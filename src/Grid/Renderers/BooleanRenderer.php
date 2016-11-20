@@ -20,8 +20,8 @@ class BooleanRenderer
     public function render()
     {
         if ($this->value == true) {
-            return trans('backend/global.yes');
+            return trans('motor-backend::backend/global.yes');
         }
-        return trans('backend/global.no');
+        return trans('motor-backend::backend/global.no');
     }
 }

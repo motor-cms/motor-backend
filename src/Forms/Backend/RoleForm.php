@@ -10,10 +10,10 @@ class RoleForm extends Form
     public function buildForm()
     {
         $this
-            ->add('name', 'text', ['label' => trans('backend/roles.name'), 'rules' => 'required'])
+            ->add('name', 'text', ['label' => trans('motor-backend::backend/roles.name'), 'rules' => 'required'])
             ->add('permissions', 'checkboxcollection', [
                 'type' => 'checkbox',
-                'label' => trans('backend/permissions.permissions'),
+                'label' => trans('motor-backend::backend/permissions.permissions'),
                 'property' => 'id',    // Which property to use on the tags model for value, defualts to id
                 'collection' => Permission::lists('id', 'name')->toArray(),
                 'data' => null, //Permission::lists('name', 'id')->toArray(),            // Data is automatically bound from model, here we can override it
@@ -22,7 +22,7 @@ class RoleForm extends Form
                     'attr' => ['class' => 'permission']
                 ]
             ])
-            ->add('submit', 'submit', ['attr' => ['class' => 'btn btn-primary'], 'label' => trans('backend/roles.save')]);
+            ->add('submit', 'submit', ['attr' => ['class' => 'btn btn-primary'], 'label' => trans('motor-backend::backend/roles.save')]);
 
     }
 }

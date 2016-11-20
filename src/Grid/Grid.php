@@ -111,7 +111,7 @@ class Grid extends Base
         $this->actions[] = $action;
 
         // Once the first action is added, we need to add the action column
-        $this->addColumn('special:actions', trans('backend/global.actions'))->style('text-align: right');
+        $this->addColumn('special:actions', trans('motor-backend::backend/global.actions'))->style('text-align: right');
 
         return $action;
     }

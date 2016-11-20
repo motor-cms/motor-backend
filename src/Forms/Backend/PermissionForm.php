@@ -9,7 +9,7 @@ class PermissionForm extends Form
     public function buildForm()
     {
         $this
-            ->add('name', 'text', ['label' => trans('backend/permissions.name'), 'rules' => 'required'])
-            ->add('submit', 'submit', ['attr' => ['class' => 'btn btn-primary'], 'label' => trans('backend/permissions.save')]);
+            ->add('name', 'text', ['label' => trans('motor-backend::backend/permissions.name'), 'rules' => 'required'])
+            ->add('submit', 'submit', ['attr' => ['class' => 'btn btn-primary'], 'label' => trans('motor-backend::backend/permissions.save')]);
     }
 }

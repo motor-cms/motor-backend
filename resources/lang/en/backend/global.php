@@ -1,0 +1,47 @@
+<?php
+
+return [
+    'administration'  => 'Admin',
+    'home'            => 'Home',
+    'back'            => 'back',
+    'delete_question' => 'Really delete?',
+    'edit'            => 'Edit',
+    'delete'          => 'Delete',
+    'show'            => 'Show',
+    'actions'         => 'Actions',
+    'image'           => 'Image',
+    'video'           => 'Video',
+    'dashboard'       => 'Dashboard',
+    'yes'             => 'Yes',
+    'no'              => 'No',
+    'search'          => 'Search',
+    'no_records'      => 'No records found',
+    'base_info'       => 'Basic information',
+    'name'            => 'Name',
+    'please_choose'   => '-- Please choose --',
+    'address'         => [
+        'address_1' => 'Address',
+        'address_2' => 'Address supplemental',
+        'zip'       => 'Zip code',
+        'city'      => 'City',
+        'country'   => 'Country',
+    ],
+    'contact'         => [
+        'salutations'   => [
+            'm' => 'Mr',
+            'f' => 'Ms',
+        ],
+        'salutation'    => 'Salutation',
+        'title'         => 'Title',
+        'first_name'    => 'First name',
+        'last_name'     => 'Last name',
+        'date_of_birth' => 'Date of birth',
+        'email'         => 'Email',
+        'phone_home'    => 'Phone (home)',
+        'phone_mobile'  => 'Phone (mobile)',
+        'phone_work'    => 'Phone (work)',
+        'website'       => 'Website',
+        'contact'       => 'Contact',
+        'phone'         => 'Phone',
+    ]
+];

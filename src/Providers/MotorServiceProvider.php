@@ -23,6 +23,7 @@ class MotorServiceProvider extends ServiceProvider
             require __DIR__ . '/../../routes/web.php';
         }
         $this->routeModelBindings();
+        $this->translations();
         $this->navigationItems();
     }
 
@@ -35,8 +36,15 @@ class MotorServiceProvider extends ServiceProvider
     public function register()
     {
         $this->mergeConfigFrom(__DIR__ . '/../../resources/config/motor-backend.php', 'motor-backend');
+    }
 
-        $this->mergeConfigFrom(__DIR__ . '/../../resources/config/motor-navigation.php', 'motor-navigation');
+    public function translations()
+    {
+        $this->loadTranslationsFrom(__DIR__.'/../../resources/lang', 'motor-backend');
+
+        $this->publishes([
+            __DIR__.'/../../resources/lang' => resource_path('lang/vendor/motor-backend'),
+        ]);
     }
 
 

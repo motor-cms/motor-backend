@@ -66,7 +66,7 @@ class ProfileEditController extends Controller
 
         $this->handleFileupload($request, $user, 'avatar', 'avatar');
 
-        flash()->success(trans('backend/users.profile.updated'));
+        flash()->success(trans('motor-backend::backend/users.profile.updated'));
 
         return redirect('backend/dashboard');
     }

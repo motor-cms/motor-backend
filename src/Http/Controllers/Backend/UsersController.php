@@ -78,7 +78,7 @@ class UsersController extends Controller
             }
         }
 
-        flash()->success(trans('backend/users.created'));
+        flash()->success(trans('motor-backend::backend/users.created'));
 
         return redirect('backend/users');
     }
@@ -156,7 +156,7 @@ class UsersController extends Controller
             }
         }
 
-        flash()->success(trans('backend/users.updated'));
+        flash()->success(trans('motor-backend::backend/users.updated'));
 
         return redirect('backend/users');
     }
@@ -173,7 +173,7 @@ class UsersController extends Controller
     {
         $user->delete();
 
-        flash()->success(trans('backend/users.deleted'));
+        flash()->success(trans('motor-backend::backend/users.deleted'));
 
         return redirect('backend/users');
     }

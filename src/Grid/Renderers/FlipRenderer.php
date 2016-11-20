@@ -20,8 +20,8 @@ class FlipRenderer
     public function render()
     {
         if ($this->value == true) {
-            return '<button class="btn btn-xs btn-default">'.trans('backend/global.yes').'</button>';
+            return '<button class="btn btn-xs btn-default">'.trans('motor-backend::backend/global.yes').'</button>';
         }
-        return '<button class="btn btn-xs btn-default">'.trans('backend/global.no').'</button>';
+        return '<button class="btn btn-xs btn-default">'.trans('motor-backend::backend/global.no').'</button>';
     }
 }
