@@ -11,5 +11,5 @@
 
 @section('main-content')
     @include('motor-backend::errors.list')
-    @include('backend.clients.form')
+    @include('motor-backend::backend.clients.form')
 @endsection
