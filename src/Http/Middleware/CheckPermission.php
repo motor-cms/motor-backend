@@ -53,6 +53,7 @@ class CheckPermission
                 $routeParts[0] = 'delete';
                 break;
             case 'index':
+            case 'show':
                 $routeParts[0] = 'read';
                 break;
         }
