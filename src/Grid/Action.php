@@ -106,19 +106,19 @@ class Action extends Base
 
         switch ($this->type) {
             case 'form':
-                $view = 'grid.actions.form';
+                $view = 'motor-backend::grid.actions.form';
                 break;
             case 'duplicate':
-                $view = 'grid.actions.duplicate';
+                $view = 'motor-backend::grid.actions.duplicate';
                 break;
             case 'edit':
-                $view = 'grid.actions.edit';
+                $view = 'motor-backend::grid.actions.edit';
                 break;
             case 'delete';
-                $view = 'grid.actions.delete';
+                $view = 'motor-backend::grid.actions.delete';
                 break;
             default:
-                $view = 'grid.actions.button';
+                $view = 'motor-backend::grid.actions.button';
         }
 
         return \View::make($view, [ 'link' => $this->link, 'record' => $record, 'label' => $this->label, 'parameters' => $this->parameters ])->render();

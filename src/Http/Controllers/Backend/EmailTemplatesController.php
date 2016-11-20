@@ -25,7 +25,7 @@ class EmailTemplatesController extends Controller
         $grid      = new EmailTemplateGrid(EmailTemplate::class);
         $paginator = $grid->getPaginator();
 
-        return view('backend.email_templates.index', compact('paginator', 'grid'));
+        return view('motor-backend::backend.email_templates.index', compact('paginator', 'grid'));
     }
 
 
@@ -53,7 +53,7 @@ class EmailTemplatesController extends Controller
             'model'  => $record
         ]);
 
-        return view('backend.email_templates.create', compact('form'));
+        return view('motor-backend::backend.email_templates.create', compact('form'));
     }
 
 
@@ -76,7 +76,7 @@ class EmailTemplatesController extends Controller
         $record = new EmailTemplate($request->all());
         $record->save();
 
-        flash()->success(trans('backend/email_templates.created'));
+        flash()->success(trans('motor-backend::backend/email_templates.created'));
 
         return redirect('backend/email_templates');
     }
@@ -110,7 +110,7 @@ class EmailTemplatesController extends Controller
             'model'  => $record
         ]);
 
-        return view('backend.email_templates.edit', compact('form'));
+        return view('motor-backend::backend.email_templates.edit', compact('form'));
     }
 
 
@@ -133,7 +133,7 @@ class EmailTemplatesController extends Controller
 
         $record->update($request->all());
 
-        flash()->success(trans('backend/email_templates.updated'));
+        flash()->success(trans('motor-backend::backend/email_templates.updated'));
 
         return redirect('backend/email_templates');
     }
@@ -150,7 +150,7 @@ class EmailTemplatesController extends Controller
     {
         $record->delete();
 
-        flash()->success(trans('backend/email_templates.deleted'));
+        flash()->success(trans('motor-backend::backend/email_templates.deleted'));
 
         return redirect('backend/email_templates');
     }

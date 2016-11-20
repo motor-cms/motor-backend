@@ -26,7 +26,7 @@ class UsersController extends Controller
         $grid      = new UsersGrid(User::class);
         $paginator = $grid->getPaginator();
 
-        return view('backend.users.index', compact('paginator', 'grid'));
+        return view('motor-backend::backend.users.index', compact('paginator', 'grid'));
     }
 
 
@@ -43,7 +43,7 @@ class UsersController extends Controller
             'enctype' => 'multipart/form-data'
         ]);
 
-        return view('backend.users.create', compact('form'));
+        return view('motor-backend::backend.users.create', compact('form'));
     }
 
 
@@ -113,7 +113,7 @@ class UsersController extends Controller
             'model'   => $user
         ]);
 
-        return view('backend.users.edit', compact('form'));
+        return view('motor-backend::backend.users.edit', compact('form'));
     }
 
 

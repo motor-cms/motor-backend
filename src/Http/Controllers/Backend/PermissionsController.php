@@ -23,7 +23,7 @@ class PermissionsController extends Controller
         $grid      = new PermissionGrid(Permission::class);
         $paginator = $grid->getPaginator();
 
-        return view('backend.permissions.index', compact('paginator', 'grid'));
+        return view('motor-backend::backend.permissions.index', compact('paginator', 'grid'));
     }
 
 
@@ -40,7 +40,7 @@ class PermissionsController extends Controller
             'enctype' => 'multipart/form-data'
         ]);
 
-        return view('backend.permissions.create', compact('form'));
+        return view('motor-backend::backend.permissions.create', compact('form'));
     }
 
 
@@ -63,7 +63,7 @@ class PermissionsController extends Controller
         $record = new Permission($this->handleInputValues($form, $request->all()));
         $record->save();
 
-        flash()->success(trans('backend/permissions.created'));
+        flash()->success(trans('motor-backend::backend/permissions.created'));
 
         return redirect('backend/permissions');
     }
@@ -98,7 +98,7 @@ class PermissionsController extends Controller
             'model'   => $record
         ]);
 
-        return view('backend.permissions.edit', compact('form'));
+        return view('motor-backend::backend.permissions.edit', compact('form'));
     }
 
 
@@ -121,7 +121,7 @@ class PermissionsController extends Controller
 
         $record->update($this->handleInputValues($form, $request->all()));
 
-        flash()->success(trans('backend/permissions.updated'));
+        flash()->success(trans('motor-backend::backend/permissions.updated'));
 
         return redirect('backend/permissions');
     }
@@ -138,7 +138,7 @@ class PermissionsController extends Controller
     {
         $record->delete();
 
-        flash()->success(trans('backend/permissions.deleted'));
+        flash()->success(trans('motor-backend::backend/permissions.deleted'));
 
         return redirect('backend/permissions');
     }

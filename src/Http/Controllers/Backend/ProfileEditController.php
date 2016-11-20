@@ -31,7 +31,7 @@ class ProfileEditController extends Controller
             'model'   => $user
         ]);
 
-        return view('backend.profile.edit', compact('form'));
+        return view('motor-backend::backend.profile.edit', compact('form'));
     }
 
 

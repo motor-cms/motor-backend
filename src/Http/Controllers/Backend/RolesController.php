@@ -24,7 +24,7 @@ class RolesController extends Controller
         $grid      = new RoleGrid(Role::class);
         $paginator = $grid->getPaginator();
 
-        return view('backend.roles.index', compact('paginator', 'grid'));
+        return view('motor-backend::backend.roles.index', compact('paginator', 'grid'));
     }
 
 
@@ -41,7 +41,7 @@ class RolesController extends Controller
             'enctype' => 'multipart/form-data'
         ]);
 
-        return view('backend.roles.create', compact('form'));
+        return view('motor-backend::backend.roles.create', compact('form'));
     }
 
 
@@ -72,7 +72,7 @@ class RolesController extends Controller
             }
         }
 
-        flash()->success(trans('backend/roles.created'));
+        flash()->success(trans('motor-backend::backend/roles.created'));
 
         return redirect('backend/roles');
     }
@@ -107,7 +107,7 @@ class RolesController extends Controller
             'model'   => $record
         ]);
 
-        return view('backend.roles.edit', compact('form'));
+        return view('motor-backend::backend.roles.edit', compact('form'));
     }
 
 
@@ -142,7 +142,7 @@ class RolesController extends Controller
             }
         }
 
-        flash()->success(trans('backend/roles.updated'));
+        flash()->success(trans('motor-backend::backend/roles.updated'));
 
         return redirect('backend/roles');
     }
@@ -159,7 +159,7 @@ class RolesController extends Controller
     {
         $record->delete();
 
-        flash()->success(trans('backend/roles.deleted'));
+        flash()->success(trans('motor-backend::backend/roles.deleted'));
 
         return redirect('backend/roles');
     }

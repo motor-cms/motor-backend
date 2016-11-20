@@ -25,7 +25,7 @@ class ClientsController extends Controller
         $grid      = new ClientGrid(Client::class);
         $paginator = $grid->getPaginator();
 
-        return view('backend.clients.index', compact('paginator', 'grid'));
+        return view('motor-backend::backend.clients.index', compact('paginator', 'grid'));
     }
 
 
@@ -42,7 +42,7 @@ class ClientsController extends Controller
             'enctype' => 'multipart/form-data'
         ]);
 
-        return view('backend.clients.create', compact('form'));
+        return view('motor-backend::backend.clients.create', compact('form'));
     }
 
 
@@ -65,7 +65,7 @@ class ClientsController extends Controller
         $record = new Client($this->handleInputValues($form, $request->all()));
         $record->save();
 
-        flash()->success(trans('backend/clients.created'));
+        flash()->success(trans('motor-backend::backend/clients.created'));
 
         return redirect('backend/clients');
     }
@@ -100,7 +100,7 @@ class ClientsController extends Controller
             'model'   => $record
         ]);
 
-        return view('backend.clients.edit', compact('form'));
+        return view('motor-backend::backend.clients.edit', compact('form'));
     }
 
 
@@ -124,7 +124,7 @@ class ClientsController extends Controller
         $data = $this->handleInputValues($form, $request->all());
         $record->update($data);
 
-        flash()->success(trans('backend/clients.updated'));
+        flash()->success(trans('motor-backend::backend/clients.updated'));
 
         return redirect('backend/clients');
     }
@@ -141,7 +141,7 @@ class ClientsController extends Controller
     {
         $record->delete();
 
-        flash()->success(trans('backend/clients.deleted'));
+        flash()->success(trans('motor-backend::backend/clients.deleted'));
 
         return redirect('backend/clients');
     }

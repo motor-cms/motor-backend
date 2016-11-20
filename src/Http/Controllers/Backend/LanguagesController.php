@@ -23,7 +23,7 @@ class LanguagesController extends Controller
         $grid      = new LanguageGrid(Language::class);
         $paginator = $grid->getPaginator();
 
-        return view('backend.languages.index', compact('paginator', 'grid'));
+        return view('motor-backend::backend.languages.index', compact('paginator', 'grid'));
     }
 
 
@@ -39,7 +39,7 @@ class LanguagesController extends Controller
             'route'  => 'backend.languages.store'
         ]);
 
-        return view('backend.languages.create', compact('form'));
+        return view('motor-backend::backend.languages.create', compact('form'));
     }
 
 
@@ -62,7 +62,7 @@ class LanguagesController extends Controller
         $record = new Language($request->all());
         $record->save();
 
-        flash()->success(trans('backend/languages.created'));
+        flash()->success(trans('motor-backend::backend/languages.created'));
 
         return redirect('backend/languages');
     }
@@ -96,7 +96,7 @@ class LanguagesController extends Controller
             'model'  => $record
         ]);
 
-        return view('backend.languages.edit', compact('form'));
+        return view('motor-backend::backend.languages.edit', compact('form'));
     }
 
 
@@ -119,7 +119,7 @@ class LanguagesController extends Controller
 
         $record->update($request->all());
 
-        flash()->success(trans('backend/languages.updated'));
+        flash()->success(trans('motor-backend::backend/languages.updated'));
 
         return redirect('backend/languages');
     }
@@ -136,7 +136,7 @@ class LanguagesController extends Controller
     {
         $record->delete();
 
-        flash()->success(trans('backend/languages.deleted'));
+        flash()->success(trans('motor-backend::backend/languages.deleted'));
 
         return redirect('backend/languages');
     }

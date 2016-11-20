@@ -15,15 +15,11 @@ class MotorServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        $this->publishes([
-            __DIR__ . '/../../resources/config/motor-backend.php' => config_path('motor-backend.php'),
-        ]);
-
-        if ( ! $this->app->routesAreCached()) {
-            require __DIR__ . '/../../routes/web.php';
-        }
+        $this->config();
+        $this->routes();
         $this->routeModelBindings();
         $this->translations();
+        $this->views();
         $this->navigationItems();
     }
 
@@ -38,12 +34,39 @@ class MotorServiceProvider extends ServiceProvider
         $this->mergeConfigFrom(__DIR__ . '/../../resources/config/motor-backend.php', 'motor-backend');
     }
 
+
+    public function routes()
+    {
+        if ( ! $this->app->routesAreCached()) {
+            require __DIR__ . '/../../routes/web.php';
+        }
+    }
+
+
+    public function config()
+    {
+        $this->publishes([
+            __DIR__ . '/../../resources/config/motor-backend.php' => config_path('motor-backend.php'),
+        ]);
+    }
+
+
     public function translations()
     {
-        $this->loadTranslationsFrom(__DIR__.'/../../resources/lang', 'motor-backend');
+        $this->loadTranslationsFrom(__DIR__ . '/../../resources/lang', 'motor-backend');
 
         $this->publishes([
-            __DIR__.'/../../resources/lang' => resource_path('lang/vendor/motor-backend'),
+            __DIR__ . '/../../resources/lang' => resource_path('lang/vendor/motor-backend'),
+        ]);
+    }
+
+
+    public function views()
+    {
+        $this->loadViewsFrom(__DIR__ . '/../../resources/views', 'motor-backend');
+
+        $this->publishes([
+            __DIR__ . '/../../resources/views' => resource_path('views/vendor/motor-backend'),
         ]);
     }
 
@@ -79,6 +102,7 @@ class MotorServiceProvider extends ServiceProvider
     public function navigationItems()
     {
         $config = $this->app['config']->get('motor-navigation', []);
-        $this->app['config']->set('motor-navigation', array_replace_recursive(require __DIR__ . '/../../resources/config/backend/navigation.php', $config));
+        $this->app['config']->set('motor-navigation',
+            array_replace_recursive(require __DIR__ . '/../../resources/config/backend/navigation.php', $config));
     }
 }
