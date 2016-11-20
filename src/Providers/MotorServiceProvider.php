@@ -16,13 +16,14 @@ class MotorServiceProvider extends ServiceProvider
     public function boot()
     {
         $this->publishes([
-            __DIR__.'/../../resources/config/motor-backend.php' => config_path('motor-backend.php'),
+            __DIR__ . '/../../resources/config/motor-backend.php' => config_path('motor-backend.php'),
         ]);
 
-        if (! $this->app->routesAreCached()) {
-            require __DIR__.'/../../routes/web.php';
+        if ( ! $this->app->routesAreCached()) {
+            require __DIR__ . '/../../routes/web.php';
         }
         $this->routeModelBindings();
+        $this->navigationItems();
     }
 
 
@@ -33,11 +34,11 @@ class MotorServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        $this->mergeConfigFrom(
-            __DIR__.'/../../resources/config/motor-backend.php', 'motor-backend'
-        );
+        $this->mergeConfigFrom(__DIR__ . '/../../resources/config/motor-backend.php', 'motor-backend');
 
+        $this->mergeConfigFrom(__DIR__ . '/../../resources/config/motor-navigation.php', 'motor-navigation');
     }
+
 
     public function routeModelBindings()
     {
@@ -64,5 +65,12 @@ class MotorServiceProvider extends ServiceProvider
         Route::bind('email_template', function ($id) {
             return config('motor-backend.models.email_template')::findOrFail($id);
         });
+    }
+
+
+    public function navigationItems()
+    {
+        $config = $this->app['config']->get('motor-navigation', []);
+        $this->app['config']->set('motor-navigation', array_replace_recursive(require __DIR__ . '/../../resources/config/backend/navigation.php', $config));
     }
 }
