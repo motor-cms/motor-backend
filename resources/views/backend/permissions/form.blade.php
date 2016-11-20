@@ -4,6 +4,7 @@
         <h3 class="box-title">{{ trans('motor-backend::backend/global.base_info') }}</h3>
     </div>
     <div class="box-body">
+        {!! form_row($form->permission_group_id) !!}
         {!! form_row($form->name) !!}
     </div>
     <!-- /.box-body -->

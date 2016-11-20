@@ -10,5 +10,6 @@ return [
     'updated'     => 'Berechtigung aktualisiert',
     'deleted'     => 'Berechtigung gelöscht',
 
-    'name' => 'Name'
+    'name'  => 'Name',
+    'group' => 'Gruppe',
 ];

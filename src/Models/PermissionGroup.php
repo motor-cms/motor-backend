@@ -3,8 +3,9 @@
 namespace Motor\Backend\Models;
 
 use Sofa\Eloquence\Eloquence;
+use Illuminate\Database\Eloquent\Model;
 
-class Permission extends \Spatie\Permission\Models\Permission
+class PermissionGroup extends Model
 {
 
     use Eloquence;
@@ -33,15 +34,7 @@ class Permission extends \Spatie\Permission\Models\Permission
      * @var array
      */
     protected $fillable = [
-        'permission_group_id',
-        'name'
+        'name',
+        'sort_position'
     ];
-
-    /**
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
-     */
-    public function group()
-    {
-        return $this->belongsTo(config('motor-backend.models.permission_group'), 'permission_group_id');
-    }
 }

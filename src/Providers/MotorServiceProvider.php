@@ -4,6 +4,7 @@ namespace Motor\Backend\Providers;
 
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\Route;
+use Motor\Backend\Console\Commands\MotorCreatePermissionsCommand;
 
 class MotorServiceProvider extends ServiceProvider
 {
@@ -21,6 +22,9 @@ class MotorServiceProvider extends ServiceProvider
         $this->translations();
         $this->views();
         $this->navigationItems();
+        $this->permissions();
+        $this->registerCommands();
+        $this->migrations();
     }
 
 
@@ -32,6 +36,19 @@ class MotorServiceProvider extends ServiceProvider
     public function register()
     {
         $this->mergeConfigFrom(__DIR__ . '/../../resources/config/motor-backend.php', 'motor-backend');
+    }
+
+    public function migrations()
+    {
+        $this->loadMigrationsFrom(__DIR__.'/../../resources/migrations');
+    }
+
+
+    public function permissions()
+    {
+        $config = $this->app['config']->get('motor-permissions', []);
+        $this->app['config']->set('motor-permissions',
+            array_replace_recursive(require __DIR__ . '/../../resources/config/motor-permissions.php', $config));
     }
 
 
@@ -104,5 +121,15 @@ class MotorServiceProvider extends ServiceProvider
         $config = $this->app['config']->get('motor-navigation', []);
         $this->app['config']->set('motor-navigation',
             array_replace_recursive(require __DIR__ . '/../../resources/config/backend/navigation.php', $config));
+    }
+
+
+    public function registerCommands()
+    {
+        if ($this->app->runningInConsole()) {
+            $this->commands([
+                MotorCreatePermissionsCommand::class,
+            ]);
+        }
     }
 }
