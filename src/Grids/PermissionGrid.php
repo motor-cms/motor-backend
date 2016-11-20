@@ -13,7 +13,7 @@ class PermissionGrid extends Grid
         $this->setDefaultSorting('id', 'ASC');
         $this->addColumn('group.name', trans('motor-backend::backend/permissions.group'));
         $this->addColumn('name', trans('motor-backend::backend/permissions.name'));
-        $this->addEditAction(trans('motor-backend::backend/global.edit'), 'backend.permissions.edit');
-        $this->addDeleteAction(trans('motor-backend::backend/global.delete'), 'backend.permissions.destroy');
+        $this->addEditAction(trans('motor-backend::backend/global.edit'), 'backend.permissions.edit')->needsPermissionTo('permissions.write');
+        $this->addDeleteAction(trans('motor-backend::backend/global.delete'), 'backend.permissions.destroy')->needsPermissionTo('permissions.delete');
     }
 }

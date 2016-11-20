@@ -6,7 +6,9 @@
 
 @section('contentheader_title')
     {{ trans('motor-backend::backend/languages.languages') }}
-    {!! link_to_route('backend.languages.create', trans('motor-backend::backend/languages.new'), [], ['class' => 'pull-right btn btn-sm btn-success']) !!}
+    @if (Auth::user()->hasRole('SuperAdmin') || Auth::user()->hasPermissionTo('languages.write'))
+        {!! link_to_route('backend.languages.create', trans('motor-backend::backend/languages.new'), [], ['class' => 'pull-right btn btn-sm btn-success']) !!}
+    @endif
 @endsection
 
 @section('main-content')

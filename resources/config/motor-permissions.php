@@ -36,7 +36,7 @@ return [
         'values' => [
             'read',
             'write',
-            'delete',
+            'delete'
         ]
     ],
     'permissions'     => [

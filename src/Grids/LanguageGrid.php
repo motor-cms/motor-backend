@@ -14,8 +14,8 @@ class LanguageGrid extends Grid
         $this->addColumn('iso_639_1', trans('motor-backend::backend/languages.iso_639_1'));
         $this->addColumn('native_name', trans('motor-backend::backend/languages.native_name'), true);
         $this->addColumn('english_name', trans('motor-backend::backend/languages.english_name'), true);
-        $this->addEditAction(trans('motor-backend::backend/global.edit'), 'backend.languages.edit');
-        $this->addDeleteAction(trans('motor-backend::backend/global.delete'), 'backend.languages.destroy');
+        $this->addEditAction(trans('motor-backend::backend/global.edit'), 'backend.languages.edit')->needsPermissionTo('languages.write');
+        $this->addDeleteAction(trans('motor-backend::backend/global.delete'), 'backend.languages.destroy')->needsPermissionTo('languages.delete');
 
         $this->filter->add(new SearchRenderer('search'));
     }

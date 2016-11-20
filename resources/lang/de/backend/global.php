@@ -29,14 +29,15 @@ return [
     'latitude'        => 'Breitengrad',
     'sort_position'   => 'Position',
     'all'             => 'Alle',
-    'address' => [
+    'access_denied'   => 'Zugriff verweigert',
+    'address'         => [
         'address_1' => 'Adresse',
         'address_2' => 'Adresse (weiter)',
         'zip'       => 'Postleitzahl',
         'city'      => 'Ort',
         'country'   => 'Land',
     ],
-    'contact' => [
+    'contact'         => [
         'salutations'      => [
             'm' => 'Herr',
             'f' => 'Frau',

@@ -15,9 +15,9 @@ class EmailTemplateGrid extends Grid
         $this->addColumn('language.iso_639_1', trans('motor-backend::backend/languages.language'));
         $this->addColumn('name', trans('motor-backend::backend/global.name'), true);
         $this->setDefaultSorting('id', 'ASC');
-        $this->addEditAction(trans('motor-backend::backend/global.edit'), 'backend.email_templates.edit');
-        $this->addDuplicateAction(trans('motor-backend::backend/global.duplicate'), 'backend.email_templates.duplicate');
-        $this->addDeleteAction(trans('motor-backend::backend/global.delete'), 'backend.email_templates.destroy');
+        $this->addEditAction(trans('motor-backend::backend/global.edit'), 'backend.email_templates.edit')->needsPermissionTo('email_templates.write');
+        $this->addDuplicateAction(trans('motor-backend::backend/global.duplicate'), 'backend.email_templates.duplicate')->needsPermissionTo('email_templates.write');
+        $this->addDeleteAction(trans('motor-backend::backend/global.delete'), 'backend.email_templates.destroy')->needsPermissionTo('email_templates.delete');
 
         $this->filter->add(new SearchRenderer('search'));
         $this->filter->addClientFilter();

@@ -9,6 +9,6 @@
 @endsection
 
 @section('main-content')
-    @include('errors.list')
+    @include('motor-backend::errors.list')
     @include('motor-backend::backend.profile.form')
 @endsection

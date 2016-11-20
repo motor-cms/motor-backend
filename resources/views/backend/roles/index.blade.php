@@ -6,7 +6,9 @@
 
 @section('contentheader_title')
     {{ trans('motor-backend::backend/roles.roles') }}
-    {!! link_to_route('backend.roles.create', trans('motor-backend::backend/roles.new'), [], ['class' => 'pull-right btn btn-sm btn-success']) !!}
+    @if (Auth::user()->hasRole('SuperAdmin') || Auth::user()->hasPermissionTo('roles.write'))
+        {!! link_to_route('backend.roles.create', trans('motor-backend::backend/roles.new'), [], ['class' => 'pull-right btn btn-sm btn-success']) !!}
+    @endif
 @endsection
 
 @section('main-content')

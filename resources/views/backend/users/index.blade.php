@@ -6,7 +6,9 @@
 
 @section('contentheader_title')
     {{ trans('motor-backend::backend/users.users') }}
-    {!! link_to_route('backend.users.create', trans('motor-backend::backend/users.new'), [], ['class' => 'pull-right btn btn-sm btn-success']) !!}
+    @if (Auth::user()->hasRole('SuperAdmin') || Auth::user()->hasPermissionTo('users.write'))
+        {!! link_to_route('backend.users.create', trans('motor-backend::backend/users.new'), [], ['class' => 'pull-right btn btn-sm btn-success']) !!}
+    @endif
 @endsection
 
 @section('main-content')

@@ -6,7 +6,9 @@
 
 @section('contentheader_title')
     {{ trans('motor-backend::backend/clients.clients') }}
-    {!! link_to_route('backend.clients.create', trans('motor-backend::backend/clients.new'), [], ['class' => 'pull-right btn btn-sm btn-success']) !!}
+    @if (Auth::user()->hasRole('SuperAdmin') || Auth::user()->hasPermissionTo('clients.write'))
+        {!! link_to_route('backend.clients.create', trans('motor-backend::backend/clients.new'), [], ['class' => 'pull-right btn btn-sm btn-success']) !!}
+    @endif
 @endsection
 
 @section('main-content')

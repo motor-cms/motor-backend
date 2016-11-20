@@ -6,7 +6,9 @@
 
 @section('contentheader_title')
     {{ trans('motor-backend::backend/permissions.permissions') }}
-    {!! link_to_route('backend.permissions.create', trans('motor-backend::backend/permissions.new'), [], ['class' => 'pull-right btn btn-sm btn-success']) !!}
+    @if (Auth::user()->hasRole('SuperAdmin') || Auth::user()->hasPermissionTo('permissions.write'))
+        {!! link_to_route('backend.permissions.create', trans('motor-backend::backend/permissions.new'), [], ['class' => 'pull-right btn btn-sm btn-success']) !!}
+    @endif
 @endsection
 
 @section('main-content')
