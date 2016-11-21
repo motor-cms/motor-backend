@@ -30,29 +30,31 @@ desired effect
 |---------------------------------------------------------|
 -->
 <body class="skin-blue sidebar-mini">
-<div class="wrapper">
+<div id="app">
+    <div class="wrapper">
 
     @include('motor-backend::layouts.partials.mainheader')
 
     @include('motor-backend::layouts.partials.sidebar')
 
     <!-- Content Wrapper. Contains page content -->
-    <div class="content-wrapper">
+        <div class="content-wrapper">
 
         @include('motor-backend::layouts.partials.contentheader')
 
         <!-- Main content -->
-        <section class="content">
-            <!-- Your Page Content Here -->
-            @yield('main-content')
-        </section><!-- /.content -->
-    </div><!-- /.content-wrapper -->
+            <section class="content">
+                <!-- Your Page Content Here -->
+                @yield('main-content')
+            </section><!-- /.content -->
+        </div><!-- /.content-wrapper -->
 
-    @include('motor-backend::layouts.partials.controlsidebar')
+        @include('motor-backend::layouts.partials.controlsidebar')
 
-    @include('motor-backend::layouts.partials.footer')
+        @include('motor-backend::layouts.partials.footer')
 
-</div><!-- ./wrapper -->
+    </div><!-- ./wrapper -->
+</div>
 
 @section('scripts')
 

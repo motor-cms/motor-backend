@@ -2,6 +2,7 @@
 
 namespace Motor\Backend\Providers;
 
+use Acacha\AdminLTETemplateLaravel\Facades\AdminLTE;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\Route;
 use Motor\Backend\Console\Commands\MotorCreatePermissionsCommand;
@@ -38,9 +39,10 @@ class MotorServiceProvider extends ServiceProvider
         $this->mergeConfigFrom(__DIR__ . '/../../resources/config/motor-backend.php', 'motor-backend');
     }
 
+
     public function migrations()
     {
-        $this->loadMigrationsFrom(__DIR__.'/../../resources/migrations');
+        $this->loadMigrationsFrom(__DIR__ . '/../../resources/migrations');
     }
 
 
