@@ -15,7 +15,9 @@
     <!-- Theme style -->
     <link href="{{ asset('/css/AdminLTE.css') }}" rel="stylesheet" type="text/css" />
     <!-- custom styles -->
-    <link href="{{ asset('/css/okis.css') }}" rel="stylesheet" type="text/css" />
+    <link href="{{ asset('/css/backend.css') }}" rel="stylesheet" type="text/css" />
+    <!-- custom styles -->
+    <link href="{{ asset('/css/project.css') }}" rel="stylesheet" type="text/css" />
     <!-- AdminLTE Skins. We have chosen the skin-blue for this starter
           page. However, you can choose any other skin. Make sure you
           apply the skin class to the body tag so the changes take effect.
