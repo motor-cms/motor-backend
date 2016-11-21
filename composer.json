@@ -17,7 +17,7 @@
     "doctrine/dbal": "^2.5",
     "php-console/php-console": "^3.1",
     "guzzlehttp/guzzle": "^6.2",
-    "acacha/admin-lte-template-laravel": "^2.0",
+    "acacha/admin-lte-template-laravel": "3.*",
     "barryvdh/laravel-ide-helper": "^2.1",
     "dimsav/laravel-translatable": "^5.5",
     "laracasts/flash": "^2.0",
