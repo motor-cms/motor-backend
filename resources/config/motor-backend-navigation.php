@@ -6,7 +6,7 @@ return [
             'slug'        => 'dashboard',
             'name'        => 'motor-backend::backend/global.dashboard',
             'icon'        => 'fa fa-home',
-            'route'       => 'backend.dashboard',
+            'route'       => 'backend.dashboard.index',
             'roles'       => [ 'SuperAdmin' ],
             'permissions' => [ 'dashboard.read' ]
         ],

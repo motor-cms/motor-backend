@@ -9,6 +9,5 @@ return [
     'created' => 'Rolle erstellt',
     'updated' => 'Rolle aktualisiert',
     'deleted' => 'Rolle gelöscht',
-
-    'name' => 'Name'
+    'name'    => 'Name'
 ];

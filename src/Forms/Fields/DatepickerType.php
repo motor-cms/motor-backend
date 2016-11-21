@@ -11,7 +11,7 @@ class DatepickerType extends FormField {
         // At first it tries to load config variable,
         // and if fails falls back to loading view
         // resources/views/fields/datetime.blade.php
-        return 'laravel-form-builder::datepicker';
+        return 'motor-backend::laravel-form-builder.datepicker';
     }
 
     public function render(array $options = [], $showLabel = true, $showField = true, $showError = true)

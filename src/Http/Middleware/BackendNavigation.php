@@ -20,10 +20,7 @@ class BackendNavigation
     {
         \Menu::make('backendNavigation', function ($menu) {
 
-            //$items = config('backend.navigation.items');
-
-            //dd(config('motor-navigation.items'));
-            $items = config('motor-navigation.items');
+            $items = config('motor-backend-navigation.items');
             ksort($items);
 
             foreach ($items as $key => $item) {

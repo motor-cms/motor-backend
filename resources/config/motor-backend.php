@@ -11,6 +11,7 @@ return [
         'email_template'   => Motor\Backend\Models\EmailTemplate::class,
     ],
     'routes' => [
+        'dashboard'       => true,
         'users'           => true,
         'roles'           => true,
         'permissions'     => true,

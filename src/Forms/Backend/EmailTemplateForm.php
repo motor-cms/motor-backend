@@ -3,15 +3,15 @@
 namespace Motor\Backend\Forms\Backend;
 
 use Kris\LaravelFormBuilder\Form;
-use Motor\Backend\Models\Client;
 use Motor\Backend\Models\Language;
 
 class EmailTemplateForm extends Form
 {
     public function buildForm()
     {
+        $clients = config('motor-backend.models.client')::lists('name', 'id')->toArray();
         $this
-            ->add('client_id', 'select', ['label' => trans('motor-backend::backend/clients.client'), 'rules' => 'required', 'choices' => Client::lists('name', 'id')->toArray()])
+            ->add('client_id', 'select', ['label' => trans('motor-backend::backend/clients.client'), 'rules' => 'required', 'choices' => $clients])
             ->add('name', 'text', ['label' => trans('motor-backend::backend/global.name'), 'rules' => 'required'])
             ->add('language_id', 'select', ['label' => trans('motor-backend::backend/languages.language'), 'rules' => 'required', 'choices' => Language::lists('native_name', 'id')->toArray()])
 

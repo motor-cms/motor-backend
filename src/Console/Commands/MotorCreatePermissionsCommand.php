@@ -33,7 +33,7 @@ class MotorCreatePermissionsCommand extends Command
      */
     public function handle()
     {
-        $permissions = config('motor-permissions');
+        $permissions = config('motor-backend-permissions');
         foreach ($permissions as $name => $group) {
 
             // Check if the group exists

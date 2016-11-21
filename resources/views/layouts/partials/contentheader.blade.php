@@ -4,9 +4,11 @@
         @yield('contentheader_title', 'Page Header here')
         <small>@yield('contentheader_description')</small>
     </h1>
-    <p>
-        @include('flash::message')
-    </p>
+    <div class="flash-message">
+        <p>
+            @include('flash::message')
+        </p>
+    </div>
     {{--
     <ol class="breadcrumb">
         <li><a href="#"><i class="fa fa-dashboard"></i> Level</a></li>

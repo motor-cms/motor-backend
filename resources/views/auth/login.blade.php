@@ -8,8 +8,8 @@
 <body class="hold-transition login-page">
     <div class="login-box">
         <div class="login-logo">
-            <img src="{{ config('project.logo-large') }}" style="max-width: 100%;"/>
-            <b>{{ config('project.name_part_2') }}</b>
+            <img src="{{ config('motor-backend-project.logo-large') }}" style="max-width: 100%; max-height: 200px;"/><br/>
+            <b>{{ config('motor-backend-project.name') }}</b>
         </div><!-- /.login-logo -->
 
     @if (count($errors) > 0)

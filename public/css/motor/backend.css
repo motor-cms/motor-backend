@@ -1,0 +1,16 @@
+.form-control-sortable {
+    display: inline-block;
+    width: 97%;
+}
+.sortable-handle {
+    width: 3%;
+}
+.box-header > .box-tools.full {
+    position: static;
+}
+.content-header .btn {
+    margin-left: 5px;
+}
+.pagination {
+    margin: 5px 0 !important;
+}

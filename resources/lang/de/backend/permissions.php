@@ -9,7 +9,6 @@ return [
     'created'     => 'Berechtigung erstellt',
     'updated'     => 'Berechtigung aktualisiert',
     'deleted'     => 'Berechtigung gelöscht',
-
-    'name'  => 'Name',
-    'group' => 'Gruppe',
+    'name'        => 'Name',
+    'group'       => 'Gruppe',
 ];

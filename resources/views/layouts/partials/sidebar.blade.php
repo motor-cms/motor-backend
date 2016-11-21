@@ -11,7 +11,7 @@
                     @if ($avatar = Auth::user()->getMedia('avatar')->first())
                         <img src="{{ $avatar->getUrl('thumb') }}" class="img-circle" alt="User Image"/>
                     @else
-                        <img src="{{asset('/img/logo.png')}}" class="img-circle" alt="User Image" />
+                        <img src="{{asset(config('motor-backend-project.logo-white'))}}" class="img-circle" alt="User Image" />
                     @endif
                 </div>
                 <div class="pull-left info">

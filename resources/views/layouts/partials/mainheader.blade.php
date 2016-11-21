@@ -4,9 +4,9 @@
     <!-- Logo -->
     <a href="{{ url('/backend') }}" class="logo">
         <!-- mini logo for sidebar mini 50x50 pixels -->
-        <span class="logo-mini">{{ config('project.name_short') }}</span>
+        <span class="logo-mini">{{ config('motor-backend-project.name_short') }}</span>
         <!-- logo for regular state and mobile devices -->
-        <span class="logo-lg">{{ config('project.name_part_1') }} <b>{{  config('project.name_part_2') }}</b></span>
+        <span class="logo-lg">{{ config('motor-backend-project.name_part_1') }} <b>{{  config('motor-backend-project.name_part_2') }}</b></span>
     </a>
 
     <!-- Header Navbar -->
@@ -122,7 +122,7 @@
                             @if ($avatar = Auth::user()->getMedia('avatar')->first())
                                 <img src="{{ $avatar->getUrl('thumb') }}" class="user-image" alt="User Image"/>
                             @else
-                                <img src="{{asset('/img/logo.png')}}" class="user-image" alt="User Image"/>
+                                <img src="{{asset(config('motor-backend-project.logo-white'))}}" class="user-image" alt="User Image"/>
                             @endif
                             <!-- hidden-xs hides the username on small devices so only the image appears. -->
                             <span class="hidden-xs">{{ Auth::user()->name }}</span>
@@ -133,7 +133,7 @@
                                 @if ($avatar = Auth::user()->getMedia('avatar')->first())
                                     <img src="{{ $avatar->getUrl('thumb') }}" class="img-circle" alt="User Image"/>
                                 @else
-                                    <img src="{{asset('/img/logo.png')}}" class="img-circle" alt="User Image" />
+                                    <img src="{{asset(config('motor-backend-project.logo-white'))}}" class="img-circle" alt="User Image" />
                                 @endif
                                 <p>
                                     {{ Auth::user()->name }}
