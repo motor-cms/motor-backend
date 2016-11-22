@@ -8,6 +8,7 @@ use Motor\Backend\Models\EmailTemplate;
 use Motor\Backend\Http\Requests\Backend\EmailTemplateRequest;
 use Motor\Backend\Grids\EmailTemplateGrid;
 use Kris\LaravelFormBuilder\FormBuilderTrait;
+use Motor\Backend\Services\EmailTemplateService;
 
 class EmailTemplatesController extends Controller
 {
@@ -22,8 +23,11 @@ class EmailTemplatesController extends Controller
      */
     public function index()
     {
-        $grid      = new EmailTemplateGrid(EmailTemplate::class);
-        $paginator = $grid->getPaginator();
+        $grid = new EmailTemplateGrid(EmailTemplate::class);
+
+        $service      = EmailTemplateService::collection($grid);
+        $grid->filter = $service->getFilter();
+        $paginator    = $service->getPaginator();
 
         return view('motor-backend::backend.email_templates.index', compact('paginator', 'grid'));
     }
@@ -35,6 +39,7 @@ class EmailTemplatesController extends Controller
     public function duplicate(EmailTemplate $record)
     {
         $newRecord = $record->replicate();
+
         return $this->create($newRecord);
     }
 
@@ -73,8 +78,7 @@ class EmailTemplatesController extends Controller
             return redirect()->back()->withErrors($form->getErrors())->withInput();
         }
 
-        $record = new EmailTemplate($request->all());
-        $record->save();
+        EmailTemplateService::createWithForm($request, $form);
 
         flash()->success(trans('motor-backend::backend/email_templates.created'));
 
@@ -131,7 +135,7 @@ class EmailTemplatesController extends Controller
             return redirect()->back()->withErrors($form->getErrors())->withInput();
         }
 
-        $record->update($request->all());
+        EmailTemplateService::updateWithForm($record, $request, $form);
 
         flash()->success(trans('motor-backend::backend/email_templates.updated'));
 
@@ -148,7 +152,7 @@ class EmailTemplatesController extends Controller
      */
     public function destroy(EmailTemplate $record)
     {
-        $record->delete();
+        EmailTemplateService::delete($record);
 
         flash()->success(trans('motor-backend::backend/email_templates.deleted'));
 

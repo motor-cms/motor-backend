@@ -17,9 +17,9 @@ class LanguagesController extends Controller
      */
     public function index()
     {
-        $result = (new LanguageService('LanguageApi'))->getPaginator();
+        $result = LanguageService::collection()->getPaginator();
 
-        return response($result);
+        return response()->json(['data' => $result]);
     }
 
 
@@ -32,9 +32,9 @@ class LanguagesController extends Controller
      */
     public function store(LanguageRequest $request)
     {
-        $result = (new LanguageService())->store($request->all());
+        $result = LanguageService::create($request)->getResult();
 
-        return response($result);
+        return response()->json(['data' => $result]);
     }
 
 
@@ -47,9 +47,9 @@ class LanguagesController extends Controller
      */
     public function show(Language $record)
     {
-        $result = (new LanguageService())->show($record);
+        $result = LanguageService::show($record)->getResult();
 
-        return response($result);
+        return response()->json(['data' => $result]);
     }
 
 
@@ -63,9 +63,9 @@ class LanguagesController extends Controller
      */
     public function update(LanguageRequest $request, Language $record)
     {
-        $result = (new LanguageService())->update($record, $request->all());
+        $result = LanguageService::update($record, $request)->getResult();
 
-        return response($result);
+        return response()->json(['data' => $result]);
     }
 
 
@@ -78,8 +78,8 @@ class LanguagesController extends Controller
      */
     public function destroy(Language $record)
     {
-        $result = (new LanguageService())->destroy($record);
+        $result = LanguageService::delete($record)->getResult();
 
-        return response((string) $result);
+        return response()->json(['data' => $result]);
     }
 }

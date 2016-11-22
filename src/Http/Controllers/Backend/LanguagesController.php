@@ -22,7 +22,8 @@ class LanguagesController extends Controller
     public function index()
     {
         $grid      = new LanguageGrid(Language::class);
-        $service = new LanguageService($grid);
+
+        $service = LanguageService::collection($grid);
         $grid->filter = $service->getFilter();
         $paginator    = $service->getPaginator();
 
@@ -62,7 +63,7 @@ class LanguagesController extends Controller
             return redirect()->back()->withErrors($form->getErrors())->withInput();
         }
 
-        $result = (new LanguageService())->store($request->all(), $form);
+        LanguageService::createWithForm($request, $form);
 
         flash()->success(trans('motor-backend::backend/languages.created'));
 
@@ -119,7 +120,7 @@ class LanguagesController extends Controller
             return redirect()->back()->withErrors($form->getErrors())->withInput();
         }
 
-        $result = (new LanguageService())->update($record, $request->all(), $form);
+        LanguageService::updateWithForm($record, $request, $form);
 
         flash()->success(trans('motor-backend::backend/languages.updated'));
 
@@ -136,7 +137,7 @@ class LanguagesController extends Controller
      */
     public function destroy(Language $record)
     {
-        $result = (new LanguageService())->destroy($record);
+        LanguageService::delete($record);
 
         flash()->success(trans('motor-backend::backend/languages.deleted'));
 

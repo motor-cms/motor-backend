@@ -3,11 +3,11 @@
 namespace Motor\Backend\Http\Controllers\Api;
 
 use Motor\Backend\Http\Controllers\Controller;
-use Motor\Backend\Http\Requests\Backend\ClientRequest;
-use Motor\Backend\Models\Client;
-use Motor\Backend\Services\ClientService;
+use Motor\Backend\Http\Requests\Backend\UserRequest;
+use Motor\Backend\Models\User;
+use Motor\Backend\Services\UserService;
 
-class ClientsController extends Controller
+class UsersController extends Controller
 {
 
     /**
@@ -17,7 +17,7 @@ class ClientsController extends Controller
      */
     public function index()
     {
-        $result = ClientService::collection()->getPaginator();
+        $result = UserService::collection()->getPaginator();
 
         return response()->json(['data' => $result]);
     }
@@ -30,9 +30,9 @@ class ClientsController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function store(ClientRequest $request)
+    public function store(UserRequest $request)
     {
-        $result = ClientService::create($request)->getResult();
+        $result = UserService::create($request)->getResult();
 
         return response()->json(['data' => $result]);
     }
@@ -45,9 +45,9 @@ class ClientsController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function show(Client $record)
+    public function show(User $record)
     {
-        $result = ClientService::show($record)->getResult();
+        $result = UserService::show($record)->getResult();
 
         return response()->json(['data' => $result]);
     }
@@ -61,9 +61,9 @@ class ClientsController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function update(ClientRequest $request, Client $record)
+    public function update(UserRequest $request, User $record)
     {
-        $result = ClientService::update($record, $request)->getResult();
+        $result = UserService::update($record, $request)->getResult();
 
         return response()->json(['data' => $result]);
     }
@@ -76,9 +76,9 @@ class ClientsController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Client $record)
+    public function destroy(User $record)
     {
-        $result = ClientService::delete($record)->getResult();
+        $result = UserService::delete($record)->getResult();
 
         return response()->json(['data' => $result]);
     }

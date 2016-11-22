@@ -9,10 +9,13 @@ use Motor\Backend\Http\Requests\Backend\RoleRequest;
 use Motor\Backend\Grids\RoleGrid;
 use Kris\LaravelFormBuilder\FormBuilderTrait;
 use Motor\Backend\Forms\Backend\RoleForm;
+use Motor\Backend\Services\RoleService;
 
 class RolesController extends Controller
 {
+
     use FormBuilderTrait;
+
 
     /**
      * Display a listing of the resource.
@@ -21,8 +24,11 @@ class RolesController extends Controller
      */
     public function index()
     {
-        $grid      = new RoleGrid(Role::class);
-        $paginator = $grid->getPaginator();
+        $grid = new RoleGrid(Role::class);
+
+        $service      = RoleService::collection($grid);
+        $grid->filter = $service->getFilter();
+        $paginator    = $service->getPaginator();
 
         return view('motor-backend::backend.roles.index', compact('paginator', 'grid'));
     }
@@ -61,16 +67,7 @@ class RolesController extends Controller
             return redirect()->back()->withErrors($form->getErrors())->withInput();
         }
 
-        $inputData = $this->handleInputValues($form, $request->all());
-
-        $record = new Role($inputData);
-        $record->save();
-
-        if (isset($inputData['permissions']) && is_array($inputData['permissions'])) {
-            foreach ($inputData['permissions'] as $permission => $value) {
-                $record->givePermissionTo($permission);
-            }
-        }
+        RoleService::createWithForm($request, $form);
 
         flash()->success(trans('motor-backend::backend/roles.created'));
 
@@ -128,19 +125,7 @@ class RolesController extends Controller
             return redirect()->back()->withErrors($form->getErrors())->withInput();
         }
 
-        $inputData = $this->handleInputValues($form, $request->all());
-
-        $record->update($inputData);
-
-        foreach (Permission::all() as $permission) {
-            $record->revokePermissionTo($permission);
-        }
-
-        if (isset($inputData['permissions']) && is_array($inputData['permissions'])) {
-            foreach ($inputData['permissions'] as $permission => $value) {
-                $record->givePermissionTo($permission);
-            }
-        }
+        RoleService::updateWithForm($record, $request, $form);
 
         flash()->success(trans('motor-backend::backend/roles.updated'));
 
@@ -157,7 +142,7 @@ class RolesController extends Controller
      */
     public function destroy(Role $record)
     {
-        $record->delete();
+        RoleService::delete($record);
 
         flash()->success(trans('motor-backend::backend/roles.deleted'));
 

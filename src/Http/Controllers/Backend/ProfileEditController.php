@@ -7,6 +7,7 @@ use Motor\Backend\Http\Requests\Backend\ProfileEditRequest;
 use Motor\Backend\Http\Controllers\Controller;
 use Auth;
 use Kris\LaravelFormBuilder\FormBuilderTrait;
+use Motor\Backend\Services\ProfileEditService;
 
 class ProfileEditController extends Controller
 {
@@ -51,20 +52,7 @@ class ProfileEditController extends Controller
         if ( ! $form->isValid()) {
             return redirect()->back()->withErrors($form->getErrors())->withInput();
         }
-
-        $data = $this->handleInputValues($form, $request->all());
-
-        if ($data['password'] == '') {
-            unset( $data['password'] );
-        } else {
-            $data['password'] = bcrypt($data['password']);
-        }
-
-        $user = Auth::user();
-
-        $user->update($data);
-
-        $this->handleFileupload($request, $user, 'avatar', 'avatar');
+        ProfileEditService::updateWithForm(Auth::user(), $request, $form);
 
         flash()->success(trans('motor-backend::backend/users.profile.updated'));
 

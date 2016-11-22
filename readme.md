@@ -182,6 +182,15 @@ Add this method to your exception handler
     }
 ```
 
+Add the 'media' filesystem to your config/filesystems.php disks array
+
+```php
+        'media' => [
+            'driver' => 'local',
+            'root'   => public_path() . '/media',
+        ],
+```
+
 ## Credits
 
 - [Reza Esmaili](https://github.com/dfox288)

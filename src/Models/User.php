@@ -3,6 +3,7 @@
 namespace Motor\Backend\Models;
 
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Motor\Core\Traits\Filterable;
 use Sofa\Eloquence\Eloquence;
 use Spatie\MediaLibrary\HasMedia\HasMediaTrait;
 use Spatie\MediaLibrary\HasMedia\Interfaces\HasMediaConversions;
@@ -14,6 +15,7 @@ class User extends Authenticatable implements HasMediaConversions
     use Eloquence;
     use HasMediaTrait;
     use HasRoles;
+    use Filterable;
 
     public function registerMediaConversions()
     {

@@ -7,6 +7,7 @@ use Culpa\Traits\CreatedBy;
 use Culpa\Traits\DeletedBy;
 use Culpa\Traits\UpdatedBy;
 use Illuminate\Database\Eloquent\Model;
+use Motor\Core\Traits\Filterable;
 use Sofa\Eloquence\Eloquence;
 
 class EmailTemplate extends Model
@@ -14,6 +15,7 @@ class EmailTemplate extends Model
 
     use Eloquence;
     use Blameable, CreatedBy, UpdatedBy, DeletedBy;
+    use Filterable;
 
     protected $blameable = array('created', 'updated', 'deleted');
 

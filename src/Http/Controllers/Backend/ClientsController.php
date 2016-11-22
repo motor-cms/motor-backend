@@ -25,7 +25,7 @@ class ClientsController extends Controller
     {
         $grid = new ClientGrid(Client::class);
 
-        $service = new ClientService($grid);
+        $service = ClientService::collection($grid);
         $grid->filter = $service->getFilter();
         $paginator    = $service->getPaginator();
 
@@ -66,7 +66,7 @@ class ClientsController extends Controller
             return redirect()->back()->withErrors($form->getErrors())->withInput();
         }
 
-        $result = (new ClientService())->store($request->all(), $form);
+        ClientService::createWithForm($request, $form);
 
         flash()->success(trans('motor-backend::backend/clients.created'));
 
@@ -124,7 +124,7 @@ class ClientsController extends Controller
             return redirect()->back()->withErrors($form->getErrors())->withInput();
         }
 
-        $result = (new ClientService())->update($record, $request->all(), $form);
+        ClientService::updateWithForm($record, $request, $form);
 
         flash()->success(trans('motor-backend::backend/clients.updated'));
 
@@ -141,7 +141,7 @@ class ClientsController extends Controller
      */
     public function destroy(Client $record)
     {
-        $result = (new ClientService())->destroy($record);
+        ClientService::delete($record);
 
         flash()->success(trans('motor-backend::backend/clients.deleted'));
 

@@ -8,10 +8,13 @@ use Motor\Backend\Http\Requests\Backend\PermissionRequest;
 use Motor\Backend\Grids\PermissionGrid;
 use Kris\LaravelFormBuilder\FormBuilderTrait;
 use Motor\Backend\Forms\Backend\PermissionForm;
+use Motor\Backend\Services\PermissionService;
 
 class PermissionsController extends Controller
 {
+
     use FormBuilderTrait;
+
 
     /**
      * Display a listing of the resource.
@@ -20,8 +23,11 @@ class PermissionsController extends Controller
      */
     public function index()
     {
-        $grid      = new PermissionGrid(Permission::class);
-        $paginator = $grid->getPaginator();
+        $grid = new PermissionGrid(Permission::class);
+
+        $service      = PermissionService::collection($grid);
+        $grid->filter = $service->getFilter();
+        $paginator    = $service->getPaginator();
 
         return view('motor-backend::backend.permissions.index', compact('paginator', 'grid'));
     }
@@ -60,8 +66,7 @@ class PermissionsController extends Controller
             return redirect()->back()->withErrors($form->getErrors())->withInput();
         }
 
-        $record = new Permission($this->handleInputValues($form, $request->all()));
-        $record->save();
+        PermissionService::createWithForm($request, $form);
 
         flash()->success(trans('motor-backend::backend/permissions.created'));
 
@@ -119,7 +124,7 @@ class PermissionsController extends Controller
             return redirect()->back()->withErrors($form->getErrors())->withInput();
         }
 
-        $record->update($this->handleInputValues($form, $request->all()));
+        PermissionService::updateWithForm($record, $request, $form);
 
         flash()->success(trans('motor-backend::backend/permissions.updated'));
 
@@ -136,7 +141,7 @@ class PermissionsController extends Controller
      */
     public function destroy(Permission $record)
     {
-        $record->delete();
+        PermissionService::delete($record);
 
         flash()->success(trans('motor-backend::backend/permissions.deleted'));
 

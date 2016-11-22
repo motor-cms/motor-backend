@@ -2,6 +2,7 @@
 
 namespace Motor\Backend\Models;
 
+use Motor\Core\Traits\Filterable;
 use Sofa\Eloquence\Eloquence;
 
 //use Culpa\Traits\Blameable;
@@ -13,6 +14,7 @@ class Role extends \Spatie\Permission\Models\Role
 {
 
     use Eloquence;
+    use Filterable;
 
 //    use Blameable, CreatedBy, UpdatedBy, DeletedBy;
 

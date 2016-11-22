@@ -2,6 +2,7 @@
 
 namespace Motor\Backend\Models;
 
+use Motor\Core\Traits\Filterable;
 use Sofa\Eloquence\Eloquence;
 use Illuminate\Database\Eloquent\Model;
 
@@ -9,6 +10,7 @@ class PermissionGroup extends Model
 {
 
     use Eloquence;
+    use Filterable;
 
 //    use Blameable, CreatedBy, UpdatedBy, DeletedBy;
 

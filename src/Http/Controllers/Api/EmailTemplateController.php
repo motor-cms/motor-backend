@@ -3,11 +3,11 @@
 namespace Motor\Backend\Http\Controllers\Api;
 
 use Motor\Backend\Http\Controllers\Controller;
-use Motor\Backend\Http\Requests\Backend\ClientRequest;
-use Motor\Backend\Models\Client;
-use Motor\Backend\Services\ClientService;
+use Motor\Backend\Http\Requests\Backend\EmailTemplateRequest;
+use Motor\Backend\Models\EmailTemplate;
+use Motor\Backend\Services\EmailTemplateService;
 
-class ClientsController extends Controller
+class EmailTemplatesController extends Controller
 {
 
     /**
@@ -17,7 +17,7 @@ class ClientsController extends Controller
      */
     public function index()
     {
-        $result = ClientService::collection()->getPaginator();
+        $result = EmailTemplateService::collection()->getPaginator();
 
         return response()->json(['data' => $result]);
     }
@@ -30,9 +30,9 @@ class ClientsController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function store(ClientRequest $request)
+    public function store(EmailTemplateRequest $request)
     {
-        $result = ClientService::create($request)->getResult();
+        $result = EmailTemplateService::create($request)->getResult();
 
         return response()->json(['data' => $result]);
     }
@@ -45,9 +45,9 @@ class ClientsController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function show(Client $record)
+    public function show(EmailTemplate $record)
     {
-        $result = ClientService::show($record)->getResult();
+        $result = EmailTemplateService::show($record)->getResult();
 
         return response()->json(['data' => $result]);
     }
@@ -61,9 +61,9 @@ class ClientsController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function update(ClientRequest $request, Client $record)
+    public function update(EmailTemplateRequest $request, EmailTemplate $record)
     {
-        $result = ClientService::update($record, $request)->getResult();
+        $result = EmailTemplateService::update($record, $request)->getResult();
 
         return response()->json(['data' => $result]);
     }
@@ -76,9 +76,9 @@ class ClientsController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Client $record)
+    public function destroy(EmailTemplate $record)
     {
-        $result = ClientService::delete($record)->getResult();
+        $result = EmailTemplateService::delete($record)->getResult();
 
         return response()->json(['data' => $result]);
     }

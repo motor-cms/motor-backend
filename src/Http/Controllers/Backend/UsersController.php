@@ -9,6 +9,7 @@ use Motor\Backend\Models\Role;
 use Motor\Backend\Models\User;
 use Motor\Backend\Http\Controllers\Controller;
 use Kris\LaravelFormBuilder\FormBuilderTrait;
+use Motor\Backend\Services\UserService;
 
 class UsersController extends Controller
 {
@@ -23,8 +24,11 @@ class UsersController extends Controller
      */
     public function index()
     {
-        $grid      = new UsersGrid(User::class);
-        $paginator = $grid->getPaginator();
+        $grid = new UsersGrid(User::class);
+
+        $service = UserService::collection($grid);
+        $grid->filter = $service->getFilter();
+        $paginator    = $service->getPaginator();
 
         return view('motor-backend::backend.users.index', compact('paginator', 'grid'));
     }
@@ -63,20 +67,7 @@ class UsersController extends Controller
             return redirect()->back()->withErrors($form->getErrors())->withInput();
         }
 
-        $data              = $this->handleInputValues($form, $request->all());
-        $data['password']  = bcrypt($data['password']);
-        $data['api_token'] = str_random(60);
-
-        $user = new User($data);
-        $user->save();
-
-        $this->handleFileupload($request, $user, 'avatar', 'avatar');
-
-        if (isset( $data['roles'] ) && is_array($data['roles'])) {
-            foreach ($data['roles'] as $role => $value) {
-                $user->assignRole($role);
-            }
-        }
+        UserService::createWithForm($request, $form);
 
         flash()->success(trans('motor-backend::backend/users.created'));
 
@@ -91,9 +82,8 @@ class UsersController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(User $record)
     {
-        //
     }
 
 
@@ -108,7 +98,7 @@ class UsersController extends Controller
     {
         $form = $this->form(UserForm::class, [
             'method'  => 'PATCH',
-            'url' => route('backend.users.update', [$user->id]),
+            'url'     => route('backend.users.update', [ $user->id ]),
             'enctype' => 'multipart/form-data',
             'model'   => $user
         ]);
@@ -125,7 +115,7 @@ class UsersController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function update(UserRequest $request, User $user)
+    public function update(UserRequest $request, User $record)
     {
         $form = $this->form(UserForm::class);
 
@@ -134,27 +124,7 @@ class UsersController extends Controller
             return redirect()->back()->withErrors($form->getErrors())->withInput();
         }
 
-        $data = $this->handleInputValues($form, $request->all());
-
-        if ($data['password'] == '') {
-            unset( $data['password'] );
-        } else {
-            $data['password'] = bcrypt($data['password']);
-        }
-
-        $user->update($data);
-
-        $this->handleFileupload($request, $user, 'avatar', 'avatar');
-
-        foreach (Role::all() as $role) {
-            $user->removeRole($role);
-        }
-
-        if (isset( $data['roles'] ) && is_array($data['roles'])) {
-            foreach ($data['roles'] as $role => $value) {
-                $user->assignRole($role);
-            }
-        }
+        UserService::updateWithForm($record, $request, $form);
 
         flash()->success(trans('motor-backend::backend/users.updated'));
 
@@ -169,9 +139,9 @@ class UsersController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function destroy(User $user)
+    public function destroy(User $record)
     {
-        $user->delete();
+        UserService::delete($record);
 
         flash()->success(trans('motor-backend::backend/users.deleted'));
 
