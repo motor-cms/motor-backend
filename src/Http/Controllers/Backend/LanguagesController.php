@@ -8,6 +8,7 @@ use Motor\Backend\Http\Requests\Backend\LanguageRequest;
 use Motor\Backend\Models\Language;
 use Motor\Backend\Http\Controllers\Controller;
 use Kris\LaravelFormBuilder\FormBuilderTrait;
+use Motor\Backend\Services\LanguageService;
 
 class LanguagesController extends Controller
 {
@@ -21,7 +22,9 @@ class LanguagesController extends Controller
     public function index()
     {
         $grid      = new LanguageGrid(Language::class);
-        $paginator = $grid->getPaginator();
+        $service = new LanguageService($grid);
+        $grid->filter = $service->getFilter();
+        $paginator    = $service->getPaginator();
 
         return view('motor-backend::backend.languages.index', compact('paginator', 'grid'));
     }
@@ -59,8 +62,7 @@ class LanguagesController extends Controller
             return redirect()->back()->withErrors($form->getErrors())->withInput();
         }
 
-        $record = new Language($request->all());
-        $record->save();
+        $result = (new LanguageService())->store($request->all(), $form);
 
         flash()->success(trans('motor-backend::backend/languages.created'));
 
@@ -117,7 +119,7 @@ class LanguagesController extends Controller
             return redirect()->back()->withErrors($form->getErrors())->withInput();
         }
 
-        $record->update($request->all());
+        $result = (new LanguageService())->update($record, $request->all(), $form);
 
         flash()->success(trans('motor-backend::backend/languages.updated'));
 
@@ -134,7 +136,7 @@ class LanguagesController extends Controller
      */
     public function destroy(Language $record)
     {
-        $record->delete();
+        $result = (new LanguageService())->destroy($record);
 
         flash()->success(trans('motor-backend::backend/languages.deleted'));
 

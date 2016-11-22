@@ -8,6 +8,7 @@ use Motor\Backend\Http\Requests\Backend\ClientRequest;
 use Motor\Backend\Grids\ClientGrid;
 use Motor\Backend\Models\Client;
 use Kris\LaravelFormBuilder\FormBuilderTrait;
+use Motor\Backend\Services\ClientService;
 
 class ClientsController extends Controller
 {
@@ -22,8 +23,11 @@ class ClientsController extends Controller
      */
     public function index()
     {
-        $grid      = new ClientGrid(Client::class);
-        $paginator = $grid->getPaginator();
+        $grid = new ClientGrid(Client::class);
+
+        $service = new ClientService($grid);
+        $grid->filter = $service->getFilter();
+        $paginator    = $service->getPaginator();
 
         return view('motor-backend::backend.clients.index', compact('paginator', 'grid'));
     }
@@ -62,8 +66,7 @@ class ClientsController extends Controller
             return redirect()->back()->withErrors($form->getErrors())->withInput();
         }
 
-        $record = new Client($this->handleInputValues($form, $request->all()));
-        $record->save();
+        $result = (new ClientService())->store($request->all(), $form);
 
         flash()->success(trans('motor-backend::backend/clients.created'));
 
@@ -121,8 +124,7 @@ class ClientsController extends Controller
             return redirect()->back()->withErrors($form->getErrors())->withInput();
         }
 
-        $data = $this->handleInputValues($form, $request->all());
-        $record->update($data);
+        $result = (new ClientService())->update($record, $request->all(), $form);
 
         flash()->success(trans('motor-backend::backend/clients.updated'));
 
@@ -139,7 +141,7 @@ class ClientsController extends Controller
      */
     public function destroy(Client $record)
     {
-        $record->delete();
+        $result = (new ClientService())->destroy($record);
 
         flash()->success(trans('motor-backend::backend/clients.deleted'));
 

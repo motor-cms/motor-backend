@@ -163,6 +163,25 @@ Add this method to your exception handler
     }
 ```
 
+...and replace the render method
+
+```php
+    public function render($request, Exception $exception)
+    {
+        if ($exception instanceof ModelNotFoundException)
+        {
+            if (!$request->acceptsHtml())
+            {
+                return response()->json([
+                    'message' => 'Record not found',
+                ], 404);
+            }
+        }
+
+        return parent::render($request, $exception);
+    }
+```
+
 ## Credits
 
 - [Reza Esmaili](https://github.com/dfox288)

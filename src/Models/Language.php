@@ -3,12 +3,14 @@
 namespace Motor\Backend\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Motor\Core\Traits\Filterable;
 use Sofa\Eloquence\Eloquence;
 
 class Language extends Model
 {
 
     use Eloquence;
+    use Filterable;
 
     /**
      * Searchable columns for the Eloquence trait
