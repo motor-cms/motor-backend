@@ -5,7 +5,7 @@ use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 use Motor\Backend\Models\Role;
 
-class LoginTest extends TestCase
+class BackendRoleTest extends TestCase
 {
 
     use DatabaseTransactions;

@@ -3,6 +3,7 @@
 use Illuminate\Foundation\Testing\WithoutMiddleware;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
+use Motor\Backend\Models\User;
 
 class ProfileTest extends TestCase
 {
@@ -114,7 +115,6 @@ class ProfileTest extends TestCase
 
     ///**
     // * @test
-    // * @requires function skiptestdummy
     // */
     //public function can_modify_profile_and_upload_image_and_delete_it_again()
     //{
@@ -129,6 +129,8 @@ class ProfileTest extends TestCase
     //        'email'      => $this->user->email,
     //        'collection' => 'avatar'
     //    ]);
+    //
+    //    $this->user = User::find($this->user->id);
     //
     //    $this->json('PATCH', '/api/profile/edit?api_token=' . $this->user->api_token, [
     //        'name'          => 'TestName2',

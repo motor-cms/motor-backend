@@ -3,7 +3,7 @@
         {!! $filter->render() !!}
     @endforeach
     <div class="input-group input-group-sm">
-        <button type="submit" class="btn btn-default"><i class="fa fa-search"></i></button>
+        <button type="submit" class="btn btn-default" id="grid-search-button"><i class="fa fa-search"></i></button>
     </div>
 </form>
 <div class="box-tools">
