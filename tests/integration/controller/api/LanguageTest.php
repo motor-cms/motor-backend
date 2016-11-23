@@ -17,7 +17,7 @@ class LanguageTest extends TestCase
 
     protected $deletePermission;
 
-    protected $tables = [ 'users', 'languages', 'permissions', 'user_has_permissions' ];
+    protected $tables = [ 'users', 'languages', 'permissions', 'user_has_permissions', 'user_has_roles', 'roles' ];
 
 
     public function setUp()

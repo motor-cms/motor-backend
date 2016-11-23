@@ -19,7 +19,7 @@ class EmailTemplateTest extends TestCase
 
     protected $deletePermission;
 
-    protected $tables = [ 'users', 'clients', 'email_templates', 'permissions', 'user_has_permissions' ];
+    protected $tables = [ 'users', 'clients', 'email_templates', 'permissions', 'user_has_permissions', 'user_has_roles', 'roles' ];
 
 
     public function setUp()

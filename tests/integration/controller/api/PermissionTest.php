@@ -17,7 +17,7 @@ class PermissionTest extends TestCase
 
     protected $deletePermission;
 
-    protected $tables = [ 'users', 'permissions', 'user_has_permissions' ];
+    protected $tables = [ 'users', 'permissions', 'user_has_permissions', 'user_has_roles', 'roles' ];
 
 
     public function setUp()

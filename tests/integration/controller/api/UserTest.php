@@ -21,7 +21,7 @@ class UserTest extends TestCase
 
     protected $writePermissionPermission;
 
-    protected $tables = [ 'users', 'permissions', 'user_has_permissions', 'user_has_roles', 'clients' ];
+    protected $tables = [ 'users', 'permissions', 'user_has_permissions', 'user_has_roles', 'clients', 'permissions', 'user_has_permissions', 'user_has_roles', 'roles' ];
 
 
     public function setUp()
