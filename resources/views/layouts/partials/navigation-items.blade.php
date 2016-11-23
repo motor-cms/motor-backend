@@ -1,5 +1,5 @@
 @foreach($items as $item)
-    @if (Auth::user()->hasAnyRole(explode(',', $item->attributes['roles'])) || ($item->attributes['permissions'] != '' && Auth::user()->hasPermissionTo($item->attributes['permissions'])))
+    @if (has_role($item->attributes['roles']) || ($item->attributes['permissions'] != '' && has_permission($item->attributes['permissions'])))
     <li@lm-attrs($item) @if($item->hasChildren()) class="treeview" @endif @lm-endattrs>
         <a href="{!! $item->url() !!}">{!! $item->title !!}</a>
         @if($item->hasChildren())

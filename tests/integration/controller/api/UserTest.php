@@ -1,9 +1,5 @@
 <?php
 
-// TODO: make sure the permission to add/edit roles and permissions for users are given
-// TODO: test file upload
-// TODO: test file deletion
-
 use Illuminate\Foundation\Testing\WithoutMiddleware;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
@@ -20,6 +16,10 @@ class UserTest extends TestCase
     protected $writePermission;
 
     protected $deletePermission;
+
+    protected $writeRolePermission;
+
+    protected $writePermissionPermission;
 
     protected $tables = [ 'users', 'permissions', 'user_has_permissions', 'user_has_roles' ];
 
@@ -39,6 +39,9 @@ class UserTest extends TestCase
         $this->readPermission   = factory(Motor\Backend\Models\Permission::class)->create([ 'name' => 'users.read' ]);
         $this->writePermission  = factory(Motor\Backend\Models\Permission::class)->create([ 'name' => 'users.write' ]);
         $this->deletePermission = factory(Motor\Backend\Models\Permission::class)->create([ 'name' => 'users.delete' ]);
+
+        $this->writeRolePermission       = factory(Motor\Backend\Models\Permission::class)->create([ 'name' => 'roles.write' ]);
+        $this->writePermissionPermission = factory(Motor\Backend\Models\Permission::class)->create([ 'name' => 'permissions.write' ]);
     }
 
 
@@ -95,9 +98,38 @@ class UserTest extends TestCase
 
 
     /** @test */
+    public function cannot_create_a_new_user_with_permissions()
+    {
+        $this->user->givePermissionTo($this->writePermission);
+        $permissions = factory(Motor\Backend\Models\Permission::class, 5)->create();
+        $this->json('POST', '/api/users?api_token=' . $this->user->api_token, [
+            'name'        => 'Testuser',
+            'email'       => 'test@test.de',
+            'password'    => 'secret',
+            'permissions' => [
+                $permissions[0]->name => 1,
+                $permissions[1]->name => 1,
+                $permissions[2]->name => 1,
+                $permissions[3]->name => 1,
+            ]
+        ])->seeStatusCode(200)->seeJson([
+            'name' => 'Testuser',
+        ])->dontSeeJson([
+            'name' => $permissions[0]->name,
+        ])->dontSeeJson([
+            'name' => $permissions[1]->name,
+        ])->dontSeeJson([
+            'name' => $permissions[2]->name,
+        ])->dontSeeJson([
+            'name' => $permissions[3]->name,
+        ]);
+    }
+
+    /** @test */
     public function can_create_a_new_user_with_permissions()
     {
         $this->user->givePermissionTo($this->writePermission);
+        $this->user->givePermissionTo($this->writePermissionPermission);
         $permissions = factory(Motor\Backend\Models\Permission::class, 5)->create();
         $this->json('POST', '/api/users?api_token=' . $this->user->api_token, [
             'name'        => 'Testuser',
@@ -122,16 +154,40 @@ class UserTest extends TestCase
         ]);
     }
 
+
     /** @test */
-    public function can_create_a_new_user_with_roles()
+    public function cannot_create_a_new_user_with_roles()
     {
         $this->user->givePermissionTo($this->writePermission);
         $roles = factory(Motor\Backend\Models\Role::class, 2)->create();
         $this->json('POST', '/api/users?api_token=' . $this->user->api_token, [
-            'name'        => 'Testuser',
-            'email'       => 'test@test.de',
-            'password'    => 'secret',
-            'roles' => [
+            'name'     => 'Testuser',
+            'email'    => 'test@test.de',
+            'password' => 'secret',
+            'roles'    => [
+                $roles[0]->name => 1,
+                $roles[1]->name => 1
+            ]
+        ])->seeStatusCode(200)->seeJson([
+            'name' => 'Testuser',
+        ])->dontSeeJson([
+            'name' => $roles[0]->name,
+        ])->dontSeeJson([
+            'name' => $roles[1]->name,
+        ]);
+    }
+
+    /** @test */
+    public function can_create_a_new_user_with_roles()
+    {
+        $this->user->givePermissionTo($this->writePermission);
+        $this->user->givePermissionTo($this->writeRolePermission);
+        $roles = factory(Motor\Backend\Models\Role::class, 2)->create();
+        $this->json('POST', '/api/users?api_token=' . $this->user->api_token, [
+            'name'     => 'Testuser',
+            'email'    => 'test@test.de',
+            'password' => 'secret',
+            'roles'    => [
                 $roles[0]->name => 1,
                 $roles[1]->name => 1
             ]
@@ -141,6 +197,60 @@ class UserTest extends TestCase
             'name' => $roles[0]->name,
         ])->seeJson([
             'name' => $roles[1]->name,
+        ]);
+    }
+
+    /** @test */
+    public function can_modify_a_user_with_roles()
+    {
+        $this->user->givePermissionTo($this->writePermission);
+        $this->user->givePermissionTo($this->writeRolePermission);
+        $user = factory(Motor\Backend\Models\User::class)->create();
+        $roles = factory(Motor\Backend\Models\Role::class, 2)->create();
+        $this->json('PATCH', '/api/users/'.$user->id.'?api_token=' . $this->user->api_token, [
+            'name'     => 'Testuser',
+            'email'    => 'test@test.de',
+            'password' => 'secret',
+            'roles'    => [
+                $roles[0]->name => 1,
+                $roles[1]->name => 1
+            ]
+        ])->seeStatusCode(200)->seeJson([
+            'name' => 'Testuser',
+        ])->seeJson([
+            'name' => $roles[0]->name,
+        ])->seeJson([
+            'name' => $roles[1]->name,
+        ]);
+    }
+
+    /** @test */
+    public function can_modify_a_user_with_permissions()
+    {
+        $this->user->givePermissionTo($this->writePermission);
+        $this->user->givePermissionTo($this->writePermissionPermission);
+        $user = factory(Motor\Backend\Models\User::class)->create();
+        $permissions = factory(Motor\Backend\Models\Permission::class, 5)->create();
+        $this->json('PATCH', '/api/users/'.$user->id.'?api_token=' . $this->user->api_token, [
+            'name'        => 'Testuser',
+            'email'       => 'test@test.de',
+            'password'    => 'secret',
+            'permissions' => [
+                $permissions[0]->name => 1,
+                $permissions[1]->name => 1,
+                $permissions[2]->name => 1,
+                $permissions[3]->name => 1,
+            ]
+        ])->seeStatusCode(200)->seeJson([
+            'name' => 'Testuser',
+        ])->seeJson([
+            'name' => $permissions[0]->name,
+        ])->seeJson([
+            'name' => $permissions[1]->name,
+        ])->seeJson([
+            'name' => $permissions[2]->name,
+        ])->seeJson([
+            'name' => $permissions[3]->name,
         ]);
     }
 
@@ -244,6 +354,64 @@ class UserTest extends TestCase
             'email' => $user->email
         ])->seeStatusCode(200)->seeJson([
             'name' => 'TestName'
+        ]);
+    }
+
+
+    /** @test */
+    public function can_modify_a_user_and_upload_image()
+    {
+        $this->user->givePermissionTo($this->writePermission);
+        $user = factory(Motor\Backend\Models\User::class)->create();
+        $this->json('PATCH', '/api/users/' . $user->id . '?api_token=' . $this->user->api_token, [
+            'name'   => 'TestName',
+            'email'  => $user->email,
+            'avatar' => base64_encode(file_get_contents(__DIR__ . '/../../../../public/images/motor-logo-large.png'))
+        ])->seeStatusCode(200)->seeJson([
+            'name'       => 'TestName',
+            'collection' => 'avatar'
+        ]);
+    }
+
+
+    /** @test */
+    public function can_modify_a_user_and_upload_image_and_set_custom_filename()
+    {
+        $this->user->givePermissionTo($this->writePermission);
+        $user = factory(Motor\Backend\Models\User::class)->create();
+        $this->json('PATCH', '/api/users/' . $user->id . '?api_token=' . $this->user->api_token, [
+            'name'        => 'TestName',
+            'email'       => $user->email,
+            'avatar'      => base64_encode(file_get_contents(__DIR__ . '/../../../../public/images/motor-logo-large.png')),
+            'avatar_name' => 'custom_filename.png',
+        ])->seeStatusCode(200)->seeJson([
+            'name'       => 'TestName',
+            'collection' => 'avatar',
+            'file_name'  => 'custom_filename.png'
+        ]);
+    }
+
+
+    /** @test */
+    public function can_modify_a_user_and_upload_image_and_delete_it_again()
+    {
+        $this->user->givePermissionTo($this->writePermission);
+        $user = factory(Motor\Backend\Models\User::class)->create();
+        $this->json('PATCH', '/api/users/' . $user->id . '?api_token=' . $this->user->api_token, [
+            'name'   => 'TestName',
+            'email'  => $user->email,
+            'avatar' => base64_encode(file_get_contents(__DIR__ . '/../../../../public/images/motor-logo-large.png'))
+        ])->seeStatusCode(200)->seeJson([
+            'name'       => 'TestName',
+            'collection' => 'avatar'
+        ]);
+
+        $this->json('PATCH', '/api/users/' . $user->id . '?api_token=' . $this->user->api_token, [
+            'name'          => 'TestName',
+            'email'         => $user->email,
+            'avatar_delete' => 1
+        ])->seeStatusCode(200)->dontSeeJson([
+            'collection' => 'avatar'
         ]);
     }
 

@@ -6,7 +6,7 @@
 
 @section('contentheader_title')
     {{ trans('motor-backend::backend/roles.roles') }}
-    @if (Auth::user()->hasRole('SuperAdmin') || Auth::user()->hasPermissionTo('roles.write'))
+    @if (has_permission('roles.write'))
         {!! link_to_route('backend.roles.create', trans('motor-backend::backend/roles.new'), [], ['class' => 'pull-right btn btn-sm btn-success']) !!}
     @endif
 @endsection

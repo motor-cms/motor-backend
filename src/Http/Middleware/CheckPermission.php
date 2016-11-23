@@ -62,10 +62,7 @@ class CheckPermission
         $routeParts = array_reverse($routeParts);
         $permission = implode('.', $routeParts);
 
-        if ($this->auth->user()->hasRole('SuperAdmin')) {
-            return $next($request);
-        }
-        if ( ! $this->auth->user()->hasPermissionTo($permission)) {
+        if ( ! has_permission($permission)) {
             abort(403);
         }
 

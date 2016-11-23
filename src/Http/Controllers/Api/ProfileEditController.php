@@ -21,8 +21,8 @@ class ProfileEditController extends Controller
      */
     public function update(ProfileEditRequest $request)
     {
-        $result = ProfileEditService::update(Auth::user(), $request)->getResult();
-        $resource = $this->transformItem($result, UserTransformer::class, 'client,permissions,roles');
+        $result   = ProfileEditService::update(Auth::user(), $request)->getResult();
+        $resource = $this->transformItem($result, UserTransformer::class, 'client,permissions,roles,files');
 
         return $this->respondWithJson('Profile updated', $resource);
     }
@@ -30,8 +30,8 @@ class ProfileEditController extends Controller
 
     public function me()
     {
-        $result = ProfileEditService::show(Auth::user())->getResult();
-        $resource = $this->transformItem($result, UserTransformer::class, 'client,permissions,roles');
+        $result   = ProfileEditService::show(Auth::user())->getResult();
+        $resource = $this->transformItem($result, UserTransformer::class, 'client,permissions,roles,files');
 
         return $this->respondWithJson('Profile read', $resource);
 

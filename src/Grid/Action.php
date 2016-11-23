@@ -48,8 +48,8 @@ class Action extends Base
 
     public function onCondition($column, $value, $operator = '=')
     {
-        $this->conditionColumn = $column;
-        $this->conditionValue = $value;
+        $this->conditionColumn   = $column;
+        $this->conditionValue    = $value;
         $this->conditionoperator = $operator;
 
         return $this;
@@ -64,11 +64,11 @@ class Action extends Base
 
     public function render($record)
     {
-        if ($this->permission != '' && ( ! Auth::user()->hasRole('SuperAdmin') && ! Auth::user()->hasPermissionTo($this->permission) )) {
+        if ($this->permission != '' && ! has_permission($this->permission)) {
             return false;
         }
 
-        if (!is_null($this->conditionColumn)) {
+        if ( ! is_null($this->conditionColumn)) {
             $condition = false;
 
             switch ($this->conditionOperator) {
@@ -99,7 +99,7 @@ class Action extends Base
                     break;
             }
 
-            if (!$condition) {
+            if ( ! $condition) {
                 return false;
             }
         }
@@ -121,6 +121,11 @@ class Action extends Base
                 $view = 'motor-backend::grid.actions.button';
         }
 
-        return \View::make($view, [ 'link' => $this->link, 'record' => $record, 'label' => $this->label, 'parameters' => $this->parameters ])->render();
+        return \View::make($view, [
+            'link'       => $this->link,
+            'record'     => $record,
+            'label'      => $this->label,
+            'parameters' => $this->parameters
+        ])->render();
     }
 }

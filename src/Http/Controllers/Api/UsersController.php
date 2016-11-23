@@ -19,7 +19,7 @@ class UsersController extends Controller
     public function index()
     {
         $result = UserService::collection()->getPaginator();
-        $resource = $this->transformPaginator($result, UserTransformer::class, 'client,permissions,roles');
+        $resource = $this->transformPaginator($result, UserTransformer::class, 'client,permissions,roles,files');
 
         return $this->respondWithJson('User collection read', $resource);
     }
@@ -35,7 +35,7 @@ class UsersController extends Controller
     public function store(UserRequest $request)
     {
         $result = UserService::create($request)->getResult();
-        $resource = $this->transformItem($result, UserTransformer::class, 'client,permissions,roles');
+        $resource = $this->transformItem($result, UserTransformer::class, 'client,permissions,roles,files');
 
         return $this->respondWithJson('User created', $resource);
     }
@@ -51,7 +51,7 @@ class UsersController extends Controller
     public function show(User $record)
     {
         $result = UserService::show($record)->getResult();
-        $resource = $this->transformItem($result, UserTransformer::class, 'client,permissions,roles');
+        $resource = $this->transformItem($result, UserTransformer::class, 'client,permissions,roles,files');
 
         return $this->respondWithJson('User read', $resource);
     }
@@ -68,7 +68,7 @@ class UsersController extends Controller
     public function update(UserRequest $request, User $record)
     {
         $result = UserService::update($record, $request)->getResult();
-        $resource = $this->transformItem($result, UserTransformer::class, 'client,permissions,roles');
+        $resource = $this->transformItem($result, UserTransformer::class, 'client,permissions,roles,files');
 
         return $this->respondWithJson('User updated', $resource);
     }

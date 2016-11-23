@@ -22,11 +22,15 @@ class UserService extends BaseService
 
     public function afterCreate()
     {
-        foreach (Arr::get($this->data, 'roles', []) as $role => $value) {
-            $this->record->assignRole($role);
+        if (has_permission('roles.write')) {
+            foreach (Arr::get($this->data, 'roles', []) as $role => $value) {
+                $this->record->assignRole($role);
+            }
         }
-        foreach (Arr::get($this->data, 'permissions', []) as $permission => $value) {
-            $this->record->givePermissionTo($permission);
+        if (has_permission('permissions.write')) {
+            foreach (Arr::get($this->data, 'permissions', []) as $permission => $value) {
+                $this->record->givePermissionTo($permission);
+            }
         }
         $this->uploadFile($this->request->file('avatar'), 'avatar');
     }
@@ -50,13 +54,20 @@ class UserService extends BaseService
 
     public function afterUpdate()
     {
-        // FIXME: if we call this over the api and only want to update, let's say the email address, the user will be stripped of all roles and permissions
-        foreach (Role::all() as $role) {
-            $this->record->removeRole($role);
+        if (has_permission('roles.write')) {
+            if (is_array(Arr::get($this->data, 'roles'))) {
+                foreach (Role::all() as $role) {
+                    $this->record->removeRole($role);
+                }
+            }
         }
 
-        foreach (Permission::all() as $permission) {
-            $this->record->revokePermissionTo($permission);
+        if (has_permission('permissions.write')) {
+            if (is_array(Arr::get($this->data, 'permissions'))) {
+                foreach (Permission::all() as $permission) {
+                    $this->record->revokePermissionTo($permission);
+                }
+            }
         }
 
         $this->afterCreate();

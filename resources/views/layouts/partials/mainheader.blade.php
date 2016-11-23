@@ -158,7 +158,7 @@
                             --}}
                             <!-- Menu Footer-->
                             <li class="user-footer">
-                                @if (Auth::user()->hasRole('SuperAdmin') || Auth::user()->hasPermissionTo('profile.write'))
+                                @if (has_permission('profile.write'))
                                 <div class="pull-left">
                                     <a href="{{url('/backend/profile/edit')}}" class="btn btn-default btn-flat">{{ trans('motor-backend::backend/global.edit') }}</a>
                                 </div>

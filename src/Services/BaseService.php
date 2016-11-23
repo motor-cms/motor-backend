@@ -10,6 +10,7 @@ use Illuminate\Support\Str;
 use Kris\LaravelFormBuilder\Fields\CheckableType;
 use Kris\LaravelFormBuilder\Fields\SelectType;
 use Kris\LaravelFormBuilder\Form;
+use Motor\Backend\Forms\Fields\CheckboxCollectionType;
 use Motor\Backend\Forms\Fields\DatepickerType;
 use Motor\Backend\Forms\Fields\DatetimepickerType;
 use Motor\Core\Filter\Filter;
@@ -211,11 +212,10 @@ abstract class BaseService
         $this->beforeCreate();
         $this->record = new $this->model($this->data);
         $this->result = $this->record->save();
-
-        if ($this->result) {
-            $this->result = $this->record;
-        }
         $this->afterCreate();
+        if ($this->result) {
+            $this->result = $this->record->fresh();
+        }
 
         return $this;
     }
@@ -231,10 +231,10 @@ abstract class BaseService
     {
         $this->beforeUpdate();
         $this->result = $this->record->update($this->data);
-        if ($this->result) {
-            $this->result = $this->record;
-        }
         $this->afterUpdate();
+        if ($this->result) {
+            $this->result = $this->record->fresh();
+        }
 
         return $this;
     }
@@ -324,6 +324,13 @@ abstract class BaseService
                 }
             }
 
+            // Handle empty checkboxcollection
+            if ($field instanceof CheckboxCollectionType) {
+                if ( ! isset( $data[$field->getRealName()] )) {
+                    $data[$field->getRealName()] = [];
+                }
+            }
+
             // Handle empty date values
             if ($field instanceof DatepickerType || $field instanceof DatetimepickerType) {
 
@@ -390,6 +397,7 @@ abstract class BaseService
 
         return $this;
     }
+
 
     /**
      * Helper method to check if a file upload field is base64 encoded

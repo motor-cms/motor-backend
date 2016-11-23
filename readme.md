@@ -168,6 +168,12 @@ Add this method to your exception handler
 ```php
     public function render($request, Exception $exception)
     {
+        if ($exception instanceof HttpException) {
+            if (!$request->acceptsHtml())
+            {
+                return response()->json(['error' => 'Access denied.'], 403);            }
+        }
+
         if ($exception instanceof ModelNotFoundException)
         {
             if (!$request->acceptsHtml())

@@ -1,11 +1,10 @@
 <?php
 
-// TODO: transform media
-
 namespace Motor\Backend\Transformers;
 
 use League\Fractal;
 use Motor\Backend\Models\User;
+use Spatie\MediaLibrary\HasMedia\Interfaces\HasMedia;
 
 class UserTransformer extends Fractal\TransformerAbstract
 {
@@ -18,7 +17,8 @@ class UserTransformer extends Fractal\TransformerAbstract
     protected $availableIncludes = [
         'client',
         'roles',
-        'permissions'
+        'permissions',
+        'files'
     ];
 
 
@@ -68,6 +68,19 @@ class UserTransformer extends Fractal\TransformerAbstract
     {
         if ( ! is_null($record->roles)) {
             return $this->collection($record->roles, new RoleTransformer());
+        }
+    }
+
+
+    /**
+     * Include files
+     *
+     * @return \League\Fractal\Resource\Collection
+     */
+    public function includeFiles(HasMedia $record)
+    {
+        if (count($record->getMedia()) > 0) {
+            return $this->collection($record->getMedia(), new MediaTransformer());
         }
     }
 }

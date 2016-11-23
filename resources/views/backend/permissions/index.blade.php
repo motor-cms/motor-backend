@@ -6,7 +6,7 @@
 
 @section('contentheader_title')
     {{ trans('motor-backend::backend/permissions.permissions') }}
-    @if (Auth::user()->hasRole('SuperAdmin') || Auth::user()->hasPermissionTo('permissions.write'))
+    @if (has_permission('permissions.write'))
         {!! link_to_route('backend.permissions.create', trans('motor-backend::backend/permissions.new'), [], ['class' => 'pull-right btn btn-sm btn-success']) !!}
     @endif
 @endsection
