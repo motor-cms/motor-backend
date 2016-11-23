@@ -32,12 +32,12 @@ class EmailTemplateTest extends TestCase
 
     protected function addDefaults()
     {
-        $this->user   = factory(Motor\Backend\Models\User::class)->create();
-        $this->client = factory(Motor\Backend\Models\Client::class)->create();
+        $this->user   = create_test_user();
+        $this->client = create_test_client();
 
-        $this->readPermission   = factory(Motor\Backend\Models\Permission::class)->create([ 'name' => 'email_templates.read' ]);
-        $this->writePermission  = factory(Motor\Backend\Models\Permission::class)->create([ 'name' => 'email_templates.write' ]);
-        $this->deletePermission = factory(Motor\Backend\Models\Permission::class)->create([ 'name' => 'email_templates.delete' ]);
+        $this->readPermission   = create_test_permission_with_name('email_templates.read');
+        $this->writePermission  = create_test_permission_with_name('email_templates.write');
+        $this->deletePermission = create_test_permission_with_name('email_templates.delete');
     }
 
 
@@ -82,7 +82,7 @@ class EmailTemplateTest extends TestCase
     public function can_create_a_new_email_template()
     {
         $this->user->givePermissionTo($this->writePermission);
-        $language = factory(Motor\Backend\Models\Language::class)->create();
+        $language = create_test_language();
         $this->json('POST', '/api/email_templates?api_token=' . $this->user->api_token, [
             'client_id'   => $this->client->id,
             'language_id' => $language->id,
@@ -98,7 +98,7 @@ class EmailTemplateTest extends TestCase
     public function can_show_a_single_email_template()
     {
         $this->user->givePermissionTo($this->readPermission);
-        $email_template = factory(Motor\Backend\Models\EmailTemplate::class)->create();
+        $email_template = create_test_email_template();
         $this->json('GET',
             '/api/email_templates/' . $email_template->id . '?api_token=' . $this->user->api_token)->seeStatusCode(200)->seeJson([
             'body_html' => $email_template->body_html
@@ -108,7 +108,7 @@ class EmailTemplateTest extends TestCase
     /** @test */
     public function fails_to_show_a_single_email_template_without_permission()
     {
-        $email_template = factory(Motor\Backend\Models\EmailTemplate::class)->create();
+        $email_template = create_test_email_template();
         $this->json('GET',
             '/api/email_template/' . $email_template->id . '?api_token=' . $this->user->api_token)->seeStatusCode(403)->seeJson([
             'error' => 'Access denied.'
@@ -141,7 +141,7 @@ class EmailTemplateTest extends TestCase
     public function can_search_for_an_email_template()
     {
         $this->user->givePermissionTo($this->readPermission);
-        $email_templates = factory(Motor\Backend\Models\EmailTemplate::class, 10)->create();
+        $email_templates = create_test_email_template(10);
         $this->json('GET',
             '/api/email_templates?api_token=' . $this->user->api_token . '&search=' . $email_templates[2]->subject)->seeStatusCode(200)->seeJson([
             'subject' => $email_templates[2]->subject
@@ -153,7 +153,7 @@ class EmailTemplateTest extends TestCase
     public function can_show_a_second_results_page()
     {
         $this->user->givePermissionTo($this->readPermission);
-        factory(Motor\Backend\Models\EmailTemplate::class, 50)->create();
+        $email_templates = create_test_email_template(50);
         $this->json('GET',
             '/api/email_templates?api_token=' . $this->user->api_token . '&page=2')->seeStatusCode(200)->seeJson([
             'current_page' => 2
@@ -176,7 +176,7 @@ class EmailTemplateTest extends TestCase
     public function fails_if_trying_to_modify_a_email_template_without_payload()
     {
         $this->user->givePermissionTo($this->writePermission);
-        $email_template = factory(Motor\Backend\Models\EmailTemplate::class)->create();
+        $email_template = create_test_email_template();
         $this->json('PATCH',
             '/api/email_templates/' . $email_template->id . '?api_token=' . $this->user->api_token)->seeStatusCode(422)->seeJson([
             'client_id' => [ 'The client id field is required.' ]
@@ -186,7 +186,7 @@ class EmailTemplateTest extends TestCase
     /** @test */
     public function fails_if_trying_to_modify_an_email_template_without_permission()
     {
-        $email_template = factory(Motor\Backend\Models\EmailTemplate::class)->create();
+        $email_template = create_test_email_template();
         $this->json('PATCH',
             '/api/email_templates/' . $email_template->id . '?api_token=' . $this->user->api_token)->seeStatusCode(403)->seeJson([
             'error' => 'Access denied.'
@@ -198,8 +198,8 @@ class EmailTemplateTest extends TestCase
     public function can_modify_an_email_template()
     {
         $this->user->givePermissionTo($this->writePermission);
-        $language       = factory(Motor\Backend\Models\Language::class)->create();
-        $email_template = factory(Motor\Backend\Models\EmailTemplate::class)->create();
+        $language       = create_test_language();
+        $email_template = create_test_email_template();
         $this->json('PATCH', '/api/email_templates/' . $email_template->id . '?api_token=' . $this->user->api_token, [
             'client_id'   => $this->client->id,
             'language_id' => $language->id,
@@ -224,7 +224,7 @@ class EmailTemplateTest extends TestCase
     /** @test */
     public function fails_to_delete_an_email_template_without_permission()
     {
-        $email_template = factory(Motor\Backend\Models\EmailTemplate::class)->create();
+        $email_template = create_test_email_template();
         $this->json('DELETE',
             '/api/email_templates/' . $email_template->id . '?api_token=' . $this->user->api_token)->seeStatusCode(403)->seeJson([
             'error' => 'Access denied.'
@@ -235,7 +235,7 @@ class EmailTemplateTest extends TestCase
     public function can_delete_an_email_template()
     {
         $this->user->givePermissionTo($this->deletePermission);
-        $email_template = factory(Motor\Backend\Models\EmailTemplate::class)->create();
+        $email_template = create_test_email_template();
         $this->json('DELETE',
             '/api/email_templates/' . $email_template->id . '?api_token=' . $this->user->api_token)->seeStatusCode(200)->seeJson([
             'success' => true

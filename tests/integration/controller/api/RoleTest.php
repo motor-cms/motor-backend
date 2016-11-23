@@ -38,11 +38,11 @@ class RoleTest extends TestCase
 
     protected function addDefaults()
     {
-        $this->user = factory(Motor\Backend\Models\User::class)->create();
+        $this->user   = create_test_user();
 
-        $this->readPermission   = factory(Motor\Backend\Models\Permission::class)->create([ 'name' => 'roles.read' ]);
-        $this->writePermission  = factory(Motor\Backend\Models\Permission::class)->create([ 'name' => 'roles.write' ]);
-        $this->deletePermission = factory(Motor\Backend\Models\Permission::class)->create([ 'name' => 'roles.delete' ]);
+        $this->readPermission   = create_test_permission_with_name('roles.read');
+        $this->writePermission  = create_test_permission_with_name('roles.write');
+        $this->deletePermission = create_test_permission_with_name('roles.delete');
     }
 
 
@@ -100,7 +100,7 @@ class RoleTest extends TestCase
     public function can_create_a_new_role_with_permissions()
     {
         $this->user->givePermissionTo($this->writePermission);
-        $permissions = factory(Motor\Backend\Models\Permission::class, 5)->create();
+        $permissions = create_test_permission(5);
         $this->json('POST', '/api/roles?api_token=' . $this->user->api_token, [
             'name'        => 'TestRole',
             'permissions' => [
@@ -127,7 +127,7 @@ class RoleTest extends TestCase
     public function can_show_a_single_role()
     {
         $this->user->givePermissionTo($this->readPermission);
-        $role = factory(Motor\Backend\Models\Role::class)->create();
+        $role = create_test_role();
         $this->json('GET',
             '/api/roles/' . $role->id . '?api_token=' . $this->user->api_token)->seeStatusCode(200)->seeJson([
             'name' => $role->name
@@ -138,7 +138,7 @@ class RoleTest extends TestCase
     /** @test */
     public function fails_to_show_a_single_role_without_permission()
     {
-        $role = factory(Motor\Backend\Models\Role::class)->create();
+        $role = create_test_role();
         $this->json('GET',
             '/api/roles/' . $role->id . '?api_token=' . $this->user->api_token)->seeStatusCode(403)->seeJson([
             'error' => 'Access denied.'
@@ -160,7 +160,7 @@ class RoleTest extends TestCase
     public function can_show_multiple_roles()
     {
         $this->user->givePermissionTo($this->readPermission);
-        $roles = factory(Motor\Backend\Models\Role::class, 10)->create();
+        $roles = create_test_role(10);
         $this->json('GET', '/api/roles?api_token=' . $this->user->api_token)->seeStatusCode(200)->seeJson([
             'name' => $roles[0]->name
         ]);
@@ -171,7 +171,7 @@ class RoleTest extends TestCase
     public function can_search_for_a_role()
     {
         $this->user->givePermissionTo($this->readPermission);
-        $roles = factory(Motor\Backend\Models\Role::class, 10)->create();
+        $roles = create_test_role(10);
         $this->json('GET',
             '/api/roles?api_token=' . $this->user->api_token . '&search=' . $roles[2]->name)->seeStatusCode(200)->seeJson([
             'name' => $roles[2]->name
@@ -183,7 +183,7 @@ class RoleTest extends TestCase
     public function can_show_a_second_results_page()
     {
         $this->user->givePermissionTo($this->readPermission);
-        factory(Motor\Backend\Models\Role::class, 50)->create();
+        create_test_role(50);
         $this->json('GET', '/api/roles?api_token=' . $this->user->api_token . '&page=2')->seeStatusCode(200)->seeJson([
             'current_page' => 2
         ]);
@@ -204,7 +204,7 @@ class RoleTest extends TestCase
     public function fails_if_trying_to_modify_a_role_without_payload()
     {
         $this->user->givePermissionTo($this->writePermission);
-        $role = factory(Motor\Backend\Models\Role::class)->create();
+        $role = create_test_role();
         $this->json('PATCH',
             '/api/roles/' . $role->id . '?api_token=' . $this->user->api_token)->seeStatusCode(422)->seeJson([
             'name' => [ 'The name field is required.' ]
@@ -215,7 +215,7 @@ class RoleTest extends TestCase
     /** @test */
     public function fails_if_trying_to_modify_a_role_without_permission()
     {
-        $role = factory(Motor\Backend\Models\Role::class)->create();
+        $role = create_test_role();
         $this->json('PATCH',
             '/api/roles/' . $role->id . '?api_token=' . $this->user->api_token)->seeStatusCode(403)->seeJson([
             'error' => 'Access denied.'
@@ -227,7 +227,7 @@ class RoleTest extends TestCase
     public function can_modify_a_role()
     {
         $this->user->givePermissionTo($this->writePermission);
-        $role = factory(Motor\Backend\Models\Role::class)->create();
+        $role = create_test_role();
         $this->json('PATCH', '/api/roles/' . $role->id . '?api_token=' . $this->user->api_token, [
             'name' => 'TestRole'
         ])->seeStatusCode(200)->seeJson([
@@ -249,7 +249,7 @@ class RoleTest extends TestCase
     /** @test */
     public function fails_to_delete_a_role_without_permission()
     {
-        $role = factory(Motor\Backend\Models\Role::class)->create();
+        $role = create_test_role();
         $this->json('DELETE',
             '/api/roles/' . $role->id . '?api_token=' . $this->user->api_token)->seeStatusCode(403)->seeJson([
             'error' => 'Access denied.'
@@ -261,7 +261,7 @@ class RoleTest extends TestCase
     public function can_delete_a_role()
     {
         $this->user->givePermissionTo($this->deletePermission);
-        $role = factory(Motor\Backend\Models\Role::class)->create();
+        $role = create_test_role();
         $this->json('DELETE',
             '/api/roles/' . $role->id . '?api_token=' . $this->user->api_token)->seeStatusCode(200)->seeJson([
             'success' => true

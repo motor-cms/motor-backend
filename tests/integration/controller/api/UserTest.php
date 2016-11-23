@@ -21,7 +21,7 @@ class UserTest extends TestCase
 
     protected $writePermissionPermission;
 
-    protected $tables = [ 'users', 'permissions', 'user_has_permissions', 'user_has_roles' ];
+    protected $tables = [ 'users', 'permissions', 'user_has_permissions', 'user_has_roles', 'clients' ];
 
 
     public function setUp()
@@ -34,14 +34,14 @@ class UserTest extends TestCase
 
     protected function addDefaults()
     {
-        $this->user = factory(Motor\Backend\Models\User::class)->create();
+        $this->user   = create_test_user();
 
-        $this->readPermission   = factory(Motor\Backend\Models\Permission::class)->create([ 'name' => 'users.read' ]);
-        $this->writePermission  = factory(Motor\Backend\Models\Permission::class)->create([ 'name' => 'users.write' ]);
-        $this->deletePermission = factory(Motor\Backend\Models\Permission::class)->create([ 'name' => 'users.delete' ]);
+        $this->readPermission   = create_test_permission_with_name('users.read');
+        $this->writePermission  = create_test_permission_with_name('users.write');
+        $this->deletePermission = create_test_permission_with_name('users.delete');
 
-        $this->writeRolePermission       = factory(Motor\Backend\Models\Permission::class)->create([ 'name' => 'roles.write' ]);
-        $this->writePermissionPermission = factory(Motor\Backend\Models\Permission::class)->create([ 'name' => 'permissions.write' ]);
+        $this->writeRolePermission  = create_test_permission_with_name('roles.write');
+        $this->writePermissionPermission  = create_test_permission_with_name('permissions.write');
     }
 
 
@@ -101,7 +101,7 @@ class UserTest extends TestCase
     public function cannot_create_a_new_user_with_permissions()
     {
         $this->user->givePermissionTo($this->writePermission);
-        $permissions = factory(Motor\Backend\Models\Permission::class, 5)->create();
+        $permissions = create_test_permission(5);
         $this->json('POST', '/api/users?api_token=' . $this->user->api_token, [
             'name'        => 'Testuser',
             'email'       => 'test@test.de',
@@ -130,7 +130,7 @@ class UserTest extends TestCase
     {
         $this->user->givePermissionTo($this->writePermission);
         $this->user->givePermissionTo($this->writePermissionPermission);
-        $permissions = factory(Motor\Backend\Models\Permission::class, 5)->create();
+        $permissions = create_test_permission(5);
         $this->json('POST', '/api/users?api_token=' . $this->user->api_token, [
             'name'        => 'Testuser',
             'email'       => 'test@test.de',
@@ -159,7 +159,7 @@ class UserTest extends TestCase
     public function cannot_create_a_new_user_with_roles()
     {
         $this->user->givePermissionTo($this->writePermission);
-        $roles = factory(Motor\Backend\Models\Role::class, 2)->create();
+        $roles = create_test_role(2);
         $this->json('POST', '/api/users?api_token=' . $this->user->api_token, [
             'name'     => 'Testuser',
             'email'    => 'test@test.de',
@@ -182,7 +182,7 @@ class UserTest extends TestCase
     {
         $this->user->givePermissionTo($this->writePermission);
         $this->user->givePermissionTo($this->writeRolePermission);
-        $roles = factory(Motor\Backend\Models\Role::class, 2)->create();
+        $roles = create_test_role(2);
         $this->json('POST', '/api/users?api_token=' . $this->user->api_token, [
             'name'     => 'Testuser',
             'email'    => 'test@test.de',
@@ -205,8 +205,8 @@ class UserTest extends TestCase
     {
         $this->user->givePermissionTo($this->writePermission);
         $this->user->givePermissionTo($this->writeRolePermission);
-        $user = factory(Motor\Backend\Models\User::class)->create();
-        $roles = factory(Motor\Backend\Models\Role::class, 2)->create();
+        $user = create_test_user();
+        $roles = create_test_role(2);
         $this->json('PATCH', '/api/users/'.$user->id.'?api_token=' . $this->user->api_token, [
             'name'     => 'Testuser',
             'email'    => 'test@test.de',
@@ -229,8 +229,8 @@ class UserTest extends TestCase
     {
         $this->user->givePermissionTo($this->writePermission);
         $this->user->givePermissionTo($this->writePermissionPermission);
-        $user = factory(Motor\Backend\Models\User::class)->create();
-        $permissions = factory(Motor\Backend\Models\Permission::class, 5)->create();
+        $user = create_test_user();
+        $permissions = create_test_permission(5);
         $this->json('PATCH', '/api/users/'.$user->id.'?api_token=' . $this->user->api_token, [
             'name'        => 'Testuser',
             'email'       => 'test@test.de',
@@ -258,7 +258,7 @@ class UserTest extends TestCase
     public function can_show_a_single_user()
     {
         $this->user->givePermissionTo($this->readPermission);
-        $user = factory(Motor\Backend\Models\User::class)->create();
+        $user = create_test_user();
         $this->json('GET',
             '/api/users/' . $user->id . '?api_token=' . $this->user->api_token)->seeStatusCode(200)->seeJson([
             'name' => $user->name
@@ -269,7 +269,7 @@ class UserTest extends TestCase
     /** @test */
     public function fails_to_show_a_single_user_without_permission()
     {
-        $user = factory(Motor\Backend\Models\User::class)->create();
+        $user = create_test_user();
         $this->json('GET',
             '/api/users/' . $user->id . '?api_token=' . $this->user->api_token)->seeStatusCode(403)->seeJson([
             'error' => 'Access denied.'
@@ -292,7 +292,7 @@ class UserTest extends TestCase
     public function can_search_for_a_user()
     {
         $this->user->givePermissionTo($this->readPermission);
-        $users = factory(Motor\Backend\Models\User::class, 10)->create();
+        $users = create_test_user(10);
         $this->json('GET',
             '/api/users?api_token=' . $this->user->api_token . '&search=' . $users[2]->name)->seeStatusCode(200)->seeJson([
             'name' => $users[2]->name
@@ -304,7 +304,7 @@ class UserTest extends TestCase
     public function can_show_a_second_results_page()
     {
         $this->user->givePermissionTo($this->readPermission);
-        factory(Motor\Backend\Models\User::class, 50)->create();
+        create_test_user(50);
         $this->json('GET', '/api/users?api_token=' . $this->user->api_token . '&page=2')->seeStatusCode(200)->seeJson([
             'current_page' => 2
         ]);
@@ -325,7 +325,7 @@ class UserTest extends TestCase
     public function fails_if_trying_to_modify_a_user_without_payload()
     {
         $this->user->givePermissionTo($this->writePermission);
-        $user = factory(Motor\Backend\Models\User::class)->create();
+        $user = create_test_user();
         $this->json('PATCH',
             '/api/users/' . $user->id . '?api_token=' . $this->user->api_token)->seeStatusCode(422)->seeJson([
             'name' => [ 'The name field is required.' ]
@@ -336,7 +336,7 @@ class UserTest extends TestCase
     /** @test */
     public function fails_if_trying_to_modify_a_user_without_permission()
     {
-        $user = factory(Motor\Backend\Models\User::class)->create();
+        $user = create_test_user();
         $this->json('PATCH',
             '/api/users/' . $user->id . '?api_token=' . $this->user->api_token)->seeStatusCode(403)->seeJson([
             'error' => 'Access denied.'
@@ -348,7 +348,7 @@ class UserTest extends TestCase
     public function can_modify_a_user()
     {
         $this->user->givePermissionTo($this->writePermission);
-        $user = factory(Motor\Backend\Models\User::class)->create();
+        $user = create_test_user();
         $this->json('PATCH', '/api/users/' . $user->id . '?api_token=' . $this->user->api_token, [
             'name'  => 'TestName',
             'email' => $user->email
@@ -362,7 +362,7 @@ class UserTest extends TestCase
     public function can_modify_a_user_and_upload_image()
     {
         $this->user->givePermissionTo($this->writePermission);
-        $user = factory(Motor\Backend\Models\User::class)->create();
+        $user = create_test_user();
         $this->json('PATCH', '/api/users/' . $user->id . '?api_token=' . $this->user->api_token, [
             'name'   => 'TestName',
             'email'  => $user->email,
@@ -378,7 +378,7 @@ class UserTest extends TestCase
     public function can_modify_a_user_and_upload_image_and_set_custom_filename()
     {
         $this->user->givePermissionTo($this->writePermission);
-        $user = factory(Motor\Backend\Models\User::class)->create();
+        $user = create_test_user();
         $this->json('PATCH', '/api/users/' . $user->id . '?api_token=' . $this->user->api_token, [
             'name'        => 'TestName',
             'email'       => $user->email,
@@ -396,7 +396,7 @@ class UserTest extends TestCase
     public function can_modify_a_user_and_upload_image_and_delete_it_again()
     {
         $this->user->givePermissionTo($this->writePermission);
-        $user = factory(Motor\Backend\Models\User::class)->create();
+        $user = create_test_user();
         $this->json('PATCH', '/api/users/' . $user->id . '?api_token=' . $this->user->api_token, [
             'name'   => 'TestName',
             'email'  => $user->email,
@@ -429,7 +429,7 @@ class UserTest extends TestCase
     /** @test */
     public function fails_to_delete_a_user_without_permission()
     {
-        $user = factory(Motor\Backend\Models\User::class)->create();
+        $user = create_test_user();
         $this->json('DELETE',
             '/api/users/' . $user->id . '?api_token=' . $this->user->api_token)->seeStatusCode(403)->seeJson([
             'error' => 'Access denied.'
@@ -441,7 +441,7 @@ class UserTest extends TestCase
     public function can_delete_a_user()
     {
         $this->user->givePermissionTo($this->deletePermission);
-        $user = factory(Motor\Backend\Models\User::class)->create();
+        $user = create_test_user();
         $this->json('DELETE',
             '/api/users/' . $user->id . '?api_token=' . $this->user->api_token)->seeStatusCode(200)->seeJson([
             'success' => true

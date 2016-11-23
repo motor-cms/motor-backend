@@ -41,14 +41,14 @@ $factory->define(Motor\Backend\Models\Language::class, function (Faker\Generator
 $factory->define(Motor\Backend\Models\Client::class, function (Faker\Generator $faker) {
     return [
         'name'       => $faker->sentence,
-        'created_by' => 1,
-        'updated_by' => 1,
+        'created_by' => factory(Motor\Backend\Models\User::class)->create()->id,
+        'updated_by' => factory(Motor\Backend\Models\User::class)->create()->id,
     ];
 });
 
 $factory->define(Motor\Backend\Models\Permission::class, function (Faker\Generator $faker) {
     return [
-        'name' => $faker->word . '.' . $faker->word
+        'name' => $faker->word . '.' . $faker->word.'.'.$faker->word
     ];
 });
 
@@ -65,7 +65,7 @@ $factory->define(Motor\Backend\Models\EmailTemplate::class, function (Faker\Gene
         'subject'    => $faker->sentence,
         'body_text'  => $faker->paragraph(1),
         'body_html'  => $faker->paragraph(1),
-        'created_by' => 1,
-        'updated_by' => 1,
+        'created_by' => factory(Motor\Backend\Models\User::class)->create()->id,
+        'updated_by' => factory(Motor\Backend\Models\User::class)->create()->id,
     ];
 });

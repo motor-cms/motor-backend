@@ -30,11 +30,10 @@ class ClientTest extends TestCase
 
     protected function addDefaults()
     {
-        $this->user = factory(Motor\Backend\Models\User::class)->create();
-
-        $this->readPermission   = factory(Motor\Backend\Models\Permission::class)->create([ 'name' => 'clients.read' ]);
-        $this->writePermission  = factory(Motor\Backend\Models\Permission::class)->create([ 'name' => 'clients.write' ]);
-        $this->deletePermission = factory(Motor\Backend\Models\Permission::class)->create([ 'name' => 'clients.delete' ]);
+        $this->user = create_test_user();
+        $this->readPermission = create_test_permission_with_name('clients.read');
+        $this->writePermission = create_test_permission_with_name('clients.write');
+        $this->deletePermission = create_test_permission_with_name('clients.delete');
     }
 
 
@@ -92,7 +91,7 @@ class ClientTest extends TestCase
     public function can_show_a_single_client()
     {
         $this->user->givePermissionTo($this->readPermission);
-        $client = factory(Motor\Backend\Models\Client::class)->create();
+        $client = create_test_client();
         $this->json('GET',
             '/api/clients/' . $client->id . '?api_token=' . $this->user->api_token)->seeStatusCode(200)->seeJson([
             'name' => $client->name
@@ -123,7 +122,7 @@ class ClientTest extends TestCase
     public function can_show_multiple_clients()
     {
         $this->user->givePermissionTo($this->readPermission);
-        $clients = factory(Motor\Backend\Models\Client::class, 10)->create();
+        $clients = create_test_client(10);
         $this->json('GET', '/api/clients?api_token=' . $this->user->api_token)->seeStatusCode(200)->seeJson([
             'name' => $clients[0]->name
         ]);
@@ -134,7 +133,7 @@ class ClientTest extends TestCase
     public function can_search_for_a_client()
     {
         $this->user->givePermissionTo($this->readPermission);
-        $clients = factory(Motor\Backend\Models\Client::class, 10)->create();
+        $clients = create_test_client(10);
         $this->json('GET',
             '/api/clients?api_token=' . $this->user->api_token . '&search=' . $clients[2]->name)->seeStatusCode(200)->seeJson([
             'name' => $clients[2]->name
@@ -146,7 +145,7 @@ class ClientTest extends TestCase
     public function can_show_a_second_results_page()
     {
         $this->user->givePermissionTo($this->readPermission);
-        factory(Motor\Backend\Models\Client::class, 50)->create();
+        create_test_client(50);
         $this->json('GET',
             '/api/clients?api_token=' . $this->user->api_token . '&page=2')->seeStatusCode(200)->seeJson([
             'current_page' => 2
@@ -168,7 +167,7 @@ class ClientTest extends TestCase
     public function fails_if_trying_to_modify_a_client_without_payload()
     {
         $this->user->givePermissionTo($this->writePermission);
-        $client = factory(Motor\Backend\Models\Client::class)->create();
+        $client = create_test_client();
         $this->json('PATCH',
             '/api/clients/' . $client->id . '?api_token=' . $this->user->api_token)->seeStatusCode(422)->seeJson([
             'name' => [ 'The name field is required.' ]
@@ -179,7 +178,7 @@ class ClientTest extends TestCase
     /** @test */
     public function fails_if_trying_to_modify_a_client_without_permission()
     {
-        $client = factory(Motor\Backend\Models\Client::class)->create();
+        $client = create_test_client();
         $this->json('PATCH',
             '/api/clients/' . $client->id . '?api_token=' . $this->user->api_token)->seeStatusCode(403)->seeJson([
             'error' => 'Access denied.'
@@ -190,7 +189,7 @@ class ClientTest extends TestCase
     public function can_modify_a_client()
     {
         $this->user->givePermissionTo($this->writePermission);
-        $client = factory(Motor\Backend\Models\Client::class)->create();
+        $client = create_test_client();
         $this->json('PATCH', '/api/clients/' . $client->id . '?api_token=' . $this->user->api_token, [
             'name' => $client->name,
             'city' => 'Saarbrücken'
@@ -224,7 +223,7 @@ class ClientTest extends TestCase
     public function can_delete_a_client()
     {
         $this->user->givePermissionTo($this->deletePermission);
-        $client = factory(Motor\Backend\Models\Client::class)->create();
+        $client = create_test_client();
         $this->json('DELETE',
             '/api/clients/' . $client->id . '?api_token=' . $this->user->api_token)->seeStatusCode(200)->seeJson([
             'success' => true

@@ -30,11 +30,11 @@ class PermissionTest extends TestCase
 
     protected function addDefaults()
     {
-        $this->user = factory(Motor\Backend\Models\User::class)->create();
+        $this->user   = create_test_user();
 
-        $this->readPermission   = factory(Motor\Backend\Models\Permission::class)->create([ 'name' => 'permissions.read' ]);
-        $this->writePermission  = factory(Motor\Backend\Models\Permission::class)->create([ 'name' => 'permissions.write' ]);
-        $this->deletePermission = factory(Motor\Backend\Models\Permission::class)->create([ 'name' => 'permissions.delete' ]);
+        $this->readPermission   = create_test_permission_with_name('permissions.read');
+        $this->writePermission  = create_test_permission_with_name('permissions.write');
+        $this->deletePermission = create_test_permission_with_name('permissions.delete');
     }
 
 
@@ -92,7 +92,7 @@ class PermissionTest extends TestCase
     public function can_create_a_new_permission_with_permission_group()
     {
         $this->user->givePermissionTo($this->writePermission);
-        $permission_group = factory(Motor\Backend\Models\PermissionGroup::class)->create();
+        $permission_group = create_test_permission_group();
         $this->json('POST', '/api/permissions?api_token=' . $this->user->api_token, [
             'name'                => 'TestPermission',
             'permission_group_id' => $permission_group->id
@@ -107,7 +107,7 @@ class PermissionTest extends TestCase
     public function can_show_a_single_permission()
     {
         $this->user->givePermissionTo($this->readPermission);
-        $permission = factory(Motor\Backend\Models\Permission::class)->create();
+        $permission = create_test_permission();
         $this->json('GET',
             '/api/permissions/' . $permission->id . '?api_token=' . $this->user->api_token)->seeStatusCode(200)->seeJson([
             'name' => $permission->name
@@ -118,7 +118,7 @@ class PermissionTest extends TestCase
     /** @test */
     public function fails_to_show_a_single_permission_without_permission()
     {
-        $permission = factory(Motor\Backend\Models\Permission::class)->create();
+        $permission = create_test_permission();
         $this->json('GET',
             '/api/permissions/' . $permission->id . '?api_token=' . $this->user->api_token)->seeStatusCode(403)->seeJson([
             'error' => 'Access denied.'
@@ -130,7 +130,7 @@ class PermissionTest extends TestCase
     public function can_show_multiple_permissions()
     {
         $this->user->givePermissionTo($this->readPermission);
-        $permissions = factory(Motor\Backend\Models\Permission::class, 10)->create();
+        $permissions = create_test_permission(10);
         $this->json('GET', '/api/permissions?api_token=' . $this->user->api_token)->seeStatusCode(200)->seeJson([
             'name' => $permissions[0]->name
         ]);
@@ -141,7 +141,7 @@ class PermissionTest extends TestCase
     public function can_search_for_a_permission()
     {
         $this->user->givePermissionTo($this->readPermission);
-        $permissions = factory(Motor\Backend\Models\Permission::class, 10)->create();
+        $permissions = create_test_permission(10);
         $this->json('GET',
             '/api/permissions?api_token=' . $this->user->api_token . '&search=' . $permissions[2]->name)->seeStatusCode(200)->seeJson([
             'name' => $permissions[2]->name
@@ -153,7 +153,7 @@ class PermissionTest extends TestCase
     public function can_show_a_second_results_page()
     {
         $this->user->givePermissionTo($this->readPermission);
-        factory(Motor\Backend\Models\Permission::class, 50)->create();
+        create_test_permission(50);
         $this->json('GET',
             '/api/permissions?api_token=' . $this->user->api_token . '&page=2')->seeStatusCode(200)->seeJson([
             'current_page' => 2
@@ -175,7 +175,7 @@ class PermissionTest extends TestCase
     public function fails_if_trying_to_modify_a_permission_without_payload()
     {
         $this->user->givePermissionTo($this->writePermission);
-        $permission = factory(Motor\Backend\Models\Permission::class)->create();
+        $permission = create_test_permission();
         $this->json('PATCH',
             '/api/permissions/' . $permission->id . '?api_token=' . $this->user->api_token)->seeStatusCode(422)->seeJson([
             'name' => [ 'The name field is required.' ]
@@ -186,7 +186,7 @@ class PermissionTest extends TestCase
     /** @test */
     public function fails_if_trying_to_modify_a_permission_without_permission()
     {
-        $permission = factory(Motor\Backend\Models\Permission::class)->create();
+        $permission = create_test_permission();
         $this->json('PATCH',
             '/api/permissions/' . $permission->id . '?api_token=' . $this->user->api_token)->seeStatusCode(403)->seeJson([
             'error' => 'Access denied.'
@@ -198,7 +198,7 @@ class PermissionTest extends TestCase
     public function can_modify_a_permission()
     {
         $this->user->givePermissionTo($this->writePermission);
-        $permission = factory(Motor\Backend\Models\Permission::class)->create();
+        $permission = create_test_permission();
         $this->json('PATCH', '/api/permissions/' . $permission->id . '?api_token=' . $this->user->api_token, [
             'name' => 'tests.create'
         ])->seeStatusCode(200)->seeJson([
@@ -220,7 +220,7 @@ class PermissionTest extends TestCase
     /** @test */
     public function fails_to_delete_a_permission_without_permission()
     {
-        $permission = factory(Motor\Backend\Models\Permission::class)->create();
+        $permission = create_test_permission();
         $this->json('DELETE',
             '/api/permissions/' . $permission->id . '?api_token=' . $this->user->api_token)->seeStatusCode(403)->seeJson([
             'error' => 'Access denied.'
@@ -231,7 +231,7 @@ class PermissionTest extends TestCase
     public function can_delete_a_permission()
     {
         $this->user->givePermissionTo($this->deletePermission);
-        $permission = factory(Motor\Backend\Models\Permission::class)->create();
+        $permission = create_test_permission();
         $this->json('DELETE',
             '/api/permissions/' . $permission->id . '?api_token=' . $this->user->api_token)->seeStatusCode(200)->seeJson([
             'success' => true

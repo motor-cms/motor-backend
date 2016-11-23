@@ -37,10 +37,10 @@ class ProfileTest extends TestCase
 
     protected function addDefaults()
     {
-        $this->user = factory(Motor\Backend\Models\User::class)->create();
+        $this->user   = create_test_user();
 
-        $this->readPermission  = factory(Motor\Backend\Models\Permission::class)->create([ 'name' => 'profile.read' ]);
-        $this->writePermission = factory(Motor\Backend\Models\Permission::class)->create([ 'name' => 'profile.write' ]);
+        $this->readPermission   = create_test_permission_with_name('profile.read');
+        $this->writePermission  = create_test_permission_with_name('profile.write');
     }
 
 
