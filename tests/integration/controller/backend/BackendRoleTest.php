@@ -21,6 +21,7 @@ class BackendRoleTest extends TestCase
     protected $tables = [
         'users',
         'roles',
+        'media',
         'permissions',
         'user_has_permissions',
         'roles',
@@ -105,6 +106,18 @@ class BackendRoleTest extends TestCase
             ->see('Role created')
             ->see('NewRole')
             ->seePageIs('/backend/roles');
+    }
+
+    /** @test */
+    public function cannot_create_a_new_role_with_empty_fields()
+    {
+        $this->visit('/backend/roles/create')
+            ->see('Create role')
+            ->within('.box-footer', function(){
+                $this->press('Save role');
+            })
+            ->see('Data missing!')
+            ->seePageIs('/backend/roles/create');
     }
 
     /** @test */

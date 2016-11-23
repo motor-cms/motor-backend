@@ -6,7 +6,7 @@ return [
     'new'                     => 'Create email template',
     'edit'                    => 'Edit email template',
     'save'                    => 'Save email template',
-    'created'                 => 'Email template saved',
+    'created'                 => 'Email template created',
     'updated'                 => 'Email template updated',
     'deleted'                 => 'Email template deleted',
     'template_info'           => 'Template information',

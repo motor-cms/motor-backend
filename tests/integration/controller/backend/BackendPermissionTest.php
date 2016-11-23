@@ -109,26 +109,17 @@ class BackendPermissionTest extends TestCase
     }
 
     /** @test */
-    public function can_create_a_new_permission_and_select_a_different_permission_group()
+    public function cannot_create_a_new_permission_with_empty_fields()
     {
-        $groups = create_test_permission_group(5);
-
         $this->visit('/backend/permissions/create')
             ->see('Create permission')
-            ->type('NewPermission', 'name')
-            ->select($groups[2]->id, 'permission_group_id')
             ->within('.box-footer', function(){
                 $this->press('Save permission');
             })
-            ->see('Permission created')
-            ->see('NewPermission')
-            ->seePageIs('/backend/permissions');
-
-        $permission = Permission::where('name', 'NewPermission')->first();
-
-        $this->assertEquals($groups[2]->id, $permission->permission_group_id);
-        $this->assertEquals($groups[2]->name, $permission->group->name);
+            ->see('Data missing!')
+            ->seePageIs('/backend/permissions/create');
     }
+
 
     /** @test */
     public function can_modify_a_permission_and_change_the_permission_group()

@@ -4,7 +4,7 @@ use Illuminate\Foundation\Testing\WithoutMiddleware;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 
-class EmailTemplateTest extends TestCase
+class ApiEmailTemplateTest extends TestCase
 {
 
     use DatabaseTransactions;
@@ -19,7 +19,17 @@ class EmailTemplateTest extends TestCase
 
     protected $deletePermission;
 
-    protected $tables = [ 'users', 'clients', 'email_templates', 'permissions', 'user_has_permissions', 'user_has_roles', 'roles' ];
+    protected $tables = [
+        'users',
+        'clients',
+        'languages',
+        'email_templates',
+        'permissions',
+        'user_has_permissions',
+        'roles',
+        'user_has_roles',
+        'role_has_permissions'
+    ];
 
 
     public function setUp()

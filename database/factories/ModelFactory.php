@@ -26,7 +26,7 @@ $factory->define(Motor\Backend\Models\User::class, function (Faker\Generator $fa
 
 $factory->define(Motor\Backend\Models\Role::class, function (Faker\Generator $faker) {
     return [
-        'name' => $faker->name
+        'name' => $faker->word.'.'.str_random(20)
     ];
 });
 
@@ -40,15 +40,16 @@ $factory->define(Motor\Backend\Models\Language::class, function (Faker\Generator
 
 $factory->define(Motor\Backend\Models\Client::class, function (Faker\Generator $faker) {
     return [
-        'name'       => $faker->sentence,
-        'created_by' => factory(Motor\Backend\Models\User::class)->create()->id,
-        'updated_by' => factory(Motor\Backend\Models\User::class)->create()->id,
+        'name'               => $faker->sentence,
+        'country_iso_3166_1' => str_random(2),
+        'created_by'         => factory(Motor\Backend\Models\User::class)->create()->id,
+        'updated_by'         => factory(Motor\Backend\Models\User::class)->create()->id,
     ];
 });
 
 $factory->define(Motor\Backend\Models\Permission::class, function (Faker\Generator $faker) {
     return [
-        'name' => $faker->word . '.' . $faker->word.'.'.$faker->word
+        'name' => $faker->word . '.' . $faker->word . '.' . $faker->word
     ];
 });
 
@@ -60,12 +61,13 @@ $factory->define(Motor\Backend\Models\PermissionGroup::class, function (Faker\Ge
 
 $factory->define(Motor\Backend\Models\EmailTemplate::class, function (Faker\Generator $faker) {
     return [
-        'client_id'  => 1,
-        'name'       => $faker->sentence,
-        'subject'    => $faker->sentence,
-        'body_text'  => $faker->paragraph(1),
-        'body_html'  => $faker->paragraph(1),
-        'created_by' => factory(Motor\Backend\Models\User::class)->create()->id,
-        'updated_by' => factory(Motor\Backend\Models\User::class)->create()->id,
+        'client_id'   => factory(Motor\Backend\Models\Client::class)->create()->id,
+        'language_id' => factory(Motor\Backend\Models\Language::class)->create()->id,
+        'name'        => $faker->sentence,
+        'subject'     => $faker->sentence,
+        'body_text'   => $faker->paragraph(1),
+        'body_html'   => $faker->paragraph(1),
+        'created_by'  => factory(Motor\Backend\Models\User::class)->create()->id,
+        'updated_by'  => factory(Motor\Backend\Models\User::class)->create()->id,
     ];
 });
