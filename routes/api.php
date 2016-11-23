@@ -1,6 +1,6 @@
 <?php
 Route::group([
-    'middleware' => ['auth:api', 'bindings'],
+    'middleware' => [ 'auth:api', 'bindings', 'permission' ],
     'namespace'  => 'Motor\Backend\Http\Controllers\Api',
     'prefix'     => 'api',
     'as'         => 'api.',
@@ -10,7 +10,8 @@ Route::group([
     Route::resource('languages', 'LanguagesController');
     Route::resource('roles', 'RolesController');
     Route::resource('permissions', 'PermissionsController');
+    Route::resource('email_templates', 'EmailTemplatesController');
 
-    Route::get('profile/me', 'ProfileEditController@me')->name('profile.me');
+    Route::get('profile/me', 'ProfileEditController@me')->name('profile.read');
     Route::patch('profile/edit', 'ProfileEditController@update')->name('profile.update');
 });

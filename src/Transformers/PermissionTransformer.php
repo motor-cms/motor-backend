@@ -1,0 +1,40 @@
+<?php
+
+namespace Motor\Backend\Transformers;
+
+use League\Fractal;
+use Motor\Backend\Models\Permission;
+
+class PermissionTransformer extends Fractal\TransformerAbstract
+{
+
+    /**
+     * List of resources possible to include
+     *
+     * @var array
+     */
+    protected $availableIncludes = [
+        'group'
+    ];
+
+    public function transform(Permission $record)
+    {
+        return [
+            'id'                  => (int) $record->id,
+            'name'                => $record->name,
+            'permission_group_id' => $record->permission_group_id,
+        ];
+    }
+
+    /**
+     * Include permission group
+     *
+     * @return \League\Fractal\Resource\Item
+     */
+    public function includeGroup(Permission $record)
+    {
+        if ( ! is_null($record->group)) {
+            return $this->item($record->group, new PermissionGroupTransformer());
+        }
+    }
+}

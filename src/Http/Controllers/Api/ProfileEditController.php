@@ -6,6 +6,7 @@ use Motor\Backend\Http\Requests\Backend\ProfileEditRequest;
 use Motor\Backend\Http\Controllers\Controller;
 use Auth;
 use Motor\Backend\Services\ProfileEditService;
+use Motor\Backend\Transformers\UserTransformer;
 
 class ProfileEditController extends Controller
 {
@@ -21,16 +22,18 @@ class ProfileEditController extends Controller
     public function update(ProfileEditRequest $request)
     {
         $result = ProfileEditService::update(Auth::user(), $request)->getResult();
+        $resource = $this->transformItem($result, UserTransformer::class, 'client,permissions,roles');
 
-        return response()->json([ 'data' => $result ]);
+        return $this->respondWithJson('Profile updated', $resource);
     }
 
 
     public function me()
     {
         $result = ProfileEditService::show(Auth::user())->getResult();
+        $resource = $this->transformItem($result, UserTransformer::class, 'client,permissions,roles');
 
-        return response()->json([ 'data' => $result ]);
+        return $this->respondWithJson('Profile read', $resource);
 
     }
 }

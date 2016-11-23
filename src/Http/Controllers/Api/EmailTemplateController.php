@@ -6,6 +6,7 @@ use Motor\Backend\Http\Controllers\Controller;
 use Motor\Backend\Http\Requests\Backend\EmailTemplateRequest;
 use Motor\Backend\Models\EmailTemplate;
 use Motor\Backend\Services\EmailTemplateService;
+use Motor\Backend\Transformers\EmailTemplateTransformer;
 
 class EmailTemplatesController extends Controller
 {
@@ -17,9 +18,10 @@ class EmailTemplatesController extends Controller
      */
     public function index()
     {
-        $result = EmailTemplateService::collection()->getPaginator();
+        $paginator = EmailTemplateService::collection()->getPaginator();
+        $resource = $this->transformPaginator($paginator, EmailTemplateTransformer::class, 'client,language');
 
-        return response()->json(['data' => $result]);
+        return $this->respondWithJson('Email template collection read', $resource);
     }
 
 
@@ -33,8 +35,9 @@ class EmailTemplatesController extends Controller
     public function store(EmailTemplateRequest $request)
     {
         $result = EmailTemplateService::create($request)->getResult();
+        $resource = $this->transformItem($result, EmailTemplateTransformer::class, 'client,language');
 
-        return response()->json(['data' => $result]);
+        return $this->respondWithJson('Email template created', $resource);
     }
 
 
@@ -48,8 +51,9 @@ class EmailTemplatesController extends Controller
     public function show(EmailTemplate $record)
     {
         $result = EmailTemplateService::show($record)->getResult();
+        $resource = $this->transformItem($result, EmailTemplateTransformer::class, 'client,language');
 
-        return response()->json(['data' => $result]);
+        return $this->respondWithJson('Email template read', $resource);
     }
 
 
@@ -64,8 +68,9 @@ class EmailTemplatesController extends Controller
     public function update(EmailTemplateRequest $request, EmailTemplate $record)
     {
         $result = EmailTemplateService::update($record, $request)->getResult();
+        $resource = $this->transformItem($result, EmailTemplateTransformer::class, 'client,language');
 
-        return response()->json(['data' => $result]);
+        return $this->respondWithJson('Email template updated', $resource);
     }
 
 
@@ -80,6 +85,9 @@ class EmailTemplatesController extends Controller
     {
         $result = EmailTemplateService::delete($record)->getResult();
 
-        return response()->json(['data' => $result]);
+        if ($result) {
+            return $this->respondWithJson('Email template deleted', ['success' => true]);
+        }
+        return $this->respondWithJson('Email template NOT deleted', ['success' => false]);
     }
 }

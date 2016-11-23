@@ -2,6 +2,9 @@
 
 namespace Motor\Backend\Http\Controllers;
 
+use Illuminate\Support\Arr;
+use League\Fractal\Pagination\IlluminatePaginatorAdapter;
+use League\Fractal\Resource\ResourceAbstract;
 use Motor\Backend\Forms\Fields\DatepickerType;
 use Motor\Backend\Forms\Fields\DatetimepickerType;
 use Motor\Backend\Http\Requests\Request;
@@ -16,18 +19,57 @@ use Kris\LaravelFormBuilder\Fields\CheckableType;
 use Kris\LaravelFormBuilder\Fields\SelectType;
 use Kris\LaravelFormBuilder\Form;
 use Spatie\MediaLibrary\HasMedia\Interfaces\HasMedia;
+use League\Fractal\Manager;
+use League\Fractal\Resource\Collection;
+use League\Fractal\Resource\Item;
 
 class Controller extends BaseController
 {
 
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
 
+    protected $fractal;
+
 
     public function __construct()
     {
         \Locale::setDefault(config('app.locale'));
+        $this->fractal = new Manager();
     }
 
+    protected function transformItem($record, $transformer, $includes = '')
+    {
+        $this->fractal->parseIncludes($includes);
+        return new Item($record, new $transformer);
+    }
+
+    protected function transformCollection($collection, $transformer, $includes = '')
+    {
+        $this->fractal->parseIncludes($includes);
+        return new Collection($collection, new $transformer);
+    }
+
+    protected function transformPaginator($paginator, $transformer, $includes = '')
+    {
+        $this->fractal->parseIncludes($includes);
+        $resource = new Collection($paginator->getCollection(), new $transformer);
+        $resource->setPaginator(new IlluminatePaginatorAdapter($paginator));
+        return $resource;
+    }
+
+    protected function respondWithJson($message, $data)
+    {
+        $meta = null;
+        if ($data instanceof ResourceAbstract) {
+            $data = $this->fractal->createData($data)->toArray();
+            $meta = Arr::get($data, 'meta', null);
+            $data = Arr::get($data, 'data');
+        }
+        if (!is_null($meta)) {
+            return response()->json(['message' => $message, 'data' => $data, 'meta' => $meta]);
+        }
+        return response()->json(['message' => $message, 'data' => $data]);
+    }
 
     /**
      * @param Form  $form

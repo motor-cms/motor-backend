@@ -1,6 +1,13 @@
 <?php
 
 return [
+    'profile'         => [
+        'name'   => 'backend/global.profile',
+        'values' => [
+            'read',
+            'write'
+        ]
+    ],
     'dashboard'       => [
         'name'   => 'backend/global.dashboard',
         'values' => [

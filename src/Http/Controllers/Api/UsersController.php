@@ -6,6 +6,7 @@ use Motor\Backend\Http\Controllers\Controller;
 use Motor\Backend\Http\Requests\Backend\UserRequest;
 use Motor\Backend\Models\User;
 use Motor\Backend\Services\UserService;
+use Motor\Backend\Transformers\UserTransformer;
 
 class UsersController extends Controller
 {
@@ -18,8 +19,9 @@ class UsersController extends Controller
     public function index()
     {
         $result = UserService::collection()->getPaginator();
+        $resource = $this->transformPaginator($result, UserTransformer::class, 'client,permissions,roles');
 
-        return response()->json(['data' => $result]);
+        return $this->respondWithJson('User collection read', $resource);
     }
 
 
@@ -33,8 +35,9 @@ class UsersController extends Controller
     public function store(UserRequest $request)
     {
         $result = UserService::create($request)->getResult();
+        $resource = $this->transformItem($result, UserTransformer::class, 'client,permissions,roles');
 
-        return response()->json(['data' => $result]);
+        return $this->respondWithJson('User created', $resource);
     }
 
 
@@ -48,8 +51,9 @@ class UsersController extends Controller
     public function show(User $record)
     {
         $result = UserService::show($record)->getResult();
+        $resource = $this->transformItem($result, UserTransformer::class, 'client,permissions,roles');
 
-        return response()->json(['data' => $result]);
+        return $this->respondWithJson('User read', $resource);
     }
 
 
@@ -64,8 +68,9 @@ class UsersController extends Controller
     public function update(UserRequest $request, User $record)
     {
         $result = UserService::update($record, $request)->getResult();
+        $resource = $this->transformItem($result, UserTransformer::class, 'client,permissions,roles');
 
-        return response()->json(['data' => $result]);
+        return $this->respondWithJson('User updated', $resource);
     }
 
 
@@ -80,6 +85,9 @@ class UsersController extends Controller
     {
         $result = UserService::delete($record)->getResult();
 
-        return response()->json(['data' => $result]);
+        if ($result) {
+            return $this->respondWithJson('User deleted', ['success' => true]);
+        }
+        return $this->respondWithJson('User NOT deleted', ['success' => false]);
     }
 }

@@ -6,6 +6,7 @@ use Motor\Backend\Http\Controllers\Controller;
 use Motor\Backend\Http\Requests\Backend\RoleRequest;
 use Motor\Backend\Models\Role;
 use Motor\Backend\Services\RoleService;
+use Motor\Backend\Transformers\RoleTransformer;
 
 class RolesController extends Controller
 {
@@ -17,9 +18,10 @@ class RolesController extends Controller
      */
     public function index()
     {
-        $result = RoleService::collection()->getPaginator();
+        $paginator = RoleService::collection()->getPaginator();
+        $resource = $this->transformPaginator($paginator, RoleTransformer::class, 'permissions');
 
-        return response()->json(['data' => $result]);
+        return $this->respondWithJson('Role collection read', $resource);
     }
 
 
@@ -33,8 +35,9 @@ class RolesController extends Controller
     public function store(RoleRequest $request)
     {
         $result = RoleService::create($request)->getResult();
+        $resource = $this->transformItem($result, RoleTransformer::class, 'permissions');
 
-        return response()->json(['data' => $result]);
+        return $this->respondWithJson('Role created', $resource);
     }
 
 
@@ -48,8 +51,9 @@ class RolesController extends Controller
     public function show(Role $record)
     {
         $result = RoleService::show($record)->getResult();
+        $resource = $this->transformItem($result, RoleTransformer::class, 'permissions');
 
-        return response()->json(['data' => $result]);
+        return $this->respondWithJson('Role read', $resource);
     }
 
 
@@ -64,8 +68,9 @@ class RolesController extends Controller
     public function update(RoleRequest $request, Role $record)
     {
         $result = RoleService::update($record, $request)->getResult();
+        $resource = $this->transformItem($result, RoleTransformer::class, 'permissions');
 
-        return response()->json(['data' => $result]);
+        return $this->respondWithJson('Role updated', $resource);
     }
 
 
@@ -80,6 +85,9 @@ class RolesController extends Controller
     {
         $result = RoleService::delete($record)->getResult();
 
-        return response()->json(['data' => $result]);
+        if ($result) {
+            return $this->respondWithJson('Role deleted', ['success' => true]);
+        }
+        return $this->respondWithJson('Role NOT deleted', ['success' => false]);
     }
 }

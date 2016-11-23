@@ -158,9 +158,11 @@
                             --}}
                             <!-- Menu Footer-->
                             <li class="user-footer">
+                                @if (Auth::user()->hasRole('SuperAdmin') || Auth::user()->hasPermissionTo('profile.write'))
                                 <div class="pull-left">
                                     <a href="{{url('/backend/profile/edit')}}" class="btn btn-default btn-flat">{{ trans('motor-backend::backend/global.edit') }}</a>
                                 </div>
+                                @endif
                                 <div class="pull-right">
                                     <form action="{{ url('/logout') }}" method="POST" class="form-inline">
                                         {{ csrf_field() }}

@@ -37,6 +37,7 @@ class CheckPermission
     {
         $route        = $request->route()->getName();
         $routeCleaned = str_replace('backend.', '', $route);
+        $routeCleaned = str_replace('api.', '', $routeCleaned);
 
         $routeParts = explode('.', $routeCleaned);
         $routeParts = array_reverse($routeParts);

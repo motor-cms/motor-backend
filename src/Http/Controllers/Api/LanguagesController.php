@@ -6,6 +6,7 @@ use Motor\Backend\Http\Controllers\Controller;
 use Motor\Backend\Http\Requests\Backend\LanguageRequest;
 use Motor\Backend\Models\Language;
 use Motor\Backend\Services\LanguageService;
+use Motor\Backend\Transformers\LanguageTransformer;
 
 class LanguagesController extends Controller
 {
@@ -17,9 +18,10 @@ class LanguagesController extends Controller
      */
     public function index()
     {
-        $result = LanguageService::collection()->getPaginator();
+        $paginator = LanguageService::collection()->getPaginator();
+        $resource = $this->transformPaginator($paginator, LanguageTransformer::class);
 
-        return response()->json(['data' => $result]);
+        return $this->respondWithJson('Language collection read', $resource);
     }
 
 
@@ -33,8 +35,9 @@ class LanguagesController extends Controller
     public function store(LanguageRequest $request)
     {
         $result = LanguageService::create($request)->getResult();
+        $resource = $this->transformItem($result, LanguageTransformer::class);
 
-        return response()->json(['data' => $result]);
+        return $this->respondWithJson('Language created', $resource);
     }
 
 
@@ -48,8 +51,9 @@ class LanguagesController extends Controller
     public function show(Language $record)
     {
         $result = LanguageService::show($record)->getResult();
+        $resource = $this->transformItem($result, LanguageTransformer::class);
 
-        return response()->json(['data' => $result]);
+        return $this->respondWithJson('Language read', $resource);
     }
 
 
@@ -64,8 +68,9 @@ class LanguagesController extends Controller
     public function update(LanguageRequest $request, Language $record)
     {
         $result = LanguageService::update($record, $request)->getResult();
+        $resource = $this->transformItem($result, LanguageTransformer::class);
 
-        return response()->json(['data' => $result]);
+        return $this->respondWithJson('Language updated', $resource);
     }
 
 
@@ -80,6 +85,9 @@ class LanguagesController extends Controller
     {
         $result = LanguageService::delete($record)->getResult();
 
-        return response()->json(['data' => $result]);
+        if ($result) {
+            return $this->respondWithJson('Language deleted', ['success' => true]);
+        }
+        return $this->respondWithJson('Language NOT deleted', ['success' => false]);
     }
 }

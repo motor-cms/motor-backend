@@ -6,6 +6,7 @@ use Motor\Backend\Http\Controllers\Controller;
 use Motor\Backend\Http\Requests\Backend\PermissionRequest;
 use Motor\Backend\Models\Permission;
 use Motor\Backend\Services\PermissionService;
+use Motor\Backend\Transformers\PermissionTransformer;
 
 class PermissionsController extends Controller
 {
@@ -17,9 +18,10 @@ class PermissionsController extends Controller
      */
     public function index()
     {
-        $result = PermissionService::collection()->getPaginator();
+        $paginator = PermissionService::collection()->getPaginator();
+        $resource = $this->transformPaginator($paginator, PermissionTransformer::class, 'group');
 
-        return response()->json(['data' => $result]);
+        return $this->respondWithJson('Permission collection read', $resource);
     }
 
 
@@ -33,8 +35,9 @@ class PermissionsController extends Controller
     public function store(PermissionRequest $request)
     {
         $result = PermissionService::create($request)->getResult();
+        $resource = $this->transformItem($result, PermissionTransformer::class, 'group');
 
-        return response()->json(['data' => $result]);
+        return $this->respondWithJson('Permission created', $resource);
     }
 
 
@@ -48,8 +51,9 @@ class PermissionsController extends Controller
     public function show(Permission $record)
     {
         $result = PermissionService::show($record)->getResult();
+        $resource = $this->transformItem($result, PermissionTransformer::class, 'group');
 
-        return response()->json(['data' => $result]);
+        return $this->respondWithJson('Permission read', $resource);
     }
 
 
@@ -64,8 +68,9 @@ class PermissionsController extends Controller
     public function update(PermissionRequest $request, Permission $record)
     {
         $result = PermissionService::update($record, $request)->getResult();
+        $resource = $this->transformItem($result, PermissionTransformer::class, 'group');
 
-        return response()->json(['data' => $result]);
+        return $this->respondWithJson('Permission updated', $resource);
     }
 
 
@@ -80,6 +85,9 @@ class PermissionsController extends Controller
     {
         $result = PermissionService::delete($record)->getResult();
 
-        return response()->json(['data' => $result]);
+        if ($result) {
+            return $this->respondWithJson('Permission deleted', ['success' => true]);
+        }
+        return $this->respondWithJson('Permission NOT deleted', ['success' => false]);
     }
 }

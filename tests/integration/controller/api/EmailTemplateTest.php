@@ -1,0 +1,244 @@
+<?php
+
+use Illuminate\Foundation\Testing\WithoutMiddleware;
+use Illuminate\Foundation\Testing\DatabaseMigrations;
+use Illuminate\Foundation\Testing\DatabaseTransactions;
+
+class EmailTemplateTest extends TestCase
+{
+
+    use DatabaseTransactions;
+
+    protected $user;
+
+    protected $client;
+
+    protected $readPermission;
+
+    protected $writePermission;
+
+    protected $deletePermission;
+
+    protected $tables = [ 'users', 'clients', 'email_templates', 'permissions', 'user_has_permissions' ];
+
+
+    public function setUp()
+    {
+        parent::setUp();
+
+        $this->addDefaults();
+    }
+
+
+    protected function addDefaults()
+    {
+        $this->user   = factory(Motor\Backend\Models\User::class)->create();
+        $this->client = factory(Motor\Backend\Models\Client::class)->create();
+
+        $this->readPermission   = factory(Motor\Backend\Models\Permission::class)->create([ 'name' => 'email_templates.read' ]);
+        $this->writePermission  = factory(Motor\Backend\Models\Permission::class)->create([ 'name' => 'email_templates.write' ]);
+        $this->deletePermission = factory(Motor\Backend\Models\Permission::class)->create([ 'name' => 'email_templates.delete' ]);
+    }
+
+
+    /**
+     * @test
+     */
+    public function returns_403_if_not_authenticated()
+    {
+        $this->json('GET', '/api/email_templates/1')->seeStatusCode(401)->seeJson([ 'error' => 'Unauthenticated.' ]);
+    }
+
+
+    /** @test */
+    public function returns_404_for_non_existing_record()
+    {
+        $this->user->givePermissionTo($this->readPermission);
+        $this->json('GET', '/api/email_templates/1?api_token=' . $this->user->api_token)->seeStatusCode(404)->seeJson([
+            'message' => 'Record not found',
+        ]);
+    }
+
+
+    /** @test */
+    public function fails_if_trying_to_create_without_payload()
+    {
+        $this->user->givePermissionTo($this->writePermission);
+        $this->json('POST', '/api/email_templates?api_token=' . $this->user->api_token)->seeStatusCode(422)->seeJson([
+            'client_id' => [ "The client id field is required." ]
+        ]);
+    }
+
+    /** @test */
+    public function fails_if_trying_to_create_without_permission()
+    {
+        $this->json('POST', '/api/email_templates?api_token=' . $this->user->api_token)->seeStatusCode(403)->seeJson([
+            'error' => "Access denied."
+        ]);
+    }
+
+
+    /** @test */
+    public function can_create_a_new_email_template()
+    {
+        $this->user->givePermissionTo($this->writePermission);
+        $language = factory(Motor\Backend\Models\Language::class)->create();
+        $this->json('POST', '/api/email_templates?api_token=' . $this->user->api_token, [
+            'client_id'   => $this->client->id,
+            'language_id' => $language->id,
+            'name'        => 'Test',
+            'subject'     => 'Test'
+        ])->seeStatusCode(200)->seeJson([
+            'name' => 'Test'
+        ]);
+    }
+
+
+    /** @test */
+    public function can_show_a_single_email_template()
+    {
+        $this->user->givePermissionTo($this->readPermission);
+        $email_template = factory(Motor\Backend\Models\EmailTemplate::class)->create();
+        $this->json('GET',
+            '/api/email_templates/' . $email_template->id . '?api_token=' . $this->user->api_token)->seeStatusCode(200)->seeJson([
+            'body_html' => $email_template->body_html
+        ]);
+    }
+
+    /** @test */
+    public function fails_to_show_a_single_email_template_without_permission()
+    {
+        $email_template = factory(Motor\Backend\Models\EmailTemplate::class)->create();
+        $this->json('GET',
+            '/api/email_template/' . $email_template->id . '?api_token=' . $this->user->api_token)->seeStatusCode(403)->seeJson([
+            'error' => 'Access denied.'
+        ]);
+    }
+
+
+    /** @test */
+    public function can_get_empty_result_when_trying_to_show_multiple_email_templates()
+    {
+        $this->user->givePermissionTo($this->readPermission);
+        $this->json('GET', '/api/email_templates?api_token=' . $this->user->api_token)->seeStatusCode(200)->seeJson([
+            'total' => 0
+        ]);
+    }
+
+
+    /** @test */
+    public function can_show_multiple_email_templates()
+    {
+        $this->user->givePermissionTo($this->readPermission);
+        $email_templates = factory(Motor\Backend\Models\EmailTemplate::class, 10)->create();
+        $this->json('GET', '/api/email_templates?api_token=' . $this->user->api_token)->seeStatusCode(200)->seeJson([
+            'subject' => $email_templates[0]->subject
+        ]);
+    }
+
+
+    /** @test */
+    public function can_search_for_an_email_template()
+    {
+        $this->user->givePermissionTo($this->readPermission);
+        $email_templates = factory(Motor\Backend\Models\EmailTemplate::class, 10)->create();
+        $this->json('GET',
+            '/api/email_templates?api_token=' . $this->user->api_token . '&search=' . $email_templates[2]->subject)->seeStatusCode(200)->seeJson([
+            'subject' => $email_templates[2]->subject
+        ]);
+    }
+
+
+    /** @test */
+    public function can_show_a_second_results_page()
+    {
+        $this->user->givePermissionTo($this->readPermission);
+        factory(Motor\Backend\Models\EmailTemplate::class, 50)->create();
+        $this->json('GET',
+            '/api/email_templates?api_token=' . $this->user->api_token . '&page=2')->seeStatusCode(200)->seeJson([
+            'current_page' => 2
+        ]);
+    }
+
+
+    /** @test */
+    public function fails_if_trying_to_update_nonexisting_email_template()
+    {
+        $this->user->givePermissionTo($this->writePermission);
+        $this->json('PATCH',
+            '/api/email_templates/2?api_token=' . $this->user->api_token)->seeStatusCode(404)->seeJson([
+            'message' => 'Record not found'
+        ]);
+    }
+
+
+    /** @test */
+    public function fails_if_trying_to_modify_a_email_template_without_payload()
+    {
+        $this->user->givePermissionTo($this->writePermission);
+        $email_template = factory(Motor\Backend\Models\EmailTemplate::class)->create();
+        $this->json('PATCH',
+            '/api/email_templates/' . $email_template->id . '?api_token=' . $this->user->api_token)->seeStatusCode(422)->seeJson([
+            'client_id' => [ 'The client id field is required.' ]
+        ]);
+    }
+
+    /** @test */
+    public function fails_if_trying_to_modify_an_email_template_without_permission()
+    {
+        $email_template = factory(Motor\Backend\Models\EmailTemplate::class)->create();
+        $this->json('PATCH',
+            '/api/email_templates/' . $email_template->id . '?api_token=' . $this->user->api_token)->seeStatusCode(403)->seeJson([
+            'error' => 'Access denied.'
+        ]);
+    }
+
+
+    /** @test */
+    public function can_modify_an_email_template()
+    {
+        $this->user->givePermissionTo($this->writePermission);
+        $language       = factory(Motor\Backend\Models\Language::class)->create();
+        $email_template = factory(Motor\Backend\Models\EmailTemplate::class)->create();
+        $this->json('PATCH', '/api/email_templates/' . $email_template->id . '?api_token=' . $this->user->api_token, [
+            'client_id'   => $this->client->id,
+            'language_id' => $language->id,
+            'name'        => 'Updated-Test',
+            'subject'     => 'Test'
+        ])->seeStatusCode(200)->seeJson([
+            'name' => 'Updated-Test'
+        ]);
+    }
+
+
+    /** @test */
+    public function fails_if_trying_to_delete_a_non_existing_email_template()
+    {
+        $this->user->givePermissionTo($this->deletePermission);
+        $this->json('DELETE',
+            '/api/email_templates/1?api_token=' . $this->user->api_token)->seeStatusCode(404)->seeJson([
+            'message' => 'Record not found'
+        ]);
+    }
+
+    /** @test */
+    public function fails_to_delete_an_email_template_without_permission()
+    {
+        $email_template = factory(Motor\Backend\Models\EmailTemplate::class)->create();
+        $this->json('DELETE',
+            '/api/email_templates/' . $email_template->id . '?api_token=' . $this->user->api_token)->seeStatusCode(403)->seeJson([
+            'error' => 'Access denied.'
+        ]);
+    }
+
+    /** @test */
+    public function can_delete_an_email_template()
+    {
+        $this->user->givePermissionTo($this->deletePermission);
+        $email_template = factory(Motor\Backend\Models\EmailTemplate::class)->create();
+        $this->json('DELETE',
+            '/api/email_templates/' . $email_template->id . '?api_token=' . $this->user->api_token)->seeStatusCode(200)->seeJson([
+            'success' => true
+        ]);
+    }
+}

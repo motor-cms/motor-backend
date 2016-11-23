@@ -6,6 +6,7 @@ use Motor\Backend\Http\Controllers\Controller;
 use Motor\Backend\Http\Requests\Backend\ClientRequest;
 use Motor\Backend\Models\Client;
 use Motor\Backend\Services\ClientService;
+use Motor\Backend\Transformers\ClientTransformer;
 
 class ClientsController extends Controller
 {
@@ -17,9 +18,10 @@ class ClientsController extends Controller
      */
     public function index()
     {
-        $result = ClientService::collection()->getPaginator();
+        $paginator = ClientService::collection()->getPaginator();
+        $resource = $this->transformPaginator($paginator, ClientTransformer::class);
 
-        return response()->json(['data' => $result]);
+        return $this->respondWithJson('Client collection read', $resource);
     }
 
 
@@ -33,8 +35,9 @@ class ClientsController extends Controller
     public function store(ClientRequest $request)
     {
         $result = ClientService::create($request)->getResult();
+        $resource = $this->transformItem($result, ClientTransformer::class);
 
-        return response()->json(['data' => $result]);
+        return $this->respondWithJson('Client created', $resource);
     }
 
 
@@ -48,8 +51,9 @@ class ClientsController extends Controller
     public function show(Client $record)
     {
         $result = ClientService::show($record)->getResult();
+        $resource = $this->transformItem($result, ClientTransformer::class);
 
-        return response()->json(['data' => $result]);
+        return $this->respondWithJson('Client read', $resource);
     }
 
 
@@ -64,8 +68,9 @@ class ClientsController extends Controller
     public function update(ClientRequest $request, Client $record)
     {
         $result = ClientService::update($record, $request)->getResult();
+        $resource = $this->transformItem($result, ClientTransformer::class);
 
-        return response()->json(['data' => $result]);
+        return $this->respondWithJson('Client updated', $resource);
     }
 
 
@@ -80,6 +85,9 @@ class ClientsController extends Controller
     {
         $result = ClientService::delete($record)->getResult();
 
-        return response()->json(['data' => $result]);
+        if ($result) {
+            return $this->respondWithJson('Client deleted', ['success' => true]);
+        }
+        return $this->respondWithJson('Client NOT deleted', ['success' => false]);
     }
 }
