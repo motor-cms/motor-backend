@@ -17,10 +17,20 @@ class LoginTest extends TestCase
 
     protected $tables = [ 'users', 'clients', 'permissions', 'user_has_permissions', 'user_has_roles', 'roles' ];
 
+
+    public function setUp()
+    {
+        parent::setUp();
+
+        create_test_permission_with_name('profile.read');
+        create_test_permission_with_name('profile.write');
+    }
+
+
     /** @test */
     public function user_exists_in_database()
     {
-        $this->createUser();
+        $this->user = create_test_user();
 
         $this->seeInDatabase('users', [
             'email' => $this->user->email
@@ -31,7 +41,7 @@ class LoginTest extends TestCase
     /** @test */
     public function user_cannot_log_in_without_password()
     {
-        $this->createUser();
+        $this->user = create_test_user();
 
         $this->visit('/login')->type($this->user->email,
             'email')->press('Sign in')->see('The password field is required.');
@@ -41,7 +51,7 @@ class LoginTest extends TestCase
     /** @test */
     public function user_cannot_log_in_with_wrong_password()
     {
-        $this->createUser();
+        $this->user = create_test_user();
 
         $this->visit('/login')->type($this->user->email, 'email')->type('wrong_password',
             'password')->press('Sign in')->see('These credentials do not match our records.');
@@ -51,9 +61,7 @@ class LoginTest extends TestCase
     /** @test */
     public function user_can_log_in_and_see_dashboard_as_superadmin()
     {
-        $this->createUser();
-        $this->createRole();
-        $this->user->assignRole($this->role);
+        $this->user = create_test_superadmin();
 
         $this->visit('/login')->type($this->user->email, 'email')->type('secret',
             'password')->press('Sign in')->see('Dashboard');
@@ -63,9 +71,7 @@ class LoginTest extends TestCase
     /** @test */
     public function user_can_log_in_and_can_see_dashboard()
     {
-        $this->createUser();
-        $this->createPermission();
-        $this->user->givePermissionTo('dashboard.read');
+        $this->user = create_test_user_with_permissions([ 'dashboard.read' ]);
 
         $this->visit('/login')->type($this->user->email, 'email')->type('secret',
             'password')->press('Sign in')->see('Dashboard');
@@ -78,9 +84,8 @@ class LoginTest extends TestCase
      */
     public function user_can_log_in_and_cannot_see_dashboard()
     {
-        $this->createUser();
-
-        $this->createPermission();
+        $this->user = create_test_user();
+        create_test_permission_with_name('dashboard.read');
 
         try {
             $this->visit('/login')->type($this->user->email, 'email')->type('secret', 'password')->press('Sign in');
@@ -89,23 +94,4 @@ class LoginTest extends TestCase
         }
     }
 
-
-    protected function createUser()
-    {
-        $this->user = factory(Motor\Backend\Models\User::class)->create();
-    }
-
-
-    protected function createRole()
-    {
-        $this->role = factory(Motor\Backend\Models\Role::class)->create([ 'name' => 'SuperAdmin' ]);
-    }
-
-
-    protected function createPermission()
-    {
-        $this->permission = factory(Motor\Backend\Models\Permission::class)->create([ 'name' => 'dashboard.read' ]);
-        factory(Motor\Backend\Models\Permission::class)->create([ 'name' => 'profile.read' ]);
-        factory(Motor\Backend\Models\Permission::class)->create([ 'name' => 'profile.write' ]);
-    }
 }
