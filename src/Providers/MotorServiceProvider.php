@@ -36,11 +36,11 @@ class MotorServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        $this->mergeConfigFrom(__DIR__ . '/../../resources/config/motor-backend.php', 'motor-backend');
-        $this->mergeConfigFrom(__DIR__ . '/../../resources/config/motor-backend-project.php', 'motor-backend-project');
-        $this->mergeConfigFrom(__DIR__ . '/../../resources/config/laravel-form-builder.php', 'laravel-form-builder');
-        $this->mergeConfigFrom(__DIR__ . '/../../resources/config/laravel-permission.php', 'laravel-permission');
-        $this->mergeConfigFrom(__DIR__ . '/../../resources/config/laravel-menu/settings.php', 'laravel-menu.settings');
+        $this->mergeConfigFrom(__DIR__ . '/../../config/motor-backend.php', 'motor-backend');
+        $this->mergeConfigFrom(__DIR__ . '/../../config/motor-backend-project.php', 'motor-backend-project');
+        $this->mergeConfigFrom(__DIR__ . '/../../config/laravel-form-builder.php', 'laravel-form-builder');
+        $this->mergeConfigFrom(__DIR__ . '/../../config/laravel-permission.php', 'laravel-permission');
+        $this->mergeConfigFrom(__DIR__ . '/../../config/laravel-menu/settings.php', 'laravel-menu.settings');
     }
 
 
@@ -70,7 +70,7 @@ class MotorServiceProvider extends ServiceProvider
     {
         $config = $this->app['config']->get('motor-backend-permissions', []);
         $this->app['config']->set('motor-backend-permissions',
-            array_replace_recursive(require __DIR__ . '/../../resources/config/motor-backend-permissions.php',
+            array_replace_recursive(require __DIR__ . '/../../config/motor-backend-permissions.php',
                 $config));
     }
 
@@ -87,10 +87,10 @@ class MotorServiceProvider extends ServiceProvider
     public function config()
     {
         $this->publishes([
-            __DIR__ . '/../../resources/config/motor-backend-project.php'          => config_path('motor-backend-project.php'),
-            __DIR__ . '/../../resources/config/motor-backend.php'                  => config_path('motor-backend.php'),
-            __DIR__ . '/../../resources/config/motor-backend-navigation-stub.php'  => config_path('motor-backend-navigation.php'),
-            __DIR__ . '/../../resources/config/motor-backend-permissions-stub.php' => config_path('motor-backend-permissions.php'),
+            __DIR__ . '/../../config/motor-backend-project.php'          => config_path('motor-backend-project.php'),
+            __DIR__ . '/../../config/motor-backend.php'                  => config_path('motor-backend.php'),
+            __DIR__ . '/../../config/motor-backend-navigation-stub.php'  => config_path('motor-backend-navigation.php'),
+            __DIR__ . '/../../config/motor-backend-permissions-stub.php' => config_path('motor-backend-permissions.php'),
         ], 'motor-backend-install');
     }
 
@@ -147,7 +147,7 @@ class MotorServiceProvider extends ServiceProvider
     {
         $config = $this->app['config']->get('motor-backend-navigation', []);
         $this->app['config']->set('motor-backend-navigation',
-            array_replace_recursive(require __DIR__ . '/../../resources/config/motor-backend-navigation.php', $config));
+            array_replace_recursive(require __DIR__ . '/../../config/motor-backend-navigation.php', $config));
     }
 
 
