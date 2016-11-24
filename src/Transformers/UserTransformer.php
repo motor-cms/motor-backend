@@ -22,6 +22,13 @@ class UserTransformer extends Fractal\TransformerAbstract
     ];
 
 
+    /**
+     * Transform record to array
+     *
+     * @param User $record
+     *
+     * @return array
+     */
     public function transform(User $record)
     {
         return [
