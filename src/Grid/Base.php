@@ -2,6 +2,8 @@
 
 namespace Motor\Backend\Grid;
 
+use Illuminate\Support\Arr;
+
 class Base {
 
     protected $attributes = [ ];
@@ -19,6 +21,11 @@ class Base {
         $this->attributes['style'] = $style;
 
         return $this;
+    }
+
+    public function getStyle()
+    {
+        return Arr::get($this->attributes, 'style');
     }
 
     public function buildAttributes()

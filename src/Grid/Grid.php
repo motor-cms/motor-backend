@@ -27,6 +27,8 @@ class Grid extends Base
 
     protected $actions = [];
 
+    protected $specialRows = [];
+
     public $filter;
 
 
@@ -78,6 +80,19 @@ class Grid extends Base
         }
 
         return $column;
+    }
+
+    public function addSpecialRow($view)
+    {
+        $specialRow = new SpecialRow($view);
+        $this->specialRows[] = $specialRow;
+
+        return $specialRow;
+    }
+
+    public function getSpecialRows()
+    {
+        return $this->specialRows;
     }
 
 
@@ -151,6 +166,7 @@ class Grid extends Base
                 $sanitize = ( count($column->getFilters()) || $column->hasCellClosure() ) ? false : true;
                 $value    = $this->getCellValue($cell, $column, $record, $sanitize);
                 $cell->setValue($value);
+                $cell->setRecord($record); // we might need it for some renderers
                 $cell->parseFilters($column->getFilters());
                 if ($column->hasCellClosure()) {
                     $closure = $column->getCellClosure();
@@ -252,10 +268,10 @@ class Grid extends Base
             // Fallback, just return the value
             $value = $column->getName();
         }
+        $cell->style($column->getStyle());
 
         if ($column->getName() == 'special:actions') {
             $value = '';
-            $cell->style('text-align: right');
             foreach ($this->getActions() as $action) {
                 $value .= $action->render($record);
             }

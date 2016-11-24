@@ -36,6 +36,11 @@
                 @endforeach
             </tr>
         @endforeach
+        @foreach ($grid->getSpecialRows() as $row)
+            <tr class="special">
+                <td colspan="{!! count($grid->getColumns()) !!}">{!! $row->render($paginator) !!}</td>
+            </tr>
+        @endforeach
         </tbody>
     </table>
 </div>

@@ -9,7 +9,9 @@ class Cell extends Base
 
     protected $value = '';
 
-    protected $renderer = 'text';
+    protected $record;
+
+    protected $renderer;
 
     protected $renderOptions = [ ];
 
@@ -19,7 +21,7 @@ class Cell extends Base
      *
      * @param $name
      */
-    public function __construct($name, $renderer = 'text', $renderOptions = [ ])
+    public function __construct($name, $renderer, $renderOptions = [ ])
     {
         $this->name          = $name;
         $this->renderer      = $renderer;
@@ -44,6 +46,11 @@ class Cell extends Base
         $this->value = $value;
     }
 
+    public function setRecord($record)
+    {
+        $this->record = $record;
+    }
+
 
     /**
      * @return string
@@ -51,7 +58,7 @@ class Cell extends Base
     public function getValue()
     {
         // Get renderer
-        $renderer = new $this->renderer($this->value, $this->renderOptions);
+        $renderer = new $this->renderer($this->value, $this->renderOptions, $this->record);
 
         return $renderer->render();
     }

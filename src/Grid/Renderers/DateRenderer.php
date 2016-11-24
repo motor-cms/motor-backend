@@ -2,6 +2,8 @@
 
 namespace Motor\Backend\Grid\Renderers;
 
+use Carbon\Carbon;
+
 class DateRenderer
 {
 
@@ -24,9 +26,12 @@ class DateRenderer
         if ($this->value == '' || $this->value == null) {
             return '';
         }
+
+        $date = Carbon::parse($this->value);
+
         if (isset($this->options['format'])) {
-            return date($this->options['format'], strtotime($this->value));
+            return $date->format($this->options['format']);
         }
-        return date($this->defaultFormat, strtotime($this->value));
+        return $date->format($this->defaultFormat);
     }
 }
