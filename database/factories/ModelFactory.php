@@ -26,7 +26,7 @@ $factory->define(Motor\Backend\Models\User::class, function (Faker\Generator $fa
 
 $factory->define(Motor\Backend\Models\Role::class, function (Faker\Generator $faker) {
     return [
-        'name' => $faker->word.'.'.str_random(20)
+        'name' => $faker->word.$faker->word.str_random(20)
     ];
 });
 
