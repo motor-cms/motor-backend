@@ -9,6 +9,7 @@ use Motor\Backend\Models\Role;
 class BackendUserTest extends TestCase
 {
 
+    use DatabaseMigrations;
     use DatabaseTransactions;
 
     protected $user;

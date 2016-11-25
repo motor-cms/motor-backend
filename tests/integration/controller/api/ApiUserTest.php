@@ -7,6 +7,7 @@ use Illuminate\Foundation\Testing\DatabaseTransactions;
 class ApiUserTest extends TestCase
 {
 
+    use DatabaseMigrations;
     use DatabaseTransactions;
 
     protected $user;
