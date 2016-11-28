@@ -51,7 +51,7 @@
     },
     "files": [
       "helpers/motor_backend_helpers.php",
-      "src/src/Spatie/Glide/GlideImage.php"
+      "src/Spatie/Glide/GlideImage.php"
     ]
   },
   "minimum-stability": "dev"
