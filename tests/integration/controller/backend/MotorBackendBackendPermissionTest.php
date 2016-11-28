@@ -76,6 +76,7 @@ class MotorBackendBackendPermissionTest extends TestCase
     public function can_visit_the_edit_form_of_a_permission_and_change_the_name()
     {
         $permission = create_test_permission();
+        $group = create_test_permission_group();
 
         $this->visit('/backend/permissions/'.$permission->id.'/edit')
             ->see($permission->name)
@@ -99,6 +100,7 @@ class MotorBackendBackendPermissionTest extends TestCase
     /** @test */
     public function can_create_a_new_permission()
     {
+        $group = create_test_permission_group();
         $this->visit('/backend/permissions/create')
             ->see(trans('motor-backend::backend/permissions.new'))
             ->type('NewPermission', 'name')
