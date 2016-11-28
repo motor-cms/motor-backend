@@ -47,11 +47,14 @@
   },
   "autoload": {
     "psr-4": {
-      "Motor\\Backend\\": "src"
+      "Motor\\Backend\\": "src",
+      "Spatie\\Glide\\": "src/Spatie/Glide"
     },
     "files": [
-      "helpers/motor_backend_helpers.php",
-      "src/Spatie/Glide/GlideImage.php"
+      "helpers/motor_backend_helpers.php"
+    ],
+    "exclude-from-classmap": [
+      "vendor/spatie/laravel-glide/src/GlideImage.php"
     ]
   },
   "minimum-stability": "dev"
