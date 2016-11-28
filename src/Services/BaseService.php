@@ -8,6 +8,7 @@ use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Str;
 use Kris\LaravelFormBuilder\Fields\CheckableType;
+use Kris\LaravelFormBuilder\Fields\ChildFormType;
 use Kris\LaravelFormBuilder\Fields\SelectType;
 use Kris\LaravelFormBuilder\Form;
 use Motor\Backend\Forms\Fields\CheckboxCollectionType;
@@ -317,6 +318,11 @@ abstract class BaseService
     {
         foreach ($form->getFields() as $name => $field) {
 
+            // Handle subforms
+            if ($field instanceof ChildFormType) {
+                $data[$field->getRealName()] = $this->handleFormValues($field->getForm(), Arr::get($data, $field->getRealName()));
+            }
+
             // Handle empty checkbox values
             if ($field instanceof CheckableType) {
                 if ( ! isset( $data[$field->getRealName()] )) {
@@ -361,9 +367,17 @@ abstract class BaseService
      *
      * @return $this
      */
-    public function uploadFile($file, $identifier = 'image', $collection = null)
+    public function uploadFile($file, $identifier = 'image', $collection = null, $record = null)
     {
-        if ( ! $this->record instanceof HasMedia) {
+        if (!is_null($record) && !$record instanceof HasMedia) {
+            return $this;
+        }
+
+        if (is_null($record)) {
+            $record = $this->record;
+        }
+
+        if (!$record instanceof HasMedia) {
             return $this;
         }
 
@@ -372,14 +386,14 @@ abstract class BaseService
         if ( ! is_null($file) || $this->isValidBase64(Arr::get($this->data, $identifier)) || Arr::get($this->data,
                 Str::slug($identifier) . '_delete') == 1
         ) {
-            $this->record->clearMediaCollection($identifier);
+            $record->clearMediaCollection($identifier);
             if ( ! is_null($collection)) {
-                $this->record->clearMediaCollection($collection);
+                $record->clearMediaCollection($collection);
             }
         }
 
         if ($file instanceof UploadedFile && $file->isValid()) {
-            $this->record->addMedia($file)->toCollection($collection);
+            $record->addMedia($file)->toCollection($collection);
         } else {
             if ($this->isValidBase64(Arr::get($this->data, $identifier))) {
                 $image = base64_decode($this->data[$identifier]);
@@ -391,7 +405,7 @@ abstract class BaseService
                 $handle = fopen($tempFilename, "w");
                 fwrite($handle, $image);
                 fclose($handle);
-                $this->record->addMedia($tempFilename)->setName($name)->setFileName($name)->toCollection($collection);
+                $record->addMedia($tempFilename)->setName($name)->setFileName($name)->toCollection($collection);
             }
         }
 
