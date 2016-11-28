@@ -50,7 +50,8 @@
       "Motor\\Backend\\": "src"
     },
     "files": [
-      "helpers/motor_backend_helpers.php"
+      "helpers/motor_backend_helpers.php",
+      "src/Spatie/Glide/GlideImage.php"
     ]
   },
   "minimum-stability": "dev"
