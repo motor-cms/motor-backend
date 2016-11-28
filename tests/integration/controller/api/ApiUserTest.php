@@ -22,7 +22,18 @@ class ApiUserTest extends TestCase
 
     protected $writePermissionPermission;
 
-    protected $tables = [ 'users', 'permissions', 'user_has_permissions', 'user_has_roles', 'clients', 'permissions', 'user_has_permissions', 'user_has_roles', 'roles' ];
+    protected $tables = [
+        'users',
+        'media',
+        'clients',
+        'languages',
+        'users',
+        'permissions',
+        'user_has_permissions',
+        'roles',
+        'user_has_roles',
+        'role_has_permissions'
+    ];
 
 
     public function setUp()
@@ -35,14 +46,14 @@ class ApiUserTest extends TestCase
 
     protected function addDefaults()
     {
-        $this->user   = create_test_user();
+        $this->user = create_test_user();
 
-        $this->readPermission   = create_test_permission_with_name('users.read');
-        $this->writePermission  = create_test_permission_with_name('users.write');
+        $this->readPermission = create_test_permission_with_name('users.read');
+        $this->writePermission = create_test_permission_with_name('users.write');
         $this->deletePermission = create_test_permission_with_name('users.delete');
 
-        $this->writeRolePermission  = create_test_permission_with_name('roles.write');
-        $this->writePermissionPermission  = create_test_permission_with_name('permissions.write');
+        $this->writeRolePermission = create_test_permission_with_name('roles.write');
+        $this->writePermissionPermission = create_test_permission_with_name('permissions.write');
     }
 
 
@@ -51,7 +62,7 @@ class ApiUserTest extends TestCase
      */
     public function returns_403_if_not_authenticated()
     {
-        $this->json('GET', '/api/users/99')->seeStatusCode(401)->seeJson([ 'error' => 'Unauthenticated.' ]);
+        $this->json('GET', '/api/users/99')->seeStatusCode(401)->seeJson(['error' => 'Unauthenticated.']);
     }
 
 
@@ -70,7 +81,7 @@ class ApiUserTest extends TestCase
     {
         $this->user->givePermissionTo($this->writePermission);
         $this->json('POST', '/api/users?api_token=' . $this->user->api_token)->seeStatusCode(422)->seeJson([
-            'name' => [ "The name field is required." ]
+            'name' => ["The name field is required."]
         ]);
     }
 
@@ -89,8 +100,8 @@ class ApiUserTest extends TestCase
     {
         $this->user->givePermissionTo($this->writePermission);
         $this->json('POST', '/api/users?api_token=' . $this->user->api_token, [
-            'name'     => 'TestUser',
-            'email'    => 'test@test.de',
+            'name' => 'TestUser',
+            'email' => 'test@test.de',
             'password' => 'secret'
         ])->seeStatusCode(200)->seeJson([
             'name' => 'TestUser'
@@ -104,9 +115,9 @@ class ApiUserTest extends TestCase
         $this->user->givePermissionTo($this->writePermission);
         $permissions = create_test_permission(5);
         $this->json('POST', '/api/users?api_token=' . $this->user->api_token, [
-            'name'        => 'Testuser',
-            'email'       => 'test@test.de',
-            'password'    => 'secret',
+            'name' => 'Testuser',
+            'email' => 'test@test.de',
+            'password' => 'secret',
             'permissions' => [
                 $permissions[0]->name => 1,
                 $permissions[1]->name => 1,
@@ -133,9 +144,9 @@ class ApiUserTest extends TestCase
         $this->user->givePermissionTo($this->writePermissionPermission);
         $permissions = create_test_permission(5);
         $this->json('POST', '/api/users?api_token=' . $this->user->api_token, [
-            'name'        => 'Testuser',
-            'email'       => 'test@test.de',
-            'password'    => 'secret',
+            'name' => 'Testuser',
+            'email' => 'test@test.de',
+            'password' => 'secret',
             'permissions' => [
                 $permissions[0]->name => 1,
                 $permissions[1]->name => 1,
@@ -162,10 +173,10 @@ class ApiUserTest extends TestCase
         $this->user->givePermissionTo($this->writePermission);
         $roles = create_test_role(2);
         $this->json('POST', '/api/users?api_token=' . $this->user->api_token, [
-            'name'     => 'Testuser',
-            'email'    => 'test@test.de',
+            'name' => 'Testuser',
+            'email' => 'test@test.de',
             'password' => 'secret',
-            'roles'    => [
+            'roles' => [
                 $roles[0]->name => 1,
                 $roles[1]->name => 1
             ]
@@ -185,10 +196,10 @@ class ApiUserTest extends TestCase
         $this->user->givePermissionTo($this->writeRolePermission);
         $roles = create_test_role(2);
         $this->json('POST', '/api/users?api_token=' . $this->user->api_token, [
-            'name'     => 'Testuser',
-            'email'    => 'test@test.de',
+            'name' => 'Testuser',
+            'email' => 'test@test.de',
             'password' => 'secret',
-            'roles'    => [
+            'roles' => [
                 $roles[0]->name => 1,
                 $roles[1]->name => 1
             ]
@@ -208,11 +219,11 @@ class ApiUserTest extends TestCase
         $this->user->givePermissionTo($this->writeRolePermission);
         $user = create_test_user();
         $roles = create_test_role(2);
-        $this->json('PATCH', '/api/users/'.$user->id.'?api_token=' . $this->user->api_token, [
-            'name'     => 'Testuser',
-            'email'    => 'test@test.de',
+        $this->json('PATCH', '/api/users/' . $user->id . '?api_token=' . $this->user->api_token, [
+            'name' => 'Testuser',
+            'email' => 'test@test.de',
             'password' => 'secret',
-            'roles'    => [
+            'roles' => [
                 $roles[0]->name => 1,
                 $roles[1]->name => 1
             ]
@@ -232,10 +243,10 @@ class ApiUserTest extends TestCase
         $this->user->givePermissionTo($this->writePermissionPermission);
         $user = create_test_user();
         $permissions = create_test_permission(5);
-        $this->json('PATCH', '/api/users/'.$user->id.'?api_token=' . $this->user->api_token, [
-            'name'        => 'Testuser',
-            'email'       => 'test@test.de',
-            'password'    => 'secret',
+        $this->json('PATCH', '/api/users/' . $user->id . '?api_token=' . $this->user->api_token, [
+            'name' => 'Testuser',
+            'email' => 'test@test.de',
+            'password' => 'secret',
             'permissions' => [
                 $permissions[0]->name => 1,
                 $permissions[1]->name => 1,
@@ -329,7 +340,7 @@ class ApiUserTest extends TestCase
         $user = create_test_user();
         $this->json('PATCH',
             '/api/users/' . $user->id . '?api_token=' . $this->user->api_token)->seeStatusCode(422)->seeJson([
-            'name' => [ 'The name field is required.' ]
+            'name' => ['The name field is required.']
         ]);
     }
 
@@ -351,7 +362,7 @@ class ApiUserTest extends TestCase
         $this->user->givePermissionTo($this->writePermission);
         $user = create_test_user();
         $this->json('PATCH', '/api/users/' . $user->id . '?api_token=' . $this->user->api_token, [
-            'name'  => 'TestName',
+            'name' => 'TestName',
             'email' => $user->email
         ])->seeStatusCode(200)->seeJson([
             'name' => 'TestName'
@@ -365,11 +376,11 @@ class ApiUserTest extends TestCase
         $this->user->givePermissionTo($this->writePermission);
         $user = create_test_user();
         $this->json('PATCH', '/api/users/' . $user->id . '?api_token=' . $this->user->api_token, [
-            'name'   => 'TestName',
-            'email'  => $user->email,
+            'name' => 'TestName',
+            'email' => $user->email,
             'avatar' => base64_encode(file_get_contents(__DIR__ . '/../../../../public/images/motor-logo-large.png'))
         ])->seeStatusCode(200)->seeJson([
-            'name'       => 'TestName',
+            'name' => 'TestName',
             'collection' => 'avatar'
         ]);
     }
@@ -381,14 +392,14 @@ class ApiUserTest extends TestCase
         $this->user->givePermissionTo($this->writePermission);
         $user = create_test_user();
         $this->json('PATCH', '/api/users/' . $user->id . '?api_token=' . $this->user->api_token, [
-            'name'        => 'TestName',
-            'email'       => $user->email,
-            'avatar'      => base64_encode(file_get_contents(__DIR__ . '/../../../../public/images/motor-logo-large.png')),
+            'name' => 'TestName',
+            'email' => $user->email,
+            'avatar' => base64_encode(file_get_contents(__DIR__ . '/../../../../public/images/motor-logo-large.png')),
             'avatar_name' => 'custom_filename.png',
         ])->seeStatusCode(200)->seeJson([
-            'name'       => 'TestName',
+            'name' => 'TestName',
             'collection' => 'avatar',
-            'file_name'  => 'custom_filename.png'
+            'file_name' => 'custom_filename.png'
         ]);
     }
 
@@ -399,17 +410,17 @@ class ApiUserTest extends TestCase
         $this->user->givePermissionTo($this->writePermission);
         $user = create_test_user();
         $this->json('PATCH', '/api/users/' . $user->id . '?api_token=' . $this->user->api_token, [
-            'name'   => 'TestName',
-            'email'  => $user->email,
+            'name' => 'TestName',
+            'email' => $user->email,
             'avatar' => base64_encode(file_get_contents(__DIR__ . '/../../../../public/images/motor-logo-large.png'))
         ])->seeStatusCode(200)->seeJson([
-            'name'       => 'TestName',
+            'name' => 'TestName',
             'collection' => 'avatar'
         ]);
 
         $this->json('PATCH', '/api/users/' . $user->id . '?api_token=' . $this->user->api_token, [
-            'name'          => 'TestName',
-            'email'         => $user->email,
+            'name' => 'TestName',
+            'email' => $user->email,
             'avatar_delete' => 1
         ])->seeStatusCode(200)->dontSeeJson([
             'collection' => 'avatar'
