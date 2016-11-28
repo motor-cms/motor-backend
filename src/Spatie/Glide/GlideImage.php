@@ -5,7 +5,7 @@ namespace Spatie\Glide;
 use League\Glide\ServerFactory;
 use Spatie\Glide\Exceptions\SourceFileDoesNotExist;
 
-if ( ! class_exists('GlideImage')) {
+if ( ! class_exists('\\Spatie\\Glide\\GlideImage')) {
     class GlideImage
     {
 
