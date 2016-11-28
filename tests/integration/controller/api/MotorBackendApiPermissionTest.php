@@ -4,7 +4,7 @@ use Illuminate\Foundation\Testing\WithoutMiddleware;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 
-class ApiPermissionTest extends TestCase
+class MotorBackendApiPermissionTest extends TestCase
 {
 
     use DatabaseTransactions;

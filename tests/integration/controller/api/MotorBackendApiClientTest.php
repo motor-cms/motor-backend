@@ -4,7 +4,7 @@ use Illuminate\Foundation\Testing\WithoutMiddleware;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 
-class ApiClientTest extends TestCase
+class MotorBackendApiClientTest extends TestCase
 {
 
     use DatabaseTransactions;
@@ -47,7 +47,7 @@ class ApiClientTest extends TestCase
 
 
     /** @test */
-    public function returns_404_for_non_existing_record()
+    public function returns_404_for_non_existing_client_record()
     {
         $this->user->givePermissionTo($this->readPermission);
         $this->json('GET', '/api/clients/1?api_token=' . $this->user->api_token)->seeStatusCode(404)->seeJson([

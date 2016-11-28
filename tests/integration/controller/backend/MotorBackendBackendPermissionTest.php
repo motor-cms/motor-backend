@@ -6,7 +6,7 @@ use Illuminate\Foundation\Testing\DatabaseTransactions;
 use Motor\Backend\Models\Permission;
 use Motor\Backend\Models\Role;
 
-class BackendPermissionTest extends TestCase
+class MotorBackendBackendPermissionTest extends TestCase
 {
 
     use DatabaseTransactions;
@@ -42,20 +42,22 @@ class BackendPermissionTest extends TestCase
     {
         $this->user   = create_test_superadmin();
 
-        $this->readPermission   = create_test_permission_with_name('roles.read');
-        $this->writePermission  = create_test_permission_with_name('roles.write');
-        $this->deletePermission = create_test_permission_with_name('roles.delete');
+        $this->readPermission   = create_test_permission_with_name('permissions.read');
+        $this->writePermission  = create_test_permission_with_name('permissions.write');
+        $this->deletePermission = create_test_permission_with_name('permissions.delete');
 
         $this->actingAs($this->user);
     }
 
 
     /** @test */
-    public function can_see_grid_with_one_role()
+    public function can_see_grid_with_three_permission()
     {
-        $this->visit('/backend/roles')
-            ->see('Roles')
-            ->see('SuperAdmin');
+        $this->visit('/backend/permissions')
+            ->see(trans('motor-backend::backend/permissions.permissions'))
+            ->see('permissions.read')
+            ->see('permissions.write')
+            ->see('permissions.delete');
     }
 
     /** @test */
@@ -63,10 +65,10 @@ class BackendPermissionTest extends TestCase
     {
         $this->visit('/backend/permissions')
             ->within('table', function(){
-                $this->click('Edit');
+                $this->click(trans('motor-backend::backend/global.edit'));
             })
             ->seePageIs('/backend/permissions/1/edit')
-            ->click('back')
+            ->click(trans('motor-backend::backend/global.back'))
             ->seePageIs('/backend/permissions');
     }
 
@@ -79,9 +81,9 @@ class BackendPermissionTest extends TestCase
             ->see($permission->name)
             ->type('NewPermission', 'name')
             ->within('.box-footer', function(){
-                $this->press('Save permission');
+                $this->press(trans('motor-backend::backend/permissions.save'));
             })
-            ->see('Permission updated')
+            ->see(trans('motor-backend::backend/permissions.updated'))
             ->see('NewPermission')
             ->seePageIs('/backend/permissions');
     }
@@ -90,7 +92,7 @@ class BackendPermissionTest extends TestCase
     public function can_click_the_create_button()
     {
         $this->visit('/backend/permissions')
-            ->click('Create permission')
+            ->click(trans('motor-backend::backend/permissions.new'))
             ->seePageIs('/backend/permissions/create');
     }
 
@@ -98,12 +100,12 @@ class BackendPermissionTest extends TestCase
     public function can_create_a_new_permission()
     {
         $this->visit('/backend/permissions/create')
-            ->see('Create permission')
+            ->see(trans('motor-backend::backend/permissions.new'))
             ->type('NewPermission', 'name')
             ->within('.box-footer', function(){
-                $this->press('Save permission');
+                $this->press(trans('motor-backend::backend/permissions.save'));
             })
-            ->see('Permission created')
+            ->see(trans('motor-backend::backend/permissions.created'))
             ->see('NewPermission')
             ->seePageIs('/backend/permissions');
     }
@@ -112,9 +114,9 @@ class BackendPermissionTest extends TestCase
     public function cannot_create_a_new_permission_with_empty_fields()
     {
         $this->visit('/backend/permissions/create')
-            ->see('Create permission')
+            ->see(trans('motor-backend::backend/permissions.new'))
             ->within('.box-footer', function(){
-                $this->press('Save permission');
+                $this->press(trans('motor-backend::backend/permissions.save'));
             })
             ->see('Data missing!')
             ->seePageIs('/backend/permissions/create');
@@ -133,13 +135,13 @@ class BackendPermissionTest extends TestCase
         $this->assertEquals($groups[1]->id, $permission->permission_group_id);
 
         $this->visit('/backend/permissions/'.$permission->id.'/edit')
-            ->see('Edit permission')
+            ->see(trans('motor-backend::backend/permissions.edit'))
             ->type('Updated permission', 'name')
             ->select($groups[3]->id, 'permission_group_id')
             ->within('.box-footer', function(){
-                $this->press('Save permission');
+                $this->press(trans('motor-backend::backend/permissions.save'));
             })
-            ->see('Permission updated')
+            ->see(trans('motor-backend::backend/permissions.updated'))
             ->see('Updated permission')
             ->seePageIs('/backend/permissions');
 
@@ -157,7 +159,7 @@ class BackendPermissionTest extends TestCase
 
         $this->visit('/backend/permissions')
             ->within('table', function(){
-                $this->press('Delete');
+                $this->press(trans('motor-backend::backend/global.delete'));
             })
             ->seePageIs('/backend/permissions');
 

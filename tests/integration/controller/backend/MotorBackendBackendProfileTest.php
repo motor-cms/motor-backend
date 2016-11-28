@@ -5,7 +5,7 @@ use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 use Motor\Backend\Models\User;
 
-class BackendProfileTest extends TestCase
+class MotorBackendBackendProfileTest extends TestCase
 {
 
     use DatabaseTransactions;
@@ -36,7 +36,7 @@ class BackendProfileTest extends TestCase
         $this->visit('/login')
             ->type($this->user->email, 'email')
             ->type('secret', 'password')
-            ->press('Sign in')
+            ->press(trans('motor-backend::backend/login.sign_in'))
             ->see('Dashboard');
     }
 
@@ -48,16 +48,16 @@ class BackendProfileTest extends TestCase
         $this->visit('/login')
             ->type($this->user->email, 'email')
             ->type('secret', 'password')
-            ->press('Sign in')
+            ->press(trans('motor-backend::backend/login.sign_in'))
             ->see('Dashboard')
             ->within('.user-footer', function(){
-                $this->click('Edit');
+                $this->click(trans('motor-backend::backend/global.edit'));
             })
-            ->see('Edit profile')
+            ->see(trans('motor-backend::backend/users.profile.edit'))
             ->type('NewName', 'name')
             ->type('newpassword', 'password')
             ->type('newpassword', 'password_confirmation')
-            ->press('Save profile');
+            ->press(trans('motor-backend::backend/users.profile.save'));
 
         $this->assertEquals('NewName', $this->user->fresh()->name);
     }
@@ -67,11 +67,11 @@ class BackendProfileTest extends TestCase
     {
         $this->user_can_change_password();
 
-        $this->press('Sign out')
+        $this->press(trans('motor-backend::backend/login.sign_out'))
             ->seePageIs('/login')
             ->type($this->user->email, 'email')
             ->type('newpassword', 'password')
-            ->press('Sign in')
+            ->press(trans('motor-backend::backend/login.sign_in'))
             ->see('Dashboard');
 
     }
@@ -85,7 +85,7 @@ class BackendProfileTest extends TestCase
 
         $this->visit('/backend/profile/edit')
             ->attach(__DIR__ . '/../../../../public/images/motor-logo-large.png', 'avatar')
-            ->press('Save profile');
+            ->press(trans('motor-backend::backend/users.profile.save'));
 
         $media = $this->user->fresh()->getMedia()->first();
 
@@ -98,13 +98,13 @@ class BackendProfileTest extends TestCase
         $this->user_can_add_profile_picture();
 
         // We need to log out for this test to work
-        $this->press('Sign out');
+        $this->press(trans('motor-backend::backend/login.sign_out'));
         $this->user = User::find($this->user->id);
         $this->actingAs($this->user);
 
         $this->visit('/backend/profile/edit')
             ->type('1', 'avatar_delete')
-            ->press('Save profile');
+            ->press(trans('motor-backend::backend/users.profile.save'));
 
         $media = $this->user->fresh()->getMedia()->first();
 
@@ -117,13 +117,13 @@ class BackendProfileTest extends TestCase
         $this->user_can_add_profile_picture();
 
         // We need to log out for this test to work
-        $this->press('Sign out');
+        $this->press(trans('motor-backend::backend/login.sign_out'));
         $this->user = User::find($this->user->id);
         $this->actingAs($this->user);
 
         $this->visit('/backend/profile/edit')
             ->attach(__DIR__ . '/../../../../public/images/motor-logo-small.png', 'avatar')
-            ->press('Save profile');
+            ->press(trans('motor-backend::backend/users.profile.save'));
 
         $media = $this->user->fresh()->getMedia()->first();
 

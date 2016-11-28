@@ -4,7 +4,7 @@ use Illuminate\Foundation\Testing\WithoutMiddleware;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 
-class ApiLanguageTest extends TestCase
+class MotorBackendApiLanguageTest extends TestCase
 {
 
     use DatabaseTransactions;

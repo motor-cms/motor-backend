@@ -5,7 +5,7 @@ use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 use Motor\Backend\Models\Role;
 
-class LoginTest extends TestCase
+class MotorBackendBackendRoleTest extends TestCase
 {
 
     use DatabaseTransactions;
@@ -21,6 +21,7 @@ class LoginTest extends TestCase
     protected $tables = [
         'users',
         'roles',
+        'media',
         'permissions',
         'user_has_permissions',
         'roles',
@@ -53,7 +54,7 @@ class LoginTest extends TestCase
     public function can_see_grid_with_one_role()
     {
         $this->visit('/backend/roles')
-            ->see('Roles')
+            ->see(trans('motor-backend::backend/roles.roles'))
             ->see('SuperAdmin');
     }
 
@@ -62,10 +63,10 @@ class LoginTest extends TestCase
     {
         $this->visit('/backend/roles')
             ->within('table', function(){
-                $this->click('Edit');
+                $this->click(trans('motor-backend::backend/global.edit'));
             })
             ->seePageIs('/backend/roles/1/edit')
-            ->click('back')
+            ->click(trans('motor-backend::backend/global.back'))
             ->seePageIs('/backend/roles');
     }
 
@@ -78,9 +79,9 @@ class LoginTest extends TestCase
             ->see($role->name)
             ->type('NewRole', 'name')
             ->within('.box-footer', function(){
-                $this->press('Save role');
+                $this->press(trans('motor-backend::backend/roles.save'));
             })
-            ->see('Role updated')
+            ->see(trans('motor-backend::backend/roles.updated'))
             ->see('NewRole')
             ->seePageIs('/backend/roles');
     }
@@ -89,7 +90,7 @@ class LoginTest extends TestCase
     public function can_click_the_create_button()
     {
         $this->visit('/backend/roles')
-            ->click('Create role')
+            ->click(trans('motor-backend::backend/roles.new'))
             ->seePageIs('/backend/roles/create');
     }
 
@@ -97,14 +98,26 @@ class LoginTest extends TestCase
     public function can_create_a_new_role()
     {
         $this->visit('/backend/roles/create')
-            ->see('Create role')
+            ->see(trans('motor-backend::backend/roles.new'))
             ->type('NewRole', 'name')
             ->within('.box-footer', function(){
-                $this->press('Save role');
+                $this->press(trans('motor-backend::backend/roles.save'));
             })
-            ->see('Role created')
+            ->see(trans('motor-backend::backend/roles.created'))
             ->see('NewRole')
             ->seePageIs('/backend/roles');
+    }
+
+    /** @test */
+    public function cannot_create_a_new_role_with_empty_fields()
+    {
+        $this->visit('/backend/roles/create')
+            ->see(trans('motor-backend::backend/roles.new'))
+            ->within('.box-footer', function(){
+                $this->press(trans('motor-backend::backend/roles.save'));
+            })
+            ->see('Data missing!')
+            ->seePageIs('/backend/roles/create');
     }
 
     /** @test */
@@ -114,13 +127,13 @@ class LoginTest extends TestCase
         create_test_permission_with_name('another.permission');
 
         $this->visit('/backend/roles/create')
-            ->see('Create role')
+            ->see(trans('motor-backend::backend/roles.new'))
             ->type('NewRole', 'name')
             ->check('permissions[test.permission]')
             ->within('.box-footer', function(){
-                $this->press('Save role');
+                $this->press(trans('motor-backend::backend/roles.save'));
             })
-            ->see('Role created')
+            ->see(trans('motor-backend::backend/roles.created'))
             ->see('NewRole')
             ->seePageIs('/backend/roles');
 
@@ -141,13 +154,13 @@ class LoginTest extends TestCase
         $role->givePermissionTo('test.permission');
 
         $this->visit('/backend/roles/'.$role->id.'/edit')
-            ->see('Edit role')
+            ->see(trans('motor-backend::backend/roles.edit'))
             ->type('Updated role', 'name')
             ->check('permissions[another.permission]')
             ->within('.box-footer', function(){
-                $this->press('Save role');
+                $this->press(trans('motor-backend::backend/roles.save'));
             })
-            ->see('Role updated')
+            ->see(trans('motor-backend::backend/roles.updated'))
             ->see('Updated role')
             ->seePageIs('/backend/roles');
 
@@ -167,14 +180,14 @@ class LoginTest extends TestCase
         $role->givePermissionTo('another.permission');
 
         $this->visit('/backend/roles/'.$role->id.'/edit')
-            ->see('Edit role')
+            ->see(trans('motor-backend::backend/roles.edit'))
             ->type('Updated role', 'name')
             ->uncheck('permissions[test.permission]')
             ->check('permissions[another.permission]')
             ->within('.box-footer', function(){
-                $this->press('Save role');
+                $this->press(trans('motor-backend::backend/roles.save'));
             })
-            ->see('Role updated')
+            ->see(trans('motor-backend::backend/roles.updated'))
             ->see('Updated role')
             ->seePageIs('/backend/roles');
 
@@ -188,7 +201,7 @@ class LoginTest extends TestCase
         create_test_role();
         $this->visit('/backend/roles')
             ->within('table', function(){
-                $this->press('Delete');
+                $this->press(trans('motor-backend::backend/global.delete'));
             })
             ->seePageIs('/backend/roles');
 

@@ -6,7 +6,7 @@ use Illuminate\Foundation\Testing\DatabaseTransactions;
 use Motor\Backend\Models\User;
 use Motor\Backend\Models\Role;
 
-class BackendUserTest extends TestCase
+class MotorBackendBackendUserTest extends TestCase
 {
 
     use DatabaseMigrations;
@@ -58,7 +58,7 @@ class BackendUserTest extends TestCase
     public function can_see_grid_with_one_users()
     {
         $this->visit('/backend/users')
-            ->see('Users')
+            ->see(trans('motor-backend::backend/users.users'))
             ->see($this->user->name);
     }
 
@@ -67,7 +67,7 @@ class BackendUserTest extends TestCase
     {
         $user = create_test_user();
         $this->visit('/backend/users')
-            ->see('Users')
+            ->see(trans('motor-backend::backend/users.users'))
             ->see($user->name);
     }
 
@@ -76,10 +76,10 @@ class BackendUserTest extends TestCase
     {
         $this->visit('/backend/users')
             ->within('table', function(){
-                $this->click('Edit');
+                $this->click(trans('motor-backend::backend/global.edit'));
             })
             ->seePageIs('/backend/users/1/edit')
-            ->click('back')
+            ->click(trans('motor-backend::backend/global.back'))
             ->seePageIs('/backend/users');
     }
 
@@ -92,9 +92,9 @@ class BackendUserTest extends TestCase
             ->see($user->name)
             ->type('NewUserName', 'name')
             ->within('.box-footer', function(){
-                $this->press('Save user');
+                $this->press(trans('motor-backend::backend/users.save'));
             })
-            ->see('User updated')
+            ->see(trans('motor-backend::backend/users.updated'))
             ->see('NewUserName')
             ->seePageIs('/backend/users');
     }
@@ -103,7 +103,7 @@ class BackendUserTest extends TestCase
     public function can_click_the_create_button()
     {
         $this->visit('/backend/users')
-            ->click('Create user')
+            ->click(trans('motor-backend::backend/users.new'))
             ->seePageIs('/backend/users/create');
     }
 
@@ -111,14 +111,14 @@ class BackendUserTest extends TestCase
     public function can_create_a_new_user()
     {
         $this->visit('/backend/users/create')
-            ->see('Create user')
+            ->see(trans('motor-backend::backend/users.new'))
             ->type('Username', 'name')
             ->type('test@test.de', 'email')
             ->type('secret', 'password')
             ->within('.box-footer', function(){
-                $this->press('Save user');
+                $this->press(trans('motor-backend::backend/users.save'));
             })
-            ->see('User created')
+            ->see(trans('motor-backend::backend/users.created'))
             ->see('Username')
             ->seePageIs('/backend/users');
     }
@@ -128,15 +128,15 @@ class BackendUserTest extends TestCase
     {
         $role = create_test_role();
         $this->visit('/backend/users/create')
-            ->see('Create user')
+            ->see(trans('motor-backend::backend/users.new'))
             ->type('Username', 'name')
             ->type('uniqueemailaddress@test.de', 'email')
             ->type('secret', 'password')
             ->check('roles['.$role->name.']')
             ->within('.box-footer', function(){
-                $this->press('Save user');
+                $this->press(trans('motor-backend::backend/users.save'));
             })
-            ->see('User created')
+            ->see(trans('motor-backend::backend/users.created'))
             ->see('Username')
             ->seePageIs('/backend/users');
 
@@ -151,12 +151,12 @@ class BackendUserTest extends TestCase
         $user = create_test_user();
         $user->assignRole($role);
         $this->visit('/backend/users/'.$user->id.'/edit')
-            ->see('Edit user')
+            ->see(trans('motor-backend::backend/users.edit'))
             ->uncheck('roles['.$role->name.']')
             ->within('.box-footer', function(){
-                $this->press('Save user');
+                $this->press(trans('motor-backend::backend/users.save'));
             })
-            ->see('User updated')
+            ->see(trans('motor-backend::backend/users.updated'))
             ->seePageIs('/backend/users');
 
         $updatedUser = User::find($user->id);
@@ -168,15 +168,15 @@ class BackendUserTest extends TestCase
     public function can_create_a_new_user_and_upload_an_avatar()
     {
         $this->visit('/backend/users/create')
-            ->see('Create user')
+            ->see(trans('motor-backend::backend/users.new'))
             ->type('Username', 'name')
             ->type('uniqueemailaddress@test.de', 'email')
             ->type('secret', 'password')
             ->attach(__DIR__ . '/../../../../public/images/motor-logo-large.png', 'avatar')
             ->within('.box-footer', function(){
-                $this->press('Save user');
+                $this->press(trans('motor-backend::backend/users.save'));
             })
-            ->see('User created')
+            ->see(trans('motor-backend::backend/users.created'))
             ->see('Username')
             ->seePageIs('/backend/users');
 
@@ -190,9 +190,9 @@ class BackendUserTest extends TestCase
     public function cannot_create_a_new_user_with_empty_fields()
     {
         $this->visit('/backend/users/create')
-            ->see('Create user')
+            ->see(trans('motor-backend::backend/users.new'))
             ->within('.box-footer', function(){
-                $this->press('Save user');
+                $this->press(trans('motor-backend::backend/users.save'));
             })
             ->see('Data missing!')
             ->seePageIs('/backend/users/create');
@@ -203,12 +203,12 @@ class BackendUserTest extends TestCase
     {
         $user = create_test_user();
         $this->visit('/backend/users/'.$user->id.'/edit')
-            ->see('Edit user')
+            ->see(trans('motor-backend::backend/users.edit'))
             ->type('Updated Email Template Name', 'name')
             ->within('.box-footer', function(){
-                $this->press('Save user');
+                $this->press(trans('motor-backend::backend/users.save'));
             })
-            ->see('User updated')
+            ->see(trans('motor-backend::backend/users.updated'))
             ->see('Updated Email Template Name')
             ->seePageIs('/backend/users');
     }
@@ -218,12 +218,12 @@ class BackendUserTest extends TestCase
     {
         $user = create_test_user();
         $this->visit('/backend/users/'.$user->id.'/edit')
-            ->see('Edit user')
+            ->see(trans('motor-backend::backend/users.edit'))
             ->type('newpassword', 'password')
             ->within('.box-footer', function(){
-                $this->press('Save user');
+                $this->press(trans('motor-backend::backend/users.save'));
             })
-            ->see('User updated')
+            ->see(trans('motor-backend::backend/users.updated'))
             ->seePageIs('/backend/users');
     }
 
@@ -232,12 +232,12 @@ class BackendUserTest extends TestCase
     {
         $user = create_test_user();
         $this->visit('/backend/users/'.$user->id.'/edit')
-            ->see('Edit user')
+            ->see(trans('motor-backend::backend/users.edit'))
             ->attach(__DIR__ . '/../../../../public/images/motor-logo-large.png', 'avatar')
             ->within('.box-footer', function(){
-                $this->press('Save user');
+                $this->press(trans('motor-backend::backend/users.save'));
             })
-            ->see('User updated')
+            ->see(trans('motor-backend::backend/users.updated'))
             ->seePageIs('/backend/users');
 
         $updatedUser = User::find($user->id);
@@ -254,12 +254,12 @@ class BackendUserTest extends TestCase
         $user = $this->can_modify_a_user_and_upload_an_avatar();
 
         $this->visit('/backend/users/'.$user->id.'/edit')
-            ->see('Edit user')
+            ->see(trans('motor-backend::backend/users.edit'))
             ->type(1, 'avatar_delete')
             ->within('.box-footer', function(){
-                $this->press('Save user');
+                $this->press(trans('motor-backend::backend/users.save'));
             })
-            ->see('User updated')
+            ->see(trans('motor-backend::backend/users.updated'))
             ->seePageIs('/backend/users');
 
         $updatedUser = User::find($user->id);
@@ -274,12 +274,12 @@ class BackendUserTest extends TestCase
         $user = $this->can_modify_a_user_and_upload_an_avatar();
 
         $this->visit('/backend/users/'.$user->id.'/edit')
-            ->see('Edit user')
+            ->see(trans('motor-backend::backend/users.edit'))
             ->attach(__DIR__ . '/../../../../public/images/motor-logo-small.png', 'avatar')
             ->within('.box-footer', function(){
-                $this->press('Save user');
+                $this->press(trans('motor-backend::backend/users.save'));
             })
-            ->see('User updated')
+            ->see(trans('motor-backend::backend/users.updated'))
             ->seePageIs('/backend/users');
 
         $updatedUser = User::find($user->id);
@@ -297,7 +297,7 @@ class BackendUserTest extends TestCase
 
         $this->visit('/backend/users')
             ->within('table', function(){
-                $this->press('Delete');
+                $this->press(trans('motor-backend::backend/global.delete'));
             })
             ->seePageIs('/backend/users');
 
