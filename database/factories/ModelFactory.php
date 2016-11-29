@@ -26,7 +26,7 @@ $factory->define(Motor\Backend\Models\User::class, function (Faker\Generator $fa
 
 $factory->define(Motor\Backend\Models\Role::class, function (Faker\Generator $faker) {
     return [
-        'name' => $faker->word.$faker->word.str_random(20)
+        'name' => $faker->word . $faker->word . str_random(20)
     ];
 });
 
@@ -61,13 +61,17 @@ $factory->define(Motor\Backend\Models\PermissionGroup::class, function (Faker\Ge
 
 $factory->define(Motor\Backend\Models\EmailTemplate::class, function (Faker\Generator $faker) {
     return [
-        'client_id'   => factory(Motor\Backend\Models\Client::class)->create()->id,
-        'language_id' => factory(Motor\Backend\Models\Language::class)->create()->id,
-        'name'        => $faker->sentence,
-        'subject'     => $faker->sentence,
-        'body_text'   => $faker->paragraph(1),
-        'body_html'   => $faker->paragraph(1),
-        'created_by'  => factory(Motor\Backend\Models\User::class)->create()->id,
-        'updated_by'  => factory(Motor\Backend\Models\User::class)->create()->id,
+        'client_id'               => factory(Motor\Backend\Models\Client::class)->create()->id,
+        'language_id'             => factory(Motor\Backend\Models\Language::class)->create()->id,
+        'name'                    => $faker->sentence,
+        'subject'                 => $faker->sentence,
+        'body_text'               => $faker->paragraph(1),
+        'body_html'               => $faker->paragraph(1),
+        'default_sender_email'    => $faker->email,
+        'default_sender_name'     => $faker->name,
+        'default_recipient_email' => $faker->email,
+        'default_recipient_name'  => $faker->name,
+        'created_by'              => factory(Motor\Backend\Models\User::class)->create()->id,
+        'updated_by'              => factory(Motor\Backend\Models\User::class)->create()->id,
     ];
 });
