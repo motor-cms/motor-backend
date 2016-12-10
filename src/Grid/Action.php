@@ -50,7 +50,7 @@ class Action extends Base
     {
         $this->conditionColumn   = $column;
         $this->conditionValue    = $value;
-        $this->conditionoperator = $operator;
+        $this->conditionOperator = $operator;
 
         return $this;
     }
@@ -74,6 +74,11 @@ class Action extends Base
             switch ($this->conditionOperator) {
                 case '=':
                     if ($record->{$this->conditionColumn} == $this->conditionValue) {
+                        $condition = true;
+                    }
+                    break;
+                case '!=':
+                    if ($record->{$this->conditionColumn} != $this->conditionValue) {
                         $condition = true;
                     }
                     break;

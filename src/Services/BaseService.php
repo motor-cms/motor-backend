@@ -210,8 +210,9 @@ abstract class BaseService
      */
     public function doCreate()
     {
+        $this->record = new $this->model();
         $this->beforeCreate();
-        $this->record = new $this->model($this->data);
+        $this->record->fill($this->data);
         $this->result = $this->record->save();
         $this->afterCreate();
         if ($this->result) {
