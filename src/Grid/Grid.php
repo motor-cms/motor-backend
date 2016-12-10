@@ -347,19 +347,15 @@ class Grid extends Base
 
     public function getPaginator($limit = 20)
     {
-        $this->filter->add(new PerPageRenderer('per_page'))->setup();
+        $query = ( $this->model )::filteredByMultiple($this->filter);
+
+        if (!$this->filter->get('per_page')) {
+            $this->filter->add(new PerPageRenderer('per_page'))->setup();
+        }
 
         $perPage = $this->filter->get('per_page');
         if ( ! is_null($perPage) && ! is_null($perPage->getValue())) {
             $limit = $perPage->getValue();
-        }
-
-        $query = app($this->model);
-
-        foreach ($this->filter->filters() as $name => $filter) {
-            if ( ! is_null($filter->getValue())) {
-                $query = $filter->query($query);
-            }
         }
 
         list( $sortableField, $sortableDirection ) = $this->getSorting();
