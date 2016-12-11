@@ -70,8 +70,7 @@ class MotorServiceProvider extends ServiceProvider
     {
         $config = $this->app['config']->get('motor-backend-permissions', []);
         $this->app['config']->set('motor-backend-permissions',
-            array_replace_recursive(require __DIR__ . '/../../config/motor-backend-permissions.php',
-                $config));
+            array_replace_recursive(require __DIR__ . '/../../config/motor-backend-permissions.php', $config));
     }
 
 

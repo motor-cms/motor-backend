@@ -82,13 +82,15 @@ class Grid extends Base
         return $column;
     }
 
+
     public function addSpecialRow($view)
     {
-        $specialRow = new SpecialRow($view);
+        $specialRow          = new SpecialRow($view);
         $this->specialRows[] = $specialRow;
 
         return $specialRow;
     }
+
 
     public function getSpecialRows()
     {
@@ -247,7 +249,7 @@ class Grid extends Base
             foreach (explode('.', $column->getName()) as $segment) {
                 try {
                     $temporaryRecord->{$segment};
-                    if (isset( $temporaryRecord->{$segment} )) {
+                    if (isset($temporaryRecord->{$segment})) {
                         $value           = $temporaryRecord->{$segment};
                         $temporaryRecord = $temporaryRecord->{$segment};
                     }
@@ -261,7 +263,7 @@ class Grid extends Base
             if ($sanitize) {
                 $value = $this->sanitize($value);
             }
-        } elseif (is_array($record) && isset( $record[$column->getName()] )) {
+        } elseif (is_array($record) && isset($record[$column->getName()])) {
             // Array value
             $value = $record[$column->getName()];
         } else {
@@ -307,7 +309,7 @@ class Grid extends Base
      */
     public function checkSortable($field, $direction)
     {
-        list( $sortableField, $sortableDirection ) = $this->getSorting();
+        list($sortableField, $sortableDirection) = $this->getSorting();
 
         if ($sortableField == $field && $sortableDirection == $direction) {
             return true;
@@ -339,6 +341,13 @@ class Grid extends Base
     }
 
 
+    public function setSorting($field, $direction)
+    {
+        \Session::set('sortable_field', $field);
+        \Session::set('sortable_direction', $direction);
+    }
+
+
     public function getSortableLink($field, $direction)
     {
         return '?sortable_field=' . $field . '&sortable_direction=' . $direction;
@@ -349,7 +358,7 @@ class Grid extends Base
     {
         $query = ( $this->model )::filteredByMultiple($this->filter);
 
-        if (!$this->filter->get('per_page')) {
+        if ( ! $this->filter->get('per_page')) {
             $this->filter->add(new PerPageRenderer('per_page'))->setup();
         }
 
@@ -358,7 +367,7 @@ class Grid extends Base
             $limit = $perPage->getValue();
         }
 
-        list( $sortableField, $sortableDirection ) = $this->getSorting();
+        list($sortableField, $sortableDirection) = $this->getSorting();
 
         if ( ! is_null($sortableField)) {
             return $query->orderBy($sortableField, $sortableDirection)->paginate($limit);
