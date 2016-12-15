@@ -19,6 +19,8 @@ class BackendNavigation
      */
     public function handle($request, Closure $next)
     {
+        $m = \Menu::make('', function(){}); //  <-- we need to do this to load the deferred service provider as we're using our motor-backend class for the menu
+
         $menu = new Menu;
 
         //\Menu::make('backendNavigation', function ($menu) {
