@@ -15,20 +15,19 @@ class Menu extends \Lavary\Menu\Menu {
     {
         if(is_callable($callback))
         {
-            if (!array_key_exists($name, $this->menu)) {
-                $this->menu[$name] = new Builder($name, $this->loadConf($name));
-            }
+
+            $menu = new Builder($name, $this->loadConf($name));
 
             // Registering the items
-            call_user_func($callback, $this->menu[$name]);
+            call_user_func($callback, $menu);
 
             // Storing each menu instance in the collection
-            $this->collection->put($name, $this->menu[$name]);
+            $this->collection->put($name, $menu);
 
             // Make the instance available in all views
-            \View::share($name, $this->menu[$name]);
+            \View::share($name, $menu);
 
-            return $this->menu[$name];
+            return $menu;
         }
     }
 
