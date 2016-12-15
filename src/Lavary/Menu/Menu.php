@@ -2,7 +2,8 @@
 
 namespace Motor\Backend\Lavary\Menu;
 
-class Menu extends \Lavary\Menu\Menu {
+class
+Menu extends \Lavary\Menu\Menu {
 
     /**
      * Create a new menu instance
@@ -15,19 +16,20 @@ class Menu extends \Lavary\Menu\Menu {
     {
         if(is_callable($callback))
         {
-
-            $menu = new Builder($name, $this->loadConf($name));
+            if (!array_key_exists($name, $this->menu)) {
+                $this->menu[$name] = new Builder($name, $this->loadConf($name));
+            }
 
             // Registering the items
-            call_user_func($callback, $menu);
+            call_user_func($callback, $this->menu[$name]);
 
             // Storing each menu instance in the collection
-            $this->collection->put($name, $menu);
+            $this->collection->put($name, $this->menu[$name]);
 
             // Make the instance available in all views
-            \View::share($name, $menu);
+            \View::share($name, $this->menu[$name]);
 
-            return $menu;
+            return $this->menu[$name];
         }
     }
 
