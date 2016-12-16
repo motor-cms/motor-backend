@@ -322,13 +322,13 @@ class Grid extends Base
     protected function getSorting()
     {
         // Check in the URL
-        $sortableField     = \Request::get('sortable_field');
-        $sortableDirection = \Request::get('sortable_direction');
+        $sortableField     = \Request::get(get_class($this).'_sortable_field');
+        $sortableDirection = \Request::get(get_class($this).'_sortable_direction');
 
         // Check session
         if (is_null($sortableField)) {
-            $sortableField     = \Session::get('sortable_field');
-            $sortableDirection = \Session::get('sortable_direction');
+            $sortableField     = \Session::get(get_class($this).'_sortable_field');
+            $sortableDirection = \Session::get(get_class($this).'_sortable_direction');
         }
 
         // Check default
@@ -343,8 +343,8 @@ class Grid extends Base
 
     public function setSorting($field, $direction)
     {
-        \Session::set('sortable_field', $field);
-        \Session::set('sortable_direction', $direction);
+        \Session::set(get_class($this).'_sortable_field', $field);
+        \Session::set(get_class($this).'_sortable_direction', $direction);
     }
 
 
