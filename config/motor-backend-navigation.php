@@ -18,7 +18,7 @@ return [
             'roles'       => [ 'SuperAdmin' ],
             'permissions' => [],
             'items'       => [
-                100  => [
+                100 => [
                     'slug'        => 'users',
                     'name'        => 'motor-backend::backend/users.users',
                     'icon'        => 'fa fa-user',
@@ -65,7 +65,16 @@ return [
                     'route'       => 'backend.permissions.index',
                     'roles'       => [ 'SuperAdmin' ],
                     'permissions' => [],
-                ]
+                ],
+                160 => [
+                    'slug'        => 'category_trees',
+                    'name'        => 'motor-backend::backend/category_trees.category_trees',
+                    'icon'        => 'fa fa-plus',
+                    'route'       => 'backend.category_trees.index',
+                    'roles'       => [ 'SuperAdmin' ],
+                    'permissions' => [ 'category_trees.read' ],
+                    'aliases'     => [ 'backend.categories' ]
+                ],
             ]
         ]
     ]

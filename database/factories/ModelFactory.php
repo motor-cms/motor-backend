@@ -75,3 +75,15 @@ $factory->define(Motor\Backend\Models\EmailTemplate::class, function (Faker\Gene
         'updated_by'              => factory(Motor\Backend\Models\User::class)->create()->id,
     ];
 });
+
+$factory->define(Motor\Backend\Models\Category::class, function (Faker\Generator $faker) {
+    return [
+        'name' => $faker->word
+    ];
+});
+
+$factory->define(Motor\Backend\Models\CategoryTree::class, function (Faker\Generator $faker) {
+    return [
+        'name' => $faker->word
+    ];
+});

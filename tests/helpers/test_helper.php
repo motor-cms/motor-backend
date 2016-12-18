@@ -93,3 +93,12 @@ function create_test_email_template($count = 1)
     return $email_template = factory(Motor\Backend\Models\EmailTemplate::class, $count)->create();
 
 }
+function create_test_category($count = 1)
+{
+    return factory(Motor\Backend\Models\Category::class, $count)->create();
+}
+
+function create_test_category_tree($count = 1)
+{
+    return factory(Motor\Backend\Models\CategoryTree::class, $count)->create();
+}

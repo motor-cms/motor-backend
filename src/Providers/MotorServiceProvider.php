@@ -139,6 +139,10 @@ class MotorServiceProvider extends ServiceProvider
         Route::bind('email_template', function ($id) {
             return config('motor-backend.models.email_template')::findOrFail($id);
         });
+
+        Route::bind('category', function ($id) {
+            return \Motor\Backend\Models\Category::findOrFail($id);
+        });
     }
 
 

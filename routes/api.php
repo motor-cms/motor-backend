@@ -11,6 +11,7 @@ Route::group([
     Route::resource('roles', 'RolesController');
     Route::resource('permissions', 'PermissionsController');
     Route::resource('email_templates', 'EmailTemplatesController');
+    Route::resource('categories', 'CategoriesController');
 
     Route::get('profile/me', 'ProfileEditController@me')->name('profile.read');
     Route::patch('profile/edit', 'ProfileEditController@update')->name('profile.update');
