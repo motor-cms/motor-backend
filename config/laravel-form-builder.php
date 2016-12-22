@@ -34,6 +34,7 @@ return [
         'datepicker'         => Motor\Backend\Forms\Fields\DatepickerType::class,
         'select2'            => Motor\Backend\Forms\Fields\Select2Type::class,
         'file_image'         => Motor\Backend\Forms\Fields\FileImageType::class,
+        'file_file'          => Motor\Backend\Forms\Fields\FileFileType::class,
         'checkboxcollection' => Motor\Backend\Forms\Fields\CheckboxCollectionType::class,
     ]
 ];

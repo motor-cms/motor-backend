@@ -14,6 +14,8 @@ return [
     'teaser_image'    => 'Teaser image',
     'body_image'      => 'Image',
     'image'           => 'Image',
+    'files'           => 'Files',
+    'file'            => 'File',
     'video'           => 'Video',
     'dashboard'       => 'Dashboard',
     'yes'             => 'Yes',
@@ -38,7 +40,7 @@ return [
         'country'   => 'Country',
     ],
     'contact'         => [
-        'salutations'   => [
+        'salutations'      => [
             'm' => 'Mr',
             'f' => 'Ms',
             'c' => 'Company',
@@ -50,17 +52,17 @@ return [
             'c' => 'Dear',
             'n' => ''
         ],
-        'salutation'    => 'Salutation',
-        'title'         => 'Title',
-        'first_name'    => 'First name',
-        'last_name'     => 'Last name',
-        'date_of_birth' => 'Date of birth',
-        'email'         => 'Email',
-        'phone_home'    => 'Phone (home)',
-        'phone_mobile'  => 'Phone (mobile)',
-        'phone_work'    => 'Phone (work)',
-        'website'       => 'Website',
-        'contact'       => 'Contact',
-        'phone'         => 'Phone',
+        'salutation'       => 'Salutation',
+        'title'            => 'Title',
+        'first_name'       => 'First name',
+        'last_name'        => 'Last name',
+        'date_of_birth'    => 'Date of birth',
+        'email'            => 'Email',
+        'phone_home'       => 'Phone (home)',
+        'phone_mobile'     => 'Phone (mobile)',
+        'phone_work'       => 'Phone (work)',
+        'website'          => 'Website',
+        'contact'          => 'Contact',
+        'phone'            => 'Phone',
     ]
 ];
