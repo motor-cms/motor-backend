@@ -1,4 +1,4 @@
-<div class="box-body table-responsive no-padding">
+<div class="@boxBody table-responsive no-padding">
     <table class="table table-hover" {!! $grid->buildAttributes() !!}>
         <thead>
         <tr>

@@ -1,26 +1,26 @@
 {!! form_start($form, ['id' => 'category-item']) !!}
 <div class="row">
     <div class="col-md-8">
-        <div class="box box-primary">
-            <div class="box-header with-border">
+        <div class="@boxWrapper box-primary">
+            <div class="@boxHeader with-border">
                 <h3 class="box-title">{{ trans('motor-backend::backend/global.base_info') }}</h3>
             </div>
-            <div class="box-body">
+            <div class="@boxBody">
                 {!! form_row($form->name) !!}
             </div>
             <!-- /.box-body -->
 
-            <div class="box-footer">
+            <div class="@boxFooter">
                 {!! form_row($form->submit) !!}
             </div>
         </div>
     </div>
     <div class="col-md-4">
-        <div class="box box-primary">
-            <div class="box-header with-border">
+        <div class="@boxWrapper box-primary">
+            <div class="@boxHeader with-border">
                 <h3 class="box-title">{{ trans('motor-backend::backend/category_trees.category_tree') }}</h3>
             </div>
-            <div class="box-body">
+            <div class="@boxBody">
                 <div id="category-tree">
                     @include('motor-backend::layouts.partials.category-tree-items', array('items' => $trees, 'newItem' => $newItem, 'selectedItem' => $selectedItem))
                 </div>

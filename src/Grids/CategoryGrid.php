@@ -3,7 +3,7 @@
 namespace Motor\Backend\Grids;
 
 use Motor\Backend\Grid\Grid;
-use Motor\CMS\Grid\Renderers\TreeRenderer;
+use Motor\Backend\Grid\Renderers\TreeRenderer;
 
 class CategoryGrid extends Grid
 {

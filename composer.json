@@ -36,6 +36,7 @@
     "barryvdh/laravel-cors": "^0.8.0",
     "fideloper/proxy": "^3.1",
     "spatie/laravel-permission": "^1.5",
+    "kalnoy/nestedset": "^4.1",
     "dfox288/motor-core": "0.*"
   },
   "require-dev": {

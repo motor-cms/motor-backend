@@ -2,6 +2,7 @@
 
 namespace Motor\Backend\Providers;
 
+use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\Route;
 use Motor\Backend\Console\Commands\MotorCreatePermissionsCommand;
@@ -26,6 +27,26 @@ class MotorServiceProvider extends ServiceProvider
         $this->registerCommands();
         $this->migrations();
         $this->publishResourceAssets();
+        $this->bladeDirectives();
+    }
+
+    public function bladeDirectives()
+    {
+        Blade::directive('boxWrapper', function () {
+            return config('motor-backend-html.box_wrapper');
+        });
+
+        Blade::directive('boxHeader', function () {
+            return config('motor-backend-html.box_header');
+        });
+
+        Blade::directive('boxBody', function () {
+            return config('motor-backend-html.box_body');
+        });
+
+        Blade::directive('boxFooter', function () {
+            return config('motor-backend-html.box_footer');
+        });
     }
 
 
@@ -37,6 +58,7 @@ class MotorServiceProvider extends ServiceProvider
     public function register()
     {
         $this->mergeConfigFrom(__DIR__ . '/../../config/motor-backend.php', 'motor-backend');
+        $this->mergeConfigFrom(__DIR__ . '/../../config/motor-backend-html.php', 'motor-backend-html');
         $this->mergeConfigFrom(__DIR__ . '/../../config/motor-backend-project.php', 'motor-backend-project');
         $this->mergeConfigFrom(__DIR__ . '/../../config/laravel-form-builder.php', 'laravel-form-builder');
         $this->mergeConfigFrom(__DIR__ . '/../../config/laravel-permission.php', 'laravel-permission');
