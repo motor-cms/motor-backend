@@ -4,11 +4,7 @@
         @yield('contentheader_title', 'Page Header here')
         <small>@yield('contentheader_description')</small>
     </h1>
-    <div class="flash-message">
-        <p>
-            @include('flash::message')
-        </p>
-    </div>
+    @include('motor-backend::layouts.partials.message')
     {{--
     <ol class="breadcrumb">
         <li><a href="#"><i class="fa fa-dashboard"></i> Level</a></li>

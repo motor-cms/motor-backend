@@ -20,13 +20,13 @@ elixir(function (mix) {
         // .less('adminlte-app.less')
         .less('./node_modules/toastr/toastr.less')
         .styles([
+            './public/css/toastr.css',
             './public/css/app.css',
             './node_modules/select2/dist/css/select2.css',
             './node_modules/admin-lte/dist/css/skins/_all-skins.css',
             './public/css/adminlte-less.css',
             // './public/css/adminlte-app.css',
             './node_modules/icheck/skins/square/blue.css',
-            './public/css/toastr.css',
             './public/css/motor/backend.css',
             './public/css/motor/project.css',
             './node_modules/eonasdan-bootstrap-datetimepicker/build/css/bootstrap-datetimepicker.css'

@@ -62,5 +62,11 @@ return [
         'website'          => 'Webseite',
         'contact'          => 'Kontakt',
         'phone'            => 'Telefon',
+    ],
+    'flash'           => [
+        'warning' => 'Warnung',
+        'info'    => 'Information',
+        'error'   => 'Fehler',
+        'success' => 'Erfolgreich'
     ]
 ];

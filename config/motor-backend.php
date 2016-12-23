@@ -20,5 +20,6 @@ return [
         'email_templates' => true,
         'profile'         => true
 
-    ]
+    ],
+    'flash' => 'toastr'
 ];
