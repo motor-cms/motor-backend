@@ -40,7 +40,7 @@ class BackendNavigation
 
                 if (isset($item['items'])) {
 
-                    $menu->get($item['slug'])->append('</span> <i class="fa fa-angle-left pull-right"></i>');
+                    $menu->get($item['slug'])->append('</span> '.config('motor-backend-navigation.collapseIcon'));
 
                     ksort($item['items']);
 
