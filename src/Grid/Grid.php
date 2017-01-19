@@ -31,6 +31,8 @@ class Grid extends Base
 
     public $filter;
 
+    public $paginator = null;
+
 
     /**
      * Grid constructor.
@@ -319,7 +321,7 @@ class Grid extends Base
     }
 
 
-    protected function getSorting()
+    public function getSorting()
     {
         // Check in the URL
         $sortableField     = \Request::get(get_class($this).'_sortable_field');
@@ -356,6 +358,11 @@ class Grid extends Base
 
     public function getPaginator($limit = 20)
     {
+
+        if (!is_null($this->paginator)) {
+            return $this->paginator;
+        }
+
         $query = ( $this->model )::filteredByMultiple($this->filter);
 
         if ( ! $this->filter->get('per_page')) {
@@ -370,10 +377,12 @@ class Grid extends Base
         list($sortableField, $sortableDirection) = $this->getSorting();
 
         if ( ! is_null($sortableField)) {
-            return $query->orderBy($sortableField, $sortableDirection)->paginate($limit);
+            $this->paginator = $query->orderBy($sortableField, $sortableDirection)->paginate($limit);
+            return $this->paginator;
         }
 
-        return $query->paginate($limit);
+        $this->paginator = $query->paginate($limit);
+        return $this->paginator;
     }
 
 

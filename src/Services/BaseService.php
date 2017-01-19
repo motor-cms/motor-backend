@@ -36,6 +36,10 @@ abstract class BaseService
 
     protected $result;
 
+    protected $sortableField = 'id';
+
+    protected $sortableDirection = 'ASC';
+
 
     /**
      * Basic create method.
@@ -118,12 +122,16 @@ abstract class BaseService
      *
      * @return static
      */
-    public static function collection($alias = '')
+    public static function collection($alias = '', $sorting = null)
     {
         $instance         = new static();
         $instance->filter = new Filter($alias);
         $instance->defaultFilters();
         $instance->filters();
+
+        if (!is_null($sorting)) {
+            $instance->setSorting($sorting);
+        }
 
         return $instance;
     }
@@ -182,7 +190,52 @@ abstract class BaseService
      */
     public function getPaginator()
     {
-        return ( $this->model )::filteredByMultiple($this->getFilter())->paginate($this->getFilter()->get('per_page')->getValue());
+        $query = ( $this->model )::filteredByMultiple($this->getFilter());
+        $query = $this->applyScopes($query);
+        $query = $this->applySorting($query);
+
+        return $query->paginate($this->getFilter()->get('per_page')->getValue());
+    }
+
+
+    /**
+     * Set sorting array
+     *
+     * @param array $sorting
+     */
+    public function setSorting(Array $sorting)
+    {
+        list($this->sortableField, $this->sortableDirection) = $sorting;
+
+        return $this;
+    }
+
+
+    /**
+     * Add custom sorting, if available
+     *
+     * @param $query
+     */
+    public function applySorting($query)
+    {
+        if ( ! is_null($this->sortableField)) {
+            return $query->orderBy($this->sortableField, $this->sortableDirection);
+        }
+
+        return $query;
+    }
+
+
+    /**
+     * Add custom scopes to query
+     *
+     * @param $query
+     *
+     * @return mixed
+     */
+    public function applyScopes($query)
+    {
+        return $query;
     }
 
 
@@ -321,19 +374,20 @@ abstract class BaseService
 
             // Handle subforms
             if ($field instanceof ChildFormType) {
-                $data[$field->getRealName()] = $this->handleFormValues($field->getForm(), Arr::get($data, $field->getRealName()));
+                $data[$field->getRealName()] = $this->handleFormValues($field->getForm(),
+                    Arr::get($data, $field->getRealName()));
             }
 
             // Handle empty checkbox values
             if ($field instanceof CheckableType) {
-                if ( ! isset( $data[$field->getRealName()] )) {
+                if ( ! isset($data[$field->getRealName()])) {
                     $data[$field->getRealName()] = false;
                 }
             }
 
             // Handle empty checkboxcollection
             if ($field instanceof CheckboxCollectionType) {
-                if ( ! isset( $data[$field->getRealName()] )) {
+                if ( ! isset($data[$field->getRealName()])) {
                     $data[$field->getRealName()] = [];
                 }
             }
@@ -344,13 +398,13 @@ abstract class BaseService
                 if ($data[$field->getRealName() . '_picker'] == '') {
                     $data[$field->getRealName()] = '';
                 }
-                if ( ! isset( $data[$field->getRealName()] ) || ( isset( $data[$field->getRealName()] ) && $data[$field->getRealName()] == '' || $data[$field->getRealName()] == '0000-00-00 00:00:00' || $data[$field->getRealName()] == '0000-00-00' )) {
+                if ( ! isset($data[$field->getRealName()]) || ( isset($data[$field->getRealName()]) && $data[$field->getRealName()] == '' || $data[$field->getRealName()] == '0000-00-00 00:00:00' || $data[$field->getRealName()] == '0000-00-00' )) {
                     $data[$field->getRealName()] = null;
                 }
             }
 
             // Handle empty select values
-            if ($field instanceof SelectType && isset( $data[$field->getRealName()] ) && $data[$field->getRealName()] == '') {
+            if ($field instanceof SelectType && isset($data[$field->getRealName()]) && $data[$field->getRealName()] == '') {
                 $data[$field->getRealName()] = null;
             }
         }
@@ -370,7 +424,7 @@ abstract class BaseService
      */
     public function uploadFile($file, $identifier = 'image', $collection = null, $record = null)
     {
-        if (!is_null($record) && !$record instanceof HasMedia) {
+        if ( ! is_null($record) && ! $record instanceof HasMedia) {
             return $this;
         }
 
@@ -378,7 +432,7 @@ abstract class BaseService
             $record = $this->record;
         }
 
-        if (!$record instanceof HasMedia) {
+        if ( ! $record instanceof HasMedia) {
             return $this;
         }
 
