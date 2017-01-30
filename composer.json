@@ -32,7 +32,7 @@
     "sofa/eloquence": "~5.3",
     "spatie/laravel-fractal": "^1.9",
     "intervention/imagecache": "^2.3",
-    "league/glide-laravel": "^1.2",
+    "league/glide-laravel": "^1.0",
     "lavary/laravel-menu": "^1.6",
     "nstapelbroek/culpa": "^2.0",
     "symfony/intl": "^3.0",
