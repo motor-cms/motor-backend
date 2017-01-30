@@ -29,7 +29,6 @@
     "laracasts/flash": "^2.0",
     "laravelcollective/html": "~5.4",
     "laracasts/generators": "^1.1",
-    "sofa/hookable": "patch",
     "sofa/eloquence": "~5.3",
     "spatie/laravel-fractal": "^1.9",
     "intervention/imagecache": "^2.3",
