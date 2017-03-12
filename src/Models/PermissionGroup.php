@@ -3,13 +3,13 @@
 namespace Motor\Backend\Models;
 
 use Motor\Core\Traits\Filterable;
-use Sofa\Eloquence\Eloquence;
+use Motor\Core\Traits\Searchable;
 use Illuminate\Database\Eloquent\Model;
 
 class PermissionGroup extends Model
 {
 
-    use Eloquence;
+    use Searchable;
     use Filterable;
 
 //    use Blameable, CreatedBy, UpdatedBy, DeletedBy;
@@ -22,7 +22,7 @@ class PermissionGroup extends Model
 //    protected $blameable = array('created', 'updated', 'deleted');
 
     /**
-     * Searchable columns for the Eloquence trait
+     * Searchable columns for the searchable trait
      *
      * @var array
      */

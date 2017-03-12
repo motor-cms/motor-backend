@@ -4,7 +4,6 @@ namespace Motor\Backend\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Kalnoy\Nestedset\NodeTrait;
-use Sofa\Eloquence\Eloquence;
 use Motor\Core\Traits\Filterable;
 use Culpa\Traits\Blameable;
 use Culpa\Traits\CreatedBy;
@@ -14,7 +13,6 @@ use Culpa\Traits\UpdatedBy;
 class Category extends Model
 {
 
-    //use Eloquence;
     use Filterable;
     use Blameable, CreatedBy, UpdatedBy, DeletedBy;
     use NodeTrait;
@@ -27,7 +25,7 @@ class Category extends Model
     protected $blameable = [ 'created', 'updated', 'deleted' ];
 
     /**
-     * Searchable columns for the Eloquence trait
+     * Searchable columns for the searchable trait
      *
      * @var array
      */

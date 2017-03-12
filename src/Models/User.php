@@ -1,10 +1,10 @@
 <?php
 
 namespace Motor\Backend\Models;
+use Motor\Core\Traits\Searchable;
 
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Motor\Core\Traits\Filterable;
-use Sofa\Eloquence\Eloquence;
 use Spatie\MediaLibrary\HasMedia\HasMediaTrait;
 use Spatie\MediaLibrary\HasMedia\Interfaces\HasMediaConversions;
 use Spatie\Permission\Traits\HasRoles;
@@ -12,7 +12,7 @@ use Spatie\Permission\Traits\HasRoles;
 class User extends Authenticatable implements HasMediaConversions
 {
 
-    use Eloquence;
+    use Searchable;
     use HasMediaTrait;
     use HasRoles;
     use Filterable;
@@ -23,7 +23,7 @@ class User extends Authenticatable implements HasMediaConversions
     }
 
     /**
-     * Searchable columns for the Eloquence trait
+     * Searchable columns for the searchable trait
      *
      * @var array
      */

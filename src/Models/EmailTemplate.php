@@ -8,12 +8,12 @@ use Culpa\Traits\DeletedBy;
 use Culpa\Traits\UpdatedBy;
 use Illuminate\Database\Eloquent\Model;
 use Motor\Core\Traits\Filterable;
-use Sofa\Eloquence\Eloquence;
+use Motor\Core\Traits\Searchable;
 
 class EmailTemplate extends Model
 {
 
-    use Eloquence;
+    use Searchable;
     use Blameable, CreatedBy, UpdatedBy, DeletedBy;
     use Filterable;
 

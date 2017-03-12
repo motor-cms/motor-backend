@@ -31,7 +31,6 @@ Then you need to add a bunch of other service providers
         Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider::class,
         Intervention\Image\ImageServiceProvider::class,
         Dimsav\Translatable\TranslatableServiceProvider::class,
-        Sofa\Eloquence\ServiceProvider::class,
         Lavary\Menu\ServiceProvider::class,
         Culpa\CulpaServiceProvider::class,
         Kris\LaravelFormBuilder\FormBuilderServiceProvider::class,

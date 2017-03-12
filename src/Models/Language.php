@@ -4,16 +4,16 @@ namespace Motor\Backend\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Motor\Core\Traits\Filterable;
-use Sofa\Eloquence\Eloquence;
+use Motor\Core\Traits\Searchable;
 
 class Language extends Model
 {
 
-    use Eloquence;
+    use Searchable;
     use Filterable;
 
     /**
-     * Searchable columns for the Eloquence trait
+     * Searchable columns for the searchable trait
      *
      * @var array
      */
