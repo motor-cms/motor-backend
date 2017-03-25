@@ -10,7 +10,7 @@ class UserForm extends Form
 {
     public function buildForm()
     {
-        $clients = config('motor-backend.models.client')::lists('name', 'id')->toArray();
+        $clients = config('motor-backend.models.client')::pluck('name', 'id')->toArray();
         $this
             ->add('client_id', 'select', ['label' => trans('motor-backend::backend/clients.client'), 'choices' => $clients, 'empty_value' => trans('motor-backend::backend/global.all')])
             ->add('name', 'text', ['label' => trans('motor-backend::backend/users.name'), 'rules' => 'required'])
@@ -21,8 +21,8 @@ class UserForm extends Form
                 'type' => 'checkbox',
                 'label' => trans('motor-backend::backend/roles.roles'),
                 'property' => 'id',    // Which property to use on the tags model for value, defualts to id
-                'collection' => Role::lists('id', 'name')->toArray(),
-                'data' => null, //Permission::lists('name', 'id')->toArray(),            // Data is automatically bound from model, here we can override it
+                'collection' => Role::pluck('id', 'name')->toArray(),
+                'data' => null, //Permission::pluck('name', 'id')->toArray(),            // Data is automatically bound from model, here we can override it
                 'options' => [    // these are options for a single type
                     'label' => false,
                     'attr' => ['class' => 'role']
