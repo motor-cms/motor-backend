@@ -218,8 +218,9 @@ abstract class BaseService
      */
     public function applySorting($query)
     {
+        // FIXME: we can't assume that the sorting will always be on the base model!?
         if ( ! is_null($this->sortableField)) {
-            return $query->orderBy($this->sortableField, $this->sortableDirection);
+            return $query->orderBy($query->getModel()->getTable().'.'.$this->sortableField, $this->sortableDirection);
         }
 
         return $query;

@@ -376,8 +376,9 @@ class Grid extends Base
 
         list($sortableField, $sortableDirection) = $this->getSorting();
 
+        // FIXME: we can't assume that the sorting will always be on the base model!?
         if ( ! is_null($sortableField)) {
-            $this->paginator = $query->orderBy($sortableField, $sortableDirection)->paginate($limit);
+            $this->paginator = $query->orderBy($query->getModel()->getTable().'.'.$sortableField, $sortableDirection)->paginate($limit);
             return $this->paginator;
         }
 
