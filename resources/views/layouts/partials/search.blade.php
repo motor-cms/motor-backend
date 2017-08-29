@@ -7,5 +7,5 @@
     </div>
 </form>
 <div class="box-tools">
-    {!! $paginator->appends(['search' => $grid->getSearchTerm() ])->links() !!}
+    {!! $paginator->appends(['search' => $grid->getSearchTerm(), 'sortable_field' => $grid->getSortableColumn(), 'sortable_direction' => $grid->getSortableDirection() ])->links() !!}
 </div>

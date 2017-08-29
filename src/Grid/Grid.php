@@ -45,6 +45,10 @@ class Grid extends Base
         $this->searchTerm   = request('search');
         $this->clientFilter = request('client_id');
 
+        if (request('sortable_field') && request('sortable_direction')) {
+            $this->setSorting(request('sortable_field'), request('sortable_direction'));
+        }
+
         $this->filter = new Filter($this);
 
         $this->setup();
@@ -345,8 +349,20 @@ class Grid extends Base
 
     public function setSorting($field, $direction)
     {
-        \Session::set(get_class($this).'_sortable_field', $field);
-        \Session::set(get_class($this).'_sortable_direction', $direction);
+        \Session::put(get_class($this).'_sortable_field', $field);
+        \Session::put(get_class($this).'_sortable_direction', $direction);
+    }
+
+    public function getSortableColumn()
+    {
+        $sorting = $this->getSorting();
+        return $sorting[0];
+    }
+
+    public function getSortableDirection()
+    {
+        $sorting = $this->getSorting();
+        return $sorting[1];
     }
 
 

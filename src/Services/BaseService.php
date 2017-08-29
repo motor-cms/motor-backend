@@ -129,6 +129,10 @@ abstract class BaseService
         $instance->defaultFilters();
         $instance->filters();
 
+        if (array_get($_GET, 'sortable_field') && array_get($_GET, 'sortable_direction')) {
+            $instance->setSorting([array_get($_GET, 'sortable_field'), array_get($_GET, 'sortable_direction')]);
+        }
+
         if (!is_null($sorting)) {
             $instance->setSorting($sorting);
         }
