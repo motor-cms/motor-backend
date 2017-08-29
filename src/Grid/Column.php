@@ -13,7 +13,7 @@ class Column extends Base
 
     protected $sortableField = '';
 
-    protected $filters = [ ];
+    protected $filters = [];
 
     protected $cellClosure = null;
 
@@ -21,14 +21,16 @@ class Column extends Base
 
     protected $renderOptions;
 
+
     /**
      * Column constructor.
      *
-     * @param      $name
-     * @param      $label
-     * @param bool $sortable
+     * @param        $name
+     * @param        $label
+     * @param bool   $sortable
+     * @param string $sortableField
      */
-    public function __construct($name, $label, $sortable = false)
+    public function __construct($name, $label, $sortable = false, $sortableField = null)
     {
         $this->name = $name;
 
@@ -40,6 +42,9 @@ class Column extends Base
         }
 
         $this->label = $label;
+        if ( ! is_null($sortableField)) {
+            $this->sortableField = $sortableField;
+        }
         $this->setSortable($sortable);
     }
 
@@ -49,9 +54,9 @@ class Column extends Base
      *
      * @param $type
      */
-    public function renderer($renderer, $options=[])
+    public function renderer($renderer, $options = [])
     {
-        $this->renderer = $renderer;
+        $this->renderer      = $renderer;
         $this->renderOptions = $options;
 
         return $this;
@@ -101,7 +106,7 @@ class Column extends Base
     protected function setSortable($sortable)
     {
         $this->sortable = (bool) $sortable;
-        if ($this->sortable) {
+        if ($this->sortable && $this->sortableField == '') {
             $this->sortableField = ( is_string($sortable) ) ? $sortable : $this->name;
         }
 

@@ -76,9 +76,9 @@ class Grid extends Base
      *
      * @return Column
      */
-    public function addColumn($name, $label = null, $sortable = false)
+    public function addColumn($name, $label = null, $sortable = false, $sortableField = null)
     {
-        $column                            = new Column($name, $label, $sortable);
+        $column                            = new Column($name, $label, $sortable, $sortableField);
         $this->columns[$column->getName()] = $column;
 
         if ($sortable) {

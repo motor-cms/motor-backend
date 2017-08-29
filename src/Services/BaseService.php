@@ -130,10 +130,10 @@ abstract class BaseService
         $instance->filters();
 
         if (array_get($_GET, 'sortable_field') && array_get($_GET, 'sortable_direction')) {
-            $instance->setSorting([array_get($_GET, 'sortable_field'), array_get($_GET, 'sortable_direction')]);
+            $instance->setSorting([ array_get($_GET, 'sortable_field'), array_get($_GET, 'sortable_direction') ]);
         }
 
-        if (!is_null($sorting)) {
+        if ( ! is_null($sorting)) {
             $instance->setSorting($sorting);
         }
 
@@ -222,9 +222,37 @@ abstract class BaseService
      */
     public function applySorting($query)
     {
-        // FIXME: we can't assume that the sorting will always be on the base model!?
+        // check if we need to join a table
+        $join = false;
+        if (strpos($this->sortableField, '.') > 0) {
+            $join       = true;
+            $joinExists = false;
+
+            list($table, $field) = explode('.', $this->sortableField);
+
+            $joins = $query->getQuery()->joins;
+            if ($joins == null) {
+                $joinExists = false;
+            } else {
+                foreach ($joins as $join) {
+                    if ($join->table == $table) {
+                        $joinExists = true;
+                    }
+                }
+            }
+
+            if ( ! $joinExists) {
+                $query->join(str_plural($table) . ' as ' . $table, $table . '_id', $table . '.id');
+            }
+        }
+
         if ( ! is_null($this->sortableField)) {
-            return $query->orderBy($query->getModel()->getTable().'.'.$this->sortableField, $this->sortableDirection);
+            if ($join) {
+                return $query->orderBy($this->sortableField, $this->sortableDirection);
+            }
+
+            return $query->orderBy($query->getModel()->getTable() . '.' . $this->sortableField,
+                $this->sortableDirection);
         }
 
         return $query;
@@ -444,8 +472,7 @@ abstract class BaseService
         $collection = ( ! is_null($collection) ? $collection : $identifier );
 
         if ( ! is_null($file) || $this->isValidBase64(Arr::get($this->data, $identifier)) || Arr::get($this->data,
-                Str::slug($identifier) . '_delete') == 1
-        ) {
+                Str::slug($identifier) . '_delete') == 1) {
             $record->clearMediaCollection($identifier);
             if ( ! is_null($collection)) {
                 $record->clearMediaCollection($collection);
