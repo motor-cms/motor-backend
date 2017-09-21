@@ -12,17 +12,18 @@
     }
   ],
   "require": {
-    "php": ">=5.6.4",
-    "laravel/framework": "5.4.*",
+    "php": ">=7.0.0",
+    "fideloper/proxy": "~3.3",
+    "laravel/framework": "5.5.*",
+    "laravel/tinker": "~1.0",
     "doctrine/dbal": "^2.5",
     "php-console/php-console": "^3.1",
     "guzzlehttp/guzzle": "^6.2",
-    "acacha/admin-lte-template-laravel": "3.*",
+    "acacha/admin-lte-template-laravel": "5.*",
     "barryvdh/laravel-ide-helper": "^2.1",
     "dimsav/laravel-translatable": "^5.5",
     "laracasts/flash": "^2.0",
-    "laravelcollective/html": "^5.4",
-    "laracasts/generators": "dev-master",
+    "laravelcollective/html": "^5.5",
     "spatie/laravel-fractal": "^1.9",
     "intervention/imagecache": "^2.3",
     "league/glide-laravel": "^1.0",
@@ -30,20 +31,21 @@
     "nstapelbroek/culpa": "^2.0",
     "symfony/intl": "^3.0",
     "kris/laravel-form-builder": "^1.6",
-    "spatie/laravel-medialibrary": "^4.0",
+    "spatie/laravel-medialibrary": "^6.0",
     "wpb/string-blade-compiler": "^3.4",
-    "barryvdh/laravel-cors": "^0.8.0",
-    "fideloper/proxy": "^3.1",
+    "barryvdh/laravel-cors": "^0.9.3",
     "spatie/laravel-permission": "^1.5",
     "kalnoy/nestedset": "^4.1",
-    "dfox288/motor-core": "0.2.*"
+    "dfox288/motor-core": "0.3.*"
   },
   "require-dev": {
+    "filp/whoops": "~2.0",
     "fzaninotto/faker": "~1.4",
     "mockery/mockery": "0.9.*",
-    "phpunit/phpunit": "~4.0",
-    "symfony/css-selector": "3.1.*",
-    "symfony/dom-crawler": "3.1.*"
+    "phpunit/phpunit": "~6.0",
+    "symfony/css-selector": "3.2.*",
+    "symfony/dom-crawler": "3.2.*",
+    "orchestra/testbench": "~3.5"
   },
   "autoload": {
     "psr-4": {
