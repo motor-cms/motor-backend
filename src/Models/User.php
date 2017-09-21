@@ -7,6 +7,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Motor\Core\Traits\Filterable;
 use Spatie\MediaLibrary\HasMedia\HasMediaTrait;
 use Spatie\MediaLibrary\HasMedia\Interfaces\HasMediaConversions;
+use Spatie\MediaLibrary\Media;
 use Spatie\Permission\Traits\HasRoles;
 
 class User extends Authenticatable implements HasMediaConversions
@@ -17,7 +18,7 @@ class User extends Authenticatable implements HasMediaConversions
     use HasRoles;
     use Filterable;
 
-    public function registerMediaConversions()
+    public function registerMediaConversions(Media $media = null)
     {
         $this->addMediaConversion('thumb')->setManipulations([ 'w' => 400, 'h' => 400 ]);
     }
