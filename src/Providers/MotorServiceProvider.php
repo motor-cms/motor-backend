@@ -61,7 +61,7 @@ class MotorServiceProvider extends ServiceProvider
         $this->mergeConfigFrom(__DIR__ . '/../../config/motor-backend-html.php', 'motor-backend-html');
         $this->mergeConfigFrom(__DIR__ . '/../../config/motor-backend-project.php', 'motor-backend-project');
         $this->mergeConfigFrom(__DIR__ . '/../../config/laravel-form-builder.php', 'laravel-form-builder');
-        $this->mergeConfigFrom(__DIR__ . '/../../config/laravel-permission.php', 'laravel-permission');
+        $this->mergeConfigFrom(__DIR__ . '/../../config/permission.php', 'permission');
         $this->mergeConfigFrom(__DIR__ . '/../../config/laravel-menu/settings.php', 'laravel-menu.settings');
     }
 

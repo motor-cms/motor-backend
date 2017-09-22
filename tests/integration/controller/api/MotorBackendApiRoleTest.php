@@ -21,9 +21,9 @@ class MotorBackendApiRoleTest extends TestCase
         'users',
         'roles',
         'permissions',
-        'user_has_permissions',
         'roles',
-        'user_has_roles',
+        'model_has_permissions',
+        'model_has_roles',
         'role_has_permissions'
     ];
 
@@ -38,7 +38,7 @@ class MotorBackendApiRoleTest extends TestCase
 
     protected function addDefaults()
     {
-        $this->user   = create_test_user();
+        $this->user = create_test_user();
 
         $this->readPermission   = create_test_permission_with_name('roles.read');
         $this->writePermission  = create_test_permission_with_name('roles.write');

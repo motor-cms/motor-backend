@@ -6,6 +6,7 @@
     <div class="@boxBody">
         {!! form_row($form->permission_group_id) !!}
         {!! form_row($form->name) !!}
+        {!! form_row($form->guard_name) !!}
     </div>
     <!-- /.box-body -->
 

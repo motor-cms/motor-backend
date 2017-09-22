@@ -17,7 +17,14 @@ class MotorBackendApiLanguageTest extends TestCase
 
     protected $deletePermission;
 
-    protected $tables = [ 'users', 'languages', 'permissions', 'user_has_permissions', 'user_has_roles', 'roles' ];
+    protected $tables = [
+        'users',
+        'languages',
+        'permissions',
+        'model_has_permissions',
+        'model_has_roles',
+        'roles'
+    ];
 
 
     public function setUp()
@@ -30,7 +37,7 @@ class MotorBackendApiLanguageTest extends TestCase
 
     protected function addDefaults()
     {
-        $this->user   = create_test_user();
+        $this->user = create_test_user();
 
         $this->readPermission   = create_test_permission_with_name('languages.read');
         $this->writePermission  = create_test_permission_with_name('languages.write');
@@ -215,6 +222,7 @@ class MotorBackendApiLanguageTest extends TestCase
         ]);
     }
 
+
     /** @test */
     public function fails_to_delete_a_client_without_permission()
     {
@@ -224,6 +232,7 @@ class MotorBackendApiLanguageTest extends TestCase
             'error' => 'Access denied.'
         ]);
     }
+
 
     /** @test */
     public function can_delete_a_language()

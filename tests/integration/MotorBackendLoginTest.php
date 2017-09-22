@@ -22,9 +22,9 @@ class MotorBackendLoginTest extends TestCase
         'users',
         'roles',
         'permissions',
-        'user_has_permissions',
+        'model_has_permissions',
         'roles',
-        'user_has_roles',
+        'model_has_roles',
         'role_has_permissions'
     ];
 

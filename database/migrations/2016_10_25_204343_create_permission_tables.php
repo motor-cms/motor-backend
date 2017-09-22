@@ -12,7 +12,7 @@ class CreatePermissionTables extends Migration
      */
     public function up()
     {
-        $config = config('laravel-permission.table_names');
+        $config = config('permission.table_names');
 
         Schema::create($config['roles'], function (Blueprint $table) {
             $table->increments('id');
@@ -26,13 +26,13 @@ class CreatePermissionTables extends Migration
             $table->timestamps();
         });
 
-        Schema::create($config['user_has_permissions'], function (Blueprint $table) use ($config) {
+        Schema::create('user_has_permissions', function (Blueprint $table) use ($config) {
             $table->integer('user_id')->unsigned();
             $table->integer('permission_id')->unsigned();
 
             $table->foreign('user_id')
                 ->references('id')
-                ->on($config['users'])
+                ->on('users')
                 ->onDelete('cascade');
 
             $table->foreign('permission_id')
@@ -43,7 +43,7 @@ class CreatePermissionTables extends Migration
             $table->primary(['user_id', 'permission_id']);
         });
 
-        Schema::create($config['user_has_roles'], function (Blueprint $table) use ($config) {
+        Schema::create('user_has_roles', function (Blueprint $table) use ($config) {
             $table->integer('role_id')->unsigned();
             $table->integer('user_id')->unsigned();
 
@@ -54,7 +54,7 @@ class CreatePermissionTables extends Migration
 
             $table->foreign('user_id')
                 ->references('id')
-                ->on($config['users'])
+                ->on('users')
                 ->onDelete('cascade');
 
             $table->primary(['role_id', 'user_id']);
@@ -85,11 +85,11 @@ class CreatePermissionTables extends Migration
      */
     public function down()
     {
-        $config = config('laravel-permission.table_names');
+        $config = config('permission.table_names');
 
         Schema::drop($config['role_has_permissions']);
-        Schema::drop($config['user_has_roles']);
-        Schema::drop($config['user_has_permissions']);
+        Schema::drop('user_has_roles');
+        Schema::drop('user_has_permissions');
         Schema::drop($config['roles']);
         Schema::drop($config['permissions']);
     }

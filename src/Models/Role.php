@@ -31,7 +31,8 @@ class Role extends \Spatie\Permission\Models\Role
      * @var array
      */
     protected $searchableColumns = [
-        'name'
+        'name',
+        'guard_name'
     ];
 
     /**
@@ -40,6 +41,7 @@ class Role extends \Spatie\Permission\Models\Role
      * @var array
      */
     protected $fillable = [
-        'name'
+        'name',
+        'guard_name'
     ];
 }

@@ -18,6 +18,8 @@ class User extends Authenticatable implements HasMediaConversions
     use HasRoles;
     use Filterable;
 
+    protected $guard_name = 'web';
+
     public function registerMediaConversions(Media $media = null)
     {
         $this->addMediaConversion('thumb')->setManipulations([ 'w' => 400, 'h' => 400 ]);

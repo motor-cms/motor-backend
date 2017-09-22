@@ -15,6 +15,7 @@ function create_test_user_with_roles($roles)
     $user = create_test_user();
     foreach ($roles as $role) {
         $role = create_test_role_with_name($role);
+        $user = $user->first();
         $user->assignRole($role);
     }
 
@@ -55,17 +56,17 @@ function assign_test_permission($user, $permission)
 
 function create_test_permission_with_name($permission)
 {
-    return factory(Motor\Backend\Models\Permission::class)->create([ 'name' => $permission ]);
+    return factory(Motor\Backend\Models\Permission::class)->create([ 'name' => $permission , 'guard_name' => 'web']);
 }
 
 function create_test_role_with_name($role)
 {
-    return factory(Motor\Backend\Models\Role::class)->create([ 'name' => $role ]);
+    return factory(Motor\Backend\Models\Role::class)->create([ 'name' => $role, 'guard_name' => 'web' ]);
 }
 
 function create_test_permission($count = 1)
 {
-    return factory(Motor\Backend\Models\Permission::class, $count)->create();
+    return factory(Motor\Backend\Models\Permission::class, $count)->create(['guard_name' => 'web']);
 }
 
 function create_test_permission_group($count = 1)
@@ -75,7 +76,7 @@ function create_test_permission_group($count = 1)
 
 function create_test_role($count = 1)
 {
-    return factory(Motor\Backend\Models\Role::class, $count)->create();
+    return factory(Motor\Backend\Models\Role::class, $count)->create(['guard_name' => 'web']);
 }
 
 function create_test_client($count = 1)

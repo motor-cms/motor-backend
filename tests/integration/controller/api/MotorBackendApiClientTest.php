@@ -17,7 +17,14 @@ class MotorBackendApiClientTest extends TestCase
 
     protected $deletePermission;
 
-    protected $tables = [ 'users', 'clients', 'permissions', 'user_has_permissions', 'user_has_roles', 'roles' ];
+    protected $tables = [
+        'users',
+        'clients',
+        'permissions',
+        'model_has_permissions',
+        'model_has_roles',
+        'roles'
+    ];
 
 
     public function setUp()
@@ -30,9 +37,9 @@ class MotorBackendApiClientTest extends TestCase
 
     protected function addDefaults()
     {
-        $this->user = create_test_user();
-        $this->readPermission = create_test_permission_with_name('clients.read');
-        $this->writePermission = create_test_permission_with_name('clients.write');
+        $this->user             = create_test_user();
+        $this->readPermission   = create_test_permission_with_name('clients.read');
+        $this->writePermission  = create_test_permission_with_name('clients.write');
         $this->deletePermission = create_test_permission_with_name('clients.delete');
     }
 
@@ -98,6 +105,7 @@ class MotorBackendApiClientTest extends TestCase
         ]);
     }
 
+
     /** @test */
     public function fails_to_show_a_single_client_without_permission()
     {
@@ -107,6 +115,7 @@ class MotorBackendApiClientTest extends TestCase
             'error' => 'Access denied.'
         ]);
     }
+
 
     /** @test */
     public function can_get_empty_result_when_trying_to_show_multiple_clients()
@@ -185,6 +194,7 @@ class MotorBackendApiClientTest extends TestCase
         ]);
     }
 
+
     /** @test */
     public function can_modify_a_client()
     {
@@ -218,6 +228,7 @@ class MotorBackendApiClientTest extends TestCase
             'error' => 'Access denied.'
         ]);
     }
+
 
     /** @test */
     public function can_delete_a_client()

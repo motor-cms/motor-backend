@@ -480,7 +480,7 @@ abstract class BaseService
         }
 
         if ($file instanceof UploadedFile && $file->isValid()) {
-            $record->addMedia($file)->toCollection($collection);
+            $record->addMedia($file)->toMediaCollection($collection, 'media');
         } else {
             if ($this->isValidBase64(Arr::get($this->data, $identifier))) {
                 $image = base64_decode($this->data[$identifier]);
@@ -492,7 +492,7 @@ abstract class BaseService
                 $handle = fopen($tempFilename, "w");
                 fwrite($handle, $image);
                 fclose($handle);
-                $record->addMedia($tempFilename)->setName($name)->setFileName($name)->toCollection($collection);
+                $record->addMedia($tempFilename)->setName($name)->setFileName($name)->toMediaCollection($collection, 'media');
             }
         }
 

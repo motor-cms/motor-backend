@@ -11,4 +11,6 @@ return [
     'deleted'     => 'Berechtigung gelöscht',
     'name'        => 'Name',
     'group'       => 'Gruppe',
+    'guard_name'  => 'Zone',
+
 ];

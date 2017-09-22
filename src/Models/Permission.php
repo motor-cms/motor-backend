@@ -26,7 +26,8 @@ class Permission extends \Spatie\Permission\Models\Permission
      * @var array
      */
     protected $searchableColumns = [
-        'name'
+        'name',
+        'guard_name'
     ];
 
     /**
@@ -36,7 +37,8 @@ class Permission extends \Spatie\Permission\Models\Permission
      */
     protected $fillable = [
         'permission_group_id',
-        'name'
+        'name',
+        'guard_name'
     ];
 
     /**

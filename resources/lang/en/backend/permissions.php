@@ -10,5 +10,6 @@ return [
     'updated'     => 'Permission updated',
     'deleted'     => 'Permission deleted',
     'name'        => 'Name',
-    'group'       => 'Group'
+    'group'       => 'Group',
+    'guard_name'  => 'Zone',
 ];

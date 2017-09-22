@@ -17,7 +17,13 @@ class MotorBackendApiPermissionTest extends TestCase
 
     protected $deletePermission;
 
-    protected $tables = [ 'users', 'permissions', 'user_has_permissions', 'user_has_roles', 'roles' ];
+    protected $tables = [
+        'users',
+        'permissions',
+        'model_has_permissions',
+        'model_has_roles',
+        'roles'
+    ];
 
 
     public function setUp()
@@ -30,7 +36,7 @@ class MotorBackendApiPermissionTest extends TestCase
 
     protected function addDefaults()
     {
-        $this->user   = create_test_user();
+        $this->user = create_test_user();
 
         $this->readPermission   = create_test_permission_with_name('permissions.read');
         $this->writePermission  = create_test_permission_with_name('permissions.write');
@@ -226,6 +232,7 @@ class MotorBackendApiPermissionTest extends TestCase
             'error' => 'Access denied.'
         ]);
     }
+
 
     /** @test */
     public function can_delete_a_permission()

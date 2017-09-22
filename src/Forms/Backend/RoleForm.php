@@ -11,6 +11,7 @@ class RoleForm extends Form
     {
         $this
             ->add('name', 'text', ['label' => trans('motor-backend::backend/roles.name'), 'rules' => 'required'])
+            ->add('guard_name', 'text', ['label' => trans('motor-backend::backend/roles.guard_name'), 'default_value' => 'web', 'rules' => 'required'])
             ->add('permissions', 'checkboxcollection', [
                 'type' => 'checkbox',
                 'label' => trans('motor-backend::backend/permissions.permissions'),
