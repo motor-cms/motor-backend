@@ -84,7 +84,7 @@ class MotorServiceProvider extends ServiceProvider
 
     public function migrations()
     {
-        $this->loadMigrationsFrom(__DIR__ . '/../../database/migrations');
+        $this->loadMigrationsFrom(realpath(__DIR__ . '/../../database/migrations'));
     }
 
 

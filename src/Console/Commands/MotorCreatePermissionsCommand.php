@@ -52,11 +52,12 @@ class MotorCreatePermissionsCommand extends Command
             foreach ($group['values'] as $value) {
 
                 // Check if the permission exists
-                $permission = Permission::where('name', $name.'.'.$value)->first();
+                $permission = Permission::where('name', $name . '.' . $value)->first();
                 if (is_null($permission)) {
                     $this->info('Creating permission for ' . $name . ' > ' . $value);
                     $permission                      = new Permission();
-                    $permission->name                = $name.'.'.$value;
+                    $permission->name                = $name . '.' . $value;
+                    $permission->guard_name          = 'web';
                     $permission->permission_group_id = $permissionGroup->id;
                     $permission->save();
                 }
