@@ -2,6 +2,7 @@
 
 return [
     'users'            => 'Benutzer',
+    'user'             => 'Benutzer',
     'new'              => 'Neuer Benutzer',
     'edit'             => 'Benutzer bearbeiten',
     'save'             => 'Benutzer speichern',

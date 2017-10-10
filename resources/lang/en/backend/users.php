@@ -2,6 +2,7 @@
 
 return [
     'users'            => 'Users',
+    'user'             => 'User',
     'new'              => 'Create user',
     'edit'             => 'Edit user',
     'save'             => 'Save user',
