@@ -428,9 +428,10 @@ abstract class BaseService
             // Handle empty date values
             if ($field instanceof DatepickerType || $field instanceof DatetimepickerType) {
 
-                if ($data[$field->getRealName() . '_picker'] == '') {
+                if (!isset($data[$field->getRealName().'_picker']) || (isset($data[$field->getRealName().'_picker']) && $data[$field->getRealName() . '_picker'] == '')) {
                     $data[$field->getRealName()] = '';
                 }
+
                 if ( ! isset($data[$field->getRealName()]) || ( isset($data[$field->getRealName()]) && $data[$field->getRealName()] == '' || $data[$field->getRealName()] == '0000-00-00 00:00:00' || $data[$field->getRealName()] == '0000-00-00' )) {
                     $data[$field->getRealName()] = null;
                 }
