@@ -34,6 +34,7 @@ class Client extends Model
         'slug',
         'is_active',
         'name',
+        'address',
         'zip',
         'city',
         'country_iso_3166_1',
