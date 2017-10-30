@@ -36,5 +36,6 @@ return [
         'file_image'         => Motor\Backend\Forms\Fields\FileImageType::class,
         'file_file'          => Motor\Backend\Forms\Fields\FileFileType::class,
         'checkboxcollection' => Motor\Backend\Forms\Fields\CheckboxCollectionType::class,
+        'htmleditor'         => Motor\Backend\Forms\Fields\HtmlEditorType::class,
     ]
 ];
