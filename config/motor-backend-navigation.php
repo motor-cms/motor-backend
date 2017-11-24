@@ -1,7 +1,7 @@
 <?php
 
 return [
-    'collapseIcon' => '<i class="fa fa-angle-left pull-right"></i>',
+    'collapseIcon' => '', //<i class="fa fa-angle-left pull-right"></i>',
     'items' => [
         0   => [
             'slug'        => 'dashboard',

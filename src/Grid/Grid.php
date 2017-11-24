@@ -2,6 +2,7 @@
 
 namespace Motor\Backend\Grid;
 
+use Illuminate\Support\Collection;
 use Motor\Core\Filter\Filter;
 use Motor\Core\Filter\Renderers\PerPageRenderer;
 use Auth;
@@ -262,6 +263,8 @@ class Grid extends Base
                 } catch (\Exception $e) {
                 }
             }
+        } elseif ($record->{$column->getName()} instanceof Collection) {
+            $value = $record->{$column->getName()}->toArray();
         } elseif (is_object($record)) {
             // Eloquent fieldname
             $value = @$record->{$column->getName()};

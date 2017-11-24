@@ -47,6 +47,10 @@ class MotorServiceProvider extends ServiceProvider
         Blade::directive('boxFooter', function () {
             return config('motor-backend-html.box_footer');
         });
+
+        Blade::directive('defaultButtonSize', function () {
+            return config('motor-backend-html.default_button_size');
+        });
     }
 
 

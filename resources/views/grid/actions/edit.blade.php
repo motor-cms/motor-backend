@@ -1,1 +1,1 @@
-{!! link_to_route($link, $label, [$record->id], ['class' => 'btn btn-warning btn-xs']) !!}
+{!! link_to_route($link, $label, [$record->id], ['class' => 'btn btn-warning @defaultButtonSize']) !!}

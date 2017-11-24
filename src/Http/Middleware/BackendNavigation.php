@@ -50,7 +50,7 @@ class BackendNavigation
                             'roles'       => implode(',', $subitem['roles']),
                             'permissions' => implode(',', $subitem['permissions']),
                             'aliases'     => implode(',', Arr::get($subitem, 'aliases', []))
-                        ])->nickname($subitem['slug']);
+                        ])->nickname($subitem['slug'])->prepend('<i class="' . $subitem['icon'] . '"></i> <span>')->append('</span>');
                     }
                 }
             }

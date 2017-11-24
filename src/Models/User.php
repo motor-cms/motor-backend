@@ -1,6 +1,7 @@
 <?php
 
 namespace Motor\Backend\Models;
+
 use Motor\Core\Traits\Searchable;
 
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -9,8 +10,9 @@ use Spatie\MediaLibrary\HasMedia\HasMediaTrait;
 use Spatie\MediaLibrary\HasMedia\Interfaces\HasMediaConversions;
 use Spatie\MediaLibrary\Media;
 use Spatie\Permission\Traits\HasRoles;
+use Tymon\JWTAuth\Contracts\JWTSubject;
 
-class User extends Authenticatable implements HasMediaConversions
+class User extends Authenticatable implements HasMediaConversions, JWTSubject
 {
 
     use Searchable;
@@ -20,10 +22,33 @@ class User extends Authenticatable implements HasMediaConversions
 
     protected $guard_name = 'web';
 
+    /**
+     * Get the identifier that will be stored in the subject claim of the JWT.
+     *
+     * @return mixed
+     */
+    public function getJWTIdentifier()
+    {
+        return $this->getKey();
+    }
+
+
+    /**
+     * Return a key value array, containing any custom claims to be added to the JWT.
+     *
+     * @return array
+     */
+    public function getJWTCustomClaims()
+    {
+        return ['haha' => 'lol'];
+    }
+
+
     public function registerMediaConversions(Media $media = null)
     {
         $this->addMediaConversion('thumb')->setManipulations([ 'w' => 400, 'h' => 400 ]);
     }
+
 
     /**
      * Searchable columns for the searchable trait

@@ -15,4 +15,20 @@ Route::group([
 
     Route::get('profile/me', 'ProfileEditController@me')->name('profile.read');
     Route::patch('profile/edit', 'ProfileEditController@update')->name('profile.update');
+
+});
+
+Route::group([
+    'middleware' => [ 'api', 'bindings' ],
+    'namespace'  => 'Motor\Backend\Http\Controllers\Api\Auth',
+    'prefix' => 'api/auth',
+    'as'         => 'api.auth',
+
+], function ($router) {
+
+    Route::post('login', 'LoginController@login')->name('login');
+    Route::post('logout', 'LoginController@logout')->name('logout');
+    Route::post('refresh', 'LoginController@refresh')->name('refresh');
+    Route::post('me', 'LoginController@me')->name('me');
+
 });

@@ -7,17 +7,17 @@
                     {!! $column->getLabel() !!}
                     @if ($column->isSortable())
                         @if ($grid->checkSortable($column->getSortableField(), 'ASC'))
-                            <span class="glyphicon glyphicon-chevron-up"></span>
+                            <span class="fa fa-chevron-up"></span>
                         @else
                             <a href="{{ $grid->getSortableLink($column->getSortableField(), 'ASC') }}">
-                                <span class="glyphicon glyphicon-chevron-up"></span>
+                                <span class="fa fa-chevron-up"></span>
                             </a>
                         @endif
                         @if ($grid->checkSortable($column->getSortableField(), 'DESC'))
-                            <span class="glyphicon glyphicon-chevron-down"></span>
+                            <span class="fa fa-chevron-down"></span>
                         @else
                             <a href="{{ $grid->getSortableLink($column->getSortableField(), 'DESC') }}">
-                                <span class="glyphicon glyphicon-chevron-down"></span>
+                                <span class="fa fa-chevron-down"></span>
                             </a>
                         @endif
                     @endif

@@ -1,65 +1,65 @@
 <!DOCTYPE html>
-<!--
-This is a starter template page. Use this page to start your new project from
-scratch. This page gets rid of all links and provides the needed markup only.
--->
 <html lang="en">
 
 @section('htmlheader')
     @include('motor-backend::layouts.partials.htmlheader')
 @show
 
-<!--
-BODY TAG OPTIONS:
-=================
-Apply one or more of the following classes to get the
-desired effect
-|---------------------------------------------------------|
-| SKINS         | skin-blue                               |
-|               | skin-black                              |
-|               | skin-purple                             |
-|               | skin-yellow                             |
-|               | skin-red                                |
-|               | skin-green                              |
-|---------------------------------------------------------|
-|LAYOUT OPTIONS | fixed                                   |
-|               | layout-boxed                            |
-|               | layout-top-nav                          |
-|               | sidebar-collapse                        |
-|               | sidebar-mini                            |
-|---------------------------------------------------------|
--->
-<body class="skin-blue sidebar-mini">
-<div id="app">
-    <div class="wrapper">
+<body class="app header-fixed sidebar-fixed aside-menu-fixed aside-menu-hidden">
+
+<header class="app-header navbar">
+    <button class="navbar-toggler mobile-sidebar-toggler d-lg-none mr-auto" type="button">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <a class="navbar-brand" href="#"></a>
+
+    <button class="navbar-toggler sidebar-toggler d-md-down-none" type="button">
+        <span class="navbar-toggler-icon"></span>
+    </button>
 
     @include('motor-backend::layouts.partials.mainheader')
 
-    @include('motor-backend::layouts.partials.sidebar')
+    <button class="navbar-toggler aside-menu-toggler" type="button">
+        <span class="navbar-toggler-icon"></span>
+    </button>
 
-    <!-- Content Wrapper. Contains page content -->
-        <div class="content-wrapper">
+</header>
 
-        @include('motor-backend::layouts.partials.contentheader')
+<div class="app-body">
+    <div class="sidebar">
+        <nav class="sidebar-nav">
+            @if (isset($backendNavigation))
+                <ul class="nav">
+                    @include('motor-backend::layouts.partials.navigation-items', array('items' => $backendNavigation->roots()))
+                </ul>
+            @endif
+        </nav>
+        <button class="sidebar-minimizer brand-minimizer" type="button"></button>
+    </div>
 
-        <!-- Main content -->
-            <section class="content">
-                <!-- Your Page Content Here -->
-                @yield('main-content')
-            </section><!-- /.content -->
-        </div><!-- /.content-wrapper -->
+    <!-- Main content -->
+    <main class="main">
 
-        @include('motor-backend::layouts.partials.controlsidebar')
+        @include('motor-backend::layouts.partials.breadcrumbs')
 
-        @include('motor-backend::layouts.partials.footer')
+        <div class="container-fluid">
+            @include('motor-backend::layouts.partials.contentheader')
+            @yield('main-content')
+        </div>
+        <!-- /.conainer-fluid -->
+    </main>
 
-    </div><!-- ./wrapper -->
+    <aside class="aside-menu">
+    </aside>
+
+
 </div>
 
+@include('motor-backend::layouts.partials.footer')
+
 @section('scripts')
-
     @include('motor-backend::layouts.partials.scripts')
-
 @show
 
 @yield('view_scripts')

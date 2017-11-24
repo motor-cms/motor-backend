@@ -1,9 +1,9 @@
 <!-- Content Header (Page header) -->
 <section class="content-header">
-    <h1>
+    <h4>
         @yield('contentheader_title', 'Page Header here')
         <small>@yield('contentheader_description')</small>
-    </h1>
+    </h4>
     @include('motor-backend::layouts.partials.message')
     {{--
     <ol class="breadcrumb">

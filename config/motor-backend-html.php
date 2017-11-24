@@ -1,8 +1,9 @@
 <?php
 
 return [
-    'box_wrapper' => 'box',
-    'box_header'  => 'box-header',
-    'box_body'    => 'box-body',
-    'box_footer'  => 'box-footer'
+    'box_wrapper'         => 'card',
+    'box_header'          => 'card-header',
+    'box_body'            => 'card-body',
+    'box_footer'          => 'card-footer',
+    'default_button_size' => 'btn-sm'
 ];
