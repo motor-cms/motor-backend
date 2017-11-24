@@ -65,6 +65,8 @@
 @yield('view_scripts')
 <script>
     $('div.flash-message .alert').not('.alert-important').delay(3000).fadeOut(350);
+    $('.sidebar-nav li.active').addClass('open');
+    $('.sidebar-nav li.active > a').addClass('active');
 </script>
 
 </body>
