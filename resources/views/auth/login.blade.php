@@ -5,72 +5,49 @@
 @endsection
 
 @section('content')
-<body class="hold-transition login-page">
-    <div class="login-box">
-        <div class="login-logo">
-            <img src="{{ config('motor-backend-project.logo-large') }}" style="max-width: 100%; max-height: 200px;"/><br/>
-            <b>{{ config('motor-backend-project.name') }}</b>
-        </div><!-- /.login-logo -->
-
-    @if (count($errors) > 0)
-        <div class="alert alert-danger">
-            <strong>Whoops!</strong> {{ trans('motor-backend::backend/login.errors') }}<br><br>
-            <ul>
-                @foreach ($errors->all() as $error)
-                    <li>{{ $error }}</li>
-                @endforeach
-            </ul>
-        </div>
-    @endif
-
-    <div class="login-box-body">
-    <p class="login-box-msg">{{ trans('motor-backend::backend/login.sign_in_text') }}</p>
-    <form action="{{ url('/login') }}" method="post">
-        <input type="hidden" name="_token" value="{{ csrf_token() }}">
-        <div class="form-group has-feedback">
-            <input type="email" class="form-control" placeholder="{{ trans('motor-backend::backend/users.email') }}" name="email"/>
-            <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
-        </div>
-        <div class="form-group has-feedback">
-            <input type="password" class="form-control" placeholder="{{ trans('motor-backend::backend/users.password') }}" name="password"/>
-            <span class="glyphicon glyphicon-lock form-control-feedback"></span>
-        </div>
-        <div class="row">
-            <div class="col-xs-8">
-                <div class="checkbox icheck">
-                    <label>
-                        <input type="checkbox" name="remember"> {{ trans('motor-backend::backend/login.remember') }}
-                    </label>
+    <body class="app flex-row align-items-center">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-8">
+                <div class="card-group">
+                    <div class="card p-4">
+                        <div class="card-body">
+                            <h1>Login</h1>
+                            <p class="text-muted">{{ trans('motor-backend::backend/login.sign_in_text') }}</p>
+                            <form action="{{ url('/login') }}" method="post">
+                                <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                                <div class="input-group mb-3">
+                                    <span class="input-group-addon"><i class="icon-user"></i></span>
+                                    <input type="text" name="email" class="form-control" placeholder="{{ trans('motor-backend::backend/users.email') }}">
+                                </div>
+                                <div class="input-group mb-4">
+                                    <span class="input-group-addon"><i class="icon-lock"></i></span>
+                                    <input type="password" name="password" class="form-control" placeholder="{{ trans('motor-backend::backend/users.password') }}">
+                                </div>
+                                <div class="row">
+                                    <div class="col-6">
+                                        <input type="checkbox" name="remember" id="remember"> <label for="remember">{{ trans('motor-backend::backend/login.remember') }}</label>
+                                    </div>
+                                    <div class="col-6 text-right">
+                                        <button type="submit" class="btn btn-primary px-4">{{ trans('motor-backend::backend/login.sign_in') }}</button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                    <div class="card text-white bg-primary py-5 d-md-down-none" style="width:44%">
+                        <div class="card-body text-center">
+                            <div>
+                                <h2>{{ config('motor-backend-project.name') }}</h2>
+                                <img src="{{ config('motor-backend-project.logo-white') }}" style="max-width: 100%;
+                                max-height: 200px;"/>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-            </div><!-- /.col -->
-            <div class="col-xs-4">
-                <button type="submit" class="btn btn-primary btn-block btn-flat">{{ trans('motor-backend::backend/login.sign_in') }}</button>
-            </div><!-- /.col -->
+            </div>
         </div>
-    </form>
-
-        {{--
-    @include('auth.partials.social_login')
-
-    <a href="{{ url('/password/reset') }}">I forgot my password</a><br>
-    <a href="{{ url('/register') }}" class="text-center">Register a new membership</a>
-        --}}
-
-</div><!-- /.login-box-body -->
-
-</div><!-- /.login-box -->
-
+    </div>
     @include('motor-backend::layouts.partials.scripts_auth')
-
-    <script>
-        $(function () {
-            $('input').iCheck({
-                checkboxClass: 'icheckbox_square-blue',
-                radioClass: 'iradio_square-blue',
-                increaseArea: '20%' // optional
-            });
-        });
-    </script>
-</body>
 
 @endsection
