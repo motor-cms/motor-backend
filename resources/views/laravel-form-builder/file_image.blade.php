@@ -9,21 +9,19 @@
 <?php endif; ?>
 
         <div class="clearfix"></div>
-        @if (isset($options['image']))
-            {!! Form::hidden($options['name_slug'].'_delete') !!}
-            <div class="{{$options['name_slug']}}-container">
-                <div class="pull-left">
-                    <img src="{{ $options['image'] }}"/>
-                </div>
-                <div class="pull-right">
-                    <button class="btn btn-danger btn-sm {{$options['name_slug']}}-delete"><i class="fa fa-trash"></i></button>
+        @foreach ($options['files'] as $file)
+            {!! Form::hidden('delete_media_'.$file['id']) !!}
+            <div class="media-{{$file['id']}}-container" style="margin-bottom: 10px">
+                <div class="float-left">
+                    <button class="delete-file-button btn btn-danger btn-sm media-{{$options['name_slug']}}-delete" data-id="{{$file['id']}}"><i class="fa fa-trash"></i></button>
+                    <img class="img-thumbnail" src="{{ $file['image'] }}"/>
                 </div>
                 <div class="clearfix"></div>
             </div>
-        @endif
+        @endforeach
 
     <?php if ($showField): ?>
-    <?= Form::input('file', $name, $options['value'], $options['attr']) ?>
+    <?= Form::input('file', $name, $options['value'], array_merge($options['attr'], ['class' => 'form-control-upload'])) ?>
 
     @include ('laravel-form-builder::help_block')
     <?php endif; ?>
@@ -38,13 +36,13 @@
 
 @section('view_scripts')
     <script type="text/javascript">
-        $('.{{$options['name_slug']}}-delete').click(function (e) {
+        $('.media-{{$options['name_slug']}}-delete').click(function (e) {
             e.preventDefault();
             if (!confirm('{!! trans('motor-backend::backend/global.delete_question') !!}')) {
                 return false;
             }
-            $('div.{{$options['name_slug']}}-container').addClass('hide');
-            $('input[name="{{$options['name_slug'].'_delete'}}"]').val(1);
+            $('div.media-'+$(this).data('id')+'-container').addClass('d-xl-down-none');
+            $('input[name="delete_media_'+$(this).data('id')+'"]').val(1);
             return false;
         });
     </script>

@@ -32,6 +32,7 @@ return [
     'sort_position'   => 'Position',
     'all'             => 'All',
     'access_denied'   => 'Access denied',
+    'uploaded'        => 'Uploaded',
     'address'         => [
         'address_1' => 'Address',
         'address_2' => 'Address supplemental',

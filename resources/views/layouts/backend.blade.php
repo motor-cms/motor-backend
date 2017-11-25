@@ -67,6 +67,14 @@
     $('div.flash-message .alert').not('.alert-important').delay(3000).fadeOut(350);
     $('.sidebar-nav li.active').addClass('open');
     $('.sidebar-nav li.active > a').addClass('active');
+    $('video, audio').mediaelementplayer({
+        // Do not forget to put a final slash (/)
+        pluginPath: 'https://cdnjs.com/libraries/mediaelement/',
+        // this will allow the CDN to use Flash without restrictions
+        // (by default, this is set as `sameDomain`)
+        shimScriptAccess: 'always'
+        // more configuration
+    });
 </script>
 </body>
 </html>

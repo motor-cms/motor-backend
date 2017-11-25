@@ -8,17 +8,18 @@
     <?=Form::label($name, $options['label'], $options['label_attr'])?>
     <?php endif; ?>
 
-        <div class="clearfix"></div>
-        @foreach ($options['files'] as $file)
-            {!! Form::hidden('delete_media_'.$file['id']) !!}
+    <div class="clearfix"></div>
+    @foreach ($options['files'] as $file)
+        {!! Form::hidden('delete_media_'.$file['id']) !!}
             <div class="media-{{$file['id']}}-container" style="margin-bottom: 10px">
-                <div class="float-left">
-                    <button class="btn btn-danger btn-sm media-{{$options['name_slug']}}-delete" data-id="{{$file['id']}}"><i class="fa fa-trash"></i></button>
-                    <span><strong>{{ $file['name'] }}</strong></span><br><span style="padding-left: 32px;">{{trans('motor-backend::backend/global.uploaded')}} {{$file['created_at']}}</span>
-                </div>
-                <div class="clearfix"></div>
+            <video style="width:100%;height:100%;" controls="controls" width="100%" height="100%" src="{{$file['public_path']}}"></video>
+            <div class="float-left">
+                <button class="btn btn-danger btn-sm media-{{$options['name_slug']}}-delete" data-id="{{$file['id']}}"><i class="fa fa-trash"></i></button>
+                <span><strong>{{ $file['name'] }}</strong></span><br><span style="padding-left: 32px;">{{trans('motor-backend::backend/global.uploaded')}} {{$file['created_at']}}</span>
             </div>
-        @endforeach
+            <div class="clearfix"></div>
+        </div>
+    @endforeach
 
     <?php if ($showField): ?>
     <?= Form::input('file', $name, $options['value'], array_merge($options['attr'], ['class' => 'form-control-upload'])) ?>

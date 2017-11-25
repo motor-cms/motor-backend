@@ -408,7 +408,7 @@ abstract class BaseService
             // Handle subforms
             if ($field instanceof ChildFormType) {
                 $data[$field->getRealName()] = $this->handleFormValues($field->getForm(),
-                    Arr::get($data, $field->getRealName()));
+                    Arr::get($data, $field->getRealName(), []));
             }
 
             // Handle empty checkbox values
@@ -456,7 +456,7 @@ abstract class BaseService
      *
      * @return $this
      */
-    public function uploadFile($file, $identifier = 'image', $collection = null, $record = null)
+    public function uploadFile($file, $identifier = 'image', $collection = null, $record = null, $addToCollection = false)
     {
         if ( ! is_null($record) && ! $record instanceof HasMedia) {
             return $this;
@@ -472,8 +472,16 @@ abstract class BaseService
 
         $collection = ( ! is_null($collection) ? $collection : $identifier );
 
-        if ( ! is_null($file) || $this->isValidBase64(Arr::get($this->data, $identifier)) || Arr::get($this->data,
-                Str::slug($identifier) . '_delete') == 1) {
+        foreach($this->data as $key => $value) {
+            if (preg_match('/delete_media_(.*)/', $key, $matches) == 1 && $value == 1) {
+                $media = $record->getMedia($matches[1]);
+                if (count($media) > 0) {
+                    $record->deleteMedia($matches[1]);
+                }
+            }
+        }
+
+        if (( ! is_null($file) || $this->isValidBase64(Arr::get($this->data, $identifier))) && $addToCollection === false) {
             $record->clearMediaCollection($identifier);
             if ( ! is_null($collection)) {
                 $record->clearMediaCollection($collection);

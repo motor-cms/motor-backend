@@ -5,7 +5,7 @@ namespace Motor\Backend\Forms\Fields;
 use Illuminate\Support\Str;
 use Kris\LaravelFormBuilder\Fields\InputType;
 
-class FileImageType extends InputType
+class FileAudioType extends FileFileType
 {
 
     protected function getTemplate()
@@ -13,7 +13,7 @@ class FileImageType extends InputType
         // At first it tries to load config variable,
         // and if fails falls back to loading view
         // resources/views/fields/datetime.blade.php
-        return 'motor-backend::laravel-form-builder.file_image';
+        return 'motor-backend::laravel-form-builder.file_audio';
     }
 
 
@@ -40,10 +40,10 @@ class FileImageType extends InputType
             $options['files'] = [];
             foreach ($items as $item) {
                 $options['files'][] = [
-                    'id'         => $item->id,
-                    'name'       => $item->file_name,
-                    'image'      => $item->getUrl('thumb'),
-                    'created_at' => $item->created_at
+                    'id'          => $item->id,
+                    'name'        => $item->file_name,
+                    'public_path' => $item->getUrl(),
+                    'created_at'  => $item->created_at
                 ];
             }
         }

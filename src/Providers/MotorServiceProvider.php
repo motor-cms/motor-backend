@@ -61,6 +61,7 @@ class MotorServiceProvider extends ServiceProvider
      */
     public function register()
     {
+        $this->mergeConfigFrom(__DIR__ . '/../../config/medialibrary.php', 'medialibrary');
         $this->mergeConfigFrom(__DIR__ . '/../../config/motor-backend.php', 'motor-backend');
         $this->mergeConfigFrom(__DIR__ . '/../../config/motor-backend-html.php', 'motor-backend-html');
         $this->mergeConfigFrom(__DIR__ . '/../../config/motor-backend-project.php', 'motor-backend-project');
