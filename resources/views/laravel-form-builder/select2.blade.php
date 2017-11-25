@@ -24,7 +24,9 @@
 @section('view_scripts')
     <script type="text/javascript">
         $(document).ready(function() {
-            $('#{{$name}}').select2();
+            $('#{{$name}}').select2({
+                width: '100%'
+            });
         });
     </script>
 @append

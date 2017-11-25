@@ -68,6 +68,5 @@
     $('.sidebar-nav li.active').addClass('open');
     $('.sidebar-nav li.active > a').addClass('active');
 </script>
-
 </body>
 </html>
