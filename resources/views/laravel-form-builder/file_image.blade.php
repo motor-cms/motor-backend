@@ -14,7 +14,7 @@
             <div class="media-{{$file['id']}}-container" style="margin-bottom: 10px">
                 <div class="float-left">
                     <button class="delete-file-button btn btn-danger btn-sm media-{{$options['name_slug']}}-delete" data-id="{{$file['id']}}"><i class="fa fa-trash"></i></button>
-                    <img class="img-thumbnail" src="{{ $file['image'] }}"/>
+                    <a data-caption="{{$options['label']}}" data-fancybox="gallery" href="{{$file['preview']}}"><img class="img-thumbnail" src="{{ $file['image'] }}"/></a>
                 </div>
                 <div class="clearfix"></div>
             </div>

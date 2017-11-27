@@ -43,11 +43,13 @@ class FileImageType extends InputType
                     'id'         => $item->id,
                     'name'       => $item->file_name,
                     'image'      => $item->getUrl('thumb'),
+                    'preview'    => $item->getUrl('preview'),
                     'created_at' => $item->created_at
                 ];
             }
         }
 
+        $options['name'] = $this->getName();
         $options['name_slug'] = Str::slug($this->getName());
 
         return parent::render($options, $showLabel, $showField, $showError);

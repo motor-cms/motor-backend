@@ -24,6 +24,6 @@ class BladeRenderer
 
     public function render()
     {
-        return view(Arr::get($this->options, 'template'), [ 'record' => $this->record ])->render();
+        return view(Arr::get($this->options, 'template'), [ 'record' => $this->record, 'value' => $this->value, 'options' => $this->options ])->render();
     }
 }

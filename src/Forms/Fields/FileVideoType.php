@@ -48,6 +48,7 @@ class FileVideoType extends InputType
             }
         }
 
+        $options['name'] = $this->getName();
         $options['name_slug'] = Str::slug($this->getName());
 
         return parent::render($options, $showLabel, $showField, $showError);
