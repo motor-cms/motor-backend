@@ -11,6 +11,8 @@ class Cell extends Base
 
     protected $record;
 
+    protected $column;
+
     protected $renderer;
 
     protected $renderOptions = [ ];
@@ -51,6 +53,11 @@ class Cell extends Base
         $this->record = $record;
     }
 
+    public function setColumn($column)
+    {
+        $this->column = $column;
+    }
+
 
     /**
      * @return string
@@ -59,6 +66,10 @@ class Cell extends Base
     {
         // Get renderer
         $renderer = new $this->renderer($this->value, $this->renderOptions, $this->record);
+
+        if (!$this->column->checkCondition($this->record)) {
+            return '';
+        }
 
         return $renderer->render();
     }

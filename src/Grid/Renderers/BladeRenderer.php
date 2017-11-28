@@ -24,6 +24,15 @@ class BladeRenderer
 
     public function render()
     {
-        return view(Arr::get($this->options, 'template'), [ 'record' => $this->record, 'value' => $this->value, 'options' => $this->options ])->render();
+        // FIXME: hack for sort_positions
+        $index = 0;
+        if (isset($this->options['field'])) {
+            if ($this->options['field'] == 'sort_position') {
+                $index = 100;
+            } else {
+                $index = 1000;
+            }
+        }
+        return view(Arr::get($this->options, 'template'), [ 'record' => $this->record, 'value' => $this->value, 'options' => $this->options, 'index' => $index ])->render();
     }
 }

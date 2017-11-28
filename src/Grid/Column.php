@@ -21,6 +21,12 @@ class Column extends Base
 
     protected $renderOptions;
 
+    protected $conditionColumn = null;
+
+    protected $conditionValue = null;
+
+    protected $conditionOperator = '=';
+
 
     /**
      * Column constructor.
@@ -46,6 +52,61 @@ class Column extends Base
             $this->sortableField = $sortableField;
         }
         $this->setSortable($sortable);
+    }
+
+
+    public function onCondition($column, $value, $operator = '=')
+    {
+        $this->conditionColumn   = $column;
+        $this->conditionValue    = $value;
+        $this->conditionOperator = $operator;
+
+        return $this;
+    }
+
+    public function checkCondition($record)
+    {
+        if ( ! is_null($this->conditionColumn)) {
+            $condition = false;
+
+            switch ($this->conditionOperator) {
+                case '=':
+                    if ($record->{$this->conditionColumn} == $this->conditionValue) {
+                        $condition = true;
+                    }
+                    break;
+                case '!=':
+                    if ($record->{$this->conditionColumn} != $this->conditionValue) {
+                        $condition = true;
+                    }
+                    break;
+                case '>':
+                    if ($record->{$this->conditionColumn} > $this->conditionValue) {
+                        $condition = true;
+                    }
+                    break;
+                case '<':
+                    if ($record->{$this->conditionColumn} < $this->conditionValue) {
+                        $condition = true;
+                    }
+                    break;
+                case '>=':
+                    if ($record->{$this->conditionColumn} >= $this->conditionValue) {
+                        $condition = true;
+                    }
+                    break;
+                case '<=':
+                    if ($record->{$this->conditionColumn} <= $this->conditionValue) {
+                        $condition = true;
+                    }
+                    break;
+            }
+
+            if ( ! $condition) {
+                return false;
+            }
+        }
+        return true;
     }
 
 

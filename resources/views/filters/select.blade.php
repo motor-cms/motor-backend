@@ -1,5 +1,9 @@
 <select name="{{ $name }}" value="{{ $value }}" class="form-control">
-    <option value="">{{ trans('motor-backend::backend/global.please_choose') }}</option>
+    @if (isset($emptyOptionString) && !is_null($emptyOptionString))
+        <option value="">{{ $emptyOptionString }}</option>
+    @else
+        <option value="">{{ trans('motor-backend::backend/global.please_choose') }}</option>
+    @endif
     @foreach ($options as $optionValue => $optionLabel)
         @if ($value == $optionValue && $value != '')
             <option value="{{$optionValue}}" selected>{{$optionLabel}}</option>

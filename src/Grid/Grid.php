@@ -176,6 +176,7 @@ class Grid extends Base
                 $value    = $this->getCellValue($cell, $column, $record, $sanitize);
                 $cell->setValue($value);
                 $cell->setRecord($record); // we might need it for some renderers
+                $cell->setColumn($column); // we might need it for some renderers
                 $cell->parseFilters($column->getFilters());
                 if ($column->hasCellClosure()) {
                     $closure = $column->getCellClosure();
