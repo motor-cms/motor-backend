@@ -57,6 +57,22 @@ class Controller extends BaseController
         return $resource;
     }
 
+    protected function respondWithJsonDownload($message, $data, $filename)
+    {
+        $meta = null;
+        if ($data instanceof ResourceAbstract) {
+            $data = $this->fractal->createData($data)->toArray();
+            $meta = Arr::get($data, 'meta', null);
+            $data = Arr::get($data, 'data');
+        }
+        if (!is_null($meta)) {
+            $json = json_encode(['message' => $message, 'data' => $data, 'meta' => $meta]);
+        } else {
+            $json = json_encode(['message' => $message, 'data' => $data]);
+        }
+        return response()->attachment($json, $filename, 'application/json');
+    }
+
     protected function respondWithJson($message, $data)
     {
         $meta = null;

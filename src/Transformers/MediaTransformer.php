@@ -16,7 +16,8 @@ class MediaTransformer extends Fractal\TransformerAbstract
             'file_name'  => $record->file_name,
             'size'       => (int) $record->size,
             'url'        => $record->getUrl(),
-            'path'       => $record->getPath()
+            'path'       => $record->getPath(),
+            'created_at' => (string)$record->created_at,
         ];
     }
 }

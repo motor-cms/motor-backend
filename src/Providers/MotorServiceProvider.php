@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\Route;
 use Motor\Backend\Console\Commands\MotorCreatePermissionsCommand;
+use Illuminate\Support\Facades\Response;
 
 class MotorServiceProvider extends ServiceProvider
 {
@@ -17,6 +18,16 @@ class MotorServiceProvider extends ServiceProvider
      */
     public function boot()
     {
+        Response::macro('attachment', function ($content, $filename, $format='application/json') {
+
+            $headers = [
+                'Content-type'        => $format,
+                'Content-Disposition' => 'attachment; filename="'.$filename.'"',
+            ];
+
+            return Response::make($content, 200, $headers);
+        });
+
         $this->config();
         $this->routes();
         $this->routeModelBindings();
@@ -28,6 +39,7 @@ class MotorServiceProvider extends ServiceProvider
         $this->migrations();
         $this->publishResourceAssets();
         $this->bladeDirectives();
+
     }
 
     public function bladeDirectives()
