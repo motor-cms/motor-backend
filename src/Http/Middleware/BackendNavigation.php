@@ -19,7 +19,8 @@ class BackendNavigation
      */
     public function handle($request, Closure $next)
     {
-        $m = \Menu::make('', function(){}); //  <-- we need to do this to load the deferred service provider as we're using our motor-backend class for the menu
+        $m = \Menu::make('', function () {
+        }); //  <-- we need to do this to load the deferred service provider as we're using our motor-backend class for the menu
 
         $menu = new Menu;
 
@@ -40,17 +41,32 @@ class BackendNavigation
 
                 if (isset($item['items'])) {
 
-                    $menu->get($item['slug'])->append('</span> '.config('motor-backend-navigation.collapseIcon'));
+                    $menu->get($item['slug'])->append('</span> ' . config('motor-backend-navigation.collapseIcon'));
 
                     ksort($item['items']);
 
                     foreach ($item['items'] as $subkey => $subitem) {
-                        $menu->get($item['slug'])->add(trans($subitem['name']), [
-                            'route'       => $subitem['route'],
-                            'roles'       => implode(',', $subitem['roles']),
-                            'permissions' => implode(',', $subitem['permissions']),
-                            'aliases'     => implode(',', Arr::get($subitem, 'aliases', []))
-                        ])->nickname($subitem['slug'])->prepend('<i class="' . $subitem['icon'] . '"></i> <span>')->append('</span>');
+
+                        if (config('motor-backend-html.show_navigation_subitem_icon', false)) {
+                            $menu->get($item['slug'])
+                                 ->add(trans($subitem['name']), [
+                                     'route' => $subitem['route'],
+                                     'roles' => implode(',', $subitem['roles']),
+                                     'permissions' => implode(',', $subitem['permissions']),
+                                     'aliases' => implode(',', Arr::get($subitem, 'aliases', []))
+                                 ])
+                                 ->nickname($subitem['slug'])
+                                 ->prepend('<i class="' . $subitem['icon'] . '"></i> <span>')
+                                 ->append('</span>');
+                        } else {
+                            $menu->get($item['slug'])->add(trans($subitem['name']), [
+                                'route'       => $subitem['route'],
+                                'roles'       => implode(',', $subitem['roles']),
+                                'permissions' => implode(',', $subitem['permissions']),
+                                'aliases'     => implode(',', Arr::get($subitem, 'aliases', []))
+                            ])->nickname($subitem['slug']);
+                        }
+
                     }
                 }
             }

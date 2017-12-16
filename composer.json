@@ -36,7 +36,8 @@
     "barryvdh/laravel-cors": "^0.9.3",
     "spatie/laravel-permission": "^2.6",
     "kalnoy/nestedset": "^4.3",
-    "motor-cms/motor-core": "0.3.*"
+    "motor-cms/motor-core": "0.3.*",
+    "tymon/jwt-auth": "1.0.0-rc.1"
   },
   "require-dev": {
     "filp/whoops": "~2.0",
