@@ -37,7 +37,6 @@ return [
         'file_file'          => Motor\Backend\Forms\Fields\FileFileType::class,
         'file_video'         => Motor\Backend\Forms\Fields\FileVideoType::class,
         'file_audio'         => Motor\Backend\Forms\Fields\FileAudioType::class,
-        'checkboxcollection' => Motor\Backend\Forms\Fields\CheckboxCollectionType::class,
         'htmleditor'         => Motor\Backend\Forms\Fields\HtmlEditorType::class,
     ]
 ];

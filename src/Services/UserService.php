@@ -23,13 +23,13 @@ class UserService extends BaseService
     public function afterCreate()
     {
         if (has_permission('roles.write')) {
-            foreach (Arr::get($this->data, 'roles', []) as $role => $value) {
+            foreach (Arr::get($this->data, 'roles', []) as $key => $role) {
                 $this->record->assignRole($role);
             }
         }
         if (has_permission('permissions.write')) {
-            foreach (Arr::get($this->data, 'permissions', []) as $permission => $value) {
-                $this->record->givePermissionTo($permission);
+            foreach (Arr::get($this->data, 'permissions', []) as $key => $permission) {
+                $this->record->givePermissionTo(Permission::find((int)$permission));
             }
         }
         $this->uploadFile($this->request->file('avatar'), 'avatar');

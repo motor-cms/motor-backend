@@ -14,8 +14,8 @@ class RoleService extends BaseService
 
     public function afterCreate()
     {
-        foreach (Arr::get($this->data, 'permissions', []) as $permission => $value) {
-            $this->record->givePermissionTo($permission);
+        foreach (Arr::get($this->data, 'permissions', []) as $key => $permission) {
+            $this->record->givePermissionTo(Permission::find((int)$permission));
         }
     }
 

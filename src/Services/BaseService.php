@@ -9,9 +9,9 @@ use Illuminate\Support\Arr;
 use Illuminate\Support\Str;
 use Kris\LaravelFormBuilder\Fields\CheckableType;
 use Kris\LaravelFormBuilder\Fields\ChildFormType;
+use Kris\LaravelFormBuilder\Fields\ChoiceType;
 use Kris\LaravelFormBuilder\Fields\SelectType;
 use Kris\LaravelFormBuilder\Form;
-use Motor\Backend\Forms\Fields\CheckboxCollectionType;
 use Motor\Backend\Forms\Fields\DatepickerType;
 use Motor\Backend\Forms\Fields\DatetimepickerType;
 use Motor\Core\Filter\Filter;
@@ -418,8 +418,8 @@ abstract class BaseService
                 }
             }
 
-            // Handle empty checkboxcollection
-            if ($field instanceof CheckboxCollectionType) {
+            // Handle empty choice-type (e.g. multiple checkboxes)
+            if ($field instanceof ChoiceType) {
                 if ( ! isset($data[$field->getRealName()])) {
                     $data[$field->getRealName()] = [];
                 }
@@ -474,7 +474,7 @@ abstract class BaseService
 
         foreach($this->data as $key => $value) {
             if (preg_match('/delete_media_(.*)/', $key, $matches) == 1 && $value == 1) {
-                $media = $record->getMedia($matches[1]);
+                $media = $record->getMedia($collection);
                 if (count($media) > 0) {
                     $record->deleteMedia($matches[1]);
                 }

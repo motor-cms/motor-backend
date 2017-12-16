@@ -41,7 +41,7 @@
             if (!confirm('{!! trans('motor-backend::backend/global.delete_question') !!}')) {
                 return false;
             }
-            $('div.media-'+$(this).data('id')+'-container').addClass('d-xl-down-none');
+            $('div.media-'+$(this).data('id')+'-container').addClass('d-xl-down-none hide');
             $('input[name="delete_media_'+$(this).data('id')+'"]').val(1);
             return false;
         });

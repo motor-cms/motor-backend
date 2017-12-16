@@ -44,4 +44,9 @@ class Role extends \Spatie\Permission\Models\Role
         'name',
         'guard_name'
     ];
+    //
+    //public function permissions()
+    //{
+    //    return $this->hasMany(Permission::class);
+    //}
 }
