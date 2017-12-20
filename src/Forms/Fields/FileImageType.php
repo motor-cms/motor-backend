@@ -25,7 +25,6 @@ class FileImageType extends InputType
         $childForm = ( ! is_null($this->parent->getName()) ? true : false );
 
         if ($childForm) {
-            dd("When does this happen?");
             if (isset($modelData[$this->parent->getName()]) && isset($modelData[$this->parent->getName()]['id'])) {
                 $record = app($this->getOption('model'))::find($this->parent->getModel()[$this->parent->getName()]['id']);
                 if ( ! is_null($record)) {

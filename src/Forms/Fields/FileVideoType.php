@@ -24,8 +24,7 @@ class FileVideoType extends InputType
         // Check if we're in a child form
         $childForm = ( ! is_null($this->parent->getName()) ? true : false );
 
-        if ($childForm) {#
-            dd("When does this happen?");
+        if ($childForm) {
             if (isset($modelData[$this->parent->getName()]) && isset($modelData[$this->parent->getName()]['id'])) {
                 $record = app($this->getOption('model'))::find($this->parent->getModel()[$this->parent->getName()]['id']);
                 if ( ! is_null($record)) {
