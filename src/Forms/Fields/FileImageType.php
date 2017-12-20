@@ -28,9 +28,16 @@ class FileImageType extends InputType
             if (isset($modelData[$this->parent->getName()]) && isset($modelData[$this->parent->getName()]['id'])) {
                 $record = app($this->getOption('model'))::find($this->parent->getModel()[$this->parent->getName()]['id']);
                 if ( ! is_null($record)) {
-                    $items = $record->getMedia($this->getRealName());
-                    if (isset($items[0])) {
-                        $options['image'] = $items[0]->getUrl('thumb');
+                    $items            = $record->getMedia($this->getRealName())->reverse();
+                    $options['files'] = [];
+                    foreach ($items as $item) {
+                        $options['files'][] = [
+                            'id'         => $item->id,
+                            'name'       => $item->file_name,
+                            'image'      => $item->getUrl('thumb'),
+                            'preview'    => $item->getUrl('preview'),
+                            'created_at' => $item->created_at
+                        ];
                     }
                 }
             }
@@ -48,7 +55,7 @@ class FileImageType extends InputType
             }
         }
 
-        $options['name'] = $this->getName();
+        $options['name']      = $this->getName();
         $options['name_slug'] = Str::slug($this->getName());
 
         return parent::render($options, $showLabel, $showField, $showError);
