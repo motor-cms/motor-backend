@@ -42,13 +42,15 @@ return [
             'm' => 'Herr',
             'f' => 'Frau',
             'c' => 'Firma',
-            'n' => '-'
+            'n' => '-',
+            'h' => 'Familie'
         ],
         'full_salutations' => [
             'm' => 'Sehr geehrter Herr',
             'f' => 'Sehr geehrte Frau',
             'c' => 'Sehr geehrte Firma',
-            'n' => ''
+            'n' => '',
+            'h' => 'Sehr geehrte Familie'
         ],
         'salutation'       => 'Anrede',
         'title'            => 'Titel',
