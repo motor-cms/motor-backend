@@ -44,6 +44,7 @@ class FileImageType extends InputType
         //        }
         //    }
         //} elseif (is_object($modelData)) {
+        if (is_object($modelData)) {
             $items            = $modelData->getMedia($this->getRealName())->reverse();
             foreach ($items as $item) {
                 $options['files'][] = [
@@ -54,6 +55,7 @@ class FileImageType extends InputType
                     'created_at' => $item->created_at
                 ];
             }
+        }
         //}
 
         $options['name']      = $this->getName();
