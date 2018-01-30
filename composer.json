@@ -30,7 +30,7 @@
     "lavary/laravel-menu": "^1.6",
     "nstapelbroek/culpa": "^2.0",
     "symfony/intl": "^3.3",
-    "kris/laravel-form-builder": "^1.12",
+    "kris/laravel-form-builder": "^1.14",
     "spatie/laravel-medialibrary": "^6.1",
     "wpb/string-blade-compiler": "^3.5",
     "barryvdh/laravel-cors": "^0.9.3",
