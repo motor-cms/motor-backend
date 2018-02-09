@@ -28,18 +28,23 @@
             padding: 1.5rem;
         }
     </style>
-    <script src="//cdn.ckeditor.com/4.7.3/standard/ckeditor.js"></script>
+    <script src="//cdn.ckeditor.com/4.8.0/standard/ckeditor.js"></script>
     <script>
         CKEDITOR.replace( '{{$name}}', {
-            toolbarGroups: [
-                {"name":"basicstyles","groups":["basicstyles"]},
-                {"name":"paragraph","groups":["list"]},
+            toolbar: [
+                { name: 'basicstyles', items: [ 'Bold', 'Italic', 'RemoveFormat' ] },
+                @if (isset($options['format']) && $options['format'] == true)
+                { name: 'styles', items: [ 'Format' ] },
+                @endif
+                { name: 'paragraph', items: [ 'NumberedList', 'BulletedList' ] },
                 @if (isset($options['links']) && $options['links'] == true)
-                {"name":"links"},
+                { name: 'links', items: [ 'Link', 'Unlink' ] },
                 @endif
             ],
             // Remove the redundant buttons from toolbar groups defined above.
-            removeButtons: 'Underline,Strike,Subscript,Superscript,Anchor,Styles,Specialchar'
+            // removeButtons: 'Underline,Strike,Subscript,Superscript,Anchor,Specialchar',
+            format_tags: 'p;h1;h2;h3;h4;h5',
+            stylesSet: []
         } );
     </script>
 @append
