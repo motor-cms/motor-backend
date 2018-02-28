@@ -60,5 +60,12 @@
       "vendor/spatie/laravel-glide/src/GlideImage.php"
     ]
   },
+  "extra": {
+    "laravel": {
+      "providers": [
+        "Motor\\Backend\\Providers\\MotorServiceProvider"
+      ]
+    }
+  },
   "minimum-stability": "dev"
 }
