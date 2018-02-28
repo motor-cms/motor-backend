@@ -1,6 +1,7 @@
 <?php
 
 use Culpa\Database\Schema\Blueprint;
+use Culpa\Facades\Schema;
 use Illuminate\Database\Migrations\Migration;
 
 class CreateLanguages extends Migration
