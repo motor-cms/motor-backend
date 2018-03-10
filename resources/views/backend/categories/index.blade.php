@@ -14,7 +14,7 @@
 
 @section('main-content')
     <div class="@boxWrapper">
-        <div class="@boxheader">
+        <div class="@boxHeader">
             @include('motor-backend::layouts.partials.search')
         </div>
         <!-- /.box-header -->

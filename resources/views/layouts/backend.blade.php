@@ -5,7 +5,7 @@
     @include('motor-backend::layouts.partials.htmlheader')
 @show
 
-<body class="app header-fixed sidebar-fixed aside-menu-fixed aside-menu-hidden">
+<body class="app header-fixed sidebar-fixed aside-menu-fixed @if (!isset($motorShowRightSidebar) || $motorShowRightSidebar == false) aside-menu-hidden @endif">
 
 <header class="app-header navbar">
     <button class="navbar-toggler mobile-sidebar-toggler d-lg-none mr-auto" type="button">
@@ -51,6 +51,7 @@
     </main>
 
     <aside class="aside-menu">
+        @yield('right-sidebar')
     </aside>
 
 
