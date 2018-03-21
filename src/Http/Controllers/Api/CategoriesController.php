@@ -2,12 +2,14 @@
 
 namespace Motor\Backend\Http\Controllers\Api;
 
+use Illuminate\Http\Request;
 use Motor\Backend\Http\Controllers\Controller;
 
 use Motor\Backend\Models\Category;
 use Motor\Backend\Http\Requests\Backend\CategoryRequest;
 use Motor\Backend\Services\CategoryService;
 use Motor\Backend\Transformers\CategoryTransformer;
+use Motor\Core\Filter\Renderers\WhereRenderer;
 
 class CategoriesController extends Controller
 {
@@ -16,9 +18,17 @@ class CategoriesController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $paginator = CategoryService::collection()->getPaginator();
+        $service = CategoryService::collection();
+
+
+        $filter = $service->getFilter();
+        $filter->add(new WhereRenderer('scope'))->setValue($request->get('scope'));
+        $filter->add(new WhereRenderer('parent_id'))->setOperator('!=')->setAllowNull(true)->setValue(null);
+
+        $paginator    = $service->getPaginator();
+
         $resource = $this->transformPaginator($paginator, CategoryTransformer::class);
 
         return $this->respondWithJson('Category collection read', $resource);

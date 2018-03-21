@@ -32,3 +32,12 @@ Route::group([
     Route::post('me', 'LoginController@me')->name('me');
 
 });
+
+Route::group([
+    'middleware' => [ 'web', 'web_auth', 'bindings', 'permission' ],
+    'namespace'  => 'Motor\Backend\Http\Controllers\Api',
+    'prefix'     => 'ajax',
+    'as'         => 'ajax.',
+], function () {
+    Route::get('categories', 'CategoriesController@index')->name('categories.index');
+});

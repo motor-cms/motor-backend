@@ -1,9 +1,9 @@
 <ul class="nav navbar-nav ml-auto">
     <li class="nav-item dropdown">
         <a class="nav-link dropdown-toggle nav-link" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
-            @if ($avatar = Auth::user()->getMedia('avatar')->first())
+            @if (Auth::user() != null && ($avatar = Auth::user()->getMedia('avatar')->first()))
                 <img src="{{ $avatar->getUrl('thumb') }}" class="img-avatar" alt="{{ Auth::user()->name }}">
-            @else
+            @elseif (Auth::user() != null)
                 {{ Auth::user()->name }}
             @endif
         </a>

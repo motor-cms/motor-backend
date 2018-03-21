@@ -26,7 +26,7 @@ class FileRenderer
     {
         $media = $this->record->getFirstMedia(Arr::get($this->options, 'file'));
 
-        return view('motor-backend::grid.actions.file', ['media' => $media, 'record' => $this->record ])->render();
+        return view('motor-backend::grid.actions.file', ['media' => $media, 'record' => $this->record, 'options' => $this->options ])->render();
 
     }
 }

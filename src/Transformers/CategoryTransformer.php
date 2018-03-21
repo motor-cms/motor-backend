@@ -7,6 +7,7 @@ use Motor\Backend\Models\Category;
 
 class CategoryTransformer extends Fractal\TransformerAbstract
 {
+
     /**
      * List of resources possible to include
      *
@@ -25,7 +26,8 @@ class CategoryTransformer extends Fractal\TransformerAbstract
     public function transform(Category $record)
     {
         return [
-            'id'        => (int) $record->id
+            'id'   => (int) $record->id,
+            'name' => $record->name
         ];
     }
 }

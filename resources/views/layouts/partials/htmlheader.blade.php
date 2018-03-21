@@ -11,6 +11,8 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <!-- Main styles for this application -->
+    @yield('view_styles')
+
+<!-- Main styles for this application -->
     <link href="{{ asset('/css/all.css') }}" rel="stylesheet" type="text/css" />
 </head>

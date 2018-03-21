@@ -30,13 +30,15 @@ return [
     'default_namespace' => '',
 
     'custom_fields' => [
-        'datetimepicker'     => Motor\Backend\Forms\Fields\DatetimepickerType::class,
-        'datepicker'         => Motor\Backend\Forms\Fields\DatepickerType::class,
-        'select2'            => Motor\Backend\Forms\Fields\Select2Type::class,
-        'file_image'         => Motor\Backend\Forms\Fields\FileImageType::class,
-        'file_file'          => Motor\Backend\Forms\Fields\FileFileType::class,
-        'file_video'         => Motor\Backend\Forms\Fields\FileVideoType::class,
-        'file_audio'         => Motor\Backend\Forms\Fields\FileAudioType::class,
-        'htmleditor'         => Motor\Backend\Forms\Fields\HtmlEditorType::class,
+        'datetimepicker'   => Motor\Backend\Forms\Fields\DatetimepickerType::class,
+        'datepicker'       => Motor\Backend\Forms\Fields\DatepickerType::class,
+        'select2'          => Motor\Backend\Forms\Fields\Select2Type::class,
+        'file_image'       => Motor\Backend\Forms\Fields\FileImageType::class,
+        'file_file'        => Motor\Backend\Forms\Fields\FileFileType::class,
+        'file_video'       => Motor\Backend\Forms\Fields\FileVideoType::class,
+        'file_audio'       => Motor\Backend\Forms\Fields\FileAudioType::class,
+        'htmleditor'       => Motor\Backend\Forms\Fields\HtmlEditorType::class,
+        'file_association' => Motor\Backend\Forms\Fields\FileAssociationType::class,
+        'colorpicker'      => Motor\Backend\Forms\Fields\ColorPickerType::class,
     ]
 ];

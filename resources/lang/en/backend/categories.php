@@ -10,6 +10,7 @@ return [
     'updated'    => 'Category updated',
     'deleted'    => 'Category deleted',
 
-    'name'         => 'Name',
-    'new_category' => 'New category'
+    'name'           => 'Name',
+    'new_category'   => 'New category',
+    'all_categories' => 'All categories',
 ];
