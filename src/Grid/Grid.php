@@ -254,13 +254,17 @@ class Grid extends Base
         if (preg_match('#^[a-z0-9_-]+(?:\.[a-z0-9_-]+)+$#i', $column->getName(), $matches) && is_object($record)) {
             $temporaryRecord = $record;
             $value           = '';
-            foreach (explode('.', $column->getName()) as $segment) {
+            $segments        = explode('.', $column->getName());
+            foreach ($segments as $key => $segment) {
                 try {
-                    $temporaryRecord->{$segment};
-                    if (isset($temporaryRecord->{$segment})) {
-                        $value           = $temporaryRecord->{$segment};
-                        $temporaryRecord = $temporaryRecord->{$segment};
+                    if ( ! is_null($temporaryRecord->{$segment})) {
+                        if ($key == count($segments) - 1) {
+                            $value = $temporaryRecord->{$segment};
+                        }
                     }
+                    $temporaryRecord = $temporaryRecord->{$segment};
+                    //if (isset($temporaryRecord->{$segment})) {
+                    //}
                 } catch (\Exception $e) {
                 }
             }
@@ -332,13 +336,13 @@ class Grid extends Base
     public function getSorting()
     {
         // Check in the URL
-        $sortableField     = \Request::get(get_class($this).'_sortable_field');
-        $sortableDirection = \Request::get(get_class($this).'_sortable_direction');
+        $sortableField     = \Request::get(get_class($this) . '_sortable_field');
+        $sortableDirection = \Request::get(get_class($this) . '_sortable_direction');
 
         // Check session
         if (is_null($sortableField)) {
-            $sortableField     = \Session::get(get_class($this).'_sortable_field');
-            $sortableDirection = \Session::get(get_class($this).'_sortable_direction');
+            $sortableField     = \Session::get(get_class($this) . '_sortable_field');
+            $sortableDirection = \Session::get(get_class($this) . '_sortable_direction');
         }
 
         // Check default
@@ -353,19 +357,23 @@ class Grid extends Base
 
     public function setSorting($field, $direction)
     {
-        \Session::put(get_class($this).'_sortable_field', $field);
-        \Session::put(get_class($this).'_sortable_direction', $direction);
+        \Session::put(get_class($this) . '_sortable_field', $field);
+        \Session::put(get_class($this) . '_sortable_direction', $direction);
     }
+
 
     public function getSortableColumn()
     {
         $sorting = $this->getSorting();
+
         return $sorting[0];
     }
+
 
     public function getSortableDirection()
     {
         $sorting = $this->getSorting();
+
         return $sorting[1];
     }
 
@@ -379,7 +387,7 @@ class Grid extends Base
     public function getPaginator($limit = 20)
     {
 
-        if (!is_null($this->paginator)) {
+        if ( ! is_null($this->paginator)) {
             return $this->paginator;
         }
 
@@ -398,11 +406,14 @@ class Grid extends Base
 
         // FIXME: we can't assume that the sorting will always be on the base model!?
         if ( ! is_null($sortableField)) {
-            $this->paginator = $query->orderBy($query->getModel()->getTable().'.'.$sortableField, $sortableDirection)->paginate($limit);
+            $this->paginator = $query->orderBy($query->getModel()->getTable() . '.' . $sortableField,
+                $sortableDirection)->paginate($limit);
+
             return $this->paginator;
         }
 
         $this->paginator = $query->paginate($limit);
+
         return $this->paginator;
     }
 
