@@ -182,6 +182,10 @@ class MotorServiceProvider extends ServiceProvider
         Route::bind('category', function ($id) {
             return \Motor\Backend\Models\Category::findOrFail($id);
         });
+
+        Route::bind('config_variable', function($id){
+            return \Motor\Backend\Models\ConfigVariable::findOrFail($id);
+        });
     }
 
 

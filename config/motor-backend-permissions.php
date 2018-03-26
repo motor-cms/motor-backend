@@ -1,20 +1,20 @@
 <?php
 
 return [
-    'profile'         => [
+    'profile'          => [
         'name'   => 'backend/global.profile',
         'values' => [
             'read',
             'write'
         ]
     ],
-    'dashboard'       => [
+    'dashboard'        => [
         'name'   => 'backend/global.dashboard',
         'values' => [
             'read'
         ]
     ],
-    'clients'         => [
+    'clients'          => [
         'name'   => 'backend/clients.clients',
         'values' => [
             'read',
@@ -22,7 +22,7 @@ return [
             'delete',
         ]
     ],
-    'users'           => [
+    'users'            => [
         'name'   => 'backend/users.users',
         'values' => [
             'read',
@@ -30,7 +30,7 @@ return [
             'delete',
         ]
     ],
-    'languages'       => [
+    'languages'        => [
         'name'   => 'backend/languages.languages',
         'values' => [
             'read',
@@ -38,7 +38,7 @@ return [
             'delete',
         ]
     ],
-    'email_templates' => [
+    'email_templates'  => [
         'name'   => 'backend/email_templates.email_templates',
         'values' => [
             'read',
@@ -46,7 +46,7 @@ return [
             'delete'
         ]
     ],
-    'permissions'     => [
+    'permissions'      => [
         'name'   => 'backend/permissions.permissions',
         'values' => [
             'read',
@@ -54,7 +54,7 @@ return [
             'delete',
         ]
     ],
-    'roles'           => [
+    'roles'            => [
         'name'   => 'backend/roles.roles',
         'values' => [
             'read',
@@ -62,7 +62,7 @@ return [
             'delete',
         ]
     ],
-    'categories'      => [
+    'categories'       => [
         'name'   => 'motor-backend::backend/categories.categories',
         'values' => [
             'read',
@@ -70,8 +70,16 @@ return [
             'delete'
         ]
     ],
-    'category_trees'  => [
+    'category_trees'   => [
         'name'   => 'motor-backend::backend/category_trees.category_trees',
+        'values' => [
+            'read',
+            'write',
+            'delete'
+        ]
+    ],
+    'config_variables' => [
+        'name'   => 'motor-backend::backend/config_variables.config_variables',
         'values' => [
             'read',
             'write',

@@ -17,6 +17,7 @@ class MediaHelper
             $data['name']          = $items[0]->name;
             $data['file_name']     = $items[0]->file_name;
             $data['mime_type']     = \GuzzleHttp\Psr7\mimetype_from_filename($items[0]->file_name);
+            $data['is_generating'] = $items[0]->hasCustomProperty('generating');
 
             if ($base64) {
                 $data['file_base64'] = base64_encode(file_get_contents(public_path() . $items[0]->getUrl()));

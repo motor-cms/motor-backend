@@ -76,7 +76,14 @@ return [
                     'permissions' => [ 'category_trees.read' ],
                     'aliases'     => [ 'backend.categories' ]
                 ],
-            ]
+                170 => [ // <-- !!! replace 840 with your own sort position !!!
+                    'slug' => 'config_variables',
+                    'name'  => 'motor-backend::backend/config_variables.config_variables',
+                    'icon'  => 'fa fa-plus',
+                    'route' => 'backend.config_variables.index',
+                    'roles'       => [ 'SuperAdmin' ],
+                    'permissions' => [ 'config_variables.read' ],
+                ],            ]
         ]
     ]
 ];

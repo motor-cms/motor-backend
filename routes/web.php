@@ -82,5 +82,9 @@ Route::group([
                 'category_trees' => 'category'
             ]
         ]);
+
+        Route::resource('config_variables', 'ConfigVariablesController');
+        Route::get('config_variables/{config_variable}/duplicate',
+            'ConfigVariablesController@duplicate')->name('config_variables.duplicate');
     });
 });

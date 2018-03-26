@@ -103,3 +103,8 @@ function create_test_category_tree($count = 1)
 {
     return factory(Motor\Backend\Models\CategoryTree::class, $count)->create();
 }
+
+function create_test_config_variable($count = 1)
+{
+    return factory(Motor\Backend\Models\ConfigVariable::class, $count)->create();
+}

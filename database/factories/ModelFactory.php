@@ -87,3 +87,9 @@ $factory->define(Motor\Backend\Models\CategoryTree::class, function (Faker\Gener
         'name' => $faker->word
     ];
 });
+
+$factory->define(Motor\Backend\Models\ConfigVariable::class, function (Faker\Generator $faker) {
+    return [
+        'name' => $faker->word
+    ];
+});

@@ -15,7 +15,7 @@ Route::group([
 
     Route::get('profile/me', 'ProfileEditController@me')->name('profile.read');
     Route::patch('profile/edit', 'ProfileEditController@update')->name('profile.update');
-
+    Route::resource('config_variables', 'ConfigVariablesController');
 });
 
 Route::group([
