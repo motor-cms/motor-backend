@@ -7,7 +7,7 @@
 @section('contentheader_title')
     {{ trans('motor-backend::backend/config_variables.config_variables') }}
     @if (has_permission('config_variables.write'))
-	    {!! link_to_route('backend.config_variables.create', trans('motor-backend::backend/config_variables.new'), [], ['class' => 'pull-right btn btn-sm btn-success']) !!}
+	    {!! link_to_route('backend.config_variables.create', trans('motor-backend::backend/config_variables.new'), [], ['class' => 'pull-right float-right btn btn-sm btn-success']) !!}
     @endif
 @endsection
 

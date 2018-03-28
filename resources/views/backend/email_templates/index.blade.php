@@ -7,7 +7,7 @@
 @section('contentheader_title')
     {{ trans('motor-backend::backend/email_templates.email_templates') }}
     @if (has_permission('email_templates.write'))
-        {!! link_to_route('backend.email_templates.create', trans('motor-backend::backend/email_templates.new'), [], ['class' => 'pull-right btn btn-sm btn-success']) !!}
+        {!! link_to_route('backend.email_templates.create', trans('motor-backend::backend/email_templates.new'), [], ['class' => 'pull-right float-right btn btn-sm btn-success']) !!}
     @endif
 @endsection
 

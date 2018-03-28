@@ -6,7 +6,7 @@
 
 @section('contentheader_title')
     {{ trans('motor-backend::backend/config_variables.edit') }}
-    {!! link_to_route('backend.config_variables.index', trans('motor-backend::backend/global.back'), [], ['class' => 'pull-right btn btn-sm btn-danger']) !!}
+    {!! link_to_route('backend.config_variables.index', trans('motor-backend::backend/global.back'), [], ['class' => 'pull-right float-right btn btn-sm btn-danger']) !!}
 @endsection
 
 @section('main-content')
