@@ -1,12 +1,12 @@
 <?php
 
-Route::get('/', function () {
-    return redirect('/backend');
-});
-
-Route::get('/home', function () {
-    return redirect('/backend');
-});
+//Route::get('/', function () {
+//    return redirect('/backend');
+//});
+//
+//Route::get('/home', function () {
+//    return redirect('/backend');
+//});
 
 Route::group([
     'middleware' => [ 'web' ],

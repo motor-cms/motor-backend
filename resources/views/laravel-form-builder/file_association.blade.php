@@ -62,7 +62,7 @@
                 },
                 deleteFile: function (file) {
                     this.files.splice(this.files.indexOf(file), 1);
-                    $('input[name="{{$options['name']}}"]').val('');
+                    $('input[name="{{$options['name']}}"]').val('deleted');
                 }
             },
             mounted: function () {

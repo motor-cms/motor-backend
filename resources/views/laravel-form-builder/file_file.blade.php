@@ -14,7 +14,7 @@
             <div class="media-{{$file['id']}}-container" style="margin-bottom: 10px">
                 <div class="float-left">
                     <button class="btn btn-danger btn-sm media-{{$options['name_slug']}}-delete" data-id="{{$file['id']}}"><i class="fa fa-trash"></i></button>
-                    <span><strong>{{ $file['name'] }}</strong></span><br><span style="padding-left: 32px;">{{trans('motor-backend::backend/global.uploaded')}} {{$file['created_at']}}</span>
+                    <span><strong>{{ $file['name'] }}</strong></span><br><span>{{trans('motor-backend::backend/global.uploaded')}} {{$file['created_at']}}</span>
                 </div>
                 <div class="clearfix"></div>
             </div>

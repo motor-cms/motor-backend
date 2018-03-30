@@ -3,9 +3,10 @@
 namespace Motor\Backend\Forms\Fields;
 
 use Illuminate\Support\Str;
+use Kris\LaravelFormBuilder\Fields\FormField;
 use Kris\LaravelFormBuilder\Fields\InputType;
 
-class FileAudioType extends FileFileType
+class FileAudioType extends FormField
 {
 
     protected function getTemplate()
