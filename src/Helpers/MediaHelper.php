@@ -20,7 +20,7 @@ class MediaHelper
             $data['is_generating'] = $items[0]->hasCustomProperty('generating');
 
             if ($base64) {
-                $data['file_base64'] = base64_encode(file_get_contents(public_path() . $items[0]->getUrl()));
+                $data['file_base64'] = base64_encode(file_get_contents(public_path() . urldecode($items[0]->getUrl())));
             }
 
             foreach ($conversions as $conversion) {

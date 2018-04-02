@@ -136,10 +136,10 @@ abstract class BaseService {
 			]);
 		}
 
-		if (!is_null($sorting))
-		{
-			$instance->setSorting($sorting);
-		}
+//		if (!is_null($sorting))
+//		{
+//			$instance->setSorting($sorting);
+//		}
 
 		return $instance;
 	}
