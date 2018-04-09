@@ -35,9 +35,10 @@ class CheckPermission {
 	public function handle($request, Closure $next)
 	{
 
-		if (strpos($request->ip(), '10.1.') !== false) {
-			return redirect('home');
-		}
+	    // FIXME: find a proper way to do ip whitelisting
+		//if (strpos($request->ip(), '10.1.') !== false) {
+		//	return redirect('home');
+		//}
 
 		$route = $request->route()->getName();
 		$routeCleaned = str_replace('backend.', '', $route);
