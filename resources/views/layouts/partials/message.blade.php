@@ -39,6 +39,7 @@
                 toastr.success('{!! $message['message'] !!}', '{{ trans('motor-backend::backend/global.flash.success') }}');
                 break;
             case 'error':
+            case 'danger':
                 toastr.error('{!! $message['message'] !!}', '{{ trans('motor-backend::backend/global.flash.error') }}');
                 break;
             case 'warning':

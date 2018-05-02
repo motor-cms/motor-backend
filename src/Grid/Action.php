@@ -25,6 +25,10 @@ class Action extends Base
 
     protected $conditionOperator = '=';
 
+    protected $askForConfirmation = false;
+
+    protected $confirmationMessage = '';
+
 
     public function __construct($label, $link, $parameters = [])
     {
@@ -32,7 +36,7 @@ class Action extends Base
         $this->link       = $link;
         $this->parameters = $parameters;
 
-        if (isset( $parameters['type'] )) {
+        if (isset($parameters['type'])) {
             $this->type = $parameters['type'];
         }
     }
@@ -41,6 +45,19 @@ class Action extends Base
     public function needsPermissionTo($permission)
     {
         $this->permission = $permission;
+
+        return $this;
+    }
+
+
+    public function askForConfirmation($confirmation = true, $message = '')
+    {
+        $this->askForConfirmation  = $confirmation;
+        $this->confirmationMessage = $message;
+        if ($this->askForConfirmation) {
+            $this->parameters['ask_for_confirmation_class'] = 'ask-for-confirmation';
+        }
+        $this->parameters['confirmation_message'] = $this->confirmationMessage;
 
         return $this;
     }

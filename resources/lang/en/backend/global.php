@@ -71,5 +71,6 @@ return [
         'info'    => 'Information',
         'error'   => 'Error',
         'success' => 'Success'
-    ]
+    ],
+    'are_you_sure'    => 'Are you sure?'
 ];

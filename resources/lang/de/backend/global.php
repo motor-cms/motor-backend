@@ -70,5 +70,6 @@ return [
         'info'    => 'Information',
         'error'   => 'Fehler',
         'success' => 'Erfolgreich'
-    ]
+    ],
+    'are_you_sure'    => 'Sind Sie sicher?'
 ];

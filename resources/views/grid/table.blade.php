@@ -44,3 +44,21 @@
         </tbody>
     </table>
 </div>
+@section('view_scripts')
+    <script type="text/javascript">
+        $(document).ready(function() {
+            $('.ask-for-confirmation').on('click', function(e) {
+                var message = $(this).data('message');
+                console.log(message);
+                if (message == '' || message == undefined) {
+                    message = '{{trans('motor-backend::backend/global.are_you_sure')}}';
+                }
+
+                if (!confirm(message)) {
+                    e.preventDefault();
+                    return false;
+                }
+            });
+        });
+    </script>
+@append
