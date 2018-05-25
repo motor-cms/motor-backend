@@ -13,6 +13,11 @@ Route::group([
     'namespace'  => 'Motor\Backend\Http\Controllers'
 ], function () {
     Auth::routes();
+    Route::get('password/change', 'Auth\ChangePasswordController@showChangeForm')->name('auth.change-password.index');
+    Route::post('password/change', 'Auth\ChangePasswordController@change')->name('auth.change-password.store');
+    Route::match(['get', 'post'], 'register', function(){
+        return redirect('/');
+    });
 });
 
 Route::group([

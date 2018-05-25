@@ -2,6 +2,8 @@
 
 namespace Motor\Backend\Models;
 
+use Motor\Backend\Notifications\ResetPassword;
+use Illuminate\Notifications\Notifiable;
 use Motor\Core\Traits\Searchable;
 
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -19,8 +21,17 @@ class User extends Authenticatable implements HasMediaConversions, JWTSubject
     use HasMediaTrait;
     use HasRoles;
     use Filterable;
+    use Notifiable;
 
     protected $guard_name = 'web';
+
+    /**
+     * Send a password reset email to the user
+     */
+    public function sendPasswordResetNotification($token)
+    {
+        $this->notify(new ResetPassword($token, $this));
+    }
 
     /**
      * Get the identifier that will be stored in the subject claim of the JWT.
