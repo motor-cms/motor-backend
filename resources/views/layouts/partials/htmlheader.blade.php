@@ -14,5 +14,5 @@
     @yield('view_styles')
 
 <!-- Main styles for this application -->
-    <link href="{{ asset('/css/all.css') }}" rel="stylesheet" type="text/css" />
+    <link href="{{ mix('/css/motor-backend.css') }}" rel="stylesheet" type="text/css" />
 </head>

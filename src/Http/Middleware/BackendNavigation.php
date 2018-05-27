@@ -37,11 +37,13 @@ class BackendNavigation
                     'roles'       => implode(',', $item['roles']),
                     'permissions' => implode(',', $item['permissions']),
                     'aliases'     => implode(',', Arr::get($item, 'aliases', []))
-                ])->nickname($item['slug'])->prepend('<i class="' . $item['icon'] . '"></i> <span>')->append('</span>');
+                ])->nickname($item['slug'])->prepend('<i class="nav-icon ' . $item['icon'] . '"></i>');
+                //])->nickname($item['slug'])->prepend('<i class="nav-icon ' . $item['icon'] . '"></i> <span>')->append('</span>');
 
                 if (isset($item['items'])) {
 
-                    $menu->get($item['slug'])->append('</span> ' . config('motor-backend-navigation.collapseIcon'));
+                    $menu->get($item['slug'])->append(config('motor-backend-navigation.collapseIcon'));
+                    //$menu->get($item['slug'])->append('</span> ' . config('motor-backend-navigation.collapseIcon'));
 
                     ksort($item['items']);
 
@@ -56,8 +58,9 @@ class BackendNavigation
                                      'aliases' => implode(',', Arr::get($subitem, 'aliases', []))
                                  ])
                                  ->nickname($subitem['slug'])
-                                 ->prepend('<i class="' . $subitem['icon'] . '"></i> <span>')
-                                 ->append('</span>');
+                                 ->prepend('<i class="nav-icon ' . $subitem['icon'] . '"></i>');
+                            //->prepend('<i class="nav-icon ' . $subitem['icon'] . '"></i> <span>')
+                            //    ->append('</span>');
                         } else {
                             $menu->get($item['slug'])->add(trans($subitem['name']), [
                                 'route'       => $subitem['route'],

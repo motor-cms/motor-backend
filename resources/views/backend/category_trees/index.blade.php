@@ -7,7 +7,7 @@
 @section('contentheader_title')
     {{ trans('motor-backend::backend/category_trees.category_trees') }}
     @if (has_permission('category_trees.write'))
-	    {!! link_to_route('backend.category_trees.create', trans('motor-backend::backend/category_trees.new'), [], ['class' => 'pull-right btn btn-sm btn-success']) !!}
+	    {!! link_to_route('backend.category_trees.create', trans('motor-backend::backend/category_trees.new'), [], ['class' => 'pull-right float-right btn btn-sm btn-success']) !!}
     @endif
 @endsection
 
@@ -32,4 +32,4 @@
             }
         });
     </script>
-@endsection
+@append

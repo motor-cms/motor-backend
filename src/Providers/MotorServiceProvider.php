@@ -18,11 +18,11 @@ class MotorServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        Response::macro('attachment', function ($content, $filename, $format='application/json') {
+        Response::macro('attachment', function ($content, $filename, $format = 'application/json') {
 
             $headers = [
                 'Content-type'        => $format,
-                'Content-Disposition' => 'attachment; filename="'.$filename.'"',
+                'Content-Disposition' => 'attachment; filename="' . $filename . '"',
             ];
 
             return Response::make($content, 200, $headers);
@@ -39,8 +39,8 @@ class MotorServiceProvider extends ServiceProvider
         $this->migrations();
         $this->publishResourceAssets();
         $this->bladeDirectives();
-
     }
+
 
     public function bladeDirectives()
     {
@@ -86,16 +86,14 @@ class MotorServiceProvider extends ServiceProvider
     public function publishResourceAssets()
     {
         $assets = [
-            __DIR__ . '/../../public/css/motor'            => public_path('css/motor'),
-            __DIR__ . '/../../public/images'               => public_path('images'),
-            __DIR__ . '/../../resources/assets/sass'       => resource_path('assets/sass'),
-            __DIR__ . '/../../resources/assets/js'         => resource_path('assets/js'),
-            __DIR__ . '/../../resources/misc/gulpfile.js'  => base_path('gulpfile.js'),
-            __DIR__ . '/../../resources/misc/package.json' => base_path('package.json'),
-            __DIR__ . '/../../database/seeds'              => base_path('database/seeds'),
+            __DIR__ . '/../../resources/assets/sass'   => resource_path('assets/sass'),
+            __DIR__ . '/../../resources/assets/js'     => resource_path('assets/js'),
+            __DIR__ . '/../../resources/assets/images' => resource_path('assets/images'),
+            __DIR__ . '/../../resources/assets/npm'    => resource_path('assets/npm'),
+            __DIR__ . '/../../database/seeds'          => base_path('database/seeds'),
         ];
 
-        $this->publishes($assets, 'motor-backend-install');
+        $this->publishes($assets, 'motor-backend-install-resources');
     }
 
 
@@ -129,7 +127,7 @@ class MotorServiceProvider extends ServiceProvider
             __DIR__ . '/../../config/motor-backend.php'                  => config_path('motor-backend.php'),
             __DIR__ . '/../../config/motor-backend-navigation-stub.php'  => config_path('motor-backend-navigation.php'),
             __DIR__ . '/../../config/motor-backend-permissions-stub.php' => config_path('motor-backend-permissions.php'),
-        ], 'motor-backend-install');
+        ], 'motor-backend-install-config');
     }
 
 
@@ -139,7 +137,7 @@ class MotorServiceProvider extends ServiceProvider
 
         $this->publishes([
             __DIR__ . '/../../resources/lang' => resource_path('lang/vendor/motor-backend'),
-        ], 'motor-backend-translations');
+        ], 'motor-backend-install-translations');
     }
 
 
@@ -149,7 +147,7 @@ class MotorServiceProvider extends ServiceProvider
 
         $this->publishes([
             __DIR__ . '/../../resources/views' => resource_path('views/vendor/motor-backend'),
-        ], 'motor-backend-views');
+        ], 'motor-backend-install-views');
     }
 
 
@@ -183,7 +181,7 @@ class MotorServiceProvider extends ServiceProvider
             return \Motor\Backend\Models\Category::findOrFail($id);
         });
 
-        Route::bind('config_variable', function($id){
+        Route::bind('config_variable', function ($id) {
             return \Motor\Backend\Models\ConfigVariable::findOrFail($id);
         });
     }

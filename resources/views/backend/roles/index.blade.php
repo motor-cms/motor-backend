@@ -7,7 +7,7 @@
 @section('contentheader_title')
     {{ trans('motor-backend::backend/roles.roles') }}
     @if (has_permission('roles.write'))
-        {!! link_to_route('backend.roles.create', trans('motor-backend::backend/roles.new'), [], ['class' => 'pull-right btn btn-sm btn-success']) !!}
+        {!! link_to_route('backend.roles.create', trans('motor-backend::backend/roles.new'), [], ['class' => 'pull-right float-right btn btn-sm btn-success']) !!}
     @endif
 @endsection
 
@@ -32,4 +32,4 @@
             }
         });
     </script>
-@endsection
+@append

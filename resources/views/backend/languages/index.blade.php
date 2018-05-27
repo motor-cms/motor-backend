@@ -7,7 +7,7 @@
 @section('contentheader_title')
     {{ trans('motor-backend::backend/languages.languages') }}
     @if (has_permission('languages.write'))
-        {!! link_to_route('backend.languages.create', trans('motor-backend::backend/languages.new'), [], ['class' => 'pull-right btn btn-sm btn-success']) !!}
+        {!! link_to_route('backend.languages.create', trans('motor-backend::backend/languages.new'), [], ['class' => 'pull-right float-right btn btn-sm btn-success']) !!}
     @endif
 @endsection
 
@@ -32,4 +32,4 @@
             }
         });
     </script>
-@endsection
+@append

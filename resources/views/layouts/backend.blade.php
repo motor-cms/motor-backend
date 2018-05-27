@@ -5,22 +5,33 @@
     @include('motor-backend::layouts.partials.htmlheader')
 @show
 
-<body class="app header-fixed sidebar-fixed aside-menu-fixed @if (!isset($motorShowRightSidebar) || $motorShowRightSidebar == false) aside-menu-hidden @endif">
+<body class="app header-fixed sidebar-fixed aside-menu-fixed sidebar-lg-show @if (!isset($motorShowRightSidebar) || $motorShowRightSidebar == false) aside-menu-hidden @endif">
+
 
 <header class="app-header navbar">
-    <button class="navbar-toggler mobile-sidebar-toggler d-lg-none mr-auto" type="button">
+</header>
+
+
+
+<header class="app-header navbar">
+    <button class="navbar-toggler sidebar-toggler d-lg-none mr-auto" type="button" data-toggle="sidebar-show">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <a class="navbar-brand" href="#">
+        <img class="navbar-brand-full" src="{{asset(config('motor-backend-project.logo-small'))}}" width="89">
+        <img class="navbar-brand-minimized" src="{{asset(config('motor-backend-project.logo-small'))}}" width="30">
+    </a>
+    <button class="navbar-toggler sidebar-toggler d-md-down-none" type="button" data-toggle="sidebar-lg-show">
         <span class="navbar-toggler-icon"></span>
     </button>
 
-    <a class="navbar-brand" href="#"></a>
-
-    <button class="navbar-toggler sidebar-toggler d-md-down-none" type="button">
-        <span class="navbar-toggler-icon"></span>
-    </button>
 
     @include('motor-backend::layouts.partials.mainheader')
 
-    <button class="navbar-toggler aside-menu-toggler" type="button">
+    <button class="navbar-toggler aside-menu-toggler d-md-down-none" type="button" data-toggle="aside-menu-lg-show">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <button class="navbar-toggler aside-menu-toggler d-lg-none" type="button" data-toggle="aside-menu-show">
         <span class="navbar-toggler-icon"></span>
     </button>
 

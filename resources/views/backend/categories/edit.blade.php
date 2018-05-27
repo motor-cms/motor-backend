@@ -6,7 +6,7 @@
 
 @section('contentheader_title')
     {{ trans('motor-backend::backend/categories.edit') }}
-    {!! link_to_route('backend.categories.index', trans('motor-backend::backend/global.back'), ['category' => $root->id], ['class' => 'pull-right btn btn-sm btn-danger']) !!}
+    {!! link_to_route('backend.categories.index', trans('motor-backend::backend/global.back'), ['category' => $root->id], ['class' => 'pull-right float-right btn btn-sm btn-danger']) !!}
 @endsection
 
 @section('main-content')

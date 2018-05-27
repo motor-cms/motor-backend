@@ -1,4 +1,3 @@
-
 window._ = require('lodash');
 
 /**
@@ -8,12 +7,29 @@ window._ = require('lodash');
  */
 
 window.$ = window.jQuery = require('jquery');
-require('bootstrap-sass');
-
-require('admin-lte');
+window.Popper = require('popper.js');
 window.toastr = require('toastr');
-require('icheck');
-require('admin-lte/plugins/select2/select2.js');
+
+require('jquery-ui-dist/jquery-ui.js');
+
+require('bootstrap');
+
+require('@claviska/jquery-minicolors');
+
+import '@coreui/coreui';
+require('select2');
+require('mediaelement');
+require('@fancyapps/fancybox');
+window.moment = require('moment');
+require('tempusdominus-bootstrap-4');
+require('jstree');
+
+import fontawesome from '@fortawesome/fontawesome';
+import solid from '@fortawesome/fontawesome-free-solid';
+import brands from '@fortawesome/fontawesome-free-brands';
+import regular from '@fortawesome/fontawesome-free-regular';
+
+fontawesome.library.add(solid, brands, regular);
 
 /**
  * Vue is a modern JavaScript library for building interactive web interfaces
@@ -21,8 +37,11 @@ require('admin-lte/plugins/select2/select2.js');
  * and simple, leaving you to focus on building your next great project.
  */
 
-// window.Vue = require('vue');
-// require('vue-resource');
+window.Vue = require('vue');
+require('vue-resource');
+window.draggable = require('vuedraggable');
+
+window.axios = require('axios');
 
 /**
  * We'll register a HTTP interceptor to attach the "CSRF" header to each of
@@ -30,11 +49,11 @@ require('admin-lte/plugins/select2/select2.js');
  * included with Laravel will automatically verify the header's value.
  */
 
-// Vue.http.interceptors.push((request, next) => {
-//     request.headers['X-CSRF-TOKEN'] = Laravel.csrfToken;
-//
-//     next();
-// });
+Vue.http.interceptors.push((request, next) => {
+    request.headers['X-CSRF-TOKEN'] = Laravel.csrfToken;
+
+    next();
+});
 
 /**
  * Echo exposes an expressive API for subscribing to channels and listening

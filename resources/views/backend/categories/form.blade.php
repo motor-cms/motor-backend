@@ -32,8 +32,8 @@
 {!! form_end($form) !!}
 
 @section('view_scripts')
-    <link href="{{asset('plugins/jstree/themes/default/style.css')}}" rel="stylesheet" type="text/css"/>
-    <script src="{{asset('plugins/jstree/jstree.min.js')}}"></script>
+{{--    <link href="{{asset('plugins/jstree/themes/default/style.css')}}" rel="stylesheet" type="text/css"/>--}}
+{{--    <script src="{{asset('plugins/jstree/jstree.min.js')}}"></script>--}}
     <script>
         $.jstree.defaults.dnd.is_draggable = function (node) {
             var id = $(node).attr('id');

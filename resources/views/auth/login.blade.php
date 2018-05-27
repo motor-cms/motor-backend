@@ -17,19 +17,31 @@
                             <form action="{{ url('/login') }}" method="post">
                                 <input type="hidden" name="_token" value="{{ csrf_token() }}">
                                 <div class="input-group mb-3">
-                                    <span class="input-group-addon"><i class="icon-user"></i></span>
-                                    <input type="text" name="email" class="form-control" placeholder="{{ trans('motor-backend::backend/users.email') }}">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text">
+                                        <i class="icon-user"></i>
+                                        </span>
+                                    </div>
+                                    <input type="text" name="email" class="form-control"
+                                           placeholder="{{ trans('motor-backend::backend/users.email') }}">
                                 </div>
                                 <div class="input-group mb-4">
-                                    <span class="input-group-addon"><i class="icon-lock"></i></span>
-                                    <input type="password" name="password" class="form-control" placeholder="{{ trans('motor-backend::backend/users.password') }}">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text">
+                                        <i class="icon-lock"></i>
+                                        </span>
+                                    </div>
+                                    <input type="password" name="password" class="form-control"
+                                           placeholder="{{ trans('motor-backend::backend/users.password') }}">
                                 </div>
                                 <div class="row">
                                     <div class="col-6">
-                                        <input type="checkbox" name="remember" id="remember"> <label for="remember">{{ trans('motor-backend::backend/login.remember') }}</label>
+                                        <input type="checkbox" name="remember" id="remember"> <label
+                                                for="remember">{{ trans('motor-backend::backend/login.remember') }}</label>
                                     </div>
                                     <div class="col-6 text-right">
-                                        <button type="submit" class="btn btn-primary px-4">{{ trans('motor-backend::backend/login.sign_in') }}</button>
+                                        <button type="submit"
+                                                class="btn btn-primary px-4">{{ trans('motor-backend::backend/login.sign_in') }}</button>
                                     </div>
                                 </div>
                             </form>

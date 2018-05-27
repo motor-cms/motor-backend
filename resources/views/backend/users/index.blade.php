@@ -7,7 +7,7 @@
 @section('contentheader_title')
     {{ trans('motor-backend::backend/users.users') }}
     @if (has_permission('users.write'))
-        {!! link_to_route('backend.users.create', trans('motor-backend::backend/users.new'), [], ['class' => 'pull-right btn btn-sm btn-success']) !!}
+        {!! link_to_route('backend.users.create', trans('motor-backend::backend/users.new'), [], ['class' => 'pull-right float-right btn btn-sm btn-success']) !!}
     @endif
 @endsection
 
@@ -32,4 +32,4 @@
             }
         });
     </script>
-@endsection
+@append
