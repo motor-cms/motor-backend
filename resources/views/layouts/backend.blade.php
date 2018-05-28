@@ -5,7 +5,7 @@
     @include('motor-backend::layouts.partials.htmlheader')
 @show
 
-<body class="app header-fixed sidebar-fixed aside-menu-fixed sidebar-lg-show @if (!isset($motorShowRightSidebar) || $motorShowRightSidebar == false) aside-menu-hidden @endif">
+<body class="app header-fixed sidebar-fixed aside-menu-fixed sidebar-lg-show @if (isset($motorShowRightSidebar) && $motorShowRightSidebar == true) aside-menu-lg-show @endif">
 
 
 <header class="app-header navbar">
@@ -29,9 +29,6 @@
     @include('motor-backend::layouts.partials.mainheader')
 
     <button class="navbar-toggler aside-menu-toggler d-md-down-none" type="button" data-toggle="aside-menu-lg-show">
-        <span class="navbar-toggler-icon"></span>
-    </button>
-    <button class="navbar-toggler aside-menu-toggler d-lg-none" type="button" data-toggle="aside-menu-show">
         <span class="navbar-toggler-icon"></span>
     </button>
 
