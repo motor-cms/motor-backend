@@ -40,5 +40,7 @@ return [
         'htmleditor'       => Motor\Backend\Forms\Fields\HtmlEditorType::class,
         'file_association' => Motor\Backend\Forms\Fields\FileAssociationType::class,
         'colorpicker'      => Motor\Backend\Forms\Fields\ColorPickerType::class,
+        'custom_button'    => Motor\Backend\Forms\Fields\CustomButtonType::class,
+
     ]
 ];
