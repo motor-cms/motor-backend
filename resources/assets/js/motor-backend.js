@@ -24,12 +24,7 @@ window.moment = require('moment');
 require('tempusdominus-bootstrap-4');
 require('jstree');
 
-import fontawesome from '@fortawesome/fontawesome';
-import solid from '@fortawesome/fontawesome-free-solid';
-import brands from '@fortawesome/fontawesome-free-brands';
-import regular from '@fortawesome/fontawesome-free-regular';
-
-fontawesome.library.add(solid, brands, regular);
+require('@fortawesome/fontawesome-free/js/all');
 
 /**
  * Vue is a modern JavaScript library for building interactive web interfaces
@@ -52,7 +47,7 @@ window.axios = require('axios');
 Vue.http.interceptors.push((request, next) => {
     request.headers['X-CSRF-TOKEN'] = Laravel.csrfToken;
 
-    next();
+next();
 });
 
 /**
