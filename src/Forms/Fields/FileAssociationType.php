@@ -18,9 +18,7 @@ class FileAssociationType extends InputType
         return 'motor-backend::laravel-form-builder.file_association';
     }
 
-
-    public function render(array $options = [], $showLabel = true, $showField = true, $showError = true)
-    {
+    public function getData() {
         $modelData = $this->parent->getModel();
 
         $options['file_association'] = false;
@@ -33,9 +31,16 @@ class FileAssociationType extends InputType
                 $options['file_association'] = json_encode($data['data']);
             }
         }
+        return $options;
+    }
 
+
+    public function render(array $options = [], $showLabel = true, $showField = true, $showError = true)
+    {
         $options['name'] = $this->getName();
         $options['name_slug'] = Str::slug($this->getName());
+
+        $options = array_merge($options, $this->getData());
 
         return parent::render($options, $showLabel, $showField, $showError);
     }

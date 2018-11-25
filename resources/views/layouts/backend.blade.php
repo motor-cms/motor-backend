@@ -7,7 +7,6 @@
 
 <body class="app header-fixed sidebar-fixed aside-menu-fixed sidebar-lg-show @if (isset($motorShowRightSidebar) && $motorShowRightSidebar == true) aside-menu-lg-show @endif">
 
-
 <header class="app-header navbar">
 </header>
 
@@ -34,7 +33,7 @@
 
 </header>
 
-<div class="app-body">
+<div id="app" class="app-body">
     <div class="sidebar">
         <nav class="sidebar-nav">
             @if (isset($backendNavigation))

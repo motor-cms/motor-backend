@@ -5,8 +5,10 @@ namespace Motor\Backend\Providers;
 use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\Route;
+use Motor\Backend\Console\Commands\MotorGenerateIncludeCommand;
 use Motor\Backend\Console\Commands\MotorCreatePermissionsCommand;
 use Illuminate\Support\Facades\Response;
+use Motor\CMS\Http\Middleware\Frontend\Navigation;
 
 class MotorServiceProvider extends ServiceProvider
 {
@@ -18,6 +20,10 @@ class MotorServiceProvider extends ServiceProvider
      */
     public function boot()
     {
+
+        //app('router')->middleware('frontend-navigation', Navigation::class);
+        $result = app('router')->pushMiddlewareToGroup('frontend', Navigation::class);
+
         Response::macro('attachment', function ($content, $filename, $format = 'application/json') {
 
             $headers = [
@@ -200,6 +206,7 @@ class MotorServiceProvider extends ServiceProvider
         if ($this->app->runningInConsole()) {
             $this->commands([
                 MotorCreatePermissionsCommand::class,
+                MotorGenerateIncludeCommand::class,
             ]);
         }
     }

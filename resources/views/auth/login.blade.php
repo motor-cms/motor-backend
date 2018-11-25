@@ -6,7 +6,7 @@
 
 @section('content')
     <body class="app flex-row align-items-center">
-    <div class="container">
+    <div id="app" class="container">
         <div class="row justify-content-center">
             <div class="col-md-8">
                 <div class="card-group">
