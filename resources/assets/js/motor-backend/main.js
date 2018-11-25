@@ -17,6 +17,7 @@ require('bootstrap');
 require('@claviska/jquery-minicolors');
 
 import '@coreui/coreui';
+
 require('select2');
 require('mediaelement');
 require('@fancyapps/fancybox');
@@ -37,6 +38,16 @@ require('vue-resource');
 window.draggable = require('vuedraggable');
 
 window.axios = require('axios');
+window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
+
+let token = document.head.querySelector('meta[name="csrf-token"]');
+
+if (token) {
+    window.axios.defaults.headers.common['X-CSRF-TOKEN'] = token.content;
+} else {
+    console.error('CSRF token not found: https://laravel.com/docs/csrf#csrf-x-csrf-token');
+}
+
 
 /**
  * We'll register a HTTP interceptor to attach the "CSRF" header to each of
@@ -47,8 +58,11 @@ window.axios = require('axios');
 Vue.http.interceptors.push((request, next) => {
     request.headers['X-CSRF-TOKEN'] = Laravel.csrfToken;
 
-next();
+    next();
 });
+import Vuex from 'vuex';
+
+Vue.use(Vuex);
 
 /**
  * Echo exposes an expressive API for subscribing to channels and listening
@@ -62,3 +76,13 @@ next();
 //     broadcaster: 'pusher',
 //     key: 'your-pusher-key'
 // });
+
+Vue.component(
+    'motor-backend-file-association',
+    require('./components/FileAssociation.vue')
+);
+
+Vue.component(
+    'motor-backend-file-association-field',
+    require('./components/fields/FileAssociationField.vue')
+);
