@@ -18,7 +18,7 @@ use Motor\Backend\Forms\Fields\DatetimepickerType;
 use Motor\Core\Filter\Filter;
 use Motor\Core\Filter\Renderers\PerPageRenderer;
 use Motor\Core\Filter\Renderers\SearchRenderer;
-use Spatie\MediaLibrary\HasMedia\Interfaces\HasMedia;
+use Spatie\MediaLibrary\HasMedia\HasMedia;
 
 abstract class BaseService
 {

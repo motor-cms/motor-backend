@@ -31,13 +31,16 @@
     "nstapelbroek/culpa": "^3.0",
     "symfony/intl": "~4.1",
     "kris/laravel-form-builder": "^1.15",
-    "spatie/laravel-medialibrary": "^6.6",
+    "spatie/laravel-medialibrary": "^7.5.2",
     "barryvdh/laravel-cors": "^0.11",
     "spatie/laravel-permission": "^2.25",
     "kalnoy/nestedset": "^4.3",
     "laravel/tinker": "^1.0",
     "wpb/string-blade-compiler": "dev-laravel-5.7",
-    "tymon/jwt-auth": "1.0.0-rc.3"
+    "tymon/jwt-auth": "1.0.0-rc.3",
+    "martinlindhe/laravel-vue-i18n-generator": "^0.1",
+    "tightenco/ziggy": "^0.6",
+    "laravel/horizon": "^1.3"
   },
   "require-dev": {
     "beyondcode/laravel-dump-server": "^1.0",

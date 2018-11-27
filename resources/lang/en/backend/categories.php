@@ -13,4 +13,5 @@ return [
     'name'           => 'Name',
     'new_category'   => 'New category',
     'all_categories' => 'All categories',
+    'items_for'      => 'Categories for: :name',
 ];

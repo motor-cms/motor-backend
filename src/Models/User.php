@@ -8,20 +8,21 @@ use Motor\Core\Traits\Searchable;
 
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Motor\Core\Traits\Filterable;
-use Spatie\MediaLibrary\HasMedia\HasMediaTrait;
-use Spatie\MediaLibrary\HasMedia\Interfaces\HasMediaConversions;
-use Spatie\MediaLibrary\Media;
 use Spatie\Permission\Traits\HasRoles;
 use Tymon\JWTAuth\Contracts\JWTSubject;
 
-class User extends Authenticatable implements HasMediaConversions, JWTSubject
+use Spatie\MediaLibrary\Models\Media;
+use Spatie\MediaLibrary\HasMedia\HasMedia;
+use Spatie\MediaLibrary\HasMedia\HasMediaTrait;
+
+class User extends Authenticatable implements HasMedia, JWTSubject
 {
 
     use Searchable;
-    use HasMediaTrait;
     use HasRoles;
     use Filterable;
     use Notifiable;
+    use HasMediaTrait;
 
     protected $guard_name = 'web';
 
@@ -53,7 +54,6 @@ class User extends Authenticatable implements HasMediaConversions, JWTSubject
     {
         return ['haha' => 'lol'];
     }
-
 
     public function registerMediaConversions(Media $media = null)
     {
