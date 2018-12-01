@@ -67,7 +67,7 @@ abstract class BaseService
      */
     public static function createWithForm(Request $request, Form $form)
     {
-        return $instance = ( new static() )->setRequest($request)->setForm($form)->doCreate();
+        return $instance = ( new static() )->setRequest($request, $form)->setForm($form)->doCreate();
     }
 
 
@@ -98,7 +98,7 @@ abstract class BaseService
      */
     public static function updateWithForm(Model $record, Request $request, Form $form)
     {
-        return ( new static() )->setRequest($request)->setRecord($record)->setForm($form)->doUpdate();
+        return ( new static() )->setRequest($request, $form)->setForm($form)->setRecord($record)->doUpdate();
     }
 
 
@@ -312,6 +312,7 @@ abstract class BaseService
     {
         $this->record = new $this->model();
         $this->beforeCreate();
+        
         $this->record->fill($this->data);
         $this->result = $this->record->save();
         $this->afterCreate();
@@ -398,10 +399,15 @@ abstract class BaseService
      *
      * @return $this
      */
-    public function setRequest(Request $request)
+    public function setRequest(Request $request, $form = null)
     {
+        $key = '';
+        if (!is_null($form)) {
+            $key = $form->getName() != '' ? $this->form->getName() : null;
+        }
+
         $this->request = $request;
-        $this->data    = $this->request->all();
+        $this->data    = $this->request->input($key, []);
 
         return $this;
     }
@@ -452,6 +458,7 @@ abstract class BaseService
             }
 
             // Handle empty select values
+            var_dump($field->getRealName());
             if ($field instanceof SelectType && isset($data[$field->getRealName()]) && $data[$field->getRealName()] == '') {
                 $data[$field->getRealName()] = null;
             }

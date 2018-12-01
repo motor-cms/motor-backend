@@ -20,10 +20,6 @@ class MotorServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-
-        //app('router')->middleware('frontend-navigation', Navigation::class);
-        $result = app('router')->pushMiddlewareToGroup('frontend', Navigation::class);
-
         Response::macro('attachment', function ($content, $filename, $format = 'application/json') {
 
             $headers = [
