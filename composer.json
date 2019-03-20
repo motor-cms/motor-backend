@@ -37,7 +37,7 @@
     "kalnoy/nestedset": "^4.3",
     "laravel/tinker": "^1.0",
     "wpb/string-blade-compiler": "3.7.x-dev",
-    "tymon/jwt-auth": "1.0.0-rc.3",
+    "tymon/jwt-auth": "1.0.0-rc.4.1@dev",
     "martinlindhe/laravel-vue-i18n-generator": "^0.1",
     "tightenco/ziggy": "^0.6",
     "laravel/horizon": "^1.3"
