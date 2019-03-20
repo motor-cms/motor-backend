@@ -36,7 +36,7 @@
     "spatie/laravel-permission": "^2.25",
     "kalnoy/nestedset": "^4.3",
     "laravel/tinker": "^1.0",
-    "wpb/string-blade-compiler": "dev-laravel-5.7",
+    "wpb/string-blade-compiler": "^3.7",
     "tymon/jwt-auth": "1.0.0-rc.3",
     "martinlindhe/laravel-vue-i18n-generator": "^0.1",
     "tightenco/ziggy": "^0.6",
@@ -53,12 +53,6 @@
     "symfony/dom-crawler": "~4.1",
     "orchestra/testbench": "~3.7"
   },
-  "repositories": [
-    {
-      "type": "vcs",
-      "url": "https://github.com/mikerogne/StringBladeCompiler"
-    }
-  ],
   "autoload": {
     "psr-4": {
       "Motor\\Backend\\": "src",
