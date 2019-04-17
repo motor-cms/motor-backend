@@ -79,10 +79,10 @@ Vue.use(Vuex);
 
 Vue.component(
     'motor-backend-file-association',
-    require('./components/FileAssociation.vue')
+    require('./components/FileAssociation.vue').default
 );
 
 Vue.component(
     'motor-backend-file-association-field',
-    require('./components/fields/FileAssociationField.vue')
+    require('./components/fields/FileAssociationField.vue').default
 );
