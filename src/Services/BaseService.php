@@ -411,7 +411,11 @@ abstract class BaseService
         }
 
         $this->request = $request;
-        $this->data    = $this->request->input($key, []);
+        if ($key == '') {
+            $this->data = $this->request->all();
+        } else {
+            $this->data    = $this->request->input($key, []);
+        }
 
         return $this;
     }
@@ -462,7 +466,6 @@ abstract class BaseService
             }
 
             // Handle empty select values
-            var_dump($field->getRealName());
             if ($field instanceof SelectType && isset($data[$field->getRealName()]) && $data[$field->getRealName()] == '') {
                 $data[$field->getRealName()] = null;
             }

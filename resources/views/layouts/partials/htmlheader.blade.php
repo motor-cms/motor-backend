@@ -6,10 +6,8 @@
     <meta name="author" content="Reza Esmaili">
     <meta name="keyword" content="">
     <link rel="shortcut icon" href="">
-    <title>{{ config('motor-backend-project.name') }} Backend - @yield('htmlheader_title', 'Your title here') </title>
-
-    <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
+    <title>{{ config('motor-backend-project.name') }} Backend - @yield('htmlheader_title', 'Your title here') </title>
 
     @yield('view_styles')
 
