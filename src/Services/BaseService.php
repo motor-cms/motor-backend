@@ -403,7 +403,11 @@ abstract class BaseService
     {
         $key = '';
         if (!is_null($form)) {
-            $key = $form->getName() != '' ? $this->form->getName() : null;
+            if (!is_null($this->form)) {
+                $key = $form->getName() != '' ? $this->form->getName() : null;
+            } else {
+                $key = $form->getName();
+            }
         }
 
         $this->request = $request;
