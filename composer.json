@@ -12,52 +12,51 @@
     }
   ],
   "require": {
-    "php": ">=7.1.3",
+    "php": "^7.1.3",
     "fideloper/proxy": "^4.0",
-    "laravel/framework": "5.7.*",
-    "motor-cms/motor-core": "0.6.*",
+    "laravel/framework": "5.8.*",
+    "laravel/tinker": "^1.0",
+
+    "motor-cms/motor-core": "0.8.*",
 
     "doctrine/dbal": "^2.6",
     "php-console/php-console": "^3.1",
     "guzzlehttp/guzzle": "^6.3",
-    "barryvdh/laravel-ide-helper": "^2.4",
-    "dimsav/laravel-translatable": "^9.0",
+    "barryvdh/laravel-ide-helper": "^2.6",
+    "dimsav/laravel-translatable": "^9.4",
     "laracasts/flash": "^3.0",
-    "laravelcollective/html": "^5.7",
-    "spatie/laravel-fractal": "^5.3",
+    "laravelcollective/html": "^5.8",
+    "spatie/laravel-fractal": "^5.5",
     "intervention/imagecache": "^2.3",
     "league/glide-laravel": "^1.0",
     "lavary/laravel-menu": "^1.7",
     "nstapelbroek/culpa": "^3.0",
-    "symfony/intl": "~4.1",
-    "kris/laravel-form-builder": "^1.15",
-    "spatie/laravel-medialibrary": "^7.5.2",
+    "symfony/intl": "~4.2",
+    "kris/laravel-form-builder": "^1.20",
+    "spatie/laravel-medialibrary": "^7.6",
     "barryvdh/laravel-cors": "^0.11",
-    "spatie/laravel-permission": "^2.25",
+    "spatie/laravel-permission": "^2.37",
     "kalnoy/nestedset": "^4.3",
-    "laravel/tinker": "^1.0",
-    "wpb/string-blade-compiler": "3.7.x-dev",
-    "tymon/jwt-auth": "1.0.0-rc.4.1@dev",
+    "wpb/string-blade-compiler": "^3.8.1",
+    "tymon/jwt-auth": "1.0.0-rc.4.1",
     "martinlindhe/laravel-vue-i18n-generator": "^0.1",
-    "tightenco/ziggy": "^0.6",
-    "laravel/horizon": "^1.3"
+    "tightenco/ziggy": "^0.7",
+    "laravel/horizon": "^3.1",
+    "predis/predis": "^1.1"
   },
   "require-dev": {
     "beyondcode/laravel-dump-server": "^1.0",
     "filp/whoops": "^2.0",
     "fzaninotto/faker": "^1.4",
     "mockery/mockery": "^1.0",
-    "nunomaduro/collision": "^2.0",
-    "phpunit/phpunit": "^7.0",
-    "symfony/css-selector": "~4.1",
-    "symfony/dom-crawler": "~4.1",
-    "orchestra/testbench": "~3.7"
+    "nunomaduro/collision": "^3.0",
+    "phpunit/phpunit": "^7.5",
+    "symfony/css-selector": "~4.2",
+    "symfony/dom-crawler": "~4.2",
+    "orchestra/testbench": "~3.8",
+    "laravel/dusk": "~5.0"
   },
   "repositories": [
-    {
-      "type": "vcs",
-      "url": "https://github.com/TerrePorter/StringBladeCompiler"
-    }
   ],
   "autoload": {
     "psr-4": {
