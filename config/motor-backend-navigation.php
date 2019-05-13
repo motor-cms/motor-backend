@@ -2,7 +2,7 @@
 
 return [
     'collapseIcon' => '', //<i class="fa fa-angle-left pull-right"></i>',
-    'items' => [
+    'items'        => [
         0   => [
             'slug'        => 'dashboard',
             'name'        => 'motor-backend::backend/global.dashboard',
@@ -17,7 +17,7 @@ return [
             'icon'        => 'fa fa-cogs',
             'route'       => null,
             'roles'       => [ 'SuperAdmin' ],
-            'permissions' => [],
+            'permissions' => [ 'administration.rad' ],
             'items'       => [
                 100 => [
                     'slug'        => 'users',
@@ -25,7 +25,7 @@ return [
                     'icon'        => 'fa fa-user',
                     'route'       => 'backend.users.index',
                     'roles'       => [ 'SuperAdmin' ],
-                    'permissions' => [],
+                    'permissions' => [ 'users.read' ],
                 ],
                 110 => [
                     'slug'        => 'languages',
@@ -33,7 +33,7 @@ return [
                     'icon'        => 'fa fa-globe',
                     'route'       => 'backend.languages.index',
                     'roles'       => [ 'SuperAdmin' ],
-                    'permissions' => [],
+                    'permissions' => [ 'languages.read' ],
                 ],
                 120 => [
                     'slug'        => 'clients',
@@ -41,7 +41,7 @@ return [
                     'icon'        => 'fa fa-plus',
                     'route'       => 'backend.clients.index',
                     'roles'       => [ 'SuperAdmin' ],
-                    'permissions' => [],
+                    'permissions' => [ 'clients.read' ],
                 ],
                 130 => [
                     'slug'        => 'email_templates',
@@ -49,7 +49,7 @@ return [
                     'icon'        => 'fa fa-plus',
                     'route'       => 'backend.email_templates.index',
                     'roles'       => [ 'SuperAdmin' ],
-                    'permissions' => [],
+                    'permissions' => [ 'email_templates.read' ],
                 ],
                 140 => [
                     'slug'        => 'roles',
@@ -57,7 +57,7 @@ return [
                     'icon'        => 'fa fa-plus',
                     'route'       => 'backend.roles.index',
                     'roles'       => [ 'SuperAdmin' ],
-                    'permissions' => [],
+                    'permissions' => [ 'roles.read' ],
                 ],
                 150 => [
                     'slug'        => 'permissions',
@@ -65,7 +65,7 @@ return [
                     'icon'        => 'fa fa-plus',
                     'route'       => 'backend.permissions.index',
                     'roles'       => [ 'SuperAdmin' ],
-                    'permissions' => [],
+                    'permissions' => [ 'permissions.read' ],
                 ],
                 160 => [
                     'slug'        => 'category_trees',
@@ -76,14 +76,15 @@ return [
                     'permissions' => [ 'category_trees.read' ],
                     'aliases'     => [ 'backend.categories' ]
                 ],
-                170 => [ // <-- !!! replace 840 with your own sort position !!!
-                    'slug' => 'config_variables',
-                    'name'  => 'motor-backend::backend/config_variables.config_variables',
-                    'icon'  => 'fa fa-plus',
-                    'route' => 'backend.config_variables.index',
+                170 => [
+                    'slug'        => 'config_variables',
+                    'name'        => 'motor-backend::backend/config_variables.config_variables',
+                    'icon'        => 'fa fa-plus',
+                    'route'       => 'backend.config_variables.index',
                     'roles'       => [ 'SuperAdmin' ],
                     'permissions' => [ 'config_variables.read' ],
-                ],            ]
+                ],
+            ]
         ]
     ]
 ];

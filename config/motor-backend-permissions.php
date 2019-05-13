@@ -86,4 +86,10 @@ return [
             'delete'
         ]
     ],
+    'administration'   => [
+        'name'   => 'motor-backend::backend/global.administration',
+        'values' => [
+            'read'
+        ]
+    ]
 ];
