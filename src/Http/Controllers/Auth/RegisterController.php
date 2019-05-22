@@ -2,6 +2,7 @@
 
 namespace Motor\Backend\Http\Controllers\Auth;
 
+use Illuminate\Http\Request;
 use Motor\Backend\Models\User;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Validator;
@@ -27,7 +28,7 @@ class RegisterController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = '/home';
+    protected $redirectTo = '/';
 
     /**
      * Create a new controller instance.
@@ -46,7 +47,10 @@ class RegisterController extends Controller
      */
     public function showRegistrationForm()
     {
-        return view('motor-backend::auth.register');
+        // We're disabling this controller by redirecting to /
+        // Yes, we could do this in the routes, but that would break route caching
+        return redirect($this->redirectTo);
+        //return view('motor-backend::auth.register');
     }
 
     /**
