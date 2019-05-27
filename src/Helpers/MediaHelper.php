@@ -12,7 +12,7 @@ class MediaHelper
         $data  = [];
         $items = $record->getMedia($identifier);
 
-        $host = env('APP_URL');
+        $host = config('app.url');
 
         //$host = ( isset($_SERVER['HTTPS']) ? "https" : "http" ) . "://".$_SERVER['HTTP_HOST'];
 
