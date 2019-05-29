@@ -3,6 +3,7 @@
 namespace Motor\Backend\Services;
 
 use Illuminate\Support\Arr;
+use Illuminate\Support\Str;
 use Motor\Backend\Models\Permission;
 use Motor\Backend\Models\Role;
 use Motor\Backend\Models\User;
@@ -16,7 +17,7 @@ class UserService extends BaseService
     public function beforeCreate()
     {
         $this->data['password']  = bcrypt($this->data['password']);
-        $this->data['api_token'] = str_random(60);
+        $this->data['api_token'] = Str::random(60);
     }
 
 

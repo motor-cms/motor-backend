@@ -130,10 +130,10 @@ abstract class BaseService
         $instance->defaultFilters();
         $instance->filters();
 
-        if (array_get($_GET, 'sortable_field') && array_get($_GET, 'sortable_direction')) {
+        if (Arr::get($_GET, 'sortable_field') && Arr::get($_GET, 'sortable_direction')) {
             $instance->setSorting([
-                array_get($_GET, 'sortable_field'),
-                array_get($_GET, 'sortable_direction')
+                Arr::get($_GET, 'sortable_field'),
+                Arr::get($_GET, 'sortable_direction')
             ]);
         }
 
@@ -236,7 +236,7 @@ abstract class BaseService
 
             // Handle blamable
             if ($table == 'createdBy' || $table == 'updatedBy' || $table == 'deletedBy') {
-                $tableColumn         = snake_case($table);
+                $tableColumn         = Str::snake($table);
                 $table               = 'user';
                 $this->sortableField = $table . '.' . $field;
             }
@@ -255,7 +255,7 @@ abstract class BaseService
             }
 
             if ( ! $joinExists) {
-                $query->join(str_plural($table) . ' as ' . $table, $tableColumn, $table . '.id');
+                $query->join(Str::plural($table) . ' as ' . $table, $tableColumn, $table . '.id');
             }
         }
 

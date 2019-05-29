@@ -12,6 +12,9 @@
 */
 
 /** @var \Illuminate\Database\Eloquent\Factory $factory */
+
+use Illuminate\Support\Str;
+
 $factory->define(Motor\Backend\Models\User::class, function (Faker\Generator $faker) {
     static $password;
 
@@ -19,20 +22,20 @@ $factory->define(Motor\Backend\Models\User::class, function (Faker\Generator $fa
         'name'           => $faker->name,
         'email'          => $faker->unique()->safeEmail,
         'password'       => $password ?: $password = bcrypt('secret'),
-        'api_token'      => str_random(60),
-        'remember_token' => str_random(10),
+        'api_token'      => Str::random(60),
+        'remember_token' => Str::random(10),
     ];
 });
 
 $factory->define(Motor\Backend\Models\Role::class, function (Faker\Generator $faker) {
     return [
-        'name' => $faker->word . $faker->word . str_random(20)
+        'name' => $faker->word . $faker->word . Str::random(20)
     ];
 });
 
 $factory->define(Motor\Backend\Models\Language::class, function (Faker\Generator $faker) {
     return [
-        'iso_639_1'    => str_random(2),
+        'iso_639_1'    => Str::random(2),
         'english_name' => $faker->word,
         'native_name'  => $faker->word
     ];
@@ -41,7 +44,7 @@ $factory->define(Motor\Backend\Models\Language::class, function (Faker\Generator
 $factory->define(Motor\Backend\Models\Client::class, function (Faker\Generator $faker) {
     return [
         'name'               => $faker->sentence,
-        'country_iso_3166_1' => str_random(2),
+        'country_iso_3166_1' => Str::random(2),
         'created_by'         => factory(Motor\Backend\Models\User::class)->create()->id,
         'updated_by'         => factory(Motor\Backend\Models\User::class)->create()->id,
     ];
