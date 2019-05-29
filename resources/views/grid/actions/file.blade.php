@@ -1,4 +1,4 @@
-@if (Arr::get($options, 'name_only', false))
+@if (Illuminate\Support\Arr::get($options, 'name_only', false))
     @if ($media == null)
         {{ trans('motor-media::backend/global.no_file') }}
     @else

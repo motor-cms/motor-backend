@@ -1,1 +1,1 @@
-{!! link_to_route($link, $label, [$record->id], ['data-message' => Arr::get($parameters, 'confirmation_message'), 'class' => 'btn @defaultButtonSize '. Arr::get($parameters, 'class').' '.Arr::get($parameters, 'ask_for_confirmation_class')]) !!}
+{!! link_to_route($link, $label, [$record->id], ['data-message' => Illuminate\Support\Arr::get($parameters, 'confirmation_message'), 'class' => 'btn @defaultButtonSize '. Illuminate\Support\Arr::get($parameters, 'class').' '.Illuminate\Support\Arr::get($parameters, 'ask_for_confirmation_class')]) !!}
