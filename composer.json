@@ -23,7 +23,7 @@
     "php-console/php-console": "^3.1",
     "guzzlehttp/guzzle": "^6.3",
     "barryvdh/laravel-ide-helper": "^2.6",
-    "dimsav/laravel-translatable": "^9.4",
+    "astrotomic/laravel-translatable": "^11.1",
     "laracasts/flash": "^3.0",
     "laravelcollective/html": "^5.8",
     "spatie/laravel-fractal": "^5.5",

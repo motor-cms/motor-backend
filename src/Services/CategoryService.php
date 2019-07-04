@@ -3,7 +3,6 @@
 namespace Motor\Backend\Services;
 
 use Motor\Backend\Models\Category;
-use Motor\Backend\Services\BaseService;
 
 class CategoryService extends BaseService
 {

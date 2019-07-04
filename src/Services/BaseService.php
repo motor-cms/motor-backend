@@ -231,7 +231,7 @@ abstract class BaseService
         // check if we need to join a table
         $join = false;
         if (strpos($this->sortableField, '.') > 0) {
-            list($table, $field) = explode('.', $this->sortableField);
+            [$table, $field] = explode('.', $this->sortableField);
             $tableColumn = $table . '_id';
 
             // Handle blamable
