@@ -3,8 +3,11 @@
 namespace Motor\Backend\Services;
 
 use Motor\Backend\Models\ConfigVariable;
-use Motor\Backend\Services\BaseService;
 
+/**
+ * Class ConfigVariableService
+ * @package Motor\Backend\Services
+ */
 class ConfigVariableService extends BaseService
 {
 

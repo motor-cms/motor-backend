@@ -13,16 +13,18 @@ use Illuminate\Foundation\Bus\DispatchesJobs;
 use Illuminate\Routing\Controller as BaseController;
 use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
-use Illuminate\Foundation\Auth\Access\AuthorizesResources;
 use Illuminate\Support\Str;
 use Kris\LaravelFormBuilder\Fields\CheckableType;
 use Kris\LaravelFormBuilder\Fields\SelectType;
 use Kris\LaravelFormBuilder\Form;
-use Spatie\MediaLibrary\HasMedia\Interfaces\HasMedia;
 use League\Fractal\Manager;
 use League\Fractal\Resource\Collection;
 use League\Fractal\Resource\Item;
 
+/**
+ * Class Controller
+ * @package Motor\Backend\Http\Controllers
+ */
 class Controller extends BaseController
 {
 
@@ -37,26 +39,57 @@ class Controller extends BaseController
         $this->fractal = new Manager();
     }
 
+
+    /**
+     * @param        $record
+     * @param        $transformer
+     * @param string $includes
+     * @return Item
+     */
     protected function transformItem($record, $transformer, $includes = '')
     {
         $this->fractal->parseIncludes($includes);
-        return new Item($record, new $transformer);
+
+        return new Item($record, ( new $transformer ));
     }
 
+
+    /**
+     * @param        $collection
+     * @param        $transformer
+     * @param string $includes
+     * @return Collection
+     */
     protected function transformCollection($collection, $transformer, $includes = '')
     {
         $this->fractal->parseIncludes($includes);
-        return new Collection($collection, new $transformer);
+
+        return new Collection($collection, ( new $transformer ));
     }
 
+
+    /**
+     * @param        $paginator
+     * @param        $transformer
+     * @param string $includes
+     * @return Collection
+     */
     protected function transformPaginator($paginator, $transformer, $includes = '')
     {
         $this->fractal->parseIncludes($includes);
-        $resource = new Collection($paginator->getCollection(), new $transformer);
+        $resource = new Collection($paginator->getCollection(), ( new $transformer ));
         $resource->setPaginator(new IlluminatePaginatorAdapter($paginator));
+
         return $resource;
     }
 
+
+    /**
+     * @param $message
+     * @param $data
+     * @param $filename
+     * @return mixed
+     */
     protected function respondWithJsonDownload($message, $data, $filename)
     {
         $meta = null;
@@ -65,14 +98,21 @@ class Controller extends BaseController
             $meta = Arr::get($data, 'meta', null);
             $data = Arr::get($data, 'data');
         }
-        if (!is_null($meta)) {
-            $json = json_encode(['message' => $message, 'data' => $data, 'meta' => $meta]);
+        if ( ! is_null($meta)) {
+            $json = json_encode([ 'message' => $message, 'data' => $data, 'meta' => $meta ]);
         } else {
-            $json = json_encode(['message' => $message, 'data' => $data]);
+            $json = json_encode([ 'message' => $message, 'data' => $data ]);
         }
+
         return response()->attachment($json, $filename, 'application/json');
     }
 
+
+    /**
+     * @param $message
+     * @param $data
+     * @return \Illuminate\Http\JsonResponse
+     */
     protected function respondWithJson($message, $data)
     {
         $meta = null;
@@ -81,65 +121,10 @@ class Controller extends BaseController
             $meta = Arr::get($data, 'meta', null);
             $data = Arr::get($data, 'data');
         }
-        if (!is_null($meta)) {
-            return response()->json(['message' => $message, 'data' => $data, 'meta' => $meta]);
-        }
-        return response()->json(['message' => $message, 'data' => $data]);
-    }
-
-    /**
-     * @param Form  $form
-     * @param array $data
-     *
-     * @return array
-     */
-    protected function handleInputValues(Form $form, array $data)
-    {
-        foreach ($form->getFields() as $name => $field) {
-
-            // Handle empty checkbox values
-            if ($field instanceof CheckableType) {
-                if ( ! isset( $data[$field->getRealName()] )) {
-                    $data[$field->getRealName()] = false;
-                }
-            }
-
-            // Handle empty date values
-            if ($field instanceof DatepickerType || $field instanceof DatetimepickerType) {
-
-                if ($data[$field->getRealName().'_picker'] == '') {
-                    $data[$field->getRealName()] = '';
-                }
-                if ( ! isset( $data[$field->getRealName()] ) || ( isset( $data[$field->getRealName()] ) && $data[$field->getRealName()] == '' || $data[$field->getRealName()] == '0000-00-00 00:00:00' || $data[$field->getRealName()] == '0000-00-00' )) {
-                    $data[$field->getRealName()] = null;
-                }
-            }
-
-            // Handle empty select values
-            if ($field instanceof SelectType && isset( $data[$field->getRealName()] ) && $data[$field->getRealName()] == '') {
-                $data[$field->getRealName()] = null;
-            }
+        if ( ! is_null($meta)) {
+            return response()->json([ 'message' => $message, 'data' => $data, 'meta' => $meta ]);
         }
 
-        return $data;
-    }
-
-
-    /**
-     * @param Request $request
-     * @param Model   $model
-     */
-    protected function handleFileupload(Request $request, HasMedia $record, $identifier = 'image', $collection = null)
-    {
-        $collection = ( ! is_null($collection) ? $collection : $identifier );
-
-        if ( ! is_null($request->file($identifier)) || $request->get(Str::slug($identifier) . '_delete') == 1) {
-            $record->clearMediaCollection($identifier);
-            $record->clearMediaCollection($collection);
-        }
-
-        if ($request->file($identifier) && $request->file($identifier)->isValid()) {
-            $record->addMedia($request->file($identifier))->toCollection($collection);
-        }
+        return response()->json([ 'message' => $message, 'data' => $data ]);
     }
 }

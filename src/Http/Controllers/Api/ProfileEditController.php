@@ -8,14 +8,18 @@ use Auth;
 use Motor\Backend\Services\ProfileEditService;
 use Motor\Backend\Transformers\UserTransformer;
 
+/**
+ * Class ProfileEditController
+ * @package Motor\Backend\Http\Controllers\Api
+ */
 class ProfileEditController extends Controller
 {
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request $request
-     * @param  int                      $id
+     * @param \Illuminate\Http\Request $request
+     * @param int                      $id
      *
      * @return \Illuminate\Http\Response
      */
@@ -28,6 +32,9 @@ class ProfileEditController extends Controller
     }
 
 
+    /**
+     * @return \Illuminate\Http\JsonResponse
+     */
     public function me()
     {
         $result   = ProfileEditService::show(Auth::user())->getResult();

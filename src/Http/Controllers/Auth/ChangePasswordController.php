@@ -4,12 +4,16 @@ namespace Motor\Backend\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use Motor\Backend\Traits\ChangesPasswords;
-use Illuminate\Foundation\Auth\ResetsPasswords;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
+/**
+ * Class ChangePasswordController
+ * @package Motor\Backend\Http\Controllers\Auth
+ */
 class ChangePasswordController extends Controller
 {
+
     /*
     |--------------------------------------------------------------------------
     | Password Reset Controller
@@ -36,19 +40,22 @@ class ChangePasswordController extends Controller
      *
      * If no token is present, display the link request form.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  string|null  $token
+     * @param \Illuminate\Http\Request $request
+     * @param string|null              $token
+     *
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function showChangeForm(Request $request)
     {
-        return view('motor-backend::auth.passwords.change')->with(
-            ['email' => Auth::guard()->user()->email]
-        );
+        return view('motor-backend::auth.passwords.change')->with([ 'email' => Auth::guard()->user()->email ]);
     }
 
+
+    /**
+     * @param Request $request
+     */
     public function saveNewPassword(Request $request)
     {
-        dd("HIER");
+        // Fixme: do something here
     }
 }

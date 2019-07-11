@@ -4,19 +4,23 @@ namespace Motor\Backend\Http\Controllers\Backend;
 
 use Kalnoy\Nestedset\NestedSet;
 use Motor\Backend\Http\Controllers\Controller;
-
 use Motor\Backend\Models\Category;
 use Motor\Backend\Http\Requests\Backend\CategoryRequest;
 use Motor\Backend\Services\CategoryService;
 use Motor\Backend\Grids\CategoryGrid;
 use Motor\Backend\Forms\Backend\CategoryForm;
-
 use Kris\LaravelFormBuilder\FormBuilderTrait;
 use Motor\Core\Filter\Renderers\WhereRenderer;
 
+/**
+ * Class CategoriesController
+ * @package Motor\Backend\Http\Controllers\Backend
+ */
 class CategoriesController extends Controller
 {
+
     use FormBuilderTrait;
+
 
     /**
      * Display a listing of the resource.
@@ -34,8 +38,8 @@ class CategoriesController extends Controller
         $filter->add(new WhereRenderer('scope'))->setValue($record->scope);
         $filter->add(new WhereRenderer('parent_id'))->setOperator('!=')->setAllowNull(true)->setValue(null);
 
-        $grid->filter = $filter;
-        $paginator    = $service->getPaginator();
+        $grid->setFilter($filter);
+        $paginator = $service->getPaginator();
 
         return view('motor-backend::backend.categories.index', compact('paginator', 'grid', 'record'));
     }
@@ -54,18 +58,19 @@ class CategoriesController extends Controller
             'enctype' => 'multipart/form-data'
         ]);
 
-        $trees = Category::where('scope', $root->scope)->defaultOrder()->get()->toTree();
-        $newItem = true;
+        $trees        = Category::where('scope', $root->scope)->defaultOrder()->get()->toTree();
+        $newItem      = true;
         $selectedItem = null;
 
-        return view('motor-backend::backend.categories.create', compact('form', 'trees', 'newItem', 'selectedItem', 'root'));
+        return view('motor-backend::backend.categories.create',
+            compact('form', 'trees', 'newItem', 'selectedItem', 'root'));
     }
 
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request $request
+     * @param \Illuminate\Http\Request $request
      *
      * @return \Illuminate\Http\Response
      */
@@ -84,14 +89,14 @@ class CategoriesController extends Controller
 
         flash()->success(trans('motor-backend::backend/categories.created'));
 
-        return redirect('backend/categories/'.$root->id);
+        return redirect('backend/categories/' . $root->id);
     }
 
 
     /**
      * Display the specified resource.
      *
-     * @param  int $id
+     * @param int $id
      *
      * @return \Illuminate\Http\Response
      */
@@ -104,7 +109,7 @@ class CategoriesController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int $id
+     * @param int $id
      *
      * @return \Illuminate\Http\Response
      */
@@ -121,18 +126,19 @@ class CategoriesController extends Controller
             'model'   => $record
         ]);
 
-        $newItem = false;
+        $newItem      = false;
         $selectedItem = $record->id;
 
-        return view('motor-backend::backend.categories.edit', compact('form', 'trees', 'root', 'newItem', 'selectedItem'));
+        return view('motor-backend::backend.categories.edit',
+            compact('form', 'trees', 'root', 'newItem', 'selectedItem'));
     }
 
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request $request
-     * @param  int                      $id
+     * @param \Illuminate\Http\Request $request
+     * @param int                      $id
      *
      * @return \Illuminate\Http\Response
      */
@@ -151,14 +157,14 @@ class CategoriesController extends Controller
 
         flash()->success(trans('motor-backend::backend/categories.updated'));
 
-        return redirect('backend/categories/'.$root->id);
+        return redirect('backend/categories/' . $root->id);
     }
 
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int $id
+     * @param int $id
      *
      * @return \Illuminate\Http\Response
      */
@@ -170,6 +176,6 @@ class CategoriesController extends Controller
 
         flash()->success(trans('motor-backend::backend/categories.deleted'));
 
-        return redirect('backend/categories/'.$root->id);
+        return redirect('backend/categories/' . $root->id);
     }
 }

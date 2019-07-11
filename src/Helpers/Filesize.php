@@ -2,9 +2,17 @@
 
 namespace Motor\Backend\Helpers;
 
+/**
+ * Class Filesize
+ * @package Motor\Backend\Helpers
+ */
 class Filesize
 {
 
+    /**
+     * @param $bytes
+     * @return string
+     */
     public static function bytesToHuman($bytes)
     {
         $units = [ 'B', 'KB', 'MB', 'GB', 'TB', 'PB' ];

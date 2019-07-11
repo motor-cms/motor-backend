@@ -4,6 +4,9 @@ use Illuminate\Foundation\Testing\WithoutMiddleware;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 
+/**
+ * Class MotorBackendApiUserTest
+ */
 class MotorBackendApiUserTest extends TestCase
 {
 

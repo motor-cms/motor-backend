@@ -2,6 +2,10 @@
 
 namespace Motor\Backend\Grid;
 
+/**
+ * Class Cell
+ * @package Motor\Backend\Grid
+ */
 class Cell extends Base
 {
 
@@ -15,7 +19,7 @@ class Cell extends Base
 
     protected $renderer;
 
-    protected $renderOptions = [ ];
+    protected $renderOptions = [];
 
 
     /**
@@ -23,7 +27,7 @@ class Cell extends Base
      *
      * @param $name
      */
-    public function __construct($name, $renderer, $renderOptions = [ ])
+    public function __construct($name, $renderer, $renderOptions = [])
     {
         $this->name          = $name;
         $this->renderer      = $renderer;
@@ -48,11 +52,19 @@ class Cell extends Base
         $this->value = $value;
     }
 
+
+    /**
+     * @param $record
+     */
     public function setRecord($record)
     {
         $this->record = $record;
     }
 
+
+    /**
+     * @param $column
+     */
     public function setColumn($column)
     {
         $this->column = $column;
@@ -67,7 +79,7 @@ class Cell extends Base
         // Get renderer
         $renderer = new $this->renderer($this->value, $this->renderOptions, $this->record);
 
-        if (!$this->column->checkCondition($this->record)) {
+        if ( ! $this->column->checkCondition($this->record)) {
             return '';
         }
 
@@ -85,7 +97,7 @@ class Cell extends Base
     public function parseFilters($filters)
     {
         foreach ($filters as $filter) {
-            $params = [ ];
+            $params = [];
             if (preg_match('/([^\[]*+)\[(.+)\]/', $filter, $match)) {
                 $filter = $match[1];
                 $params = explode(',', $match[2]);
@@ -100,7 +112,7 @@ class Cell extends Base
 
                 try {
                     $this->value = call_user_func_array($filter, $params);
-                } catch (\Exception $e) {
+                } catch (\Exception $exception) {
                     return false;
                 }
             }

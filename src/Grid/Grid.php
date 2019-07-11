@@ -7,6 +7,10 @@ use Motor\Core\Filter\Filter;
 use Motor\Core\Filter\Renderers\PerPageRenderer;
 use Auth;
 
+/**
+ * Class Grid
+ * @package Motor\Backend\Grid
+ */
 class Grid extends Base
 {
 
@@ -30,9 +34,9 @@ class Grid extends Base
 
     protected $specialRows = [];
 
-    public $filter;
+    protected $filter;
 
-    public $paginator = null;
+    protected $paginator = null;
 
 
     /**
@@ -64,9 +68,21 @@ class Grid extends Base
     }
 
 
+    /**
+     * @return Filter
+     */
     public function getFilter()
     {
         return $this->filter;
+    }
+
+
+    /**
+     * @param $filter
+     */
+    public function setFilter($filter)
+    {
+        $this->filter = $filter;
     }
 
 
@@ -90,6 +106,10 @@ class Grid extends Base
     }
 
 
+    /**
+     * @param $view
+     * @return SpecialRow
+     */
     public function addSpecialRow($view)
     {
         $specialRow          = new SpecialRow($view);
@@ -99,36 +119,70 @@ class Grid extends Base
     }
 
 
+    /**
+     * @return array
+     */
     public function getSpecialRows()
     {
         return $this->specialRows;
     }
 
 
+    /**
+     * @param       $label
+     * @param       $link
+     * @param       $action
+     * @param array $parameters
+     * @return Action
+     */
     public function addFormAction($label, $link, $action, $parameters = [])
     {
         return $this->addAction($label, $link, array_merge($parameters, [ 'type' => 'form', 'action' => $action ]));
     }
 
 
+    /**
+     * @param       $label
+     * @param       $link
+     * @param array $parameters
+     * @return Action
+     */
     public function addEditAction($label, $link, $parameters = [])
     {
         return $this->addAction($label, $link, array_merge($parameters, [ 'type' => 'edit' ]));
     }
 
 
+    /**
+     * @param       $label
+     * @param       $link
+     * @param array $parameters
+     * @return Action
+     */
     public function addDuplicateAction($label, $link, $parameters = [])
     {
         return $this->addAction($label, $link, array_merge($parameters, [ 'type' => 'duplicate' ]));
     }
 
 
+    /**
+     * @param       $label
+     * @param       $link
+     * @param array $parameters
+     * @return Action
+     */
     public function addDeleteAction($label, $link, $parameters = [])
     {
         return $this->addAction($label, $link, array_merge($parameters, [ 'type' => 'delete' ]));
     }
 
 
+    /**
+     * @param       $label
+     * @param       $link
+     * @param array $parameters
+     * @return Action
+     */
     public function addAction($label, $link, $parameters = [])
     {
         $action          = new Action($label, $link, $parameters);
@@ -141,6 +195,9 @@ class Grid extends Base
     }
 
 
+    /**
+     * @return array
+     */
     public function getActions()
     {
         return $this->actions;
@@ -265,18 +322,23 @@ class Grid extends Base
                     $temporaryRecord = $temporaryRecord->{$segment};
                     //if (isset($temporaryRecord->{$segment})) {
                     //}
-                } catch (\Exception $e) {
+                } catch (\Exception $exception) {
                 }
             }
         } elseif ($record->{$column->getName()} instanceof Collection) {
             $value = $record->{$column->getName()}->toArray();
         } elseif (is_object($record)) {
             // Eloquent fieldname
-            $value = @$record->{$column->getName()};
+            if (isset($record->{$column->getName()})) {
+                $value = $record->{$column->getName()};
 
-            if ($sanitize) {
-                $value = $this->sanitize($value);
+                if ($sanitize) {
+                    $value = $this->sanitize($value);
+                }
+            } else {
+                $value = 'COLUMN NOT FOUND';
             }
+
         } elseif (is_array($record) && isset($record[$column->getName()])) {
             // Array value
             $value = $record[$column->getName()];
@@ -323,7 +385,7 @@ class Grid extends Base
      */
     public function checkSortable($field, $direction)
     {
-        list($sortableField, $sortableDirection) = $this->getSorting();
+        [ $sortableField, $sortableDirection ] = $this->getSorting();
 
         if ($sortableField == $field && $sortableDirection == $direction) {
             return true;
@@ -333,16 +395,39 @@ class Grid extends Base
     }
 
 
+    /**
+     * @return string
+     * @throws \ReflectionException
+     */
+    /**
+     * @return string
+     * @throws \ReflectionException
+     */
+    protected function getClass()
+    {
+        $reflect = new \ReflectionClass($this);
+
+        return $reflect->getName();
+    }
+
+
+    /**
+     * @return array
+     */
+    /**
+     * @return array
+     * @throws \ReflectionException
+     */
     public function getSorting()
     {
         // Check in the URL
-        $sortableField     = \Request::get(get_class($this) . '_sortable_field');
-        $sortableDirection = \Request::get(get_class($this) . '_sortable_direction');
+        $sortableField     = \Request::get($this->getClass() . '_sortable_field');
+        $sortableDirection = \Request::get($this->getClass() . '_sortable_direction');
 
         // Check session
         if (is_null($sortableField)) {
-            $sortableField     = \Session::get(get_class($this) . '_sortable_field');
-            $sortableDirection = \Session::get(get_class($this) . '_sortable_direction');
+            $sortableField     = \Session::get($this->getClass() . '_sortable_field');
+            $sortableDirection = \Session::get($this->getClass() . '_sortable_direction');
         }
 
         // Check default
@@ -355,13 +440,28 @@ class Grid extends Base
     }
 
 
+    /**
+     * @param $field
+     * @param $direction
+     */
+    /**
+     * @param $field
+     * @param $direction
+     * @throws \ReflectionException
+     */
     public function setSorting($field, $direction)
     {
-        \Session::put(get_class($this) . '_sortable_field', $field);
-        \Session::put(get_class($this) . '_sortable_direction', $direction);
+        \Session::put($this->getClass() . '_sortable_field', $field);
+        \Session::put($this->getClass() . '_sortable_direction', $direction);
     }
 
 
+    /**
+     * @return mixed
+     */
+    /**
+     * @return mixed
+     */
     public function getSortableColumn()
     {
         $sorting = $this->getSorting();
@@ -370,6 +470,12 @@ class Grid extends Base
     }
 
 
+    /**
+     * @return mixed
+     */
+    /**
+     * @return mixed
+     */
     public function getSortableDirection()
     {
         $sorting = $this->getSorting();
@@ -378,12 +484,30 @@ class Grid extends Base
     }
 
 
+    /**
+     * @param $field
+     * @param $direction
+     * @return string
+     */
+    /**
+     * @param $field
+     * @param $direction
+     * @return string
+     */
     public function getSortableLink($field, $direction)
     {
         return '?sortable_field=' . $field . '&sortable_direction=' . $direction;
     }
 
 
+    /**
+     * @param int $limit
+     * @return |null
+     */
+    /**
+     * @param int $limit
+     * @return |null
+     */
     public function getPaginator($limit = 20)
     {
 
@@ -402,7 +526,7 @@ class Grid extends Base
             $limit = $perPage->getValue();
         }
 
-        list($sortableField, $sortableDirection) = $this->getSorting();
+        [ $sortableField, $sortableDirection ] = $this->getSorting();
 
         // FIXME: we can't assume that the sorting will always be on the base model!?
         if ( ! is_null($sortableField)) {
@@ -418,12 +542,24 @@ class Grid extends Base
     }
 
 
+    /**
+     * @return array|\Illuminate\Http\Request|string
+     */
+    /**
+     * @return array|\Illuminate\Http\Request|string
+     */
     public function getSearchTerm()
     {
         return $this->searchTerm;
     }
 
 
+    /**
+     * @return array|bool|\Illuminate\Http\Request|string
+     */
+    /**
+     * @return array|bool|\Illuminate\Http\Request|string
+     */
     public function getClientFilter()
     {
         return $this->clientFilter;

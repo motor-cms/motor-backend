@@ -7,6 +7,10 @@ use Illuminate\Contracts\Auth\Guard;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
 
+/**
+ * Class CheckPermission
+ * @package Motor\Backend\Http\Middleware
+ */
 class CheckPermission
 {
 
@@ -30,8 +34,8 @@ class CheckPermission
     /**
      * Handle an incoming request.
      *
-     * @param  \Illuminate\Http\Request $request
-     * @param  \Closure                 $next
+     * @param \Illuminate\Http\Request $request
+     * @param \Closure                 $next
      *
      * @return mixed
      */

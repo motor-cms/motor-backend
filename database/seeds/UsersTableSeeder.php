@@ -4,6 +4,9 @@ use Illuminate\Database\Seeder;
 use Illuminate\Support\Str;
 use Motor\Backend\Models\User;
 
+/**
+ * Class UsersTableSeeder
+ */
 class UsersTableSeeder extends Seeder
 {
 

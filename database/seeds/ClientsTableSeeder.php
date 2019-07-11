@@ -3,6 +3,9 @@
 use Illuminate\Database\Seeder;
 use Motor\Backend\Models\User;
 
+/**
+ * Class ClientsTableSeeder
+ */
 class ClientsTableSeeder extends Seeder
 {
 

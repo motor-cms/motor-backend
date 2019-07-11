@@ -9,6 +9,10 @@ use Auth;
 use Kris\LaravelFormBuilder\FormBuilderTrait;
 use Motor\Backend\Services\ProfileEditService;
 
+/**
+ * Class ProfileEditController
+ * @package Motor\Backend\Http\Controllers\Backend
+ */
 class ProfileEditController extends Controller
 {
 
@@ -18,7 +22,7 @@ class ProfileEditController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int $id
+     * @param int $id
      *
      * @return \Illuminate\Http\Response
      */
@@ -39,8 +43,8 @@ class ProfileEditController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request $request
-     * @param  int                      $id
+     * @param \Illuminate\Http\Request $request
+     * @param int                      $id
      *
      * @return \Illuminate\Http\Response
      */

@@ -5,6 +5,10 @@ namespace Motor\Backend\Transformers;
 use League\Fractal;
 use Motor\Backend\Models\Role;
 
+/**
+ * Class RoleTransformer
+ * @package Motor\Backend\Transformers
+ */
 class RoleTransformer extends Fractal\TransformerAbstract
 {
 
@@ -17,6 +21,11 @@ class RoleTransformer extends Fractal\TransformerAbstract
         'permissions'
     ];
 
+
+    /**
+     * @param Role $record
+     * @return array
+     */
     public function transform(Role $record)
     {
         return [
@@ -24,6 +33,7 @@ class RoleTransformer extends Fractal\TransformerAbstract
             'name' => $record->name
         ];
     }
+
 
     /**
      * Include Permissions

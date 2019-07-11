@@ -4,8 +4,16 @@ namespace Motor\Backend\Forms\Fields;
 
 use Kris\LaravelFormBuilder\Fields\SelectType;
 
-class Select2Type extends SelectType {
+/**
+ * Class Select2Type
+ * @package Motor\Backend\Forms\Fields
+ */
+class Select2Type extends SelectType
+{
 
+    /**
+     * @return string
+     */
     protected function getTemplate()
     {
         // At first it tries to load config variable,
@@ -14,6 +22,14 @@ class Select2Type extends SelectType {
         return 'motor-backend::laravel-form-builder.select2';
     }
 
+
+    /**
+     * @param array $options
+     * @param bool  $showLabel
+     * @param bool  $showField
+     * @param bool  $showError
+     * @return string
+     */
     public function render(array $options = [], $showLabel = true, $showField = true, $showError = true)
     {
         return parent::render($options, $showLabel, $showField, $showError);

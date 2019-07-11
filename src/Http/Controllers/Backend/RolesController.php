@@ -3,7 +3,6 @@
 namespace Motor\Backend\Http\Controllers\Backend;
 
 use Motor\Backend\Http\Controllers\Controller;
-use Motor\Backend\Models\Permission;
 use Motor\Backend\Models\Role;
 use Motor\Backend\Http\Requests\Backend\RoleRequest;
 use Motor\Backend\Grids\RoleGrid;
@@ -11,6 +10,10 @@ use Kris\LaravelFormBuilder\FormBuilderTrait;
 use Motor\Backend\Forms\Backend\RoleForm;
 use Motor\Backend\Services\RoleService;
 
+/**
+ * Class RolesController
+ * @package Motor\Backend\Http\Controllers\Backend
+ */
 class RolesController extends Controller
 {
 
@@ -26,9 +29,9 @@ class RolesController extends Controller
     {
         $grid = new RoleGrid(Role::class);
 
-        $service      = RoleService::collection($grid);
-        $grid->filter = $service->getFilter();
-        $paginator    = $service->getPaginator();
+        $service = RoleService::collection($grid);
+        $grid->setFilter($service->getFilter());
+        $paginator = $service->getPaginator();
 
         return view('motor-backend::backend.roles.index', compact('paginator', 'grid'));
     }
@@ -54,7 +57,7 @@ class RolesController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request $request
+     * @param \Illuminate\Http\Request $request
      *
      * @return \Illuminate\Http\Response
      */
@@ -78,7 +81,7 @@ class RolesController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int $id
+     * @param int $id
      *
      * @return \Illuminate\Http\Response
      */
@@ -91,7 +94,7 @@ class RolesController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int $id
+     * @param int $id
      *
      * @return \Illuminate\Http\Response
      */
@@ -111,8 +114,8 @@ class RolesController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request $request
-     * @param  int                      $id
+     * @param \Illuminate\Http\Request $request
+     * @param int                      $id
      *
      * @return \Illuminate\Http\Response
      */
@@ -136,7 +139,7 @@ class RolesController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int $id
+     * @param int $id
      *
      * @return \Illuminate\Http\Response
      */

@@ -4,11 +4,17 @@ namespace Motor\Backend\Forms\Fields;
 
 use Illuminate\Support\Str;
 use Kris\LaravelFormBuilder\Fields\FormField;
-use Kris\LaravelFormBuilder\Fields\InputType;
 
+/**
+ * Class FileAudioType
+ * @package Motor\Backend\Forms\Fields
+ */
 class FileAudioType extends FormField
 {
 
+    /**
+     * @return string
+     */
     protected function getTemplate()
     {
         // At first it tries to load config variable,
@@ -18,6 +24,13 @@ class FileAudioType extends FormField
     }
 
 
+    /**
+     * @param array $options
+     * @param bool  $showLabel
+     * @param bool  $showField
+     * @param bool  $showError
+     * @return string
+     */
     public function render(array $options = [], $showLabel = true, $showField = true, $showError = true)
     {
         $modelData = $this->parent->getModel();
@@ -48,7 +61,7 @@ class FileAudioType extends FormField
             }
         }
 
-        $options['name'] = $this->getName();
+        $options['name']      = $this->getName();
         $options['name_slug'] = Str::slug($this->getName());
 
         return parent::render($options, $showLabel, $showField, $showError);

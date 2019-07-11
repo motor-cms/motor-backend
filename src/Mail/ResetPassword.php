@@ -5,8 +5,11 @@ namespace Motor\Backend\Mail;
 use Illuminate\Bus\Queueable;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
-use Illuminate\Contracts\Queue\ShouldQueue;
 
+/**
+ * Class ResetPassword
+ * @package Motor\Backend\Mail
+ */
 class ResetPassword extends Mailable
 {
 

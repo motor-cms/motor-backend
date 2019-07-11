@@ -4,6 +4,10 @@ namespace Motor\Backend\Grid;
 
 use Illuminate\Contracts\Pagination\Paginator;
 
+/**
+ * Class SpecialRow
+ * @package Motor\Backend\Grid
+ */
 class SpecialRow extends Base
 {
 
@@ -14,6 +18,10 @@ class SpecialRow extends Base
     protected $view;
 
 
+    /**
+     * SpecialRow constructor.
+     * @param $view
+     */
     public function __construct($view)
     {
         $this->view = $view;
@@ -23,7 +31,10 @@ class SpecialRow extends Base
     /**
      * Set column type
      *
-     * @param $type
+     * @param       $renderer
+     * @param array $options
+     *
+     * @return $this
      */
     public function renderer($renderer, $options = [])
     {
@@ -34,6 +45,10 @@ class SpecialRow extends Base
     }
 
 
+    /**
+     * @param Paginator $paginator
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
     public function render(Paginator $paginator)
     {
         // Get renderer

@@ -2,21 +2,25 @@
 
 namespace Motor\Backend\Lavary\Menu;
 
-class
-Menu extends \Lavary\Menu\Menu {
+/**
+ * Class Menu
+ * @package Motor\Backend\Lavary\Menu
+ */
+class Menu extends \Lavary\Menu\Menu
+{
 
     /**
      * Create a new menu instance
      *
-     * @param  string  $name
-     * @param  callable  $callback
+     * @param string   $name
+     * @param callable $callback
+     *
      * @return \Lavary\Menu\Menu
      */
     public function make($name, $callback)
     {
-        if(is_callable($callback))
-        {
-            if (!array_key_exists($name, $this->menu)) {
+        if (is_callable($callback)) {
+            if ( ! array_key_exists($name, $this->menu)) {
                 $this->menu[$name] = new Builder($name, $this->loadConf($name));
             }
 

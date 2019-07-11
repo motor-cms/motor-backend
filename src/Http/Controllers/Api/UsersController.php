@@ -8,6 +8,10 @@ use Motor\Backend\Models\User;
 use Motor\Backend\Services\UserService;
 use Motor\Backend\Transformers\UserTransformer;
 
+/**
+ * Class UsersController
+ * @package Motor\Backend\Http\Controllers\Api
+ */
 class UsersController extends Controller
 {
 
@@ -18,7 +22,7 @@ class UsersController extends Controller
      */
     public function index()
     {
-        $result = UserService::collection()->getPaginator();
+        $result   = UserService::collection()->getPaginator();
         $resource = $this->transformPaginator($result, UserTransformer::class, 'client,permissions,roles,files');
 
         return $this->respondWithJson('User collection read', $resource);
@@ -28,13 +32,13 @@ class UsersController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request $request
+     * @param \Illuminate\Http\Request $request
      *
      * @return \Illuminate\Http\Response
      */
     public function store(UserRequest $request)
     {
-        $result = UserService::create($request)->getResult();
+        $result   = UserService::create($request)->getResult();
         $resource = $this->transformItem($result, UserTransformer::class, 'client,permissions,roles,files');
 
         return $this->respondWithJson('User created', $resource);
@@ -44,13 +48,13 @@ class UsersController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int $id
+     * @param int $id
      *
      * @return \Illuminate\Http\Response
      */
     public function show(User $record)
     {
-        $result = UserService::show($record)->getResult();
+        $result   = UserService::show($record)->getResult();
         $resource = $this->transformItem($result, UserTransformer::class, 'client,permissions,roles,files');
 
         return $this->respondWithJson('User read', $resource);
@@ -60,14 +64,14 @@ class UsersController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request $request
-     * @param  int                      $id
+     * @param \Illuminate\Http\Request $request
+     * @param int                      $id
      *
      * @return \Illuminate\Http\Response
      */
     public function update(UserRequest $request, User $record)
     {
-        $result = UserService::update($record, $request)->getResult();
+        $result   = UserService::update($record, $request)->getResult();
         $resource = $this->transformItem($result, UserTransformer::class, 'client,permissions,roles,files');
 
         return $this->respondWithJson('User updated', $resource);
@@ -77,7 +81,7 @@ class UsersController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int $id
+     * @param int $id
      *
      * @return \Illuminate\Http\Response
      */
@@ -86,8 +90,9 @@ class UsersController extends Controller
         $result = UserService::delete($record)->getResult();
 
         if ($result) {
-            return $this->respondWithJson('User deleted', ['success' => true]);
+            return $this->respondWithJson('User deleted', [ 'success' => true ]);
         }
-        return $this->respondWithJson('User NOT deleted', ['success' => false]);
+
+        return $this->respondWithJson('User NOT deleted', [ 'success' => false ]);
     }
 }

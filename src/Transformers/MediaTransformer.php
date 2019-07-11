@@ -5,9 +5,17 @@ namespace Motor\Backend\Transformers;
 use League\Fractal;
 use Spatie\MediaLibrary\Models\Media;
 
+/**
+ * Class MediaTransformer
+ * @package Motor\Backend\Transformers
+ */
 class MediaTransformer extends Fractal\TransformerAbstract
 {
 
+    /**
+     * @param Media $record
+     * @return array
+     */
     public function transform(Media $record)
     {
         return [
@@ -17,7 +25,7 @@ class MediaTransformer extends Fractal\TransformerAbstract
             'size'       => (int) $record->size,
             'url'        => $record->getUrl(),
             'path'       => $record->getPath(),
-            'created_at' => (string)$record->created_at,
+            'created_at' => (string) $record->created_at,
         ];
     }
 }

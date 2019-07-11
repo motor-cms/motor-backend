@@ -6,7 +6,6 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Arr;
-use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\Str;
 use Kris\LaravelFormBuilder\Fields\CheckableType;
 use Kris\LaravelFormBuilder\Fields\ChildFormType;
@@ -20,6 +19,10 @@ use Motor\Core\Filter\Renderers\PerPageRenderer;
 use Motor\Core\Filter\Renderers\SearchRenderer;
 use Spatie\MediaLibrary\HasMedia\HasMedia;
 
+/**
+ * Class BaseService
+ * @package Motor\Backend\Services
+ */
 abstract class BaseService
 {
 
@@ -52,7 +55,7 @@ abstract class BaseService
      */
     public static function create(Request $request)
     {
-        return $instance = ( new static() )->setRequest($request)->doCreate();
+        return ( new static() )->setRequest($request)->doCreate();
     }
 
 
@@ -67,7 +70,7 @@ abstract class BaseService
      */
     public static function createWithForm(Request $request, Form $form)
     {
-        return $instance = ( new static() )->setRequest($request, $form)->setForm($form)->doCreate();
+        return ( new static() )->setRequest($request, $form)->setForm($form)->doCreate();
     }
 
 
@@ -200,7 +203,7 @@ abstract class BaseService
     public function getPaginator()
     {
         $query = ( $this->model )::filteredByMultiple($this->getFilter());
-        $query->addSelect($query->getModel()->getTable().'.*');
+        $query->addSelect($query->getModel()->getTable() . '.*');
         $query = $this->applyScopes($query);
         $query = $this->applySorting($query);
 
@@ -215,7 +218,7 @@ abstract class BaseService
      */
     public function setSorting(Array $sorting)
     {
-        list($this->sortableField, $this->sortableDirection) = $sorting;
+        [ $this->sortableField, $this->sortableDirection ] = $sorting;
 
         return $this;
     }
@@ -231,7 +234,7 @@ abstract class BaseService
         // check if we need to join a table
         $join = false;
         if (strpos($this->sortableField, '.') > 0) {
-            [$table, $field] = explode('.', $this->sortableField);
+            [ $table, $field ] = explode('.', $this->sortableField);
             $tableColumn = $table . '_id';
 
             // Handle blamable
@@ -312,7 +315,6 @@ abstract class BaseService
     {
         $this->record = new $this->model();
         $this->beforeCreate();
-        
         $this->record->fill($this->data);
         $this->result = $this->record->save();
         $this->afterCreate();
@@ -402,8 +404,8 @@ abstract class BaseService
     public function setRequest(Request $request, $form = null)
     {
         $key = '';
-        if (!is_null($form)) {
-            if (!is_null($this->form)) {
+        if ( ! is_null($form)) {
+            if ( ! is_null($this->form)) {
                 $key = $form->getName() != '' ? $this->form->getName() : null;
             } else {
                 $key = $form->getName();
@@ -414,7 +416,7 @@ abstract class BaseService
         if ($key == '') {
             $this->data = $this->request->all();
         } else {
-            $this->data    = $this->request->input($key, []);
+            $this->data = $this->request->input($key, []);
         }
 
         return $this;
@@ -431,7 +433,7 @@ abstract class BaseService
      */
     public function handleFormValues(Form $form, array $data)
     {
-        foreach ($form->getFields() as $name => $field) {
+        foreach ($form->getFields() as $field) {
 
             // Handle subforms
             if ($field instanceof ChildFormType) {

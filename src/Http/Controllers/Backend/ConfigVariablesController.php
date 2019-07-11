@@ -3,7 +3,6 @@
 namespace Motor\Backend\Http\Controllers\Backend;
 
 use Motor\Backend\Http\Controllers\Controller;
-
 use Motor\Backend\Models\ConfigVariable;
 use Motor\Backend\Http\Requests\Backend\ConfigVariableRequest;
 use Motor\Backend\Services\ConfigVariableService;
@@ -12,6 +11,10 @@ use Motor\Backend\Forms\Backend\ConfigVariableForm;
 
 use Kris\LaravelFormBuilder\FormBuilderTrait;
 
+/**
+ * Class ConfigVariablesController
+ * @package Motor\Backend\Http\Controllers\Backend
+ */
 class ConfigVariablesController extends Controller
 {
 
@@ -27,9 +30,9 @@ class ConfigVariablesController extends Controller
     {
         $grid = new ConfigVariableGrid(ConfigVariable::class);
 
-        $service      = ConfigVariableService::collection($grid);
-        $grid->filter = $service->getFilter();
-        $paginator    = $service->getPaginator();
+        $service = ConfigVariableService::collection($grid);
+        $grid->setFilter($service->getFilter());
+        $paginator = $service->getPaginator();
 
         return view('motor-backend::backend.config_variables.index', compact('paginator', 'grid'));
     }
@@ -68,7 +71,7 @@ class ConfigVariablesController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request $request
+     * @param \Illuminate\Http\Request $request
      *
      * @return \Illuminate\Http\Response
      */
@@ -92,7 +95,7 @@ class ConfigVariablesController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int $id
+     * @param int $id
      *
      * @return \Illuminate\Http\Response
      */
@@ -105,7 +108,7 @@ class ConfigVariablesController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int $id
+     * @param int $id
      *
      * @return \Illuminate\Http\Response
      */
@@ -125,8 +128,8 @@ class ConfigVariablesController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request $request
-     * @param  int                      $id
+     * @param \Illuminate\Http\Request $request
+     * @param int                      $id
      *
      * @return \Illuminate\Http\Response
      */
@@ -150,7 +153,7 @@ class ConfigVariablesController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int $id
+     * @param int $id
      *
      * @return \Illuminate\Http\Response
      */

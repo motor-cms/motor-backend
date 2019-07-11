@@ -5,6 +5,10 @@ namespace Motor\Backend\Transformers;
 use League\Fractal;
 use Motor\Backend\Models\Category;
 
+/**
+ * Class CategoryTransformer
+ * @package Motor\Backend\Transformers
+ */
 class CategoryTransformer extends Fractal\TransformerAbstract
 {
 

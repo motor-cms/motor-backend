@@ -6,9 +6,16 @@ use Illuminate\Database\Eloquent\Collection;
 use Motor\Backend\Models\Permission;
 use Kris\LaravelFormBuilder\Form;
 
+/**
+ * Class RoleForm
+ * @package Motor\Backend\Forms\Backend
+ */
 class RoleForm extends Form
 {
 
+    /**
+     * @return mixed|void
+     */
     public function buildForm()
     {
         $selected = [];

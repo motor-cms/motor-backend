@@ -5,6 +5,10 @@ namespace Motor\Backend\Transformers;
 use League\Fractal;
 use Motor\Backend\Models\Permission;
 
+/**
+ * Class PermissionTransformer
+ * @package Motor\Backend\Transformers
+ */
 class PermissionTransformer extends Fractal\TransformerAbstract
 {
 
@@ -17,6 +21,11 @@ class PermissionTransformer extends Fractal\TransformerAbstract
         'group'
     ];
 
+
+    /**
+     * @param Permission $record
+     * @return array
+     */
     public function transform(Permission $record)
     {
         return [
@@ -25,6 +34,7 @@ class PermissionTransformer extends Fractal\TransformerAbstract
             'permission_group_id' => $record->permission_group_id,
         ];
     }
+
 
     /**
      * Include permission group

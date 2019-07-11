@@ -5,8 +5,13 @@ namespace Motor\Backend\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 
+/**
+ * Class LoginController
+ * @package Motor\Backend\Http\Controllers\Auth
+ */
 class LoginController extends Controller
 {
+
     /*
     |--------------------------------------------------------------------------
     | Login Controller
@@ -27,6 +32,7 @@ class LoginController extends Controller
      */
     protected $redirectTo = '/backend';
 
+
     /**
      * Create a new controller instance.
      *
@@ -34,8 +40,9 @@ class LoginController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('guest', ['except' => 'logout']);
+        $this->middleware('guest', [ 'except' => 'logout' ]);
     }
+
 
     /**
      * Show the application's login form.

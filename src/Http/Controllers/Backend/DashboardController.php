@@ -1,16 +1,9 @@
 <?php
 
-/*
- * Taken from
- * https://github.com/laravel/framework/blob/5.2/src/Illuminate/Auth/Console/stubs/make/controllers/HomeController.stub
- */
-
 namespace Motor\Backend\Http\Controllers\Backend;
 
 use App\Http\Controllers\Controller;
-use Auth;
 use Illuminate\Http\Request;
-use Motor\Backend\Models\User;
 
 /**
  * Class DashboardController
@@ -18,6 +11,7 @@ use Motor\Backend\Models\User;
  */
 class DashboardController extends Controller
 {
+
     /**
      * Create a new controller instance.
      *
@@ -27,6 +21,7 @@ class DashboardController extends Controller
     {
         $this->middleware('auth');
     }
+
 
     /**
      * Show the application dashboard.

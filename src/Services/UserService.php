@@ -8,10 +8,20 @@ use Motor\Backend\Models\Permission;
 use Motor\Backend\Models\Role;
 use Motor\Backend\Models\User;
 
+/**
+ * Class UserService
+ * @package Motor\Backend\Services
+ */
 class UserService extends BaseService
 {
 
     protected $model = User::class;
+
+
+    public function filters()
+    {
+        $this->filter->addClientFilter();
+    }
 
 
     public function beforeCreate()
@@ -24,13 +34,13 @@ class UserService extends BaseService
     public function afterCreate()
     {
         if (has_permission('roles.write')) {
-            foreach (Arr::get($this->data, 'roles', []) as $key => $role) {
+            foreach (Arr::get($this->data, 'roles', []) as $role) {
                 $this->record->assignRole($role);
             }
         }
         if (has_permission('permissions.write')) {
-            foreach (Arr::get($this->data, 'permissions', []) as $key => $permission) {
-                $this->record->givePermissionTo(Permission::find((int)$permission));
+            foreach (Arr::get($this->data, 'permissions', []) as $permission) {
+                $this->record->givePermissionTo(Permission::find((int) $permission));
             }
         }
         $this->uploadFile($this->request->file('avatar'), 'avatar');
@@ -41,11 +51,11 @@ class UserService extends BaseService
     {
         // Special case to filter out the users api token when calling over the api
         if (Arr::get($this->data, 'api_token')) {
-            unset( $this->data['api_token'] );
+            unset($this->data['api_token']);
         }
 
         if (Arr::get($this->data, 'password') == '') {
-            unset( $this->data['password'] );
+            unset($this->data['password']);
         } else {
             $this->data['password'] = bcrypt($this->data['password']);
         }

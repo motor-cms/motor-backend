@@ -4,6 +4,10 @@ namespace Motor\Backend\Http\Requests\Backend;
 
 use Motor\Backend\Http\Requests\Request;
 
+/**
+ * Class ClientRequest
+ * @package Motor\Backend\Http\Requests\Backend
+ */
 class ClientRequest extends Request
 {
 

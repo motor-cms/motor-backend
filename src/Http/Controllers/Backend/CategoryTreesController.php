@@ -3,19 +3,23 @@
 namespace Motor\Backend\Http\Controllers\Backend;
 
 use Motor\Backend\Http\Controllers\Controller;
-
 use Motor\Backend\Models\Category;
 use Motor\Backend\Http\Requests\Backend\CategoryTreeRequest;
 use Motor\Backend\Services\CategoryService;
 use Motor\Backend\Grids\CategoryTreeGrid;
 use Motor\Backend\Forms\Backend\CategoryTreeForm;
-
 use Kris\LaravelFormBuilder\FormBuilderTrait;
 use Motor\Core\Filter\Renderers\WhereRenderer;
 
+/**
+ * Class CategoryTreesController
+ * @package Motor\Backend\Http\Controllers\Backend
+ */
 class CategoryTreesController extends Controller
 {
+
     use FormBuilderTrait;
+
 
     /**
      * Display a listing of the resource.
@@ -31,8 +35,8 @@ class CategoryTreesController extends Controller
         $filter = $service->getFilter();
         $filter->add(new WhereRenderer('parent_id'))->setDefaultValue(null)->setAllowNull(true);
 
-        $grid->filter = $filter;
-        $paginator    = $service->getPaginator();
+        $grid->setFilter($filter);
+        $paginator = $service->getPaginator();
 
         return view('motor-backend::backend.category_trees.index', compact('paginator', 'grid'));
     }
@@ -58,7 +62,7 @@ class CategoryTreesController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request $request
+     * @param \Illuminate\Http\Request $request
      *
      * @return \Illuminate\Http\Response
      */
@@ -82,7 +86,7 @@ class CategoryTreesController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int $id
+     * @param int $id
      *
      * @return \Illuminate\Http\Response
      */
@@ -95,7 +99,7 @@ class CategoryTreesController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int $id
+     * @param int $id
      *
      * @return \Illuminate\Http\Response
      */
@@ -115,8 +119,8 @@ class CategoryTreesController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request $request
-     * @param  int                      $id
+     * @param \Illuminate\Http\Request $request
+     * @param int                      $id
      *
      * @return \Illuminate\Http\Response
      */
@@ -140,7 +144,7 @@ class CategoryTreesController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int $id
+     * @param int $id
      *
      * @return \Illuminate\Http\Response
      */

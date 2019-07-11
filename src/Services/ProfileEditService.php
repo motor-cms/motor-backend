@@ -5,6 +5,10 @@ namespace Motor\Backend\Services;
 use Illuminate\Support\Arr;
 use Motor\Backend\Models\User;
 
+/**
+ * Class ProfileEditService
+ * @package Motor\Backend\Services
+ */
 class ProfileEditService extends BaseService
 {
 
@@ -14,7 +18,7 @@ class ProfileEditService extends BaseService
     public function beforeUpdate()
     {
         if (Arr::get($this->data, 'password') == '') {
-            unset( $this->data['password'] );
+            unset($this->data['password']);
         } else {
             $this->data['password'] = bcrypt($this->data['password']);
         }
@@ -26,5 +30,4 @@ class ProfileEditService extends BaseService
     {
         $this->uploadFile($this->request->file('avatar'), 'avatar');
     }
-
 }

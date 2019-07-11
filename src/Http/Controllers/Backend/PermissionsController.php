@@ -10,6 +10,10 @@ use Kris\LaravelFormBuilder\FormBuilderTrait;
 use Motor\Backend\Forms\Backend\PermissionForm;
 use Motor\Backend\Services\PermissionService;
 
+/**
+ * Class PermissionsController
+ * @package Motor\Backend\Http\Controllers\Backend
+ */
 class PermissionsController extends Controller
 {
 
@@ -25,9 +29,9 @@ class PermissionsController extends Controller
     {
         $grid = new PermissionGrid(Permission::class);
 
-        $service      = PermissionService::collection($grid);
-        $grid->filter = $service->getFilter();
-        $paginator    = $service->getPaginator();
+        $service = PermissionService::collection($grid);
+        $grid->setFilter($service->getFilter());
+        $paginator = $service->getPaginator();
 
         return view('motor-backend::backend.permissions.index', compact('paginator', 'grid'));
     }
@@ -53,7 +57,7 @@ class PermissionsController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request $request
+     * @param \Illuminate\Http\Request $request
      *
      * @return \Illuminate\Http\Response
      */
@@ -77,7 +81,7 @@ class PermissionsController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int $id
+     * @param int $id
      *
      * @return \Illuminate\Http\Response
      */
@@ -90,7 +94,7 @@ class PermissionsController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int $id
+     * @param int $id
      *
      * @return \Illuminate\Http\Response
      */
@@ -110,8 +114,8 @@ class PermissionsController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request $request
-     * @param  int                      $id
+     * @param \Illuminate\Http\Request $request
+     * @param int                      $id
      *
      * @return \Illuminate\Http\Response
      */
@@ -135,7 +139,7 @@ class PermissionsController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int $id
+     * @param int $id
      *
      * @return \Illuminate\Http\Response
      */

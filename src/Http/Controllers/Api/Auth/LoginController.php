@@ -6,6 +6,10 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\Controller;
 
+/**
+ * Class LoginController
+ * @package Motor\Backend\Http\Controllers\Api\Auth
+ */
 class LoginController extends Controller
 {
 
@@ -24,7 +28,7 @@ class LoginController extends Controller
     /**
      * Get a JWT token via given credentials.
      *
-     * @param  \Illuminate\Http\Request $request
+     * @param \Illuminate\Http\Request $request
      *
      * @return \Illuminate\Http\JsonResponse
      */
@@ -50,6 +54,7 @@ class LoginController extends Controller
         if ($this->guard()->user() == null) {
             return response()->json([ 'error' => 'Unauthorized' ], 401);
         }
+
         return response()->json($this->guard()->user());
     }
 
@@ -81,7 +86,7 @@ class LoginController extends Controller
     /**
      * Get the token array structure.
      *
-     * @param  string $token
+     * @param string $token
      *
      * @return \Illuminate\Http\JsonResponse
      */

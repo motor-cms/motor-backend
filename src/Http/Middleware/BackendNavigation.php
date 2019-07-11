@@ -6,31 +6,35 @@ use Closure;
 use Illuminate\Support\Arr;
 use Motor\Backend\Lavary\Menu\Menu;
 
+/**
+ * Class BackendNavigation
+ * @package Motor\Backend\Http\Middleware
+ */
 class BackendNavigation
 {
 
     /**
      * Handle an incoming request.
      *
-     * @param  \Illuminate\Http\Request $request
-     * @param  \Closure                 $next
+     * @param \Illuminate\Http\Request $request
+     * @param \Closure                 $next
      *
      * @return mixed
      */
     public function handle($request, Closure $next)
     {
-        $m = \Menu::make('', function () {
+        \Menu::make('', static function () {
         }); //  <-- we need to do this to load the deferred service provider as we're using our motor-backend class for the menu
 
-        $menu = new Menu;
+        $menu = ( new Menu );
 
         //\Menu::make('backendNavigation', function ($menu) {
-        $menu->make('backendNavigation', function ($menu) {
+        $menu->make('backendNavigation', static function ($menu) {
 
             $items = config('motor-backend-navigation.items');
             ksort($items);
 
-            foreach ($items as $key => $item) {
+            foreach ($items as $item) {
 
                 $menu->add(trans($item['name']), [
                     'route'       => Arr::get($item, 'route'),
@@ -47,7 +51,7 @@ class BackendNavigation
 
                     ksort($item['items']);
 
-                    foreach ($item['items'] as $subkey => $subitem) {
+                    foreach ($item['items'] as $subitem) {
 
                         if (config('motor-backend-html.show_navigation_subitem_icon', false)) {
                             $menu->get($item['slug'])

@@ -6,6 +6,10 @@ use League\Glide\ServerFactory;
 use Spatie\Glide\Exceptions\SourceFileDoesNotExist;
 
 if ( ! class_exists('\\Spatie\\Glide\\GlideImage')) {
+    /**
+     * Class GlideImage
+     * @package Spatie\Glide
+     */
     class GlideImage
     {
 
@@ -22,12 +26,20 @@ if ( ! class_exists('\\Spatie\\Glide\\GlideImage')) {
         protected $modificationParameters = [];
 
 
+        /**
+         * @param string $sourceFile
+         * @return GlideImage
+         */
         public static function create(string $sourceFile): GlideImage
         {
             return ( new static() )->setSourceFile($sourceFile);
         }
 
 
+        /**
+         * @param string $sourceFile
+         * @return GlideImage
+         */
         public function setSourceFile(string $sourceFile): GlideImage
         {
             if ( ! file_exists($sourceFile)) {
@@ -40,6 +52,10 @@ if ( ! class_exists('\\Spatie\\Glide\\GlideImage')) {
         }
 
 
+        /**
+         * @param array $modificationParameters
+         * @return GlideImage
+         */
         public function modify(array $modificationParameters): GlideImage
         {
             $this->modificationParameters = $modificationParameters;
@@ -48,6 +64,12 @@ if ( ! class_exists('\\Spatie\\Glide\\GlideImage')) {
         }
 
 
+        /**
+         * @param string $outputFile
+         * @return string
+         * @throws \League\Glide\Filesystem\FileNotFoundException
+         * @throws \League\Glide\Filesystem\FilesystemException
+         */
         public function save(string $outputFile): string
         {
             $sourceFileName = pathinfo($this->sourceFile, PATHINFO_BASENAME);

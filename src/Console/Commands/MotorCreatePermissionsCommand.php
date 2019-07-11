@@ -4,10 +4,13 @@ namespace Motor\Backend\Console\Commands;
 
 use Illuminate\Console\Command;
 use Illuminate\Support\Arr;
-use Motor\Backend\Grids\PermissionGrid;
 use Motor\Backend\Models\Permission;
 use Motor\Backend\Models\PermissionGroup;
 
+/**
+ * Class MotorCreatePermissionsCommand
+ * @package Motor\Backend\Console\Commands
+ */
 class MotorCreatePermissionsCommand extends Command
 {
 
@@ -29,9 +32,9 @@ class MotorCreatePermissionsCommand extends Command
     /**
      * Execute the console command.
      *
-     * @return mixed
+     * @return void
      */
-    public function handle()
+    public function handle(): void
     {
         $permissions = config('motor-backend-permissions');
         foreach ($permissions as $name => $group) {

@@ -6,6 +6,10 @@ use Illuminate\Support\Arr;
 use Motor\Backend\Models\Permission;
 use Motor\Backend\Models\Role;
 
+/**
+ * Class RoleService
+ * @package Motor\Backend\Services
+ */
 class RoleService extends BaseService
 {
 
@@ -14,8 +18,8 @@ class RoleService extends BaseService
 
     public function afterCreate()
     {
-        foreach (Arr::get($this->data, 'permissions', []) as $key => $permission) {
-            $this->record->givePermissionTo(Permission::find((int)$permission));
+        foreach (Arr::get($this->data, 'permissions', []) as $permission) {
+            $this->record->givePermissionTo(Permission::find((int) $permission));
         }
     }
 
@@ -27,7 +31,5 @@ class RoleService extends BaseService
         }
 
         $this->afterCreate();
-
     }
-
 }

@@ -5,6 +5,9 @@ use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 use Motor\Backend\Models\User;
 
+/**
+ * Class MotorBackendApiProfileTest
+ */
 class MotorBackendApiProfileTest extends TestCase
 {
 

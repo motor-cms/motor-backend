@@ -4,9 +4,11 @@ namespace Motor\Backend\Notifications;
 
 use Illuminate\Bus\Queueable;
 use Illuminate\Notifications\Notification;
-use Illuminate\Contracts\Queue\ShouldQueue;
-use Illuminate\Notifications\Messages\MailMessage;
 
+/**
+ * Class ResetPassword
+ * @package Motor\Backend\Notifications
+ */
 class ResetPassword extends Notification
 {
 
@@ -32,7 +34,7 @@ class ResetPassword extends Notification
     /**
      * Get the notification's delivery channels.
      *
-     * @param  mixed $notifiable
+     * @param mixed $notifiable
      *
      * @return array
      */
@@ -45,9 +47,9 @@ class ResetPassword extends Notification
     /**
      * Get the mail representation of the notification.
      *
-     * @param  mixed $notifiable
+     * @param $notifiable
      *
-     * @return \Illuminate\Notifications\Messages\MailMessage
+     * @return \Motor\Backend\Mail\ResetPassword
      */
     public function toMail($notifiable)
     {
@@ -58,7 +60,7 @@ class ResetPassword extends Notification
     /**
      * Get the array representation of the notification.
      *
-     * @param  mixed $notifiable
+     * @param mixed $notifiable
      *
      * @return array
      */

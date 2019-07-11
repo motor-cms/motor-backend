@@ -4,6 +4,10 @@ namespace Motor\Backend\Grid;
 
 use Auth;
 
+/**
+ * Class Action
+ * @package Motor\Backend\Grid
+ */
 class Action extends Base
 {
 
@@ -30,6 +34,12 @@ class Action extends Base
     protected $confirmationMessage = '';
 
 
+    /**
+     * Action constructor.
+     * @param       $label
+     * @param       $link
+     * @param array $parameters
+     */
     public function __construct($label, $link, $parameters = [])
     {
         $this->label      = $label;
@@ -42,6 +52,10 @@ class Action extends Base
     }
 
 
+    /**
+     * @param $permission
+     * @return $this
+     */
     public function needsPermissionTo($permission)
     {
         $this->permission = $permission;
@@ -50,6 +64,11 @@ class Action extends Base
     }
 
 
+    /**
+     * @param bool   $confirmation
+     * @param string $message
+     * @return $this
+     */
     public function askForConfirmation($confirmation = true, $message = '')
     {
         $this->askForConfirmation  = $confirmation;
@@ -63,6 +82,12 @@ class Action extends Base
     }
 
 
+    /**
+     * @param        $column
+     * @param        $value
+     * @param string $operator
+     * @return $this
+     */
     public function onCondition($column, $value, $operator = '=')
     {
         $this->conditionColumn   = $column;
@@ -73,12 +98,19 @@ class Action extends Base
     }
 
 
+    /**
+     * @return string
+     */
     public function getLabel()
     {
         return $this->label;
     }
 
 
+    /**
+     * @param $record
+     * @return bool|string
+     */
     public function render($record)
     {
         if ($this->permission != '' && ! has_permission($this->permission)) {
@@ -136,7 +168,7 @@ class Action extends Base
             case 'edit':
                 $view = 'motor-backend::grid.actions.edit';
                 break;
-            case 'delete';
+            case 'delete':
                 $view = 'motor-backend::grid.actions.delete';
                 break;
             default:

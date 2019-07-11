@@ -11,7 +11,7 @@
 Route::group([
     'middleware' => [ 'web' ],
     'namespace'  => 'Motor\Backend\Http\Controllers'
-], function () {
+], static function () {
     Auth::routes();
     Route::get('password/change', 'Auth\ChangePasswordController@showChangeForm')->name('auth.change-password.index');
     Route::post('password/change', 'Auth\ChangePasswordController@change')->name('auth.change-password.store');
@@ -26,9 +26,9 @@ Route::group([
         'web_auth',
         'navigation'
     ]
-], function () {
+], static function () {
 
-    Route::group([ 'middleware' => [ 'permission' ] ], function () {
+    Route::group([ 'middleware' => [ 'permission' ] ], static function () {
 
         if (config('motor-backend.routes.dashboard')) {
             Route::get('/', [
@@ -60,8 +60,8 @@ Route::group([
 
         if (config('motor-backend.routes.email_templates')) {
             Route::resource('email_templates', 'EmailTemplatesController');
-            Route::get('email_templates/{email_template}/duplicate',
-                'EmailTemplatesController@duplicate')->name('email_templates.duplicate');
+            Route::get('email_templates/{email_template}/duplicate', 'EmailTemplatesController@duplicate')
+                 ->name('email_templates.duplicate');
         }
 
         if (config('motor-backend.routes.profile')) {
@@ -86,7 +86,7 @@ Route::group([
         ]);
 
         Route::resource('config_variables', 'ConfigVariablesController');
-        Route::get('config_variables/{config_variable}/duplicate',
-            'ConfigVariablesController@duplicate')->name('config_variables.duplicate');
+        Route::get('config_variables/{config_variable}/duplicate', 'ConfigVariablesController@duplicate')
+             ->name('config_variables.duplicate');
     });
 });

@@ -8,8 +8,11 @@ use Illuminate\Support\Facades\Route;
 use Motor\Backend\Console\Commands\MotorGenerateIncludeCommand;
 use Motor\Backend\Console\Commands\MotorCreatePermissionsCommand;
 use Illuminate\Support\Facades\Response;
-use Motor\CMS\Http\Middleware\Frontend\Navigation;
 
+/**
+ * Class MotorServiceProvider
+ * @package Motor\Backend\Providers
+ */
 class MotorServiceProvider extends ServiceProvider
 {
 
@@ -20,7 +23,7 @@ class MotorServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        Response::macro('attachment', function ($content, $filename, $format = 'application/json') {
+        Response::macro('attachment', static function ($content, $filename, $format = 'application/json') {
 
             $headers = [
                 'Content-type'        => $format,
@@ -46,23 +49,23 @@ class MotorServiceProvider extends ServiceProvider
 
     public function bladeDirectives()
     {
-        Blade::directive('boxWrapper', function () {
+        Blade::directive('boxWrapper', static function () {
             return config('motor-backend-html.box_wrapper');
         });
 
-        Blade::directive('boxHeader', function () {
+        Blade::directive('boxHeader', static function () {
             return config('motor-backend-html.box_header');
         });
 
-        Blade::directive('boxBody', function () {
+        Blade::directive('boxBody', static function () {
             return config('motor-backend-html.box_body');
         });
 
-        Blade::directive('boxFooter', function () {
+        Blade::directive('boxFooter', static function () {
             return config('motor-backend-html.box_footer');
         });
 
-        Blade::directive('defaultButtonSize', function () {
+        Blade::directive('defaultButtonSize', static function () {
             return config('motor-backend-html.default_button_size');
         });
     }
@@ -157,35 +160,35 @@ class MotorServiceProvider extends ServiceProvider
 
     public function routeModelBindings()
     {
-        Route::bind('user', function ($id) {
+        Route::bind('user', static function ($id) {
             return config('motor-backend.models.user')::findOrFail($id);
         });
 
-        Route::bind('role', function ($id) {
+        Route::bind('role', static function ($id) {
             return config('motor-backend.models.role')::findOrFail($id);
         });
 
-        Route::bind('permission', function ($id) {
+        Route::bind('permission', static function ($id) {
             return config('motor-backend.models.permission')::findOrFail($id);
         });
 
-        Route::bind('language', function ($id) {
+        Route::bind('language', static function ($id) {
             return config('motor-backend.models.language')::findOrFail($id);
         });
 
-        Route::bind('client', function ($id) {
+        Route::bind('client', static function ($id) {
             return config('motor-backend.models.client')::findOrFail($id);
         });
 
-        Route::bind('email_template', function ($id) {
+        Route::bind('email_template', static function ($id) {
             return config('motor-backend.models.email_template')::findOrFail($id);
         });
 
-        Route::bind('category', function ($id) {
+        Route::bind('category', static function ($id) {
             return \Motor\Backend\Models\Category::findOrFail($id);
         });
 
-        Route::bind('config_variable', function ($id) {
+        Route::bind('config_variable', static function ($id) {
             return \Motor\Backend\Models\ConfigVariable::findOrFail($id);
         });
     }

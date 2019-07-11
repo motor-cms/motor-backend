@@ -4,10 +4,20 @@ namespace Motor\Backend\Grid;
 
 use Illuminate\Support\Arr;
 
-class Base {
+/**
+ * Class Base
+ * @package Motor\Backend\Grid
+ */
+class Base
+{
 
-    protected $attributes = [ ];
+    protected $attributes = [];
 
+
+    /**
+     * @param $attributes
+     * @return $this
+     */
     public function attributes($attributes)
     {
         $this->attributes = $attributes;
@@ -16,6 +26,10 @@ class Base {
     }
 
 
+    /**
+     * @param $style
+     * @return $this
+     */
     public function style($style)
     {
         $this->attributes['style'] = $style;
@@ -23,14 +37,22 @@ class Base {
         return $this;
     }
 
+
+    /**
+     * @return mixed
+     */
     public function getStyle()
     {
         return Arr::get($this->attributes, 'style');
     }
 
+
+    /**
+     * @return string
+     */
     public function buildAttributes()
     {
-        if (empty( $this->attributes )) {
+        if (count($this->attributes) === 0) {
             return '';
         }
 
@@ -43,11 +65,16 @@ class Base {
     }
 
 
+    /**
+     * @param $string
+     * @return string
+     */
     protected function sanitize($string)
     {
-        if (!is_array($string)) {
+        if ( ! is_array($string)) {
             return nl2br(htmlspecialchars($string));
         }
+
         return $string;
     }
 }

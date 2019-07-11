@@ -10,6 +10,10 @@ use Motor\Backend\Models\Client;
 use Kris\LaravelFormBuilder\FormBuilderTrait;
 use Motor\Backend\Services\ClientService;
 
+/**
+ * Class ClientsController
+ * @package Motor\Backend\Http\Controllers\Backend
+ */
 class ClientsController extends Controller
 {
 
@@ -26,8 +30,8 @@ class ClientsController extends Controller
         $grid = new ClientGrid(Client::class);
 
         $service = ClientService::collection($grid);
-        $grid->filter = $service->getFilter();
-        $paginator    = $service->getPaginator();
+        $grid->setFilter($service->getFilter());
+        $paginator = $service->getPaginator();
 
         return view('motor-backend::backend.clients.index', compact('paginator', 'grid'));
     }
@@ -53,7 +57,7 @@ class ClientsController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request $request
+     * @param \Illuminate\Http\Request $request
      *
      * @return \Illuminate\Http\Response
      */
@@ -77,7 +81,7 @@ class ClientsController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int $id
+     * @param int $id
      *
      * @return \Illuminate\Http\Response
      */
@@ -90,7 +94,7 @@ class ClientsController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int $id
+     * @param int $id
      *
      * @return \Illuminate\Http\Response
      */
@@ -110,8 +114,8 @@ class ClientsController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request $request
-     * @param  int                      $id
+     * @param \Illuminate\Http\Request $request
+     * @param int                      $id
      *
      * @return \Illuminate\Http\Response
      */
@@ -135,7 +139,7 @@ class ClientsController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int $id
+     * @param int $id
      *
      * @return \Illuminate\Http\Response
      */

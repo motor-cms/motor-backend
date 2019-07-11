@@ -9,6 +9,10 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Password;
 
+/**
+ * Trait ChangesPasswords
+ * @package Motor\Backend\Traits
+ */
 trait ChangesPasswords
 {
 
@@ -18,7 +22,7 @@ trait ChangesPasswords
     /**
      * Reset the given user's password.
      *
-     * @param  \Illuminate\Http\Request $request
+     * @param \Illuminate\Http\Request $request
      *
      * @return \Illuminate\Http\RedirectResponse|\Illuminate\Http\JsonResponse
      */
@@ -61,7 +65,7 @@ trait ChangesPasswords
     /**
      * Get the password reset credentials from the request.
      *
-     * @param  \Illuminate\Http\Request $request
+     * @param \Illuminate\Http\Request $request
      *
      * @return array
      */
@@ -74,14 +78,14 @@ trait ChangesPasswords
     /**
      * Reset the given user's password.
      *
-     * @param  \Illuminate\Contracts\Auth\CanResetPassword $user
-     * @param  string                                      $password
+     * @param \Illuminate\Contracts\Auth\CanResetPassword $user
+     * @param string                                      $password
      *
      * @return void
      */
     protected function resetPassword($user, $password)
     {
-        $user->password = Hash::make($password);
+        $user->password                 = Hash::make($password);
         $user->password_last_changed_at = date('Y-m-d H:i:s');
 
         $user->setRememberToken(Str::random(60));
@@ -97,7 +101,7 @@ trait ChangesPasswords
     /**
      * Get the response for a successful password reset.
      *
-     * @param  string $response
+     * @param string $response
      *
      * @return \Illuminate\Http\RedirectResponse|\Illuminate\Http\JsonResponse
      */
@@ -110,8 +114,8 @@ trait ChangesPasswords
     /**
      * Get the response for a failed password reset.
      *
-     * @param  \Illuminate\Http\Request $request
-     * @param  string                   $response
+     * @param \Illuminate\Http\Request $request
+     * @param string                   $response
      *
      * @return \Illuminate\Http\RedirectResponse|\Illuminate\Http\JsonResponse
      */

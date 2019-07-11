@@ -5,6 +5,10 @@ namespace Motor\Backend\Transformers;
 use League\Fractal;
 use Motor\Backend\Models\EmailTemplate;
 
+/**
+ * Class EmailTemplateTransformer
+ * @package Motor\Backend\Transformers
+ */
 class EmailTemplateTransformer extends Fractal\TransformerAbstract
 {
 
@@ -19,6 +23,10 @@ class EmailTemplateTransformer extends Fractal\TransformerAbstract
     ];
 
 
+    /**
+     * @param EmailTemplate $record
+     * @return array
+     */
     public function transform(EmailTemplate $record)
     {
         return [
@@ -38,6 +46,7 @@ class EmailTemplateTransformer extends Fractal\TransformerAbstract
         ];
     }
 
+
     /**
      * Include client
      *
@@ -49,6 +58,7 @@ class EmailTemplateTransformer extends Fractal\TransformerAbstract
             return $this->item($record->client, new ClientTransformer());
         }
     }
+
 
     /**
      * Include language

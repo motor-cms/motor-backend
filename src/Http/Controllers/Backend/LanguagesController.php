@@ -10,9 +10,15 @@ use Motor\Backend\Http\Controllers\Controller;
 use Kris\LaravelFormBuilder\FormBuilderTrait;
 use Motor\Backend\Services\LanguageService;
 
+/**
+ * Class LanguagesController
+ * @package Motor\Backend\Http\Controllers\Backend
+ */
 class LanguagesController extends Controller
 {
+
     use FormBuilderTrait;
+
 
     /**
      * Display a listing of the resource.
@@ -21,11 +27,11 @@ class LanguagesController extends Controller
      */
     public function index()
     {
-        $grid      = new LanguageGrid(Language::class);
+        $grid = new LanguageGrid(Language::class);
 
         $service = LanguageService::collection($grid);
-        $grid->filter = $service->getFilter();
-        $paginator    = $service->getPaginator();
+        $grid->setFilter($service->getFilter());
+        $paginator = $service->getPaginator();
 
         return view('motor-backend::backend.languages.index', compact('paginator', 'grid'));
     }
@@ -50,7 +56,7 @@ class LanguagesController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request $request
+     * @param \Illuminate\Http\Request $request
      *
      * @return \Illuminate\Http\Response
      */
@@ -74,7 +80,7 @@ class LanguagesController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int $id
+     * @param int $id
      *
      * @return \Illuminate\Http\Response
      */
@@ -87,7 +93,7 @@ class LanguagesController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int $id
+     * @param int $id
      *
      * @return \Illuminate\Http\Response
      */
@@ -106,8 +112,8 @@ class LanguagesController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request $request
-     * @param  int                      $id
+     * @param \Illuminate\Http\Request $request
+     * @param int                      $id
      *
      * @return \Illuminate\Http\Response
      */
@@ -131,7 +137,7 @@ class LanguagesController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int $id
+     * @param int $id
      *
      * @return \Illuminate\Http\Response
      */

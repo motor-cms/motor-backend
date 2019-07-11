@@ -4,6 +4,9 @@ use Culpa\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 use Culpa\Facades\Schema;
 
+/**
+ * Class CreateEmailTemplates
+ */
 class CreateEmailTemplates extends Migration
 {
 

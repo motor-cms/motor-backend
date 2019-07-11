@@ -5,9 +5,16 @@ namespace Motor\Backend\Forms\Fields;
 use Illuminate\Support\Str;
 use Kris\LaravelFormBuilder\Fields\InputType;
 
+/**
+ * Class FileVideoType
+ * @package Motor\Backend\Forms\Fields
+ */
 class FileVideoType extends InputType
 {
 
+    /**
+     * @return string
+     */
     protected function getTemplate()
     {
         // At first it tries to load config variable,
@@ -17,6 +24,13 @@ class FileVideoType extends InputType
     }
 
 
+    /**
+     * @param array $options
+     * @param bool  $showLabel
+     * @param bool  $showField
+     * @param bool  $showError
+     * @return string
+     */
     public function render(array $options = [], $showLabel = true, $showField = true, $showError = true)
     {
         $modelData = $this->parent->getModel();
@@ -48,7 +62,7 @@ class FileVideoType extends InputType
             }
         }
 
-        $options['name'] = $this->getName();
+        $options['name']      = $this->getName();
         $options['name_slug'] = Str::slug($this->getName());
 
         return parent::render($options, $showLabel, $showField, $showError);

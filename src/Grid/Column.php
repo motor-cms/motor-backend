@@ -2,6 +2,10 @@
 
 namespace Motor\Backend\Grid;
 
+/**
+ * Class Column
+ * @package Motor\Backend\Grid
+ */
 class Column extends Base
 {
 
@@ -55,6 +59,12 @@ class Column extends Base
     }
 
 
+    /**
+     * @param        $column
+     * @param        $value
+     * @param string $operator
+     * @return $this
+     */
     public function onCondition($column, $value, $operator = '=')
     {
         $this->conditionColumn   = $column;
@@ -64,6 +74,11 @@ class Column extends Base
         return $this;
     }
 
+
+    /**
+     * @param $record
+     * @return bool
+     */
     public function checkCondition($record)
     {
         if ( ! is_null($this->conditionColumn)) {
@@ -106,6 +121,7 @@ class Column extends Base
                 return false;
             }
         }
+
         return true;
     }
 
@@ -168,7 +184,7 @@ class Column extends Base
     {
         $this->sortable = (bool) $sortable;
         if ($this->sortable && $this->sortableField == '') {
-            $this->sortableField = ( is_string($sortable) ) ? $sortable : $this->name;
+            $this->sortableField = is_string($sortable) ? $sortable : $this->name;
         }
 
         return $this;

@@ -4,16 +4,25 @@ namespace Motor\Backend\Grid\Renderers;
 
 use Carbon\Carbon;
 
+/**
+ * Class DateRenderer
+ * @package Motor\Backend\Grid\Renderers
+ */
 class DateRenderer
 {
 
     protected $value = '';
 
-    protected $options = [ ];
+    protected $options = [];
 
     protected $defaultFormat = 'Y-m-d H:i:s';
 
 
+    /**
+     * DateRenderer constructor.
+     * @param       $value
+     * @param array $options
+     */
     public function __construct($value, $options = [])
     {
         $this->value   = $value;
@@ -21,6 +30,9 @@ class DateRenderer
     }
 
 
+    /**
+     * @return string
+     */
     public function render()
     {
         if ($this->value == '' || $this->value == null) {
@@ -32,6 +44,7 @@ class DateRenderer
         if (isset($this->options['format'])) {
             return $date->format($this->options['format']);
         }
+
         return $date->format($this->defaultFormat);
     }
 }

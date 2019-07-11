@@ -6,6 +6,9 @@ use Illuminate\Foundation\Testing\DatabaseTransactions;
 use Motor\Backend\Models\EmailTemplate;
 use Motor\Backend\Models\Role;
 
+/**
+ * Class MotorBackendBackendEmailTemplateTest
+ */
 class MotorBackendBackendEmailTemplateTest extends TestCase
 {
 

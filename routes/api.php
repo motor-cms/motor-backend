@@ -4,7 +4,7 @@ Route::group([
     'namespace'  => 'Motor\Backend\Http\Controllers\Api',
     'prefix'     => 'api',
     'as'         => 'api.',
-], function () {
+], static function () {
     Route::resource('users', 'UsersController');
     Route::resource('clients', 'ClientsController');
     Route::resource('languages', 'LanguagesController');
@@ -21,10 +21,10 @@ Route::group([
 Route::group([
     'middleware' => [ 'api', 'bindings' ],
     'namespace'  => 'Motor\Backend\Http\Controllers\Api\Auth',
-    'prefix' => 'api/auth',
+    'prefix'     => 'api/auth',
     'as'         => 'api.auth',
 
-], function ($router) {
+], static function ($router) {
 
     Route::post('login', 'LoginController@login')->name('login');
     Route::post('logout', 'LoginController@logout')->name('logout');
@@ -38,6 +38,6 @@ Route::group([
     'namespace'  => 'Motor\Backend\Http\Controllers\Api',
     'prefix'     => 'ajax',
     'as'         => 'ajax.',
-], function () {
+], static function () {
     Route::get('categories', 'CategoriesController@index')->name('categories.index');
 });

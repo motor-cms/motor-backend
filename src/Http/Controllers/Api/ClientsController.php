@@ -8,6 +8,10 @@ use Motor\Backend\Models\Client;
 use Motor\Backend\Services\ClientService;
 use Motor\Backend\Transformers\ClientTransformer;
 
+/**
+ * Class ClientsController
+ * @package Motor\Backend\Http\Controllers\Api
+ */
 class ClientsController extends Controller
 {
 
@@ -19,7 +23,7 @@ class ClientsController extends Controller
     public function index()
     {
         $paginator = ClientService::collection()->getPaginator();
-        $resource = $this->transformPaginator($paginator, ClientTransformer::class);
+        $resource  = $this->transformPaginator($paginator, ClientTransformer::class);
 
         return $this->respondWithJson('Client collection read', $resource);
     }
@@ -28,13 +32,13 @@ class ClientsController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request $request
+     * @param \Illuminate\Http\Request $request
      *
      * @return \Illuminate\Http\Response
      */
     public function store(ClientRequest $request)
     {
-        $result = ClientService::create($request)->getResult();
+        $result   = ClientService::create($request)->getResult();
         $resource = $this->transformItem($result, ClientTransformer::class);
 
         return $this->respondWithJson('Client created', $resource);
@@ -44,13 +48,13 @@ class ClientsController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int $id
+     * @param int $id
      *
      * @return \Illuminate\Http\Response
      */
     public function show(Client $record)
     {
-        $result = ClientService::show($record)->getResult();
+        $result   = ClientService::show($record)->getResult();
         $resource = $this->transformItem($result, ClientTransformer::class);
 
         return $this->respondWithJson('Client read', $resource);
@@ -60,14 +64,14 @@ class ClientsController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request $request
-     * @param  int                      $id
+     * @param \Illuminate\Http\Request $request
+     * @param int                      $id
      *
      * @return \Illuminate\Http\Response
      */
     public function update(ClientRequest $request, Client $record)
     {
-        $result = ClientService::update($record, $request)->getResult();
+        $result   = ClientService::update($record, $request)->getResult();
         $resource = $this->transformItem($result, ClientTransformer::class);
 
         return $this->respondWithJson('Client updated', $resource);
@@ -77,7 +81,7 @@ class ClientsController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int $id
+     * @param int $id
      *
      * @return \Illuminate\Http\Response
      */
@@ -86,8 +90,9 @@ class ClientsController extends Controller
         $result = ClientService::delete($record)->getResult();
 
         if ($result) {
-            return $this->respondWithJson('Client deleted', ['success' => true]);
+            return $this->respondWithJson('Client deleted', [ 'success' => true ]);
         }
-        return $this->respondWithJson('Client NOT deleted', ['success' => false]);
+
+        return $this->respondWithJson('Client NOT deleted', [ 'success' => false ]);
     }
 }

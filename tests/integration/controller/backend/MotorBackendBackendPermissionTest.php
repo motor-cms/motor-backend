@@ -6,6 +6,9 @@ use Illuminate\Foundation\Testing\DatabaseTransactions;
 use Motor\Backend\Models\Permission;
 use Motor\Backend\Models\Role;
 
+/**
+ * Class MotorBackendBackendPermissionTest
+ */
 class MotorBackendBackendPermissionTest extends TestCase
 {
 

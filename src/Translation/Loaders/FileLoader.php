@@ -2,6 +2,10 @@
 
 namespace Motor\Backend\Translation\Loaders;
 
+/**
+ * Class FileLoader
+ * @package Motor\Backend\Translation\Loaders
+ */
 class FileLoader extends \Illuminate\Translation\FileLoader
 {
 

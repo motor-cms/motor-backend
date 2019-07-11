@@ -5,12 +5,15 @@ namespace Motor\Backend\Http\Controllers\Backend;
 use Motor\Backend\Forms\Backend\UserForm;
 use Motor\Backend\Grids\UsersGrid;
 use Motor\Backend\Http\Requests\Backend\UserRequest;
-use Motor\Backend\Models\Role;
 use Motor\Backend\Models\User;
 use Motor\Backend\Http\Controllers\Controller;
 use Kris\LaravelFormBuilder\FormBuilderTrait;
 use Motor\Backend\Services\UserService;
 
+/**
+ * Class UsersController
+ * @package Motor\Backend\Http\Controllers\Backend
+ */
 class UsersController extends Controller
 {
 
@@ -27,8 +30,8 @@ class UsersController extends Controller
         $grid = new UsersGrid(User::class);
 
         $service = UserService::collection($grid);
-        $grid->filter = $service->getFilter();
-        $paginator    = $service->getPaginator();
+        $grid->setFilter($service->getFilter());
+        $paginator = $service->getPaginator();
 
         return view('motor-backend::backend.users.index', compact('paginator', 'grid'));
     }
@@ -54,7 +57,7 @@ class UsersController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request $request
+     * @param \Illuminate\Http\Request $request
      *
      * @return \Illuminate\Http\Response
      */
@@ -78,7 +81,7 @@ class UsersController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int $id
+     * @param int $id
      *
      * @return \Illuminate\Http\Response
      */
@@ -90,7 +93,7 @@ class UsersController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int $id
+     * @param int $id
      *
      * @return \Illuminate\Http\Response
      */
@@ -110,8 +113,8 @@ class UsersController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request $request
-     * @param  int                      $id
+     * @param \Illuminate\Http\Request $request
+     * @param int                      $id
      *
      * @return \Illuminate\Http\Response
      */
@@ -135,7 +138,7 @@ class UsersController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int $id
+     * @param int $id
      *
      * @return \Illuminate\Http\Response
      */

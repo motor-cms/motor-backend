@@ -5,9 +5,17 @@ namespace Motor\Backend\Transformers;
 use League\Fractal;
 use Motor\Backend\Models\Client;
 
+/**
+ * Class ClientTransformer
+ * @package Motor\Backend\Transformers
+ */
 class ClientTransformer extends Fractal\TransformerAbstract
 {
 
+    /**
+     * @param Client $record
+     * @return array
+     */
     public function transform(Client $record)
     {
         return [

@@ -8,6 +8,10 @@ use Motor\Backend\Models\Language;
 use Motor\Backend\Services\LanguageService;
 use Motor\Backend\Transformers\LanguageTransformer;
 
+/**
+ * Class LanguagesController
+ * @package Motor\Backend\Http\Controllers\Api
+ */
 class LanguagesController extends Controller
 {
 
@@ -19,7 +23,7 @@ class LanguagesController extends Controller
     public function index()
     {
         $paginator = LanguageService::collection()->getPaginator();
-        $resource = $this->transformPaginator($paginator, LanguageTransformer::class);
+        $resource  = $this->transformPaginator($paginator, LanguageTransformer::class);
 
         return $this->respondWithJson('Language collection read', $resource);
     }
@@ -28,13 +32,13 @@ class LanguagesController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request $request
+     * @param \Illuminate\Http\Request $request
      *
      * @return \Illuminate\Http\Response
      */
     public function store(LanguageRequest $request)
     {
-        $result = LanguageService::create($request)->getResult();
+        $result   = LanguageService::create($request)->getResult();
         $resource = $this->transformItem($result, LanguageTransformer::class);
 
         return $this->respondWithJson('Language created', $resource);
@@ -44,13 +48,13 @@ class LanguagesController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int $id
+     * @param int $id
      *
      * @return \Illuminate\Http\Response
      */
     public function show(Language $record)
     {
-        $result = LanguageService::show($record)->getResult();
+        $result   = LanguageService::show($record)->getResult();
         $resource = $this->transformItem($result, LanguageTransformer::class);
 
         return $this->respondWithJson('Language read', $resource);
@@ -60,14 +64,14 @@ class LanguagesController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request $request
-     * @param  int                      $id
+     * @param \Illuminate\Http\Request $request
+     * @param int                      $id
      *
      * @return \Illuminate\Http\Response
      */
     public function update(LanguageRequest $request, Language $record)
     {
-        $result = LanguageService::update($record, $request)->getResult();
+        $result   = LanguageService::update($record, $request)->getResult();
         $resource = $this->transformItem($result, LanguageTransformer::class);
 
         return $this->respondWithJson('Language updated', $resource);
@@ -77,7 +81,7 @@ class LanguagesController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int $id
+     * @param int $id
      *
      * @return \Illuminate\Http\Response
      */
@@ -86,8 +90,9 @@ class LanguagesController extends Controller
         $result = LanguageService::delete($record)->getResult();
 
         if ($result) {
-            return $this->respondWithJson('Language deleted', ['success' => true]);
+            return $this->respondWithJson('Language deleted', [ 'success' => true ]);
         }
-        return $this->respondWithJson('Language NOT deleted', ['success' => false]);
+
+        return $this->respondWithJson('Language NOT deleted', [ 'success' => false ]);
     }
 }

@@ -6,6 +6,9 @@ use Illuminate\Foundation\Testing\DatabaseTransactions;
 use Motor\Backend\Models\Client;
 use Motor\Backend\Models\Role;
 
+/**
+ * Class MotorBackendBackendClientTest
+ */
 class MotorBackendBackendClientTest extends TestCase
 {
 

@@ -2,9 +2,12 @@
 
 namespace Motor\Backend\Grids;
 
-use Motor\Core\Filter\Renderers\SearchRenderer;
 use Motor\Backend\Grid\Grid;
 
+/**
+ * Class ClientGrid
+ * @package Motor\Backend\Grids
+ */
 class ClientGrid extends Grid
 {
 
@@ -14,7 +17,9 @@ class ClientGrid extends Grid
         $this->addColumn('name', trans('motor-backend::backend/clients.name'), true);
         $this->addColumn('contact_name', trans('motor-backend::backend/clients.contact'));
         $this->setDefaultSorting('id', 'ASC');
-        $this->addEditAction(trans('motor-backend::backend/global.edit'), 'backend.clients.edit')->needsPermissionTo('clients.write');
-        $this->addDeleteAction(trans('motor-backend::backend/global.delete'), 'backend.clients.destroy')->needsPermissionTo('clients.delete');
+        $this->addEditAction(trans('motor-backend::backend/global.edit'), 'backend.clients.edit')
+             ->needsPermissionTo('clients.write');
+        $this->addDeleteAction(trans('motor-backend::backend/global.delete'), 'backend.clients.destroy')
+             ->needsPermissionTo('clients.delete');
     }
 }

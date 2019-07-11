@@ -2,14 +2,23 @@
 
 namespace Motor\Backend\Grid\Renderers;
 
+/**
+ * Class MultipleRenderer
+ * @package Motor\Backend\Grid\Renderers
+ */
 class MultipleRenderer
 {
 
     protected $value = '';
 
-    protected $options = [ ];
+    protected $options = [];
 
 
+    /**
+     * MultipleRenderer constructor.
+     * @param $value
+     * @param $options
+     */
     public function __construct($value, $options)
     {
         $this->value   = $value;
@@ -17,11 +26,15 @@ class MultipleRenderer
     }
 
 
+    /**
+     * @return string
+     */
     public function render()
     {
-        if (!is_array($this->value)) {
+        if ( ! is_array($this->value)) {
             return '';
         }
+
         return implode(', ', $this->value);
     }
 }

@@ -5,9 +5,17 @@ namespace Motor\Backend\Transformers;
 use League\Fractal;
 use Motor\Backend\Models\Language;
 
+/**
+ * Class LanguageTransformer
+ * @package Motor\Backend\Transformers
+ */
 class LanguageTransformer extends Fractal\TransformerAbstract
 {
 
+    /**
+     * @param Language $record
+     * @return array
+     */
     public function transform(Language $record)
     {
         return [

@@ -5,9 +5,16 @@ namespace Motor\Backend\Forms\Fields;
 use Illuminate\Support\Str;
 use Kris\LaravelFormBuilder\Fields\InputType;
 
+/**
+ * Class FileImageType
+ * @package Motor\Backend\Forms\Fields
+ */
 class FileImageType extends InputType
 {
 
+    /**
+     * @return string
+     */
     protected function getTemplate()
     {
         // At first it tries to load config variable,
@@ -17,6 +24,13 @@ class FileImageType extends InputType
     }
 
 
+    /**
+     * @param array $options
+     * @param bool  $showLabel
+     * @param bool  $showField
+     * @param bool  $showError
+     * @return string
+     */
     public function render(array $options = [], $showLabel = true, $showField = true, $showError = true)
     {
         $modelData = $this->parent->getModel();
@@ -45,7 +59,7 @@ class FileImageType extends InputType
         //    }
         //} elseif (is_object($modelData)) {
         if (is_object($modelData)) {
-            $items            = $modelData->getMedia($this->getRealName())->reverse();
+            $items = $modelData->getMedia($this->getRealName())->reverse();
             foreach ($items as $item) {
                 $options['files'][] = [
                     'id'         => $item->id,

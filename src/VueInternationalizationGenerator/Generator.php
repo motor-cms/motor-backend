@@ -4,6 +4,10 @@ use DirectoryIterator;
 use Exception;
 use App;
 
+/**
+ * Class Generator
+ * @package Motor\Backend\VueInternationalizationGenerator
+ */
 class Generator
 {
 
@@ -13,8 +17,8 @@ class Generator
 
     private $filesToCreate = [];
 
-    const VUEX_I18N = 'vuex-i18n';
-    const VUE_I18N = 'vue-i18n';
+    public const VUEX_I18N = 'vuex-i18n';
+    public const VUE_I18N = 'vue-i18n';
 
 
     /**
@@ -32,9 +36,9 @@ class Generator
 
 
     /**
-     * @param string  $path
-     * @param boolean $umd
-     * @param boolean $withVendor
+     * @param string $path
+     * @param bool   $umd
+     * @param bool   $withVendor
      *
      * @return string
      * @throws Exception
@@ -51,7 +55,7 @@ class Generator
         $jsBody  = '';
         foreach ($dir as $fileinfo) {
             if ( ! $fileinfo->isDot()) {
-                if ( ! $withVendor && in_array($fileinfo->getFilename(), ['vendor'])) {
+                if ( ! $withVendor && in_array($fileinfo->getFilename(), [ 'vendor' ])) {
                     continue;
                 }
 
@@ -93,9 +97,9 @@ class Generator
             }
 
             // get all files
-            $dir = new DirectoryIterator($directory);
+            $dir    = new DirectoryIterator($directory);
             $jsBody = '';
-            $files = [];
+            $files  = [];
             foreach ($dir as $fileinfo) {
                 if ( ! $fileinfo->isDot()) {
                     $files[] = $fileinfo->getRealPath();
@@ -141,8 +145,8 @@ class Generator
 
 
     /**
-     * @param string  $path
-     * @param boolean $umd
+     * @param string $path
+     * @param bool   $umd
      *
      * @return string
      * @throws Exception
@@ -159,7 +163,7 @@ class Generator
         $dir          = new DirectoryIterator($path);
         $jsBody       = '';
         foreach ($dir as $fileinfo) {
-            if ( ! $fileinfo->isDot() && ! in_array($fileinfo->getFilename(), ['vendor'])) {
+            if ( ! $fileinfo->isDot() && ! in_array($fileinfo->getFilename(), [ 'vendor' ])) {
                 $noExt = $this->removeExtension($fileinfo->getFilename());
                 if ( ! in_array($noExt, $this->availableLocales)) {
                     App::setLocale($noExt);
@@ -218,7 +222,7 @@ class Generator
         if (pathinfo($path, PATHINFO_EXTENSION) !== 'json') {
             return null;
         }
-        $tmp = (array)json_decode(file_get_contents($path), true);
+        $tmp = (array) json_decode(file_get_contents($path), true);
         if (gettype($tmp) !== "array") {
             throw new Exception('Unexpected data while processing ' . $path);
         }
@@ -261,7 +265,7 @@ class Generator
                     continue;
                 }
 
-                $tmp = include($fileName);
+                $tmp = include $fileName;
 
                 if (gettype($tmp) !== "array") {
                     throw new Exception('Unexpected data while processing ' . $fileName);
@@ -337,21 +341,21 @@ class Generator
      *
      * @return string
      */
-    private function adjustString($s)
+    private function adjustString($string)
     {
-        if ( ! is_string($s)) {
-            return $s;
+        if ( ! is_string($string)) {
+            return $string;
         }
 
         if ($this->config['i18nLib'] === self::VUEX_I18N) {
             $searchPipePattern = '/(\s)*(\|)(\s)*/';
             $threeColons       = ' ::: ';
-            $s                 = preg_replace($searchPipePattern, $threeColons, $s);
+            $string            = preg_replace($searchPipePattern, $threeColons, $string);
         }
 
-        return preg_replace_callback('/(?<!mailto|tel):\w+/', function ($matches) {
+        return preg_replace_callback('/(?<!mailto|tel):\w+/', static function ($matches) {
             return '{' . mb_substr($matches[0], 1) . '}';
-        }, $s);
+        }, $string);
     }
 
 
@@ -382,7 +386,7 @@ class Generator
      */
     private function getUMDModule($body)
     {
-        $js = <<<HEREDOC
+        return <<<HEREDOC
 (function (global, factory) {
     typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory() :
         typeof define === 'function' && define.amd ? define(factory) :
@@ -391,8 +395,6 @@ class Generator
     return {$body}
 })));
 HEREDOC;
-
-        return $js;
     }
 
 

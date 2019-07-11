@@ -5,6 +5,9 @@ use Illuminate\Database\Migrations\Migration;
 use Kalnoy\Nestedset\NestedSet;
 use Culpa\Facades\Schema;
 
+/**
+ * Class CreateCategoriesTable
+ */
 class CreateCategoriesTable extends Migration
 {
     /**

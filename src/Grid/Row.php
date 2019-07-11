@@ -2,10 +2,14 @@
 
 namespace Motor\Backend\Grid;
 
+/**
+ * Class Row
+ * @package Motor\Backend\Grid
+ */
 class Row extends Base
 {
 
-    protected $cells = [ ];
+    protected $cells = [];
 
 
     /**
@@ -32,7 +36,7 @@ class Row extends Base
      */
     public function getCell($name)
     {
-        if (isset( $this->cells[$name] )) {
+        if (isset($this->cells[$name])) {
             return $this->cells[$name];
         }
 

@@ -6,6 +6,9 @@ use Illuminate\Foundation\Testing\DatabaseTransactions;
 use Motor\Backend\Models\Language;
 use Motor\Backend\Models\Role;
 
+/**
+ * Class MotorBackendBackendLanguageTest
+ */
 class MotorBackendBackendLanguageTest extends TestCase
 {
 

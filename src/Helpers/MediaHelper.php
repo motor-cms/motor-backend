@@ -4,9 +4,20 @@ namespace Motor\Backend\Helpers;
 
 use Spatie\MediaLibrary\HasMedia\HasMedia;
 
+/**
+ * Class MediaHelper
+ * @package Motor\Backend\Helpers
+ */
 class MediaHelper
 {
 
+    /**
+     * @param HasMedia $record
+     * @param          $identifier
+     * @param bool     $base64
+     * @param array    $conversions
+     * @return array
+     */
     public static function getFileInformation(HasMedia $record, $identifier, $base64 = false, $conversions = [])
     {
         $data  = [];
