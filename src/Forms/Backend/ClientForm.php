@@ -12,6 +12,8 @@ class ClientForm extends Form
 {
 
     /**
+     * Define fields for ClientForm
+     *
      * @return mixed|void
      */
     public function buildForm()

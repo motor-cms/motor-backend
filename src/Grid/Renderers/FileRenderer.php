@@ -2,6 +2,7 @@
 
 namespace Motor\Backend\Grid\Renderers;
 
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Arr;
 
 /**
@@ -20,11 +21,12 @@ class FileRenderer
 
     /**
      * FileRenderer constructor.
-     * @param       $value
-     * @param array $options
-     * @param null  $record
+     *
+     * @param            $value
+     * @param array      $options
+     * @param Model|null $record
      */
-    public function __construct($value, $options = [], $record = null)
+    public function __construct($value, array $options = [], Model $record = null)
     {
         $this->value   = $value;
         $this->options = $options;

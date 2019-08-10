@@ -25,9 +25,11 @@ class Cell extends Base
     /**
      * Cell constructor.
      *
-     * @param $name
+     * @param string $name
+     * @param        $renderer
+     * @param array  $renderOptions
      */
-    public function __construct($name, $renderer, $renderOptions = [])
+    public function __construct(string $name, $renderer, array $renderOptions = [])
     {
         $this->name          = $name;
         $this->renderer      = $renderer;
@@ -38,7 +40,7 @@ class Cell extends Base
     /**
      * @return string
      */
-    public function getName()
+    public function getName(): string
     {
         return $this->name;
     }
@@ -94,7 +96,7 @@ class Cell extends Base
      *
      * @return bool
      */
-    public function parseFilters($filters)
+    public function parseFilters(array $filters)
     {
         foreach ($filters as $filter) {
             $params = [];

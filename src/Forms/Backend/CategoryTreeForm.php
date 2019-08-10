@@ -12,6 +12,8 @@ class CategoryTreeForm extends Form
 {
 
     /**
+     * Define fields for CategoryTreeForm
+     *
      * @return mixed|void
      */
     public function buildForm()

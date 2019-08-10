@@ -47,6 +47,9 @@ class MotorServiceProvider extends ServiceProvider
     }
 
 
+    /**
+     * Register custom blade directives
+     */
     public function bladeDirectives()
     {
         Blade::directive('boxWrapper', static function () {
@@ -90,6 +93,9 @@ class MotorServiceProvider extends ServiceProvider
     }
 
 
+    /**
+     * Publish all necessary asset resources
+     */
     public function publishResourceAssets()
     {
         $assets = [
@@ -104,12 +110,18 @@ class MotorServiceProvider extends ServiceProvider
     }
 
 
+    /**
+     * Set migration path
+     */
     public function migrations()
     {
         $this->loadMigrationsFrom(realpath(__DIR__ . '/../../database/migrations'));
     }
 
 
+    /**
+     * Merge permission config file
+     */
     public function permissions()
     {
         $config = $this->app['config']->get('motor-backend-permissions', []);
@@ -118,6 +130,9 @@ class MotorServiceProvider extends ServiceProvider
     }
 
 
+    /**
+     * Set routes
+     */
     public function routes()
     {
         if ( ! $this->app->routesAreCached()) {
@@ -127,6 +142,9 @@ class MotorServiceProvider extends ServiceProvider
     }
 
 
+    /**
+     * Set configuration files for publishing
+     */
     public function config()
     {
         $this->publishes([
@@ -138,6 +156,9 @@ class MotorServiceProvider extends ServiceProvider
     }
 
 
+    /**
+     * Set translation paths
+     */
     public function translations()
     {
         $this->loadTranslationsFrom(__DIR__ . '/../../resources/lang', 'motor-backend');
@@ -148,6 +169,9 @@ class MotorServiceProvider extends ServiceProvider
     }
 
 
+    /**
+     * Set view path
+     */
     public function views()
     {
         $this->loadViewsFrom(__DIR__ . '/../../resources/views', 'motor-backend');
@@ -158,6 +182,9 @@ class MotorServiceProvider extends ServiceProvider
     }
 
 
+    /**
+     * Add route model bindings
+     */
     public function routeModelBindings()
     {
         Route::bind('user', static function ($id) {
@@ -194,6 +221,9 @@ class MotorServiceProvider extends ServiceProvider
     }
 
 
+    /**
+     * Merge backend navigation items from configuration file
+     */
     public function navigationItems()
     {
         $config = $this->app['config']->get('motor-backend-navigation', []);
@@ -202,6 +232,9 @@ class MotorServiceProvider extends ServiceProvider
     }
 
 
+    /**
+     * Register artisan commands
+     */
     public function registerCommands()
     {
         if ($this->app->runningInConsole()) {
@@ -212,3 +245,4 @@ class MotorServiceProvider extends ServiceProvider
         }
     }
 }
+

@@ -3,6 +3,7 @@
 namespace Motor\Backend\Grid;
 
 use Auth;
+use Illuminate\Database\Eloquent\Model;
 
 /**
  * Class Action
@@ -40,7 +41,7 @@ class Action extends Base
      * @param       $link
      * @param array $parameters
      */
-    public function __construct($label, $link, $parameters = [])
+    public function __construct(string $label, string $link, array $parameters = [])
     {
         $this->label      = $label;
         $this->link       = $link;
@@ -56,7 +57,7 @@ class Action extends Base
      * @param $permission
      * @return $this
      */
-    public function needsPermissionTo($permission)
+    public function needsPermissionTo(string $permission)
     {
         $this->permission = $permission;
 
@@ -69,7 +70,7 @@ class Action extends Base
      * @param string $message
      * @return $this
      */
-    public function askForConfirmation($confirmation = true, $message = '')
+    public function askForConfirmation(bool $confirmation = true, string $message = '')
     {
         $this->askForConfirmation  = $confirmation;
         $this->confirmationMessage = $message;
@@ -88,7 +89,7 @@ class Action extends Base
      * @param string $operator
      * @return $this
      */
-    public function onCondition($column, $value, $operator = '=')
+    public function onCondition(string $column, $value, string $operator = '=')
     {
         $this->conditionColumn   = $column;
         $this->conditionValue    = $value;
@@ -108,10 +109,10 @@ class Action extends Base
 
 
     /**
-     * @param $record
+     * @param Model $record
      * @return bool|string
      */
-    public function render($record)
+    public function render(Model $record)
     {
         if ($this->permission != '' && ! has_permission($this->permission)) {
             return false;

@@ -34,7 +34,7 @@ class Row extends Base
      *
      * @return bool|mixed
      */
-    public function getCell($name)
+    public function getCell(string $name)
     {
         if (isset($this->cells[$name])) {
             return $this->cells[$name];
@@ -49,7 +49,7 @@ class Row extends Base
      *
      * @return array
      */
-    public function getCells()
+    public function getCells(): array
     {
         return $this->cells;
     }

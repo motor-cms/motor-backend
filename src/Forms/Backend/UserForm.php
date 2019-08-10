@@ -15,6 +15,8 @@ class UserForm extends Form
 {
 
     /**
+     * Define fields for UserForm
+     *
      * @return mixed|void
      */
     public function buildForm()

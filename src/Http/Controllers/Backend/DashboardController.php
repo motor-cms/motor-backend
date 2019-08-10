@@ -26,7 +26,8 @@ class DashboardController extends Controller
     /**
      * Show the application dashboard.
      *
-     * @return Response
+     * @param Request $request
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function show(Request $request)
     {

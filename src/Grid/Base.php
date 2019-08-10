@@ -18,7 +18,7 @@ class Base
      * @param $attributes
      * @return $this
      */
-    public function attributes($attributes)
+    public function attributes(array $attributes)
     {
         $this->attributes = $attributes;
 

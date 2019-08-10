@@ -12,6 +12,8 @@ class LanguageForm extends Form
 {
 
     /**
+     * Define fields for LanguageForm
+     *
      * @return mixed|void
      */
     public function buildForm()

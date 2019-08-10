@@ -2,6 +2,8 @@
 
 namespace Motor\Backend\Grid\Renderers;
 
+use Illuminate\Support\Arr;
+
 /**
  * Class TextRenderer
  * @package Motor\Backend\Grid\Renderers
@@ -19,7 +21,7 @@ class TextRenderer
      * @param $value
      * @param $options
      */
-    public function __construct($value, $options)
+    public function __construct($value, array $options = [])
     {
         $this->value   = $value;
         $this->options = $options;
@@ -31,6 +33,10 @@ class TextRenderer
      */
     public function render()
     {
+        if ($this->value === '' && Arr::get($this->options, 'empty_text')) {
+            return Arr::get($this->options, 'empty_text');
+        }
+
         return $this->value;
     }
 }

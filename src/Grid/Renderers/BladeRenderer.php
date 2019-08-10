@@ -2,6 +2,7 @@
 
 namespace Motor\Backend\Grid\Renderers;
 
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Arr;
 
 /**
@@ -20,11 +21,13 @@ class BladeRenderer
 
     /**
      * BladeRenderer constructor.
-     * @param      $value
-     * @param      $options
-     * @param null $record
+     *
+     * BladeRenderer constructor.
+     * @param            $value
+     * @param            $options
+     * @param Model|null $record
      */
-    public function __construct($value, $options, $record = null)
+    public function __construct($value, $options, Model $record = null)
     {
         $this->value   = $value;
         $this->options = $options;

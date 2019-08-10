@@ -21,7 +21,7 @@ class TranslateRenderer
      * @param $value
      * @param $options
      */
-    public function __construct($value, $options)
+    public function __construct($value, array $options)
     {
         $this->value   = $value;
         $this->options = $options;

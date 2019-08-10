@@ -12,6 +12,8 @@ class PermissionForm extends Form
 {
 
     /**
+     * Define fields for PermissionForm
+     *
      * @return mixed|void
      */
     public function buildForm()

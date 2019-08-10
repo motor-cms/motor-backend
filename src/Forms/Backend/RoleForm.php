@@ -14,6 +14,8 @@ class RoleForm extends Form
 {
 
     /**
+     * Define fields for RoleForm
+     *
      * @return mixed|void
      */
     public function buildForm()

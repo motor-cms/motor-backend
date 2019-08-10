@@ -12,6 +12,8 @@ class CategoryForm extends Form
 {
 
     /**
+     * Define fields for CategoryForm
+     *
      * @return mixed|void
      */
     public function buildForm()

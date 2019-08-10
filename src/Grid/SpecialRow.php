@@ -36,7 +36,7 @@ class SpecialRow extends Base
      *
      * @return $this
      */
-    public function renderer($renderer, $options = [])
+    public function renderer($renderer, array $options = [])
     {
         $this->renderer      = $renderer;
         $this->renderOptions = $options;

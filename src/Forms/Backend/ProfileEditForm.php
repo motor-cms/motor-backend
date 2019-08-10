@@ -13,6 +13,8 @@ class ProfileEditForm extends Form
 {
 
     /**
+     * Define fields for ProfileEditForm
+     *
      * @return mixed|void
      */
     public function buildForm()

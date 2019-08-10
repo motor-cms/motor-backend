@@ -107,6 +107,7 @@ class LoginController extends Controller
      */
     public function guard()
     {
+        /** @noinspection PhpUndefinedClassInspection */
         return Auth::guard();
     }
 }

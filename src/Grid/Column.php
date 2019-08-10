@@ -23,7 +23,7 @@ class Column extends Base
 
     protected $renderer = 'Motor\Backend\Grid\Renderers\TextRenderer';
 
-    protected $renderOptions;
+    protected $renderOptions = [];
 
     protected $conditionColumn = null;
 
@@ -148,6 +148,19 @@ class Column extends Base
     public function getRenderer()
     {
         return $this->renderer;
+    }
+
+
+    /**
+     * Set options for renderer
+     *
+     * @param array $options
+     */
+    public function setRenderOptions(array $options)
+    {
+        $this->renderOptions = $options;
+
+        return $this;
     }
 
 

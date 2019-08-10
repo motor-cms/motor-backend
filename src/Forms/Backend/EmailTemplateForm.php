@@ -13,6 +13,8 @@ class EmailTemplateForm extends Form
 {
 
     /**
+     * Define fields for EmailTemplateForm
+     *
      * @return mixed|void
      */
     public function buildForm()

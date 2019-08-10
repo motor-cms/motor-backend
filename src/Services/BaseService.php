@@ -178,7 +178,7 @@ abstract class BaseService
      *
      * @return mixed
      */
-    public function getFilter()
+    public function getFilter(): Filter
     {
         return $this->filter;
     }

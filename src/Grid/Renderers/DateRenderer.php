@@ -23,7 +23,7 @@ class DateRenderer
      * @param       $value
      * @param array $options
      */
-    public function __construct($value, $options = [])
+    public function __construct($value, array $options = [])
     {
         $this->value   = $value;
         $this->options = $options;
@@ -35,7 +35,7 @@ class DateRenderer
      */
     public function render()
     {
-        if ($this->value == '' || $this->value == null) {
+        if ($this->value === '' || $this->value === null || $this->value === 'COLUMN NOT FOUND') {
             return '';
         }
 

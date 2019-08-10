@@ -14,6 +14,7 @@ class UsersGrid extends Grid
     protected function setup()
     {
         $this->addColumn('id', 'ID', true);
+        $this->addColumn('client.name', trans('motor-backend::backend/clients.client'), true)->setRenderOptions(['empty_text' => trans('motor-backend::backend/global.all')]);
         $this->addColumn('name', trans('motor-backend::backend/users.name'), true);
         $this->addColumn('email', trans('motor-backend::backend/users.email'), true);
         $this->setDefaultSorting('id', 'ASC');

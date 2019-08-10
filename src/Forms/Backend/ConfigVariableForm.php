@@ -12,6 +12,8 @@ class ConfigVariableForm extends Form
 {
 
     /**
+     * Define fields for ConfigVariableForm
+     *
      * @return mixed|void
      */
     public function buildForm()

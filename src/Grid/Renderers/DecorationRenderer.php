@@ -21,7 +21,7 @@ class DecorationRenderer
      * @param       $value
      * @param array $options
      */
-    public function __construct($value, $options = [])
+    public function __construct($value, array $options = [])
     {
         $this->value   = $value;
         $this->options = $options;

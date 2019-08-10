@@ -18,7 +18,7 @@ class MediaHelper
      * @param array    $conversions
      * @return array
      */
-    public static function getFileInformation(HasMedia $record, $identifier, $base64 = false, $conversions = [])
+    public static function getFileInformation(HasMedia $record, string $identifier, bool $base64 = false, array $conversions = []): array
     {
         $data  = [];
         $items = $record->getMedia($identifier);

@@ -10,10 +10,10 @@ class Filesize
 {
 
     /**
-     * @param $bytes
+     * @param int $bytes
      * @return string
      */
-    public static function bytesToHuman($bytes)
+    public static function bytesToHuman(int $bytes): string
     {
         $units = [ 'B', 'KB', 'MB', 'GB', 'TB', 'PB' ];
 
