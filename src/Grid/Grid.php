@@ -219,6 +219,7 @@ class Grid extends Base
      * Query database and parse all rows and cells
      *
      * @return array
+     * @throws \ReflectionException
      */
     public function getRows(): array
     {
@@ -299,11 +300,11 @@ class Grid extends Base
      * Cell renderer, should maybe be outsourced in a 'render' class as we'll have separate renderers later (probably
      * ;))
      *
-     * @param      $column
-     * @param      $record
-     * @param bool $sanitize
-     *
-     * @return mixed|string
+     * @param Cell   $cell
+     * @param Column $column
+     * @param        $record
+     * @param bool   $sanitize
+     * @return string
      */
     protected function getCellValue(Cell $cell, Column $column, $record, $sanitize = true): string
     {
@@ -480,7 +481,7 @@ class Grid extends Base
 
     /**
      * @param int $limit
-     * @return |null
+     * @return AbstractPaginator
      * @throws \ReflectionException
      */
     public function getPaginator(int $limit = 20): AbstractPaginator

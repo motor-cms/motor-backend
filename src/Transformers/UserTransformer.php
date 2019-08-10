@@ -47,7 +47,8 @@ class UserTransformer extends Fractal\TransformerAbstract
     /**
      * Include client
      *
-     * @return \League\Fractal\Resource\Item
+     * @param User $record
+     * @return Fractal\Resource\Item
      */
     public function includeClient(User $record)
     {
@@ -60,7 +61,8 @@ class UserTransformer extends Fractal\TransformerAbstract
     /**
      * Include permissions
      *
-     * @return \League\Fractal\Resource\Collection
+     * @param User $record
+     * @return Fractal\Resource\Collection
      */
     public function includePermissions(User $record)
     {
@@ -73,7 +75,8 @@ class UserTransformer extends Fractal\TransformerAbstract
     /**
      * Include permissions
      *
-     * @return \League\Fractal\Resource\Collection
+     * @param User $record
+     * @return Fractal\Resource\Collection
      */
     public function includeRoles(User $record)
     {
@@ -86,7 +89,8 @@ class UserTransformer extends Fractal\TransformerAbstract
     /**
      * Include files
      *
-     * @return \League\Fractal\Resource\Collection
+     * @param HasMedia $record
+     * @return Fractal\Resource\Collection
      */
     public function includeFiles(HasMedia $record)
     {

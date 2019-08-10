@@ -18,7 +18,7 @@ class EmailTemplatesController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\JsonResponse
      */
     public function index()
     {
@@ -32,9 +32,8 @@ class EmailTemplatesController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param \Illuminate\Http\Request $request
-     *
-     * @return \Illuminate\Http\Response
+     * @param EmailTemplateRequest $request
+     * @return \Illuminate\Http\JsonResponse
      */
     public function store(EmailTemplateRequest $request)
     {
@@ -48,9 +47,8 @@ class EmailTemplatesController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param int $id
-     *
-     * @return \Illuminate\Http\Response
+     * @param EmailTemplate $record
+     * @return \Illuminate\Http\JsonResponse
      */
     public function show(EmailTemplate $record)
     {
@@ -64,10 +62,9 @@ class EmailTemplatesController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param \Illuminate\Http\Request $request
-     * @param int                      $id
-     *
-     * @return \Illuminate\Http\Response
+     * @param EmailTemplateRequest $request
+     * @param EmailTemplate        $record
+     * @return \Illuminate\Http\JsonResponse
      */
     public function update(EmailTemplateRequest $request, EmailTemplate $record)
     {
@@ -81,9 +78,8 @@ class EmailTemplatesController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param int $id
-     *
-     * @return \Illuminate\Http\Response
+     * @param EmailTemplate $record
+     * @return \Illuminate\Http\JsonResponse
      */
     public function destroy(EmailTemplate $record)
     {

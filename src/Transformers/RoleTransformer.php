@@ -38,7 +38,8 @@ class RoleTransformer extends Fractal\TransformerAbstract
     /**
      * Include Permissions
      *
-     * @return \League\Fractal\Resource\Collection
+     * @param Role $record
+     * @return Fractal\Resource\Collection
      */
     public function includePermissions(Role $record)
     {

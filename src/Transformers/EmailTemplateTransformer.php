@@ -50,7 +50,8 @@ class EmailTemplateTransformer extends Fractal\TransformerAbstract
     /**
      * Include client
      *
-     * @return \League\Fractal\Resource\Item
+     * @param EmailTemplate $record
+     * @return Fractal\Resource\Item
      */
     public function includeClient(EmailTemplate $record)
     {
@@ -63,7 +64,8 @@ class EmailTemplateTransformer extends Fractal\TransformerAbstract
     /**
      * Include language
      *
-     * @return \League\Fractal\Resource\Item
+     * @param EmailTemplate $record
+     * @return Fractal\Resource\Item
      */
     public function includeLanguage(EmailTemplate $record)
     {

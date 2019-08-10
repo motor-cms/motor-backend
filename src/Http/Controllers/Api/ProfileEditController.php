@@ -18,10 +18,8 @@ class ProfileEditController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param \Illuminate\Http\Request $request
-     * @param int                      $id
-     *
-     * @return \Illuminate\Http\Response
+     * @param ProfileEditRequest $request
+     * @return \Illuminate\Http\JsonResponse
      */
     public function update(ProfileEditRequest $request)
     {
@@ -41,6 +39,5 @@ class ProfileEditController extends Controller
         $resource = $this->transformItem($result, UserTransformer::class, 'client,permissions,roles,files');
 
         return $this->respondWithJson('Profile read', $resource);
-
     }
 }

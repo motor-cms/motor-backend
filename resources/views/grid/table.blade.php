@@ -48,8 +48,7 @@
     <script type="text/javascript">
         $(document).ready(function() {
             $('.ask-for-confirmation').on('click', function(e) {
-                var message = $(this).data('message');
-                console.log(message);
+                let message = $(this).data('message');
                 if (message == '' || message == undefined) {
                     message = '{{trans('motor-backend::backend/global.are_you_sure')}}';
                 }

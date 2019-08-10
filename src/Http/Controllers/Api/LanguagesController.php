@@ -18,7 +18,7 @@ class LanguagesController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\JsonResponse
      */
     public function index()
     {
@@ -32,9 +32,8 @@ class LanguagesController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param \Illuminate\Http\Request $request
-     *
-     * @return \Illuminate\Http\Response
+     * @param LanguageRequest $request
+     * @return \Illuminate\Http\JsonResponse
      */
     public function store(LanguageRequest $request)
     {
@@ -48,9 +47,8 @@ class LanguagesController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param int $id
-     *
-     * @return \Illuminate\Http\Response
+     * @param Language $record
+     * @return \Illuminate\Http\JsonResponse
      */
     public function show(Language $record)
     {
@@ -64,10 +62,9 @@ class LanguagesController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param \Illuminate\Http\Request $request
-     * @param int                      $id
-     *
-     * @return \Illuminate\Http\Response
+     * @param LanguageRequest $request
+     * @param Language        $record
+     * @return \Illuminate\Http\JsonResponse
      */
     public function update(LanguageRequest $request, Language $record)
     {
@@ -81,9 +78,8 @@ class LanguagesController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param int $id
-     *
-     * @return \Illuminate\Http\Response
+     * @param Language $record
+     * @return \Illuminate\Http\JsonResponse
      */
     public function destroy(Language $record)
     {

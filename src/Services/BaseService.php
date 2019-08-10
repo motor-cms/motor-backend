@@ -123,8 +123,8 @@ abstract class BaseService
      * Applies basic filters and adds filters through the individual services filters() method
      *
      * @param string $alias
-     *
-     * @return static
+     * @param null   $sorting
+     * @return BaseService
      */
     public static function collection($alias = '', $sorting = null)
     {
@@ -215,6 +215,7 @@ abstract class BaseService
      * Set sorting array
      *
      * @param array $sorting
+     * @return $this
      */
     public function setSorting(Array $sorting)
     {
@@ -228,6 +229,7 @@ abstract class BaseService
      * Add custom sorting, if available
      *
      * @param $query
+     * @return mixed
      */
     public function applySorting($query)
     {
@@ -398,7 +400,7 @@ abstract class BaseService
      * Sets a request object
      *
      * @param Request $request
-     *
+     * @param null    $form
      * @return $this
      */
     public function setRequest(Request $request, $form = null)
@@ -483,7 +485,8 @@ abstract class BaseService
      * @param        $file
      * @param string $identifier
      * @param null   $collection
-     *
+     * @param null   $record
+     * @param bool   $addToCollection
      * @return $this
      */
     public function uploadFile(

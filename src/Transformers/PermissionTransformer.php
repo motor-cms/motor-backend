@@ -39,7 +39,8 @@ class PermissionTransformer extends Fractal\TransformerAbstract
     /**
      * Include permission group
      *
-     * @return \League\Fractal\Resource\Item
+     * @param Permission $record
+     * @return Fractal\Resource\Item
      */
     public function includeGroup(Permission $record)
     {

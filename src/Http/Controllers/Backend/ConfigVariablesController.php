@@ -24,7 +24,8 @@ class ConfigVariablesController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     * @throws \ReflectionException
      */
     public function index()
     {
@@ -40,6 +41,7 @@ class ConfigVariablesController extends Controller
 
     /**
      * @param ConfigVariable $record
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function duplicate(ConfigVariable $record)
     {
@@ -53,7 +55,8 @@ class ConfigVariablesController extends Controller
     /**
      * Show the form for creating a new resource.
      *
-     * @return \Illuminate\Http\Response
+     * @param ConfigVariable $record
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function create(ConfigVariable $record)
     {
@@ -71,9 +74,8 @@ class ConfigVariablesController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param \Illuminate\Http\Request $request
-     *
-     * @return \Illuminate\Http\Response
+     * @param ConfigVariableRequest $request
+     * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
      */
     public function store(ConfigVariableRequest $request)
     {
@@ -95,9 +97,7 @@ class ConfigVariablesController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param int $id
-     *
-     * @return \Illuminate\Http\Response
+     * @param $id
      */
     public function show($id)
     {
@@ -108,9 +108,8 @@ class ConfigVariablesController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param int $id
-     *
-     * @return \Illuminate\Http\Response
+     * @param ConfigVariable $record
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function edit(ConfigVariable $record)
     {
@@ -128,10 +127,9 @@ class ConfigVariablesController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param \Illuminate\Http\Request $request
-     * @param int                      $id
-     *
-     * @return \Illuminate\Http\Response
+     * @param ConfigVariableRequest $request
+     * @param ConfigVariable        $record
+     * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
      */
     public function update(ConfigVariableRequest $request, ConfigVariable $record)
     {
@@ -153,9 +151,8 @@ class ConfigVariablesController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param int $id
-     *
-     * @return \Illuminate\Http\Response
+     * @param ConfigVariable $record
+     * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
      */
     public function destroy(ConfigVariable $record)
     {

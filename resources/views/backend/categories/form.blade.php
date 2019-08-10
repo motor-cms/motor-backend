@@ -36,7 +36,7 @@
 {{--    <script src="{{asset('plugins/jstree/jstree.min.js')}}"></script>--}}
     <script>
         $.jstree.defaults.dnd.is_draggable = function (node) {
-            var id = $(node).attr('id');
+            let id = $(node).attr('id');
             if (id != 'category-item') {
                 return false;
             }
@@ -60,8 +60,8 @@
             });
         });
 
-        var openNode = function (node) {
-            var parent = $('#category-tree').jstree().get_parent(node);
+        let openNode = function (node) {
+            let parent = $('#category-tree').jstree().get_parent(node);
             $('#category-tree').jstree().open_node(parent);
 
             if (parent) {
@@ -78,17 +78,17 @@
 //            e.preventDefault();
 
             // get item parent
-            var parent = $('#category-tree').jstree().get_parent('category-item');
+            let parent = $('#category-tree').jstree().get_parent('category-item');
 
             $('input[name="parent_id"]').val($('#' + parent).data('category-id'));
 
             // get previous sibling (if any)
-            var previousSibling = $('#category-tree').jstree().get_prev_dom('category-item', true);
+            let previousSibling = $('#category-tree').jstree().get_prev_dom('category-item', true);
             if (previousSibling !== false) {
                 $('input[name="previous_sibling_id"]').val(previousSibling.data('category-id'));
             }
 
-            var nextSibling = $('#category-tree').jstree().get_next_dom('category-item', true);
+            let nextSibling = $('#category-tree').jstree().get_next_dom('category-item', true);
             if (nextSibling !== false) {
                 $('input[name="next_sibling_id"]').val(nextSibling.data('category-id'));
             }

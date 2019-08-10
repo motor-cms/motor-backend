@@ -80,6 +80,8 @@ class User extends Authenticatable implements HasMedia, JWTSubject
 
     /**
      * Send a password reset email to the user
+     *
+     * @param string $token
      */
     public function sendPasswordResetNotification($token)
     {

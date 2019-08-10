@@ -212,9 +212,9 @@ class Generator
 
 
     /**
-     * @param string $path
-     *
-     * @return array
+     * @param $path
+     * @return array|null
+     * @throws Exception
      */
     private function allocateLocaleJSON($path)
     {
@@ -232,9 +232,9 @@ class Generator
 
 
     /**
-     * @param string $path
-     *
+     * @param $path
      * @return array
+     * @throws Exception
      */
     private function allocateLocaleArray($path)
     {
@@ -337,9 +337,8 @@ class Generator
     /**
      * Turn Laravel style ":link" into vue-i18n style "{link}" or vuex-i18n style ":::".
      *
-     * @param string $s
-     *
-     * @return string
+     * @param $string
+     * @return string|string[]|null
      */
     private function adjustString($string)
     {

@@ -129,7 +129,9 @@ class Column extends Base
     /**
      * Set column type
      *
-     * @param $type
+     * @param       $renderer
+     * @param array $options
+     * @return $this
      */
     public function renderer($renderer, $options = [])
     {
@@ -155,6 +157,7 @@ class Column extends Base
      * Set options for renderer
      *
      * @param array $options
+     * @return $this
      */
     public function setRenderOptions(array $options)
     {

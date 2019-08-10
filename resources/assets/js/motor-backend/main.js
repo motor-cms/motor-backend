@@ -97,7 +97,7 @@ Vue.mixin({
 
             if (!str) { return str; }
 
-            var regex = '.{1,' +width+ '}(\s|$)' + (cut ? '|.{' +width+ '}|.+$' : '|\S+?(\s|$)');
+            let regex = '.{1,' +width+ '}(\s|$)' + (cut ? '|.{' +width+ '}|.+$' : '|\S+?(\s|$)');
 
             return str.match( RegExp(regex, 'g') ).join( brk );
         }

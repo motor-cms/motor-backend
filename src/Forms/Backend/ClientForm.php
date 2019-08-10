@@ -3,6 +3,7 @@
 namespace Motor\Backend\Forms\Backend;
 
 use Kris\LaravelFormBuilder\Form;
+use Symfony\Component\Intl\Countries;
 
 /**
  * Class ClientForm
@@ -27,7 +28,7 @@ class ClientForm extends Form
              ->add('city', 'text', [ 'label' => trans('motor-backend::backend/global.address.city') ])
              ->add('country_iso_3166_1', 'select2', [
                  'label'   => trans('motor-backend::backend/global.address.country'),
-                 'choices' => \Symfony\Component\Intl\Intl::getRegionBundle()->getCountryNames()
+                 'choices' => Countries::getNames()
              ])
              ->add('contact_name', 'text', [ 'label' => trans('motor-backend::backend/clients.contact') ])
              ->add('contact_phone', 'text', [ 'label' => trans('motor-backend::backend/global.contact.phone') ])
