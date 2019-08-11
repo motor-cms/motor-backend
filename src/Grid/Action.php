@@ -110,7 +110,8 @@ class Action extends Base
 
     /**
      * @param Model $record
-     * @return bool|string
+     * @return array|bool|string
+     * @throws \Throwable
      */
     public function render(Model $record)
     {

@@ -22,9 +22,8 @@ trait ChangesPasswords
     /**
      * Reset the given user's password.
      *
-     * @param \Illuminate\Http\Request $request
-     *
-     * @return \Illuminate\Http\RedirectResponse|\Illuminate\Http\JsonResponse
+     * @param Request $request
+     * @return \Illuminate\Http\JsonResponse|\Illuminate\Http\RedirectResponse
      */
     public function change(Request $request)
     {
