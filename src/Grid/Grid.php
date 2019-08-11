@@ -189,7 +189,7 @@ class Grid extends Base
         $this->actions[] = $action;
 
         // Once the first action is added, we need to add the action column
-        $this->addColumn('special:actions', trans('motor-backend::backend/global.actions'))->style('text-align: right');
+        $this->addColumn('special:actions', trans('motor-backend::backend/global.actions'))->attributes(['style' => 'text-align: right; min-width: 130px;', 'class' => 'action-column']);
 
         return $action;
     }
@@ -347,6 +347,7 @@ class Grid extends Base
             // Fallback, just return the value
             $value = $column->getName();
         }
+        $cell->attributes($column->getAttributes());
         $cell->style($column->getStyle());
 
         if ($column->getName() == 'special:actions') {

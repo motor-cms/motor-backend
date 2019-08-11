@@ -48,6 +48,15 @@ class Base
 
 
     /**
+     * @return array
+     */
+    public function getAttributes()
+    {
+        return $this->attributes;
+    }
+
+
+    /**
      * @return string
      */
     public function buildAttributes()

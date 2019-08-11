@@ -100,6 +100,14 @@ h3.box-title {
 .sidebar-padding {
   padding: 10px;
 }
+
 .modal-xlg {
   max-width: 1000px;
+}
+
+.table th {
+  border-top: none !important;
+}
+td.action-column a {
+  margin-left: 5px;
 }
