@@ -8,7 +8,7 @@
         @if ($value == $optionValue && $value != '')
             <option value="{{$optionValue}}" selected>{{$optionLabel}}</option>
         @else
-            <option value="{{$optionValue}}">{{$optionLabel}}</option>
+            <option value="{{$optionValue}}">{!! $optionLabel !!}</option>
         @endif
     @endforeach
 </select>

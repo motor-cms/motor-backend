@@ -10,7 +10,7 @@
 
     <?php if ($showField): ?>
     <?= Form::input('hidden', $name, $options['value']) ?>
-    <?= Form::input('text', $name.'_picker', ($options['value'] ? date('d.m.Y H:i:s', strtotime($options['value'])) : ''), array_merge(['data-target' => "#".$name.'_picker', 'data-toggle' => "datetimepicker"], $options['attr'])) ?>
+    <?= Form::input('text', $name.'_picker', ($options['value'] ? date('d.m.Y H:i:s', strtotime($options['value'])) : ''), array_merge(['data-target' => "#".$name.'_picker'], $options['attr'])) ?>
     @include ('laravel-form-builder::help_block')
     <?php endif; ?>
 
@@ -27,7 +27,18 @@
         $(function () {
             $('input[name="{{$name}}_picker"]').datetimepicker({
                 locale: 'de',
-                defaultDate: false
+                defaultDate: false,
+                icons: {
+                    time: 'far fa-clock',
+                    date: 'far fa-calendar-alt',
+                    up: 'fas fa-arrow-up',
+                    down: 'fas fa-arrow-down',
+                    previous: 'fas fa-chevron-left',
+                    next: 'fas fa-chevron-right',
+                    today: 'far fa-calendar-check-o',
+                    clear: 'far fa-trash',
+                    close: 'far fa-times'
+                }
             });
             $('input[name="{{$name}}_picker"]').on('dp.change', function (e) {
                 $('input[name="{{$name}}"]').val(e.date.format('YYYY-MM-DD HH:mm:ss'));

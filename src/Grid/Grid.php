@@ -304,9 +304,9 @@ class Grid extends Base
      * @param Column $column
      * @param        $record
      * @param bool   $sanitize
-     * @return string
+     * @return mixed
      */
-    protected function getCellValue(Cell $cell, Column $column, $record, $sanitize = true): string
+    protected function getCellValue(Cell $cell, Column $column, $record, $sanitize = true)
     {
         // Eloquent relation with dot notation
         if (preg_match('#^[a-z0-9_-]+(?:\.[a-z0-9_-]+)+$#i', $column->getName(), $matches) && is_object($record)) {
