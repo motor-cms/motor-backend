@@ -189,7 +189,8 @@ class Grid extends Base
         $this->actions[] = $action;
 
         // Once the first action is added, we need to add the action column
-        $this->addColumn('special:actions', trans('motor-backend::backend/global.actions'))->attributes(['style' => 'text-align: right; min-width: 130px;', 'class' => 'action-column']);
+        $this->addColumn('special:actions', trans('motor-backend::backend/global.actions'))
+             ->attributes([ 'style' => 'text-align: right; min-width: 130px;', 'class' => 'action-column' ]);
 
         return $action;
     }
@@ -516,6 +517,20 @@ class Grid extends Base
         $this->paginator = $query->paginate($limit);
 
         return $this->paginator;
+    }
+
+
+    /**
+     * Set an external paginator
+     *
+     * @param AbstractPaginator $paginator
+     * @return $this
+     */
+    public function setPaginator(AbstractPaginator $paginator)
+    {
+        $this->paginator = $paginator;
+
+        return $this;
     }
 
 
