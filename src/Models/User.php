@@ -8,7 +8,6 @@ use Motor\Core\Traits\Searchable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Motor\Core\Traits\Filterable;
 use Spatie\Permission\Traits\HasRoles;
-use Tymon\JWTAuth\Contracts\JWTSubject;
 use Spatie\MediaLibrary\Models\Media;
 use Spatie\MediaLibrary\HasMedia\HasMedia;
 use Spatie\MediaLibrary\HasMedia\HasMediaTrait;
@@ -66,7 +65,7 @@ use Spatie\MediaLibrary\HasMedia\HasMediaTrait;
  * @method static \Illuminate\Database\Eloquent\Builder|\Motor\Backend\Models\User whereUpdatedAt( $value )
  * @mixin \Eloquent
  */
-class User extends Authenticatable implements HasMedia, JWTSubject
+class User extends Authenticatable implements HasMedia
 {
 
     use Searchable;
@@ -86,28 +85,6 @@ class User extends Authenticatable implements HasMedia, JWTSubject
     public function sendPasswordResetNotification($token)
     {
         $this->notify(new ResetPassword($token, $this));
-    }
-
-
-    /**
-     * Get the identifier that will be stored in the subject claim of the JWT.
-     *
-     * @return mixed
-     */
-    public function getJWTIdentifier()
-    {
-        return $this->getKey();
-    }
-
-
-    /**
-     * Return a key value array, containing any custom claims to be added to the JWT.
-     *
-     * @return array
-     */
-    public function getJWTCustomClaims()
-    {
-        return [ 'haha' => 'lol' ];
     }
 
 
