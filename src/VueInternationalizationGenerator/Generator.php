@@ -88,7 +88,7 @@ class Generator
         // loop through all namespaces and get data from translation files
         $translator = app('translator');
 
-        foreach ($translator->getLoader()->hints as $namespace => $directory) {
+        foreach ($translator->getLoader()->namespaces() as $namespace => $directory) {
 
             $fileinfo = new \SplFileInfo($directory);
 
