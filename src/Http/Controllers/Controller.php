@@ -104,7 +104,9 @@ class Controller extends BaseController
             $json = json_encode([ 'message' => $message, 'data' => $data ]);
         }
 
-        return response()->attachment($json, $filename, 'application/json');
+        return response()->streamDownload(function () use ($json ){
+            echo $json;
+        }, $filename, ['Content-Type' => 'application/json']);
     }
 
 
