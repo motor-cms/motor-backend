@@ -76,7 +76,7 @@ class Base
 
     /**
      * @param $string
-     * @return string
+     * @return string|array
      */
     protected function sanitize($string)
     {

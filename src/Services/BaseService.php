@@ -488,6 +488,9 @@ abstract class BaseService
      * @param null   $record
      * @param bool   $addToCollection
      * @return $this
+     * @throws \Spatie\MediaLibrary\Exceptions\FileCannotBeAdded\DiskDoesNotExist
+     * @throws \Spatie\MediaLibrary\Exceptions\FileCannotBeAdded\FileDoesNotExist
+     * @throws \Spatie\MediaLibrary\Exceptions\FileCannotBeAdded\FileIsTooBig
      */
     public function uploadFile(
         $file,
