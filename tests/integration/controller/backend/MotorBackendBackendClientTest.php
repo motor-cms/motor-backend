@@ -11,7 +11,6 @@ use Motor\Backend\Models\Role;
  */
 class MotorBackendBackendClientTest extends TestCase
 {
-
     use DatabaseTransactions;
 
     protected $user;
@@ -76,7 +75,7 @@ class MotorBackendBackendClientTest extends TestCase
     {
         $client = create_test_client();
         $this->visit('/backend/clients')
-            ->within('table', function(){
+            ->within('table', function () {
                 $this->click(trans('motor-backend::backend/global.edit'));
             })
             ->seePageIs('/backend/clients/'.$client->id.'/edit')
@@ -93,7 +92,7 @@ class MotorBackendBackendClientTest extends TestCase
             ->see($client->name)
             ->type('NewClientName', 'name')
             ->select('AU', 'country_iso_3166_1')
-            ->within('.box-footer', function(){
+            ->within('.box-footer', function () {
                 $this->press(trans('motor-backend::backend/clients.save'));
             })
             ->see(trans('motor-backend::backend/clients.updated'))
@@ -119,7 +118,7 @@ class MotorBackendBackendClientTest extends TestCase
             ->see(trans('motor-backend::backend/clients.new'))
             ->type('DE', 'country_iso_3166_1')
             ->type('Client Name', 'name')
-            ->within('.box-footer', function(){
+            ->within('.box-footer', function () {
                 $this->press(trans('motor-backend::backend/clients.save'));
             })
             ->see(trans('motor-backend::backend/clients.created'))
@@ -132,7 +131,7 @@ class MotorBackendBackendClientTest extends TestCase
     {
         $this->visit('/backend/clients/create')
             ->see(trans('motor-backend::backend/clients.new'))
-            ->within('.box-footer', function(){
+            ->within('.box-footer', function () {
                 $this->press(trans('motor-backend::backend/clients.save'));
             })
             ->see('Data missing!')
@@ -146,7 +145,7 @@ class MotorBackendBackendClientTest extends TestCase
         $this->visit('/backend/clients/'.$client->id.'/edit')
             ->see(trans('motor-backend::backend/clients.edit'))
             ->type('Updated Client Name', 'name')
-            ->within('.box-footer', function(){
+            ->within('.box-footer', function () {
                 $this->press(trans('motor-backend::backend/clients.save'));
             })
             ->see(trans('motor-backend::backend/clients.updated'))
@@ -162,7 +161,7 @@ class MotorBackendBackendClientTest extends TestCase
         $this->assertCount(1, Client::all());
 
         $this->visit('/backend/clients')
-            ->within('table', function(){
+            ->within('table', function () {
                 $this->press(trans('motor-backend::backend/global.delete'));
             })
             ->seePageIs('/backend/clients');
@@ -175,7 +174,7 @@ class MotorBackendBackendClientTest extends TestCase
     {
         $clients = create_test_client(100);
         $this->visit('/backend/clients')
-            ->within('.pagination', function(){
+            ->within('.pagination', function () {
                 $this->click('3');
             })
             ->seePageIs('/backend/clients?page=3');

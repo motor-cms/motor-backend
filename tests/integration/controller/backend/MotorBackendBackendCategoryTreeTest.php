@@ -10,7 +10,6 @@ use Motor\Backend\Models\CategoryTree;
  */
 class MotorBackendBackendCategoryTreeTest extends TestCase
 {
-
     use DatabaseTransactions;
 
     protected $user;
@@ -79,7 +78,7 @@ class MotorBackendBackendCategoryTreeTest extends TestCase
     {
         $record = create_test_category_tree();
         $this->visit('/backend/category_trees')
-            ->within('table', function(){
+            ->within('table', function () {
                 $this->click(trans('motor-backend::backend/global.edit'));
             })
             ->seePageIs('/backend/category_trees/'.$record->id.'/edit')
@@ -95,7 +94,7 @@ class MotorBackendBackendCategoryTreeTest extends TestCase
         $this->visit('/backend/category_trees/'.$record->id.'/edit')
             ->see($record->name)
             ->type('Updated Category tree', 'name')
-            ->within('.box-footer', function(){
+            ->within('.box-footer', function () {
                 $this->press(trans('motor-backend::backend/category_trees.save'));
             })
             ->see(trans('motor-backend::backend/category_trees.updated'))
@@ -120,7 +119,7 @@ class MotorBackendBackendCategoryTreeTest extends TestCase
         $this->visit('/backend/category_trees/create')
             ->see(trans('motor-backend::backend/category_trees.new'))
             ->type('Create Category tree Name', 'name')
-            ->within('.box-footer', function(){
+            ->within('.box-footer', function () {
                 $this->press(trans('motor-backend::backend/category_trees.save'));
             })
             ->see(trans('motor-backend::backend/category_trees.created'))
@@ -133,7 +132,7 @@ class MotorBackendBackendCategoryTreeTest extends TestCase
     {
         $this->visit('/backend/category_trees/create')
             ->see(trans('motor-backend::backend/category_trees.new'))
-            ->within('.box-footer', function(){
+            ->within('.box-footer', function () {
                 $this->press(trans('motor-backend::backend/category_trees.save'));
             })
             ->see('Data missing!')
@@ -147,7 +146,7 @@ class MotorBackendBackendCategoryTreeTest extends TestCase
         $this->visit('/backend/category_trees/'.$record->id.'/edit')
             ->see(trans('motor-backend::backend/category_trees.edit'))
             ->type('Modified Category tree Name', 'name')
-            ->within('.box-footer', function(){
+            ->within('.box-footer', function () {
                 $this->press(trans('motor-backend::backend/category_trees.save'));
             })
             ->see(trans('motor-backend::backend/category_trees.updated'))
@@ -163,7 +162,7 @@ class MotorBackendBackendCategoryTreeTest extends TestCase
         $this->assertCount(1, CategoryTree::all());
 
         $this->visit('/backend/category_trees')
-            ->within('table', function(){
+            ->within('table', function () {
                 $this->press(trans('motor-backend::backend/global.delete'));
             })
             ->seePageIs('/backend/category_trees')
@@ -177,7 +176,7 @@ class MotorBackendBackendCategoryTreeTest extends TestCase
     {
         $records = create_test_category_tree(100);
         $this->visit('/backend/category_trees')
-            ->within('.pagination', function(){
+            ->within('.pagination', function () {
                 $this->click('3');
             })
             ->seePageIs('/backend/category_trees?page=3');

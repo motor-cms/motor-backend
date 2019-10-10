@@ -10,7 +10,6 @@ use App;
  */
 class Generator
 {
-
     private $config;
 
     private $availableLocales = [];
@@ -28,7 +27,7 @@ class Generator
      */
     public function __construct($config = [])
     {
-        if ( ! isset($config['i18nLib'])) {
+        if (! isset($config['i18nLib'])) {
             $config['i18nLib'] = self::VUE_I18N;
         }
         $this->config = $config;
@@ -45,7 +44,7 @@ class Generator
      */
     public function generateFromPath($path, $umd = null, $withVendor = false)
     {
-        if ( ! is_dir($path)) {
+        if (! is_dir($path)) {
             throw new Exception('Directory not found: ' . $path);
         }
 
@@ -54,8 +53,8 @@ class Generator
         $dir     = new DirectoryIterator($path);
         $jsBody  = '';
         foreach ($dir as $fileinfo) {
-            if ( ! $fileinfo->isDot()) {
-                if ( ! $withVendor && in_array($fileinfo->getFilename(), [ 'vendor' ])) {
+            if (! $fileinfo->isDot()) {
+                if (! $withVendor && in_array($fileinfo->getFilename(), [ 'vendor' ])) {
                     continue;
                 }
 
@@ -89,10 +88,9 @@ class Generator
         $translator = app('translator');
 
         foreach ($translator->getLoader()->namespaces() as $namespace => $directory) {
-
             $fileinfo = new \SplFileInfo($directory);
 
-            if ( ! $fileinfo->isDir()) {
+            if (! $fileinfo->isDir()) {
                 continue;
             }
 
@@ -101,13 +99,12 @@ class Generator
             $jsBody = '';
             $files  = [];
             foreach ($dir as $fileinfo) {
-                if ( ! $fileinfo->isDot()) {
+                if (! $fileinfo->isDot()) {
                     $files[] = $fileinfo->getRealPath();
                 }
             }
 
             foreach ($files as $fileName) {
-
                 $fileinfo = new \SplFileInfo($fileName);
 
                 $noExt = $this->removeExtension($fileinfo->getFilename());
@@ -130,11 +127,10 @@ class Generator
         $jsonLocales = json_encode($locales, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE) . PHP_EOL;
 
         if (json_last_error() !== JSON_ERROR_NONE) {
-
             throw new Exception('Could not generate JSON, error code ' . json_last_error());
         }
 
-        if ( ! $umd) {
+        if (! $umd) {
             $jsBody = $this->getES6Module($jsonLocales);
         } else {
             $jsBody = $this->getUMDModule($jsonLocales);
@@ -153,7 +149,7 @@ class Generator
      */
     public function generateMultiple($path, $umd = null)
     {
-        if ( ! is_dir($path)) {
+        if (! is_dir($path)) {
             throw new Exception('Directory not found: ' . $path);
         }
         $jsPath       = base_path() . $this->config['jsPath'];
@@ -163,9 +159,9 @@ class Generator
         $dir          = new DirectoryIterator($path);
         $jsBody       = '';
         foreach ($dir as $fileinfo) {
-            if ( ! $fileinfo->isDot() && ! in_array($fileinfo->getFilename(), [ 'vendor' ])) {
+            if (! $fileinfo->isDot() && ! in_array($fileinfo->getFilename(), [ 'vendor' ])) {
                 $noExt = $this->removeExtension($fileinfo->getFilename());
-                if ( ! in_array($noExt, $this->availableLocales)) {
+                if (! in_array($noExt, $this->availableLocales)) {
                     App::setLocale($noExt);
                     $this->availableLocales[] = $noExt;
                 }
@@ -183,8 +179,6 @@ class Generator
                 } else {
                     $locales[$noExt] = $local;
                 }
-
-
             }
         }
         foreach ($this->filesToCreate as $fileName => $data) {
@@ -194,13 +188,13 @@ class Generator
             if (json_last_error() !== JSON_ERROR_NONE) {
                 throw new Exception('Could not generate JSON, error code ' . json_last_error());
             }
-            if ( ! $umd) {
+            if (! $umd) {
                 $jsBody = $this->getES6Module($jsonLocales);
             } else {
                 $jsBody = $this->getUMDModule($jsonLocales);
             }
 
-            if ( ! is_dir(dirname($fileToCreate))) {
+            if (! is_dir(dirname($fileToCreate))) {
                 mkdir(dirname($fileToCreate), 0777, true);
             }
 
@@ -260,8 +254,10 @@ class Generator
                     continue;
                 }
 
-                if (isset($this->config['langFiles']) && ! empty($this->config['langFiles']) && ! in_array($noExt,
-                        $this->config['langFiles'])) {
+                if (isset($this->config['langFiles']) && ! empty($this->config['langFiles']) && ! in_array(
+                    $noExt,
+                    $this->config['langFiles']
+                )) {
                     continue;
                 }
 
@@ -273,13 +269,15 @@ class Generator
                 }
                 if ($lastLocale !== false) {
                     $root                                        = realpath(base_path() . $this->config['langPath'] . '/' . $lastLocale);
-                    $filePath                                    = $this->removeExtension(str_replace('\\', '_',
-                        ltrim(str_replace($root, '', realpath($fileName)), '\\')));
+                    $filePath                                    = $this->removeExtension(str_replace(
+                        '\\',
+                        '_',
+                        ltrim(str_replace($root, '', realpath($fileName)), '\\')
+                    ));
                     $this->filesToCreate[$filePath][$lastLocale] = $this->adjustArray($tmp);
                 }
 
                 $data[$noExt] = $this->adjustArray($tmp);
-
             }
         }
 
@@ -342,7 +340,7 @@ class Generator
      */
     private function adjustString($string)
     {
-        if ( ! is_string($string)) {
+        if (! is_string($string)) {
             return $string;
         }
 

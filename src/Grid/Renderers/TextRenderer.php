@@ -10,7 +10,6 @@ use Illuminate\Support\Arr;
  */
 class TextRenderer
 {
-
     protected $value = '';
 
     protected $options = [];

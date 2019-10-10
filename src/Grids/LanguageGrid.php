@@ -11,7 +11,6 @@ use Motor\Backend\Grid\Grid;
  */
 class LanguageGrid extends Grid
 {
-
     protected function setup()
     {
         $this->addColumn('id', 'ID', true);

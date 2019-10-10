@@ -25,7 +25,6 @@ use Spatie\MediaLibrary\HasMedia\HasMedia;
  */
 abstract class BaseService
 {
-
     protected $filter;
 
     protected $request;
@@ -140,10 +139,10 @@ abstract class BaseService
             ]);
         }
 
-//		if (!is_null($sorting))
-//		{
-//			$instance->setSorting($sorting);
-//		}
+        //		if (!is_null($sorting))
+        //		{
+        //			$instance->setSorting($sorting);
+        //		}
 
         return $instance;
     }
@@ -202,7 +201,7 @@ abstract class BaseService
      */
     public function getPaginator()
     {
-        $query = ( $this->model )::filteredByMultiple($this->getFilter());
+        $query = ($this->model)::filteredByMultiple($this->getFilter());
         $query->addSelect($query->getModel()->getTable() . '.*');
         $query = $this->applyScopes($query);
         $query = $this->applySorting($query);
@@ -217,7 +216,7 @@ abstract class BaseService
      * @param array $sorting
      * @return $this
      */
-    public function setSorting(Array $sorting)
+    public function setSorting(array $sorting)
     {
         [ $this->sortableField, $this->sortableDirection ] = $sorting;
 
@@ -259,19 +258,20 @@ abstract class BaseService
                 }
             }
 
-            if ( ! $joinExists) {
+            if (! $joinExists) {
                 $query->join(Str::plural($table) . ' as ' . $table, $tableColumn, $table . '.id');
             }
         }
 
-        if ( ! is_null($this->sortableField)) {
-
+        if (! is_null($this->sortableField)) {
             if ($join) {
                 return $query->orderBy($this->sortableField, $this->sortableDirection);
             }
 
-            return $query->orderBy($query->getModel()->getTable() . '.' . $this->sortableField,
-                $this->sortableDirection);
+            return $query->orderBy(
+                $query->getModel()->getTable() . '.' . $this->sortableField,
+                $this->sortableDirection
+            );
         }
 
         return $query;
@@ -406,8 +406,8 @@ abstract class BaseService
     public function setRequest(Request $request, $form = null)
     {
         $key = '';
-        if ( ! is_null($form)) {
-            if ( ! is_null($this->form)) {
+        if (! is_null($form)) {
+            if (! is_null($this->form)) {
                 $key = $form->getName() != '' ? $this->form->getName() : null;
             } else {
                 $key = $form->getName();
@@ -439,32 +439,33 @@ abstract class BaseService
 
             // Handle subforms
             if ($field instanceof ChildFormType) {
-                $data[$field->getRealName()] = $this->handleFormValues($field->getForm(),
-                    Arr::get($data, $field->getRealName(), []));
+                $data[$field->getRealName()] = $this->handleFormValues(
+                    $field->getForm(),
+                    Arr::get($data, $field->getRealName(), [])
+                );
             }
 
             // Handle empty checkbox values
             if ($field instanceof CheckableType) {
-                if ( ! isset($data[$field->getRealName()])) {
+                if (! isset($data[$field->getRealName()])) {
                     $data[$field->getRealName()] = false;
                 }
             }
 
             // Handle empty choice-type (e.g. multiple checkboxes)
             if ($field instanceof ChoiceType) {
-                if ( ! isset($data[$field->getRealName()])) {
+                if (! isset($data[$field->getRealName()])) {
                     $data[$field->getRealName()] = [];
                 }
             }
 
             // Handle empty date values
             if ($field instanceof DatepickerType || $field instanceof DatetimepickerType) {
-
-                if ( ! isset($data[$field->getRealName() . '_picker']) || ( isset($data[$field->getRealName() . '_picker']) && $data[$field->getRealName() . '_picker'] == '' )) {
+                if (! isset($data[$field->getRealName() . '_picker']) || (isset($data[$field->getRealName() . '_picker']) && $data[$field->getRealName() . '_picker'] == '')) {
                     $data[$field->getRealName()] = '';
                 }
 
-                if ( ! isset($data[$field->getRealName()]) || ( isset($data[$field->getRealName()]) && $data[$field->getRealName()] == '' || $data[$field->getRealName()] == '0000-00-00 00:00:00' || $data[$field->getRealName()] == '0000-00-00' )) {
+                if (! isset($data[$field->getRealName()]) || (isset($data[$field->getRealName()]) && $data[$field->getRealName()] == '' || $data[$field->getRealName()] == '0000-00-00 00:00:00' || $data[$field->getRealName()] == '0000-00-00')) {
                     $data[$field->getRealName()] = null;
                 }
             }
@@ -499,7 +500,7 @@ abstract class BaseService
         $record = null,
         $addToCollection = false
     ) {
-        if ( ! is_null($record) && ! $record instanceof HasMedia) {
+        if (! is_null($record) && ! $record instanceof HasMedia) {
             return $this;
         }
 
@@ -507,11 +508,11 @@ abstract class BaseService
             $record = $this->record;
         }
 
-        if ( ! $record instanceof HasMedia) {
+        if (! $record instanceof HasMedia) {
             return $this;
         }
 
-        $collection = ( ! is_null($collection) ? $collection : $identifier );
+        $collection = (! is_null($collection) ? $collection : $identifier);
 
         foreach ($this->data as $key => $value) {
             if (preg_match('/delete_media_(.*)/', $key, $matches) == 1 && $value == 1) {
@@ -522,10 +523,12 @@ abstract class BaseService
             }
         }
 
-        if (( ! is_null($file) || $this->isValidBase64(Arr::get($this->data,
-                    $identifier)) ) && $addToCollection === false) {
+        if ((! is_null($file) || $this->isValidBase64(Arr::get(
+            $this->data,
+            $identifier
+        ))) && $addToCollection === false) {
             $record->clearMediaCollection($identifier);
-            if ( ! is_null($collection)) {
+            if (! is_null($collection)) {
                 $record->clearMediaCollection($collection);
             }
         }
@@ -565,12 +568,12 @@ abstract class BaseService
     {
         $decoded = base64_decode($string, true);
         // Check if there is no invalid character in strin
-        if ( ! preg_match('/^[a-zA-Z0-9\/\r\n+]*={0,2}$/', $string)) {
+        if (! preg_match('/^[a-zA-Z0-9\/\r\n+]*={0,2}$/', $string)) {
             return false;
         }
 
         // Decode the string in strict mode and send the responce
-        if ( ! base64_decode($string, true)) {
+        if (! base64_decode($string, true)) {
             return false;
         }
 

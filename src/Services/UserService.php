@@ -14,7 +14,6 @@ use Motor\Backend\Models\User;
  */
 class UserService extends BaseService
 {
-
     protected $model = User::class;
 
 
@@ -59,7 +58,6 @@ class UserService extends BaseService
         } else {
             $this->data['password'] = bcrypt($this->data['password']);
         }
-
     }
 
 
@@ -83,5 +81,4 @@ class UserService extends BaseService
 
         $this->afterCreate();
     }
-
 }

@@ -67,7 +67,6 @@ use Spatie\MediaLibrary\HasMedia\HasMediaTrait;
  */
 class User extends Authenticatable implements HasMedia
 {
-
     use Searchable;
     use HasRoles;
     use Filterable;

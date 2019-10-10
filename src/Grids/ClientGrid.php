@@ -10,7 +10,6 @@ use Motor\Backend\Grid\Grid;
  */
 class ClientGrid extends Grid
 {
-
     protected function setup()
     {
         $this->addColumn('id', 'ID', true);

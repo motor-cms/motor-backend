@@ -8,7 +8,6 @@ namespace Motor\Backend\Grid;
  */
 class Row extends Base
 {
-
     protected $cells = [];
 
 

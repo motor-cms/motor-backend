@@ -16,7 +16,6 @@ use Motor\Backend\Services\UserService;
  */
 class UsersController extends Controller
 {
-
     use FormBuilderTrait;
 
 
@@ -66,7 +65,7 @@ class UsersController extends Controller
         $form = $this->form(UserForm::class);
 
         // It will automatically use current request, get the rules, and do the validation
-        if ( ! $form->isValid()) {
+        if (! $form->isValid()) {
             return redirect()->back()->withErrors($form->getErrors())->withInput();
         }
 
@@ -119,7 +118,7 @@ class UsersController extends Controller
         $form = $this->form(UserForm::class);
 
         // It will automatically use current request, get the rules, and do the validation
-        if ( ! $form->isValid()) {
+        if (! $form->isValid()) {
             return redirect()->back()->withErrors($form->getErrors())->withInput();
         }
 

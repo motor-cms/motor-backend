@@ -20,7 +20,6 @@ abstract class JsonRequest extends FormRequest
      */
     protected function getValidatorInstance()
     {
-
         Log::info('Request headers: ' . json_encode(getallheaders()));
         Log::info('Request body: ' . $this->getContent());
 
@@ -31,7 +30,11 @@ abstract class JsonRequest extends FormRequest
         }
         $data = json_decode($this->getContent(), true);
 
-        return $factory->make($data, $this->container->call([ $this, 'rules' ]), $this->messages(),
-            $this->attributes());
+        return $factory->make(
+            $data,
+            $this->container->call([ $this, 'rules' ]),
+            $this->messages(),
+            $this->attributes()
+        );
     }
 }

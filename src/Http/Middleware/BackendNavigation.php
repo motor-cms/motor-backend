@@ -30,12 +30,10 @@ class BackendNavigation
 
         //\Menu::make('backendNavigation', function ($menu) {
         $menu->make('backendNavigation', static function ($menu) {
-
             $items = config('motor-backend-navigation.items');
             ksort($items);
 
             foreach ($items as $item) {
-
                 $menu->add(trans($item['name']), [
                     'route'       => Arr::get($item, 'route'),
                     'roles'       => implode(',', $item['roles']),
@@ -45,14 +43,12 @@ class BackendNavigation
                 //])->nickname($item['slug'])->prepend('<i class="nav-icon ' . $item['icon'] . '"></i> <span>')->append('</span>');
 
                 if (isset($item['items'])) {
-
                     $menu->get($item['slug'])->append(config('motor-backend-navigation.collapseIcon'));
                     //$menu->get($item['slug'])->append('</span> ' . config('motor-backend-navigation.collapseIcon'));
 
                     ksort($item['items']);
 
                     foreach ($item['items'] as $subitem) {
-
                         if (config('motor-backend-html.show_navigation_subitem_icon', false)) {
                             $menu->get($item['slug'])
                                  ->add(trans($subitem['name']), [
@@ -63,7 +59,7 @@ class BackendNavigation
                                  ])
                                  ->nickname($subitem['slug'])
                                  ->prepend('<i class="nav-icon ' . $subitem['icon'] . '"></i>');
-                            //->prepend('<i class="nav-icon ' . $subitem['icon'] . '"></i> <span>')
+                        //->prepend('<i class="nav-icon ' . $subitem['icon'] . '"></i> <span>')
                             //    ->append('</span>');
                         } else {
                             $menu->get($item['slug'])->add(trans($subitem['name']), [
@@ -73,7 +69,6 @@ class BackendNavigation
                                 'aliases'     => implode(',', Arr::get($subitem, 'aliases', []))
                             ])->nickname($subitem['slug']);
                         }
-
                     }
                 }
             }

@@ -11,7 +11,6 @@ use Illuminate\Support\Arr;
  */
 class BladeRenderer
 {
-
     protected $value = '';
 
     protected $options = [];

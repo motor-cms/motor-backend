@@ -11,7 +11,6 @@ use Illuminate\Database\Eloquent\Model;
  */
 class Action extends Base
 {
-
     protected $link = '';
 
     protected $label = '';
@@ -119,7 +118,7 @@ class Action extends Base
             return false;
         }
 
-        if ( ! is_null($this->conditionColumn)) {
+        if (! is_null($this->conditionColumn)) {
             $condition = false;
 
             switch ($this->conditionOperator) {
@@ -155,7 +154,7 @@ class Action extends Base
                     break;
             }
 
-            if ( ! $condition) {
+            if (! $condition) {
                 return false;
             }
         }

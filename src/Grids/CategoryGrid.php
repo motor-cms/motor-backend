@@ -11,7 +11,6 @@ use Motor\Backend\Grid\Renderers\TreeRenderer;
  */
 class CategoryGrid extends Grid
 {
-
     protected function setup()
     {
         $this->addColumn('name', trans('motor-backend::backend/categories.name'))->renderer(TreeRenderer::class);

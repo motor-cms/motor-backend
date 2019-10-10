@@ -62,7 +62,6 @@ use Motor\Core\Traits\Searchable;
  */
 class Client extends Model
 {
-
     use Searchable;
     use Blameable, CreatedBy, UpdatedBy, DeletedBy;
     use Filterable;

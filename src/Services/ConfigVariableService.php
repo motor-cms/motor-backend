@@ -10,6 +10,5 @@ use Motor\Backend\Models\ConfigVariable;
  */
 class ConfigVariableService extends BaseService
 {
-
     protected $model = ConfigVariable::class;
 }

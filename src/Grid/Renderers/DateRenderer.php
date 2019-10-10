@@ -10,7 +10,6 @@ use Carbon\Carbon;
  */
 class DateRenderer
 {
-
     protected $value = '';
 
     protected $options = [];

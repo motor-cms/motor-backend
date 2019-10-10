@@ -12,7 +12,6 @@ use Motor\Backend\Models\Role;
  */
 class RoleService extends BaseService
 {
-
     protected $model = Role::class;
 
 

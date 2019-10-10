@@ -11,7 +11,6 @@ use Motor\Backend\Models\Role;
  */
 class MotorBackendBackendEmailTemplateTest extends TestCase
 {
-
     use DatabaseTransactions;
 
     protected $user;
@@ -77,7 +76,7 @@ class MotorBackendBackendEmailTemplateTest extends TestCase
     {
         $email_template = create_test_email_template();
         $this->visit('/backend/email_templates')
-            ->within('table', function(){
+            ->within('table', function () {
                 $this->click(trans('motor-backend::backend/global.edit'));
             })
             ->seePageIs('/backend/email_templates/'.$email_template->id.'/edit')
@@ -93,7 +92,7 @@ class MotorBackendBackendEmailTemplateTest extends TestCase
         $this->visit('/backend/email_templates/'.$email_template->id.'/edit')
             ->see($email_template->name)
             ->type('NewEmailTemplateName', 'name')
-            ->within('.box-footer', function(){
+            ->within('.box-footer', function () {
                 $this->press(trans('motor-backend::backend/email_templates.save'));
             })
             ->see(trans('motor-backend::backend/email_templates.updated'))
@@ -120,7 +119,7 @@ class MotorBackendBackendEmailTemplateTest extends TestCase
             ->select($language->id, 'language_id')
             ->type('Email Template Name', 'name')
             ->type('Email Template Subject', 'subject')
-            ->within('.box-footer', function(){
+            ->within('.box-footer', function () {
                 $this->press(trans('motor-backend::backend/email_templates.save'));
             })
             ->see(trans('motor-backend::backend/email_templates.created'))
@@ -133,7 +132,7 @@ class MotorBackendBackendEmailTemplateTest extends TestCase
     {
         $this->visit('/backend/email_templates/create')
             ->see(trans('motor-backend::backend/email_templates.new'))
-            ->within('.box-footer', function(){
+            ->within('.box-footer', function () {
                 $this->press(trans('motor-backend::backend/email_templates.save'));
             })
             ->see('Data missing!')
@@ -147,7 +146,7 @@ class MotorBackendBackendEmailTemplateTest extends TestCase
         $this->visit('/backend/email_templates/'.$email_template->id.'/edit')
             ->see(trans('motor-backend::backend/email_templates.edit'))
             ->type('Updated Email Template Name', 'name')
-            ->within('.box-footer', function(){
+            ->within('.box-footer', function () {
                 $this->press(trans('motor-backend::backend/email_templates.save'));
             })
             ->see(trans('motor-backend::backend/email_templates.updated'))
@@ -165,7 +164,7 @@ class MotorBackendBackendEmailTemplateTest extends TestCase
             ->see(trans('motor-backend::backend/email_templates.edit'))
             ->select($client->id, 'client_id')
             ->select($language->id, 'language_id')
-            ->within('.box-footer', function(){
+            ->within('.box-footer', function () {
                 $this->press(trans('motor-backend::backend/email_templates.save'));
             })
             ->see(trans('motor-backend::backend/email_templates.updated'))
@@ -182,7 +181,7 @@ class MotorBackendBackendEmailTemplateTest extends TestCase
         $this->assertCount(1, EmailTemplate::all());
 
         $this->visit('/backend/email_templates')
-            ->within('table', function(){
+            ->within('table', function () {
                 $this->press(trans('motor-backend::backend/global.delete'));
             })
             ->seePageIs('/backend/email_templates');
@@ -195,7 +194,7 @@ class MotorBackendBackendEmailTemplateTest extends TestCase
     {
         create_test_email_template(100);
         $this->visit('/backend/email_templates')
-            ->within('.pagination', function(){
+            ->within('.pagination', function () {
                 $this->click('3');
             })
             ->seePageIs('/backend/email_templates?page=3');

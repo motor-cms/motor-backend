@@ -10,7 +10,6 @@ use Motor\Backend\Models\Category;
  */
 class MotorBackendBackendCategoryTest extends TestCase
 {
-
     use DatabaseTransactions;
 
     protected $user;
@@ -79,7 +78,7 @@ class MotorBackendBackendCategoryTest extends TestCase
     {
         $record = create_test_category();
         $this->visit('/backend/categories')
-            ->within('table', function(){
+            ->within('table', function () {
                 $this->click(trans('motor-backend::backend/global.edit'));
             })
             ->seePageIs('/backend/categories/'.$record->id.'/edit')
@@ -95,7 +94,7 @@ class MotorBackendBackendCategoryTest extends TestCase
         $this->visit('/backend/categories/'.$record->id.'/edit')
             ->see($record->name)
             ->type('Updated Category', 'name')
-            ->within('.box-footer', function(){
+            ->within('.box-footer', function () {
                 $this->press(trans('motor-backend::backend/categories.save'));
             })
             ->see(trans('motor-backend::backend/categories.updated'))
@@ -120,7 +119,7 @@ class MotorBackendBackendCategoryTest extends TestCase
         $this->visit('/backend/categories/create')
             ->see(trans('motor-backend::backend/categories.new'))
             ->type('Create Category Name', 'name')
-            ->within('.box-footer', function(){
+            ->within('.box-footer', function () {
                 $this->press(trans('motor-backend::backend/categories.save'));
             })
             ->see(trans('motor-backend::backend/categories.created'))
@@ -133,7 +132,7 @@ class MotorBackendBackendCategoryTest extends TestCase
     {
         $this->visit('/backend/categories/create')
             ->see(trans('motor-backend::backend/categories.new'))
-            ->within('.box-footer', function(){
+            ->within('.box-footer', function () {
                 $this->press(trans('motor-backend::backend/categories.save'));
             })
             ->see('Data missing!')
@@ -147,7 +146,7 @@ class MotorBackendBackendCategoryTest extends TestCase
         $this->visit('/backend/categories/'.$record->id.'/edit')
             ->see(trans('motor-backend::backend/categories.edit'))
             ->type('Modified Category Name', 'name')
-            ->within('.box-footer', function(){
+            ->within('.box-footer', function () {
                 $this->press(trans('motor-backend::backend/categories.save'));
             })
             ->see(trans('motor-backend::backend/categories.updated'))
@@ -163,7 +162,7 @@ class MotorBackendBackendCategoryTest extends TestCase
         $this->assertCount(1, Category::all());
 
         $this->visit('/backend/categories')
-            ->within('table', function(){
+            ->within('table', function () {
                 $this->press(trans('motor-backend::backend/global.delete'));
             })
             ->seePageIs('/backend/categories')
@@ -177,7 +176,7 @@ class MotorBackendBackendCategoryTest extends TestCase
     {
         $records = create_test_category(100);
         $this->visit('/backend/categories')
-            ->within('.pagination', function(){
+            ->within('.pagination', function () {
                 $this->click('3');
             })
             ->seePageIs('/backend/categories?page=3');

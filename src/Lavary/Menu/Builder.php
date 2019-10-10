@@ -19,7 +19,6 @@ class Builder extends \Lavary\Menu\Builder
      */
     public function add($title, $options = [])
     {
-
         $id = isset($options['id']) ? $options['id'] : $this->id();
 
         $item = new Item($this, $id, $title, $options);
@@ -28,5 +27,4 @@ class Builder extends \Lavary\Menu\Builder
 
         return $item;
     }
-
 }

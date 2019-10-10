@@ -10,7 +10,6 @@ use Illuminate\Database\Eloquent\Model;
  */
 class TreeRenderer
 {
-
     protected $value = '';
 
     protected $options = [];
@@ -20,7 +19,7 @@ class TreeRenderer
 
     /**
      * TreeRenderer constructor.
-     * 
+     *
      * @param            $value
      * @param array      $options
      * @param Model|null $record

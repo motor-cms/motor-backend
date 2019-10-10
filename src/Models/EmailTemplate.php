@@ -64,7 +64,6 @@ use Motor\Core\Traits\Searchable;
  */
 class EmailTemplate extends Model
 {
-
     use Searchable;
     use Blameable, CreatedBy, UpdatedBy, DeletedBy;
     use Filterable;
@@ -108,5 +107,4 @@ class EmailTemplate extends Model
     {
         return $this->belongsTo(config('motor-backend.models.language'));
     }
-
 }

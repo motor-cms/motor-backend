@@ -46,7 +46,6 @@ use Culpa\Traits\UpdatedBy;
  */
 class ConfigVariable extends Model
 {
-
     use Searchable;
     use Filterable;
     use Blameable, CreatedBy, UpdatedBy, DeletedBy;

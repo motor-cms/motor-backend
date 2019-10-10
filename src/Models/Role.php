@@ -31,7 +31,6 @@ use Motor\Core\Traits\Searchable;
  */
 class Role extends \Spatie\Permission\Models\Role
 {
-
     use Searchable;
     use Filterable;
 

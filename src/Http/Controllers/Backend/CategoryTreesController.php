@@ -17,7 +17,6 @@ use Motor\Core\Filter\Renderers\WhereRenderer;
  */
 class CategoryTreesController extends Controller
 {
-
     use FormBuilderTrait;
 
 
@@ -71,7 +70,7 @@ class CategoryTreesController extends Controller
         $form = $this->form(CategoryTreeForm::class);
 
         // It will automatically use current request, get the rules, and do the validation
-        if ( ! $form->isValid()) {
+        if (! $form->isValid()) {
             return redirect()->back()->withErrors($form->getErrors())->withInput();
         }
 
@@ -125,7 +124,7 @@ class CategoryTreesController extends Controller
         $form = $this->form(CategoryTreeForm::class);
 
         // It will automatically use current request, get the rules, and do the validation
-        if ( ! $form->isValid()) {
+        if (! $form->isValid()) {
             return redirect()->back()->withErrors($form->getErrors())->withInput();
         }
 

@@ -44,7 +44,7 @@ class PermissionTransformer extends Fractal\TransformerAbstract
      */
     public function includeGroup(Permission $record)
     {
-        if ( ! is_null($record->group)) {
+        if (! is_null($record->group)) {
             return $this->item($record->group, new PermissionGroupTransformer());
         }
     }

@@ -9,7 +9,6 @@ use Illuminate\Foundation\Testing\DatabaseTransactions;
  */
 class MotorBackendApiPermissionTest extends TestCase
 {
-
     use DatabaseTransactions;
 
     protected $user;
@@ -117,8 +116,10 @@ class MotorBackendApiPermissionTest extends TestCase
     {
         $this->user->givePermissionTo($this->readPermission);
         $permission = create_test_permission();
-        $this->json('GET',
-            '/api/permissions/' . $permission->id . '?api_token=' . $this->user->api_token)->seeStatusCode(200)->seeJson([
+        $this->json(
+            'GET',
+            '/api/permissions/' . $permission->id . '?api_token=' . $this->user->api_token
+        )->seeStatusCode(200)->seeJson([
             'name' => $permission->name
         ]);
     }
@@ -128,8 +129,10 @@ class MotorBackendApiPermissionTest extends TestCase
     public function fails_to_show_a_single_permission_without_permission()
     {
         $permission = create_test_permission();
-        $this->json('GET',
-            '/api/permissions/' . $permission->id . '?api_token=' . $this->user->api_token)->seeStatusCode(403)->seeJson([
+        $this->json(
+            'GET',
+            '/api/permissions/' . $permission->id . '?api_token=' . $this->user->api_token
+        )->seeStatusCode(403)->seeJson([
             'error' => 'Access denied.'
         ]);
     }
@@ -151,8 +154,10 @@ class MotorBackendApiPermissionTest extends TestCase
     {
         $this->user->givePermissionTo($this->readPermission);
         $permissions = create_test_permission(10);
-        $this->json('GET',
-            '/api/permissions?api_token=' . $this->user->api_token . '&search=' . $permissions[2]->name)->seeStatusCode(200)->seeJson([
+        $this->json(
+            'GET',
+            '/api/permissions?api_token=' . $this->user->api_token . '&search=' . $permissions[2]->name
+        )->seeStatusCode(200)->seeJson([
             'name' => $permissions[2]->name
         ]);
     }
@@ -163,8 +168,10 @@ class MotorBackendApiPermissionTest extends TestCase
     {
         $this->user->givePermissionTo($this->readPermission);
         create_test_permission(50);
-        $this->json('GET',
-            '/api/permissions?api_token=' . $this->user->api_token . '&page=2')->seeStatusCode(200)->seeJson([
+        $this->json(
+            'GET',
+            '/api/permissions?api_token=' . $this->user->api_token . '&page=2'
+        )->seeStatusCode(200)->seeJson([
             'current_page' => 2
         ]);
     }
@@ -185,8 +192,10 @@ class MotorBackendApiPermissionTest extends TestCase
     {
         $this->user->givePermissionTo($this->writePermission);
         $permission = create_test_permission();
-        $this->json('PATCH',
-            '/api/permissions/' . $permission->id . '?api_token=' . $this->user->api_token)->seeStatusCode(422)->seeJson([
+        $this->json(
+            'PATCH',
+            '/api/permissions/' . $permission->id . '?api_token=' . $this->user->api_token
+        )->seeStatusCode(422)->seeJson([
             'name' => [ 'The name field is required.' ]
         ]);
     }
@@ -196,8 +205,10 @@ class MotorBackendApiPermissionTest extends TestCase
     public function fails_if_trying_to_modify_a_permission_without_permission()
     {
         $permission = create_test_permission();
-        $this->json('PATCH',
-            '/api/permissions/' . $permission->id . '?api_token=' . $this->user->api_token)->seeStatusCode(403)->seeJson([
+        $this->json(
+            'PATCH',
+            '/api/permissions/' . $permission->id . '?api_token=' . $this->user->api_token
+        )->seeStatusCode(403)->seeJson([
             'error' => 'Access denied.'
         ]);
     }
@@ -230,8 +241,10 @@ class MotorBackendApiPermissionTest extends TestCase
     public function fails_to_delete_a_permission_without_permission()
     {
         $permission = create_test_permission();
-        $this->json('DELETE',
-            '/api/permissions/' . $permission->id . '?api_token=' . $this->user->api_token)->seeStatusCode(403)->seeJson([
+        $this->json(
+            'DELETE',
+            '/api/permissions/' . $permission->id . '?api_token=' . $this->user->api_token
+        )->seeStatusCode(403)->seeJson([
             'error' => 'Access denied.'
         ]);
     }
@@ -242,8 +255,10 @@ class MotorBackendApiPermissionTest extends TestCase
     {
         $this->user->givePermissionTo($this->deletePermission);
         $permission = create_test_permission();
-        $this->json('DELETE',
-            '/api/permissions/' . $permission->id . '?api_token=' . $this->user->api_token)->seeStatusCode(200)->seeJson([
+        $this->json(
+            'DELETE',
+            '/api/permissions/' . $permission->id . '?api_token=' . $this->user->api_token
+        )->seeStatusCode(200)->seeJson([
             'success' => true
         ]);
     }

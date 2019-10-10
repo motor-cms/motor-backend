@@ -11,7 +11,6 @@ use Motor\Backend\Models\Role;
  */
 class MotorBackendBackendLanguageTest extends TestCase
 {
-
     use DatabaseTransactions;
 
     protected $user;
@@ -75,7 +74,7 @@ class MotorBackendBackendLanguageTest extends TestCase
     {
         $language = create_test_language();
         $this->visit('/backend/languages')
-            ->within('table', function(){
+            ->within('table', function () {
                 $this->click(trans('motor-backend::backend/global.edit'));
             })
             ->seePageIs('/backend/languages/'.$language->id.'/edit')
@@ -91,7 +90,7 @@ class MotorBackendBackendLanguageTest extends TestCase
         $this->visit('/backend/languages/'.$language->id.'/edit')
             ->see($language->english_name)
             ->type('NewLanguageName', 'english_name')
-            ->within('.box-footer', function(){
+            ->within('.box-footer', function () {
                 $this->press(trans('motor-backend::backend/languages.save'));
             })
             ->see(trans('motor-backend::backend/languages.updated'))
@@ -115,7 +114,7 @@ class MotorBackendBackendLanguageTest extends TestCase
             ->type('DE', 'iso_639_1')
             ->type('Native Name', 'native_name')
             ->type('English Name', 'english_name')
-            ->within('.box-footer', function(){
+            ->within('.box-footer', function () {
                 $this->press(trans('motor-backend::backend/languages.save'));
             })
             ->see(trans('motor-backend::backend/languages.created'))
@@ -128,7 +127,7 @@ class MotorBackendBackendLanguageTest extends TestCase
     {
         $this->visit('/backend/languages/create')
             ->see(trans('motor-backend::backend/languages.new'))
-            ->within('.box-footer', function(){
+            ->within('.box-footer', function () {
                 $this->press(trans('motor-backend::backend/languages.save'));
             })
             ->see('Data missing!')
@@ -142,7 +141,7 @@ class MotorBackendBackendLanguageTest extends TestCase
         $this->visit('/backend/languages/'.$language->id.'/edit')
             ->see(trans('motor-backend::backend/languages.edit'))
             ->type('Updated English Name', 'english_name')
-            ->within('.box-footer', function(){
+            ->within('.box-footer', function () {
                 $this->press(trans('motor-backend::backend/languages.save'));
             })
             ->see(trans('motor-backend::backend/languages.updated'))
@@ -158,7 +157,7 @@ class MotorBackendBackendLanguageTest extends TestCase
         $this->assertCount(1, Language::all());
 
         $this->visit('/backend/languages')
-            ->within('table', function(){
+            ->within('table', function () {
                 $this->press(trans('motor-backend::backend/global.delete'));
             })
             ->seePageIs('/backend/languages');
@@ -171,7 +170,7 @@ class MotorBackendBackendLanguageTest extends TestCase
     {
         create_test_language(100);
         $this->visit('/backend/languages')
-            ->within('.pagination', function(){
+            ->within('.pagination', function () {
                 $this->click('3');
             })
             ->seePageIs('/backend/languages?page=3');

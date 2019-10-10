@@ -28,7 +28,8 @@ class UpdatePermissionTables extends Migration
             $table->string('guard_name')->after('name');
         });
 
-        Schema::create($tableNames['model_has_permissions'],
+        Schema::create(
+            $tableNames['model_has_permissions'],
             function (Blueprint $table) use ($tableNames, $foreignKeys) {
                 $table->integer('permission_id')->unsigned();
                 $table->morphs('model');
@@ -36,7 +37,8 @@ class UpdatePermissionTables extends Migration
                 $table->foreign('permission_id')->references('id')->on($tableNames['permissions'])->onDelete('cascade');
 
                 $table->primary([ 'permission_id', 'model_id', 'model_type' ]);
-            });
+            }
+        );
 
         Schema::create($tableNames['model_has_roles'], function (Blueprint $table) use ($tableNames, $foreignKeys) {
             $table->integer('role_id')->unsigned();

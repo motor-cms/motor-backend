@@ -55,7 +55,7 @@ class EmailTemplateTransformer extends Fractal\TransformerAbstract
      */
     public function includeClient(EmailTemplate $record)
     {
-        if ( ! is_null($record->client)) {
+        if (! is_null($record->client)) {
             return $this->item($record->client, new ClientTransformer());
         }
     }
@@ -69,7 +69,7 @@ class EmailTemplateTransformer extends Fractal\TransformerAbstract
      */
     public function includeLanguage(EmailTemplate $record)
     {
-        if ( ! is_null($record->language)) {
+        if (! is_null($record->language)) {
             return $this->item($record->language, new LanguageTransformer());
         }
     }

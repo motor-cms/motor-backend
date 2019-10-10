@@ -21,8 +21,11 @@ class CategoryForm extends Form
         $this->add('parent_id', 'hidden')
              ->add('previous_sibling_id', 'hidden')
              ->add('next_sibling_id', 'hidden')
-             ->add('name', 'text',
-                 [ 'label' => trans('motor-backend::backend/categories.name'), 'rules' => 'required' ])
+             ->add(
+                 'name',
+                 'text',
+                 [ 'label' => trans('motor-backend::backend/categories.name'), 'rules' => 'required' ]
+             )
              ->add('submit', 'submit', [
                  'attr'  => [ 'class' => 'btn btn-primary' ],
                  'label' => trans('motor-backend::backend/categories.save')

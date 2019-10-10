@@ -10,7 +10,6 @@ use Motor\Backend\Models\ConfigVariable;
  */
 class MotorBackendBackendConfigVariableTest extends TestCase
 {
-
     use DatabaseTransactions;
 
     protected $user;
@@ -79,7 +78,7 @@ class MotorBackendBackendConfigVariableTest extends TestCase
     {
         $record = create_test_config_variable();
         $this->visit('/backend/config_variables')
-            ->within('table', function(){
+            ->within('table', function () {
                 $this->click(trans('motor-backend::backend/global.edit'));
             })
             ->seePageIs('/backend/config_variables/'.$record->id.'/edit')
@@ -95,7 +94,7 @@ class MotorBackendBackendConfigVariableTest extends TestCase
         $this->visit('/backend/config_variables/'.$record->id.'/edit')
             ->see($record->name)
             ->type('Updated Config variable', 'name')
-            ->within('.box-footer', function(){
+            ->within('.box-footer', function () {
                 $this->press(trans('motor-backend::backend/config_variables.save'));
             })
             ->see(trans('motor-backend::backend/config_variables.updated'))
@@ -120,7 +119,7 @@ class MotorBackendBackendConfigVariableTest extends TestCase
         $this->visit('/backend/config_variables/create')
             ->see(trans('motor-backend::backend/config_variables.new'))
             ->type('Create Config variable Name', 'name')
-            ->within('.box-footer', function(){
+            ->within('.box-footer', function () {
                 $this->press(trans('motor-backend::backend/config_variables.save'));
             })
             ->see(trans('motor-backend::backend/config_variables.created'))
@@ -133,7 +132,7 @@ class MotorBackendBackendConfigVariableTest extends TestCase
     {
         $this->visit('/backend/config_variables/create')
             ->see(trans('motor-backend::backend/config_variables.new'))
-            ->within('.box-footer', function(){
+            ->within('.box-footer', function () {
                 $this->press(trans('motor-backend::backend/config_variables.save'));
             })
             ->see('Data missing!')
@@ -147,7 +146,7 @@ class MotorBackendBackendConfigVariableTest extends TestCase
         $this->visit('/backend/config_variables/'.$record->id.'/edit')
             ->see(trans('motor-backend::backend/config_variables.edit'))
             ->type('Modified Config variable Name', 'name')
-            ->within('.box-footer', function(){
+            ->within('.box-footer', function () {
                 $this->press(trans('motor-backend::backend/config_variables.save'));
             })
             ->see(trans('motor-backend::backend/config_variables.updated'))
@@ -163,7 +162,7 @@ class MotorBackendBackendConfigVariableTest extends TestCase
         $this->assertCount(1, ConfigVariable::all());
 
         $this->visit('/backend/config_variables')
-            ->within('table', function(){
+            ->within('table', function () {
                 $this->press(trans('motor-backend::backend/global.delete'));
             })
             ->seePageIs('/backend/config_variables')
@@ -177,7 +176,7 @@ class MotorBackendBackendConfigVariableTest extends TestCase
     {
         $records = create_test_config_variable(100);
         $this->visit('/backend/config_variables')
-            ->within('.pagination', function(){
+            ->within('.pagination', function () {
                 $this->click('3');
             })
             ->seePageIs('/backend/config_variables?page=3');

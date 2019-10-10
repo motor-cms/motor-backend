@@ -28,7 +28,6 @@ class CreatePermissionGroupTable extends Migration
             $table->integer('permission_group_id')->after('id')->unsigned()->index()->nullable();
             $table->foreign('permission_group_id')->references('id')->on('permission_groups')->onDelete('set null');
         });
-
     }
 
 
@@ -45,6 +44,5 @@ class CreatePermissionGroupTable extends Migration
         });
 
         Schema::dropIfExists('permission_groups');
-
     }
 }

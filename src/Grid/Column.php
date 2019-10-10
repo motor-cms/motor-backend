@@ -8,7 +8,6 @@ namespace Motor\Backend\Grid;
  */
 class Column extends Base
 {
-
     protected $name;
 
     protected $label = '';
@@ -52,7 +51,7 @@ class Column extends Base
         }
 
         $this->label = $label;
-        if ( ! is_null($sortableField)) {
+        if (! is_null($sortableField)) {
             $this->sortableField = $sortableField;
         }
         $this->setSortable($sortable);
@@ -81,7 +80,7 @@ class Column extends Base
      */
     public function checkCondition($record)
     {
-        if ( ! is_null($this->conditionColumn)) {
+        if (! is_null($this->conditionColumn)) {
             $condition = false;
 
             switch ($this->conditionOperator) {
@@ -117,7 +116,7 @@ class Column extends Base
                     break;
             }
 
-            if ( ! $condition) {
+            if (! $condition) {
                 return false;
             }
         }
@@ -278,7 +277,7 @@ class Column extends Base
      */
     public function hasCellClosure()
     {
-        if ( ! is_null($this->cellClosure)) {
+        if (! is_null($this->cellClosure)) {
             return true;
         }
 

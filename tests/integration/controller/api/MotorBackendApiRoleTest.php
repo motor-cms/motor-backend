@@ -9,7 +9,6 @@ use Illuminate\Foundation\Testing\DatabaseTransactions;
  */
 class MotorBackendApiRoleTest extends TestCase
 {
-
     use DatabaseTransactions;
 
     protected $user;
@@ -131,8 +130,10 @@ class MotorBackendApiRoleTest extends TestCase
     {
         $this->user->givePermissionTo($this->readPermission);
         $role = create_test_role();
-        $this->json('GET',
-            '/api/roles/' . $role->id . '?api_token=' . $this->user->api_token)->seeStatusCode(200)->seeJson([
+        $this->json(
+            'GET',
+            '/api/roles/' . $role->id . '?api_token=' . $this->user->api_token
+        )->seeStatusCode(200)->seeJson([
             'name' => $role->name
         ]);
     }
@@ -142,8 +143,10 @@ class MotorBackendApiRoleTest extends TestCase
     public function fails_to_show_a_single_role_without_permission()
     {
         $role = create_test_role();
-        $this->json('GET',
-            '/api/roles/' . $role->id . '?api_token=' . $this->user->api_token)->seeStatusCode(403)->seeJson([
+        $this->json(
+            'GET',
+            '/api/roles/' . $role->id . '?api_token=' . $this->user->api_token
+        )->seeStatusCode(403)->seeJson([
             'error' => 'Access denied.'
         ]);
     }
@@ -175,8 +178,10 @@ class MotorBackendApiRoleTest extends TestCase
     {
         $this->user->givePermissionTo($this->readPermission);
         $roles = create_test_role(10);
-        $this->json('GET',
-            '/api/roles?api_token=' . $this->user->api_token . '&search=' . $roles[2]->name)->seeStatusCode(200)->seeJson([
+        $this->json(
+            'GET',
+            '/api/roles?api_token=' . $this->user->api_token . '&search=' . $roles[2]->name
+        )->seeStatusCode(200)->seeJson([
             'name' => $roles[2]->name
         ]);
     }
@@ -208,8 +213,10 @@ class MotorBackendApiRoleTest extends TestCase
     {
         $this->user->givePermissionTo($this->writePermission);
         $role = create_test_role();
-        $this->json('PATCH',
-            '/api/roles/' . $role->id . '?api_token=' . $this->user->api_token)->seeStatusCode(422)->seeJson([
+        $this->json(
+            'PATCH',
+            '/api/roles/' . $role->id . '?api_token=' . $this->user->api_token
+        )->seeStatusCode(422)->seeJson([
             'name' => [ 'The name field is required.' ]
         ]);
     }
@@ -219,8 +226,10 @@ class MotorBackendApiRoleTest extends TestCase
     public function fails_if_trying_to_modify_a_role_without_permission()
     {
         $role = create_test_role();
-        $this->json('PATCH',
-            '/api/roles/' . $role->id . '?api_token=' . $this->user->api_token)->seeStatusCode(403)->seeJson([
+        $this->json(
+            'PATCH',
+            '/api/roles/' . $role->id . '?api_token=' . $this->user->api_token
+        )->seeStatusCode(403)->seeJson([
             'error' => 'Access denied.'
         ]);
     }
@@ -253,8 +262,10 @@ class MotorBackendApiRoleTest extends TestCase
     public function fails_to_delete_a_role_without_permission()
     {
         $role = create_test_role();
-        $this->json('DELETE',
-            '/api/roles/' . $role->id . '?api_token=' . $this->user->api_token)->seeStatusCode(403)->seeJson([
+        $this->json(
+            'DELETE',
+            '/api/roles/' . $role->id . '?api_token=' . $this->user->api_token
+        )->seeStatusCode(403)->seeJson([
             'error' => 'Access denied.'
         ]);
     }
@@ -265,8 +276,10 @@ class MotorBackendApiRoleTest extends TestCase
     {
         $this->user->givePermissionTo($this->deletePermission);
         $role = create_test_role();
-        $this->json('DELETE',
-            '/api/roles/' . $role->id . '?api_token=' . $this->user->api_token)->seeStatusCode(200)->seeJson([
+        $this->json(
+            'DELETE',
+            '/api/roles/' . $role->id . '?api_token=' . $this->user->api_token
+        )->seeStatusCode(200)->seeJson([
             'success' => true
         ]);
     }

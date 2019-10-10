@@ -27,9 +27,7 @@ Route::group([
         'navigation'
     ]
 ], static function () {
-
     Route::group([ 'middleware' => [ 'permission' ] ], static function () {
-
         if (config('motor-backend.routes.dashboard')) {
             Route::get('/', [
                 'as'   => 'dashboard.index',

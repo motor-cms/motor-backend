@@ -23,8 +23,11 @@ class PermissionForm extends Form
                 'rules'   => 'required',
                 'choices' => \Motor\Backend\Models\PermissionGroup::pluck('name', 'id')->toArray()
             ])
-             ->add('name', 'text',
-                 [ 'label' => trans('motor-backend::backend/permissions.name'), 'rules' => 'required' ])
+             ->add(
+                 'name',
+                 'text',
+                 [ 'label' => trans('motor-backend::backend/permissions.name'), 'rules' => 'required' ]
+             )
              ->add('guard_name', 'text', [
                  'label'         => trans('motor-backend::backend/permissions.guard_name'),
                  'default_value' => 'web',

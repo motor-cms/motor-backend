@@ -152,7 +152,6 @@ function create_test_language($count = 1)
 function create_test_email_template($count = 1)
 {
     return $email_template = factory(Motor\Backend\Models\EmailTemplate::class, $count)->create();
-
 }
 
 /**

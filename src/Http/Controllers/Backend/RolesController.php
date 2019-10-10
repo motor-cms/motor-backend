@@ -16,7 +16,6 @@ use Motor\Backend\Services\RoleService;
  */
 class RolesController extends Controller
 {
-
     use FormBuilderTrait;
 
 
@@ -66,7 +65,7 @@ class RolesController extends Controller
         $form = $this->form(RoleForm::class);
 
         // It will automatically use current request, get the rules, and do the validation
-        if ( ! $form->isValid()) {
+        if (! $form->isValid()) {
             return redirect()->back()->withErrors($form->getErrors())->withInput();
         }
 
@@ -120,7 +119,7 @@ class RolesController extends Controller
         $form = $this->form(RoleForm::class);
 
         // It will automatically use current request, get the rules, and do the validation
-        if ( ! $form->isValid()) {
+        if (! $form->isValid()) {
             return redirect()->back()->withErrors($form->getErrors())->withInput();
         }
 

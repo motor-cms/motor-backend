@@ -8,7 +8,6 @@ namespace Motor\Backend\Grid\Renderers;
  */
 class FlipRenderer
 {
-
     protected $value = '';
 
     protected $options = [];

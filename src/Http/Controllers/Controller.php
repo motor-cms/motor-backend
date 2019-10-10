@@ -27,7 +27,6 @@ use League\Fractal\Resource\Item;
  */
 class Controller extends BaseController
 {
-
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
 
     protected $fractal;
@@ -98,13 +97,13 @@ class Controller extends BaseController
             $meta = Arr::get($data, 'meta', null);
             $data = Arr::get($data, 'data');
         }
-        if ( ! is_null($meta)) {
+        if (! is_null($meta)) {
             $json = json_encode([ 'message' => $message, 'data' => $data, 'meta' => $meta ]);
         } else {
             $json = json_encode([ 'message' => $message, 'data' => $data ]);
         }
 
-        return response()->streamDownload(function () use ($json ){
+        return response()->streamDownload(function () use ($json) {
             echo $json;
         }, $filename, ['Content-Type' => 'application/json']);
     }
@@ -123,7 +122,7 @@ class Controller extends BaseController
             $meta = Arr::get($data, 'meta', null);
             $data = Arr::get($data, 'data');
         }
-        if ( ! is_null($meta)) {
+        if (! is_null($meta)) {
             return response()->json([ 'message' => $message, 'data' => $data, 'meta' => $meta ]);
         }
 

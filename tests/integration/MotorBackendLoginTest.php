@@ -10,7 +10,6 @@ use Motor\Backend\Models\Role;
  */
 class MotorBackendLoginTest extends TestCase
 {
-
     use DatabaseTransactions;
 
     protected $user;
@@ -64,7 +63,7 @@ class MotorBackendLoginTest extends TestCase
     public function can_visit_the_edit_form_of_a_role_and_use_the_back_button()
     {
         $this->visit('/backend/roles')
-            ->within('table', function(){
+            ->within('table', function () {
                 $this->click(trans('motor-backend::backend/global.edit'));
             })
             ->seePageIs('/backend/roles/1/edit')
@@ -80,7 +79,7 @@ class MotorBackendLoginTest extends TestCase
         $this->visit('/backend/roles/'.$role->id.'/edit')
             ->see($role->name)
             ->type('NewRole', 'name')
-            ->within('.box-footer', function(){
+            ->within('.box-footer', function () {
                 $this->press(trans('motor-backend::backend/roles.save'));
             })
             ->see(trans('motor-backend::backend/roles.updated'))
@@ -102,7 +101,7 @@ class MotorBackendLoginTest extends TestCase
         $this->visit('/backend/roles/create')
             ->see(trans('motor-backend::backend/roles.new'))
             ->type('NewRole', 'name')
-            ->within('.box-footer', function(){
+            ->within('.box-footer', function () {
                 $this->press(trans('motor-backend::backend/roles.save'));
             })
             ->see(trans('motor-backend::backend/roles.created'))
@@ -120,7 +119,7 @@ class MotorBackendLoginTest extends TestCase
             ->see(trans('motor-backend::backend/roles.new'))
             ->type('NewRole', 'name')
             ->check('permissions[test.permission]')
-            ->within('.box-footer', function(){
+            ->within('.box-footer', function () {
                 $this->press(trans('motor-backend::backend/roles.save'));
             })
             ->see(trans('motor-backend::backend/roles.created'))
@@ -147,7 +146,7 @@ class MotorBackendLoginTest extends TestCase
             ->see(trans('motor-backend::backend/roles.edit'))
             ->type('Updated role', 'name')
             ->check('permissions[another.permission]')
-            ->within('.box-footer', function(){
+            ->within('.box-footer', function () {
                 $this->press(trans('motor-backend::backend/roles.save'));
             })
             ->see(trans('motor-backend::backend/roles.updated'))
@@ -174,7 +173,7 @@ class MotorBackendLoginTest extends TestCase
             ->type('Updated role', 'name')
             ->uncheck('permissions[test.permission]')
             ->check('permissions[another.permission]')
-            ->within('.box-footer', function(){
+            ->within('.box-footer', function () {
                 $this->press(trans('motor-backend::backend/roles.save'));
             })
             ->see(trans('motor-backend::backend/roles.updated'))
@@ -190,7 +189,7 @@ class MotorBackendLoginTest extends TestCase
     {
         create_test_role();
         $this->visit('/backend/roles')
-            ->within('table', function(){
+            ->within('table', function () {
                 $this->press(trans('motor-backend::backend/global.delete'));
             })
             ->seePageIs('/backend/roles');
@@ -203,7 +202,7 @@ class MotorBackendLoginTest extends TestCase
     {
         $roles = create_test_role(100);
         $this->visit('/backend/roles')
-            ->within('.pagination', function(){
+            ->within('.pagination', function () {
                 $this->click('3');
             })
             ->seePageIs('/backend/roles?page=3');

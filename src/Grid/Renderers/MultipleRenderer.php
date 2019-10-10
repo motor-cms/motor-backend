@@ -8,7 +8,6 @@ namespace Motor\Backend\Grid\Renderers;
  */
 class MultipleRenderer
 {
-
     protected $value = '';
 
     protected $options = [];
@@ -31,7 +30,7 @@ class MultipleRenderer
      */
     public function render()
     {
-        if ( ! is_array($this->value)) {
+        if (! is_array($this->value)) {
             return '';
         }
 

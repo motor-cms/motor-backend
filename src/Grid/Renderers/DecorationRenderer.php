@@ -10,7 +10,6 @@ use Illuminate\Support\Facades\App;
  */
 class DecorationRenderer
 {
-
     protected $value = '';
 
     protected $options = [];

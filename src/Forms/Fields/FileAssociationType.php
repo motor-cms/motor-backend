@@ -36,7 +36,7 @@ class FileAssociationType extends InputType
 
         if (is_object($modelData)) {
             $fileAssociation = $modelData->file_associations()->where('identifier', $this->getRealName())->first();
-            if ( ! is_null($fileAssociation)) {
+            if (! is_null($fileAssociation)) {
                 $data = fractal($fileAssociation->file, new FileTransformer())->toArray();
 
                 $options['file_association'] = json_encode($data['data']);

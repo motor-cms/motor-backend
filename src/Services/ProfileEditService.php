@@ -11,7 +11,6 @@ use Motor\Backend\Models\User;
  */
 class ProfileEditService extends BaseService
 {
-
     protected $model = User::class;
 
 
@@ -22,7 +21,6 @@ class ProfileEditService extends BaseService
         } else {
             $this->data['password'] = bcrypt($this->data['password']);
         }
-
     }
 
 

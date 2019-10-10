@@ -10,7 +10,6 @@ use Illuminate\Support\Facades\App;
  */
 class CollectionRenderer
 {
-
     protected $value = '';
 
     protected $options = [ 'column' => 'name' ];
@@ -24,7 +23,7 @@ class CollectionRenderer
     public function __construct($value, $options = null)
     {
         $this->value = $value;
-        if ( ! is_null($options)) {
+        if (! is_null($options)) {
             $this->options = $options;
         }
     }
@@ -35,7 +34,7 @@ class CollectionRenderer
      */
     public function render()
     {
-        if ( ! is_array($this->value)) {
+        if (! is_array($this->value)) {
             return '';
         }
 

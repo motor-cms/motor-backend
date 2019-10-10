@@ -10,7 +10,6 @@ use Motor\Backend\Models\User;
  */
 class MotorBackendApiProfileTest extends TestCase
 {
-
     use DatabaseTransactions;
 
     protected $user;

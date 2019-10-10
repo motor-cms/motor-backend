@@ -8,7 +8,6 @@ namespace Motor\Backend\Grid\Renderers;
  */
 class TranslateRenderer
 {
-
     protected $value = '';
 
     protected $options = [];

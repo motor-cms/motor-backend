@@ -17,7 +17,6 @@ use Kris\LaravelFormBuilder\FormBuilderTrait;
  */
 class ConfigVariablesController extends Controller
 {
-
     use FormBuilderTrait;
 
 
@@ -82,7 +81,7 @@ class ConfigVariablesController extends Controller
         $form = $this->form(ConfigVariableForm::class);
 
         // It will automatically use current request, get the rules, and do the validation
-        if ( ! $form->isValid()) {
+        if (! $form->isValid()) {
             return redirect()->back()->withErrors($form->getErrors())->withInput();
         }
 
@@ -136,7 +135,7 @@ class ConfigVariablesController extends Controller
         $form = $this->form(ConfigVariableForm::class);
 
         // It will automatically use current request, get the rules, and do the validation
-        if ( ! $form->isValid()) {
+        if (! $form->isValid()) {
             return redirect()->back()->withErrors($form->getErrors())->withInput();
         }
 

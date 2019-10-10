@@ -44,8 +44,10 @@ class RoleForm extends Form
                  'multiple'       => true,
                  'choices'        => Permission::pluck('name', 'id')->toArray(),
              ])
-             ->add('submit', 'submit',
-                 [ 'attr' => [ 'class' => 'btn btn-primary' ], 'label' => trans('motor-backend::backend/roles.save') ]);
-
+             ->add(
+                 'submit',
+                 'submit',
+                 [ 'attr' => [ 'class' => 'btn btn-primary' ], 'label' => trans('motor-backend::backend/roles.save') ]
+             );
     }
 }

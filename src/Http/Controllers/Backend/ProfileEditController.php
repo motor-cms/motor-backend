@@ -15,7 +15,6 @@ use Motor\Backend\Services\ProfileEditService;
  */
 class ProfileEditController extends Controller
 {
-
     use FormBuilderTrait;
 
 
@@ -49,7 +48,7 @@ class ProfileEditController extends Controller
         $form = $this->form(ProfileEditForm::class);
 
         // It will automatically use current request, get the rules, and do the validation
-        if ( ! $form->isValid()) {
+        if (! $form->isValid()) {
             return redirect()->back()->withErrors($form->getErrors())->withInput();
         }
         ProfileEditService::updateWithForm(Auth::user(), $request, $form);

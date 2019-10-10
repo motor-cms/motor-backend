@@ -11,7 +11,6 @@ use Illuminate\Support\Arr;
  */
 class CurrencyRenderer
 {
-
     protected $value = '';
 
     protected $options = [];
@@ -61,6 +60,5 @@ class CurrencyRenderer
         }
 
         return $value;
-
     }
 }

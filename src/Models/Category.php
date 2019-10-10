@@ -50,7 +50,6 @@ use Culpa\Traits\UpdatedBy;
  */
 class Category extends Model
 {
-
     use Filterable;
     use Blameable, CreatedBy, UpdatedBy, DeletedBy;
     use NodeTrait;
@@ -89,7 +88,7 @@ class Category extends Model
      */
     public function getSearchableColumns()
     {
-        return ( property_exists($this, 'searchableColumns') ) ? $this->searchableColumns : [];
+        return (property_exists($this, 'searchableColumns')) ? $this->searchableColumns : [];
     }
 
 

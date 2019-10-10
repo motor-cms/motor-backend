@@ -24,7 +24,6 @@ class MotorServiceProvider extends ServiceProvider
     public function boot()
     {
         Response::macro('attachment', static function ($content, $filename, $format = 'application/json') {
-
             $headers = [
                 'Content-type'        => $format,
                 'Content-Disposition' => 'attachment; filename="' . $filename . '"',
@@ -125,8 +124,10 @@ class MotorServiceProvider extends ServiceProvider
     public function permissions()
     {
         $config = $this->app['config']->get('motor-backend-permissions', []);
-        $this->app['config']->set('motor-backend-permissions',
-            array_replace_recursive(require __DIR__ . '/../../config/motor-backend-permissions.php', $config));
+        $this->app['config']->set(
+            'motor-backend-permissions',
+            array_replace_recursive(require __DIR__ . '/../../config/motor-backend-permissions.php', $config)
+        );
     }
 
 
@@ -135,7 +136,7 @@ class MotorServiceProvider extends ServiceProvider
      */
     public function routes()
     {
-        if ( ! $this->app->routesAreCached()) {
+        if (! $this->app->routesAreCached()) {
             require __DIR__ . '/../../routes/web.php';
             require __DIR__ . '/../../routes/api.php';
         }
@@ -227,8 +228,10 @@ class MotorServiceProvider extends ServiceProvider
     public function navigationItems()
     {
         $config = $this->app['config']->get('motor-backend-navigation', []);
-        $this->app['config']->set('motor-backend-navigation',
-            array_replace_recursive(require __DIR__ . '/../../config/motor-backend-navigation.php', $config));
+        $this->app['config']->set(
+            'motor-backend-navigation',
+            array_replace_recursive(require __DIR__ . '/../../config/motor-backend-navigation.php', $config)
+        );
     }
 
 
@@ -245,4 +248,3 @@ class MotorServiceProvider extends ServiceProvider
         }
     }
 }
-

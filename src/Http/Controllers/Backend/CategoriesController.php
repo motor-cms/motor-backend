@@ -18,7 +18,6 @@ use Motor\Core\Filter\Renderers\WhereRenderer;
  */
 class CategoriesController extends Controller
 {
-
     use FormBuilderTrait;
 
 
@@ -65,8 +64,10 @@ class CategoriesController extends Controller
         $newItem      = true;
         $selectedItem = null;
 
-        return view('motor-backend::backend.categories.create',
-            compact('form', 'trees', 'newItem', 'selectedItem', 'root'));
+        return view(
+            'motor-backend::backend.categories.create',
+            compact('form', 'trees', 'newItem', 'selectedItem', 'root')
+        );
     }
 
 
@@ -81,7 +82,7 @@ class CategoriesController extends Controller
         $form = $this->form(CategoryForm::class);
 
         // It will automatically use current request, get the rules, and do the validation
-        if ( ! $form->isValid()) {
+        if (! $form->isValid()) {
             return redirect()->back()->withErrors($form->getErrors())->withInput();
         }
 
@@ -128,8 +129,10 @@ class CategoriesController extends Controller
         $newItem      = false;
         $selectedItem = $record->id;
 
-        return view('motor-backend::backend.categories.edit',
-            compact('form', 'trees', 'root', 'newItem', 'selectedItem'));
+        return view(
+            'motor-backend::backend.categories.edit',
+            compact('form', 'trees', 'root', 'newItem', 'selectedItem')
+        );
     }
 
 
@@ -145,7 +148,7 @@ class CategoriesController extends Controller
         $form = $this->form(CategoryForm::class);
 
         // It will automatically use current request, get the rules, and do the validation
-        if ( ! $form->isValid()) {
+        if (! $form->isValid()) {
             return redirect()->back()->withErrors($form->getErrors())->withInput();
         }
 

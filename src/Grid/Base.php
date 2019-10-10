@@ -10,7 +10,6 @@ use Illuminate\Support\Arr;
  */
 class Base
 {
-
     protected $attributes = [];
 
 
@@ -80,7 +79,7 @@ class Base
      */
     protected function sanitize($string)
     {
-        if ( ! is_array($string)) {
+        if (! is_array($string)) {
             return nl2br(htmlspecialchars($string));
         }
 

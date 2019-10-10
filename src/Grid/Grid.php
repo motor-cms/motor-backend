@@ -13,7 +13,6 @@ use Motor\Core\Filter\Renderers\PerPageRenderer;
  */
 class Grid extends Base
 {
-
     protected $model;
 
     protected $searchTerm = '';
@@ -225,13 +224,11 @@ class Grid extends Base
     public function getRows(): array
     {
         foreach ($this->getPaginator() as $record) {
-
             $row = new Row($record);
 
             foreach ($this->getColumns() as $column) {
-
                 $cell     = new Cell($column->getName(), $column->getRenderer(), $column->getRenderOptions());
-                $sanitize = ( count($column->getFilters()) || $column->hasCellClosure() ) ? false : true;
+                $sanitize = (count($column->getFilters()) || $column->hasCellClosure()) ? false : true;
                 $value    = $this->getCellValue($cell, $column, $record, $sanitize);
                 $cell->setValue($value);
                 $cell->setRecord($record); // we might need it for some renderers
@@ -316,7 +313,7 @@ class Grid extends Base
             $segments        = explode('.', $column->getName());
             foreach ($segments as $key => $segment) {
                 try {
-                    if ( ! is_null($temporaryRecord->{$segment})) {
+                    if (! is_null($temporaryRecord->{$segment})) {
                         if ($key == count($segments) - 1) {
                             $value = $temporaryRecord->{$segment};
                         }
@@ -340,7 +337,6 @@ class Grid extends Base
             } else {
                 $value = 'COLUMN NOT FOUND';
             }
-
         } elseif (is_array($record) && isset($record[$column->getName()])) {
             // Array value
             $value = $record[$column->getName()];
@@ -488,28 +484,29 @@ class Grid extends Base
      */
     public function getPaginator(int $limit = 20): AbstractPaginator
     {
-
-        if ( ! is_null($this->paginator)) {
+        if (! is_null($this->paginator)) {
             return $this->paginator;
         }
 
-        $query = ( $this->model )::filteredByMultiple($this->filter);
+        $query = ($this->model)::filteredByMultiple($this->filter);
 
-        if ( ! $this->filter->get('per_page')) {
+        if (! $this->filter->get('per_page')) {
             $this->filter->add(new PerPageRenderer('per_page'))->setup();
         }
 
         $perPage = $this->filter->get('per_page');
-        if ( ! is_null($perPage) && ! is_null($perPage->getValue())) {
+        if (! is_null($perPage) && ! is_null($perPage->getValue())) {
             $limit = $perPage->getValue();
         }
 
         [ $sortableField, $sortableDirection ] = $this->getSorting();
 
         // FIXME: we can't assume that the sorting will always be on the base model!?
-        if ( ! is_null($sortableField)) {
-            $this->paginator = $query->orderBy($query->getModel()->getTable() . '.' . $sortableField,
-                $sortableDirection)->paginate($limit);
+        if (! is_null($sortableField)) {
+            $this->paginator = $query->orderBy(
+                $query->getModel()->getTable() . '.' . $sortableField,
+                $sortableDirection
+            )->paginate($limit);
 
             return $this->paginator;
         }

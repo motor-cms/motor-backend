@@ -9,7 +9,6 @@ use Illuminate\Foundation\Testing\DatabaseTransactions;
  */
 class MotorBackendApiClientTest extends TestCase
 {
-
     use DatabaseTransactions;
 
     protected $user;
@@ -102,8 +101,10 @@ class MotorBackendApiClientTest extends TestCase
     {
         $this->user->givePermissionTo($this->readPermission);
         $client = create_test_client();
-        $this->json('GET',
-            '/api/clients/' . $client->id . '?api_token=' . $this->user->api_token)->seeStatusCode(200)->seeJson([
+        $this->json(
+            'GET',
+            '/api/clients/' . $client->id . '?api_token=' . $this->user->api_token
+        )->seeStatusCode(200)->seeJson([
             'name' => $client->name
         ]);
     }
@@ -113,8 +114,10 @@ class MotorBackendApiClientTest extends TestCase
     public function fails_to_show_a_single_client_without_permission()
     {
         $client = factory(Motor\Backend\Models\Client::class)->create();
-        $this->json('GET',
-            '/api/clients/' . $client->id . '?api_token=' . $this->user->api_token)->seeStatusCode(403)->seeJson([
+        $this->json(
+            'GET',
+            '/api/clients/' . $client->id . '?api_token=' . $this->user->api_token
+        )->seeStatusCode(403)->seeJson([
             'error' => 'Access denied.'
         ]);
     }
@@ -146,8 +149,10 @@ class MotorBackendApiClientTest extends TestCase
     {
         $this->user->givePermissionTo($this->readPermission);
         $clients = create_test_client(10);
-        $this->json('GET',
-            '/api/clients?api_token=' . $this->user->api_token . '&search=' . $clients[2]->name)->seeStatusCode(200)->seeJson([
+        $this->json(
+            'GET',
+            '/api/clients?api_token=' . $this->user->api_token . '&search=' . $clients[2]->name
+        )->seeStatusCode(200)->seeJson([
             'name' => $clients[2]->name
         ]);
     }
@@ -158,8 +163,10 @@ class MotorBackendApiClientTest extends TestCase
     {
         $this->user->givePermissionTo($this->readPermission);
         create_test_client(50);
-        $this->json('GET',
-            '/api/clients?api_token=' . $this->user->api_token . '&page=2')->seeStatusCode(200)->seeJson([
+        $this->json(
+            'GET',
+            '/api/clients?api_token=' . $this->user->api_token . '&page=2'
+        )->seeStatusCode(200)->seeJson([
             'current_page' => 2
         ]);
     }
@@ -180,8 +187,10 @@ class MotorBackendApiClientTest extends TestCase
     {
         $this->user->givePermissionTo($this->writePermission);
         $client = create_test_client();
-        $this->json('PATCH',
-            '/api/clients/' . $client->id . '?api_token=' . $this->user->api_token)->seeStatusCode(422)->seeJson([
+        $this->json(
+            'PATCH',
+            '/api/clients/' . $client->id . '?api_token=' . $this->user->api_token
+        )->seeStatusCode(422)->seeJson([
             'name' => [ 'The name field is required.' ]
         ]);
     }
@@ -191,8 +200,10 @@ class MotorBackendApiClientTest extends TestCase
     public function fails_if_trying_to_modify_a_client_without_permission()
     {
         $client = create_test_client();
-        $this->json('PATCH',
-            '/api/clients/' . $client->id . '?api_token=' . $this->user->api_token)->seeStatusCode(403)->seeJson([
+        $this->json(
+            'PATCH',
+            '/api/clients/' . $client->id . '?api_token=' . $this->user->api_token
+        )->seeStatusCode(403)->seeJson([
             'error' => 'Access denied.'
         ]);
     }
@@ -226,8 +237,10 @@ class MotorBackendApiClientTest extends TestCase
     public function fails_to_delete_a_client_without_permission()
     {
         $client = factory(Motor\Backend\Models\Client::class)->create();
-        $this->json('DELETE',
-            '/api/clients/' . $client->id . '?api_token=' . $this->user->api_token)->seeStatusCode(403)->seeJson([
+        $this->json(
+            'DELETE',
+            '/api/clients/' . $client->id . '?api_token=' . $this->user->api_token
+        )->seeStatusCode(403)->seeJson([
             'error' => 'Access denied.'
         ]);
     }
@@ -238,8 +251,10 @@ class MotorBackendApiClientTest extends TestCase
     {
         $this->user->givePermissionTo($this->deletePermission);
         $client = create_test_client();
-        $this->json('DELETE',
-            '/api/clients/' . $client->id . '?api_token=' . $this->user->api_token)->seeStatusCode(200)->seeJson([
+        $this->json(
+            'DELETE',
+            '/api/clients/' . $client->id . '?api_token=' . $this->user->api_token
+        )->seeStatusCode(200)->seeJson([
             'success' => true
         ]);
     }

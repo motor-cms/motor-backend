@@ -8,7 +8,6 @@ namespace Motor\Backend\Grid;
  */
 class Cell extends Base
 {
-
     protected $name = '';
 
     protected $value = '';
@@ -81,7 +80,7 @@ class Cell extends Base
         // Get renderer
         $renderer = new $this->renderer($this->value, $this->renderOptions, $this->record);
 
-        if ( ! $this->column->checkCondition($this->record)) {
+        if (! $this->column->checkCondition($this->record)) {
             return '';
         }
 

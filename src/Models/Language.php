@@ -31,7 +31,6 @@ use Motor\Core\Traits\Searchable;
  */
 class Language extends Model
 {
-
     use Searchable;
     use Filterable;
 

@@ -16,7 +16,6 @@ use Motor\Backend\Services\LanguageService;
  */
 class LanguagesController extends Controller
 {
-
     use FormBuilderTrait;
 
 
@@ -65,7 +64,7 @@ class LanguagesController extends Controller
         $form = $this->form(LanguageForm::class);
 
         // It will automatically use current request, get the rules, and do the validation
-        if ( ! $form->isValid()) {
+        if (! $form->isValid()) {
             return redirect()->back()->withErrors($form->getErrors())->withInput();
         }
 
@@ -118,7 +117,7 @@ class LanguagesController extends Controller
         $form = $this->form(LanguageForm::class);
 
         // It will automatically use current request, get the rules, and do the validation
-        if ( ! $form->isValid()) {
+        if (! $form->isValid()) {
             return redirect()->back()->withErrors($form->getErrors())->withInput();
         }
 

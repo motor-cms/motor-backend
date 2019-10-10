@@ -9,7 +9,6 @@ use Illuminate\Foundation\Testing\DatabaseTransactions;
  */
 class MotorBackendApiUserTest extends TestCase
 {
-
     use DatabaseMigrations;
     use DatabaseTransactions;
 
@@ -274,8 +273,10 @@ class MotorBackendApiUserTest extends TestCase
     {
         $this->user->givePermissionTo($this->readPermission);
         $user = create_test_user();
-        $this->json('GET',
-            '/api/users/' . $user->id . '?api_token=' . $this->user->api_token)->seeStatusCode(200)->seeJson([
+        $this->json(
+            'GET',
+            '/api/users/' . $user->id . '?api_token=' . $this->user->api_token
+        )->seeStatusCode(200)->seeJson([
             'name' => $user->name
         ]);
     }
@@ -285,8 +286,10 @@ class MotorBackendApiUserTest extends TestCase
     public function fails_to_show_a_single_user_without_permission()
     {
         $user = create_test_user();
-        $this->json('GET',
-            '/api/users/' . $user->id . '?api_token=' . $this->user->api_token)->seeStatusCode(403)->seeJson([
+        $this->json(
+            'GET',
+            '/api/users/' . $user->id . '?api_token=' . $this->user->api_token
+        )->seeStatusCode(403)->seeJson([
             'error' => 'Access denied.'
         ]);
     }
@@ -308,8 +311,10 @@ class MotorBackendApiUserTest extends TestCase
     {
         $this->user->givePermissionTo($this->readPermission);
         $users = create_test_user(10);
-        $this->json('GET',
-            '/api/users?api_token=' . $this->user->api_token . '&search=' . $users[2]->name)->seeStatusCode(200)->seeJson([
+        $this->json(
+            'GET',
+            '/api/users?api_token=' . $this->user->api_token . '&search=' . $users[2]->name
+        )->seeStatusCode(200)->seeJson([
             'name' => $users[2]->name
         ]);
     }
@@ -341,8 +346,10 @@ class MotorBackendApiUserTest extends TestCase
     {
         $this->user->givePermissionTo($this->writePermission);
         $user = create_test_user();
-        $this->json('PATCH',
-            '/api/users/' . $user->id . '?api_token=' . $this->user->api_token)->seeStatusCode(422)->seeJson([
+        $this->json(
+            'PATCH',
+            '/api/users/' . $user->id . '?api_token=' . $this->user->api_token
+        )->seeStatusCode(422)->seeJson([
             'name' => ['The name field is required.']
         ]);
     }
@@ -352,8 +359,10 @@ class MotorBackendApiUserTest extends TestCase
     public function fails_if_trying_to_modify_a_user_without_permission()
     {
         $user = create_test_user();
-        $this->json('PATCH',
-            '/api/users/' . $user->id . '?api_token=' . $this->user->api_token)->seeStatusCode(403)->seeJson([
+        $this->json(
+            'PATCH',
+            '/api/users/' . $user->id . '?api_token=' . $this->user->api_token
+        )->seeStatusCode(403)->seeJson([
             'error' => 'Access denied.'
         ]);
     }
@@ -445,8 +454,10 @@ class MotorBackendApiUserTest extends TestCase
     public function fails_to_delete_a_user_without_permission()
     {
         $user = create_test_user();
-        $this->json('DELETE',
-            '/api/users/' . $user->id . '?api_token=' . $this->user->api_token)->seeStatusCode(403)->seeJson([
+        $this->json(
+            'DELETE',
+            '/api/users/' . $user->id . '?api_token=' . $this->user->api_token
+        )->seeStatusCode(403)->seeJson([
             'error' => 'Access denied.'
         ]);
     }
@@ -457,8 +468,10 @@ class MotorBackendApiUserTest extends TestCase
     {
         $this->user->givePermissionTo($this->deletePermission);
         $user = create_test_user();
-        $this->json('DELETE',
-            '/api/users/' . $user->id . '?api_token=' . $this->user->api_token)->seeStatusCode(200)->seeJson([
+        $this->json(
+            'DELETE',
+            '/api/users/' . $user->id . '?api_token=' . $this->user->api_token
+        )->seeStatusCode(200)->seeJson([
             'success' => true
         ]);
     }

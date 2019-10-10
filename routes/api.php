@@ -25,12 +25,10 @@ Route::group([
     'as'         => 'api.auth',
 
 ], static function ($router) {
-
     Route::post('login', 'LoginController@login')->name('login');
     Route::post('logout', 'LoginController@logout')->name('logout');
     Route::post('refresh', 'LoginController@refresh')->name('refresh');
     Route::post('me', 'LoginController@me')->name('me');
-
 });
 
 Route::group([

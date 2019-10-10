@@ -10,7 +10,6 @@ use Motor\Backend\Grid\Grid;
  */
 class ConfigVariableGrid extends Grid
 {
-
     protected function setup()
     {
         $this->addColumn('package', trans('motor-backend::backend/config_variables.package'), true);
@@ -19,8 +18,10 @@ class ConfigVariableGrid extends Grid
         $this->addColumn('value', trans('motor-backend::backend/config_variables.value'), true);
         $this->setDefaultSorting('package', 'ASC');
         $this->addEditAction(trans('motor-backend::backend/global.edit'), 'backend.config_variables.edit');
-        $this->addDuplicateAction(trans('motor-backend::backend/global.duplicate'),
-            'backend.config_variables.duplicate')->needsPermissionTo('config_variables.write');
+        $this->addDuplicateAction(
+            trans('motor-backend::backend/global.duplicate'),
+            'backend.config_variables.duplicate'
+        )->needsPermissionTo('config_variables.write');
         $this->addDeleteAction(trans('motor-backend::backend/global.delete'), 'backend.config_variables.destroy');
     }
 }

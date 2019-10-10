@@ -9,7 +9,6 @@ use Illuminate\Foundation\Testing\DatabaseTransactions;
  */
 class MotorBackendApiEmailTemplateTest extends TestCase
 {
-
     use DatabaseTransactions;
 
     protected $user;
@@ -112,8 +111,10 @@ class MotorBackendApiEmailTemplateTest extends TestCase
     {
         $this->user->givePermissionTo($this->readPermission);
         $email_template = create_test_email_template();
-        $this->json('GET',
-            '/api/email_templates/' . $email_template->id . '?api_token=' . $this->user->api_token)->seeStatusCode(200)->seeJson([
+        $this->json(
+            'GET',
+            '/api/email_templates/' . $email_template->id . '?api_token=' . $this->user->api_token
+        )->seeStatusCode(200)->seeJson([
             'body_html' => $email_template->body_html
         ]);
     }
@@ -122,8 +123,10 @@ class MotorBackendApiEmailTemplateTest extends TestCase
     public function fails_to_show_a_single_email_template_without_permission()
     {
         $email_template = create_test_email_template();
-        $this->json('GET',
-            '/api/email_template/' . $email_template->id . '?api_token=' . $this->user->api_token)->seeStatusCode(403)->seeJson([
+        $this->json(
+            'GET',
+            '/api/email_template/' . $email_template->id . '?api_token=' . $this->user->api_token
+        )->seeStatusCode(403)->seeJson([
             'error' => 'Access denied.'
         ]);
     }
@@ -155,8 +158,10 @@ class MotorBackendApiEmailTemplateTest extends TestCase
     {
         $this->user->givePermissionTo($this->readPermission);
         $email_templates = create_test_email_template(10);
-        $this->json('GET',
-            '/api/email_templates?api_token=' . $this->user->api_token . '&search=' . $email_templates[2]->subject)->seeStatusCode(200)->seeJson([
+        $this->json(
+            'GET',
+            '/api/email_templates?api_token=' . $this->user->api_token . '&search=' . $email_templates[2]->subject
+        )->seeStatusCode(200)->seeJson([
             'subject' => $email_templates[2]->subject
         ]);
     }
@@ -167,8 +172,10 @@ class MotorBackendApiEmailTemplateTest extends TestCase
     {
         $this->user->givePermissionTo($this->readPermission);
         $email_templates = create_test_email_template(50);
-        $this->json('GET',
-            '/api/email_templates?api_token=' . $this->user->api_token . '&page=2')->seeStatusCode(200)->seeJson([
+        $this->json(
+            'GET',
+            '/api/email_templates?api_token=' . $this->user->api_token . '&page=2'
+        )->seeStatusCode(200)->seeJson([
             'current_page' => 2
         ]);
     }
@@ -178,8 +185,10 @@ class MotorBackendApiEmailTemplateTest extends TestCase
     public function fails_if_trying_to_update_nonexisting_email_template()
     {
         $this->user->givePermissionTo($this->writePermission);
-        $this->json('PATCH',
-            '/api/email_templates/2?api_token=' . $this->user->api_token)->seeStatusCode(404)->seeJson([
+        $this->json(
+            'PATCH',
+            '/api/email_templates/2?api_token=' . $this->user->api_token
+        )->seeStatusCode(404)->seeJson([
             'message' => 'Record not found'
         ]);
     }
@@ -190,8 +199,10 @@ class MotorBackendApiEmailTemplateTest extends TestCase
     {
         $this->user->givePermissionTo($this->writePermission);
         $email_template = create_test_email_template();
-        $this->json('PATCH',
-            '/api/email_templates/' . $email_template->id . '?api_token=' . $this->user->api_token)->seeStatusCode(422)->seeJson([
+        $this->json(
+            'PATCH',
+            '/api/email_templates/' . $email_template->id . '?api_token=' . $this->user->api_token
+        )->seeStatusCode(422)->seeJson([
             'client_id' => [ 'The client id field is required.' ]
         ]);
     }
@@ -200,8 +211,10 @@ class MotorBackendApiEmailTemplateTest extends TestCase
     public function fails_if_trying_to_modify_an_email_template_without_permission()
     {
         $email_template = create_test_email_template();
-        $this->json('PATCH',
-            '/api/email_templates/' . $email_template->id . '?api_token=' . $this->user->api_token)->seeStatusCode(403)->seeJson([
+        $this->json(
+            'PATCH',
+            '/api/email_templates/' . $email_template->id . '?api_token=' . $this->user->api_token
+        )->seeStatusCode(403)->seeJson([
             'error' => 'Access denied.'
         ]);
     }
@@ -228,8 +241,10 @@ class MotorBackendApiEmailTemplateTest extends TestCase
     public function fails_if_trying_to_delete_a_non_existing_email_template()
     {
         $this->user->givePermissionTo($this->deletePermission);
-        $this->json('DELETE',
-            '/api/email_templates/1?api_token=' . $this->user->api_token)->seeStatusCode(404)->seeJson([
+        $this->json(
+            'DELETE',
+            '/api/email_templates/1?api_token=' . $this->user->api_token
+        )->seeStatusCode(404)->seeJson([
             'message' => 'Record not found'
         ]);
     }
@@ -238,8 +253,10 @@ class MotorBackendApiEmailTemplateTest extends TestCase
     public function fails_to_delete_an_email_template_without_permission()
     {
         $email_template = create_test_email_template();
-        $this->json('DELETE',
-            '/api/email_templates/' . $email_template->id . '?api_token=' . $this->user->api_token)->seeStatusCode(403)->seeJson([
+        $this->json(
+            'DELETE',
+            '/api/email_templates/' . $email_template->id . '?api_token=' . $this->user->api_token
+        )->seeStatusCode(403)->seeJson([
             'error' => 'Access denied.'
         ]);
     }
@@ -249,8 +266,10 @@ class MotorBackendApiEmailTemplateTest extends TestCase
     {
         $this->user->givePermissionTo($this->deletePermission);
         $email_template = create_test_email_template();
-        $this->json('DELETE',
-            '/api/email_templates/' . $email_template->id . '?api_token=' . $this->user->api_token)->seeStatusCode(200)->seeJson([
+        $this->json(
+            'DELETE',
+            '/api/email_templates/' . $email_template->id . '?api_token=' . $this->user->api_token
+        )->seeStatusCode(200)->seeJson([
             'success' => true
         ]);
     }

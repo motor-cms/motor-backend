@@ -12,7 +12,6 @@ use Illuminate\Queue\SerializesModels;
  */
 class ResetPassword extends Mailable
 {
-
     use Queueable, SerializesModels;
 
     public $token;

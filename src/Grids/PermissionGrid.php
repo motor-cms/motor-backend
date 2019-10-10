@@ -11,7 +11,6 @@ use Motor\Core\Filter\Renderers\SearchRenderer;
  */
 class PermissionGrid extends Grid
 {
-
     protected function setup()
     {
         $this->addColumn('id', 'ID', true);

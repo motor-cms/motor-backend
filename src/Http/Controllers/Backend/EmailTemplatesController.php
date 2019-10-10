@@ -16,7 +16,6 @@ use Motor\Backend\Services\EmailTemplateService;
  */
 class EmailTemplatesController extends Controller
 {
-
     use FormBuilderTrait;
 
 
@@ -58,7 +57,6 @@ class EmailTemplatesController extends Controller
      */
     public function create(EmailTemplate $record)
     {
-
         $form = $this->form(EmailTemplateForm::class, [
             'method' => 'POST',
             'route'  => 'backend.email_templates.store',
@@ -80,7 +78,7 @@ class EmailTemplatesController extends Controller
         $form = $this->form(EmailTemplateForm::class);
 
         // It will automatically use current request, get the rules, and do the validation
-        if ( ! $form->isValid()) {
+        if (! $form->isValid()) {
             return redirect()->back()->withErrors($form->getErrors())->withInput();
         }
 
@@ -133,7 +131,7 @@ class EmailTemplatesController extends Controller
         $form = $this->form(EmailTemplateForm::class);
 
         // It will automatically use current request, get the rules, and do the validation
-        if ( ! $form->isValid()) {
+        if (! $form->isValid()) {
             return redirect()->back()->withErrors($form->getErrors())->withInput();
         }
 

@@ -8,7 +8,6 @@ namespace Motor\Backend\Grid\Renderers;
  */
 class BooleanRenderer
 {
-
     protected $value = '';
 
     protected $options = [];

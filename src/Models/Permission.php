@@ -36,7 +36,6 @@ use Motor\Core\Traits\Searchable;
  */
 class Permission extends \Spatie\Permission\Models\Permission
 {
-
     use Searchable;
     use Filterable;
 

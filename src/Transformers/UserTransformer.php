@@ -37,7 +37,7 @@ class UserTransformer extends Fractal\TransformerAbstract
     {
         return [
             'id'        => (int) $record->id,
-            'client_id' => ( is_null($record->client_id) ? null : (int) $record->client_id ),
+            'client_id' => (is_null($record->client_id) ? null : (int) $record->client_id),
             'name'      => $record->name,
             'email'     => $record->email
         ];
@@ -52,7 +52,7 @@ class UserTransformer extends Fractal\TransformerAbstract
      */
     public function includeClient(User $record)
     {
-        if ( ! is_null($record->client)) {
+        if (! is_null($record->client)) {
             return $this->item($record->client, new ClientTransformer());
         }
     }
@@ -66,7 +66,7 @@ class UserTransformer extends Fractal\TransformerAbstract
      */
     public function includePermissions(User $record)
     {
-        if ( ! is_null($record->permissions)) {
+        if (! is_null($record->permissions)) {
             return $this->collection($record->permissions, new PermissionTransformer());
         }
     }
@@ -80,7 +80,7 @@ class UserTransformer extends Fractal\TransformerAbstract
      */
     public function includeRoles(User $record)
     {
-        if ( ! is_null($record->roles)) {
+        if (! is_null($record->roles)) {
             return $this->collection($record->roles, new RoleTransformer());
         }
     }

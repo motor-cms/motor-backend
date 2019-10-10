@@ -37,8 +37,11 @@ class UserForm extends Form
              ->add('name', 'text', [ 'label' => trans('motor-backend::backend/users.name'), 'rules' => 'required' ])
              ->add('email', 'text', [ 'label' => trans('motor-backend::backend/users.email'), 'rules' => 'required' ])
              ->add('password', 'password', [ 'value' => '', 'label' => trans('motor-backend::backend/users.password') ])
-             ->add('avatar', 'file_image',
-                 [ 'label' => trans('motor-backend::backend/global.image'), 'model' => User::class ])
+             ->add(
+                 'avatar',
+                 'file_image',
+                 [ 'label' => trans('motor-backend::backend/global.image'), 'model' => User::class ]
+             )
              ->add('roles', 'choice', [
                  'label'          => trans('motor-backend::backend/roles.roles'),
                  'choice_options' => [
@@ -50,7 +53,10 @@ class UserForm extends Form
                  'multiple'       => true,
                  'choices'        => Role::pluck('name', 'id')->toArray(),
              ])
-             ->add('submit', 'submit',
-                 [ 'attr' => [ 'class' => 'btn btn-primary' ], 'label' => trans('motor-backend::backend/users.save') ]);
+             ->add(
+                 'submit',
+                 'submit',
+                 [ 'attr' => [ 'class' => 'btn btn-primary' ], 'label' => trans('motor-backend::backend/users.save') ]
+             );
     }
 }

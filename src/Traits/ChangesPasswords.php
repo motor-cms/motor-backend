@@ -15,7 +15,6 @@ use Illuminate\Support\Facades\Password;
  */
 trait ChangesPasswords
 {
-
     use RedirectsUsers;
 
 

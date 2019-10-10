@@ -44,7 +44,7 @@ class RoleTransformer extends Fractal\TransformerAbstract
     public function includePermissions(Role $record)
     {
         $permissions = $record->permissions;
-        if ( ! is_null($permissions)) {
+        if (! is_null($permissions)) {
             return $this->collection($permissions, new PermissionTransformer());
         }
     }

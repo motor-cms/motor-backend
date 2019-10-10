@@ -11,7 +11,6 @@ use Illuminate\Support\Arr;
  */
 class JsonArrayRenderer
 {
-
     protected $value = '';
 
     protected $options = [];
@@ -52,6 +51,5 @@ class JsonArrayRenderer
         }
 
         return implode(', ', $values);
-
     }
 }

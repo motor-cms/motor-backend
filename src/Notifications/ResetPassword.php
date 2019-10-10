@@ -11,7 +11,6 @@ use Illuminate\Notifications\Notification;
  */
 class ResetPassword extends Notification
 {
-
     use Queueable;
 
     public $token;

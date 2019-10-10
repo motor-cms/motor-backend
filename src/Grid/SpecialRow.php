@@ -10,7 +10,6 @@ use Illuminate\Contracts\Pagination\Paginator;
  */
 class SpecialRow extends Base
 {
-
     protected $renderer = 'Motor\Backend\Grid\Renderers\TextRenderer';
 
     protected $renderOptions = [];

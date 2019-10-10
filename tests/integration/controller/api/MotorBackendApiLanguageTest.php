@@ -9,7 +9,6 @@ use Illuminate\Foundation\Testing\DatabaseTransactions;
  */
 class MotorBackendApiLanguageTest extends TestCase
 {
-
     use DatabaseTransactions;
 
     protected $user;
@@ -105,8 +104,10 @@ class MotorBackendApiLanguageTest extends TestCase
     {
         $this->user->givePermissionTo($this->readPermission);
         $language = create_test_language();
-        $this->json('GET',
-            '/api/languages/' . $language->id . '?api_token=' . $this->user->api_token)->seeStatusCode(200)->seeJson([
+        $this->json(
+            'GET',
+            '/api/languages/' . $language->id . '?api_token=' . $this->user->api_token
+        )->seeStatusCode(200)->seeJson([
             'english_name' => $language->english_name
         ]);
     }
@@ -116,8 +117,10 @@ class MotorBackendApiLanguageTest extends TestCase
     public function fails_to_show_a_single_language_without_permission()
     {
         $language = create_test_language();
-        $this->json('GET',
-            '/api/languages/' . $language->id . '?api_token=' . $this->user->api_token)->seeStatusCode(403)->seeJson([
+        $this->json(
+            'GET',
+            '/api/languages/' . $language->id . '?api_token=' . $this->user->api_token
+        )->seeStatusCode(403)->seeJson([
             'error' => 'Access denied.'
         ]);
     }
@@ -149,8 +152,10 @@ class MotorBackendApiLanguageTest extends TestCase
     {
         $this->user->givePermissionTo($this->readPermission);
         $languages = create_test_language(10);
-        $this->json('GET',
-            '/api/languages?api_token=' . $this->user->api_token . '&search=' . $languages[2]->iso_639_1)->seeStatusCode(200)->seeJson([
+        $this->json(
+            'GET',
+            '/api/languages?api_token=' . $this->user->api_token . '&search=' . $languages[2]->iso_639_1
+        )->seeStatusCode(200)->seeJson([
             'iso_639_1' => $languages[2]->iso_639_1
         ]);
     }
@@ -161,8 +166,10 @@ class MotorBackendApiLanguageTest extends TestCase
     {
         $this->user->givePermissionTo($this->readPermission);
         create_test_language(50);
-        $this->json('GET',
-            '/api/languages?api_token=' . $this->user->api_token . '&page=2')->seeStatusCode(200)->seeJson([
+        $this->json(
+            'GET',
+            '/api/languages?api_token=' . $this->user->api_token . '&page=2'
+        )->seeStatusCode(200)->seeJson([
             'current_page' => 2
         ]);
     }
@@ -183,8 +190,10 @@ class MotorBackendApiLanguageTest extends TestCase
     {
         $this->user->givePermissionTo($this->writePermission);
         $language = create_test_language();
-        $this->json('PATCH',
-            '/api/languages/' . $language->id . '?api_token=' . $this->user->api_token)->seeStatusCode(422)->seeJson([
+        $this->json(
+            'PATCH',
+            '/api/languages/' . $language->id . '?api_token=' . $this->user->api_token
+        )->seeStatusCode(422)->seeJson([
             'english_name' => [ 'The english name field is required.' ]
         ]);
     }
@@ -194,8 +203,10 @@ class MotorBackendApiLanguageTest extends TestCase
     public function fails_if_trying_to_modify_a_language_without_permission()
     {
         $language = create_test_language();
-        $this->json('PATCH',
-            '/api/languages/' . $language->id . '?api_token=' . $this->user->api_token)->seeStatusCode(403)->seeJson([
+        $this->json(
+            'PATCH',
+            '/api/languages/' . $language->id . '?api_token=' . $this->user->api_token
+        )->seeStatusCode(403)->seeJson([
             'error' => 'Access denied.'
         ]);
     }
@@ -230,8 +241,10 @@ class MotorBackendApiLanguageTest extends TestCase
     public function fails_to_delete_a_client_without_permission()
     {
         $language = create_test_language();
-        $this->json('DELETE',
-            '/api/language/' . $language->id . '?api_token=' . $this->user->api_token)->seeStatusCode(403)->seeJson([
+        $this->json(
+            'DELETE',
+            '/api/language/' . $language->id . '?api_token=' . $this->user->api_token
+        )->seeStatusCode(403)->seeJson([
             'error' => 'Access denied.'
         ]);
     }
@@ -242,8 +255,10 @@ class MotorBackendApiLanguageTest extends TestCase
     {
         $this->user->givePermissionTo($this->deletePermission);
         $language = create_test_language();
-        $this->json('DELETE',
-            '/api/languages/' . $language->id . '?api_token=' . $this->user->api_token)->seeStatusCode(200)->seeJson([
+        $this->json(
+            'DELETE',
+            '/api/languages/' . $language->id . '?api_token=' . $this->user->api_token
+        )->seeStatusCode(200)->seeJson([
             'success' => true
         ]);
     }
