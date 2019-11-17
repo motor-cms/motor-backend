@@ -4,7 +4,10 @@
         <h3 class="box-title">{{ trans('motor-backend::backend/global.base_info') }}</h3>
     </div>
     <div class="@boxBody">
-        {!! form_until($form, 'roles') !!}
+        {!! form_until($form, 'avatar') !!}
+        @if(isset($form->roles))
+            {!! form_row($form->roles) !!}
+        @endif
     </div>
     <!-- /.box-body -->
 
