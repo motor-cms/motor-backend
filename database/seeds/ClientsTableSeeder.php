@@ -1,7 +1,6 @@
 <?php
 
 use Illuminate\Database\Seeder;
-use Motor\Backend\Models\User;
 
 /**
  * Class ClientsTableSeeder
@@ -20,6 +19,8 @@ class ClientsTableSeeder extends Seeder
             'name'       => 'Default',
             'created_at' => date('Y-m-d H:i:s'),
             'updated_at' => date('Y-m-d H:i:s'),
+            'created_by' => 1,
+            'updated_by' => 1,
         ]);
     }
 }

@@ -2,6 +2,7 @@
 
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Str;
+use Motor\Backend\Models\Role;
 use Motor\Backend\Models\User;
 
 /**
@@ -17,10 +18,6 @@ class UsersTableSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('roles')->insert([
-            'name'       => 'SuperAdmin'
-        ]);
-
         DB::table('users')->insert([
             'name'       => 'Motor Admin',
             'email'      => 'motor@esmaili.info',
@@ -30,7 +27,9 @@ class UsersTableSeeder extends Seeder
             'updated_at' => date('Y-m-d H:i:s'),
         ]);
 
+        $role = Role::where('name', 'SuperAdmin')->first();
         $user = User::where('email', 'motor@esmaili.info')->first();
-        $user->assignRole('SuperAdmin');
+
+        $user->assignRole($role);
     }
 }
