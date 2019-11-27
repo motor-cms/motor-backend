@@ -35,7 +35,7 @@ class ConfigVariableForm extends Form
              )
              ->add(
                  'value',
-                 'text',
+                 'textarea',
                  [ 'label' => trans('motor-backend::backend/config_variables.value'), 'rules' => 'required' ]
              )
              ->add('submit', 'submit', [

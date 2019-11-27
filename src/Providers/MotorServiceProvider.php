@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Route;
 use Illuminate\Support\ServiceProvider;
 use Motor\Backend\Console\Commands\MotorCreatePermissionsCommand;
 use Motor\Backend\Console\Commands\MotorGenerateIncludeCommand;
+use Motor\Backend\Models\ConfigVariable;
 
 /**
  * Class MotorServiceProvider
@@ -44,6 +45,7 @@ class MotorServiceProvider extends ServiceProvider
         $this->migrations();
         $this->publishResourceAssets();
         $this->bladeDirectives();
+        merge_local_config_with_db_configuration_variables('motor-backend');
     }
 
 

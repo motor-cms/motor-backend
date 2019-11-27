@@ -26,22 +26,22 @@ use Culpa\Traits\UpdatedBy;
  * @property-read \Motor\Backend\Models\User      $creator
  * @property-read \Motor\Backend\Models\User|null $eraser
  * @property-read \Motor\Backend\Models\User      $updater
- * @method static \Illuminate\Database\Eloquent\Builder|\Motor\Backend\Models\ConfigVariable filteredBy(\Motor\Core\Filter\Filter $filter, $column )
- * @method static \Illuminate\Database\Eloquent\Builder|\Motor\Backend\Models\ConfigVariable filteredByMultiple(\Motor\Core\Filter\Filter $filter )
+ * @method static \Illuminate\Database\Eloquent\Builder|\Motor\Backend\Models\ConfigVariable filteredBy(\Motor\Core\Filter\Filter $filter, $column)
+ * @method static \Illuminate\Database\Eloquent\Builder|\Motor\Backend\Models\ConfigVariable filteredByMultiple(\Motor\Core\Filter\Filter $filter)
  * @method static \Illuminate\Database\Eloquent\Builder|\Motor\Backend\Models\ConfigVariable newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|\Motor\Backend\Models\ConfigVariable newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|\Motor\Backend\Models\ConfigVariable query()
- * @method static \Illuminate\Database\Eloquent\Builder|\Motor\Backend\Models\ConfigVariable search( $q, $full_text = false )
- * @method static \Illuminate\Database\Eloquent\Builder|\Motor\Backend\Models\ConfigVariable whereCreatedAt( $value )
- * @method static \Illuminate\Database\Eloquent\Builder|\Motor\Backend\Models\ConfigVariable whereCreatedBy( $value )
- * @method static \Illuminate\Database\Eloquent\Builder|\Motor\Backend\Models\ConfigVariable whereDeletedBy( $value )
- * @method static \Illuminate\Database\Eloquent\Builder|\Motor\Backend\Models\ConfigVariable whereGroup( $value )
- * @method static \Illuminate\Database\Eloquent\Builder|\Motor\Backend\Models\ConfigVariable whereId( $value )
- * @method static \Illuminate\Database\Eloquent\Builder|\Motor\Backend\Models\ConfigVariable whereName( $value )
- * @method static \Illuminate\Database\Eloquent\Builder|\Motor\Backend\Models\ConfigVariable wherePackage( $value )
- * @method static \Illuminate\Database\Eloquent\Builder|\Motor\Backend\Models\ConfigVariable whereUpdatedAt( $value )
- * @method static \Illuminate\Database\Eloquent\Builder|\Motor\Backend\Models\ConfigVariable whereUpdatedBy( $value )
- * @method static \Illuminate\Database\Eloquent\Builder|\Motor\Backend\Models\ConfigVariable whereValue( $value )
+ * @method static \Illuminate\Database\Eloquent\Builder|\Motor\Backend\Models\ConfigVariable search($q, $full_text = false)
+ * @method static \Illuminate\Database\Eloquent\Builder|\Motor\Backend\Models\ConfigVariable whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\Motor\Backend\Models\ConfigVariable whereCreatedBy($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\Motor\Backend\Models\ConfigVariable whereDeletedBy($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\Motor\Backend\Models\ConfigVariable whereGroup($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\Motor\Backend\Models\ConfigVariable whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\Motor\Backend\Models\ConfigVariable whereName($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\Motor\Backend\Models\ConfigVariable wherePackage($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\Motor\Backend\Models\ConfigVariable whereUpdatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\Motor\Backend\Models\ConfigVariable whereUpdatedBy($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\Motor\Backend\Models\ConfigVariable whereValue($value)
  * @mixin \Eloquent
  */
 class ConfigVariable extends Model
@@ -66,7 +66,8 @@ class ConfigVariable extends Model
         'package',
         'group',
         'name',
-        'value'
+        'value',
+        'is_invisible',
     ];
 
     /**
