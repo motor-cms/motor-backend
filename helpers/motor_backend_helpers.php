@@ -5,10 +5,14 @@ use Motor\Backend\Models\ConfigVariable;
 
 function merge_local_config_with_db_configuration_variables($package)
 {
-    foreach (ConfigVariable::where('package', $package)->get() as $configVariable) {
-        $config = app('config')->get($configVariable->group, []);
-        app('config')->set($configVariable->group,
-            array_replace_recursive($config, [ $configVariable->name => $configVariable->value ]));
+    try {
+        foreach (ConfigVariable::where('package', $package)->get() as $configVariable) {
+            $config = app('config')->get($configVariable->group, []);
+            app('config')->set($configVariable->group,
+                array_replace_recursive($config, [ $configVariable->name => $configVariable->value ]));
+        }
+    } catch(\Exception $e) {
+        // Do nothing if the database doesn't exist
     }
 }
 
