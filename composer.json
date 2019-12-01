@@ -32,7 +32,7 @@
     "nstapelbroek/culpa": "^4.0",
     "symfony/intl": "~4.2",
     "kris/laravel-form-builder": "^1.21",
-    "spatie/laravel-medialibrary": "^7.12",
+    "spatie/laravel-medialibrary": "^7.14",
     "barryvdh/laravel-cors": "^0.11",
     "spatie/laravel-permission": "^3.0",
     "kalnoy/nestedset": "^5.0",
@@ -50,17 +50,13 @@
     "beyondcode/laravel-dump-server": "^1.0",
     "symfony/css-selector": "~4.2",
     "symfony/dom-crawler": "~4.2",
-    "orchestra/testbench": "~3.8",
+    "orchestra/testbench-dusk": "^4.0",
     "laravel/dusk": "~5.0"
   },
   "repositories": [
     {
       "type": "vcs",
       "url": "https://github.com/jmarcher/culpa-laravel-5"
-    },
-    {
-      "type": "vcs",
-      "url": "https://github.com/dfox288/StringBladeCompiler"
     }
   ],
   "autoload": {
