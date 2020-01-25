@@ -2,6 +2,7 @@
 
 namespace Motor\Backend\Forms\Fields;
 
+use Illuminate\Support\Arr;
 use Illuminate\Support\Str;
 use Kris\LaravelFormBuilder\Fields\InputType;
 use Motor\Media\Transformers\FileTransformer;
@@ -40,6 +41,9 @@ class FileAssociationType extends InputType
                 $data = fractal($fileAssociation->file, new FileTransformer())->toArray();
 
                 $options['file_association'] = json_encode($data['data']);
+                $options['position'] = Arr::get($fileAssociation->custom_properties, 'position');
+                $options['description'] = Arr::get($fileAssociation->custom_properties, 'description');
+                $options['enlarge'] = Arr::get($fileAssociation->custom_properties, 'enlarge');
             }
         }
 

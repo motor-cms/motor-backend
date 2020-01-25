@@ -10,6 +10,23 @@
                    :value="options.file_association">
             <motor-backend-file-association :name="options.real_name"
                                             :file="options.file_association"></motor-backend-file-association>
+            <div class="form-group">
+                <label>Position</label>
+                <select v-model="options.position">
+                    <option value="top">Top</option>
+                    <option value="right">Right</option>
+                    <option value="bottom">Bottom</option>
+                    <option value="left">Left</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label>Enlarge</label>
+                <input type="checkbox" v-model="options.enlarge">
+            </div>
+            <div class="form-group">
+                <label>Description</label>
+                <input type="text" v-model="options.description">
+            </div>
         </template>
     </div>
 </template>
@@ -28,7 +45,6 @@
         methods: {
         },
         mounted: function () {
-
             this.$eventHub.$on('motor-backend:file-association-value-change-'+this.options.real_name, (newValue) => {
                 this.$emit('input', newValue);
             });
