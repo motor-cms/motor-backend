@@ -46,6 +46,7 @@
         },
         mounted: function () {
             this.$eventHub.$on('motor-backend:file-association-value-change-'+this.options.real_name, (newValue) => {
+                console.log("value change!");
                 this.$emit('input', newValue);
             });
         },
