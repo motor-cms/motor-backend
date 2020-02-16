@@ -52,7 +52,7 @@
         data: function () {
             return {
                 stencilProps: {
-                    aspectRatio: 16 / 9,
+                    aspectRatio: 0,
                     wheelResize: false,
                 },
                 minWidth: 100,
