@@ -27,6 +27,7 @@
                 <label>Description</label>
                 <input type="text" v-model="options.description">
             </div>
+            <input type="hidden" v-model="options.crop">
         </template>
     </div>
 </template>
@@ -46,9 +47,12 @@
         },
         mounted: function () {
             this.$eventHub.$on('motor-backend:file-association-value-change-'+this.options.real_name, (newValue) => {
-                console.log("value change!");
                 this.$emit('input', newValue);
             });
+            this.$eventHub.$on('motor-backend:file-association-crop-area-change-'+this.options.real_name, (newValue) => {
+                this.options.crop = newValue;
+            });
+            this.$eventHub.$emit('motor-backend:file-association-crop-area-set-'+this.options.real_name, this.options.crop);
         },
     }
 </script>

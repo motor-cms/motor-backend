@@ -44,6 +44,7 @@ class FileAssociationType extends InputType
                 $options['position'] = Arr::get($fileAssociation->custom_properties, 'position');
                 $options['description'] = Arr::get($fileAssociation->custom_properties, 'description');
                 $options['enlarge'] = Arr::get($fileAssociation->custom_properties, 'enlarge');
+                $options['crop'] = Arr::get($fileAssociation->custom_properties, 'crop');
             }
         }
 

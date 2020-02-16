@@ -52,7 +52,8 @@
         data: function () {
             return {
                 stencilProps: {
-                    aspectRatio: 16/9
+                    aspectRatio: 16 / 9,
+                    wheelResize: false,
                 },
                 minWidth: 100,
                 minHeight: 100,
@@ -72,17 +73,29 @@
         },
         methods: {
             changeAspect(ratio) {
-                console.log("change");
                 this.stencilProps.aspectRatio = ratio;
                 this.minHeight = 20;
                 this.minWidth = 20;
-                console.log(this.$refs);
                 Vue.nextTick(() => {
                     this.$refs.cropper[0].resetCoordinates();
                 });
             },
+            normalizeNumber(n1, n2, decimals) {
+                if (n2 === 0) {
+                    return 0;
+                }
+
+                return Number((n1 / n2).toFixed(decimals));
+            },
             changeImage(event) {
-                console.log(event);
+                const imageSize = this.$refs.cropper[0]._data.imageSize;
+                const coordinates = {
+                    x1: this.normalizeNumber(event.coordinates.left, imageSize.width, 10),
+                    x2: this.normalizeNumber(event.coordinates.width, imageSize.width, 10),
+                    y1: this.normalizeNumber(event.coordinates.top, imageSize.height, 10),
+                    y2: this.normalizeNumber(event.coordinates.height, imageSize.height, 10)
+                };
+                this.$eventHub.$emit('motor-backend:file-association-crop-area-change-' + this.name, coordinates);
             },
             populateFiles(file) {
                 if (file !== undefined) {
@@ -121,6 +134,24 @@
         mounted: function () {
             this.$eventHub.$on('motor-cms:clear-data', () => {
                 this.clearData();
+            });
+            this.$eventHub.$on('motor-backend:file-association-crop-area-set-' + this.name, (normalizedCoordinates) => {
+                console.log("received coordinates");
+                console.log(normalizedCoordinates);
+                setTimeout(() => {
+                    const imageSize = this.$refs.cropper[0]._data.imageSize;
+                    const coordinates = {
+                        left: normalizedCoordinates.x1 * imageSize.width,
+                        top: normalizedCoordinates.y1 * imageSize.height,
+                        width: normalizedCoordinates.x2 * imageSize.width,
+                        height: normalizedCoordinates.y2 * imageSize.height
+                    };
+                    this.stencilProps.aspectRatio = 0;
+                    this.minHeight = 20;
+                    this.minWidth = 20;
+                    this.$refs.cropper[0].resetCoordinates();
+                    this.$refs.cropper[0].setCoordinates(coordinates);
+                }, 1000);
             });
             this.populateFiles(this.file);
         },
