@@ -35,7 +35,7 @@ Then you need to add a bunch of other service providers
         Culpa\CulpaServiceProvider::class,
         Kris\LaravelFormBuilder\FormBuilderServiceProvider::class,
         Spatie\MediaLibrary\MediaLibraryServiceProvider::class,
-        Barryvdh\Cors\ServiceProvider::class,
+        \Fruitcake\Cors\HandleCors::class,
         Fideloper\Proxy\TrustedProxyServiceProvider::class,
         Spatie\Permission\PermissionServiceProvider::class,
         Motor\Core\Providers\MotorServiceProvider::class,
