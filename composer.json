@@ -17,7 +17,7 @@
     "laravel/framework": "^7.0",
     "laravel/tinker": "^2.0",
     "motor-cms/motor-core": "0.10.*",
-    "wpb/string-blade-compiler": "dev-master",
+    "enbit/string-blade-compiler": "^4.0",
     "doctrine/dbal": "^2.10",
     "php-console/php-console": "^3.1",
     "guzzlehttp/guzzle": "^6.5",
@@ -54,10 +54,6 @@
     {
       "type": "vcs",
       "url": "https://github.com/jmarcher/culpa-laravel-5"
-    },
-    {
-      "type": "vcs",
-      "url": "https://github.com/iNtergrated/StringBladeCompiler"
     }
   ],
   "autoload": {
