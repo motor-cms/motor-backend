@@ -13,9 +13,6 @@
   ],
   "require": {
     "php": "^7.2.5",
-    "fideloper/proxy": "^4.0",
-    "laravel/framework": "^7.0",
-    "laravel/tinker": "^2.0",
     "motor-cms/motor-core": "0.10.*",
     "enbit/string-blade-compiler": "^4.0",
     "doctrine/dbal": "^2.10",
@@ -37,15 +34,9 @@
     "kalnoy/nestedset": "^5.0",
     "martinlindhe/laravel-vue-i18n-generator": "^0.1",
     "tightenco/ziggy": "^0.9",
-    "laravel/horizon": "^4.0",
-    "predis/predis": "^1.1"
+    "laravel/horizon": "^4.0"
   },
   "require-dev": {
-    "facade/ignition": "^2.0",
-    "fzaninotto/faker": "^1.9",
-    "mockery/mockery": "^1.0",
-    "nunomaduro/collision": "^4.1",
-    "phpunit/phpunit": "^8.5",
     "symfony/css-selector": "^5.0",
     "symfony/dom-crawler": "^5.0",
     "laravel/dusk": "^5.0"
