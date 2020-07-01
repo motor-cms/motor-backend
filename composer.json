@@ -26,7 +26,7 @@
     "intervention/imagecache": "^2.4",
     "league/glide-laravel": "^1.0",
     "lavary/laravel-menu": "^1.7",
-    "nstapelbroek/culpa": "dev-master",
+    "dfox288/culpa": "^7.0",
     "symfony/intl": "^5.0",
     "kris/laravel-form-builder": "^1.30",
     "spatie/laravel-medialibrary": "^7.19",
@@ -41,12 +41,6 @@
     "symfony/dom-crawler": "^5.0",
     "laravel/dusk": "^5.0"
   },
-  "repositories": [
-    {
-      "type": "vcs",
-      "url": "https://github.com/jmarcher/culpa-laravel-5"
-    }
-  ],
   "autoload": {
     "classmap": [
       "database"
