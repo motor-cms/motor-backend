@@ -3,7 +3,7 @@
 You can install this package via composer using this command:
 
 ```bash
-composer require dfox288/motor-backend
+composer require motor-cms/motor-backend
 ```
 
 Next, you must install the service provider:
