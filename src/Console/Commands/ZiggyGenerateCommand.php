@@ -1,6 +1,6 @@
 <?php
 
-namespace Motor\Backend;
+namespace Motor\Backend\Console\Commands;
 
 use Tightenco\Ziggy\CommandRouteGenerator;
 

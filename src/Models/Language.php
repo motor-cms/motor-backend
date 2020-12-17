@@ -2,7 +2,9 @@
 
 namespace Motor\Backend\Models;
 
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Motor\Backend\Database\Factories\LanguageFactory;
 use Motor\Core\Traits\Filterable;
 use Motor\Core\Traits\Searchable;
 
@@ -33,6 +35,7 @@ class Language extends Model
 {
     use Searchable;
     use Filterable;
+    use HasFactory;
 
     /**
      * Searchable columns for the searchable trait
@@ -51,4 +54,9 @@ class Language extends Model
         'english_name',
         'native_name',
     ];
+
+	protected static function newFactory()
+	{
+		return LanguageFactory::new();
+	}
 }

@@ -2,6 +2,8 @@
 
 namespace Motor\Backend\Models;
 
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Motor\Backend\Database\Factories\UserFactory;
 use Motor\Backend\Notifications\ResetPassword;
 use Illuminate\Notifications\Notifiable;
 use Motor\Core\Traits\Searchable;
@@ -72,11 +74,16 @@ class User extends Authenticatable implements HasMedia
     use Filterable;
     use Notifiable;
     use HasMediaTrait;
+    use HasFactory;
 
     protected $guard_name = 'web';
 
+	protected static function newFactory()
+	{
+		return UserFactory::new();
+	}
 
-    /**
+	/**
      * Send a password reset email to the user
      *
      * @param string $token

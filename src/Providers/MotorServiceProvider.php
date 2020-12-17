@@ -9,7 +9,7 @@ use Illuminate\Support\ServiceProvider;
 use Motor\Backend\Console\Commands\MotorCreatePermissionsCommand;
 use Motor\Backend\Console\Commands\MotorGenerateIncludeCommand;
 use Motor\Backend\Models\ConfigVariable;
-use Motor\Backend\ZiggyGenerateCommand;
+use Motor\Backend\Console\Commands\ZiggyGenerateCommand;
 
 /**
  * Class MotorServiceProvider

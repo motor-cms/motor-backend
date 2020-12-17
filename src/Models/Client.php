@@ -6,7 +6,9 @@ use Culpa\Traits\Blameable;
 use Culpa\Traits\CreatedBy;
 use Culpa\Traits\DeletedBy;
 use Culpa\Traits\UpdatedBy;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Motor\Backend\Database\Factories\ClientFactory;
 use Motor\Core\Traits\Filterable;
 use Motor\Core\Traits\Searchable;
 
@@ -65,6 +67,7 @@ class Client extends Model
     use Searchable;
     use Blameable, CreatedBy, UpdatedBy, DeletedBy;
     use Filterable;
+	use HasFactory;
 
     protected $blameable = [ 'created', 'updated', 'deleted' ];
 
@@ -94,4 +97,9 @@ class Client extends Model
         'contact_email',
         'description'
     ];
+
+	protected static function newFactory()
+	{
+		return ClientFactory::new();
+	}
 }
