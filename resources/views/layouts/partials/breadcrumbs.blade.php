@@ -1,5 +1,4 @@
-<!-- Breadcrumb -->
-<ol class="breadcrumb">
+<ol class="breadcrumb border-0 m-0">
     <li class="breadcrumb-item"><a href="{{url('backend/dashboard')}}">Dashboard</a></li>
 
     @if (isset($backendNavigation))

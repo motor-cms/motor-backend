@@ -5,61 +5,58 @@
     @include('motor-backend::layouts.partials.htmlheader')
 @show
 
-<body class="app header-fixed sidebar-fixed aside-menu-fixed sidebar-lg-show @if (isset($motorShowRightSidebar) && $motorShowRightSidebar == true) aside-menu-lg-show @endif">
+<body class="c-app">
 
-<header class="app-header navbar">
-    <button class="navbar-toggler sidebar-toggler d-lg-none mr-auto" type="button" data-toggle="sidebar-show">
-        <span class="navbar-toggler-icon"></span>
-    </button>
-    <a class="navbar-brand" href="#">
-        <img class="navbar-brand-full" src="{{asset(config('motor-backend-project.logo-small'))}}" width="89">
-        <img class="navbar-brand-minimized" src="{{asset(config('motor-backend-project.logo-small'))}}" width="30">
-    </a>
-    <button class="navbar-toggler sidebar-toggler d-md-down-none" type="button" data-toggle="sidebar-lg-show">
-        <span class="navbar-toggler-icon"></span>
-    </button>
-
-
-    @include('motor-backend::layouts.partials.mainheader')
-
-    <button class="navbar-toggler aside-menu-toggler d-md-down-none" type="button" data-toggle="aside-menu-lg-show">
-        <span class="navbar-toggler-icon"></span>
-    </button>
-
-</header>
-
-<div id="app" class="app-body">
-    <div class="sidebar">
-        <nav class="sidebar-nav">
-            @if (isset($backendNavigation))
-                <ul class="nav">
-                    @include('motor-backend::layouts.partials.navigation-items', array('items' => $backendNavigation->roots()))
-                </ul>
-            @endif
-        </nav>
-        <button class="sidebar-minimizer brand-minimizer" type="button"></button>
+<div class="c-sidebar c-sidebar-dark c-sidebar-fixed c-sidebar-lg-show" id="sidebar">
+    <div class="c-sidebar-brand d-lg-down-none">
+        <img class="c-sidebar-brand-full" src="{{asset(config('motor-backend-project.logo-white-cropped'))}}" width="89">
+        <img class="c-sidebar-brand-minimized" src="{{asset(config('motor-backend-project.logo-white-cropped'))}}" width="30">
     </div>
 
-    <!-- Main content -->
-    <main class="main">
+    @if (isset($backendNavigation))
+        <ul class="c-sidebar-nav ps">
+            @include('motor-backend::layouts.partials.navigation-items', array('items' => $backendNavigation->roots()))
+        </ul>
+    @endif
+    <button class="c-sidebar-minimizer c-class-toggler" type="button" data-target="_parent" data-class="c-sidebar-minimized"></button>
+</div>
 
-        @include('motor-backend::layouts.partials.breadcrumbs')
+<div id="app" class="c-wrapper c-fixed-components">
+    <header class="c-header c-header-light c-header-fixed c-header-with-subheader">
+        <button class="c-header-toggler c-class-toggler d-lg-none mfe-auto" type="button" data-target="#sidebar" data-class="c-sidebar-show">
+            <i class="fas fa-bars"></i>
+        </button>
+        <button class="c-header-toggler c-class-toggler mfs-3 d-md-down-none" type="button" data-target="#sidebar" data-class="c-sidebar-lg-show" responsive="true">
+            <i class="fas fa-bars"></i>
+        </button>
+        @include('motor-backend::layouts.partials.mainheader')
 
-        <div class="container-fluid">
-            @include('motor-backend::layouts.partials.contentheader')
-            @yield('main-content')
+        <div class="c-subheader px-3">
+            <!-- Breadcrumb -->
+            @include('motor-backend::layouts.partials.breadcrumbs')
         </div>
-        <!-- /.conainer-fluid -->
-    </main>
+    </header>
 
-    <aside class="aside-menu">
-        @yield('right-sidebar')
-    </aside>
+    <!-- Main content -->
+    <div class="c-body">
+        <main class="c-main">
+
+            <div class="container-fluid">
+                @include('motor-backend::layouts.partials.contentheader')
+                @yield('main-content')
+            </div>
+            <!-- /.conainer-fluid -->
+
+        </main>
+        @include('motor-backend::layouts.partials.footer')
+    </div>
+
+{{--    <aside class="aside-menu">--}}
+{{--        @yield('right-sidebar')--}}
+{{--    </aside>--}}
 
 
 </div>
-
-@include('motor-backend::layouts.partials.footer')
 
 @section('scripts')
     @include('motor-backend::layouts.partials.scripts')

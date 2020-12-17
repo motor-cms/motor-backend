@@ -39,7 +39,7 @@ class BackendNavigation
                     'roles'       => implode(',', $item['roles']),
                     'permissions' => implode(',', $item['permissions']),
                     'aliases'     => implode(',', Arr::get($item, 'aliases', []))
-                ])->nickname($item['slug'])->prepend('<i class="nav-icon ' . $item['icon'] . '"></i>');
+                ])->nickname($item['slug'])->prepend('<i class="c-sidebar-nav-icon ' . $item['icon'] . '"></i>');
                 //])->nickname($item['slug'])->prepend('<i class="nav-icon ' . $item['icon'] . '"></i> <span>')->append('</span>');
 
                 if (isset($item['items'])) {
@@ -57,8 +57,8 @@ class BackendNavigation
                                      'permissions' => implode(',', $subitem['permissions']),
                                      'aliases' => implode(',', Arr::get($subitem, 'aliases', []))
                                  ])
-                                 ->nickname($subitem['slug'])
-                                 ->prepend('<i class="nav-icon ' . $subitem['icon'] . '"></i>');
+                                 ->nickname($subitem['slug']);
+//                                 ->prepend('<i class="c-sidebar-nav-icon ' . $subitem['icon'] . '"></i>');
                         //->prepend('<i class="nav-icon ' . $subitem['icon'] . '"></i> <span>')
                             //    ->append('</span>');
                         } else {
