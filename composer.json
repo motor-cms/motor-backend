@@ -13,7 +13,7 @@
   ],
   "require": {
     "php": "^7.3",
-    "motor-cms/motor-core": "0.10.*",
+    "motor-cms/motor-core": "^1.0",
     "wpb/string-blade-compiler": "^6.0",
     "doctrine/dbal": "^2.10",
     "php-console/php-console": "^3.1",
