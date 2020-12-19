@@ -131,3 +131,11 @@ td.action-column a {
 .form-group .minicolors-panel {
   top: 35px;
 }
+
+section.content-header h4 {
+  padding-left: 0;
+  padding-right: 0;
+}
+.bg-secondary.c-sidebar, #sidebar-right > div.c-sidebar-brand > h5 {
+  color: #3c4b64 !important;
+}
