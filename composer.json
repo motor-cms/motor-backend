@@ -14,11 +14,12 @@
   "require": {
     "php": "^7.3",
     "motor-cms/motor-core": "^1.0",
+    "tightenco/ziggy": "^1.0",
     "wpb/string-blade-compiler": "^6.0",
     "doctrine/dbal": "^2.10",
     "php-console/php-console": "^3.1",
     "guzzlehttp/guzzle": "^7.0.1",
-    "barryvdh/laravel-ide-helper": "^2.7",
+    "barryvdh/laravel-ide-helper": "^2.9",
     "astrotomic/laravel-translatable": "^11.8",
     "laracasts/flash": "^3.0",
     "laravelcollective/html": "^6.1",
