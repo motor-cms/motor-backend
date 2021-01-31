@@ -12,7 +12,7 @@ Route::group([
     'middleware' => [ 'web' ],
     'namespace'  => 'Motor\Backend\Http\Controllers'
 ], static function () {
-    Auth::routes(config('motor-backend.routes.auth'));
+    Auth::routes(config('motor-backend.routes.auth', []));
     Route::get('password/change', 'Auth\ChangePasswordController@showChangeForm')->name('auth.change-password.index');
     Route::post('password/change', 'Auth\ChangePasswordController@change')->name('auth.change-password.store');
 });
