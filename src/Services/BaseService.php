@@ -517,7 +517,9 @@ abstract class BaseService
         foreach ($this->data as $key => $value) {
             if (preg_match('/delete_media_(.*)/', $key, $matches) == 1 && $value == 1) {
                 $media = $record->getMedia($collection);
-                if (count($media) > 0) {
+                $mediaItem = $media->where('id', $matches[1])->first();
+
+                if (! empty($mediaItem)) {
                     $record->deleteMedia($matches[1]);
                 }
             }
