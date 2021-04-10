@@ -17,7 +17,7 @@ return [
             'icon'        => 'fa fa-cogs',
             'route'       => null,
             'roles'       => [ 'SuperAdmin' ],
-            'permissions' => [ 'administration.rad' ],
+            'permissions' => [ 'administration.read' ],
             'items'       => [
                 100 => [
                     'slug'        => 'users',
