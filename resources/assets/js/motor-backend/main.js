@@ -33,7 +33,7 @@ require('@fortawesome/fontawesome-free/js/all');
  * and simple, leaving you to focus on building your next great project.
  */
 
-window.Vue = require('vue');
+window.Vue = require('vue').default;
 require('vue-resource');
 window.draggable = require('vuedraggable');
 
