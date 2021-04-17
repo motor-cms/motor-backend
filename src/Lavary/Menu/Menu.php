@@ -17,7 +17,7 @@ class Menu extends \Lavary\Menu\Menu
      *
      * @return \Lavary\Menu\Menu
      */
-    public function make($name, $callback)
+    public function make($name, $callback, array $options = [])
     {
         if (is_callable($callback)) {
             if (! array_key_exists($name, $this->menu)) {

@@ -9,11 +9,10 @@ use Illuminate\Notifications\Notifiable;
 use Motor\Core\Traits\Searchable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Motor\Core\Traits\Filterable;
+use Spatie\MediaLibrary\HasMedia;
+use Spatie\MediaLibrary\MediaCollections\Models\Media;
 use Spatie\Permission\Traits\HasRoles;
-use Spatie\MediaLibrary\Models\Media;
-use Spatie\MediaLibrary\HasMedia\HasMedia;
-use Spatie\MediaLibrary\HasMedia\HasMediaTrait;
-
+use Spatie\MediaLibrary\InteractsWithMedia;
 /**
  * Motor\Backend\Models\User
  *
@@ -73,7 +72,7 @@ class User extends Authenticatable implements HasMedia
     use HasRoles;
     use Filterable;
     use Notifiable;
-    use HasMediaTrait;
+    use InteractsWithMedia;
     use HasFactory;
 
     protected $guard_name = 'web';
@@ -100,7 +99,7 @@ class User extends Authenticatable implements HasMedia
     /**
      * @param Media|null $media
      */
-    public function registerMediaConversions(Media $media = null)
+    public function registerMediaConversions(Media $media = null): void
     {
         $this->addMediaConversion('thumb')->width(400)->height(400);
         $this->addMediaConversion('preview')->width(400)->height(400);

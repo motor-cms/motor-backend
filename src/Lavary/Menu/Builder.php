@@ -2,6 +2,8 @@
 
 namespace Motor\Backend\Lavary\Menu;
 
+use Illuminate\Support\Arr;
+
 /**
  * Class Builder
  * @package Motor\Backend\Lavary\Menu
@@ -19,7 +21,7 @@ class Builder extends \Lavary\Menu\Builder
      */
     public function add($title, $options = [])
     {
-        $id = isset($options['id']) ? $options['id'] : $this->id();
+        $id = Arr::get($options, 'id', $this->id());
 
         $item = new Item($this, $id, $title, $options);
 

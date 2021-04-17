@@ -4,7 +4,7 @@ namespace Motor\Backend\Transformers;
 
 use League\Fractal;
 use Motor\Backend\Models\User;
-use Spatie\MediaLibrary\HasMedia\HasMedia;
+use Spatie\MediaLibrary\HasMedia;
 
 /**
  * Class UserTransformer

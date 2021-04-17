@@ -3,7 +3,7 @@
 namespace Motor\Backend\Transformers;
 
 use League\Fractal;
-use Spatie\MediaLibrary\Models\Media;
+use Spatie\MediaLibrary\MediaCollections\Models\Media;
 
 /**
  * Class MediaTransformer

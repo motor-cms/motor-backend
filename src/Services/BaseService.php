@@ -17,7 +17,7 @@ use Motor\Backend\Forms\Fields\DatetimepickerType;
 use Motor\Core\Filter\Filter;
 use Motor\Core\Filter\Renderers\PerPageRenderer;
 use Motor\Core\Filter\Renderers\SearchRenderer;
-use Spatie\MediaLibrary\HasMedia\HasMedia;
+use Spatie\MediaLibrary\HasMedia;
 
 /**
  * Class BaseService
@@ -483,15 +483,14 @@ abstract class BaseService
     /**
      * Handles file uploads either with a UploadedFile object or a base64 encoded file
      *
-     * @param        $file
+     * @param $file
      * @param string $identifier
-     * @param null   $collection
-     * @param null   $record
-     * @param bool   $addToCollection
+     * @param null $collection
+     * @param null $record
+     * @param false $addToCollection
      * @return $this
-     * @throws \Spatie\MediaLibrary\Exceptions\FileCannotBeAdded\DiskDoesNotExist
-     * @throws \Spatie\MediaLibrary\Exceptions\FileCannotBeAdded\FileDoesNotExist
-     * @throws \Spatie\MediaLibrary\Exceptions\FileCannotBeAdded\FileIsTooBig
+     * @throws \Spatie\MediaLibrary\MediaCollections\Exceptions\FileDoesNotExist
+     * @throws \Spatie\MediaLibrary\MediaCollections\Exceptions\FileIsTooBig
      */
     public function uploadFile(
         $file,
@@ -520,8 +519,9 @@ abstract class BaseService
                 $mediaItem = $media->where('id', $matches[1])->first();
 
                 if (! empty($mediaItem)) {
-                    $record->deleteMedia($matches[1]);
-                }
+                    $mediaItem->delete();
+//                    $record->deleteMedia($matches[1]);
+                 }
             }
         }
 

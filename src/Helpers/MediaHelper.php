@@ -2,8 +2,7 @@
 
 namespace Motor\Backend\Helpers;
 
-use Spatie\MediaLibrary\HasMedia\HasMedia;
-
+use Spatie\MediaLibrary\HasMedia;
 /**
  * Class MediaHelper
  * @package Motor\Backend\Helpers
