@@ -72,9 +72,8 @@ class UserService extends BaseService
 
     private function syncRolesAndPermissions()
     {
-        $this->record->roles()->sync(Arr::get($this->data, 'roles', []));
+        $this->record->syncRoles(Arr::get($this->data, 'roles', []));
 
-
-        $this->record->permissions()->sync(Arr::get($this->data, 'permissions', []));
+        $this->record->syncPermissions(Arr::get($this->data, 'permissions', []));
     }
 }

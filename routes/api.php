@@ -5,7 +5,7 @@ Route::group([
     'prefix'     => 'api',
     'as'         => 'api.',
 ], static function () {
-    Route::resource('users', 'UsersController');
+    Route::apiResource('users', 'UsersController');
     Route::resource('clients', 'ClientsController');
     Route::resource('languages', 'LanguagesController');
     Route::resource('roles', 'RolesController');

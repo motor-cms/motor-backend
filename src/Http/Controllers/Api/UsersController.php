@@ -2,30 +2,31 @@
 
 namespace Motor\Backend\Http\Controllers\Api;
 
-use Motor\Backend\Http\Controllers\Controller;
+use Motor\Backend\Http\Controllers\ApiController;
 use Motor\Backend\Http\Requests\Backend\UserRequest;
+use Motor\Backend\Http\Resources\UserCollection;
+use Motor\Backend\Http\Resources\UserResource;
 use Motor\Backend\Models\User;
 use Motor\Backend\Services\UserService;
-use Motor\Backend\Transformers\UserTransformer;
 
 /**
  * Class UsersController
  * @package Motor\Backend\Http\Controllers\Api
  */
-class UsersController extends Controller
+class UsersController extends ApiController
 {
+
+    protected string $modelResource = 'user';
 
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\JsonResponse
+     * @return UserCollection
      */
     public function index()
     {
-        $result   = UserService::collection()->getPaginator();
-        $resource = $this->transformPaginator($result, UserTransformer::class, 'client,permissions,roles,files');
-
-        return $this->respondWithJson('User collection read', $resource);
+        $paginator = UserService::collection()->getPaginator();
+        return (new UserCollection($paginator))->additional(['message' => 'User collection read']);
     }
 
 
@@ -37,10 +38,8 @@ class UsersController extends Controller
      */
     public function store(UserRequest $request)
     {
-        $result   = UserService::create($request)->getResult();
-        $resource = $this->transformItem($result, UserTransformer::class, 'client,permissions,roles,files');
-
-        return $this->respondWithJson('User created', $resource);
+        $result = UserService::create($request)->getResult();
+        return (new UserResource($result))->additional(['message' => 'User created'])->response()->setStatusCode(201);
     }
 
 
@@ -48,14 +47,12 @@ class UsersController extends Controller
      * Display the specified resource.
      *
      * @param User $record
-     * @return \Illuminate\Http\JsonResponse
+     * @return UserResource
      */
     public function show(User $record)
     {
-        $result   = UserService::show($record)->getResult();
-        $resource = $this->transformItem($result, UserTransformer::class, 'client,permissions,roles,files');
-
-        return $this->respondWithJson('User read', $resource);
+        $result = UserService::show($record)->getResult();
+        return (new UserResource($result))->additional(['message' => 'User read']);
     }
 
 
@@ -63,15 +60,13 @@ class UsersController extends Controller
      * Update the specified resource in storage.
      *
      * @param UserRequest $request
-     * @param User        $record
-     * @return \Illuminate\Http\JsonResponse
+     * @param User $record
+     * @return UserResource
      */
     public function update(UserRequest $request, User $record)
     {
-        $result   = UserService::update($record, $request)->getResult();
-        $resource = $this->transformItem($result, UserTransformer::class, 'client,permissions,roles,files');
-
-        return $this->respondWithJson('User updated', $resource);
+        $result = UserService::update($record, $request)->getResult();
+        return (new UserResource($result))->additional(['message' => 'User updated']);
     }
 
 
@@ -86,9 +81,8 @@ class UsersController extends Controller
         $result = UserService::delete($record)->getResult();
 
         if ($result) {
-            return $this->respondWithJson('User deleted', [ 'success' => true ]);
+            return response()->json(['message' => 'User deleted']);
         }
-
-        return $this->respondWithJson('User NOT deleted', [ 'success' => false ]);
+        return response()->json(['message' => 'Problem deleting user'], 404);
     }
 }

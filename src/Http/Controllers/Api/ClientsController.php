@@ -2,30 +2,31 @@
 
 namespace Motor\Backend\Http\Controllers\Api;
 
-use Motor\Backend\Http\Controllers\Controller;
+use Motor\Backend\Http\Controllers\ApiController;
 use Motor\Backend\Http\Requests\Backend\ClientRequest;
+use Motor\Backend\Http\Resources\ClientCollection;
+use Motor\Backend\Http\Resources\ClientResource;
 use Motor\Backend\Models\Client;
 use Motor\Backend\Services\ClientService;
-use Motor\Backend\Transformers\ClientTransformer;
 
 /**
  * Class ClientsController
  * @package Motor\Backend\Http\Controllers\Api
  */
-class ClientsController extends Controller
+class ClientsController extends ApiController
 {
+
+    protected string $modelResource = 'client';
 
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\JsonResponse
+     * @return ClientCollection
      */
     public function index()
     {
         $paginator = ClientService::collection()->getPaginator();
-        $resource  = $this->transformPaginator($paginator, ClientTransformer::class);
-
-        return $this->respondWithJson('Client collection read', $resource);
+        return (new ClientCollection($paginator))->additional(['message' => 'Client collection read']);
     }
 
 
@@ -37,10 +38,8 @@ class ClientsController extends Controller
      */
     public function store(ClientRequest $request)
     {
-        $result   = ClientService::create($request)->getResult();
-        $resource = $this->transformItem($result, ClientTransformer::class);
-
-        return $this->respondWithJson('Client created', $resource);
+        $result = ClientService::create($request)->getResult();
+        return (new ClientResource($result))->additional(['message' => 'Client created'])->response()->setStatusCode(201);
     }
 
 
@@ -48,14 +47,12 @@ class ClientsController extends Controller
      * Display the specified resource.
      *
      * @param Client $record
-     * @return \Illuminate\Http\JsonResponse
+     * @return ClientResource
      */
     public function show(Client $record)
     {
-        $result   = ClientService::show($record)->getResult();
-        $resource = $this->transformItem($result, ClientTransformer::class);
-
-        return $this->respondWithJson('Client read', $resource);
+        $result = ClientService::show($record)->getResult();
+        return (new ClientResource($result))->additional(['message' => 'Client read']);
     }
 
 
@@ -63,15 +60,13 @@ class ClientsController extends Controller
      * Update the specified resource in storage.
      *
      * @param ClientRequest $request
-     * @param Client        $record
-     * @return \Illuminate\Http\JsonResponse
+     * @param Client $record
+     * @return ClientResource
      */
     public function update(ClientRequest $request, Client $record)
     {
-        $result   = ClientService::update($record, $request)->getResult();
-        $resource = $this->transformItem($result, ClientTransformer::class);
-
-        return $this->respondWithJson('Client updated', $resource);
+        $result = ClientService::update($record, $request)->getResult();
+        return (new ClientResource($result))->additional(['message' => 'Client updated']);
     }
 
 
@@ -86,9 +81,8 @@ class ClientsController extends Controller
         $result = ClientService::delete($record)->getResult();
 
         if ($result) {
-            return $this->respondWithJson('Client deleted', [ 'success' => true ]);
+            return response()->json(['message' => 'Client deleted']);
         }
-
-        return $this->respondWithJson('Client NOT deleted', [ 'success' => false ]);
+        return response()->json(['message' => 'Problem deleting Client'], 404);
     }
 }

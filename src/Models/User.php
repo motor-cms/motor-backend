@@ -13,6 +13,7 @@ use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\MediaCollections\Models\Media;
 use Spatie\Permission\Traits\HasRoles;
 use Spatie\MediaLibrary\InteractsWithMedia;
+
 /**
  * Motor\Backend\Models\User
  *
@@ -46,24 +47,24 @@ use Spatie\MediaLibrary\InteractsWithMedia;
  *                    $permissions
  * @property-read \Illuminate\Database\Eloquent\Collection|\Spatie\Permission\Models\Role[]
  *                    $roles
- * @method static \Illuminate\Database\Eloquent\Builder|\Motor\Backend\Models\User filteredBy(\Motor\Core\Filter\Filter $filter, $column )
- * @method static \Illuminate\Database\Eloquent\Builder|\Motor\Backend\Models\User filteredByMultiple(\Motor\Core\Filter\Filter $filter )
+ * @method static \Illuminate\Database\Eloquent\Builder|\Motor\Backend\Models\User filteredBy(\Motor\Core\Filter\Filter $filter, $column)
+ * @method static \Illuminate\Database\Eloquent\Builder|\Motor\Backend\Models\User filteredByMultiple(\Motor\Core\Filter\Filter $filter)
  * @method static \Illuminate\Database\Eloquent\Builder|\Motor\Backend\Models\User newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|\Motor\Backend\Models\User newQuery()
- * @method static \Illuminate\Database\Eloquent\Builder|\Motor\Backend\Models\User permission( $permissions )
+ * @method static \Illuminate\Database\Eloquent\Builder|\Motor\Backend\Models\User permission($permissions)
  * @method static \Illuminate\Database\Eloquent\Builder|\Motor\Backend\Models\User query()
- * @method static \Illuminate\Database\Eloquent\Builder|\Motor\Backend\Models\User role( $roles, $guard = null )
- * @method static \Illuminate\Database\Eloquent\Builder|\Motor\Backend\Models\User search( $q, $full_text = false )
- * @method static \Illuminate\Database\Eloquent\Builder|\Motor\Backend\Models\User whereApiToken( $value )
- * @method static \Illuminate\Database\Eloquent\Builder|\Motor\Backend\Models\User whereClientId( $value )
- * @method static \Illuminate\Database\Eloquent\Builder|\Motor\Backend\Models\User whereCreatedAt( $value )
- * @method static \Illuminate\Database\Eloquent\Builder|\Motor\Backend\Models\User whereEmail( $value )
- * @method static \Illuminate\Database\Eloquent\Builder|\Motor\Backend\Models\User whereId( $value )
- * @method static \Illuminate\Database\Eloquent\Builder|\Motor\Backend\Models\User whereName( $value )
- * @method static \Illuminate\Database\Eloquent\Builder|\Motor\Backend\Models\User wherePassword( $value )
- * @method static \Illuminate\Database\Eloquent\Builder|\Motor\Backend\Models\User wherePasswordLastChangedAt( $value )
- * @method static \Illuminate\Database\Eloquent\Builder|\Motor\Backend\Models\User whereRememberToken( $value )
- * @method static \Illuminate\Database\Eloquent\Builder|\Motor\Backend\Models\User whereUpdatedAt( $value )
+ * @method static \Illuminate\Database\Eloquent\Builder|\Motor\Backend\Models\User role($roles, $guard = null)
+ * @method static \Illuminate\Database\Eloquent\Builder|\Motor\Backend\Models\User search($q, $full_text = false)
+ * @method static \Illuminate\Database\Eloquent\Builder|\Motor\Backend\Models\User whereApiToken($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\Motor\Backend\Models\User whereClientId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\Motor\Backend\Models\User whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\Motor\Backend\Models\User whereEmail($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\Motor\Backend\Models\User whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\Motor\Backend\Models\User whereName($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\Motor\Backend\Models\User wherePassword($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\Motor\Backend\Models\User wherePasswordLastChangedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\Motor\Backend\Models\User whereRememberToken($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\Motor\Backend\Models\User whereUpdatedAt($value)
  * @mixin \Eloquent
  */
 class User extends Authenticatable implements HasMedia
@@ -77,12 +78,12 @@ class User extends Authenticatable implements HasMedia
 
     protected $guard_name = 'web';
 
-	protected static function newFactory()
-	{
-		return UserFactory::new();
-	}
+    protected static function newFactory()
+    {
+        return UserFactory::new();
+    }
 
-	/**
+    /**
      * Send a password reset email to the user
      *
      * @param string $token
@@ -101,17 +102,20 @@ class User extends Authenticatable implements HasMedia
      */
     public function registerMediaConversions(Media $media = null): void
     {
-        $this->addMediaConversion('thumb')->width(400)->height(400);
-        $this->addMediaConversion('preview')->width(400)->height(400);
+        $this->addMediaConversion('thumb')
+             ->width(400)
+             ->height(400);
+        $this->addMediaConversion('preview')
+             ->width(400)
+             ->height(400);
     }
-
 
     /**
      * Searchable columns for the searchable trait
      *
      * @var array
      */
-    protected $searchableColumns = [ 'name', 'email' ];
+    protected $searchableColumns = ['name', 'email'];
 
     /**
      * The attributes that are mass assignable.
@@ -123,7 +127,7 @@ class User extends Authenticatable implements HasMedia
         'name',
         'email',
         'password',
-        'api_token'
+        'api_token',
     ];
 
     /**
@@ -135,7 +139,6 @@ class User extends Authenticatable implements HasMedia
         'password',
         'remember_token',
     ];
-
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo

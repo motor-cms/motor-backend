@@ -2,42 +2,38 @@
 
 namespace Motor\Backend\Http\Controllers\Api;
 
+use Illuminate\Support\Facades\Auth;
 use Motor\Backend\Http\Requests\Backend\ProfileEditRequest;
-use Motor\Backend\Http\Controllers\Controller;
-use Auth;
+use Motor\Backend\Http\Controllers\ApiController;
 use Motor\Backend\Services\ProfileEditService;
-use Motor\Backend\Transformers\UserTransformer;
+use Motor\Backend\Http\Resources\UserResource;
 
 /**
  * Class ProfileEditController
  * @package Motor\Backend\Http\Controllers\Api
  */
-class ProfileEditController extends Controller
+class ProfileEditController extends ApiController
 {
 
     /**
      * Update the specified resource in storage.
      *
-     * @param ProfileEditRequest $request
-     * @return \Illuminate\Http\JsonResponse
+     * @param \Motor\Backend\Http\Requests\Backend\ProfileEditRequest $request
+     * @return \Motor\Backend\Http\Resources\UserResource
      */
     public function update(ProfileEditRequest $request)
     {
         $result   = ProfileEditService::update(Auth::user(), $request)->getResult();
-        $resource = $this->transformItem($result, UserTransformer::class, 'client,permissions,roles,files');
-
-        return $this->respondWithJson('Profile updated', $resource);
+        return (new UserResource($result))->additional(['message' => 'Profile updated']);
     }
 
 
     /**
-     * @return \Illuminate\Http\JsonResponse
+     * @return \Motor\Backend\Http\Resources\UserResource
      */
     public function me()
     {
         $result   = ProfileEditService::show(Auth::user())->getResult();
-        $resource = $this->transformItem($result, UserTransformer::class, 'client,permissions,roles,files');
-
-        return $this->respondWithJson('Profile read', $resource);
+        return (new UserResource($result))->additional(['message' => 'Profile read']);
     }
 }
