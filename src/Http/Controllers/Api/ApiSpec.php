@@ -33,6 +33,18 @@ namespace App\Http\Controllers\Api;
 /**
  * @OA\Schema(
  *   schema="AccessDenied",
+ *   type="json",
+ *   example={"error": "Unauthenticated"},
+ *   description="The user is not authorized to make this request"
+ * )
+ */
+
+/**
+ * @OA\Schema(
+ *   schema="NotFound",
+ *   type="json",
+ *   example={"message": "Record not found"},
+ *   description="The record was not found in the database"
  * )
  */
 
@@ -118,8 +130,8 @@ namespace App\Http\Controllers\Api;
  *         property="active",
  *         type="boolean",
  *         example="false"
- *       ),
- *     ),
+ *       )
+ *     )
  *   )
  * )
  */

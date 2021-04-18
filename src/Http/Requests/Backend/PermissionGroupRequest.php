@@ -5,26 +5,21 @@ namespace Motor\Backend\Http\Requests\Backend;
 use Motor\Backend\Http\Requests\Request;
 
 /**
- * Class RoleRequest
+ * Class PermissionRequest
+ *
  * @package Motor\Backend\Http\Requests\Backend
  */
-class RoleRequest extends Request
+class PermissionGroupRequest extends Request
 {
-
     /**
      * @OA\Schema(
-     *   schema="RoleRequest",
+     *   schema="PermissionGroupRequest",
      *   @OA\Property(
      *     property="name",
      *     type="string",
-     *     example="Administrator"
+     *     example="administration"
      *   ),
-     *   @OA\Property(
-     *     property="guard_name",
-     *     type="string",
-     *     example="web"
-     *   ),
-     *   required={"name", "guard_name"},
+     *   required={"name"},
      * )
      */
 
@@ -38,7 +33,6 @@ class RoleRequest extends Request
         return true;
     }
 
-
     /**
      * Get the validation rules that apply to the request.
      *
@@ -47,7 +41,7 @@ class RoleRequest extends Request
     public function rules()
     {
         return [
-            'name' => 'required'
+            'name' => 'required',
         ];
     }
 }

@@ -7,17 +7,17 @@ use Illuminate\Http\Resources\Json\JsonResource;
 /**
  * @OA\Schema(
  *   schema="RoleResource",
- *       @OA\Property(
- *         property="name",
- *         type="string",
- *         example="Administrator"
- *       ),
- *       @OA\Property(
- *         property="guard_name",
- *         type="string",
- *         example="web"
- *       )
- *     )
+ *   @OA\Property(
+ *     property="name",
+ *     type="string",
+ *     example="Administrator"
+ *   ),
+ *   @OA\Property(
+ *     property="guard_name",
+ *     type="string",
+ *     example="web"
+ *   )
+ * )
  */
 
 class RoleResource extends JsonResource

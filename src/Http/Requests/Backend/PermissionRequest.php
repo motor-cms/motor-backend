@@ -6,10 +6,27 @@ use Motor\Backend\Http\Requests\Request;
 
 /**
  * Class PermissionRequest
+ *
  * @package Motor\Backend\Http\Requests\Backend
  */
 class PermissionRequest extends Request
 {
+    /**
+     * @OA\Schema(
+     *   schema="PermissionRequest",
+     *   @OA\Property(
+     *     property="name",
+     *     type="string",
+     *     example="dashboard.read"
+     *   ),
+     *   @OA\Property(
+     *     property="guard_name",
+     *     type="string",
+     *     example="web"
+     *   ),
+     *   required={"name", "guard_name"},
+     * )
+     */
 
     /**
      * Determine if the user is authorized to make this request.
@@ -21,7 +38,6 @@ class PermissionRequest extends Request
         return true;
     }
 
-
     /**
      * Get the validation rules that apply to the request.
      *
@@ -30,7 +46,7 @@ class PermissionRequest extends Request
     public function rules()
     {
         return [
-            'name' => 'required'
+            'name' => 'required',
         ];
     }
 }

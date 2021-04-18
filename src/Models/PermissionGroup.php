@@ -50,4 +50,12 @@ class PermissionGroup extends Model
         'name',
         'sort_position'
     ];
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function permissions()
+    {
+        return $this->hasMany(config('motor-backend.models.permission'), 'permission_group_id');
+    }
 }

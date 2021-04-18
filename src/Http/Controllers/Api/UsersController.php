@@ -23,53 +23,48 @@ class UsersController extends ApiController
      *   tags={"UsersController"},
      *   path="/api/users",
      *   summary="Get user collection",
-     *     @OA\RequestBody(
-     *         @OA\MediaType(
-     *             mediaType="application/json",
-     *         )
-     *     ),
-     *     @OA\Parameter(
-     *       @OA\Schema(type="string"),
-     *       in="query",
-     *       allowReserved=true,
-     *       name="api_token",
-     *       parameter="api_token",
-     *       description="Personal api_token of the user"
-     *     ),
+     *   @OA\Parameter(
+     *     @OA\Schema(type="string"),
+     *     in="query",
+     *     allowReserved=true,
+     *     name="api_token",
+     *     parameter="api_token",
+     *     description="Personal api_token of the user"
+     *   ),
      *   @OA\Response(
      *     response=200,
      *     description="Success",
-     *      @OA\JsonContent(
-     *        @OA\Property(
-     *          property="data",
-     *          type="array",
-     *          @OA\Items(ref="#/components/schemas/UserResource")
-     *        ),
-     *        @OA\Property(
-     *          property="meta",
-     *          ref="#/components/schemas/PaginationMeta"
-     *        ),
-     *        @OA\Property(
-     *          property="links",
-     *          ref="#/components/schemas/PaginationLinks"
-     *        ),
-     *        @OA\Property(
-     *          property="message",
-     *          type="string",
-     *          example="Collection read"
-     *        )
-     *      )
+     *     @OA\JsonContent(
+     *       @OA\Property(
+     *         property="data",
+     *         type="array",
+     *         @OA\Items(ref="#/components/schemas/UserResource")
+     *       ),
+     *       @OA\Property(
+     *         property="meta",
+     *         ref="#/components/schemas/PaginationMeta"
+     *       ),
+     *       @OA\Property(
+     *         property="links",
+     *         ref="#/components/schemas/PaginationLinks"
+     *       ),
+     *       @OA\Property(
+     *         property="message",
+     *         type="string",
+     *         example="Collection read"
+     *       )
+     *     )
      *   ),
      *   @OA\Response(
      *     response="403",
      *     description="Access denied",
      *     @OA\JsonContent(ref="#/components/schemas/AccessDenied"),
-     *   ),
+     *   )
      * )
      *
      * Display a listing of the resource.
      *
-     * @return UserCollection
+     * @return \Motor\Backend\Http\Resources\UserCollection
      */
     public function index()
     {
@@ -80,10 +75,53 @@ class UsersController extends ApiController
     }
 
     /**
+     * @OA\Post (
+     *   tags={"UsersController"},
+     *   path="/api/users",
+     *   summary="Create new user",
+     *   @OA\RequestBody(
+     *     @OA\JsonContent(ref="#/components/schemas/UserRequest")
+     *   ),
+     *   @OA\Parameter(
+     *     @OA\Schema(type="string"),
+     *     in="query",
+     *     allowReserved=true,
+     *     name="api_token",
+     *     parameter="api_token",
+     *     description="Personal api_token of the user"
+     *   ),
+     *   @OA\Response(
+     *     response=200,
+     *     description="Success",
+     *     @OA\JsonContent(
+     *       @OA\Property(
+     *         property="data",
+     *         type="object",
+     *         ref="#/components/schemas/UserResource"
+     *       ),
+     *       @OA\Property(
+     *         property="message",
+     *         type="string",
+     *         example="User created"
+     *       )
+     *     )
+     *   ),
+     *   @OA\Response(
+     *     response="403",
+     *     description="Access denied",
+     *     @OA\JsonContent(ref="#/components/schemas/AccessDenied"),
+     *   ),
+     *   @OA\Response(
+     *     response="404",
+     *     description="Not found",
+     *     @OA\JsonContent(ref="#/components/schemas/NotFound"),
+     *   )
+     * )
+     *
      * Store a newly created resource in storage.
      *
-     * @param UserRequest $request
-     * @return \Illuminate\Http\JsonResponse
+     * @param \Motor\Backend\Http\Requests\Backend\UserRequest $request
+     * @return \Illuminate\Http\JsonResponse|object
      */
     public function store(UserRequest $request)
     {
@@ -96,10 +134,57 @@ class UsersController extends ApiController
     }
 
     /**
+     * @OA\Get (
+     *   tags={"UsersController"},
+     *   path="/api/users/{user}",
+     *   summary="Get single user",
+     *   @OA\Parameter(
+     *     @OA\Schema(type="string"),
+     *     in="query",
+     *     allowReserved=true,
+     *     name="api_token",
+     *     parameter="api_token",
+     *     description="Personal api_token of the user"
+     *   ),
+     *   @OA\Parameter(
+     *     @OA\Schema(type="string"),
+     *     in="path",
+     *     name="user",
+     *     parameter="user",
+     *     description="User id"
+     *   ),
+     *   @OA\Response(
+     *     response=200,
+     *     description="Success",
+     *     @OA\JsonContent(
+     *       @OA\Property(
+     *         property="data",
+     *         type="object",
+     *         ref="#/components/schemas/UserResource"
+     *       ),
+     *       @OA\Property(
+     *         property="message",
+     *         type="string",
+     *         example="User read"
+     *       )
+     *     )
+     *   ),
+     *   @OA\Response(
+     *     response="403",
+     *     description="Access denied",
+     *     @OA\JsonContent(ref="#/components/schemas/AccessDenied"),
+     *   ),
+     *   @OA\Response(
+     *     response="404",
+     *     description="Not found",
+     *     @OA\JsonContent(ref="#/components/schemas/NotFound"),
+     *   )
+     * )
+     *
      * Display the specified resource.
      *
-     * @param User $record
-     * @return UserResource
+     * @param \Motor\Backend\Models\User $record
+     * @return \Motor\Backend\Http\Resources\UserResource
      */
     public function show(User $record)
     {
@@ -110,11 +195,61 @@ class UsersController extends ApiController
     }
 
     /**
+     * @OA\Put (
+     *   tags={"UsersController"},
+     *   path="/api/users/{user}",
+     *   summary="Update an existing user",
+     *   @OA\RequestBody(
+     *     @OA\JsonContent(ref="#/components/schemas/UserRequest")
+     *   ),
+     *   @OA\Parameter(
+     *     @OA\Schema(type="string"),
+     *     in="query",
+     *     allowReserved=true,
+     *     name="api_token",
+     *     parameter="api_token",
+     *     description="Personal api_token of the user"
+     *   ),
+     *   @OA\Parameter(
+     *     @OA\Schema(type="string"),
+     *     in="path",
+     *     name="user",
+     *     parameter="user",
+     *     description="User id"
+     *   ),
+     *   @OA\Response(
+     *     response=200,
+     *     description="Success",
+     *     @OA\JsonContent(
+     *       @OA\Property(
+     *         property="data",
+     *         type="object",
+     *         ref="#/components/schemas/UserResource"
+     *       ),
+     *       @OA\Property(
+     *         property="message",
+     *         type="string",
+     *         example="User updated"
+     *       )
+     *     )
+     *   ),
+     *   @OA\Response(
+     *     response="403",
+     *     description="Access denied",
+     *     @OA\JsonContent(ref="#/components/schemas/AccessDenied"),
+     *   ),
+     *   @OA\Response(
+     *     response="404",
+     *     description="Not found",
+     *     @OA\JsonContent(ref="#/components/schemas/NotFound"),
+     *   )
+     * )
+     *
      * Update the specified resource in storage.
      *
-     * @param UserRequest $request
-     * @param User $record
-     * @return UserResource
+     * @param \Motor\Backend\Http\Requests\Backend\UserRequest $request
+     * @param \Motor\Backend\Models\User $record
+     * @return \Motor\Backend\Http\Resources\UserResource
      */
     public function update(UserRequest $request, User $record)
     {
@@ -125,9 +260,62 @@ class UsersController extends ApiController
     }
 
     /**
+     * @OA\Delete (
+     *   tags={"UsersController"},
+     *   path="/api/users/{user}",
+     *   summary="Delete a user",
+     *   @OA\Parameter(
+     *     @OA\Schema(type="string"),
+     *     in="query",
+     *     allowReserved=true,
+     *     name="api_token",
+     *     parameter="api_token",
+     *     description="Personal api_token of the user"
+     *   ),
+     *   @OA\Parameter(
+     *     @OA\Schema(type="string"),
+     *     in="path",
+     *     name="user",
+     *     parameter="user",
+     *     description="User id"
+     *   ),
+     *   @OA\Response(
+     *     response=200,
+     *     description="Success",
+     *     @OA\JsonContent(
+     *       @OA\Property(
+     *         property="message",
+     *         type="string",
+     *         example="User deleted"
+     *       )
+     *     )
+     *   ),
+     *   @OA\Response(
+     *     response="403",
+     *     description="Access denied",
+     *     @OA\JsonContent(ref="#/components/schemas/AccessDenied"),
+     *   ),
+     *   @OA\Response(
+     *     response="404",
+     *     description="Not found",
+     *     @OA\JsonContent(ref="#/components/schemas/NotFound"),
+     *   ),
+     *   @OA\Response(
+     *     response="400",
+     *     description="Bad request",
+     *     @OA\JsonContent(
+     *       @OA\Property(
+     *         property="message",
+     *         type="string",
+     *         example="Problem deleting user"
+     *       )
+     *     )
+     *   )
+     * )
+     *
      * Remove the specified resource from storage.
      *
-     * @param User $record
+     * @param \Motor\Backend\Models\User $record
      * @return \Illuminate\Http\JsonResponse
      */
     public function destroy(User $record)
@@ -139,6 +327,6 @@ class UsersController extends ApiController
             return response()->json(['message' => 'User deleted']);
         }
 
-        return response()->json(['message' => 'Problem deleting user'], 404);
+        return response()->json(['message' => 'Problem deleting user'], 400);
     }
 }

@@ -15,20 +15,41 @@ class UserRequest extends Request
      * @OA\Schema(
      *   schema="UserRequest",
      *   @OA\Property(
+     *     property="client_id",
+     *     type="integer",
+     *     example="1"
+     *   ),
+     *   @OA\Property(
      *     property="name",
-     *     type="string"
+     *     type="string",
+     *     example="My beautiful name"
      *   ),
      *   @OA\Property(
      *     property="email",
      *     type="string",
-     *     description="Must be a RFC valid email address"
+     *     example="test@domain.com",
+     *     description="Must be a unique RFC valid email address"
      *   ),
      *   @OA\Property(
      *     property="password",
-     *     type="string"
+     *     type="string",
+     *     example="secret password"
+     *   ),
+     *   @OA\Property(
+     *     property="roles",
+     *     type="array",
+     *     @OA\Items(
+     *       ref="#/components/schemas/RoleRequest"
+     *     )
+     *   ),
+     *   @OA\Property(
+     *     property="permissions",
+     *     type="array",
+     *     @OA\Items(
+     *       ref="#/components/schemas/PermissionRequest"
+     *     )
      *   ),
      *   required={"name", "email", "password"},
-     *   example={"name": "Test user", "email": "a@b.de", "password": "secret"}
      * )
      */
 
