@@ -4,7 +4,6 @@ namespace Motor\Backend\Http\Controllers\Api;
 
 use Motor\Backend\Http\Controllers\ApiController;
 use Motor\Backend\Http\Requests\Backend\PermissionGroupRequest;
-use Motor\Backend\Http\Requests\Backend\PermissionRequest;
 use Motor\Backend\Http\Resources\PermissionGroupCollection;
 use Motor\Backend\Http\Resources\PermissionGroupResource;
 use Motor\Backend\Models\Permission;
@@ -18,7 +17,7 @@ use Motor\Backend\Services\PermissionGroupService;
  */
 class PermissionGroupsController extends ApiController
 {
-    protected string $modelResource = 'permission';
+    protected string $modelResource = 'permission_group';
 
     /**
      * @OA\Get (

@@ -2,93 +2,95 @@
 
 namespace Motor\Backend\Http\Controllers\Api;
 
-use Motor\Backend\Http\Controllers\Controller;
-use Motor\Backend\Models\ConfigVariable;
+use Motor\Backend\Http\Controllers\ApiController;
 use Motor\Backend\Http\Requests\Backend\ConfigVariableRequest;
+use Motor\Backend\Http\Resources\ConfigVariableCollection;
+use Motor\Backend\Http\Resources\ConfigVariableResource;
+use Motor\Backend\Models\ConfigVariable;
 use Motor\Backend\Services\ConfigVariableService;
-use Motor\Backend\Transformers\ConfigVariableTransformer;
 
 /**
  * Class ConfigVariablesController
+ *
  * @package Motor\Backend\Http\Controllers\Api
  */
-class ConfigVariablesController extends Controller
+class ConfigVariablesController extends ApiController
 {
+    protected string $modelResource = 'config_variable';
 
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\JsonResponse
+     * @return \Motor\Backend\Http\Resources\ConfigVariableCollection
      */
     public function index()
     {
-        $paginator = ConfigVariableService::collection()->getPaginator();
-        $resource  = $this->transformPaginator($paginator, ConfigVariableTransformer::class);
+        $paginator = ConfigVariableService::collection()
+                                          ->getPaginator();
 
-        return $this->respondWithJson('ConfigVariable collection read', $resource);
+        return (new ConfigVariableCollection($paginator))->additional(['message' => 'Config variable collection read']);
     }
-
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param ConfigVariableRequest $request
-     * @return \Illuminate\Http\JsonResponse
+     * @param \Motor\Backend\Http\Requests\Backend\ConfigVariableRequest $request
+     * @return \Illuminate\Http\JsonResponse|object
      */
     public function store(ConfigVariableRequest $request)
     {
-        $result   = ConfigVariableService::create($request)->getResult();
-        $resource = $this->transformItem($result, ConfigVariableTransformer::class);
+        $result = ConfigVariableService::create($request)
+                                       ->getResult();
 
-        return $this->respondWithJson('ConfigVariable created', $resource);
+        return (new ConfigVariableResource($result))->additional(['message' => 'Config variable created'])
+                                                    ->response()
+                                                    ->setStatusCode(201);
     }
-
 
     /**
      * Display the specified resource.
      *
-     * @param ConfigVariable $record
-     * @return \Illuminate\Http\JsonResponse
+     * @param \Motor\Backend\Models\ConfigVariable $record
+     * @return \Motor\Backend\Http\Resources\ConfigVariableResource
      */
     public function show(ConfigVariable $record)
     {
-        $result   = ConfigVariableService::show($record)->getResult();
-        $resource = $this->transformItem($result, ConfigVariableTransformer::class);
+        $result = ConfigVariableService::show($record)
+                                       ->getResult();
 
-        return $this->respondWithJson('ConfigVariable read', $resource);
+        return (new ConfigVariableResource($result))->additional(['message' => 'Config variable read']);
     }
-
 
     /**
      * Update the specified resource in storage.
      *
-     * @param ConfigVariableRequest $request
-     * @param ConfigVariable        $record
-     * @return \Illuminate\Http\JsonResponse
+     * @param \Motor\Backend\Http\Requests\Backend\ConfigVariableRequest $request
+     * @param \Motor\Backend\Models\ConfigVariable $record
+     * @return \Motor\Backend\Http\Resources\ConfigVariableResource
      */
     public function update(ConfigVariableRequest $request, ConfigVariable $record)
     {
-        $result   = ConfigVariableService::update($record, $request)->getResult();
-        $resource = $this->transformItem($result, ConfigVariableTransformer::class);
+        $result = ConfigVariableService::update($record, $request)
+                                       ->getResult();
 
-        return $this->respondWithJson('ConfigVariable updated', $resource);
+        return (new ConfigVariableResource($result))->additional(['message' => 'Config variable updated']);
     }
-
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param ConfigVariable $record
+     * @param \Motor\Backend\Models\ConfigVariable $record
      * @return \Illuminate\Http\JsonResponse
      */
     public function destroy(ConfigVariable $record)
     {
-        $result = ConfigVariableService::delete($record)->getResult();
+        $result = ConfigVariableService::delete($record)
+                                       ->getResult();
 
         if ($result) {
-            return $this->respondWithJson('ConfigVariable deleted', [ 'success' => true ]);
+            return response()->json(['message' => 'Config variable deleted']);
         }
 
-        return $this->respondWithJson('ConfigVariable NOT deleted', [ 'success' => false ]);
+        return response()->json(['message' => 'Problem deleting config variable'], 400);
     }
 }

@@ -2,93 +2,95 @@
 
 namespace Motor\Backend\Http\Controllers\Api;
 
-use Motor\Backend\Http\Controllers\Controller;
+use Motor\Backend\Http\Controllers\ApiController;
 use Motor\Backend\Http\Requests\Backend\EmailTemplateRequest;
+use Motor\Backend\Http\Resources\EmailTemplateCollection;
+use Motor\Backend\Http\Resources\EmailTemplateResource;
 use Motor\Backend\Models\EmailTemplate;
 use Motor\Backend\Services\EmailTemplateService;
-use Motor\Backend\Transformers\EmailTemplateTransformer;
 
 /**
  * Class EmailTemplatesController
+ *
  * @package Motor\Backend\Http\Controllers\Api
  */
-class EmailTemplatesController extends Controller
+class EmailTemplatesController extends ApiController
 {
+    protected string $modelResource = 'email_template';
 
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\JsonResponse
+     * @return \Motor\Backend\Http\Resources\EmailTemplateCollection
      */
     public function index()
     {
-        $paginator = EmailTemplateService::collection()->getPaginator();
-        $resource  = $this->transformPaginator($paginator, EmailTemplateTransformer::class, 'client,language');
+        $paginator = EmailTemplateService::collection()
+                                         ->getPaginator();
 
-        return $this->respondWithJson('Email template collection read', $resource);
+        return (new EmailTemplateCollection($paginator))->additional(['message' => 'Email template collection read']);
     }
-
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param EmailTemplateRequest $request
-     * @return \Illuminate\Http\JsonResponse
+     * @param \Motor\Backend\Http\Requests\Backend\EmailTemplateRequest $request
+     * @return \Illuminate\Http\JsonResponse|object
      */
     public function store(EmailTemplateRequest $request)
     {
-        $result   = EmailTemplateService::create($request)->getResult();
-        $resource = $this->transformItem($result, EmailTemplateTransformer::class, 'client,language');
+        $result = EmailTemplateService::create($request)
+                                      ->getResult();
 
-        return $this->respondWithJson('Email template created', $resource);
+        return (new EmailTemplateResource($result))->additional(['message' => 'Email template created'])
+                                                   ->response()
+                                                   ->setStatusCode(201);
     }
-
 
     /**
      * Display the specified resource.
      *
-     * @param EmailTemplate $record
-     * @return \Illuminate\Http\JsonResponse
+     * @param \Motor\Backend\Models\EmailTemplate $record
+     * @return \Motor\Backend\Http\Resources\EmailTemplateResource
      */
     public function show(EmailTemplate $record)
     {
-        $result   = EmailTemplateService::show($record)->getResult();
-        $resource = $this->transformItem($result, EmailTemplateTransformer::class, 'client,language');
+        $result = EmailTemplateService::show($record)
+                                      ->getResult();
 
-        return $this->respondWithJson('Email template read', $resource);
+        return (new EmailTemplateResource($result))->additional(['message' => 'Email template read']);
     }
-
 
     /**
      * Update the specified resource in storage.
      *
-     * @param EmailTemplateRequest $request
-     * @param EmailTemplate        $record
-     * @return \Illuminate\Http\JsonResponse
+     * @param \Motor\Backend\Http\Requests\Backend\EmailTemplateRequest $request
+     * @param \Motor\Backend\Models\EmailTemplate $record
+     * @return \Motor\Backend\Http\Resources\EmailTemplateResource
      */
     public function update(EmailTemplateRequest $request, EmailTemplate $record)
     {
-        $result   = EmailTemplateService::update($record, $request)->getResult();
-        $resource = $this->transformItem($result, EmailTemplateTransformer::class, 'client,language');
+        $result = EmailTemplateService::update($record, $request)
+                                      ->getResult();
 
-        return $this->respondWithJson('Email template updated', $resource);
+        return (new EmailTemplateResource($result))->additional(['message' => 'Email template updated']);
     }
-
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param EmailTemplate $record
+     * @param \Motor\Backend\Models\EmailTemplate $record
      * @return \Illuminate\Http\JsonResponse
      */
     public function destroy(EmailTemplate $record)
     {
-        $result = EmailTemplateService::delete($record)->getResult();
+        $result = EmailTemplateService::delete($record)
+                                      ->getResult();
 
         if ($result) {
-            return $this->respondWithJson('Email template deleted', [ 'success' => true ]);
+            return response()->json(['message' => 'Email template deleted']);
         }
 
-        return $this->respondWithJson('Email template NOT deleted', [ 'success' => false ]);
+        return response()->json(['message' => 'Problem deleting email template'], 400);
     }
 }
