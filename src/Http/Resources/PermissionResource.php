@@ -4,6 +4,22 @@ namespace Motor\Backend\Http\Resources;
 
 use Illuminate\Http\Resources\Json\JsonResource;
 
+/**
+ * @OA\Schema(
+ *   schema="PermissionResource",
+ *       @OA\Property(
+ *         property="name",
+ *         type="string",
+ *         example="dashboard.read"
+ *       ),
+ *       @OA\Property(
+ *         property="guard_name",
+ *         type="string",
+ *         example="web"
+ *       )
+ *     )
+ */
+
 class PermissionResource extends JsonResource
 {
     /**

@@ -22,7 +22,7 @@ class ApiController extends BaseController
 
     public function __construct()
     {
-        if ($this->userModel) {
+        if ($this->userModel && $this->modelResource) {
             $this->authorizeResource($this->userModel, $this->modelResource);
         }
         \Locale::setDefault(config('app.locale'));
