@@ -6,10 +6,33 @@ use Motor\Backend\Http\Requests\Request;
 
 /**
  * Class ProfileEditRequest
+ *
  * @package Motor\Backend\Http\Requests\Backend
  */
 class ProfileEditRequest extends Request
 {
+    /**
+     * @OA\Schema(
+     *   schema="ProfileEditRequest",
+     *   @OA\Property(
+     *     property="name",
+     *     type="string",
+     *     example="My beautiful name"
+     *   ),
+     *   @OA\Property(
+     *     property="email",
+     *     type="string",
+     *     example="test@domain.com",
+     *     description="Must be a unique RFC valid email address"
+     *   ),
+     *   @OA\Property(
+     *     property="password",
+     *     type="string",
+     *     example="secret password"
+     *   ),
+     *   required={"name", "email", "password"},
+     * )
+     */
 
     /**
      * Determine if the user is authorized to make this request.
@@ -21,7 +44,6 @@ class ProfileEditRequest extends Request
         return true;
     }
 
-
     /**
      * Get the validation rules that apply to the request.
      *
@@ -31,6 +53,7 @@ class ProfileEditRequest extends Request
     {
         return [
             'name'     => 'required',
+            'email'    => 'email',
             'password' => 'confirmed',
         ];
     }

@@ -147,7 +147,7 @@ class RolesController extends ApiController
      *     description="Personal api_token of the user"
      *   ),
      *   @OA\Parameter(
-     *     @OA\Schema(type="string"),
+     *     @OA\Schema(type="integer"),
      *     in="path",
      *     name="role",
      *     parameter="role",
@@ -211,7 +211,7 @@ class RolesController extends ApiController
      *     description="Personal api_token of the user"
      *   ),
      *   @OA\Parameter(
-     *     @OA\Schema(type="string"),
+     *     @OA\Schema(type="integer"),
      *     in="path",
      *     name="role",
      *     parameter="role",
@@ -273,7 +273,7 @@ class RolesController extends ApiController
      *     description="Personal api_token of the user"
      *   ),
      *   @OA\Parameter(
-     *     @OA\Schema(type="string"),
+     *     @OA\Schema(type="integer"),
      *     in="path",
      *     name="role",
      *     parameter="role",

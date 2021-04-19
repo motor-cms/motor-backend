@@ -25,7 +25,7 @@ class ProfileEditController extends ApiController
      *     mediaType="application/json",
      *   ),
      *   @OA\RequestBody(
-     *     @OA\JsonContent(ref="#/components/schemas/UserRequest"),
+     *     @OA\JsonContent(ref="#/components/schemas/ProfileEditRequest"),
      *   ),
      *   @OA\Parameter(
      *     @OA\Schema(type="string"),
