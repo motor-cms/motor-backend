@@ -43,7 +43,7 @@ class UserPolicy
      */
     public function view(User $user, User $model)
     {
-        return $user->id === $model->id;
+        return $user->id === $model->id || $user->hasPermissionTo('user.read');
     }
 
     /**
@@ -66,7 +66,7 @@ class UserPolicy
      */
     public function update(User $user, User $model)
     {
-        return $user->id === $model->id;
+        return $user->id === $model->id  || $user->hasPermissionTo('user.write');
     }
 
     /**
@@ -78,7 +78,7 @@ class UserPolicy
      */
     public function delete(User $user, User $model)
     {
-        return false;
+        return $user->hasPermissionTo('user.delete');
     }
 
     /**

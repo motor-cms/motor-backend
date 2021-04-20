@@ -32,7 +32,7 @@ class LanguagePolicy
      */
     public function viewAny(User $user)
     {
-        //
+        return $user->hasPermissionTo('language.read');
     }
 
     /**
@@ -44,7 +44,7 @@ class LanguagePolicy
      */
     public function view(User $user, Language $language)
     {
-        //
+        return $user->hasPermissionTo('language.read');
     }
 
     /**
@@ -55,7 +55,7 @@ class LanguagePolicy
      */
     public function create(User $user)
     {
-        //
+        return $user->hasPermissionTo('language.write');
     }
 
     /**
@@ -67,7 +67,7 @@ class LanguagePolicy
      */
     public function update(User $user, Language $language)
     {
-        //
+        return $user->hasPermissionTo('language.write');
     }
 
     /**
@@ -79,7 +79,7 @@ class LanguagePolicy
      */
     public function delete(User $user, Language $language)
     {
-        //
+        return $user->hasPermissionTo('language.delete');
     }
 
     /**

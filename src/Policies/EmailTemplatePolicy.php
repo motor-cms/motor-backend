@@ -32,7 +32,7 @@ class EmailTemplatePolicy
      */
     public function viewAny(User $user)
     {
-        //
+        return $user->hasPermissionTo('email_template.read');
     }
 
     /**
@@ -44,7 +44,7 @@ class EmailTemplatePolicy
      */
     public function view(User $user, EmailTemplate $emailTemplate)
     {
-        //
+        return $user->hasPermissionTo('email_template.read');
     }
 
     /**
@@ -67,7 +67,7 @@ class EmailTemplatePolicy
      */
     public function update(User $user, EmailTemplate $emailTemplate)
     {
-        //
+        return $user->hasPermissionTo('email_template.write');
     }
 
     /**
@@ -79,7 +79,7 @@ class EmailTemplatePolicy
      */
     public function delete(User $user, EmailTemplate $emailTemplate)
     {
-        //
+        return $user->hasPermissionTo('email_template.write');
     }
 
     /**
@@ -91,7 +91,7 @@ class EmailTemplatePolicy
      */
     public function restore(User $user, EmailTemplate $emailTemplate)
     {
-        //
+        return $user->hasPermissionTo('email_template.delete');
     }
 
     /**
