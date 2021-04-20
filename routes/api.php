@@ -6,17 +6,22 @@ Route::group([
     'as'         => 'api.',
 ], static function () {
     Route::apiResource('users', 'UsersController');
-    Route::resource('clients', 'ClientsController');
-    Route::resource('languages', 'LanguagesController');
-    Route::resource('roles', 'RolesController');
-    Route::resource('permissions', 'PermissionsController');
-    Route::resource('permission_groups', 'PermissionGroupsController');
-    Route::resource('email_templates', 'EmailTemplatesController');
-    Route::resource('categories', 'CategoriesController');
+    Route::apiResource('clients', 'ClientsController');
+    Route::apiResource('languages', 'LanguagesController');
+    Route::apiResource('roles', 'RolesController');
+    Route::apiResource('permissions', 'PermissionsController');
+    Route::apiResource('permission_groups', 'PermissionGroupsController');
+    Route::apiResource('email_templates', 'EmailTemplatesController');
+    Route::apiResource('category_trees', 'CategoryTreesController', [
+        'parameters' => [
+            'category_trees' => 'category'
+        ]
+    ]);
+    Route::apiResource('category_trees/{category_tree}/categories', 'CategoriesController');
 
     Route::get('profile', 'ProfileEditController@me')->name('profile.read');
     Route::put('profile', 'ProfileEditController@update')->name('profile.update');
-    Route::resource('config_variables', 'ConfigVariablesController');
+    Route::apiResource('config_variables', 'ConfigVariablesController');
 });
 
 Route::group([

@@ -9,13 +9,14 @@ use Illuminate\Routing\Controller as BaseController;
 use Motor\Backend\Models\User;
 
 /**
- * Class Controller
+ * Class ApiController
+ *
  * @package Motor\Backend\Http\Controllers
  */
 class ApiController extends BaseController
 {
-
     protected string $userModel = User::class;
+
     protected string $modelResource = '';
 
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests;

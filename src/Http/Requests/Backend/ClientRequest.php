@@ -73,7 +73,8 @@ class ClientRequest extends Request
      *     property="contact_phone",
      *     type="string",
      *     example="+1 123 123 123"
-     *   )
+     *   ),
+     *   required={"name"},
      * )
      */
 
