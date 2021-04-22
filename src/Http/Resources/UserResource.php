@@ -9,8 +9,8 @@ use Illuminate\Http\Resources\Json\JsonResource;
  *   schema="UserResource",
  *   @OA\Property(
  *     property="id",
- *     type="string",
- *     example="My beautiful user name"
+ *     type="integer",
+ *     example="1"
  *   ),
  *   @OA\Property(
  *     property="client",
