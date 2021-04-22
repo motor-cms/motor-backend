@@ -3,7 +3,7 @@
     <li class="c-header-nav-item dropdown"><a class="c-header-nav-link" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
             <div class="c-avatar" style="width: auto;">
                 @if (Auth::user() != null && ($avatar = Auth::user()->getMedia('avatar')->first()))
-                    <img src="{{ $avatar->getUrl('thumb') }}" class="img-avatar" alt="{{ Auth::user()->name }}">
+                    <img src="{{ $avatar->getUrl('thumb') }}" style="height: 30px;" class="img-avatar" alt="{{ Auth::user()->name }}">
                 @elseif (Auth::user() != null)
                     {{ Auth::user()->name }}
                 @endif

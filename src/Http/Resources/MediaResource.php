@@ -54,27 +54,34 @@ use Illuminate\Http\Resources\Json\JsonResource;
  *   )
  * )
  */
-
 class MediaResource extends JsonResource
 {
     /**
      * Transform the resource into an array.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param \Illuminate\Http\Request $request
      * @return array
      */
     public function toArray($request)
     {
+        $conversions = [];
+        foreach ($this->generated_conversions as $conversion => $status) {
+            if ($status) {
+                $conversions[$conversion] = asset($this->getUrl($conversion));
+            }
+        }
+
         return [
-            'collection' => $this->collection_name,
-            'name'       => $this->name,
-            'file_name'  => $this->file_name,
-            'size'       => (int) $this->size,
-            'mime_type'  => $this->mime_type,
-            'url'        => $this->getUrl(),
-            'path'       => $this->getPath(),
-            'uuid'       => $this->uuid,
-            'created_at' => (string) $this->created_at,
+            'collection'  => $this->collection_name,
+            'name'        => $this->name,
+            'file_name'   => $this->file_name,
+            'size'        => (int) $this->size,
+            'mime_type'   => $this->mime_type,
+            'url'         => $this->getUrl(),
+            'path'        => $this->getPath(),
+            'uuid'        => $this->uuid,
+            'created_at'  => (string) $this->created_at,
+            'conversions' => $conversions,
         ];
     }
 }
