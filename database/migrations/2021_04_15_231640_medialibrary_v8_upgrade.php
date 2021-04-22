@@ -16,12 +16,12 @@ class MedialibraryV8Upgrade extends Migration
     public function up()
     {
         Schema::table('media', function (Blueprint $table) {
-            $table->uuid('uuid')->nullable()->unique();
-            $table->string('conversions_disk')->nullable();
+            $table->uuid('uuid')->nullable()->unique()->after('order_column');
+            $table->string('conversions_disk')->nullable()->after('order_column');
         });
 
         Media::cursor()->each(
-            fn (Media $media) => $media->update(['uuid' => Str::uuid(), 'conversion_disk' => $media->disk])
+            fn (Media $media) => $media->update(['uuid' => Str::uuid(), 'conversions_disk' => $media->disk])
         );
     }
 
@@ -34,7 +34,7 @@ class MedialibraryV8Upgrade extends Migration
     {
         Schema::table('media', function (Blueprint $table) {
             $table->dropColumn('uuid');
-            $table->dropColumn('conversion_disk');
+            $table->dropColumn('conversions_disk');
         });
     }
 }

@@ -40,6 +40,11 @@ use Illuminate\Http\Resources\Json\JsonResource;
  *     property="email",
  *     type="string",
  *     example="user@domain.com"
+ *   ),
+ *   @OA\Property(
+ *     property="avatar",
+ *     type="object",
+ *     ref="#/components/schemas/MediaResource"
  *   )
  * )
  */
@@ -61,6 +66,7 @@ class UserResource extends JsonResource
             'permissions' => PermissionResource::collection($this->permissions),
             'name'        => $this->name,
             'email'       => $this->email,
+            'avatar'      => new MediaResource($this->getFirstMedia('avatar'))
         ];
     }
 }
