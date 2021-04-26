@@ -30,6 +30,11 @@ class ProfileEditRequest extends Request
      *     type="string",
      *     example="secret password"
      *   ),
+     *   @OA\Property(
+     *     property="avatar",
+     *     type="file",
+     *     example="avatar.png"
+     *   ),
      *   required={"name", "email", "password"},
      * )
      */
@@ -55,6 +60,7 @@ class ProfileEditRequest extends Request
             'name'     => 'required',
             'email'    => 'email',
             'password' => 'confirmed',
+            'avatar'   => 'nullable|image',
         ];
     }
 }
