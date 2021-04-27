@@ -36,12 +36,12 @@ class EmailTemplateRequest extends Request
      *   ),
      *   @OA\Property(
      *     property="body_text",
-     *     type="text",
+     *     type="string",
      *     example="The complete email body as text"
      *   ),
      *   @OA\Property(
      *     property="body_html",
-     *     type="text",
+     *     type="string",
      *     example="The complete email body with html tags"
      *   ),
      *   @OA\Property(

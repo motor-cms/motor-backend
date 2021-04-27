@@ -49,7 +49,7 @@ use Illuminate\Http\Resources\Json\JsonResource;
  *   ),
  *   @OA\Property(
  *     property="description",
- *     type="text",
+ *     type="string",
  *     example="A lengthy description of the client"
  *   ),
  *   @OA\Property(

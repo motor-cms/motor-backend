@@ -34,12 +34,12 @@ use Illuminate\Http\Resources\Json\JsonResource;
  *   ),
  *   @OA\Property(
  *     property="body_text",
- *     type="text",
+ *     type="string",
  *     example="The complete email body as text"
  *   ),
  *   @OA\Property(
  *     property="body_html",
- *     type="text",
+ *     type="string",
  *     example="The complete email body with html tags"
  *   ),
  *   @OA\Property(
