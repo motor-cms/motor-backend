@@ -65,9 +65,11 @@ class MediaResource extends JsonResource
     public function toArray($request)
     {
         $conversions = [];
-        foreach ($this->generated_conversions as $conversion => $status) {
-            if ($status) {
-                $conversions[$conversion] = asset($this->getUrl($conversion));
+        if (!is_null($this->generated_conversions)) {
+            foreach ($this->generated_conversions as $conversion => $status) {
+                if ($status) {
+                    $conversions[$conversion] = asset($this->getUrl($conversion));
+                }
             }
         }
 
