@@ -39,6 +39,11 @@ class LanguageResource extends JsonResource
      */
     public function toArray($request)
     {
-        return parent::toArray($request);
+        return [
+            'id'           => (int) $this->id,
+            'iso_639_1'    => $this->iso_639_1,
+            'english_name' => $this->english_name,
+            'native_name'  => $this->native_name,
+        ];
     }
 }

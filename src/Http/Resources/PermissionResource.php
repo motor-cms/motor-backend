@@ -3,6 +3,7 @@
 namespace Motor\Backend\Http\Resources;
 
 use Illuminate\Http\Resources\Json\JsonResource;
+use Motor\Backend\Http\Requests\Backend\PermissionGroupRequest;
 
 /**
  * @OA\Schema(
@@ -43,7 +44,7 @@ class PermissionResource extends JsonResource
             'id'               => (int) $this->id,
             'name'             => $this->name,
             'guard_name'       => $this->guard_name,
-            'permission_group' => (! is_null($this->group) ? $this->group->name : null),
+            'permission_group' => new PermissionGroupResource($this->whenLoaded('permission_group')),
         ];
     }
 }

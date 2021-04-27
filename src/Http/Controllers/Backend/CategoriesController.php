@@ -81,7 +81,6 @@ class CategoriesController extends Controller
     {
         $form = $this->form(CategoryForm::class);
 
-        dd($request->all());
         // It will automatically use current request, get the rules, and do the validation
         if (! $form->isValid()) {
             return redirect()->back()->withErrors($form->getErrors())->withInput();

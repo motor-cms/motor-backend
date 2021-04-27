@@ -86,6 +86,20 @@ class EmailTemplateResource extends JsonResource
      */
     public function toArray($request)
     {
-        return parent::toArray($request);
+        return [
+            'id'                      => (int) $this->id,
+            'client'                  => new ClientResource($this->client),
+            'language'                => new LanguageResource($this->language),
+            'name'                    => $this->name,
+            'subject'                 => $this->subject,
+            'body_text'               => $this->body_text,
+            'body_html'               => $this->body_html,
+            'default_sender_name'     => $this->default_sender_name,
+            'default_sender_email'    => $this->default_sender_email,
+            'default_recipient_name'  => $this->default_recipient_name,
+            'default_recipient_email' => $this->default_recipient_email,
+            'default_cc_email'        => $this->default_cc_email,
+            'default_bcc_email'       => $this->default_bcc_email,
+        ];
     }
 }

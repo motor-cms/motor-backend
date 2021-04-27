@@ -15,7 +15,7 @@ use Motor\Backend\Services\PermissionGroupService;
  *
  * @package Motor\Backend\Http\Controllers\Api
  */
-class PermissionGroupsController extends ApiController
+class  PermissionGroupsController extends ApiController
 {
     protected string $modelResource = 'permission_group';
 
@@ -192,7 +192,7 @@ class PermissionGroupsController extends ApiController
         $result = PermissionGroupService::show($record)
                                         ->getResult();
 
-        return (new PermissionGroupResource($result))->additional(['message' => 'Permission group read']);
+        return (new PermissionGroupResource($result->load('permissions')))->additional(['message' => 'Permission group read']);
     }
 
     /**

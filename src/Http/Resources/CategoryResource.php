@@ -49,6 +49,10 @@ class CategoryResource extends JsonResource
      */
     public function toArray($request)
     {
+        if ($request->route()->compiled->getStaticPrefix() === '/api/category_trees') {
+            $this->load('children');
+        }
+
         return [
             'id'        => (int) $this->id,
             'name'      => $this->name,
@@ -56,6 +60,7 @@ class CategoryResource extends JsonResource
             'parent_id' => (int) $this->parent_id,
             '_lft'      => (int) $this->_lft,
             '_rgt'      => (int) $this->_rgt,
+            'children'  => CategoryResource::collection($this->whenLoaded('children')),
         ];
     }
 }

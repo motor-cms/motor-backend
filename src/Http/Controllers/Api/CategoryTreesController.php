@@ -5,8 +5,8 @@ namespace Motor\Backend\Http\Controllers\Api;
 use Motor\Backend\Http\Controllers\ApiController;
 use Motor\Backend\Http\Requests\Backend\CategoryTreeRequest;
 use Motor\Backend\Http\Resources\CategoryCollection;
+use Motor\Backend\Http\Resources\CategoryTreeResource;
 use Motor\Backend\Models\Category;
-use Motor\Backend\Resources\Http\Resources\CategoryTreeResource;
 use Motor\Backend\Services\CategoryService;
 use Motor\Core\Filter\Renderers\WhereRenderer;
 
@@ -128,7 +128,7 @@ class CategoryTreesController extends ApiController
      * Store a newly created resource in storage.
      *
      * @param \Motor\Backend\Http\Requests\Backend\CategoryTreeRequest $request
-     * @return \Illuminate\Http\JsonResponse|object
+     * @return mixed
      */
     public function store(CategoryTreeRequest $request)
     {
@@ -191,14 +191,14 @@ class CategoryTreesController extends ApiController
      * Display the specified resource.
      *
      * @param \Motor\Backend\Models\Category $record
-     * @return \Motor\Backend\Resources\Http\Resources\CategoryTreeResource
+     * @return \Motor\Backend\Http\Resources\CategoryTreeResource
      */
     public function show(Category $record)
     {
         $result = CategoryService::show($record)
                                  ->getResult();
 
-        return (new CategoryTreeResource($result))->additional(['message' => 'Category tree read']);
+        return (new CategoryTreeResource($result->load('children')))->additional(['message' => 'Category tree read']);
     }
 
     /**

@@ -48,7 +48,6 @@ use Illuminate\Http\Resources\Json\JsonResource;
  *   )
  * )
  */
-
 class UserResource extends JsonResource
 {
     /**
@@ -61,12 +60,12 @@ class UserResource extends JsonResource
     {
         return [
             'id'          => (int) $this->id,
-            'client'      => (!is_null($this->client_id) ? new ClientResource($this->client) : null),
+            'client'      => new ClientResource($this->client),
             'roles'       => RoleResource::collection($this->roles),
             'permissions' => PermissionResource::collection($this->permissions),
             'name'        => $this->name,
             'email'       => $this->email,
-            'avatar'      => new MediaResource($this->getFirstMedia('avatar'))
+            'avatar'      => new MediaResource($this->getFirstMedia('avatar')),
         ];
     }
 }

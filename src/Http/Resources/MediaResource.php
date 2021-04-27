@@ -51,7 +51,23 @@ use Illuminate\Http\Resources\Json\JsonResource;
  *     property="created_at",
  *     type="datetime",
  *     example="2021-04-22 16:23:40"
- *   )
+ *   ),
+ *   @OA\Property(
+ *     property="conversions",
+ *     type="object",
+ *     @OA\Items(
+ *       @OA\Property(
+ *         property="thumb",
+ *         type="string",
+ *         example="http://localhost/media/conversion/my-image-thumb.png"
+ *       ),
+ *       @OA\Property(
+ *         property="preview",
+ *         type="string",
+ *         example="http://localhost/media/conversion/my-image-preview.png"
+ *       ),
+ *     ),
+ *   ),
  * )
  */
 class MediaResource extends JsonResource

@@ -45,7 +45,7 @@ class PermissionGroupResource extends JsonResource
             'id'            => (int) $this->id,
             'name'          => $this->name,
             'sort_position' => (int) $this->sort_position,
-            'permissions'   => PermissionResource::collection($this->permissions),
+            'permissions'   => PermissionResource::collection($this->whenLoaded('permissions')),
         ];
     }
 }
