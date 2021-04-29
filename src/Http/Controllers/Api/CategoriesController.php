@@ -17,6 +17,7 @@ use Motor\Core\Filter\Renderers\WhereRenderer;
  */
 class CategoriesController extends ApiController
 {
+    protected string $model = 'Motor\Backend\Models\Category';
     protected string $modelResource = 'category';
 
     /**

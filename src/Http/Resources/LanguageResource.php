@@ -2,8 +2,6 @@
 
 namespace Motor\Backend\Http\Resources;
 
-use Illuminate\Http\Resources\Json\JsonResource;
-
 /**
  * @OA\Schema(
  *   schema="LanguageResource",
@@ -29,7 +27,7 @@ use Illuminate\Http\Resources\Json\JsonResource;
  *   )
  * )
  */
-class LanguageResource extends JsonResource
+class LanguageResource extends BaseResource
 {
     /**
      * Transform the resource into an array.

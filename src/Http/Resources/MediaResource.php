@@ -2,8 +2,6 @@
 
 namespace Motor\Backend\Http\Resources;
 
-use Illuminate\Http\Resources\Json\JsonResource;
-
 /**
  * @OA\Schema(
  *   schema="MediaResource",
@@ -70,7 +68,7 @@ use Illuminate\Http\Resources\Json\JsonResource;
  *   ),
  * )
  */
-class MediaResource extends JsonResource
+class MediaResource extends BaseResource
 {
     /**
      * Transform the resource into an array.

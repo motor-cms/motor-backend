@@ -2,9 +2,7 @@
 
 namespace Motor\Backend\Http\Resources;
 
-use Illuminate\Http\Resources\Json\ResourceCollection;
-
-class CategoryTreeCollection extends ResourceCollection
+class CategoryTreeCollection extends BaseCollection
 {
     /**
      * Transform the resource collection into an array.

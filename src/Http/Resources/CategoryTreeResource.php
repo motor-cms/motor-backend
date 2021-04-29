@@ -2,8 +2,6 @@
 
 namespace Motor\Backend\Http\Resources;
 
-use Illuminate\Http\Resources\Json\JsonResource;
-
 /**
  * @OA\Schema(
  *   schema="CategoryTreeResource",
@@ -24,7 +22,7 @@ use Illuminate\Http\Resources\Json\JsonResource;
  *   )
  * )
  */
-class CategoryTreeResource extends JsonResource
+class CategoryTreeResource extends BaseResource
 {
     /**
      * Transform the resource into an array.

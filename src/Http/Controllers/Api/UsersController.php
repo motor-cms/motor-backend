@@ -16,6 +16,7 @@ use Motor\Backend\Services\UserService;
  */
 class UsersController extends ApiController
 {
+    protected string $model = 'Motor\Backend\Models\User';
     protected string $modelResource = 'user';
 
     /**

@@ -15,16 +15,15 @@ use Motor\Backend\Models\User;
  */
 class ApiController extends BaseController
 {
-    protected string $userModel = User::class;
-
     protected string $modelResource = '';
+    protected string $model = '';
 
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
 
     public function __construct()
     {
-        if ($this->userModel && $this->modelResource) {
-            $this->authorizeResource($this->userModel, $this->modelResource);
+        if ($this->model && $this->modelResource) {
+            $this->authorizeResource($this->model, $this->modelResource);
         }
         \Locale::setDefault(config('app.locale'));
     }

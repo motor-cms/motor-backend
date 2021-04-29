@@ -2,6 +2,7 @@
 
 namespace Motor\Backend\Http\Requests\Backend;
 
+use Illuminate\Validation\Rule;
 use Motor\Backend\Http\Requests\Request;
 
 /**
@@ -45,9 +46,24 @@ class CategoryTreeRequest extends Request
      */
     public function rules()
     {
+        $request = $this;
         return [
             'name'  => 'required',
-            'scope' => 'required|unique',
+            'scope'       => [
+                'required',
+                Rule::unique('categories')
+                    ->where(function ($query) use ($request) {
+                        if ($request->method() == 'PATCH' || $request->method() == 'PUT') {
+                            return $query->where('scope', $request->scope)
+                                         ->where('parent_id', null)
+                                         ->where('id', '!=', $request->route()
+                                                                     ->originalParameter('category'));
+                        } else {
+                            return $query->where('scope', $request->scope)
+                                         ->where('parent_id', null);
+                        }
+                    }),
+            ],
         ];
     }
 }

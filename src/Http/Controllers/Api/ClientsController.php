@@ -16,6 +16,7 @@ use Motor\Backend\Services\ClientService;
  */
 class ClientsController extends ApiController
 {
+    protected string $model = 'Motor\Backend\Models\Client';
     protected string $modelResource = 'client';
 
     /**

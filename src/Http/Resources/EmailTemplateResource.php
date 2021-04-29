@@ -2,8 +2,6 @@
 
 namespace Motor\Backend\Http\Resources;
 
-use Illuminate\Http\Resources\Json\JsonResource;
-
 /**
  * @OA\Schema(
  *   schema="EmailTemplateResource",
@@ -76,7 +74,7 @@ use Illuminate\Http\Resources\Json\JsonResource;
  *   )
  * )
  */
-class EmailTemplateResource extends JsonResource
+class EmailTemplateResource extends BaseResource
 {
     /**
      * Transform the resource into an array.

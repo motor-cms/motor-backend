@@ -2,8 +2,6 @@
 
 namespace Motor\Backend\Http\Resources;
 
-use Illuminate\Http\Resources\Json\JsonResource;
-
 /**
  * @OA\Schema(
  *   schema="ClientResource",
@@ -74,7 +72,7 @@ use Illuminate\Http\Resources\Json\JsonResource;
  *   )
  * )
  */
-class ClientResource extends JsonResource
+class ClientResource extends BaseResource
 {
     /**
      * Transform the resource into an array.

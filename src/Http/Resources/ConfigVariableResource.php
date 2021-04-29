@@ -2,8 +2,6 @@
 
 namespace Motor\Backend\Http\Resources;
 
-use Illuminate\Http\Resources\Json\JsonResource;
-
 /**
  * @OA\Schema(
  *   schema="ConfigVariableResource",
@@ -39,7 +37,7 @@ use Illuminate\Http\Resources\Json\JsonResource;
  *   )
  * )
  */
-class ConfigVariableResource extends JsonResource
+class ConfigVariableResource extends BaseResource
 {
     /**
      * Transform the resource into an array.

@@ -2,9 +2,6 @@
 
 namespace Motor\Backend\Http\Resources;
 
-use Illuminate\Http\Resources\Json\JsonResource;
-use Motor\Backend\Http\Requests\Backend\PermissionGroupRequest;
-
 /**
  * @OA\Schema(
  *   schema="PermissionResource",
@@ -30,7 +27,7 @@ use Motor\Backend\Http\Requests\Backend\PermissionGroupRequest;
  *   )
  * )
  */
-class PermissionResource extends JsonResource
+class PermissionResource extends BaseResource
 {
     /**
      * Transform the resource into an array.

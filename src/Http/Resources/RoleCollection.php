@@ -2,9 +2,7 @@
 
 namespace Motor\Backend\Http\Resources;
 
-use Illuminate\Http\Resources\Json\ResourceCollection;
-
-class RoleCollection extends ResourceCollection
+class RoleCollection extends BaseCollection
 {
     /**
      * Transform the resource collection into an array.
