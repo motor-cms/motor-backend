@@ -5,15 +5,15 @@ namespace Motor\Backend\Forms\Fields;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Str;
 use Kris\LaravelFormBuilder\Fields\InputType;
-use Motor\Media\Transformers\FileTransformer;
+use Motor\Media\Http\Resources\FileResource;
 
 /**
  * Class FileAssociationType
+ *
  * @package Motor\Backend\Forms\Fields
  */
 class FileAssociationType extends InputType
 {
-
     /**
      * @return string
      */
@@ -25,7 +25,6 @@ class FileAssociationType extends InputType
         return 'motor-backend::laravel-form-builder.file_association';
     }
 
-
     /**
      * @return array
      */
@@ -33,14 +32,17 @@ class FileAssociationType extends InputType
     {
         $modelData = $this->parent->getModel();
 
-        $options = [ 'file_association' => false ];
+        $options = ['file_association' => false];
 
         if (is_object($modelData)) {
-            $fileAssociation = $modelData->file_associations()->where('identifier', $this->getRealName())->first();
+            $fileAssociation = $modelData->file_associations()
+                                         ->where('identifier', $this->getRealName())
+                                         ->first();
             if (! is_null($fileAssociation)) {
-                $data = fractal($fileAssociation->file, new FileTransformer())->toArray();
+                // FIXME: check if this still works!
+                $data = (new FileResource($fileAssociation->file))->toArrayRecursive();
 
-                $options['file_association'] = json_encode($data['data']);
+                $options['file_association'] = json_encode($data);
                 $options['position'] = Arr::get($fileAssociation->custom_properties, 'position');
                 $options['description'] = Arr::get($fileAssociation->custom_properties, 'description');
                 $options['enlarge'] = Arr::get($fileAssociation->custom_properties, 'enlarge');
@@ -51,17 +53,16 @@ class FileAssociationType extends InputType
         return $options;
     }
 
-
     /**
      * @param array $options
-     * @param bool  $showLabel
-     * @param bool  $showField
-     * @param bool  $showError
+     * @param bool $showLabel
+     * @param bool $showField
+     * @param bool $showError
      * @return string
      */
     public function render(array $options = [], $showLabel = true, $showField = true, $showError = true)
     {
-        $options['name']      = $this->getName();
+        $options['name'] = $this->getName();
         $options['name_slug'] = Str::slug($this->getName());
 
         $options = array_merge($options, $this->getData());
