@@ -2,22 +2,22 @@
 
 namespace Motor\Backend\Http\Controllers\Backend;
 
+use Kris\LaravelFormBuilder\FormBuilderTrait;
 use Motor\Backend\Forms\Backend\ClientForm;
+use Motor\Backend\Grids\ClientGrid;
 use Motor\Backend\Http\Controllers\Controller;
 use Motor\Backend\Http\Requests\Backend\ClientRequest;
-use Motor\Backend\Grids\ClientGrid;
 use Motor\Backend\Models\Client;
-use Kris\LaravelFormBuilder\FormBuilderTrait;
 use Motor\Backend\Services\ClientService;
 
 /**
  * Class ClientsController
+ *
  * @package Motor\Backend\Http\Controllers\Backend
  */
 class ClientsController extends Controller
 {
     use FormBuilderTrait;
-
 
     /**
      * Display a listing of the resource.
@@ -36,23 +36,21 @@ class ClientsController extends Controller
         return view('motor-backend::backend.clients.index', compact('paginator', 'grid'));
     }
 
-
     /**
      * Show the form for creating a new resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
      */
     public function create()
     {
         $form = $this->form(ClientForm::class, [
             'method'  => 'POST',
             'route'   => 'backend.clients.store',
-            'enctype' => 'multipart/form-data'
+            'enctype' => 'multipart/form-data',
         ]);
 
         return view('motor-backend::backend.clients.create', compact('form'));
     }
-
 
     /**
      * Store a newly created resource in storage.
@@ -66,7 +64,10 @@ class ClientsController extends Controller
 
         // It will automatically use current request, get the rules, and do the validation
         if (! $form->isValid()) {
-            return redirect()->back()->withErrors($form->getErrors())->withInput();
+            return redirect()
+                ->back()
+                ->withErrors($form->getErrors())
+                ->withInput();
         }
 
         ClientService::createWithForm($request, $form);
@@ -75,7 +76,6 @@ class ClientsController extends Controller
 
         return redirect('backend/clients');
     }
-
 
     /**
      * Display the specified resource.
@@ -87,7 +87,6 @@ class ClientsController extends Controller
         //
     }
 
-
     /**
      * Show the form for editing the specified resource.
      *
@@ -98,20 +97,19 @@ class ClientsController extends Controller
     {
         $form = $this->form(ClientForm::class, [
             'method'  => 'PATCH',
-            'url'     => route('backend.clients.update', [ $record->id ]),
+            'url'     => route('backend.clients.update', [$record->id]),
             'enctype' => 'multipart/form-data',
-            'model'   => $record
+            'model'   => $record,
         ]);
 
         return view('motor-backend::backend.clients.edit', compact('form'));
     }
 
-
     /**
      * Update the specified resource in storage.
      *
      * @param ClientRequest $request
-     * @param Client        $record
+     * @param Client $record
      * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
      */
     public function update(ClientRequest $request, Client $record)
@@ -120,7 +118,10 @@ class ClientsController extends Controller
 
         // It will automatically use current request, get the rules, and do the validation
         if (! $form->isValid()) {
-            return redirect()->back()->withErrors($form->getErrors())->withInput();
+            return redirect()
+                ->back()
+                ->withErrors($form->getErrors())
+                ->withInput();
         }
 
         ClientService::updateWithForm($record, $request, $form);
@@ -129,7 +130,6 @@ class ClientsController extends Controller
 
         return redirect('backend/clients');
     }
-
 
     /**
      * Remove the specified resource from storage.
