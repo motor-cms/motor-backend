@@ -138,19 +138,22 @@
             this.$eventHub.$on('motor-backend:file-association-crop-area-set-' + this.name, (normalizedCoordinates) => {
                 console.log("received coordinates");
                 console.log(normalizedCoordinates);
+                // FIXME: two timeouts seem excessive. find a better way to wait for the async operation to yield results
                 setTimeout(() => {
                     const imageSize = this.$refs.cropper[0]._data.imageSize;
-                    const coordinates = {
+                    setTimeout(() => {
+                      const coordinates = {
                         left: normalizedCoordinates.x1 * imageSize.width,
                         top: normalizedCoordinates.y1 * imageSize.height,
                         width: normalizedCoordinates.x2 * imageSize.width,
                         height: normalizedCoordinates.y2 * imageSize.height
-                    };
-                    this.stencilProps.aspectRatio = 0;
-                    this.minHeight = 20;
-                    this.minWidth = 20;
-                    this.$refs.cropper[0].resetCoordinates();
-                    this.$refs.cropper[0].setCoordinates(coordinates);
+                      };
+                      this.stencilProps.aspectRatio = 0;
+                      this.minHeight = 20;
+                      this.minWidth = 20;
+                      this.$refs.cropper[0].resetCoordinates();
+                      this.$refs.cropper[0].setCoordinates(coordinates);
+                    }, 1000);
                 }, 1000);
             });
             this.populateFiles(this.file);
