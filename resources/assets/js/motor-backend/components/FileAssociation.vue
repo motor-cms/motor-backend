@@ -10,7 +10,7 @@
                         ref="cropper"
                         v-if="isImage(file)"
                         class="card-img-top"
-                        :src="file.file.preview"
+                        :src="file.file.conversions.preview"
                         classname="cropper"
                         :stencilProps="stencilProps"
                         :minWidth="minWidth"
@@ -88,7 +88,8 @@
                 return Number((n1 / n2).toFixed(decimals));
             },
             changeImage(event) {
-                const imageSize = this.$refs.cropper[0]._data.imageSize;
+
+              const imageSize = this.$refs.cropper[0]._data.imageSize;
                 const coordinates = {
                     x1: this.normalizeNumber(event.coordinates.left, imageSize.width, 10),
                     x2: this.normalizeNumber(event.coordinates.width, imageSize.width, 10),
@@ -115,12 +116,11 @@
                 $('input[name="' + this.name + '"]').val(JSON.stringify(this.files[0]));
             },
             isImage: function (file) {
-                if (file.file.mime_type == 'image/png' || file.file.mime_type == 'image/jpg' || file.file.mime_type == 'image/jpeg' || file.file.mime_type == 'video/mp4') {
+                if (file.file.mime_type === 'image/png' || file.file.mime_type === 'image/jpg' || file.file.mime_type === 'image/jpeg' || file.file.mime_type === 'video/mp4') {
                     return true;
                 }
                 return false;
-            }
-            ,
+            },
             deleteFile: function (file) {
                 this.files.splice(this.files.indexOf(file), 1);
                 $('input[name="' + this.name + '"]').val('deleted');
