@@ -7,6 +7,7 @@ use Illuminate\Notifications\Notification;
 
 /**
  * Class ResetPassword
+ *
  * @package Motor\Backend\Notifications
  */
 class ResetPassword extends Notification
@@ -17,20 +18,19 @@ class ResetPassword extends Notification
 
     public $user;
 
-
     /**
      * Create a new notification instance.
      *
      * ResetPassword constructor.
+     *
      * @param $token
      * @param $user
      */
     public function __construct($token, $user)
     {
         $this->token = $token;
-        $this->user  = $user;
+        $this->user = $user;
     }
-
 
     /**
      * Get the notification's delivery channels.
@@ -41,9 +41,8 @@ class ResetPassword extends Notification
      */
     public function via($notifiable)
     {
-        return [ 'mail' ];
+        return ['mail'];
     }
-
 
     /**
      * Get the mail representation of the notification.
@@ -56,7 +55,6 @@ class ResetPassword extends Notification
     {
         return new \Motor\Backend\Mail\ResetPassword($this->token, $this->user);
     }
-
 
     /**
      * Get the array representation of the notification.

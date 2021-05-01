@@ -2,11 +2,12 @@
 
 namespace Motor\Backend\Grids;
 
-use Motor\Core\Filter\Renderers\SearchRenderer;
 use Motor\Backend\Grid\Grid;
+use Motor\Core\Filter\Renderers\SearchRenderer;
 
 /**
  * Class LanguageGrid
+ *
  * @package Motor\Backend\Grids
  */
 class LanguageGrid extends Grid

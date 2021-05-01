@@ -21,6 +21,7 @@ use Spatie\MediaLibrary\HasMedia;
 
 /**
  * Class BaseService
+ *
  * @package Motor\Backend\Services
  */
 abstract class BaseService
@@ -43,7 +44,6 @@ abstract class BaseService
 
     protected $sortableDirection = 'ASC';
 
-
     /**
      * Basic create method.
      * Usually called by an API
@@ -54,55 +54,59 @@ abstract class BaseService
      */
     public static function create(Request $request)
     {
-        return ( new static() )->setRequest($request)->doCreate();
+        return (new static())->setRequest($request)
+                             ->doCreate();
     }
-
 
     /**
      * Create method with support from a Form class
      * Usually called from a backend controller
      *
      * @param Request $request
-     * @param Form    $form
+     * @param Form $form
      *
      * @return mixed
      */
     public static function createWithForm(Request $request, Form $form)
     {
-        return ( new static() )->setRequest($request, $form)->setForm($form)->doCreate();
+        return (new static())->setRequest($request, $form)
+                             ->setForm($form)
+                             ->doCreate();
     }
-
 
     /**
      * Basic update method.
      * Usually called by an API
      *
-     * @param Model   $record
+     * @param Model $record
      * @param Request $request
      *
      * @return mixed
      */
     public static function update(Model $record, Request $request)
     {
-        return ( new static() )->setRequest($request)->setRecord($record)->doUpdate();
+        return (new static())->setRequest($request)
+                             ->setRecord($record)
+                             ->doUpdate();
     }
-
 
     /**
      * Create method with support from a Form class
      * Usually called from a backend controller
      *
-     * @param Model   $record
+     * @param Model $record
      * @param Request $request
-     * @param Form    $form
+     * @param Form $form
      *
      * @return mixed
      */
     public static function updateWithForm(Model $record, Request $request, Form $form)
     {
-        return ( new static() )->setRequest($request, $form)->setForm($form)->setRecord($record)->doUpdate();
+        return (new static())->setRequest($request, $form)
+                             ->setForm($form)
+                             ->setRecord($record)
+                             ->doUpdate();
     }
-
 
     /**
      * Simple wrapper to return the given record
@@ -113,21 +117,21 @@ abstract class BaseService
      */
     public static function show($record)
     {
-        return ( new static() )->setRecord($record)->doShow();
+        return (new static())->setRecord($record)
+                             ->doShow();
     }
-
 
     /**
      * Wrapper to return paginated results
      * Applies basic filters and adds filters through the individual services filters() method
      *
      * @param string $alias
-     * @param null   $sorting
+     * @param null $sorting
      * @return BaseService
      */
     public static function collection($alias = '', $sorting = null)
     {
-        $instance         = new static();
+        $instance = new static();
         $instance->filter = new Filter($alias);
         $instance->defaultFilters();
         $instance->filters();
@@ -135,7 +139,7 @@ abstract class BaseService
         if (Arr::get($_GET, 'sortable_field') && Arr::get($_GET, 'sortable_direction')) {
             $instance->setSorting([
                 Arr::get($_GET, 'sortable_field'),
-                Arr::get($_GET, 'sortable_direction')
+                Arr::get($_GET, 'sortable_direction'),
             ]);
         }
 
@@ -147,7 +151,6 @@ abstract class BaseService
         return $instance;
     }
 
-
     /**
      * Simple wrapper around the delete method of the record
      *
@@ -157,9 +160,9 @@ abstract class BaseService
      */
     public static function delete($record)
     {
-        return ( new static() )->setRecord($record)->doDelete();
+        return (new static())->setRecord($record)
+                             ->doDelete();
     }
-
 
     /**
      * Sets default filters to use with the collection() method
@@ -167,9 +170,9 @@ abstract class BaseService
     public function defaultFilters()
     {
         $this->filter->add(new SearchRenderer('search'));
-        $this->filter->add(new PerPageRenderer('per_page'))->setup();
+        $this->filter->add(new PerPageRenderer('per_page'))
+                     ->setup();
     }
-
 
     /**
      * Returns the filter class
@@ -182,7 +185,6 @@ abstract class BaseService
         return $this->filter;
     }
 
-
     /**
      * Returns the result of create/update/delete/record methods
      *
@@ -192,7 +194,6 @@ abstract class BaseService
     {
         return $this->result;
     }
-
 
     /**
      * Returns the paginator for the model
@@ -206,9 +207,10 @@ abstract class BaseService
         $query = $this->applyScopes($query);
         $query = $this->applySorting($query);
 
-        return $query->paginate($this->getFilter()->get('per_page')->getValue());
+        return $query->paginate($this->getFilter()
+                                     ->get('per_page')
+                                     ->getValue());
     }
-
 
     /**
      * Set sorting array
@@ -218,11 +220,10 @@ abstract class BaseService
      */
     public function setSorting(array $sorting)
     {
-        [ $this->sortableField, $this->sortableDirection ] = $sorting;
+        [$this->sortableField, $this->sortableDirection] = $sorting;
 
         return $this;
     }
-
 
     /**
      * Add custom sorting, if available
@@ -235,16 +236,16 @@ abstract class BaseService
         // check if we need to join a table
         $join = false;
         if (strpos($this->sortableField, '.') > 0) {
-            [ $table, $field ] = explode('.', $this->sortableField);
-            $tableColumn = $table . '_id';
+            [$table, $field] = explode('.', $this->sortableField);
+            $tableColumn = $table.'_id';
 
             // Handle blamable
             if ($table == 'createdBy' || $table == 'updatedBy' || $table == 'deletedBy') {
-                $tableColumn         = Str::snake($table);
-                $table               = 'user';
-                $this->sortableField = $table . '.' . $field;
+                $tableColumn = Str::snake($table);
+                $table = 'user';
+                $this->sortableField = $table.'.'.$field;
             }
-            $join       = true;
+            $join = true;
             $joinExists = false;
 
             $joins = $query->getQuery()->joins;
@@ -259,7 +260,7 @@ abstract class BaseService
             }
 
             if (! $joinExists) {
-                $query->join(Str::plural($table) . ' as ' . $table, $tableColumn, $table . '.id');
+                $query->join(Str::plural($table).' as '.$table, $tableColumn, $table.'.id');
             }
         }
 
@@ -268,15 +269,12 @@ abstract class BaseService
                 return $query->orderBy($this->sortableField, $this->sortableDirection);
             }
 
-            return $query->orderBy(
-                $query->getModel()->getTable() . '.' . $this->sortableField,
-                $this->sortableDirection
-            );
+            return $query->orderBy($query->getModel()
+                                         ->getTable().'.'.$this->sortableField, $this->sortableDirection);
         }
 
         return $query;
     }
-
 
     /**
      * Add custom scopes to query
@@ -289,7 +287,6 @@ abstract class BaseService
     {
         return $query;
     }
-
 
     /**
      * Show the record (set result to the current record)
@@ -305,7 +302,6 @@ abstract class BaseService
 
         return $this;
     }
-
 
     /**
      * Creates a record and sets the result to the record when successful, or false when unsuccessful
@@ -327,7 +323,6 @@ abstract class BaseService
         return $this;
     }
 
-
     /**
      * Updates a record and sets the result to the record when successful, or false when unsuccessful
      * Also invokes before and after methods
@@ -346,7 +341,6 @@ abstract class BaseService
         return $this;
     }
 
-
     /**
      * Deletes a record and sets the result to either true or false
      * Also invokes before and after methods
@@ -364,7 +358,6 @@ abstract class BaseService
         return $this;
     }
 
-
     /**
      * Sets a Form object to use when creating/updating
      *
@@ -380,7 +373,6 @@ abstract class BaseService
         return $this;
     }
 
-
     /**
      * Sets a record
      *
@@ -395,12 +387,11 @@ abstract class BaseService
         return $this;
     }
 
-
     /**
      * Sets a request object
      *
      * @param Request $request
-     * @param null    $form
+     * @param null $form
      * @return $this
      */
     public function setRequest(Request $request, $form = null)
@@ -424,11 +415,10 @@ abstract class BaseService
         return $this;
     }
 
-
     /**
      * Loops through the fields of the Form object to handle some special cases (date/datetime and checkboxes)
      *
-     * @param Form  $form
+     * @param Form $form
      * @param array $data
      *
      * @return array
@@ -439,10 +429,7 @@ abstract class BaseService
 
             // Handle subforms
             if ($field instanceof ChildFormType) {
-                $data[$field->getRealName()] = $this->handleFormValues(
-                    $field->getForm(),
-                    Arr::get($data, $field->getRealName(), [])
-                );
+                $data[$field->getRealName()] = $this->handleFormValues($field->getForm(), Arr::get($data, $field->getRealName(), []));
             }
 
             // Handle empty checkbox values
@@ -461,7 +448,7 @@ abstract class BaseService
 
             // Handle empty date values
             if ($field instanceof DatepickerType || $field instanceof DatetimepickerType) {
-                if (! isset($data[$field->getRealName() . '_picker']) || (isset($data[$field->getRealName() . '_picker']) && $data[$field->getRealName() . '_picker'] == '')) {
+                if (! isset($data[$field->getRealName().'_picker']) || (isset($data[$field->getRealName().'_picker']) && $data[$field->getRealName().'_picker'] == '')) {
                     $data[$field->getRealName()] = '';
                 }
 
@@ -478,7 +465,6 @@ abstract class BaseService
 
         return $data;
     }
-
 
     /**
      * Handles file uploads either with a UploadedFile object or a base64 encoded file
@@ -516,19 +502,17 @@ abstract class BaseService
         foreach ($this->data as $key => $value) {
             if (preg_match('/delete_media_(.*)/', $key, $matches) == 1 && $value == 1) {
                 $media = $record->getMedia($collection);
-                $mediaItem = $media->where('id', $matches[1])->first();
+                $mediaItem = $media->where('id', $matches[1])
+                                   ->first();
 
                 if (! empty($mediaItem)) {
                     $mediaItem->delete();
 //                    $record->deleteMedia($matches[1]);
-                 }
+                }
             }
         }
 
-        if ((! is_null($file) || $this->isValidBase64(Arr::get(
-            $this->data,
-            $identifier
-        ))) && $addToCollection === false) {
+        if ((! is_null($file) || $this->isValidBase64(Arr::get($this->data, $identifier))) && $addToCollection === false) {
             $record->clearMediaCollection($identifier);
             if (! is_null($collection)) {
                 $record->clearMediaCollection($collection);
@@ -536,14 +520,15 @@ abstract class BaseService
         }
 
         if ($file instanceof UploadedFile && $file->isValid()) {
-            $record->addMedia($file)->toMediaCollection($collection, 'media');
+            $record->addMedia($file)
+                   ->toMediaCollection($collection, 'media');
         } else {
             if ($this->isValidBase64(Arr::get($this->data, $identifier))) {
                 $image = base64_decode($this->data[$identifier]);
 
                 $tempFilename = tempnam(sys_get_temp_dir(), 'upload');
 
-                $name = Arr::get($this->data, $identifier . '_name', $tempFilename);
+                $name = Arr::get($this->data, $identifier.'_name', $tempFilename);
 
                 $handle = fopen($tempFilename, "w");
                 fwrite($handle, $image);
@@ -557,7 +542,6 @@ abstract class BaseService
 
         return $this;
     }
-
 
     /**
      * Helper method to check if a file upload field is base64 encoded
@@ -587,14 +571,12 @@ abstract class BaseService
         return true;
     }
 
-
     /**
      * Stub for the filters method of the child class
      */
     public function filters()
     {
     }
-
 
     /**
      * Stub for the beforeCreate method of the child class
@@ -603,14 +585,12 @@ abstract class BaseService
     {
     }
 
-
     /**
      * Stub for the afterCreate method of the child class
      */
     public function afterCreate()
     {
     }
-
 
     /**
      * Stub for the beforeUpdate method of the child class
@@ -619,14 +599,12 @@ abstract class BaseService
     {
     }
 
-
     /**
      * Stub for the afterUpdate method of the child class
      */
     public function afterUpdate()
     {
     }
-
 
     /**
      * Stub for the beforeDelete method of the child class
@@ -635,7 +613,6 @@ abstract class BaseService
     {
     }
 
-
     /**
      * Stub for the afterDelete method of the child class
      */
@@ -643,14 +620,12 @@ abstract class BaseService
     {
     }
 
-
     /**
      * Stub for the beforeShow method of the child class
      */
     public function beforeShow()
     {
     }
-
 
     /**
      * Stub for the afterShow method of the child class

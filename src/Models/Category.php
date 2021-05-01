@@ -2,50 +2,53 @@
 
 namespace Motor\Backend\Models;
 
-use Illuminate\Database\Eloquent\Model;
-use Kalnoy\Nestedset\NodeTrait;
-use Motor\Core\Traits\Filterable;
 use Culpa\Traits\Blameable;
 use Culpa\Traits\CreatedBy;
 use Culpa\Traits\DeletedBy;
 use Culpa\Traits\UpdatedBy;
+use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Model;
+use Kalnoy\Nestedset\NodeTrait;
+use Kalnoy\Nestedset\QueryBuilder;
+use Motor\Core\Filter\Filter;
+use Motor\Core\Traits\Filterable;
 
 /**
  * Motor\Backend\Models\Category
  *
- * @property int                                                                $id
- * @property string                                                             $name
- * @property string                                                             $scope
- * @property int                                                                $_lft
- * @property int                                                                $_rgt
- * @property int|null                                                           $parent_id
- * @property int                                                                $created_by
- * @property int                                                                $updated_by
- * @property int|null                                                           $deleted_by
- * @property \Illuminate\Support\Carbon|null                                    $created_at
- * @property \Illuminate\Support\Carbon|null                                    $updated_at
+ * @property int $id
+ * @property string $name
+ * @property string $scope
+ * @property int $_lft
+ * @property int $_rgt
+ * @property int|null $parent_id
+ * @property int $created_by
+ * @property int $updated_by
+ * @property int|null $deleted_by
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
  * @property-read \Kalnoy\Nestedset\Collection|\Motor\Backend\Models\Category[] $children
- * @property-read \Motor\Backend\Models\User                                    $creator
- * @property-read \Motor\Backend\Models\User|null                               $eraser
- * @property-read \Motor\Backend\Models\Category|null                           $parent
- * @property-read \Motor\Backend\Models\User                                    $updater
- * @method static \Illuminate\Database\Eloquent\Builder|\Motor\Backend\Models\Category d()
- * @method static \Illuminate\Database\Eloquent\Builder|\Motor\Backend\Models\Category filteredBy(\Motor\Core\Filter\Filter $filter, $column )
- * @method static \Illuminate\Database\Eloquent\Builder|\Motor\Backend\Models\Category filteredByMultiple(\Motor\Core\Filter\Filter $filter )
- * @method static \Kalnoy\Nestedset\QueryBuilder|\Motor\Backend\Models\Category newModelQuery()
- * @method static \Kalnoy\Nestedset\QueryBuilder|\Motor\Backend\Models\Category newQuery()
- * @method static \Kalnoy\Nestedset\QueryBuilder|\Motor\Backend\Models\Category query()
- * @method static \Illuminate\Database\Eloquent\Builder|\Motor\Backend\Models\Category whereCreatedAt( $value )
- * @method static \Illuminate\Database\Eloquent\Builder|\Motor\Backend\Models\Category whereCreatedBy( $value )
- * @method static \Illuminate\Database\Eloquent\Builder|\Motor\Backend\Models\Category whereDeletedBy( $value )
- * @method static \Illuminate\Database\Eloquent\Builder|\Motor\Backend\Models\Category whereId( $value )
- * @method static \Illuminate\Database\Eloquent\Builder|\Motor\Backend\Models\Category whereLft( $value )
- * @method static \Illuminate\Database\Eloquent\Builder|\Motor\Backend\Models\Category whereName( $value )
- * @method static \Illuminate\Database\Eloquent\Builder|\Motor\Backend\Models\Category whereParentId( $value )
- * @method static \Illuminate\Database\Eloquent\Builder|\Motor\Backend\Models\Category whereRgt( $value )
- * @method static \Illuminate\Database\Eloquent\Builder|\Motor\Backend\Models\Category whereScope( $value )
- * @method static \Illuminate\Database\Eloquent\Builder|\Motor\Backend\Models\Category whereUpdatedAt( $value )
- * @method static \Illuminate\Database\Eloquent\Builder|\Motor\Backend\Models\Category whereUpdatedBy( $value )
+ * @property-read \Motor\Backend\Models\User $creator
+ * @property-read \Motor\Backend\Models\User|null $eraser
+ * @property-read \Motor\Backend\Models\Category|null $parent
+ * @property-read \Motor\Backend\Models\User $updater
+ * @method static Builder|Category d()
+ * @method static Builder|Category filteredBy(Filter $filter, $column)
+ * @method static Builder|Category filteredByMultiple(Filter $filter)
+ * @method static QueryBuilder|Category newModelQuery()
+ * @method static QueryBuilder|Category newQuery()
+ * @method static QueryBuilder|Category query()
+ * @method static Builder|Category whereCreatedAt($value)
+ * @method static Builder|Category whereCreatedBy($value)
+ * @method static Builder|Category whereDeletedBy($value)
+ * @method static Builder|Category whereId($value)
+ * @method static Builder|Category whereLft($value)
+ * @method static Builder|Category whereName($value)
+ * @method static Builder|Category whereParentId($value)
+ * @method static Builder|Category whereRgt($value)
+ * @method static Builder|Category whereScope($value)
+ * @method static Builder|Category whereUpdatedAt($value)
+ * @method static Builder|Category whereUpdatedBy($value)
  * @mixin \Eloquent
  */
 class Category extends Model
@@ -59,7 +62,7 @@ class Category extends Model
      *
      * @var array
      */
-    protected $blameable = [ 'created', 'updated', 'deleted' ];
+    protected $blameable = ['created', 'updated', 'deleted'];
 
     /**
      * Searchable columns for the searchable trait
@@ -67,7 +70,7 @@ class Category extends Model
      * @var array
      */
     protected $searchableColumns = [
-        'name'
+        'name',
     ];
 
     /**
@@ -77,9 +80,8 @@ class Category extends Model
      */
     protected $fillable = [
         'name',
-        'scope'
+        'scope',
     ];
-
 
     /**
      * Get searchable columns defined on the model.
@@ -100,6 +102,6 @@ class Category extends Model
      */
     protected function getScopeAttributes()
     {
-        return [ 'scope' ];
+        return ['scope'];
     }
 }

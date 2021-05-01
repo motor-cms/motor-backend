@@ -2,6 +2,7 @@
 
 namespace Motor\Backend\Http\Controllers\Api;
 
+use Illuminate\Http\Request;
 use Motor\Backend\Http\Controllers\ApiController;
 use Motor\Backend\Http\Requests\Backend\CategoryRequest;
 use Motor\Backend\Http\Resources\CategoryCollection;
@@ -82,7 +83,7 @@ class CategoriesController extends ApiController
      * @param \Motor\Backend\Models\Category $categoryTree
      * @return \Illuminate\Http\JsonResponse|\Motor\Backend\Http\Resources\CategoryCollection
      */
-    public function index(Category $categoryTree)
+    public function index(Category $categoryTree, Request $request)
     {
         $service = CategoryService::collection();
 
@@ -90,9 +91,15 @@ class CategoriesController extends ApiController
             return response()->json(['message' => 'Category tree not found'], 404);
         }
 
+        if (is_null($categoryTree->id)) {
+            $scope = $request->get('scope');
+        } else {
+            $scope = $categoryTree->scope;
+        }
+
         $filter = $service->getFilter();
         $filter->add(new WhereRenderer('scope'))
-               ->setValue($categoryTree->scope);
+               ->setValue($scope);
         $filter->add(new WhereRenderer('parent_id'))
                ->setOperator('!=')
                ->setAllowNull(true)

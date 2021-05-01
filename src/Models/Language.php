@@ -2,33 +2,35 @@
 
 namespace Motor\Backend\Models;
 
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Motor\Backend\Database\Factories\LanguageFactory;
+use Motor\Core\Filter\Filter;
 use Motor\Core\Traits\Filterable;
 use Motor\Core\Traits\Searchable;
 
 /**
  * Motor\Backend\Models\Language
  *
- * @property int                             $id
- * @property string                          $iso_639_1
- * @property string                          $english_name
- * @property string                          $native_name
+ * @property int $id
+ * @property string $iso_639_1
+ * @property string $english_name
+ * @property string $native_name
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
- * @method static \Illuminate\Database\Eloquent\Builder|\Motor\Backend\Models\Language filteredBy(\Motor\Core\Filter\Filter $filter, $column )
- * @method static \Illuminate\Database\Eloquent\Builder|\Motor\Backend\Models\Language filteredByMultiple(\Motor\Core\Filter\Filter $filter )
- * @method static \Illuminate\Database\Eloquent\Builder|\Motor\Backend\Models\Language newModelQuery()
- * @method static \Illuminate\Database\Eloquent\Builder|\Motor\Backend\Models\Language newQuery()
- * @method static \Illuminate\Database\Eloquent\Builder|\Motor\Backend\Models\Language query()
- * @method static \Illuminate\Database\Eloquent\Builder|\Motor\Backend\Models\Language search( $q, $full_text = false )
- * @method static \Illuminate\Database\Eloquent\Builder|\Motor\Backend\Models\Language whereCreatedAt( $value )
- * @method static \Illuminate\Database\Eloquent\Builder|\Motor\Backend\Models\Language whereEnglishName( $value )
- * @method static \Illuminate\Database\Eloquent\Builder|\Motor\Backend\Models\Language whereId( $value )
- * @method static \Illuminate\Database\Eloquent\Builder|\Motor\Backend\Models\Language whereIso6391( $value )
- * @method static \Illuminate\Database\Eloquent\Builder|\Motor\Backend\Models\Language whereNativeName( $value )
- * @method static \Illuminate\Database\Eloquent\Builder|\Motor\Backend\Models\Language whereUpdatedAt( $value )
+ * @method static Builder|Language filteredBy(Filter $filter, $column)
+ * @method static Builder|Language filteredByMultiple(Filter $filter)
+ * @method static Builder|Language newModelQuery()
+ * @method static Builder|Language newQuery()
+ * @method static Builder|Language query()
+ * @method static Builder|Language search($q, $full_text = false)
+ * @method static Builder|Language whereCreatedAt($value)
+ * @method static Builder|Language whereEnglishName($value)
+ * @method static Builder|Language whereId($value)
+ * @method static Builder|Language whereIso6391($value)
+ * @method static Builder|Language whereNativeName($value)
+ * @method static Builder|Language whereUpdatedAt($value)
  * @mixin \Eloquent
  */
 class Language extends Model
@@ -42,7 +44,7 @@ class Language extends Model
      *
      * @var array
      */
-    protected $searchableColumns = [ 'iso_639_1', 'native_name', 'english_name' ];
+    protected $searchableColumns = ['iso_639_1', 'native_name', 'english_name'];
 
     /**
      * The attributes that are mass assignable.
@@ -55,8 +57,8 @@ class Language extends Model
         'native_name',
     ];
 
-	protected static function newFactory()
-	{
-		return LanguageFactory::new();
-	}
+    protected static function newFactory()
+    {
+        return LanguageFactory::new();
+    }
 }

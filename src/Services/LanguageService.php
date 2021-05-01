@@ -6,6 +6,7 @@ use Motor\Backend\Models\Language;
 
 /**
  * Class LanguageService
+ *
  * @package Motor\Backend\Services
  */
 class LanguageService extends BaseService

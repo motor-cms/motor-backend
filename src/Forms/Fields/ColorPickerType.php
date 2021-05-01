@@ -6,11 +6,11 @@ use Kris\LaravelFormBuilder\Fields\FormField;
 
 /**
  * Class ColorPickerType
+ *
  * @package Motor\Backend\Forms\Fields
  */
 class ColorPickerType extends FormField
 {
-
     /**
      * @return string
      */
@@ -22,17 +22,16 @@ class ColorPickerType extends FormField
         return 'motor-backend::laravel-form-builder.colorpicker';
     }
 
-
     /**
      * @param array $options
-     * @param bool  $showLabel
-     * @param bool  $showField
-     * @param bool  $showError
+     * @param bool $showLabel
+     * @param bool $showField
+     * @param bool $showError
      * @return string
      */
     public function render(array $options = [], $showLabel = true, $showField = true, $showError = true)
     {
-        $options['attr'] = [ 'class' => 'form-control colorpicker' ];
+        $options['attr'] = ['class' => 'form-control colorpicker'];
 
         return parent::render($options, $showLabel, $showField, $showError);
     }

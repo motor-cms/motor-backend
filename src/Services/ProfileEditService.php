@@ -7,12 +7,12 @@ use Motor\Backend\Models\User;
 
 /**
  * Class ProfileEditService
+ *
  * @package Motor\Backend\Services
  */
 class ProfileEditService extends BaseService
 {
     protected $model = User::class;
-
 
     public function beforeUpdate()
     {
@@ -22,7 +22,6 @@ class ProfileEditService extends BaseService
             $this->data['password'] = bcrypt($this->data['password']);
         }
     }
-
 
     public function afterUpdate()
     {

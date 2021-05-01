@@ -4,8 +4,8 @@ namespace Motor\Backend\Forms\Backend;
 
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Support\Facades\Auth;
-use Motor\Backend\Models\Role;
 use Kris\LaravelFormBuilder\Form;
+use Motor\Backend\Models\Role;
 use Motor\Backend\Models\User;
 
 /**

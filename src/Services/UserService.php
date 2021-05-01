@@ -9,18 +9,17 @@ use Motor\Backend\Models\User;
 
 /**
  * Class UserService
+ *
  * @package Motor\Backend\Services
  */
 class UserService extends BaseService
 {
     protected $model = User::class;
 
-
     public function filters()
     {
         $this->filter->addClientFilter();
     }
-
 
     public function beforeCreate()
     {
@@ -33,13 +32,11 @@ class UserService extends BaseService
         $this->updatePassword();
     }
 
-
     public function afterCreate()
     {
         $this->syncRolesAndPermissions();
         $this->uploadFiles();
     }
-
 
     public function beforeUpdate()
     {

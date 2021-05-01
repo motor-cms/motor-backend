@@ -7,11 +7,11 @@ use Motor\Backend\Models\User;
 
 /**
  * Class ProfileEditForm
+ *
  * @package Motor\Backend\Forms\Backend
  */
 class ProfileEditForm extends Form
 {
-
     /**
      * Define fields for ProfileEditForm
      *
@@ -19,23 +19,22 @@ class ProfileEditForm extends Form
      */
     public function buildForm()
     {
-        $this->add('name', 'text', [ 'label' => trans('motor-backend::backend/users.name'), 'rules' => 'required' ])
+        $this->add('name', 'text', ['label' => trans('motor-backend::backend/users.name'), 'rules' => 'required'])
              ->add('password', 'repeated', [
                  'type'           => 'password',
-                 'first_options'  => [ 'label' => trans('motor-backend::backend/users.password'), 'value' => '' ],
+                 'first_options'  => ['label' => trans('motor-backend::backend/users.password'), 'value' => ''],
                  'second_options' => [
                      'label' => trans('motor-backend::backend/users.password_confirm'),
-                     'value' => ''
-                 ]
+                     'value' => '',
+                 ],
              ])
-             ->add(
-                 'avatar',
-                 'file_image',
-                 [ 'label' => trans('motor-backend::backend/global.image'), 'model' => User::class ]
-             )
+             ->add('avatar', 'file_image', [
+                     'label' => trans('motor-backend::backend/global.image'),
+                     'model' => User::class,
+                 ])
              ->add('submit', 'submit', [
-                 'attr'  => [ 'class' => 'btn btn-primary' ],
-                 'label' => trans('motor-backend::backend/users.profile.save')
+                 'attr'  => ['class' => 'btn btn-primary'],
+                 'label' => trans('motor-backend::backend/users.profile.save'),
              ]);
     }
 }

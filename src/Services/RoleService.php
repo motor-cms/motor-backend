@@ -8,12 +8,12 @@ use Motor\Backend\Models\Role;
 
 /**
  * Class RoleService
+ *
  * @package Motor\Backend\Services
  */
 class RoleService extends BaseService
 {
     protected $model = Role::class;
-
 
     public function afterCreate()
     {
@@ -21,7 +21,6 @@ class RoleService extends BaseService
             $this->record->givePermissionTo(Permission::find((int) $permission));
         }
     }
-
 
     public function afterUpdate()
     {

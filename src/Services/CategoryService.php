@@ -6,35 +6,33 @@ use Motor\Backend\Models\Category;
 
 /**
  * Class CategoryService
+ *
  * @package Motor\Backend\Services
  */
 class CategoryService extends BaseService
 {
     protected $model = Category::class;
 
-
     public function filters()
     {
-        $searchFilter = $this->getFilter()->get('search');
-        $model        = $this->model;
+        $searchFilter = $this->getFilter()
+                             ->get('search');
+        $model = $this->model;
         if (! is_object($this->model)) {
             $model = new $this->model();
         }
         $searchFilter->setSearchableColumns($model->getSearchableColumns());
     }
 
-
     public function beforeCreate()
     {
         $this->setTreePosition();
     }
 
-
     public function beforeUpdate()
     {
         $this->setTreePosition();
     }
-
 
     protected function setTreePosition()
     {
@@ -43,7 +41,7 @@ class CategoryService extends BaseService
 
         // If it exists, append the item AFTER the node, but only if it has been changed
         if (! is_null($node)) {
-            $this->record->scope   = $node->scope;
+            $this->record->scope = $node->scope;
             $formerPreviousSibling = null;
             if ($this->record->exists) {
                 $formerPreviousSibling = $this->record->getPrevSibling();
@@ -60,7 +58,7 @@ class CategoryService extends BaseService
             // If it exists, append the item BEFORE the node, but only if it has been changed
             if (! is_null($node)) {
                 $this->record->scope = $node->scope;
-                $formerNextSibling   = null;
+                $formerNextSibling = null;
                 if ($this->record->exists) {
                     $formerNextSibling = $this->record->getNextSibling();
                 }
@@ -72,11 +70,13 @@ class CategoryService extends BaseService
 
         // If there is no previous or next sibling, try to check if we need to append / prepend it to the root node
         if (is_null($node)) {
-            $node           = Category::find($this->request->get('parent_id'));
-            $previousParent = $this->record->ancestors()->get()->last();
+            $node = Category::find($this->request->get('parent_id'));
+            $previousParent = $this->record->ancestors()
+                                           ->get()
+                                           ->last();
             if (! is_null($node) && ! is_null($previousParent) && $previousParent->id != $node->id) {
                 $this->record->scope = $node->scope;
-                $nextSibling         = $this->record->getNextSibling();
+                $nextSibling = $this->record->getNextSibling();
                 if (is_null($nextSibling)) {
                     $this->record->appendToNode($node);
                 } else {

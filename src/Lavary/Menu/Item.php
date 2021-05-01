@@ -2,13 +2,15 @@
 
 namespace Motor\Backend\Lavary\Menu;
 
+use Request;
+
 /**
  * Class Item
+ *
  * @package Motor\Backend\Lavary\Menu
  */
 class Item extends \Lavary\Menu\Item
 {
-
     /**
      * Decide if the item should be active
      */
@@ -17,16 +19,13 @@ class Item extends \Lavary\Menu\Item
         parent::checkActivationStatus();
 
         if ($this->builder->conf['restful'] == true) {
-            $path  = ltrim(parse_url($this->url(), PHP_URL_PATH), '/');
-            $rpath = \Request::path();
+            $path = ltrim(parse_url($this->url(), PHP_URL_PATH), '/');
+            $rpath = Request::path();
 
             if ($this->builder->conf['rest_base']) {
-                $base = (is_array($this->builder->conf['rest_base'])) ? implode(
-                    '|',
-                    $this->builder->conf['rest_base']
-                ) : $this->builder->conf['rest_base'];
+                $base = (is_array($this->builder->conf['rest_base'])) ? implode('|', $this->builder->conf['rest_base']) : $this->builder->conf['rest_base'];
 
-                [ $path, $rpath ] = preg_replace('@^(' . $base . ')/@', '', [ $path, $rpath ], 1);
+                [$path, $rpath] = preg_replace('@^('.$base.')/@', '', [$path, $rpath], 1);
             }
 
             // HACK TO SUPPORT ALIASES FOR NAVIGATION ITEMS

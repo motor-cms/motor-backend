@@ -9,11 +9,11 @@ use Motor\Backend\Models\PermissionGroup;
 
 /**
  * Class MotorCreatePermissionsCommand
+ *
  * @package Motor\Backend\Console\Commands
  */
 class MotorCreatePermissionsCommand extends Command
 {
-
     /**
      * The console command name.
      *
@@ -28,7 +28,6 @@ class MotorCreatePermissionsCommand extends Command
      */
     protected $description = 'Create permissions according to the configuration and write them into the databases permissions table';
 
-
     /**
      * Execute the console command.
      *
@@ -40,27 +39,29 @@ class MotorCreatePermissionsCommand extends Command
         foreach ($permissions as $name => $group) {
 
             // Check if the group exists
-            $permissionGroup = PermissionGroup::where('name', $name)->first();
+            $permissionGroup = PermissionGroup::where('name', $name)
+                                              ->first();
             if (is_null($permissionGroup)) {
                 $permissionGroup = new PermissionGroup();
-                $this->info('Creating permission group for ' . $name);
+                $this->info('Creating permission group for '.$name);
             } else {
-                $this->info('Updating permission group for ' . $name);
+                $this->info('Updating permission group for '.$name);
             }
 
-            $permissionGroup->name          = $name;
+            $permissionGroup->name = $name;
             $permissionGroup->sort_position = Arr::get($group, 'sort_position');
             $permissionGroup->save();
 
             foreach ($group['values'] as $value) {
 
                 // Check if the permission exists
-                $permission = Permission::where('name', $name . '.' . $value)->first();
+                $permission = Permission::where('name', $name.'.'.$value)
+                                        ->first();
                 if (is_null($permission)) {
-                    $this->info('Creating permission for ' . $name . ' > ' . $value);
-                    $permission                      = new Permission();
-                    $permission->name                = $name . '.' . $value;
-                    $permission->guard_name          = 'web';
+                    $this->info('Creating permission for '.$name.' > '.$value);
+                    $permission = new Permission();
+                    $permission->name = $name.'.'.$value;
+                    $permission->guard_name = 'web';
                     $permission->permission_group_id = $permissionGroup->id;
                     $permission->save();
                 }

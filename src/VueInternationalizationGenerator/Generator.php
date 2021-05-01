@@ -1,11 +1,13 @@
 <?php namespace Motor\Backend\VueInternationalizationGenerator;
 
+use App;
 use DirectoryIterator;
 use Exception;
-use App;
+use SplFileInfo;
 
 /**
  * Class Generator
+ *
  * @package Motor\Backend\VueInternationalizationGenerator
  */
 class Generator
@@ -17,8 +19,8 @@ class Generator
     private $filesToCreate = [];
 
     public const VUEX_I18N = 'vuex-i18n';
-    public const VUE_I18N = 'vue-i18n';
 
+    public const VUE_I18N = 'vue-i18n';
 
     /**
      * The constructor
@@ -33,11 +35,10 @@ class Generator
         $this->config = $config;
     }
 
-
     /**
      * @param string $path
-     * @param bool   $umd
-     * @param bool   $withVendor
+     * @param bool $umd
+     * @param bool $withVendor
      *
      * @return string
      * @throws Exception
@@ -45,16 +46,16 @@ class Generator
     public function generateFromPath($path, $umd = null, $withVendor = false)
     {
         if (! is_dir($path)) {
-            throw new Exception('Directory not found: ' . $path);
+            throw new Exception('Directory not found: '.$path);
         }
 
         $locales = [];
-        $files   = [];
-        $dir     = new DirectoryIterator($path);
-        $jsBody  = '';
+        $files = [];
+        $dir = new DirectoryIterator($path);
+        $jsBody = '';
         foreach ($dir as $fileinfo) {
             if (! $fileinfo->isDot()) {
-                if (! $withVendor && in_array($fileinfo->getFilename(), [ 'vendor' ])) {
+                if (! $withVendor && in_array($fileinfo->getFilename(), ['vendor'])) {
                     continue;
                 }
 
@@ -64,7 +65,7 @@ class Generator
         asort($files);
 
         foreach ($files as $fileName) {
-            $fileinfo = new \SplFileInfo($fileName);
+            $fileinfo = new SplFileInfo($fileName);
 
             $noExt = $this->removeExtension($fileinfo->getFilename());
 
@@ -87,17 +88,18 @@ class Generator
         // loop through all namespaces and get data from translation files
         $translator = app('translator');
 
-        foreach ($translator->getLoader()->namespaces() as $namespace => $directory) {
-            $fileinfo = new \SplFileInfo($directory);
+        foreach ($translator->getLoader()
+                            ->namespaces() as $namespace => $directory) {
+            $fileinfo = new SplFileInfo($directory);
 
             if (! $fileinfo->isDir()) {
                 continue;
             }
 
             // get all files
-            $dir    = new DirectoryIterator($directory);
+            $dir = new DirectoryIterator($directory);
             $jsBody = '';
-            $files  = [];
+            $files = [];
             foreach ($dir as $fileinfo) {
                 if (! $fileinfo->isDot()) {
                     $files[] = $fileinfo->getRealPath();
@@ -105,7 +107,7 @@ class Generator
             }
 
             foreach ($files as $fileName) {
-                $fileinfo = new \SplFileInfo($fileName);
+                $fileinfo = new SplFileInfo($fileName);
 
                 $noExt = $this->removeExtension($fileinfo->getFilename());
 
@@ -124,10 +126,10 @@ class Generator
 
         $locales = $this->adjustVendor($locales);
 
-        $jsonLocales = json_encode($locales, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE) . PHP_EOL;
+        $jsonLocales = json_encode($locales, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE).PHP_EOL;
 
         if (json_last_error() !== JSON_ERROR_NONE) {
-            throw new Exception('Could not generate JSON, error code ' . json_last_error());
+            throw new Exception('Could not generate JSON, error code '.json_last_error());
         }
 
         if (! $umd) {
@@ -139,10 +141,9 @@ class Generator
         return $jsBody;
     }
 
-
     /**
      * @param string $path
-     * @param bool   $umd
+     * @param bool $umd
      *
      * @return string
      * @throws Exception
@@ -150,16 +151,16 @@ class Generator
     public function generateMultiple($path, $umd = null)
     {
         if (! is_dir($path)) {
-            throw new Exception('Directory not found: ' . $path);
+            throw new Exception('Directory not found: '.$path);
         }
-        $jsPath       = base_path() . $this->config['jsPath'];
-        $locales      = [];
+        $jsPath = base_path().$this->config['jsPath'];
+        $locales = [];
         $fileToCreate = '';
         $createdFiles = '';
-        $dir          = new DirectoryIterator($path);
-        $jsBody       = '';
+        $dir = new DirectoryIterator($path);
+        $jsBody = '';
         foreach ($dir as $fileinfo) {
-            if (! $fileinfo->isDot() && ! in_array($fileinfo->getFilename(), [ 'vendor' ])) {
+            if (! $fileinfo->isDot() && ! in_array($fileinfo->getFilename(), ['vendor'])) {
                 $noExt = $this->removeExtension($fileinfo->getFilename());
                 if (! in_array($noExt, $this->availableLocales)) {
                     App::setLocale($noExt);
@@ -182,11 +183,11 @@ class Generator
             }
         }
         foreach ($this->filesToCreate as $fileName => $data) {
-            $fileToCreate = $jsPath . $fileName . '.js';
-            $createdFiles .= $fileToCreate . PHP_EOL;
-            $jsonLocales  = json_encode($data, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE) . PHP_EOL;
+            $fileToCreate = $jsPath.$fileName.'.js';
+            $createdFiles .= $fileToCreate.PHP_EOL;
+            $jsonLocales = json_encode($data, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE).PHP_EOL;
             if (json_last_error() !== JSON_ERROR_NONE) {
-                throw new Exception('Could not generate JSON, error code ' . json_last_error());
+                throw new Exception('Could not generate JSON, error code '.json_last_error());
             }
             if (! $umd) {
                 $jsBody = $this->getES6Module($jsonLocales);
@@ -204,7 +205,6 @@ class Generator
         return $createdFiles;
     }
 
-
     /**
      * @param $path
      * @return array|null
@@ -218,12 +218,11 @@ class Generator
         }
         $tmp = (array) json_decode(file_get_contents($path), true);
         if (gettype($tmp) !== "array") {
-            throw new Exception('Unexpected data while processing ' . $path);
+            throw new Exception('Unexpected data while processing '.$path);
         }
 
         return $this->adjustArray($tmp);
     }
-
 
     /**
      * @param $path
@@ -232,8 +231,8 @@ class Generator
      */
     private function allocateLocaleArray($path)
     {
-        $data       = [];
-        $dir        = new DirectoryIterator($path);
+        $data = [];
+        $dir = new DirectoryIterator($path);
         $lastLocale = last($this->availableLocales);
         foreach ($dir as $fileinfo) {
             // Do not mess with dotfiles at all.
@@ -244,36 +243,29 @@ class Generator
             if ($fileinfo->isDir()) {
                 // Recursivley iterate through subdirs, until everything is allocated.
 
-                $data[$fileinfo->getFilename()] = $this->allocateLocaleArray($path . '/' . $fileinfo->getFilename());
+                $data[$fileinfo->getFilename()] = $this->allocateLocaleArray($path.'/'.$fileinfo->getFilename());
             } else {
-                $noExt    = $this->removeExtension($fileinfo->getFilename());
-                $fileName = $path . '/' . $fileinfo->getFilename();
+                $noExt = $this->removeExtension($fileinfo->getFilename());
+                $fileName = $path.'/'.$fileinfo->getFilename();
 
                 // Ignore non *.php files (ex.: .gitignore, vim swap files etc.)
                 if (pathinfo($fileName, PATHINFO_EXTENSION) !== 'php') {
                     continue;
                 }
 
-                if (isset($this->config['langFiles']) && ! empty($this->config['langFiles']) && ! in_array(
-                    $noExt,
-                    $this->config['langFiles']
-                )) {
+                if (isset($this->config['langFiles']) && ! empty($this->config['langFiles']) && ! in_array($noExt, $this->config['langFiles'])) {
                     continue;
                 }
 
                 $tmp = include $fileName;
 
                 if (gettype($tmp) !== "array") {
-                    throw new Exception('Unexpected data while processing ' . $fileName);
+                    throw new Exception('Unexpected data while processing '.$fileName);
                     continue;
                 }
                 if ($lastLocale !== false) {
-                    $root                                        = realpath(base_path() . $this->config['langPath'] . '/' . $lastLocale);
-                    $filePath                                    = $this->removeExtension(str_replace(
-                        '\\',
-                        '_',
-                        ltrim(str_replace($root, '', realpath($fileName)), '\\')
-                    ));
+                    $root = realpath(base_path().$this->config['langPath'].'/'.$lastLocale);
+                    $filePath = $this->removeExtension(str_replace('\\', '_', ltrim(str_replace($root, '', realpath($fileName)), '\\')));
                     $this->filesToCreate[$filePath][$lastLocale] = $this->adjustArray($tmp);
                 }
 
@@ -283,7 +275,6 @@ class Generator
 
         return $data;
     }
-
 
     /**
      * @param array $arr
@@ -305,7 +296,6 @@ class Generator
 
         return $res;
     }
-
 
     /**
      * Adjus vendor index placement.
@@ -331,7 +321,6 @@ class Generator
         return $locales;
     }
 
-
     /**
      * Turn Laravel style ":link" into vue-i18n style "{link}" or vuex-i18n style ":::".
      *
@@ -346,15 +335,14 @@ class Generator
 
         if ($this->config['i18nLib'] === self::VUEX_I18N) {
             $searchPipePattern = '/(\s)*(\|)(\s)*/';
-            $threeColons       = ' ::: ';
-            $string            = preg_replace($searchPipePattern, $threeColons, $string);
+            $threeColons = ' ::: ';
+            $string = preg_replace($searchPipePattern, $threeColons, $string);
         }
 
         return preg_replace_callback('/(?<!mailto|tel):\w+/', static function ($matches) {
-            return '{' . mb_substr($matches[0], 1) . '}';
+            return '{'.mb_substr($matches[0], 1).'}';
         }, $string);
     }
-
 
     /**
      * Returns filename, with extension stripped
@@ -372,7 +360,6 @@ class Generator
 
         return mb_substr($filename, 0, $pos);
     }
-
 
     /**
      * Returns an UMD style module
@@ -393,7 +380,6 @@ class Generator
 })));
 HEREDOC;
     }
-
 
     /**
      * Returns an ES6 style module

@@ -2,22 +2,25 @@
 
 namespace Motor\Backend\Helpers;
 
+use Exception;
 use Illuminate\Support\Facades\Log;
-use Motor\Backend\Models\EmailTemplate;
 use Illuminate\Support\Facades\Mail;
+use Motor\Backend\Models\EmailTemplate;
 
 class EmailHelper
 {
     public static function sendEmail($templateName, $headers = [], $data = [])
     {
         // Try to get email template
-        $template = EmailTemplate::where('name', $templateName)->first();
+        $template = EmailTemplate::where('name', $templateName)
+                                 ->first();
         if (is_null($template)) {
             Log::error('No template found for '.$templateName);
+
             return false;
         }
 
-        $body = view([ 'template' => nl2br($template->body_text) ], $data)->render();
+        $body = view(['template' => nl2br($template->body_text)], $data)->render();
 
         try {
             Mail::html($body, function ($message) use ($headers, $template, $body, $data) {
@@ -38,10 +41,9 @@ class EmailHelper
                     $message->bcc($headers['bcc_email'], $headers['bcc_name']);
                 }
 
-                $message->subject(html_entity_decode(view([ 'template' => $template->subject ], $data)->render()));
-
+                $message->subject(html_entity_decode(view(['template' => $template->subject], $data)->render()));
             });
-        } catch (\Exception $e) {
+        } catch (Exception $e) {
             Log::error($e->getMessage());
 
             return false;
@@ -49,5 +51,4 @@ class EmailHelper
 
         return true;
     }
-
 }

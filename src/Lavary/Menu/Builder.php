@@ -6,16 +6,16 @@ use Illuminate\Support\Arr;
 
 /**
  * Class Builder
+ *
  * @package Motor\Backend\Lavary\Menu
  */
 class Builder extends \Lavary\Menu\Builder
 {
-
     /**
      * Adds an item to the menu
      *
      * @param string $title
-     * @param array  $options
+     * @param array $options
      *
      * @return \Lavary\Menu\Item|Item
      */

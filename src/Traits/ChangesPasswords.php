@@ -3,20 +3,20 @@
 namespace Motor\Backend\Traits;
 
 use Illuminate\Foundation\Auth\RedirectsUsers;
-use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Password;
+use Illuminate\Support\Str;
 
 /**
  * Trait ChangesPasswords
+ *
  * @package Motor\Backend\Traits
  */
 trait ChangesPasswords
 {
     use RedirectsUsers;
-
 
     /**
      * Reset the given user's password.
@@ -28,13 +28,13 @@ trait ChangesPasswords
     {
         $this->validate($request, $this->rules(), $this->validationErrorMessages());
 
-        $this->resetPassword(Auth::guard()->user(), $request->get('password'));
+        $this->resetPassword(Auth::guard()
+                                 ->user(), $request->get('password'));
 
         flash()->success(trans('motor-backend::backend/login.password_successfully_changed'));
 
         return $this->sendResetResponse('Success');
     }
-
 
     /**
      * Get the password reset validation rules.
@@ -48,7 +48,6 @@ trait ChangesPasswords
         ];
     }
 
-
     /**
      * Get the password reset validation error messages.
      *
@@ -58,7 +57,6 @@ trait ChangesPasswords
     {
         return [];
     }
-
 
     /**
      * Get the password reset credentials from the request.
@@ -72,18 +70,17 @@ trait ChangesPasswords
         return $request->only('password', 'password_confirmation');
     }
 
-
     /**
      * Reset the given user's password.
      *
      * @param \Illuminate\Contracts\Auth\CanResetPassword $user
-     * @param string                                      $password
+     * @param string $password
      *
      * @return void
      */
     protected function resetPassword($user, $password)
     {
-        $user->password                 = Hash::make($password);
+        $user->password = Hash::make($password);
         $user->password_last_changed_at = date('Y-m-d H:i:s');
 
         $user->setRememberToken(Str::random(60));
@@ -92,9 +89,9 @@ trait ChangesPasswords
 
         //event(new PasswordReset($user));
 
-        $this->guard()->login($user);
+        $this->guard()
+             ->login($user);
     }
-
 
     /**
      * Get the response for a successful password reset.
@@ -108,20 +105,21 @@ trait ChangesPasswords
         return redirect($this->redirectPath())->with('status', trans($response));
     }
 
-
     /**
      * Get the response for a failed password reset.
      *
      * @param \Illuminate\Http\Request $request
-     * @param string                   $response
+     * @param string $response
      *
      * @return \Illuminate\Http\RedirectResponse|\Illuminate\Http\JsonResponse
      */
     protected function sendResetFailedResponse(Request $request, $response)
     {
-        return redirect()->back()->withInput($request->only('email'))->withErrors([ 'email' => trans($response) ]);
+        return redirect()
+            ->back()
+            ->withInput($request->only('email'))
+            ->withErrors(['email' => trans($response)]);
     }
-
 
     /**
      * Get the broker to be used during password reset.
@@ -132,7 +130,6 @@ trait ChangesPasswords
     {
         return Password::broker();
     }
-
 
     /**
      * Get the guard to be used during password reset.

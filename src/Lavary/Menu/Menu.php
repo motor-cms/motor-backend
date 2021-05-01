@@ -2,17 +2,19 @@
 
 namespace Motor\Backend\Lavary\Menu;
 
+use View;
+
 /**
  * Class Menu
+ *
  * @package Motor\Backend\Lavary\Menu
  */
 class Menu extends \Lavary\Menu\Menu
 {
-
     /**
      * Create a new menu instance
      *
-     * @param string   $name
+     * @param string $name
      * @param callable $callback
      *
      * @return \Lavary\Menu\Menu
@@ -31,7 +33,7 @@ class Menu extends \Lavary\Menu\Menu
             $this->collection->put($name, $this->menu[$name]);
 
             // Make the instance available in all views
-            \View::share($name, $this->menu[$name]);
+            View::share($name, $this->menu[$name]);
 
             return $this->menu[$name];
         }

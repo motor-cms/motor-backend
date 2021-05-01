@@ -9,16 +9,17 @@ use Illuminate\Support\Facades\Route;
 use Illuminate\Support\ServiceProvider;
 use Motor\Backend\Console\Commands\MotorCreatePermissionsCommand;
 use Motor\Backend\Console\Commands\MotorGenerateIncludeCommand;
-use Motor\Backend\Models\ConfigVariable;
 use Motor\Backend\Console\Commands\ZiggyGenerateCommand;
+use Motor\Backend\Models\Category;
+use Motor\Backend\Models\ConfigVariable;
 
 /**
  * Class MotorServiceProvider
+ *
  * @package Motor\Backend\Providers
  */
 class MotorServiceProvider extends ServiceProvider
 {
-
     protected $policies = [
         'Motor\Backend\Models\User' => 'Motor\Backend\Policies\UserPolicy',
 
@@ -56,7 +57,6 @@ class MotorServiceProvider extends ServiceProvider
         merge_local_config_with_db_configuration_variables('motor-backend');
     }
 
-
     /**
      * Register custom blade directives
      */
@@ -83,7 +83,6 @@ class MotorServiceProvider extends ServiceProvider
         });
     }
 
-
     /**
      * Register the application services.
      *
@@ -93,7 +92,7 @@ class MotorServiceProvider extends ServiceProvider
     {
         $this->mergeConfigFrom(__DIR__.'/../../config/ide-helper.php', 'ide-helper');
         $this->mergeConfigFrom(__DIR__.'/../../config/culpa.php', 'culpa');
-        $this->mergeConfigFrom(__DIR__ . '/../../config/media-library.php', 'medialibrary');
+        $this->mergeConfigFrom(__DIR__.'/../../config/media-library.php', 'medialibrary');
         $this->mergeConfigFrom(__DIR__.'/../../config/motor-backend.php', 'motor-backend');
         $this->mergeConfigFrom(__DIR__.'/../../config/motor-backend-html.php', 'motor-backend-html');
         $this->mergeConfigFrom(__DIR__.'/../../config/motor-backend-project.php', 'motor-backend-project');
@@ -101,7 +100,6 @@ class MotorServiceProvider extends ServiceProvider
         $this->mergeConfigFrom(__DIR__.'/../../config/permission.php', 'permission');
         $this->mergeConfigFrom(__DIR__.'/../../config/laravel-menu/settings.php', 'laravel-menu.settings');
     }
-
 
     /**
      * Publish all necessary asset resources
@@ -119,7 +117,6 @@ class MotorServiceProvider extends ServiceProvider
         $this->publishes($assets, 'motor-backend-install-resources');
     }
 
-
     /**
      * Set migration path
      */
@@ -128,29 +125,25 @@ class MotorServiceProvider extends ServiceProvider
         $this->loadMigrationsFrom(realpath(__DIR__.'/../../database/migrations'));
     }
 
-
     /**
      * Merge permission config file
      */
     public function permissions()
     {
         $config = $this->app['config']->get('motor-backend-permissions', []);
-        $this->app['config']->set('motor-backend-permissions',
-            array_replace_recursive(require __DIR__.'/../../config/motor-backend-permissions.php', $config));
+        $this->app['config']->set('motor-backend-permissions', array_replace_recursive(require __DIR__.'/../../config/motor-backend-permissions.php', $config));
     }
-
 
     /**
      * Set routes
      */
     public function routes()
     {
-        if ( ! $this->app->routesAreCached()) {
+        if (! $this->app->routesAreCached()) {
             require __DIR__.'/../../routes/web.php';
             require __DIR__.'/../../routes/api.php';
         }
     }
-
 
     /**
      * Set configuration files for publishing
@@ -165,7 +158,6 @@ class MotorServiceProvider extends ServiceProvider
         ], 'motor-backend-install-config');
     }
 
-
     /**
      * Set translation paths
      */
@@ -178,7 +170,6 @@ class MotorServiceProvider extends ServiceProvider
         ], 'motor-backend-install-translations');
     }
 
-
     /**
      * Set view path
      */
@@ -190,7 +181,6 @@ class MotorServiceProvider extends ServiceProvider
             __DIR__.'/../../resources/views' => resource_path('views/vendor/motor-backend'),
         ], 'motor-backend-install-views');
     }
-
 
     /**
      * Add route model bindings
@@ -222,14 +212,13 @@ class MotorServiceProvider extends ServiceProvider
         });
 
         Route::bind('category', static function ($id) {
-            return \Motor\Backend\Models\Category::findOrFail($id);
+            return Category::findOrFail($id);
         });
 
         Route::bind('config_variable', static function ($id) {
-            return \Motor\Backend\Models\ConfigVariable::findOrFail($id);
+            return ConfigVariable::findOrFail($id);
         });
     }
-
 
     /**
      * Merge backend navigation items from configuration file
@@ -237,10 +226,8 @@ class MotorServiceProvider extends ServiceProvider
     public function navigationItems()
     {
         $config = $this->app['config']->get('motor-backend-navigation', []);
-        $this->app['config']->set('motor-backend-navigation',
-            array_replace_recursive(require __DIR__.'/../../config/motor-backend-navigation.php', $config));
+        $this->app['config']->set('motor-backend-navigation', array_replace_recursive(require __DIR__.'/../../config/motor-backend-navigation.php', $config));
     }
-
 
     /**
      * Merge documentation items from configuration file
@@ -248,10 +235,8 @@ class MotorServiceProvider extends ServiceProvider
     public function documentation()
     {
         $config = $this->app['config']->get('motor-docs', []);
-        $this->app['config']->set('motor-docs',
-            array_replace_recursive(require __DIR__.'/../../config/motor-docs.php', $config));
+        $this->app['config']->set('motor-docs', array_replace_recursive(require __DIR__.'/../../config/motor-docs.php', $config));
     }
-
 
     /**
      * Register artisan commands

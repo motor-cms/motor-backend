@@ -7,6 +7,7 @@ use Motor\Core\Filter\Renderers\SearchRenderer;
 
 /**
  * Class RoleGrid
+ *
  * @package Motor\Backend\Grids
  */
 class RoleGrid extends Grid

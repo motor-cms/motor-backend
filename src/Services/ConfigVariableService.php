@@ -6,6 +6,7 @@ use Motor\Backend\Models\ConfigVariable;
 
 /**
  * Class ConfigVariableService
+ *
  * @package Motor\Backend\Services
  */
 class ConfigVariableService extends BaseService

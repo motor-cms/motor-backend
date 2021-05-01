@@ -2,17 +2,19 @@
 
 namespace Motor\Backend\Models;
 
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Notifications\Notifiable;
 use Motor\Backend\Database\Factories\UserFactory;
 use Motor\Backend\Notifications\ResetPassword;
-use Illuminate\Notifications\Notifiable;
-use Motor\Core\Traits\Searchable;
-use Illuminate\Foundation\Auth\User as Authenticatable;
+use Motor\Core\Filter\Filter;
 use Motor\Core\Traits\Filterable;
+use Motor\Core\Traits\Searchable;
 use Spatie\MediaLibrary\HasMedia;
+use Spatie\MediaLibrary\InteractsWithMedia;
 use Spatie\MediaLibrary\MediaCollections\Models\Media;
 use Spatie\Permission\Traits\HasRoles;
-use Spatie\MediaLibrary\InteractsWithMedia;
 
 /**
  * Motor\Backend\Models\User
@@ -47,24 +49,24 @@ use Spatie\MediaLibrary\InteractsWithMedia;
  *                    $permissions
  * @property-read \Illuminate\Database\Eloquent\Collection|\Spatie\Permission\Models\Role[]
  *                    $roles
- * @method static \Illuminate\Database\Eloquent\Builder|\Motor\Backend\Models\User filteredBy(\Motor\Core\Filter\Filter $filter, $column)
- * @method static \Illuminate\Database\Eloquent\Builder|\Motor\Backend\Models\User filteredByMultiple(\Motor\Core\Filter\Filter $filter)
- * @method static \Illuminate\Database\Eloquent\Builder|\Motor\Backend\Models\User newModelQuery()
- * @method static \Illuminate\Database\Eloquent\Builder|\Motor\Backend\Models\User newQuery()
- * @method static \Illuminate\Database\Eloquent\Builder|\Motor\Backend\Models\User permission($permissions)
- * @method static \Illuminate\Database\Eloquent\Builder|\Motor\Backend\Models\User query()
- * @method static \Illuminate\Database\Eloquent\Builder|\Motor\Backend\Models\User role($roles, $guard = null)
- * @method static \Illuminate\Database\Eloquent\Builder|\Motor\Backend\Models\User search($q, $full_text = false)
- * @method static \Illuminate\Database\Eloquent\Builder|\Motor\Backend\Models\User whereApiToken($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\Motor\Backend\Models\User whereClientId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\Motor\Backend\Models\User whereCreatedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\Motor\Backend\Models\User whereEmail($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\Motor\Backend\Models\User whereId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\Motor\Backend\Models\User whereName($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\Motor\Backend\Models\User wherePassword($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\Motor\Backend\Models\User wherePasswordLastChangedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\Motor\Backend\Models\User whereRememberToken($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\Motor\Backend\Models\User whereUpdatedAt($value)
+ * @method static Builder|User filteredBy(Filter $filter, $column)
+ * @method static Builder|User filteredByMultiple(Filter $filter)
+ * @method static Builder|User newModelQuery()
+ * @method static Builder|User newQuery()
+ * @method static Builder|User permission($permissions)
+ * @method static Builder|User query()
+ * @method static Builder|User role($roles, $guard = null)
+ * @method static Builder|User search($q, $full_text = false)
+ * @method static Builder|User whereApiToken($value)
+ * @method static Builder|User whereClientId($value)
+ * @method static Builder|User whereCreatedAt($value)
+ * @method static Builder|User whereEmail($value)
+ * @method static Builder|User whereId($value)
+ * @method static Builder|User whereName($value)
+ * @method static Builder|User wherePassword($value)
+ * @method static Builder|User wherePasswordLastChangedAt($value)
+ * @method static Builder|User whereRememberToken($value)
+ * @method static Builder|User whereUpdatedAt($value)
  * @mixin \Eloquent
  */
 class User extends Authenticatable implements HasMedia
