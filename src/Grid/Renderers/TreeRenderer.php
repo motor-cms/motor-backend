@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 /**
  * Class TreeRenderer
+ *
  * @package Motor\Backend\Grid\Renderers
  */
 class TreeRenderer
@@ -16,21 +17,19 @@ class TreeRenderer
 
     protected $record;
 
-
     /**
      * TreeRenderer constructor.
      *
      * @param            $value
-     * @param array      $options
+     * @param array $options
      * @param Model|null $record
      */
     public function __construct($value, array $options = [], Model $record = null)
     {
-        $this->value   = $value;
+        $this->value = $value;
         $this->options = $options;
-        $this->record  = $record;
+        $this->record = $record;
     }
-
 
     /**
      * @return string
@@ -38,12 +37,13 @@ class TreeRenderer
     public function render()
     {
         $returnValue = '';
-        $ancestors   = (int) $this->record->ancestors()->count();
+        $ancestors = (int) $this->record->ancestors()
+                                        ->count();
         while ($ancestors > 1) {
             $returnValue .= '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;';
             $ancestors--;
         }
 
-        return $returnValue . $this->value;
+        return $returnValue.$this->value;
     }
 }

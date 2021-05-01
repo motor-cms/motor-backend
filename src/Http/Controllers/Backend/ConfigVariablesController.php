@@ -2,23 +2,22 @@
 
 namespace Motor\Backend\Http\Controllers\Backend;
 
-use Motor\Backend\Http\Controllers\Controller;
-use Motor\Backend\Models\ConfigVariable;
-use Motor\Backend\Http\Requests\Backend\ConfigVariableRequest;
-use Motor\Backend\Services\ConfigVariableService;
-use Motor\Backend\Grids\ConfigVariableGrid;
-use Motor\Backend\Forms\Backend\ConfigVariableForm;
-
 use Kris\LaravelFormBuilder\FormBuilderTrait;
+use Motor\Backend\Forms\Backend\ConfigVariableForm;
+use Motor\Backend\Grids\ConfigVariableGrid;
+use Motor\Backend\Http\Controllers\Controller;
+use Motor\Backend\Http\Requests\Backend\ConfigVariableRequest;
+use Motor\Backend\Models\ConfigVariable;
+use Motor\Backend\Services\ConfigVariableService;
 
 /**
  * Class ConfigVariablesController
+ *
  * @package Motor\Backend\Http\Controllers\Backend
  */
 class ConfigVariablesController extends Controller
 {
     use FormBuilderTrait;
-
 
     /**
      * Display a listing of the resource.
@@ -37,19 +36,17 @@ class ConfigVariablesController extends Controller
         return view('motor-backend::backend.config_variables.index', compact('paginator', 'grid'));
     }
 
-
     /**
      * @param ConfigVariable $record
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function duplicate(ConfigVariable $record)
     {
-        $newRecord       = $record->replicate();
-        $newRecord->name = 'duplicate-of-' . $newRecord->name;
+        $newRecord = $record->replicate();
+        $newRecord->name = 'duplicate-of-'.$newRecord->name;
 
         return $this->create($newRecord);
     }
-
 
     /**
      * Show the form for creating a new resource.
@@ -69,7 +66,6 @@ class ConfigVariablesController extends Controller
         return view('motor-backend::backend.config_variables.create', compact('form'));
     }
 
-
     /**
      * Store a newly created resource in storage.
      *
@@ -82,7 +78,10 @@ class ConfigVariablesController extends Controller
 
         // It will automatically use current request, get the rules, and do the validation
         if (! $form->isValid()) {
-            return redirect()->back()->withErrors($form->getErrors())->withInput();
+            return redirect()
+                ->back()
+                ->withErrors($form->getErrors())
+                ->withInput();
         }
 
         ConfigVariableService::createWithForm($request, $form);
@@ -91,7 +90,6 @@ class ConfigVariablesController extends Controller
 
         return redirect('backend/config_variables');
     }
-
 
     /**
      * Display the specified resource.
@@ -103,7 +101,6 @@ class ConfigVariablesController extends Controller
         //
     }
 
-
     /**
      * Show the form for editing the specified resource.
      *
@@ -114,20 +111,19 @@ class ConfigVariablesController extends Controller
     {
         $form = $this->form(ConfigVariableForm::class, [
             'method'  => 'PATCH',
-            'url'     => route('backend.config_variables.update', [ $record->id ]),
+            'url'     => route('backend.config_variables.update', [$record->id]),
             'enctype' => 'multipart/form-data',
-            'model'   => $record
+            'model'   => $record,
         ]);
 
         return view('motor-backend::backend.config_variables.edit', compact('form'));
     }
 
-
     /**
      * Update the specified resource in storage.
      *
      * @param ConfigVariableRequest $request
-     * @param ConfigVariable        $record
+     * @param ConfigVariable $record
      * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
      */
     public function update(ConfigVariableRequest $request, ConfigVariable $record)
@@ -136,7 +132,10 @@ class ConfigVariablesController extends Controller
 
         // It will automatically use current request, get the rules, and do the validation
         if (! $form->isValid()) {
-            return redirect()->back()->withErrors($form->getErrors())->withInput();
+            return redirect()
+                ->back()
+                ->withErrors($form->getErrors())
+                ->withInput();
         }
 
         ConfigVariableService::updateWithForm($record, $request, $form);
@@ -145,7 +144,6 @@ class ConfigVariablesController extends Controller
 
         return redirect('backend/config_variables');
     }
-
 
     /**
      * Remove the specified resource from storage.

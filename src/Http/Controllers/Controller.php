@@ -6,6 +6,7 @@ use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Foundation\Bus\DispatchesJobs;
 use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Routing\Controller as BaseController;
+use Locale;
 use Motor\Backend\Models\User;
 
 /**
@@ -26,6 +27,6 @@ class Controller extends BaseController
         if ($this->userModel && $this->modelResource) {
             $this->authorizeResource($this->userModel, $this->modelResource);
         }
-        \Locale::setDefault(config('app.locale'));
+        Locale::setDefault(config('app.locale'));
     }
 }

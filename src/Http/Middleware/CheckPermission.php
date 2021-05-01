@@ -9,16 +9,15 @@ use Illuminate\Support\Str;
 
 /**
  * Class CheckPermission
+ *
  * @package Motor\Backend\Http\Middleware
  */
 class CheckPermission
 {
-
     /**
      * @var
      */
     protected $auth;
-
 
     /**
      * Create a new filter instance.
@@ -30,12 +29,11 @@ class CheckPermission
         $this->auth = $auth;
     }
 
-
     /**
      * Handle an incoming request.
      *
      * @param \Illuminate\Http\Request $request
-     * @param \Closure                 $next
+     * @param \Closure $next
      *
      * @return mixed
      */
@@ -46,7 +44,8 @@ class CheckPermission
         //	return redirect('home');
         //}
 
-        $route        = $request->route()->getName();
+        $route = $request->route()
+                         ->getName();
         $routeCleaned = str_replace('backend.', '', $route);
         $routeCleaned = str_replace('api.', '', $routeCleaned);
 

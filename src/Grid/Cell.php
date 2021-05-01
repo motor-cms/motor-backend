@@ -2,8 +2,11 @@
 
 namespace Motor\Backend\Grid;
 
+use Exception;
+
 /**
  * Class Cell
+ *
  * @package Motor\Backend\Grid
  */
 class Cell extends Base
@@ -20,21 +23,19 @@ class Cell extends Base
 
     protected $renderOptions = [];
 
-
     /**
      * Cell constructor.
      *
      * @param string $name
      * @param        $renderer
-     * @param array  $renderOptions
+     * @param array $renderOptions
      */
     public function __construct(string $name, $renderer, array $renderOptions = [])
     {
-        $this->name          = $name;
-        $this->renderer      = $renderer;
+        $this->name = $name;
+        $this->renderer = $renderer;
         $this->renderOptions = $renderOptions;
     }
-
 
     /**
      * @return string
@@ -44,7 +45,6 @@ class Cell extends Base
         return $this->name;
     }
 
-
     /**
      * @param $value
      */
@@ -52,7 +52,6 @@ class Cell extends Base
     {
         $this->value = $value;
     }
-
 
     /**
      * @param $record
@@ -62,7 +61,6 @@ class Cell extends Base
         $this->record = $record;
     }
 
-
     /**
      * @param $column
      */
@@ -70,7 +68,6 @@ class Cell extends Base
     {
         $this->column = $column;
     }
-
 
     /**
      * @return string
@@ -86,7 +83,6 @@ class Cell extends Base
 
         return $renderer->render();
     }
-
 
     /**
      * Parse filters assigned by column
@@ -113,7 +109,7 @@ class Cell extends Base
 
                 try {
                     $this->value = call_user_func_array($filter, $params);
-                } catch (\Exception $exception) {
+                } catch (Exception $exception) {
                     return false;
                 }
             }

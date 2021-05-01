@@ -18,6 +18,7 @@ use Motor\Backend\Services\PermissionGroupService;
 class  PermissionGroupsController extends ApiController
 {
     protected string $model = 'Motor\Backend\Models\PermissionGroup';
+
     protected string $modelResource = 'permission_group';
 
     /**

@@ -8,11 +8,11 @@ use Illuminate\Http\Request;
 
 /**
  * Class ResetPasswordController
+ *
  * @package Motor\Backend\Http\Controllers\Auth
  */
 class ResetPasswordController extends Controller
 {
-
     /*
     |--------------------------------------------------------------------------
     | Password Reset Controller
@@ -33,7 +33,6 @@ class ResetPasswordController extends Controller
      */
     protected $redirectTo = '/login';
 
-
     /**
      * Create a new controller instance.
      *
@@ -44,19 +43,18 @@ class ResetPasswordController extends Controller
         $this->middleware('guest');
     }
 
-
     /**
      * Display the password reset view for the given token.
      *
      * If no token is present, display the link request form.
      *
      * @param \Illuminate\Http\Request $request
-     * @param string|null              $token
+     * @param string|null $token
      *
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function showResetForm(Request $request, $token = null)
     {
-        return view('motor-backend::auth.passwords.reset')->with([ 'token' => $token, 'email' => $request->email ]);
+        return view('motor-backend::auth.passwords.reset')->with(['token' => $token, 'email' => $request->email]);
     }
 }

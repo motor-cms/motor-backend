@@ -2,13 +2,19 @@
 
 namespace Motor\Backend\Grid;
 
+use Closure;
+use Exception;
 use Illuminate\Pagination\AbstractPaginator;
 use Illuminate\Support\Collection;
 use Motor\Core\Filter\Filter;
 use Motor\Core\Filter\Renderers\PerPageRenderer;
+use ReflectionClass;
+use Request;
+use Session;
 
 /**
  * Class Grid
+ *
  * @package Motor\Backend\Grid
  */
 class Grid extends Base
@@ -27,7 +33,7 @@ class Grid extends Base
 
     protected $sortableFields = [];
 
-    protected $sorting = [ 'id', 'ASC' ];
+    protected $sorting = ['id', 'ASC'];
 
     protected $actions = [];
 
@@ -37,16 +43,16 @@ class Grid extends Base
 
     protected $paginator = null;
 
-
     /**
      * Grid constructor.
+     *
      * @param $model
      * @throws \ReflectionException
      */
     public function __construct($model)
     {
-        $this->model        = $model;
-        $this->searchTerm   = request('search');
+        $this->model = $model;
+        $this->searchTerm = request('search');
         $this->clientFilter = request('client_id');
 
         if (request('sortable_field') && request('sortable_direction')) {
@@ -58,14 +64,12 @@ class Grid extends Base
         $this->setup();
     }
 
-
     /**
      * Stub method. Implemented in the child classes
      */
     protected function setup()
     {
     }
-
 
     /**
      * @return Filter
@@ -75,7 +79,6 @@ class Grid extends Base
         return $this->filter;
     }
 
-
     /**
      * @param $filter
      */
@@ -84,17 +87,16 @@ class Grid extends Base
         $this->filter = $filter;
     }
 
-
     /**
-     * @param string      $name
+     * @param string $name
      * @param string|null $label
-     * @param bool        $sortable
-     * @param null        $sortableField
+     * @param bool $sortable
+     * @param null $sortableField
      * @return Column
      */
     public function addColumn(string $name, string $label = null, bool $sortable = false, $sortableField = null): Column
     {
-        $column                            = new Column($name, $label, $sortable, $sortableField);
+        $column = new Column($name, $label, $sortable, $sortableField);
         $this->columns[$column->getName()] = $column;
 
         if ($sortable) {
@@ -104,19 +106,17 @@ class Grid extends Base
         return $column;
     }
 
-
     /**
      * @param $view
      * @return SpecialRow
      */
     public function addSpecialRow($view): SpecialRow
     {
-        $specialRow          = new SpecialRow($view);
+        $specialRow = new SpecialRow($view);
         $this->specialRows[] = $specialRow;
 
         return $specialRow;
     }
-
 
     /**
      * @return array
@@ -125,7 +125,6 @@ class Grid extends Base
     {
         return $this->specialRows;
     }
-
 
     /**
      * @param       $label
@@ -136,9 +135,8 @@ class Grid extends Base
      */
     public function addFormAction(string $label, $link, $action, array $parameters = []): Action
     {
-        return $this->addAction($label, $link, array_merge($parameters, [ 'type' => 'form', 'action' => $action ]));
+        return $this->addAction($label, $link, array_merge($parameters, ['type' => 'form', 'action' => $action]));
     }
-
 
     /**
      * @param       $label
@@ -148,9 +146,8 @@ class Grid extends Base
      */
     public function addEditAction($label, $link, $parameters = []): Action
     {
-        return $this->addAction($label, $link, array_merge($parameters, [ 'type' => 'edit' ]));
+        return $this->addAction($label, $link, array_merge($parameters, ['type' => 'edit']));
     }
-
 
     /**
      * @param       $label
@@ -160,9 +157,8 @@ class Grid extends Base
      */
     public function addDuplicateAction($label, $link, $parameters = []): Action
     {
-        return $this->addAction($label, $link, array_merge($parameters, [ 'type' => 'duplicate' ]));
+        return $this->addAction($label, $link, array_merge($parameters, ['type' => 'duplicate']));
     }
-
 
     /**
      * @param       $label
@@ -172,9 +168,8 @@ class Grid extends Base
      */
     public function addDeleteAction($label, $link, $parameters = []): Action
     {
-        return $this->addAction($label, $link, array_merge($parameters, [ 'type' => 'delete' ]));
+        return $this->addAction($label, $link, array_merge($parameters, ['type' => 'delete']));
     }
-
 
     /**
      * @param       $label
@@ -184,16 +179,15 @@ class Grid extends Base
      */
     public function addAction($label, $link, $parameters = []): Action
     {
-        $action          = new Action($label, $link, $parameters);
+        $action = new Action($label, $link, $parameters);
         $this->actions[] = $action;
 
         // Once the first action is added, we need to add the action column
         $this->addColumn('special:actions', trans('motor-backend::backend/global.actions'))
-             ->attributes([ 'style' => 'text-align: right; min-width: 130px;', 'class' => 'action-column' ]);
+             ->attributes(['style' => 'text-align: right; min-width: 130px;', 'class' => 'action-column']);
 
         return $action;
     }
-
 
     /**
      * @return array
@@ -202,7 +196,6 @@ class Grid extends Base
     {
         return $this->actions;
     }
-
 
     /**
      * Get all columns
@@ -213,7 +206,6 @@ class Grid extends Base
     {
         return $this->columns;
     }
-
 
     /**
      * Query database and parse all rows and cells
@@ -227,9 +219,9 @@ class Grid extends Base
             $row = new Row($record);
 
             foreach ($this->getColumns() as $column) {
-                $cell     = new Cell($column->getName(), $column->getRenderer(), $column->getRenderOptions());
+                $cell = new Cell($column->getName(), $column->getRenderer(), $column->getRenderOptions());
                 $sanitize = (count($column->getFilters()) || $column->hasCellClosure()) ? false : true;
-                $value    = $this->getCellValue($cell, $column, $record, $sanitize);
+                $value = $this->getCellValue($cell, $column, $record, $sanitize);
                 $cell->setValue($value);
                 $cell->setRecord($record); // we might need it for some renderers
                 $cell->setColumn($column); // we might need it for some renderers
@@ -252,7 +244,6 @@ class Grid extends Base
         return $this->rows;
     }
 
-
     /**
      * Check if row closures are set
      *
@@ -267,7 +258,6 @@ class Grid extends Base
         return false;
     }
 
-
     /**
      * Get row closures
      *
@@ -278,7 +268,6 @@ class Grid extends Base
         return $this->rowClosures;
     }
 
-
     /**
      * Set row closure
      *
@@ -286,22 +275,21 @@ class Grid extends Base
      *
      * @return $this
      */
-    public function row(\Closure $closure)
+    public function row(Closure $closure)
     {
         $this->rowClosures[] = $closure;
 
         return $this;
     }
 
-
     /**
      * Cell renderer, should maybe be outsourced in a 'render' class as we'll have separate renderers later (probably
      * ;))
      *
-     * @param Cell   $cell
+     * @param Cell $cell
      * @param Column $column
      * @param        $record
-     * @param bool   $sanitize
+     * @param bool $sanitize
      * @return mixed
      */
     protected function getCellValue(Cell $cell, Column $column, $record, $sanitize = true)
@@ -309,8 +297,8 @@ class Grid extends Base
         // Eloquent relation with dot notation
         if (preg_match('#^[a-z0-9_-]+(?:\.[a-z0-9_-]+)+$#i', $column->getName(), $matches) && is_object($record)) {
             $temporaryRecord = $record;
-            $value           = '';
-            $segments        = explode('.', $column->getName());
+            $value = '';
+            $segments = explode('.', $column->getName());
             foreach ($segments as $key => $segment) {
                 try {
                     if (! is_null($temporaryRecord->{$segment})) {
@@ -321,7 +309,7 @@ class Grid extends Base
                     $temporaryRecord = $temporaryRecord->{$segment};
                     //if (isset($temporaryRecord->{$segment})) {
                     //}
-                } catch (\Exception $exception) {
+                } catch (Exception $exception) {
                 }
             }
         } elseif ($record->{$column->getName()} instanceof Collection) {
@@ -357,7 +345,6 @@ class Grid extends Base
         return $value;
     }
 
-
     /**
      * Set default sorting, if nothing is in the URL or the session
      *
@@ -368,11 +355,10 @@ class Grid extends Base
      */
     public function setDefaultSorting($field, $direction = 'ASC')
     {
-        $this->sorting = [ $field, $direction ];
+        $this->sorting = [$field, $direction];
 
         return $this;
     }
-
 
     /**
      * @param $field
@@ -382,7 +368,7 @@ class Grid extends Base
      */
     public function checkSortable($field, $direction): bool
     {
-        [ $sortableField, $sortableDirection ] = $this->getSorting();
+        [$sortableField, $sortableDirection] = $this->getSorting();
 
         if ($sortableField == $field && $sortableDirection == $direction) {
             return true;
@@ -391,18 +377,16 @@ class Grid extends Base
         return false;
     }
 
-
     /**
      * @return string
      * @throws \ReflectionException
      */
     protected function getClass()
     {
-        $reflect = new \ReflectionClass($this);
+        $reflect = new ReflectionClass($this);
 
         return $reflect->getName();
     }
-
 
     /**
      * @return array
@@ -411,24 +395,23 @@ class Grid extends Base
     public function getSorting(): array
     {
         // Check in the URL
-        $sortableField     = \Request::get($this->getClass() . '_sortable_field');
-        $sortableDirection = \Request::get($this->getClass() . '_sortable_direction');
+        $sortableField = Request::get($this->getClass().'_sortable_field');
+        $sortableDirection = Request::get($this->getClass().'_sortable_direction');
 
         // Check session
         if (is_null($sortableField)) {
-            $sortableField     = \Session::get($this->getClass() . '_sortable_field');
-            $sortableDirection = \Session::get($this->getClass() . '_sortable_direction');
+            $sortableField = Session::get($this->getClass().'_sortable_field');
+            $sortableDirection = Session::get($this->getClass().'_sortable_direction');
         }
 
         // Check default
         if (is_null($sortableField)) {
-            $sortableField     = $this->sorting[0];
+            $sortableField = $this->sorting[0];
             $sortableDirection = $this->sorting[1];
         }
 
-        return [ $sortableField, $sortableDirection ];
+        return [$sortableField, $sortableDirection];
     }
-
 
     /**
      * @param $field
@@ -437,10 +420,9 @@ class Grid extends Base
      */
     public function setSorting($field, $direction)
     {
-        \Session::put($this->getClass() . '_sortable_field', $field);
-        \Session::put($this->getClass() . '_sortable_direction', $direction);
+        Session::put($this->getClass().'_sortable_field', $field);
+        Session::put($this->getClass().'_sortable_direction', $direction);
     }
-
 
     /**
      * @return mixed
@@ -453,7 +435,6 @@ class Grid extends Base
         return $sorting[0];
     }
 
-
     /**
      * @return mixed
      * @throws \ReflectionException
@@ -465,7 +446,6 @@ class Grid extends Base
         return $sorting[1];
     }
 
-
     /**
      * @param $field
      * @param $direction
@@ -473,9 +453,8 @@ class Grid extends Base
      */
     public function getSortableLink(string $field, string $direction): string
     {
-        return '?sortable_field=' . $field . '&sortable_direction=' . $direction;
+        return '?sortable_field='.$field.'&sortable_direction='.$direction;
     }
-
 
     /**
      * @param int $limit
@@ -491,7 +470,8 @@ class Grid extends Base
         $query = ($this->model)::filteredByMultiple($this->filter);
 
         if (! $this->filter->get('per_page')) {
-            $this->filter->add(new PerPageRenderer('per_page'))->setup();
+            $this->filter->add(new PerPageRenderer('per_page'))
+                         ->setup();
         }
 
         $perPage = $this->filter->get('per_page');
@@ -499,14 +479,13 @@ class Grid extends Base
             $limit = $perPage->getValue();
         }
 
-        [ $sortableField, $sortableDirection ] = $this->getSorting();
+        [$sortableField, $sortableDirection] = $this->getSorting();
 
         // FIXME: we can't assume that the sorting will always be on the base model!?
         if (! is_null($sortableField)) {
-            $this->paginator = $query->orderBy(
-                $query->getModel()->getTable() . '.' . $sortableField,
-                $sortableDirection
-            )->paginate($limit);
+            $this->paginator = $query->orderBy($query->getModel()
+                                                     ->getTable().'.'.$sortableField, $sortableDirection)
+                                     ->paginate($limit);
 
             return $this->paginator;
         }
@@ -515,7 +494,6 @@ class Grid extends Base
 
         return $this->paginator;
     }
-
 
     /**
      * Set an external paginator
@@ -530,7 +508,6 @@ class Grid extends Base
         return $this;
     }
 
-
     /**
      * @return array|\Illuminate\Http\Request|string
      */
@@ -538,7 +515,6 @@ class Grid extends Base
     {
         return $this->searchTerm;
     }
-
 
     /**
      * @return array|bool|\Illuminate\Http\Request|string

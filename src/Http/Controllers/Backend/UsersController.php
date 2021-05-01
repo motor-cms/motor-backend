@@ -2,22 +2,22 @@
 
 namespace Motor\Backend\Http\Controllers\Backend;
 
+use Kris\LaravelFormBuilder\FormBuilderTrait;
 use Motor\Backend\Forms\Backend\UserForm;
 use Motor\Backend\Grids\UsersGrid;
+use Motor\Backend\Http\Controllers\Controller;
 use Motor\Backend\Http\Requests\Backend\UserRequest;
 use Motor\Backend\Models\User;
-use Motor\Backend\Http\Controllers\Controller;
-use Kris\LaravelFormBuilder\FormBuilderTrait;
 use Motor\Backend\Services\UserService;
 
 /**
  * Class UsersController
+ *
  * @package Motor\Backend\Http\Controllers\Backend
  */
 class UsersController extends Controller
 {
     use FormBuilderTrait;
-
 
     /**
      * Display a listing of the resource.
@@ -36,7 +36,6 @@ class UsersController extends Controller
         return view('motor-backend::backend.users.index', compact('paginator', 'grid'));
     }
 
-
     /**
      * Show the form for creating a new resource.
      *
@@ -47,12 +46,11 @@ class UsersController extends Controller
         $form = $this->form(UserForm::class, [
             'method'  => 'POST',
             'route'   => 'backend.users.store',
-            'enctype' => 'multipart/form-data'
+            'enctype' => 'multipart/form-data',
         ]);
 
         return view('motor-backend::backend.users.create', compact('form'));
     }
-
 
     /**
      * Store a newly created resource in storage.
@@ -66,7 +64,10 @@ class UsersController extends Controller
 
         // It will automatically use current request, get the rules, and do the validation
         if (! $form->isValid()) {
-            return redirect()->back()->withErrors($form->getErrors())->withInput();
+            return redirect()
+                ->back()
+                ->withErrors($form->getErrors())
+                ->withInput();
         }
 
         UserService::createWithForm($request, $form);
@@ -76,7 +77,6 @@ class UsersController extends Controller
         return redirect('backend/users');
     }
 
-
     /**
      * Display the specified resource.
      *
@@ -85,7 +85,6 @@ class UsersController extends Controller
     public function show(User $record)
     {
     }
-
 
     /**
      * Show the form for editing the specified resource.
@@ -97,20 +96,19 @@ class UsersController extends Controller
     {
         $form = $this->form(UserForm::class, [
             'method'  => 'PATCH',
-            'url'     => route('backend.users.update', [ $user->id ]),
+            'url'     => route('backend.users.update', [$user->id]),
             'enctype' => 'multipart/form-data',
-            'model'   => $user
+            'model'   => $user,
         ]);
 
         return view('motor-backend::backend.users.edit', compact('form'));
     }
 
-
     /**
      * Update the specified resource in storage.
      *
      * @param UserRequest $request
-     * @param User        $record
+     * @param User $record
      * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
      */
     public function update(UserRequest $request, User $record)
@@ -119,7 +117,10 @@ class UsersController extends Controller
 
         // It will automatically use current request, get the rules, and do the validation
         if (! $form->isValid()) {
-            return redirect()->back()->withErrors($form->getErrors())->withInput();
+            return redirect()
+                ->back()
+                ->withErrors($form->getErrors())
+                ->withInput();
         }
 
         UserService::updateWithForm($record, $request, $form);
@@ -128,7 +129,6 @@ class UsersController extends Controller
 
         return redirect('backend/users');
     }
-
 
     /**
      * Remove the specified resource from storage.

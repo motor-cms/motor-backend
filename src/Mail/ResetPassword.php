@@ -8,6 +8,7 @@ use Illuminate\Queue\SerializesModels;
 
 /**
  * Class ResetPassword
+ *
  * @package Motor\Backend\Mail
  */
 class ResetPassword extends Mailable
@@ -18,18 +19,17 @@ class ResetPassword extends Mailable
 
     public $user;
 
-
     /**
      * ResetPassword constructor.
+     *
      * @param $token
      * @param $user
      */
     public function __construct($token, $user)
     {
         $this->token = $token;
-        $this->user  = $user;
+        $this->user = $user;
     }
-
 
     /**
      * Build the message.

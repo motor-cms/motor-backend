@@ -2,17 +2,17 @@
 
 namespace Motor\Backend\Http\Controllers\Api\Auth;
 
+use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use App\Http\Controllers\Controller;
 
 /**
  * Class LoginController
+ *
  * @package Motor\Backend\Http\Controllers\Api\Auth
  */
 class LoginController extends Controller
 {
-
     /**
      * Create a new AuthController instance.
      *
@@ -20,10 +20,9 @@ class LoginController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('api', [ 'except' => [ 'login' ] ]);
+        $this->middleware('api', ['except' => ['login']]);
         //$this->middleware('authenticate-and-renew', [ 'except' => [ 'login' ] ]);
     }
-
 
     /**
      * Get a JWT token via given credentials.
@@ -36,13 +35,13 @@ class LoginController extends Controller
     {
         $credentials = $request->only('email', 'password');
 
-        if ($token = $this->guard()->attempt($credentials)) {
+        if ($token = $this->guard()
+                          ->attempt($credentials)) {
             return $this->respondWithToken($token);
         }
 
-        return response()->json([ 'error' => 'Unauthorized' ], 401);
+        return response()->json(['error' => 'Unauthorized'], 401);
     }
-
 
     /**
      * Get the authenticated User
@@ -51,13 +50,14 @@ class LoginController extends Controller
      */
     public function me()
     {
-        if ($this->guard()->user() == null) {
-            return response()->json([ 'error' => 'Unauthorized' ], 401);
+        if ($this->guard()
+                 ->user() == null) {
+            return response()->json(['error' => 'Unauthorized'], 401);
         }
 
-        return response()->json($this->guard()->user());
+        return response()->json($this->guard()
+                                     ->user());
     }
-
 
     /**
      * Log the user out (Invalidate the token)
@@ -66,11 +66,11 @@ class LoginController extends Controller
      */
     public function logout()
     {
-        $this->guard()->logout();
+        $this->guard()
+             ->logout();
 
-        return response()->json([ 'message' => 'Successfully logged out' ]);
+        return response()->json(['message' => 'Successfully logged out']);
     }
-
 
     /**
      * Refresh a token.
@@ -79,9 +79,9 @@ class LoginController extends Controller
      */
     public function refresh()
     {
-        return $this->respondWithToken($this->guard()->refresh());
+        return $this->respondWithToken($this->guard()
+                                            ->refresh());
     }
-
 
     /**
      * Get the token array structure.
@@ -95,10 +95,11 @@ class LoginController extends Controller
         return response()->json([
             'access_token' => $token,
             'token_type'   => 'bearer',
-            'expires_in'   => $this->guard()->factory()->getTTL() * 60
+            'expires_in'   => $this->guard()
+                                   ->factory()
+                                   ->getTTL() * 60,
         ]);
     }
-
 
     /**
      * Get the guard to be used during authentication.

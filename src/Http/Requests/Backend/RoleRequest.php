@@ -6,11 +6,11 @@ use Motor\Backend\Http\Requests\Request;
 
 /**
  * Class RoleRequest
+ *
  * @package Motor\Backend\Http\Requests\Backend
  */
 class RoleRequest extends Request
 {
-
     /**
      * @OA\Schema(
      *   schema="RoleRequest",
@@ -38,7 +38,6 @@ class RoleRequest extends Request
         return true;
     }
 
-
     /**
      * Get the validation rules that apply to the request.
      *
@@ -47,7 +46,7 @@ class RoleRequest extends Request
     public function rules()
     {
         return [
-            'name' => 'required'
+            'name' => 'required',
         ];
     }
 }

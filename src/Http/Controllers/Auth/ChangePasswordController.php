@@ -3,17 +3,17 @@
 namespace Motor\Backend\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
-use Motor\Backend\Traits\ChangesPasswords;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Motor\Backend\Traits\ChangesPasswords;
 
 /**
  * Class ChangePasswordController
+ *
  * @package Motor\Backend\Http\Controllers\Auth
  */
 class ChangePasswordController extends Controller
 {
-
     /*
     |--------------------------------------------------------------------------
     | Password Reset Controller
@@ -34,7 +34,6 @@ class ChangePasswordController extends Controller
      */
     protected $redirectTo = '/backend';
 
-
     /**
      * Display the password reset view for the given token.
      *
@@ -45,9 +44,11 @@ class ChangePasswordController extends Controller
      */
     public function showChangeForm(Request $request)
     {
-        return view('motor-backend::auth.passwords.change')->with([ 'email' => Auth::guard()->user()->email ]);
+        return view('motor-backend::auth.passwords.change')->with([
+            'email' => Auth::guard()
+                           ->user()->email,
+        ]);
     }
-
 
     /**
      * @param Request $request

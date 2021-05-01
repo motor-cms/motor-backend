@@ -47,9 +47,10 @@ class CategoryTreeRequest extends Request
     public function rules()
     {
         $request = $this;
+
         return [
             'name'  => 'required',
-            'scope'       => [
+            'scope' => [
                 'required',
                 Rule::unique('categories')
                     ->where(function ($query) use ($request) {

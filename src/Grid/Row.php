@@ -4,12 +4,12 @@ namespace Motor\Backend\Grid;
 
 /**
  * Class Row
+ *
  * @package Motor\Backend\Grid
  */
 class Row extends Base
 {
     protected $cells = [];
-
 
     /**
      * Add cell to row
@@ -24,7 +24,6 @@ class Row extends Base
 
         return $this;
     }
-
 
     /**
      * Get cell by column name
@@ -41,7 +40,6 @@ class Row extends Base
 
         return false;
     }
-
 
     /**
      * Get all cells

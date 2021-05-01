@@ -7,11 +7,11 @@ use Kris\LaravelFormBuilder\Fields\InputType;
 
 /**
  * Class FileFileType
+ *
  * @package Motor\Backend\Forms\Fields
  */
 class FileFileType extends InputType
 {
-
     /**
      * @return string
      */
@@ -23,12 +23,11 @@ class FileFileType extends InputType
         return 'motor-backend::laravel-form-builder.file_file';
     }
 
-
     /**
      * @param array $options
-     * @param bool  $showLabel
-     * @param bool  $showField
-     * @param bool  $showError
+     * @param bool $showLabel
+     * @param bool $showField
+     * @param bool $showError
      * @return string
      */
     public function render(array $options = [], $showLabel = true, $showField = true, $showError = true)
@@ -65,17 +64,18 @@ class FileFileType extends InputType
         //}
 
         if (is_object($modelData)) {
-            $items = $modelData->getMedia($this->getRealName())->reverse();
+            $items = $modelData->getMedia($this->getRealName())
+                               ->reverse();
             foreach ($items as $item) {
                 $options['files'][] = [
                     'id'         => $item->id,
                     'name'       => $item->file_name,
-                    'created_at' => $item->created_at
+                    'created_at' => $item->created_at,
                 ];
             }
         }
 
-        $options['name']      = $this->getName();
+        $options['name'] = $this->getName();
         $options['name_slug'] = Str::slug($this->getName());
 
         return parent::render($options, $showLabel, $showField, $showError);

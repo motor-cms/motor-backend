@@ -17,6 +17,7 @@ use Motor\Backend\Services\ConfigVariableService;
 class ConfigVariablesController extends ApiController
 {
     protected string $model = 'Motor\Backend\Models\ConfigVariable';
+
     protected string $modelResource = 'config_variable';
 
     /**

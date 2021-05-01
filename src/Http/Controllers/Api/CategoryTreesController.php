@@ -18,6 +18,7 @@ use Motor\Core\Filter\Renderers\WhereRenderer;
 class CategoryTreesController extends ApiController
 {
     protected string $model = 'Motor\Backend\Models\Category';
+
     protected string $modelResource = 'category';
 
     /**
@@ -137,8 +138,8 @@ class CategoryTreesController extends ApiController
                                  ->getResult();
 
         return (new CategoryTreeResource($result))->additional(['message' => 'Category tree created'])
-                                              ->response()
-                                              ->setStatusCode(201);
+                                                  ->response()
+                                                  ->setStatusCode(201);
     }
 
     /**

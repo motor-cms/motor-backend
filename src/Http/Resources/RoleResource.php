@@ -17,7 +17,6 @@ namespace Motor\Backend\Http\Resources;
  *   )
  * )
  */
-
 class RoleResource extends BaseResource
 {
     /**
@@ -29,7 +28,7 @@ class RoleResource extends BaseResource
     public function toArray($request)
     {
         return [
-            "name" => $this->name,
+            "name"       => $this->name,
             "guard_name" => $this->guard_name,
         ];
     }

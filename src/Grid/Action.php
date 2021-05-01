@@ -2,11 +2,12 @@
 
 namespace Motor\Backend\Grid;
 
-use Auth;
 use Illuminate\Database\Eloquent\Model;
+use View;
 
 /**
  * Class Action
+ *
  * @package Motor\Backend\Grid
  */
 class Action extends Base
@@ -33,24 +34,23 @@ class Action extends Base
 
     protected $confirmationMessage = '';
 
-
     /**
      * Action constructor.
+     *
      * @param       $label
      * @param       $link
      * @param array $parameters
      */
     public function __construct(string $label, string $link, array $parameters = [])
     {
-        $this->label      = $label;
-        $this->link       = $link;
+        $this->label = $label;
+        $this->link = $link;
         $this->parameters = $parameters;
 
         if (isset($parameters['type'])) {
             $this->type = $parameters['type'];
         }
     }
-
 
     /**
      * @param $permission
@@ -63,15 +63,14 @@ class Action extends Base
         return $this;
     }
 
-
     /**
-     * @param bool   $confirmation
+     * @param bool $confirmation
      * @param string $message
      * @return $this
      */
     public function askForConfirmation(bool $confirmation = true, string $message = '')
     {
-        $this->askForConfirmation  = $confirmation;
+        $this->askForConfirmation = $confirmation;
         $this->confirmationMessage = $message;
         if ($this->askForConfirmation) {
             $this->parameters['ask_for_confirmation_class'] = 'ask-for-confirmation';
@@ -81,7 +80,6 @@ class Action extends Base
         return $this;
     }
 
-
     /**
      * @param        $column
      * @param        $value
@@ -90,13 +88,12 @@ class Action extends Base
      */
     public function onCondition(string $column, $value, string $operator = '=')
     {
-        $this->conditionColumn   = $column;
-        $this->conditionValue    = $value;
+        $this->conditionColumn = $column;
+        $this->conditionValue = $value;
         $this->conditionOperator = $operator;
 
         return $this;
     }
-
 
     /**
      * @return string
@@ -105,7 +102,6 @@ class Action extends Base
     {
         return $this->label;
     }
-
 
     /**
      * @param Model $record
@@ -176,11 +172,12 @@ class Action extends Base
                 $view = 'motor-backend::grid.actions.button';
         }
 
-        return \View::make($view, [
+        return View::make($view, [
             'link'       => $this->link,
             'record'     => $record,
             'label'      => $this->label,
-            'parameters' => $this->parameters
-        ])->render();
+            'parameters' => $this->parameters,
+        ])
+                    ->render();
     }
 }

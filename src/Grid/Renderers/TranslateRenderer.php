@@ -4,6 +4,7 @@ namespace Motor\Backend\Grid\Renderers;
 
 /**
  * Class TranslateRenderer
+ *
  * @package Motor\Backend\Grid\Renderers
  */
 class TranslateRenderer
@@ -14,18 +15,17 @@ class TranslateRenderer
 
     protected $defaultFile = 'backend/global';
 
-
     /**
      * TranslateRenderer constructor.
+     *
      * @param $value
      * @param $options
      */
     public function __construct($value, array $options)
     {
-        $this->value   = $value;
+        $this->value = $value;
         $this->options = $options;
     }
-
 
     /**
      * @return array|\Illuminate\Contracts\Translation\Translator|string|null
@@ -33,9 +33,9 @@ class TranslateRenderer
     public function render()
     {
         if (isset($this->options['file'])) {
-            return trans($this->options['file'] . '.' . $this->value);
+            return trans($this->options['file'].'.'.$this->value);
         }
 
-        return trans($this->defaultFile . '.' . $this->value);
+        return trans($this->defaultFile.'.'.$this->value);
     }
 }

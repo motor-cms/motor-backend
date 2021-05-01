@@ -96,7 +96,10 @@ class ClientRequest extends Request
     public function rules()
     {
         return [
-            'name' => 'required',
+            'name'          => 'required',
+            'website'       => 'nullable|url',
+            'contact_email' => 'nullable|email',
+            'is_active'     => 'nullable|boolean',
         ];
     }
 }

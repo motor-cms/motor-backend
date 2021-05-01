@@ -6,12 +6,12 @@ use Motor\Backend\Models\ConfigVariable;
 function merge_local_config_with_db_configuration_variables($package)
 {
     try {
-        foreach (ConfigVariable::where('package', $package)->get() as $configVariable) {
+        foreach (ConfigVariable::where('package', $package)
+                               ->get() as $configVariable) {
             $config = app('config')->get($configVariable->group, []);
-            app('config')->set($configVariable->group,
-                array_replace_recursive($config, [ $configVariable->name => $configVariable->value ]));
+            app('config')->set($configVariable->group, array_replace_recursive($config, [$configVariable->name => $configVariable->value]));
         }
-    } catch(\Exception $e) {
+    } catch (\Exception $e) {
         // Do nothing if the database doesn't exist
     }
 }
@@ -23,7 +23,9 @@ if (! function_exists('has_permission')) {
      */
     function has_permission($permission)
     {
-        return (Auth::user()->hasRole('SuperAdmin') || Auth::user()->hasPermissionTo($permission));
+        return (Auth::user()
+                    ->hasRole('SuperAdmin') || Auth::user()
+                                                   ->hasPermissionTo($permission));
     }
 }
 
@@ -36,7 +38,9 @@ if (! function_exists('has_role')) {
     {
         $role = explode(',', $role);
 
-        return (Auth::user()->hasRole('SuperAdmin') || Auth::user()->hasAnyRole($role));
+        return (Auth::user()
+                    ->hasRole('SuperAdmin') || Auth::user()
+                                                   ->hasAnyRole($role));
     }
 }
 
@@ -47,7 +51,7 @@ if (! function_exists('has_role')) {
  */
 function config_variable($var, $default = null)
 {
-    list($package, $group, $name) = explode('.', $var);
+    [$package, $group, $name] = explode('.', $var);
 
     $variable = \Motor\Backend\Models\ConfigVariable::where('package', $package)
                                                     ->where('group', $group)

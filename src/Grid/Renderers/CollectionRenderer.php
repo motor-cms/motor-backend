@@ -6,17 +6,18 @@ use Illuminate\Support\Facades\App;
 
 /**
  * Class CollectionRenderer
+ *
  * @package Motor\Backend\Grid\Renderers
  */
 class CollectionRenderer
 {
     protected $value = '';
 
-    protected $options = [ 'column' => 'name' ];
-
+    protected $options = ['column' => 'name'];
 
     /**
      * CollectionRenderer constructor.
+     *
      * @param      $value
      * @param null $options
      */
@@ -27,7 +28,6 @@ class CollectionRenderer
             $this->options = $options;
         }
     }
-
 
     /**
      * @return string
@@ -43,6 +43,7 @@ class CollectionRenderer
             $list[] = $row[$this->options['column']];
         }
 
-        return App::make('html')->ul($list, [ 'class' => 'list-unstyled' ]);
+        return App::make('html')
+                  ->ul($list, ['class' => 'list-unstyled']);
     }
 }

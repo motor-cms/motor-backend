@@ -7,11 +7,11 @@ use Kris\LaravelFormBuilder\Fields\InputType;
 
 /**
  * Class FileVideoType
+ *
  * @package Motor\Backend\Forms\Fields
  */
 class FileVideoType extends InputType
 {
-
     /**
      * @return string
      */
@@ -23,12 +23,11 @@ class FileVideoType extends InputType
         return 'motor-backend::laravel-form-builder.file_video';
     }
 
-
     /**
      * @param array $options
-     * @param bool  $showLabel
-     * @param bool  $showField
-     * @param bool  $showError
+     * @param bool $showLabel
+     * @param bool $showField
+     * @param bool $showError
      * @return string
      */
     public function render(array $options = [], $showLabel = true, $showField = true, $showError = true)
@@ -50,19 +49,20 @@ class FileVideoType extends InputType
                 }
             }
         } elseif (is_object($modelData)) {
-            $items            = $modelData->getMedia($this->getRealName())->reverse();
+            $items = $modelData->getMedia($this->getRealName())
+                               ->reverse();
             $options['files'] = [];
             foreach ($items as $item) {
                 $options['files'][] = [
                     'id'          => $item->id,
                     'name'        => $item->file_name,
                     'public_path' => $item->getUrl(),
-                    'created_at'  => $item->created_at
+                    'created_at'  => $item->created_at,
                 ];
             }
         }
 
-        $options['name']      = $this->getName();
+        $options['name'] = $this->getName();
         $options['name_slug'] = Str::slug($this->getName());
 
         return parent::render($options, $showLabel, $showField, $showError);

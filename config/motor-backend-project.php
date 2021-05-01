@@ -8,5 +8,5 @@ return [
     'copyright'   => 'Reza Esmaili',
     'logo-large'  => 'images/motor-logo-large.png',
     'logo-small'  => 'images/motor-logo-small.png',
-    'logo-white'  => 'images/motor-logo-small-white.png'
+    'logo-white'  => 'images/motor-logo-small-white.png',
 ];

@@ -6,7 +6,7 @@ use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Foundation\Bus\DispatchesJobs;
 use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Routing\Controller as BaseController;
-use Motor\Backend\Models\User;
+use Locale;
 
 /**
  * Class ApiController
@@ -16,6 +16,7 @@ use Motor\Backend\Models\User;
 class ApiController extends BaseController
 {
     protected string $modelResource = '';
+
     protected string $model = '';
 
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
@@ -25,6 +26,6 @@ class ApiController extends BaseController
         if ($this->model && $this->modelResource) {
             $this->authorizeResource($this->model, $this->modelResource);
         }
-        \Locale::setDefault(config('app.locale'));
+        Locale::setDefault(config('app.locale'));
     }
 }

@@ -6,12 +6,12 @@ use Illuminate\Support\Arr;
 
 /**
  * Class Base
+ *
  * @package Motor\Backend\Grid
  */
 class Base
 {
     protected $attributes = [];
-
 
     /**
      * @param $attributes
@@ -24,7 +24,6 @@ class Base
         return $this;
     }
 
-
     /**
      * @param $style
      * @return $this
@@ -36,7 +35,6 @@ class Base
         return $this;
     }
 
-
     /**
      * @return mixed
      */
@@ -45,7 +43,6 @@ class Base
         return Arr::get($this->attributes, 'style');
     }
 
-
     /**
      * @return array
      */
@@ -53,7 +50,6 @@ class Base
     {
         return $this->attributes;
     }
-
 
     /**
      * @return string
@@ -66,12 +62,11 @@ class Base
 
         $compiled = '';
         foreach ($this->attributes as $key => $val) {
-            $compiled .= ' ' . $key . '="' . htmlspecialchars((string) $val, ENT_QUOTES, "UTF-8", true) . '"';
+            $compiled .= ' '.$key.'="'.htmlspecialchars((string) $val, ENT_QUOTES, "UTF-8", true).'"';
         }
 
         return $compiled;
     }
-
 
     /**
      * @param $string

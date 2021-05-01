@@ -6,6 +6,7 @@ use Illuminate\Support\Arr;
 
 /**
  * Class TextRenderer
+ *
  * @package Motor\Backend\Grid\Renderers
  */
 class TextRenderer
@@ -14,18 +15,17 @@ class TextRenderer
 
     protected $options = [];
 
-
     /**
      * TextRenderer constructor.
+     *
      * @param $value
      * @param $options
      */
     public function __construct($value, array $options = [])
     {
-        $this->value   = $value;
+        $this->value = $value;
         $this->options = $options;
     }
-
 
     /**
      * @return string

@@ -2,22 +2,22 @@
 
 namespace Motor\Backend\Http\Controllers\Backend;
 
-use Motor\Backend\Http\Controllers\Controller;
-use Motor\Backend\Models\Permission;
-use Motor\Backend\Http\Requests\Backend\PermissionRequest;
-use Motor\Backend\Grids\PermissionGrid;
 use Kris\LaravelFormBuilder\FormBuilderTrait;
 use Motor\Backend\Forms\Backend\PermissionForm;
+use Motor\Backend\Grids\PermissionGrid;
+use Motor\Backend\Http\Controllers\Controller;
+use Motor\Backend\Http\Requests\Backend\PermissionRequest;
+use Motor\Backend\Models\Permission;
 use Motor\Backend\Services\PermissionService;
 
 /**
  * Class PermissionsController
+ *
  * @package Motor\Backend\Http\Controllers\Backend
  */
 class PermissionsController extends Controller
 {
     use FormBuilderTrait;
-
 
     /**
      * Display a listing of the resource.
@@ -36,7 +36,6 @@ class PermissionsController extends Controller
         return view('motor-backend::backend.permissions.index', compact('paginator', 'grid'));
     }
 
-
     /**
      * Show the form for creating a new resource.
      *
@@ -47,12 +46,11 @@ class PermissionsController extends Controller
         $form = $this->form(PermissionForm::class, [
             'method'  => 'POST',
             'route'   => 'backend.permissions.store',
-            'enctype' => 'multipart/form-data'
+            'enctype' => 'multipart/form-data',
         ]);
 
         return view('motor-backend::backend.permissions.create', compact('form'));
     }
-
 
     /**
      * Store a newly created resource in storage.
@@ -66,7 +64,10 @@ class PermissionsController extends Controller
 
         // It will automatically use current request, get the rules, and do the validation
         if (! $form->isValid()) {
-            return redirect()->back()->withErrors($form->getErrors())->withInput();
+            return redirect()
+                ->back()
+                ->withErrors($form->getErrors())
+                ->withInput();
         }
 
         PermissionService::createWithForm($request, $form);
@@ -75,7 +76,6 @@ class PermissionsController extends Controller
 
         return redirect('backend/permissions');
     }
-
 
     /**
      * Display the specified resource.
@@ -87,7 +87,6 @@ class PermissionsController extends Controller
         //
     }
 
-
     /**
      * Show the form for editing the specified resource.
      *
@@ -98,20 +97,19 @@ class PermissionsController extends Controller
     {
         $form = $this->form(PermissionForm::class, [
             'method'  => 'PATCH',
-            'url'     => route('backend.permissions.update', [ $record->id ]),
+            'url'     => route('backend.permissions.update', [$record->id]),
             'enctype' => 'multipart/form-data',
-            'model'   => $record
+            'model'   => $record,
         ]);
 
         return view('motor-backend::backend.permissions.edit', compact('form'));
     }
 
-
     /**
      * Update the specified resource in storage.
      *
      * @param PermissionRequest $request
-     * @param Permission        $record
+     * @param Permission $record
      * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
      */
     public function update(PermissionRequest $request, Permission $record)
@@ -120,7 +118,10 @@ class PermissionsController extends Controller
 
         // It will automatically use current request, get the rules, and do the validation
         if (! $form->isValid()) {
-            return redirect()->back()->withErrors($form->getErrors())->withInput();
+            return redirect()
+                ->back()
+                ->withErrors($form->getErrors())
+                ->withInput();
         }
 
         PermissionService::updateWithForm($record, $request, $form);
@@ -129,7 +130,6 @@ class PermissionsController extends Controller
 
         return redirect('backend/permissions');
     }
-
 
     /**
      * Remove the specified resource from storage.

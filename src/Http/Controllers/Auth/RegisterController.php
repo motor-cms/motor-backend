@@ -2,18 +2,18 @@
 
 namespace Motor\Backend\Http\Controllers\Auth;
 
-use Motor\Backend\Models\User;
 use App\Http\Controllers\Controller;
-use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
+use Illuminate\Support\Facades\Validator;
+use Motor\Backend\Models\User;
 
 /**
  * Class RegisterController
+ *
  * @package Motor\Backend\Http\Controllers\Auth
  */
 class RegisterController extends Controller
 {
-
     /*
     |--------------------------------------------------------------------------
     | Register Controller
@@ -34,7 +34,6 @@ class RegisterController extends Controller
      */
     protected $redirectTo = '/';
 
-
     /**
      * Create a new controller instance.
      *
@@ -44,7 +43,6 @@ class RegisterController extends Controller
     {
         $this->middleware('guest');
     }
-
 
     /**
      * Show the application registration form.
@@ -58,7 +56,6 @@ class RegisterController extends Controller
         return redirect($this->redirectTo);
         //return view('motor-backend::auth.register');
     }
-
 
     /**
      * Get a validator for an incoming registration request.
@@ -75,7 +72,6 @@ class RegisterController extends Controller
             'password' => 'required|min:6|confirmed',
         ]);
     }
-
 
     /**
      * Create a new user instance after a valid registration.

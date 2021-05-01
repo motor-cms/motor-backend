@@ -2,22 +2,22 @@
 
 namespace Motor\Backend\Http\Controllers\Backend;
 
+use Kris\LaravelFormBuilder\FormBuilderTrait;
 use Motor\Backend\Forms\Backend\LanguageForm;
 use Motor\Backend\Grids\LanguageGrid;
+use Motor\Backend\Http\Controllers\Controller;
 use Motor\Backend\Http\Requests\Backend\LanguageRequest;
 use Motor\Backend\Models\Language;
-use Motor\Backend\Http\Controllers\Controller;
-use Kris\LaravelFormBuilder\FormBuilderTrait;
 use Motor\Backend\Services\LanguageService;
 
 /**
  * Class LanguagesController
+ *
  * @package Motor\Backend\Http\Controllers\Backend
  */
 class LanguagesController extends Controller
 {
     use FormBuilderTrait;
-
 
     /**
      * Display a listing of the resource.
@@ -36,7 +36,6 @@ class LanguagesController extends Controller
         return view('motor-backend::backend.languages.index', compact('paginator', 'grid'));
     }
 
-
     /**
      * Show the form for creating a new resource.
      *
@@ -46,12 +45,11 @@ class LanguagesController extends Controller
     {
         $form = $this->form(LanguageForm::class, [
             'method' => 'POST',
-            'route'  => 'backend.languages.store'
+            'route'  => 'backend.languages.store',
         ]);
 
         return view('motor-backend::backend.languages.create', compact('form'));
     }
-
 
     /**
      * Store a newly created resource in storage.
@@ -65,7 +63,10 @@ class LanguagesController extends Controller
 
         // It will automatically use current request, get the rules, and do the validation
         if (! $form->isValid()) {
-            return redirect()->back()->withErrors($form->getErrors())->withInput();
+            return redirect()
+                ->back()
+                ->withErrors($form->getErrors())
+                ->withInput();
         }
 
         LanguageService::createWithForm($request, $form);
@@ -74,7 +75,6 @@ class LanguagesController extends Controller
 
         return redirect('backend/languages');
     }
-
 
     /**
      * Display the specified resource.
@@ -86,7 +86,6 @@ class LanguagesController extends Controller
         //
     }
 
-
     /**
      * Show the form for editing the specified resource.
      *
@@ -97,19 +96,18 @@ class LanguagesController extends Controller
     {
         $form = $this->form(LanguageForm::class, [
             'method' => 'PATCH',
-            'url'    => route('backend.languages.update', [ $record->id ]),
-            'model'  => $record
+            'url'    => route('backend.languages.update', [$record->id]),
+            'model'  => $record,
         ]);
 
         return view('motor-backend::backend.languages.edit', compact('form'));
     }
 
-
     /**
      * Update the specified resource in storage.
      *
      * @param LanguageRequest $request
-     * @param Language        $record
+     * @param Language $record
      * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
      */
     public function update(LanguageRequest $request, Language $record)
@@ -118,7 +116,10 @@ class LanguagesController extends Controller
 
         // It will automatically use current request, get the rules, and do the validation
         if (! $form->isValid()) {
-            return redirect()->back()->withErrors($form->getErrors())->withInput();
+            return redirect()
+                ->back()
+                ->withErrors($form->getErrors())
+                ->withInput();
         }
 
         LanguageService::updateWithForm($record, $request, $form);
@@ -127,7 +128,6 @@ class LanguagesController extends Controller
 
         return redirect('backend/languages');
     }
-
 
     /**
      * Remove the specified resource from storage.

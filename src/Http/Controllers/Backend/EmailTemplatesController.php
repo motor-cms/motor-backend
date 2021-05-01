@@ -2,22 +2,22 @@
 
 namespace Motor\Backend\Http\Controllers\Backend;
 
-use Motor\Backend\Forms\Backend\EmailTemplateForm;
-use Motor\Backend\Http\Controllers\Controller;
-use Motor\Backend\Models\EmailTemplate;
-use Motor\Backend\Http\Requests\Backend\EmailTemplateRequest;
-use Motor\Backend\Grids\EmailTemplateGrid;
 use Kris\LaravelFormBuilder\FormBuilderTrait;
+use Motor\Backend\Forms\Backend\EmailTemplateForm;
+use Motor\Backend\Grids\EmailTemplateGrid;
+use Motor\Backend\Http\Controllers\Controller;
+use Motor\Backend\Http\Requests\Backend\EmailTemplateRequest;
+use Motor\Backend\Models\EmailTemplate;
 use Motor\Backend\Services\EmailTemplateService;
 
 /**
  * Class EmailTemplatesController
+ *
  * @package Motor\Backend\Http\Controllers\Backend
  */
 class EmailTemplatesController extends Controller
 {
     use FormBuilderTrait;
-
 
     /**
      * Display a listing of the resource.
@@ -36,7 +36,6 @@ class EmailTemplatesController extends Controller
         return view('motor-backend::backend.email_templates.index', compact('paginator', 'grid'));
     }
 
-
     /**
      * @param EmailTemplate $record
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
@@ -47,7 +46,6 @@ class EmailTemplatesController extends Controller
 
         return $this->create($newRecord);
     }
-
 
     /**
      * Show the form for creating a new resource.
@@ -60,12 +58,11 @@ class EmailTemplatesController extends Controller
         $form = $this->form(EmailTemplateForm::class, [
             'method' => 'POST',
             'route'  => 'backend.email_templates.store',
-            'model'  => $record
+            'model'  => $record,
         ]);
 
         return view('motor-backend::backend.email_templates.create', compact('form'));
     }
-
 
     /**
      * Store a newly created resource in storage.
@@ -79,7 +76,10 @@ class EmailTemplatesController extends Controller
 
         // It will automatically use current request, get the rules, and do the validation
         if (! $form->isValid()) {
-            return redirect()->back()->withErrors($form->getErrors())->withInput();
+            return redirect()
+                ->back()
+                ->withErrors($form->getErrors())
+                ->withInput();
         }
 
         EmailTemplateService::createWithForm($request, $form);
@@ -88,7 +88,6 @@ class EmailTemplatesController extends Controller
 
         return redirect('backend/email_templates');
     }
-
 
     /**
      * Display the specified resource.
@@ -100,7 +99,6 @@ class EmailTemplatesController extends Controller
         //
     }
 
-
     /**
      * Show the form for editing the specified resource.
      *
@@ -111,19 +109,18 @@ class EmailTemplatesController extends Controller
     {
         $form = $this->form(EmailTemplateForm::class, [
             'method' => 'PATCH',
-            'url'    => route('backend.email_templates.update', [ $record->id ]),
-            'model'  => $record
+            'url'    => route('backend.email_templates.update', [$record->id]),
+            'model'  => $record,
         ]);
 
         return view('motor-backend::backend.email_templates.edit', compact('form'));
     }
 
-
     /**
      * Update the specified resource in storage.
      *
      * @param EmailTemplateRequest $request
-     * @param EmailTemplate        $record
+     * @param EmailTemplate $record
      * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
      */
     public function update(EmailTemplateRequest $request, EmailTemplate $record)
@@ -132,7 +129,10 @@ class EmailTemplatesController extends Controller
 
         // It will automatically use current request, get the rules, and do the validation
         if (! $form->isValid()) {
-            return redirect()->back()->withErrors($form->getErrors())->withInput();
+            return redirect()
+                ->back()
+                ->withErrors($form->getErrors())
+                ->withInput();
         }
 
         EmailTemplateService::updateWithForm($record, $request, $form);
@@ -141,7 +141,6 @@ class EmailTemplatesController extends Controller
 
         return redirect('backend/email_templates');
     }
-
 
     /**
      * Remove the specified resource from storage.

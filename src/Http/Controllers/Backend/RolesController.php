@@ -2,22 +2,22 @@
 
 namespace Motor\Backend\Http\Controllers\Backend;
 
-use Motor\Backend\Http\Controllers\Controller;
-use Motor\Backend\Models\Role;
-use Motor\Backend\Http\Requests\Backend\RoleRequest;
-use Motor\Backend\Grids\RoleGrid;
 use Kris\LaravelFormBuilder\FormBuilderTrait;
 use Motor\Backend\Forms\Backend\RoleForm;
+use Motor\Backend\Grids\RoleGrid;
+use Motor\Backend\Http\Controllers\Controller;
+use Motor\Backend\Http\Requests\Backend\RoleRequest;
+use Motor\Backend\Models\Role;
 use Motor\Backend\Services\RoleService;
 
 /**
  * Class RolesController
+ *
  * @package Motor\Backend\Http\Controllers\Backend
  */
 class RolesController extends Controller
 {
     use FormBuilderTrait;
-
 
     /**
      * Display a listing of the resource.
@@ -36,7 +36,6 @@ class RolesController extends Controller
         return view('motor-backend::backend.roles.index', compact('paginator', 'grid'));
     }
 
-
     /**
      * Show the form for creating a new resource.
      *
@@ -47,12 +46,11 @@ class RolesController extends Controller
         $form = $this->form(RoleForm::class, [
             'method'  => 'POST',
             'route'   => 'backend.roles.store',
-            'enctype' => 'multipart/form-data'
+            'enctype' => 'multipart/form-data',
         ]);
 
         return view('motor-backend::backend.roles.create', compact('form'));
     }
-
 
     /**
      * Store a newly created resource in storage.
@@ -66,7 +64,10 @@ class RolesController extends Controller
 
         // It will automatically use current request, get the rules, and do the validation
         if (! $form->isValid()) {
-            return redirect()->back()->withErrors($form->getErrors())->withInput();
+            return redirect()
+                ->back()
+                ->withErrors($form->getErrors())
+                ->withInput();
         }
 
         RoleService::createWithForm($request, $form);
@@ -75,7 +76,6 @@ class RolesController extends Controller
 
         return redirect('backend/roles');
     }
-
 
     /**
      * Display the specified resource.
@@ -87,7 +87,6 @@ class RolesController extends Controller
         //
     }
 
-
     /**
      * Show the form for editing the specified resource.
      *
@@ -98,20 +97,19 @@ class RolesController extends Controller
     {
         $form = $this->form(RoleForm::class, [
             'method'  => 'PATCH',
-            'url'     => route('backend.roles.update', [ $record->id ]),
+            'url'     => route('backend.roles.update', [$record->id]),
             'enctype' => 'multipart/form-data',
-            'model'   => $record
+            'model'   => $record,
         ]);
 
         return view('motor-backend::backend.roles.edit', compact('form'));
     }
 
-
     /**
      * Update the specified resource in storage.
      *
      * @param RoleRequest $request
-     * @param Role        $record
+     * @param Role $record
      * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
      */
     public function update(RoleRequest $request, Role $record)
@@ -120,7 +118,10 @@ class RolesController extends Controller
 
         // It will automatically use current request, get the rules, and do the validation
         if (! $form->isValid()) {
-            return redirect()->back()->withErrors($form->getErrors())->withInput();
+            return redirect()
+                ->back()
+                ->withErrors($form->getErrors())
+                ->withInput();
         }
 
         RoleService::updateWithForm($record, $request, $form);
@@ -129,7 +130,6 @@ class RolesController extends Controller
 
         return redirect('backend/roles');
     }
-
 
     /**
      * Remove the specified resource from storage.

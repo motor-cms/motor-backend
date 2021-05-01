@@ -66,7 +66,7 @@ return [
     'include_helpers' => false,
 
     'helper_files' => [
-        base_path() . '/vendor/laravel/framework/src/Illuminate/Support/helpers.php',
+        base_path().'/vendor/laravel/framework/src/Illuminate/Support/helpers.php',
     ],
 
     /*
@@ -100,8 +100,8 @@ return [
     */
 
     'extra' => [
-        'Eloquent' => [ 'Illuminate\Database\Eloquent\Builder', 'Illuminate\Database\Query\Builder' ],
-        'Session'  => [ 'Illuminate\Session\Store' ],
+        'Eloquent' => ['Illuminate\Database\Eloquent\Builder', 'Illuminate\Database\Query\Builder'],
+        'Session'  => ['Illuminate\Session\Store'],
     ],
 
     'magic' => [
@@ -114,7 +114,7 @@ return [
             'critical'  => 'Monolog\Logger::addCritical',
             'alert'     => 'Monolog\Logger::addAlert',
             'emergency' => 'Monolog\Logger::addEmergency',
-        ]
+        ],
     ],
 
     /*

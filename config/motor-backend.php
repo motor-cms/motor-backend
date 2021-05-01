@@ -19,8 +19,9 @@ return [
         'languages'       => true,
         'email_templates' => true,
         'profile'         => true,
-		'auth' => [], // can be used to exclude auth routes e.g. for laravel fortify. ['login' => false, ....]
+        'auth'            => [],
+        // can be used to exclude auth routes e.g. for laravel fortify. ['login' => false, ....]
     ],
-   'flash'             => 'toastr',
-    'bootstrap_version' => 4
+    'flash'             => 'toastr',
+    'bootstrap_version' => 4,
 ];

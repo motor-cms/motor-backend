@@ -17,6 +17,7 @@ use Motor\Backend\Services\EmailTemplateService;
 class EmailTemplatesController extends ApiController
 {
     protected string $model = 'Motor\Backend\Models\EmailTemplate';
+
     protected string $modelResource = 'email_template';
 
     /**

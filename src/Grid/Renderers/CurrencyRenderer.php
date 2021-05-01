@@ -4,9 +4,11 @@ namespace Motor\Backend\Grid\Renderers;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Arr;
+use NumberFormatter;
 
 /**
  * Class CurrencyRenderer
+ *
  * @package Motor\Backend\Grid\Renderers
  */
 class CurrencyRenderer
@@ -19,21 +21,19 @@ class CurrencyRenderer
 
     protected $defaultCurrency = 'EUR';
 
-
     /**
      * CurrencyRenderer constructor.
      *
      * @param            $value
-     * @param array      $options
+     * @param array $options
      * @param Model|null $record
      */
     public function __construct($value, array $options = [], Model $record = null)
     {
-        $this->value   = $value;
+        $this->value = $value;
         $this->options = $options;
-        $this->record  = $record;
+        $this->record = $record;
     }
-
 
     /**
      * @return string
@@ -52,11 +52,11 @@ class CurrencyRenderer
             $currency = $this->defaultCurrency;
         }
 
-        $formatter = new \NumberFormatter(config('app.locale'), \NumberFormatter::CURRENCY);
-        $value     = $formatter->formatCurrency((float) $this->value, $currency);
+        $formatter = new NumberFormatter(config('app.locale'), NumberFormatter::CURRENCY);
+        $value = $formatter->formatCurrency((float) $this->value, $currency);
 
         if ((float) $this->value < 0) {
-            return '<span style="color: red;">' . $value . '</span>';
+            return '<span style="color: red;">'.$value.'</span>';
         }
 
         return $value;

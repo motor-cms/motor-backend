@@ -7,11 +7,11 @@ use Kris\LaravelFormBuilder\Fields\FormField;
 
 /**
  * Class FileAudioType
+ *
  * @package Motor\Backend\Forms\Fields
  */
 class FileAudioType extends FormField
 {
-
     /**
      * @return string
      */
@@ -23,12 +23,11 @@ class FileAudioType extends FormField
         return 'motor-backend::laravel-form-builder.file_audio';
     }
 
-
     /**
      * @param array $options
-     * @param bool  $showLabel
-     * @param bool  $showField
-     * @param bool  $showError
+     * @param bool $showLabel
+     * @param bool $showField
+     * @param bool $showError
      * @return string
      */
     public function render(array $options = [], $showLabel = true, $showField = true, $showError = true)
@@ -49,19 +48,20 @@ class FileAudioType extends FormField
                 }
             }
         } elseif (is_object($modelData)) {
-            $items            = $modelData->getMedia($this->getRealName())->reverse();
+            $items = $modelData->getMedia($this->getRealName())
+                               ->reverse();
             $options['files'] = [];
             foreach ($items as $item) {
                 $options['files'][] = [
                     'id'          => $item->id,
                     'name'        => $item->file_name,
                     'public_path' => $item->getUrl(),
-                    'created_at'  => $item->created_at
+                    'created_at'  => $item->created_at,
                 ];
             }
         }
 
-        $options['name']      = $this->getName();
+        $options['name'] = $this->getName();
         $options['name_slug'] = Str::slug($this->getName());
 
         return parent::render($options, $showLabel, $showField, $showError);

@@ -6,11 +6,11 @@ use Kris\LaravelFormBuilder\Fields\FormField;
 
 /**
  * Class DatepickerType
+ *
  * @package Motor\Backend\Forms\Fields
  */
 class DatepickerType extends FormField
 {
-
     /**
      * @return string
      */
@@ -22,17 +22,16 @@ class DatepickerType extends FormField
         return 'motor-backend::laravel-form-builder.datepicker';
     }
 
-
     /**
      * @param array $options
-     * @param bool  $showLabel
-     * @param bool  $showField
-     * @param bool  $showError
+     * @param bool $showLabel
+     * @param bool $showField
+     * @param bool $showError
      * @return string
      */
     public function render(array $options = [], $showLabel = true, $showField = true, $showError = true)
     {
-        $options['attr'] = [ 'class' => 'form-control datepicker' ];
+        $options['attr'] = ['class' => 'form-control datepicker'];
 
         return parent::render($options, $showLabel, $showField, $showError);
     }

@@ -7,6 +7,7 @@ use Illuminate\Support\Arr;
 
 /**
  * Class BladeRenderer
+ *
  * @package Motor\Backend\Grid\Renderers
  */
 class BladeRenderer
@@ -17,22 +18,21 @@ class BladeRenderer
 
     protected $record;
 
-
     /**
      * BladeRenderer constructor.
      *
      * BladeRenderer constructor.
+     *
      * @param            $value
      * @param            $options
      * @param Model|null $record
      */
     public function __construct($value, $options, Model $record = null)
     {
-        $this->value   = $value;
+        $this->value = $value;
         $this->options = $options;
-        $this->record  = $record;
+        $this->record = $record;
     }
-
 
     /**
      * @return array|string
@@ -54,7 +54,7 @@ class BladeRenderer
             'record'  => $this->record,
             'value'   => $this->value,
             'options' => $this->options,
-            'index'   => $index
+            'index'   => $index,
         ])->render();
     }
 }

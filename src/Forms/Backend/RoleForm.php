@@ -3,16 +3,16 @@
 namespace Motor\Backend\Forms\Backend;
 
 use Illuminate\Database\Eloquent\Collection;
-use Motor\Backend\Models\Permission;
 use Kris\LaravelFormBuilder\Form;
+use Motor\Backend\Models\Permission;
 
 /**
  * Class RoleForm
+ *
  * @package Motor\Backend\Forms\Backend
  */
 class RoleForm extends Form
 {
-
     /**
      * Define fields for RoleForm
      *
@@ -27,27 +27,26 @@ class RoleForm extends Form
             }
         }
 
-        $this->add('name', 'text', [ 'label' => trans('motor-backend::backend/roles.name'), 'rules' => 'required' ])
+        $this->add('name', 'text', ['label' => trans('motor-backend::backend/roles.name'), 'rules' => 'required'])
              ->add('guard_name', 'text', [
                  'label'         => trans('motor-backend::backend/roles.guard_name'),
                  'default_value' => 'web',
-                 'rules'         => 'required'
+                 'rules'         => 'required',
              ])
              ->add('permissions', 'choice', [
                  'label'          => trans('motor-backend::backend/permissions.permissions'),
                  'choice_options' => [
-                     'wrapper'    => [ 'class' => 'choice-wrapper' ],
-                     'label_attr' => [ 'class' => 'label-class' ],
+                     'wrapper'    => ['class' => 'choice-wrapper'],
+                     'label_attr' => ['class' => 'label-class'],
                  ],
                  'selected'       => $selected,
                  'expanded'       => true,
                  'multiple'       => true,
-                 'choices'        => Permission::pluck('name', 'id')->toArray(),
+                 'choices'        => Permission::pluck('name', 'id')
+                                               ->toArray(),
              ])
-             ->add(
-                 'submit',
-                 'submit',
-                 [ 'attr' => [ 'class' => 'btn btn-primary' ], 'label' => trans('motor-backend::backend/roles.save') ]
-             );
+             ->add('submit', 'submit', ['attr'  => ['class' => 'btn btn-primary'],
+                                        'label' => trans('motor-backend::backend/roles.save'),
+                 ]);
     }
 }

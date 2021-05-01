@@ -5,7 +5,7 @@ return [
         'motor-backend' => [
             'position'   => 3,
             'name'       => 'Motor-Backend',
-            'navigation' => '_navigation'
-        ]
-    ]
+            'navigation' => '_navigation',
+        ],
+    ],
 ];

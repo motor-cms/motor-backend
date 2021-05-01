@@ -6,6 +6,7 @@ use Illuminate\Contracts\Pagination\Paginator;
 
 /**
  * Class SpecialRow
+ *
  * @package Motor\Backend\Grid
  */
 class SpecialRow extends Base
@@ -16,16 +17,15 @@ class SpecialRow extends Base
 
     protected $view;
 
-
     /**
      * SpecialRow constructor.
+     *
      * @param $view
      */
     public function __construct($view)
     {
         $this->view = $view;
     }
-
 
     /**
      * Set column type
@@ -37,12 +37,11 @@ class SpecialRow extends Base
      */
     public function renderer($renderer, array $options = [])
     {
-        $this->renderer      = $renderer;
+        $this->renderer = $renderer;
         $this->renderOptions = $options;
 
         return $this;
     }
-
 
     /**
      * @param Paginator $paginator
@@ -55,7 +54,7 @@ class SpecialRow extends Base
 
         // return view
         if ($this->view) {
-            return view($this->view, [ 'paginator' => $paginator, 'value' => $renderer->render() ]);
+            return view($this->view, ['paginator' => $paginator, 'value' => $renderer->render()]);
         }
     }
 }

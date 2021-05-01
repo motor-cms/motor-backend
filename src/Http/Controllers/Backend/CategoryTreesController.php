@@ -2,13 +2,13 @@
 
 namespace Motor\Backend\Http\Controllers\Backend;
 
-use Motor\Backend\Http\Controllers\Controller;
-use Motor\Backend\Models\Category;
-use Motor\Backend\Http\Requests\Backend\CategoryTreeRequest;
-use Motor\Backend\Services\CategoryService;
-use Motor\Backend\Grids\CategoryTreeGrid;
-use Motor\Backend\Forms\Backend\CategoryTreeForm;
 use Kris\LaravelFormBuilder\FormBuilderTrait;
+use Motor\Backend\Forms\Backend\CategoryTreeForm;
+use Motor\Backend\Grids\CategoryTreeGrid;
+use Motor\Backend\Http\Controllers\Controller;
+use Motor\Backend\Http\Requests\Backend\CategoryTreeRequest;
+use Motor\Backend\Models\Category;
+use Motor\Backend\Services\CategoryService;
 use Motor\Core\Filter\Renderers\WhereRenderer;
 
 /**

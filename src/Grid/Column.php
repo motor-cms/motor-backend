@@ -2,8 +2,11 @@
 
 namespace Motor\Backend\Grid;
 
+use Closure;
+
 /**
  * Class Column
+ *
  * @package Motor\Backend\Grid
  */
 class Column extends Base
@@ -30,13 +33,12 @@ class Column extends Base
 
     protected $conditionOperator = '=';
 
-
     /**
      * Column constructor.
      *
      * @param        $name
      * @param        $label
-     * @param bool   $sortable
+     * @param bool $sortable
      * @param string $sortableField
      */
     public function __construct($name, $label, $sortable = false, $sortableField = null)
@@ -57,7 +59,6 @@ class Column extends Base
         $this->setSortable($sortable);
     }
 
-
     /**
      * @param        $column
      * @param        $value
@@ -66,13 +67,12 @@ class Column extends Base
      */
     public function onCondition($column, $value, $operator = '=')
     {
-        $this->conditionColumn   = $column;
-        $this->conditionValue    = $value;
+        $this->conditionColumn = $column;
+        $this->conditionValue = $value;
         $this->conditionOperator = $operator;
 
         return $this;
     }
-
 
     /**
      * @param $record
@@ -124,7 +124,6 @@ class Column extends Base
         return true;
     }
 
-
     /**
      * Set column type
      *
@@ -134,12 +133,11 @@ class Column extends Base
      */
     public function renderer($renderer, $options = [])
     {
-        $this->renderer      = $renderer;
+        $this->renderer = $renderer;
         $this->renderOptions = $options;
 
         return $this;
     }
-
 
     /**
      * Get renderer
@@ -150,7 +148,6 @@ class Column extends Base
     {
         return $this->renderer;
     }
-
 
     /**
      * Set options for renderer
@@ -165,7 +162,6 @@ class Column extends Base
         return $this;
     }
 
-
     /**
      * Get options for renderer
      *
@@ -176,7 +172,6 @@ class Column extends Base
         return $this->renderOptions;
     }
 
-
     /**
      * Get name
      *
@@ -186,7 +181,6 @@ class Column extends Base
     {
         return $this->name;
     }
-
 
     /**
      * Set sortable status and field
@@ -205,7 +199,6 @@ class Column extends Base
         return $this;
     }
 
-
     /**
      * Return sortable status
      *
@@ -215,7 +208,6 @@ class Column extends Base
     {
         return $this->sortable;
     }
-
 
     /**
      * Get column label
@@ -227,7 +219,6 @@ class Column extends Base
         return $this->label;
     }
 
-
     /**
      * Get sortable field
      *
@@ -237,7 +228,6 @@ class Column extends Base
     {
         return $this->sortableField;
     }
-
 
     /**
      * Set filters if available
@@ -258,7 +248,6 @@ class Column extends Base
         return $this;
     }
 
-
     /**
      * Get filters
      *
@@ -268,7 +257,6 @@ class Column extends Base
     {
         return $this->filters;
     }
-
 
     /**
      * Check for cell closure
@@ -284,7 +272,6 @@ class Column extends Base
         return false;
     }
 
-
     /**
      * Get cell closure
      *
@@ -295,7 +282,6 @@ class Column extends Base
         return $this->cellClosure;
     }
 
-
     /**
      * Set cell closure
      *
@@ -303,7 +289,7 @@ class Column extends Base
      *
      * @return $this
      */
-    public function cell(\Closure $closure)
+    public function cell(Closure $closure)
     {
         $this->cellClosure = $closure;
 

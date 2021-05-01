@@ -23,9 +23,9 @@ return [
         |
 
         */
-//        'active_user' => function () {
-//            return Auth::check() ? Auth::user() : null;
-//        },
+        //        'active_user' => function () {
+        //            return Auth::check() ? Auth::user() : null;
+        //        },
 
         /*
         |--------------------------------------------------------------------------
@@ -51,7 +51,7 @@ return [
         |
         |
         */
-        'table' => 'users'
+        'table'     => 'users',
 
     ],
     /*
@@ -68,5 +68,5 @@ return [
         'created' => 'created_by',
         'updated' => 'updated_by',
         'deleted' => 'deleted_by',
-    ]
+    ],
 ];
