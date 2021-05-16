@@ -5,16 +5,16 @@ return [
     'items'        => [
         0   => [
             'slug'        => 'dashboard',
-            'name'        => 'motor-backend::backend/global.dashboard',
-            'icon'        => 'fa fa-home',
-            'route'       => 'backend.dashboard.index',
+            'name'        => 'motor-backend.global.dashboard',
+            'icon'        => 'home',
+            'route'       => 'admin.dashboard',
             'roles'       => ['SuperAdmin'],
             'permissions' => ['dashboard.read'],
         ],
         900 => [
             'slug'        => 'administration',
-            'name'        => 'motor-backend::backend/global.administration',
-            'icon'        => 'fa fa-cogs',
+            'name'        => 'motor-backend.global.administration',
+            'icon'        => 'cogs',
             'route'       => null,
             'roles'       => ['SuperAdmin'],
             'permissions' => ['administration.read'],

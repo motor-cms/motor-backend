@@ -1,6 +1,10 @@
 <?php
+
+use Motor\Backend\Http\Controllers\Api\AdminNavigationsController;
+use Motor\Backend\Http\Controllers\Api\Auth\AuthController;
+
 Route::group([
-    'middleware' => [ 'auth:api', 'bindings', 'permission' ],
+    'middleware' => ['auth:api', 'bindings', 'permission'],
     'namespace'  => 'Motor\Backend\Http\Controllers\Api',
     'prefix'     => 'api',
     'as'         => 'api.',
@@ -14,34 +18,52 @@ Route::group([
     Route::apiResource('email_templates', 'EmailTemplatesController');
     Route::apiResource('category_trees', 'CategoryTreesController', [
         'parameters' => [
-            'category_trees' => 'category'
-        ]
+            'category_trees' => 'category',
+        ],
     ]);
     Route::apiResource('category_trees/{category_tree}/categories', 'CategoriesController');
 
-    Route::get('profile', 'ProfileEditController@me')->name('profile.read');
-    Route::put('profile', 'ProfileEditController@update')->name('profile.update');
+    Route::get('profile', 'ProfileEditController@me')
+         ->name('profile.read');
+    Route::put('profile', 'ProfileEditController@update')
+         ->name('profile.update');
     Route::apiResource('config_variables', 'ConfigVariablesController');
 });
 
-Route::group([
-    'middleware' => [ 'api', 'bindings' ],
-    'namespace'  => 'Motor\Backend\Http\Controllers\Api\Auth',
-    'prefix'     => 'api/auth',
-    'as'         => 'api.auth',
+Route::post('/api/auth/register', [AuthController::class, 'register']);
 
-], static function ($router) {
-    Route::post('login', 'LoginController@login')->name('login');
-    Route::post('logout', 'LoginController@logout')->name('logout');
-    Route::post('refresh', 'LoginController@refresh')->name('refresh');
-    Route::post('me', 'LoginController@me')->name('me');
+Route::post('/api/auth/login', [AuthController::class, 'login']);
+
+Route::group(['middleware' => ['auth:sanctum']], function () {
+    Route::get('/api/me', function (Request $request) {
+        return new \Motor\Backend\Http\Resources\UserResource(auth()->user());
+    });
+
+    Route::post('/api/auth/logout', [AuthController::class, 'logout']);
+
+    Route::get('/api/admin_navigations', [AdminNavigationsController::class, 'index'])
+         ->name('admin_navigations.index');
 });
 
+//Route::group([
+//    'middleware' => [ 'api', 'bindings' ],
+//    'namespace'  => 'Motor\Backend\Http\Controllers\Api\Auth',
+//    'prefix'     => 'api/auth',
+//    'as'         => 'api.auth',
+//
+//], static function ($router) {
+//    Route::post('login', 'LoginController@login')->name('login');
+//    Route::post('logout', 'LoginController@logout')->name('logout');
+//    Route::post('refresh', 'LoginController@refresh')->name('refresh');
+//    Route::post('me', 'LoginController@me')->name('me');
+//});
+
 Route::group([
-    'middleware' => [ 'web', 'web_auth', 'bindings', 'permission' ],
+    'middleware' => ['web', 'web_auth', 'bindings', 'permission'],
     'namespace'  => 'Motor\Backend\Http\Controllers\Api',
     'prefix'     => 'ajax',
     'as'         => 'ajax.',
 ], static function () {
-    Route::get('categories', 'CategoriesController@index')->name('categories.index');
+    Route::get('categories', 'CategoriesController@index')
+         ->name('categories.index');
 });
