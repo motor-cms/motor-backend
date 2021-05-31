@@ -8,6 +8,7 @@ use Culpa\Traits\DeletedBy;
 use Culpa\Traits\UpdatedBy;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
+use Kalnoy\Nestedset\NestedSet;
 use Kalnoy\Nestedset\NodeTrait;
 use Kalnoy\Nestedset\QueryBuilder;
 use Motor\Core\Filter\Filter;
@@ -104,4 +105,17 @@ class Category extends Model
     {
         return ['scope'];
     }
+
+    /**
+     * The "booted" method of the model.
+     *
+     * @return void
+     */
+    protected static function booted()
+    {
+        static::addGlobalScope('defaultOrder', function (Builder $builder) {
+            $builder->orderBy(NestedSet::LFT, 'ASC');
+        });
+    }
+
 }

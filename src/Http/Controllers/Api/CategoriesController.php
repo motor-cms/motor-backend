@@ -3,6 +3,7 @@
 namespace Motor\Backend\Http\Controllers\Api;
 
 use Illuminate\Http\Request;
+use Kalnoy\Nestedset\NestedSet;
 use Motor\Backend\Http\Controllers\ApiController;
 use Motor\Backend\Http\Requests\Backend\CategoryRequest;
 use Motor\Backend\Http\Resources\CategoryCollection;
@@ -105,7 +106,9 @@ class CategoriesController extends ApiController
                ->setAllowNull(true)
                ->setValue(null);
 
+        $service->setSorting([NestedSet::LFT, 'ASC']);
         $paginator = $service->getPaginator();
+
 
         return (new CategoryCollection($paginator))->additional(['message' => 'Category collection read']);
     }
@@ -236,7 +239,7 @@ class CategoriesController extends ApiController
      * @param \Motor\Backend\Models\Category $record
      * @return \Motor\Backend\Http\Resources\CategoryResource
      */
-    public function show(Category $record)
+    public function show($parent, Category $record) // Typecase on parent fails with a type error
     {
         $result = CategoryService::show($record)
                                  ->getResult();
@@ -308,7 +311,7 @@ class CategoriesController extends ApiController
      * @param \Motor\Backend\Models\Category $record
      * @return \Motor\Backend\Http\Resources\CategoryResource
      */
-    public function update(CategoryRequest $request, Category $record)
+    public function update(CategoryRequest $request, $parent, Category $record)
     {
         $result = CategoryService::update($record, $request)
                                  ->getResult();

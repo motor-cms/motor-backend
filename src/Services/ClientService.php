@@ -2,6 +2,7 @@
 
 namespace Motor\Backend\Services;
 
+use Illuminate\Support\Arr;
 use Illuminate\Support\Str;
 use Motor\Backend\Models\Client;
 
@@ -26,7 +27,7 @@ class ClientService extends BaseService
 
     private function createSlug()
     {
-        if ($this->data['slug'] == '') {
+        if (Arr::get($this->data, 'slug') == '') {
             $this->data['slug'] = Str::slug($this->data['name']);
         } else {
             $this->data['slug'] = Str::slug($this->data['slug']);

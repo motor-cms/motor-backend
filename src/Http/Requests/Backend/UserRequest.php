@@ -70,10 +70,10 @@ class UserRequest extends Request
      */
     public function rules()
     {
-        if ($this->method() === 'PATCH') {
+        if ($this->method() === 'PATCH' || $this->method() === 'PUT') {
             return [
                 'name'  => 'required',
-                'email' => 'required',
+                'avatar' => 'nullable',
             ];
         } else {
             return [

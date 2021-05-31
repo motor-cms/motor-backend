@@ -67,21 +67,21 @@ Route::group([
             Route::patch('profile/edit', 'ProfileEditController@update')->name('profile.update');
         }
 
-        Route::resource('categories', 'CategoriesController', [
-            'except' => [
-                'index',
-                'create'
-            ]
-        ]);
+        //Route::resource('categories', 'CategoriesController', [
+        //    'except' => [
+        //        'index',
+        //        'create'
+        //    ]
+        //]);
 
-        Route::get('categories/{category}', 'CategoriesController@index')->name('categories.index');
-        Route::get('categories/{category}/create', 'CategoriesController@create')->name('categories.create');
-
-        Route::resource('category_trees', 'CategoryTreesController', [
-            'parameters' => [
-                'category_trees' => 'category'
-            ]
-        ]);
+        //Route::get('categories/{category}', 'CategoriesController@index')->name('categories.index');
+        //Route::get('categories/{category}/create', 'CategoriesController@create')->name('categories.create');
+        //
+        //Route::resource('category_trees', 'CategoryTreesController', [
+        //    'parameters' => [
+        //        'category_trees' => 'category'
+        //    ]
+        //]);
 
         Route::resource('config_variables', 'ConfigVariablesController');
         Route::get('config_variables/{config_variable}/duplicate', 'ConfigVariablesController@duplicate')

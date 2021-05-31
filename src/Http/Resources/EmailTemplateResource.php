@@ -87,7 +87,9 @@ class EmailTemplateResource extends BaseResource
         return [
             'id'                      => (int) $this->id,
             'client'                  => new ClientResource($this->client),
+            'client_id'               => (int) $this->client_id,
             'language'                => new LanguageResource($this->language),
+            'language_id'             => (int) $this->language_id,
             'name'                    => $this->name,
             'subject'                 => $this->subject,
             'body_text'               => $this->body_text,

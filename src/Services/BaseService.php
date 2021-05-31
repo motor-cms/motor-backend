@@ -48,11 +48,10 @@ abstract class BaseService
      * Basic create method.
      * Usually called by an API
      *
-     * @param Request $request
-     *
-     * @return mixed
+     * @param \Illuminate\Http\Request|array $request
+     * @return \Motor\Backend\Services\BaseService
      */
-    public static function create(Request $request)
+    public static function create(Request|array $request)
     {
         return (new static())->setRequest($request)
                              ->doCreate();
@@ -78,12 +77,12 @@ abstract class BaseService
      * Basic update method.
      * Usually called by an API
      *
-     * @param Model $record
-     * @param Request $request
-     *
-     * @return mixed
+     * @param \Illuminate\Database\Elo
+     * quent\Model $record
+     * @param \Illuminate\Http\Request|array $request
+     * @return \Motor\Backend\Services\BaseService
      */
-    public static function update(Model $record, Request $request)
+    public static function update(Model $record, Request|array $request)
     {
         return (new static())->setRequest($request)
                              ->setRecord($record)
@@ -390,11 +389,11 @@ abstract class BaseService
     /**
      * Sets a request object
      *
-     * @param Request $request
+     * @param \Illuminate\Http\Request|array $request
      * @param null $form
      * @return $this
      */
-    public function setRequest(Request $request, $form = null)
+    public function setRequest(Request|array $request, $form = null)
     {
         $key = '';
         if (! is_null($form)) {
@@ -406,6 +405,12 @@ abstract class BaseService
         }
 
         $this->request = $request;
+        if (is_array($request)) {
+            $this->data = $request;
+
+            return $this;
+        }
+
         if ($key == '') {
             $this->data = $this->request->all();
         } else {
@@ -499,20 +504,29 @@ abstract class BaseService
 
         $collection = (! is_null($collection) ? $collection : $identifier);
 
-        foreach ($this->data as $key => $value) {
-            if (preg_match('/delete_media_(.*)/', $key, $matches) == 1 && $value == 1) {
-                $media = $record->getMedia($collection);
-                $mediaItem = $media->where('id', $matches[1])
-                                   ->first();
+        // FIXME: might not be useful anymore
+//        foreach ($this->data as $key => $value) {
+//            if (preg_match('/delete_media_(.*)/', $key, $matches) == 1 && $value == 1) {
+//                $media = $record->getMedia($collection);
+//                $mediaItem = $media->where('id', $matches[1])
+//                                   ->first();
+//
+//                if (! empty($mediaItem)) {
+//                    $mediaItem->delete();
+////                    $record->deleteMedia($matches[1]);
+//                }
+//            }
+//        }
 
-                if (! empty($mediaItem)) {
-                    $mediaItem->delete();
-//                    $record->deleteMedia($matches[1]);
-                }
+        // Delete from API
+        if (Arr::get($this->data, $identifier.'.dataUrl') !== null || Arr::get($this->data, $identifier) === false) {
+            $record->clearMediaCollection($identifier);
+            if (! is_null($collection)) {
+                $record->clearMediaCollection($collection);
             }
         }
 
-        if ((! is_null($file) || $this->isValidBase64(Arr::get($this->data, $identifier))) && $addToCollection === false) {
+        if ((! is_null($file) && $this->isValidBase64(Arr::get($this->data, $identifier.'.dataUrl'))) && $addToCollection === false) {
             $record->clearMediaCollection($identifier);
             if (! is_null($collection)) {
                 $record->clearMediaCollection($collection);
@@ -523,12 +537,12 @@ abstract class BaseService
             $record->addMedia($file)
                    ->toMediaCollection($collection, 'media');
         } else {
-            if ($this->isValidBase64(Arr::get($this->data, $identifier))) {
-                $image = base64_decode($this->data[$identifier]);
+            if ($this->isValidBase64(Arr::get($this->data, $identifier.'.dataUrl'))) {
+                $image = base64_decode(Arr::get($this->data, $identifier.'.dataUrl'));
 
                 $tempFilename = tempnam(sys_get_temp_dir(), 'upload');
 
-                $name = Arr::get($this->data, $identifier.'_name', $tempFilename);
+                $name = Arr::get($this->data, $identifier.'.name', $tempFilename);
 
                 $handle = fopen($tempFilename, "w");
                 fwrite($handle, $image);

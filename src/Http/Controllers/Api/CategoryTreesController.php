@@ -2,6 +2,7 @@
 
 namespace Motor\Backend\Http\Controllers\Api;
 
+use Kalnoy\Nestedset\NestedSet;
 use Motor\Backend\Http\Controllers\ApiController;
 use Motor\Backend\Http\Requests\Backend\CategoryTreeRequest;
 use Motor\Backend\Http\Resources\CategoryCollection;
@@ -78,6 +79,7 @@ class CategoryTreesController extends ApiController
                ->setDefaultValue(null)
                ->setAllowNull(true);
 
+        $service->setSorting([NestedSet::LFT, 'ASC']);
         $paginator = $service->getPaginator();
 
         return (new CategoryCollection($paginator))->additional(['message' => 'Category tree collection read']);

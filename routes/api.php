@@ -4,7 +4,7 @@ use Motor\Backend\Http\Controllers\Api\AdminNavigationsController;
 use Motor\Backend\Http\Controllers\Api\Auth\AuthController;
 
 Route::group([
-    'middleware' => ['auth:api', 'bindings', 'permission'],
+    'middleware' => ['auth:sanctum', 'bindings', 'permission'],
     'namespace'  => 'Motor\Backend\Http\Controllers\Api',
     'prefix'     => 'api',
     'as'         => 'api.',
@@ -16,12 +16,16 @@ Route::group([
     Route::apiResource('permissions', 'PermissionsController');
     Route::apiResource('permission_groups', 'PermissionGroupsController');
     Route::apiResource('email_templates', 'EmailTemplatesController');
+    Route::apiResource('category_trees/{category_tree}/categories', 'CategoriesController', [
+        'parameters' => [
+            'category_trees' => 'category',
+        ],
+    ]);
     Route::apiResource('category_trees', 'CategoryTreesController', [
         'parameters' => [
             'category_trees' => 'category',
         ],
     ]);
-    Route::apiResource('category_trees/{category_tree}/categories', 'CategoriesController');
 
     Route::get('profile', 'ProfileEditController@me')
          ->name('profile.read');

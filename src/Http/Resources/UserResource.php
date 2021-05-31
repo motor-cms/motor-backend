@@ -16,6 +16,11 @@ namespace Motor\Backend\Http\Resources;
  *     ref="#/components/schemas/ClientResource"
  *   ),
  *   @OA\Property(
+ *     property="client_id",
+ *     type="integer",
+ *     example="1"
+ *   ),
+ *   @OA\Property(
  *     property="roles",
  *     type="array",
  *     @OA\Items(
@@ -59,6 +64,7 @@ class UserResource extends BaseResource
         return [
             'id'          => (int) $this->id,
             'client'      => new ClientResource($this->client),
+            'client_id' => $this->client_id,
             'roles'       => RoleResource::collection($this->roles),
             'permissions' => PermissionResource::collection($this->permissions),
             'name'        => $this->name,

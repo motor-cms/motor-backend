@@ -29,6 +29,7 @@ class UserService extends BaseService
 
         $this->data['api_token'] = Str::random(60);
 
+        $this->updateClientId();
         $this->updatePassword();
     }
 
@@ -44,6 +45,7 @@ class UserService extends BaseService
         if (Arr::get($this->data, 'api_token')) {
             unset($this->data['api_token']);
         }
+        $this->updateClientId();
         $this->updatePassword();
     }
 
@@ -51,6 +53,13 @@ class UserService extends BaseService
     {
         $this->syncRolesAndPermissions();
         $this->uploadFiles();
+    }
+
+    private function updateClientId()
+    {
+        if (!Arr::get($this->data, 'client_id')) {
+            $this->data['client_id'] = null;
+        }
     }
 
     private function updatePassword()
@@ -64,13 +73,17 @@ class UserService extends BaseService
 
     private function uploadFiles()
     {
-        $this->uploadFile($this->request->file('avatar'), 'avatar');
+        $this->uploadFile(Arr::get($this->data, 'avatar'), 'avatar');
     }
 
     private function syncRolesAndPermissions()
     {
-        $this->record->syncRoles(Arr::get($this->data, 'roles', []));
+        if (Arr::get($this->data, 'roles')) {
+            $this->record->syncRoles(Arr::get($this->data, 'roles', []));
+        }
 
-        $this->record->syncPermissions(Arr::get($this->data, 'permissions', []));
+        //if (Arr::get($this->data, 'permissions')) {
+        //    $this->record->syncPermissions(Arr::get($this->data, 'permissions', []));
+        //}
     }
 }

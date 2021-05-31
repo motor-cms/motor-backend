@@ -58,6 +58,8 @@ class CategoryResource extends BaseResource
             'parent_id' => (int) $this->parent_id,
             '_lft'      => (int) $this->_lft,
             '_rgt'      => (int) $this->_rgt,
+            'level'     => (int) $this->ancestors()
+                                      ->count(),
             'children'  => CategoryResource::collection($this->whenLoaded('children')),
         ];
     }
