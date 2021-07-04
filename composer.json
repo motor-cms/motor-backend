@@ -30,7 +30,7 @@
     "kris/laravel-form-builder": "^1.40",
     "spatie/laravel-medialibrary": "^9.0",
     "spatie/laravel-permission": "^4.0",
-    "kalnoy/nestedset": "^5.0",
+    "kalnoy/nestedset": "^6.0",
     "laraeast/laravel-vue-i18n-generator": "^1.0",
     "laravel/horizon": "^5.0",
     "matthewbdaly/laravel-etag-middleware": "^1.3",
