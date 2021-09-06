@@ -43,6 +43,8 @@ abstract class BaseService
     protected $sortableField = 'id';
 
     protected $sortableDirection = 'ASC';
+    
+    protected $disk = 'media';
 
     /**
      * Basic create method.
@@ -466,6 +468,18 @@ abstract class BaseService
         return $data;
     }
 
+     /**
+     * Sets another disk
+     *
+     * @param string $disk
+     *
+     */
+    private function setDisk(string $disk) {
+        $this->disk = $disk;
+        return $this;
+    }
+    
+    
     /**
      * Handles file uploads either with a UploadedFile object or a base64 encoded file
      *
@@ -521,7 +535,7 @@ abstract class BaseService
 
         if ($file instanceof UploadedFile && $file->isValid()) {
             $record->addMedia($file)
-                   ->toMediaCollection($collection, 'media');
+                   ->toMediaCollection($collection, $this->disk);
         } else {
             if ($this->isValidBase64(Arr::get($this->data, $identifier))) {
                 $image = base64_decode($this->data[$identifier]);
@@ -536,7 +550,7 @@ abstract class BaseService
                 $record->addMedia($tempFilename)
                        ->setName($name)
                        ->setFileName($name)
-                       ->toMediaCollection($collection, 'media');
+                       ->toMediaCollection($collection, $this->disk);
             }
         }
 
