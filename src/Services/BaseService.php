@@ -474,7 +474,7 @@ abstract class BaseService
      * @param string $disk
      *
      */
-    private function setDisk(string $disk) {
+    protected function setDisk(string $disk) {
         $this->disk = $disk;
         return $this;
     }
