@@ -24,7 +24,7 @@ class MediaLibraryV9Upgrade extends Migration {
             ->orWhere('generated_conversions', '')
             ->orWhereRaw("JSON_TYPE(generated_conversions) = 'NULL'")
             ->update([
-                'generated_conversions' => DB::raw('custom_properties->"$.generated_conversions"'),
+                'generated_conversions' => DB::raw("JSON_EXTRACT(custom_properties, '$.generated_conversions')"),
                 // OPTIONAL: Remove the generated conversions from the custom_properties field as well:
                 // 'custom_properties'     => DB::raw("JSON_REMOVE(custom_properties, '$.generated_conversions')")
             ]);
