@@ -163,11 +163,7 @@ class MotorServiceProvider extends ServiceProvider
      */
     public function translations()
     {
-        $this->loadTranslationsFrom(__DIR__.'/../../resources/lang', 'motor-backend');
-
-        $this->publishes([
-            __DIR__.'/../../resources/lang' => resource_path('lang/vendor/motor-backend'),
-        ], 'motor-backend-install-translations');
+        $this->loadTranslationsFrom(__DIR__.'/../../lang', 'motor-backend');
     }
 
     /**
@@ -176,10 +172,6 @@ class MotorServiceProvider extends ServiceProvider
     public function views()
     {
         $this->loadViewsFrom(__DIR__.'/../../resources/views', 'motor-backend');
-
-        $this->publishes([
-            __DIR__.'/../../resources/views' => resource_path('views/vendor/motor-backend'),
-        ], 'motor-backend-install-views');
     }
 
     /**
