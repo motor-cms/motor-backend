@@ -7,8 +7,6 @@ use Motor\Backend\Http\Requests\Request;
 
 /**
  * Class CategoryTreeRequest
- *
- * @package Motor\Backend\Http\Requests\Backend
  */
 class CategoryTreeRequest extends Request
 {

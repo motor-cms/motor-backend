@@ -11,8 +11,6 @@ use Motor\Backend\Services\PermissionService;
 
 /**
  * Class PermissionsController
- *
- * @package Motor\Backend\Http\Controllers\Api
  */
 class PermissionsController extends ApiController
 {
@@ -122,7 +120,7 @@ class PermissionsController extends ApiController
      *
      * Store a newly created resource in storage.
      *
-     * @param PermissionRequest $request
+     * @param  PermissionRequest  $request
      * @return \Illuminate\Http\JsonResponse
      */
     public function store(PermissionRequest $request)
@@ -185,7 +183,7 @@ class PermissionsController extends ApiController
      *
      * Display the specified resource.
      *
-     * @param \Motor\Backend\Models\Permission $record
+     * @param  \Motor\Backend\Models\Permission  $record
      * @return \Motor\Backend\Http\Resources\PermissionResource
      */
     public function show(Permission $record)
@@ -249,8 +247,8 @@ class PermissionsController extends ApiController
      *
      * Update the specified resource in storage.
      *
-     * @param \Motor\Backend\Http\Requests\Backend\PermissionRequest $request
-     * @param \Motor\Backend\Models\Permission $record
+     * @param  \Motor\Backend\Http\Requests\Backend\PermissionRequest  $request
+     * @param  \Motor\Backend\Models\Permission  $record
      * @return \Motor\Backend\Http\Resources\PermissionResource
      */
     public function update(PermissionRequest $request, Permission $record)
@@ -317,7 +315,7 @@ class PermissionsController extends ApiController
      *
      * Remove the specified resource from storage.
      *
-     * @param \Motor\Backend\Models\Permission $record
+     * @param  \Motor\Backend\Models\Permission  $record
      * @return \Illuminate\Http\JsonResponse
      */
     public function destroy(Permission $record)

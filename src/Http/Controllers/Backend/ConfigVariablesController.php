@@ -12,8 +12,6 @@ use Motor\Backend\Services\ConfigVariableService;
 
 /**
  * Class ConfigVariablesController
- *
- * @package Motor\Backend\Http\Controllers\Backend
  */
 class ConfigVariablesController extends Controller
 {
@@ -23,6 +21,7 @@ class ConfigVariablesController extends Controller
      * Display a listing of the resource.
      *
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     *
      * @throws \ReflectionException
      */
     public function index()
@@ -37,7 +36,7 @@ class ConfigVariablesController extends Controller
     }
 
     /**
-     * @param ConfigVariable $record
+     * @param  ConfigVariable  $record
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function duplicate(ConfigVariable $record)
@@ -51,7 +50,7 @@ class ConfigVariablesController extends Controller
     /**
      * Show the form for creating a new resource.
      *
-     * @param ConfigVariable $record
+     * @param  ConfigVariable  $record
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function create(ConfigVariable $record)
@@ -69,7 +68,7 @@ class ConfigVariablesController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param ConfigVariableRequest $request
+     * @param  ConfigVariableRequest  $request
      * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
      */
     public function store(ConfigVariableRequest $request)
@@ -104,7 +103,7 @@ class ConfigVariablesController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param ConfigVariable $record
+     * @param  ConfigVariable  $record
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function edit(ConfigVariable $record)
@@ -122,8 +121,8 @@ class ConfigVariablesController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param ConfigVariableRequest $request
-     * @param ConfigVariable $record
+     * @param  ConfigVariableRequest  $request
+     * @param  ConfigVariable  $record
      * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
      */
     public function update(ConfigVariableRequest $request, ConfigVariable $record)
@@ -148,7 +147,7 @@ class ConfigVariablesController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param ConfigVariable $record
+     * @param  ConfigVariable  $record
      * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
      */
     public function destroy(ConfigVariable $record)

@@ -43,14 +43,14 @@ return [
             'f' => 'Frau',
             'c' => 'Firma',
             'n' => '-',
-            'h' => 'Familie'
+            'h' => 'Familie',
         ],
         'full_salutations' => [
             'm' => 'Sehr geehrter Herr',
             'f' => 'Sehr geehrte Frau',
             'c' => 'Sehr geehrte Firma',
             'n' => '',
-            'h' => 'Sehr geehrte Familie'
+            'h' => 'Sehr geehrte Familie',
         ],
         'salutation'       => 'Anrede',
         'title'            => 'Titel',
@@ -69,7 +69,7 @@ return [
         'warning' => 'Warnung',
         'info'    => 'Information',
         'error'   => 'Fehler',
-        'success' => 'Erfolgreich'
+        'success' => 'Erfolgreich',
     ],
-    'are_you_sure'    => 'Sind Sie sicher?'
+    'are_you_sure'    => 'Sind Sie sicher?',
 ];

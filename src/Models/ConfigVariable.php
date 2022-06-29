@@ -28,6 +28,7 @@ use Motor\Core\Traits\Searchable;
  * @property-read \Motor\Backend\Models\User $creator
  * @property-read \Motor\Backend\Models\User|null $eraser
  * @property-read \Motor\Backend\Models\User $updater
+ *
  * @method static Builder|ConfigVariable filteredBy(Filter $filter, $column)
  * @method static Builder|ConfigVariable filteredByMultiple(Filter $filter)
  * @method static Builder|ConfigVariable newModelQuery()

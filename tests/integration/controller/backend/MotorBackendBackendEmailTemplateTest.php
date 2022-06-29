@@ -1,10 +1,7 @@
 <?php
 
-use Illuminate\Foundation\Testing\WithoutMiddleware;
-use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 use Motor\Backend\Models\EmailTemplate;
-use Motor\Backend\Models\Role;
 
 /**
  * Class MotorBackendBackendEmailTemplateTest
@@ -30,9 +27,8 @@ class MotorBackendBackendEmailTemplateTest extends TestCase
         'roles',
         'model_has_permissions',
         'model_has_roles',
-        'role_has_permissions'
+        'role_has_permissions',
     ];
-
 
     public function setUp()
     {
@@ -41,18 +37,16 @@ class MotorBackendBackendEmailTemplateTest extends TestCase
         $this->addDefaults();
     }
 
-
     protected function addDefaults()
     {
-        $this->user   = create_test_superadmin();
+        $this->user = create_test_superadmin();
 
-        $this->readPermission   = create_test_permission_with_name('email_templates.read');
-        $this->writePermission  = create_test_permission_with_name('email_templates.write');
+        $this->readPermission = create_test_permission_with_name('email_templates.read');
+        $this->writePermission = create_test_permission_with_name('email_templates.write');
         $this->deletePermission = create_test_permission_with_name('email_templates.delete');
 
         $this->actingAs($this->user);
     }
-
 
     /** @test */
     public function can_see_grid_without_email_templates()

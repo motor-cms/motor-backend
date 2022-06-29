@@ -1,10 +1,7 @@
 <?php
 
-use Illuminate\Foundation\Testing\WithoutMiddleware;
-use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 use Motor\Backend\Models\Permission;
-use Motor\Backend\Models\Role;
 
 /**
  * Class MotorBackendBackendPermissionTest
@@ -28,9 +25,8 @@ class MotorBackendBackendPermissionTest extends TestCase
         'roles',
         'model_has_permissions',
         'model_has_roles',
-        'role_has_permissions'
+        'role_has_permissions',
     ];
-
 
     public function setUp()
     {
@@ -39,18 +35,16 @@ class MotorBackendBackendPermissionTest extends TestCase
         $this->addDefaults();
     }
 
-
     protected function addDefaults()
     {
-        $this->user   = create_test_superadmin();
+        $this->user = create_test_superadmin();
 
-        $this->readPermission   = create_test_permission_with_name('permissions.read');
-        $this->writePermission  = create_test_permission_with_name('permissions.write');
+        $this->readPermission = create_test_permission_with_name('permissions.read');
+        $this->writePermission = create_test_permission_with_name('permissions.write');
         $this->deletePermission = create_test_permission_with_name('permissions.delete');
 
         $this->actingAs($this->user);
     }
-
 
     /** @test */
     public function can_see_grid_with_three_permission()
@@ -125,7 +119,6 @@ class MotorBackendBackendPermissionTest extends TestCase
             ->see('Data missing!')
             ->seePageIs('/backend/permissions/create');
     }
-
 
     /** @test */
     public function can_modify_a_permission_and_change_the_permission_group()

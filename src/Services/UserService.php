@@ -9,8 +9,6 @@ use Motor\Backend\Models\User;
 
 /**
  * Class UserService
- *
- * @package Motor\Backend\Services
  */
 class UserService extends BaseService
 {

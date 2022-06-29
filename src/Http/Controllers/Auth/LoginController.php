@@ -7,8 +7,6 @@ use Illuminate\Foundation\Auth\AuthenticatesUsers;
 
 /**
  * Class LoginController
- *
- * @package Motor\Backend\Http\Controllers\Auth
  */
 class LoginController extends Controller
 {

@@ -7,22 +7,22 @@ use Motor\Backend\Models\ConfigVariable;
 
 class ConfigVariableFactory extends Factory
 {
-	/**
-	 * The name of the factory's corresponding model.
-	 *
-	 * @var string
-	 */
-	protected $model = ConfigVariable::class;
+    /**
+     * The name of the factory's corresponding model.
+     *
+     * @var string
+     */
+    protected $model = ConfigVariable::class;
 
-	/**
-	 * Define the model's default state.
-	 *
-	 * @return array
-	 */
-	public function definition()
-	{
-		return [
-			'name' => $this->faker->word
-		];
-	}
+    /**
+     * Define the model's default state.
+     *
+     * @return array
+     */
+    public function definition()
+    {
+        return [
+            'name' => $this->faker->word,
+        ];
+    }
 }

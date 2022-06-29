@@ -45,13 +45,13 @@ return [
             'm' => 'Mr',
             'f' => 'Ms',
             'c' => 'Company',
-            'n' => '-'
+            'n' => '-',
         ],
         'full_salutations' => [
             'm' => 'Dear Mr',
             'f' => 'Dear Ms',
             'c' => 'Dear',
-            'n' => ''
+            'n' => '',
         ],
         'salutation'       => 'Salutation',
         'title'            => 'Title',
@@ -70,7 +70,7 @@ return [
         'warning' => 'Warning',
         'info'    => 'Information',
         'error'   => 'Error',
-        'success' => 'Success'
+        'success' => 'Success',
     ],
-    'are_you_sure'    => 'Are you sure?'
+    'are_you_sure'    => 'Are you sure?',
 ];

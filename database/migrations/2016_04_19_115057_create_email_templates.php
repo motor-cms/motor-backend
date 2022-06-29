@@ -1,15 +1,14 @@
 <?php
 
 use Culpa\Database\Schema\Blueprint;
-use Illuminate\Database\Migrations\Migration;
 use Culpa\Facades\Schema;
+use Illuminate\Database\Migrations\Migration;
 
 /**
  * Class CreateEmailTemplates
  */
 class CreateEmailTemplates extends Migration
 {
-
     /**
      * Run the migrations.
      *
@@ -40,7 +39,6 @@ class CreateEmailTemplates extends Migration
             $table->foreign('language_id')->references('id')->on('languages')->onDelete('set null');
         });
     }
-
 
     /**
      * Reverse the migrations.

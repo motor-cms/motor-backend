@@ -1,6 +1,5 @@
 <?php
 
-use Illuminate\Foundation\Testing\WithoutMiddleware;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 
@@ -34,9 +33,8 @@ class MotorBackendApiUserTest extends TestCase
         'roles',
         'model_has_permissions',
         'model_has_roles',
-        'role_has_permissions'
+        'role_has_permissions',
     ];
-
 
     public function setUp()
     {
@@ -44,7 +42,6 @@ class MotorBackendApiUserTest extends TestCase
 
         $this->addDefaults();
     }
-
 
     protected function addDefaults()
     {
@@ -58,7 +55,6 @@ class MotorBackendApiUserTest extends TestCase
         $this->writePermissionPermission = create_test_permission_with_name('permissions.write');
     }
 
-
     /**
      * @test
      */
@@ -67,56 +63,51 @@ class MotorBackendApiUserTest extends TestCase
         $this->json('GET', '/api/users/99')->seeStatusCode(401)->seeJson(['error' => 'Unauthenticated.']);
     }
 
-
     /** @test */
     public function returns_404_for_non_existing_record()
     {
         $this->user->givePermissionTo($this->readPermission);
-        $this->json('GET', '/api/users/99?api_token=' . $this->user->api_token)->seeStatusCode(404)->seeJson([
+        $this->json('GET', '/api/users/99?api_token='.$this->user->api_token)->seeStatusCode(404)->seeJson([
             'message' => 'Record not found',
         ]);
     }
-
 
     /** @test */
     public function fails_if_trying_to_create_without_payload()
     {
         $this->user->givePermissionTo($this->writePermission);
-        $this->json('POST', '/api/users?api_token=' . $this->user->api_token)->seeStatusCode(422)->seeJson([
-            'name' => ["The name field is required."]
+        $this->json('POST', '/api/users?api_token='.$this->user->api_token)->seeStatusCode(422)->seeJson([
+            'name' => ['The name field is required.'],
         ]);
     }
-
 
     /** @test */
     public function fails_if_trying_to_create_without_permission()
     {
-        $this->json('POST', '/api/users?api_token=' . $this->user->api_token)->seeStatusCode(403)->seeJson([
-            'error' => "Access denied."
+        $this->json('POST', '/api/users?api_token='.$this->user->api_token)->seeStatusCode(403)->seeJson([
+            'error' => 'Access denied.',
         ]);
     }
-
 
     /** @test */
     public function can_create_a_new_user()
     {
         $this->user->givePermissionTo($this->writePermission);
-        $this->json('POST', '/api/users?api_token=' . $this->user->api_token, [
+        $this->json('POST', '/api/users?api_token='.$this->user->api_token, [
             'name' => 'TestUser',
             'email' => 'test@test.de',
-            'password' => 'secret'
+            'password' => 'secret',
         ])->seeStatusCode(200)->seeJson([
-            'name' => 'TestUser'
+            'name' => 'TestUser',
         ]);
     }
-
 
     /** @test */
     public function cannot_create_a_new_user_with_permissions()
     {
         $this->user->givePermissionTo($this->writePermission);
         $permissions = create_test_permission(5);
-        $this->json('POST', '/api/users?api_token=' . $this->user->api_token, [
+        $this->json('POST', '/api/users?api_token='.$this->user->api_token, [
             'name' => 'Testuser',
             'email' => 'test@test.de',
             'password' => 'secret',
@@ -125,7 +116,7 @@ class MotorBackendApiUserTest extends TestCase
                 $permissions[1]->name => 1,
                 $permissions[2]->name => 1,
                 $permissions[3]->name => 1,
-            ]
+            ],
         ])->seeStatusCode(200)->seeJson([
             'name' => 'Testuser',
         ])->dontSeeJson([
@@ -145,7 +136,7 @@ class MotorBackendApiUserTest extends TestCase
         $this->user->givePermissionTo($this->writePermission);
         $this->user->givePermissionTo($this->writePermissionPermission);
         $permissions = create_test_permission(5);
-        $this->json('POST', '/api/users?api_token=' . $this->user->api_token, [
+        $this->json('POST', '/api/users?api_token='.$this->user->api_token, [
             'name' => 'Testuser',
             'email' => 'test@test.de',
             'password' => 'secret',
@@ -154,7 +145,7 @@ class MotorBackendApiUserTest extends TestCase
                 $permissions[1]->name => 1,
                 $permissions[2]->name => 1,
                 $permissions[3]->name => 1,
-            ]
+            ],
         ])->seeStatusCode(200)->seeJson([
             'name' => 'Testuser',
         ])->seeJson([
@@ -168,20 +159,19 @@ class MotorBackendApiUserTest extends TestCase
         ]);
     }
 
-
     /** @test */
     public function cannot_create_a_new_user_with_roles()
     {
         $this->user->givePermissionTo($this->writePermission);
         $roles = create_test_role(2);
-        $this->json('POST', '/api/users?api_token=' . $this->user->api_token, [
+        $this->json('POST', '/api/users?api_token='.$this->user->api_token, [
             'name' => 'Testuser',
             'email' => 'test@test.de',
             'password' => 'secret',
             'roles' => [
                 $roles[0]->name => 1,
-                $roles[1]->name => 1
-            ]
+                $roles[1]->name => 1,
+            ],
         ])->seeStatusCode(200)->seeJson([
             'name' => 'Testuser',
         ])->dontSeeJson([
@@ -197,14 +187,14 @@ class MotorBackendApiUserTest extends TestCase
         $this->user->givePermissionTo($this->writePermission);
         $this->user->givePermissionTo($this->writeRolePermission);
         $roles = create_test_role(2);
-        $this->json('POST', '/api/users?api_token=' . $this->user->api_token, [
+        $this->json('POST', '/api/users?api_token='.$this->user->api_token, [
             'name' => 'Testuser',
             'email' => 'test@test.de',
             'password' => 'secret',
             'roles' => [
                 $roles[0]->name => 1,
-                $roles[1]->name => 1
-            ]
+                $roles[1]->name => 1,
+            ],
         ])->seeStatusCode(200)->seeJson([
             'name' => 'Testuser',
         ])->seeJson([
@@ -221,14 +211,14 @@ class MotorBackendApiUserTest extends TestCase
         $this->user->givePermissionTo($this->writeRolePermission);
         $user = create_test_user();
         $roles = create_test_role(2);
-        $this->json('PATCH', '/api/users/' . $user->id . '?api_token=' . $this->user->api_token, [
+        $this->json('PATCH', '/api/users/'.$user->id.'?api_token='.$this->user->api_token, [
             'name' => 'Testuser',
             'email' => 'test@test.de',
             'password' => 'secret',
             'roles' => [
                 $roles[0]->name => 1,
-                $roles[1]->name => 1
-            ]
+                $roles[1]->name => 1,
+            ],
         ])->seeStatusCode(200)->seeJson([
             'name' => 'Testuser',
         ])->seeJson([
@@ -245,7 +235,7 @@ class MotorBackendApiUserTest extends TestCase
         $this->user->givePermissionTo($this->writePermissionPermission);
         $user = create_test_user();
         $permissions = create_test_permission(5);
-        $this->json('PATCH', '/api/users/' . $user->id . '?api_token=' . $this->user->api_token, [
+        $this->json('PATCH', '/api/users/'.$user->id.'?api_token='.$this->user->api_token, [
             'name' => 'Testuser',
             'email' => 'test@test.de',
             'password' => 'secret',
@@ -254,7 +244,7 @@ class MotorBackendApiUserTest extends TestCase
                 $permissions[1]->name => 1,
                 $permissions[2]->name => 1,
                 $permissions[3]->name => 1,
-            ]
+            ],
         ])->seeStatusCode(200)->seeJson([
             'name' => 'Testuser',
         ])->seeJson([
@@ -275,12 +265,11 @@ class MotorBackendApiUserTest extends TestCase
         $user = create_test_user();
         $this->json(
             'GET',
-            '/api/users/' . $user->id . '?api_token=' . $this->user->api_token
+            '/api/users/'.$user->id.'?api_token='.$this->user->api_token
         )->seeStatusCode(200)->seeJson([
-            'name' => $user->name
+            'name' => $user->name,
         ]);
     }
-
 
     /** @test */
     public function fails_to_show_a_single_user_without_permission()
@@ -288,23 +277,21 @@ class MotorBackendApiUserTest extends TestCase
         $user = create_test_user();
         $this->json(
             'GET',
-            '/api/users/' . $user->id . '?api_token=' . $this->user->api_token
+            '/api/users/'.$user->id.'?api_token='.$this->user->api_token
         )->seeStatusCode(403)->seeJson([
-            'error' => 'Access denied.'
+            'error' => 'Access denied.',
         ]);
     }
-
 
     /** @test */
     public function can_show_multiple_users()
     {
         $this->user->givePermissionTo($this->readPermission);
         $users = factory(Motor\Backend\Models\User::class, 10)->create();
-        $this->json('GET', '/api/users?api_token=' . $this->user->api_token)->seeStatusCode(200)->seeJson([
-            'name' => $users[0]->name
+        $this->json('GET', '/api/users?api_token='.$this->user->api_token)->seeStatusCode(200)->seeJson([
+            'name' => $users[0]->name,
         ]);
     }
-
 
     /** @test */
     public function can_search_for_a_user()
@@ -313,33 +300,30 @@ class MotorBackendApiUserTest extends TestCase
         $users = create_test_user(10);
         $this->json(
             'GET',
-            '/api/users?api_token=' . $this->user->api_token . '&search=' . $users[2]->name
+            '/api/users?api_token='.$this->user->api_token.'&search='.$users[2]->name
         )->seeStatusCode(200)->seeJson([
-            'name' => $users[2]->name
+            'name' => $users[2]->name,
         ]);
     }
-
 
     /** @test */
     public function can_show_a_second_results_page()
     {
         $this->user->givePermissionTo($this->readPermission);
         create_test_user(50);
-        $this->json('GET', '/api/users?api_token=' . $this->user->api_token . '&page=2')->seeStatusCode(200)->seeJson([
-            'current_page' => 2
+        $this->json('GET', '/api/users?api_token='.$this->user->api_token.'&page=2')->seeStatusCode(200)->seeJson([
+            'current_page' => 2,
         ]);
     }
-
 
     /** @test */
     public function fails_if_trying_to_update_nonexisting_user()
     {
         $this->user->givePermissionTo($this->writePermission);
-        $this->json('PATCH', '/api/users/99?api_token=' . $this->user->api_token)->seeStatusCode(404)->seeJson([
-            'message' => 'Record not found'
+        $this->json('PATCH', '/api/users/99?api_token='.$this->user->api_token)->seeStatusCode(404)->seeJson([
+            'message' => 'Record not found',
         ]);
     }
-
 
     /** @test */
     public function fails_if_trying_to_modify_a_user_without_payload()
@@ -348,12 +332,11 @@ class MotorBackendApiUserTest extends TestCase
         $user = create_test_user();
         $this->json(
             'PATCH',
-            '/api/users/' . $user->id . '?api_token=' . $this->user->api_token
+            '/api/users/'.$user->id.'?api_token='.$this->user->api_token
         )->seeStatusCode(422)->seeJson([
-            'name' => ['The name field is required.']
+            'name' => ['The name field is required.'],
         ]);
     }
-
 
     /** @test */
     public function fails_if_trying_to_modify_a_user_without_permission()
@@ -361,94 +344,88 @@ class MotorBackendApiUserTest extends TestCase
         $user = create_test_user();
         $this->json(
             'PATCH',
-            '/api/users/' . $user->id . '?api_token=' . $this->user->api_token
+            '/api/users/'.$user->id.'?api_token='.$this->user->api_token
         )->seeStatusCode(403)->seeJson([
-            'error' => 'Access denied.'
+            'error' => 'Access denied.',
         ]);
     }
-
 
     /** @test */
     public function can_modify_a_user()
     {
         $this->user->givePermissionTo($this->writePermission);
         $user = create_test_user();
-        $this->json('PATCH', '/api/users/' . $user->id . '?api_token=' . $this->user->api_token, [
+        $this->json('PATCH', '/api/users/'.$user->id.'?api_token='.$this->user->api_token, [
             'name' => 'TestName',
-            'email' => $user->email
+            'email' => $user->email,
         ])->seeStatusCode(200)->seeJson([
-            'name' => 'TestName'
+            'name' => 'TestName',
         ]);
     }
-
 
     /** @test */
     public function can_modify_a_user_and_upload_image()
     {
         $this->user->givePermissionTo($this->writePermission);
         $user = create_test_user();
-        $this->json('PATCH', '/api/users/' . $user->id . '?api_token=' . $this->user->api_token, [
+        $this->json('PATCH', '/api/users/'.$user->id.'?api_token='.$this->user->api_token, [
             'name' => 'TestName',
             'email' => $user->email,
-            'avatar' => base64_encode(file_get_contents(__DIR__ . '/../../../../public/images/motor-logo-large.png'))
+            'avatar' => base64_encode(file_get_contents(__DIR__.'/../../../../public/images/motor-logo-large.png')),
         ])->seeStatusCode(200)->seeJson([
             'name' => 'TestName',
-            'collection' => 'avatar'
+            'collection' => 'avatar',
         ]);
     }
-
 
     /** @test */
     public function can_modify_a_user_and_upload_image_and_set_custom_filename()
     {
         $this->user->givePermissionTo($this->writePermission);
         $user = create_test_user();
-        $this->json('PATCH', '/api/users/' . $user->id . '?api_token=' . $this->user->api_token, [
+        $this->json('PATCH', '/api/users/'.$user->id.'?api_token='.$this->user->api_token, [
             'name' => 'TestName',
             'email' => $user->email,
-            'avatar' => base64_encode(file_get_contents(__DIR__ . '/../../../../public/images/motor-logo-large.png')),
+            'avatar' => base64_encode(file_get_contents(__DIR__.'/../../../../public/images/motor-logo-large.png')),
             'avatar_name' => 'custom_filename.png',
         ])->seeStatusCode(200)->seeJson([
             'name' => 'TestName',
             'collection' => 'avatar',
-            'file_name' => 'custom_filename.png'
+            'file_name' => 'custom_filename.png',
         ]);
     }
-
 
     /** @test */
     public function can_modify_a_user_and_upload_image_and_delete_it_again()
     {
         $this->user->givePermissionTo($this->writePermission);
         $user = create_test_user();
-        $this->json('PATCH', '/api/users/' . $user->id . '?api_token=' . $this->user->api_token, [
+        $this->json('PATCH', '/api/users/'.$user->id.'?api_token='.$this->user->api_token, [
             'name' => 'TestName',
             'email' => $user->email,
-            'avatar' => base64_encode(file_get_contents(__DIR__ . '/../../../../public/images/motor-logo-large.png'))
+            'avatar' => base64_encode(file_get_contents(__DIR__.'/../../../../public/images/motor-logo-large.png')),
         ])->seeStatusCode(200)->seeJson([
             'name' => 'TestName',
-            'collection' => 'avatar'
+            'collection' => 'avatar',
         ]);
 
-        $this->json('PATCH', '/api/users/' . $user->id . '?api_token=' . $this->user->api_token, [
+        $this->json('PATCH', '/api/users/'.$user->id.'?api_token='.$this->user->api_token, [
             'name' => 'TestName',
             'email' => $user->email,
-            'avatar_delete' => 1
+            'avatar_delete' => 1,
         ])->seeStatusCode(200)->dontSeeJson([
-            'collection' => 'avatar'
+            'collection' => 'avatar',
         ]);
     }
-
 
     /** @test */
     public function fails_if_trying_to_delete_a_non_existing_user()
     {
         $this->user->givePermissionTo($this->deletePermission);
-        $this->json('DELETE', '/api/users/99?api_token=' . $this->user->api_token)->seeStatusCode(404)->seeJson([
-            'message' => 'Record not found'
+        $this->json('DELETE', '/api/users/99?api_token='.$this->user->api_token)->seeStatusCode(404)->seeJson([
+            'message' => 'Record not found',
         ]);
     }
-
 
     /** @test */
     public function fails_to_delete_a_user_without_permission()
@@ -456,12 +433,11 @@ class MotorBackendApiUserTest extends TestCase
         $user = create_test_user();
         $this->json(
             'DELETE',
-            '/api/users/' . $user->id . '?api_token=' . $this->user->api_token
+            '/api/users/'.$user->id.'?api_token='.$this->user->api_token
         )->seeStatusCode(403)->seeJson([
-            'error' => 'Access denied.'
+            'error' => 'Access denied.',
         ]);
     }
-
 
     /** @test */
     public function can_delete_a_user()
@@ -470,9 +446,9 @@ class MotorBackendApiUserTest extends TestCase
         $user = create_test_user();
         $this->json(
             'DELETE',
-            '/api/users/' . $user->id . '?api_token=' . $this->user->api_token
+            '/api/users/'.$user->id.'?api_token='.$this->user->api_token
         )->seeStatusCode(200)->seeJson([
-            'success' => true
+            'success' => true,
         ]);
     }
 }

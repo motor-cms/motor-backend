@@ -10,8 +10,6 @@ use Locale;
 
 /**
  * Class PublicApiController
- *
- * @package Motor\Backend\Http\Controllers
  */
 class PublicApiController extends BaseController
 {

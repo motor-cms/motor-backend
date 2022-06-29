@@ -6,8 +6,6 @@ use Illuminate\Support\Arr;
 
 /**
  * Class Base
- *
- * @package Motor\Backend\Grid
  */
 class Base
 {
@@ -62,7 +60,7 @@ class Base
 
         $compiled = '';
         foreach ($this->attributes as $key => $val) {
-            $compiled .= ' '.$key.'="'.htmlspecialchars((string) $val, ENT_QUOTES, "UTF-8", true).'"';
+            $compiled .= ' '.$key.'="'.htmlspecialchars((string) $val, ENT_QUOTES, 'UTF-8', true).'"';
         }
 
         return $compiled;

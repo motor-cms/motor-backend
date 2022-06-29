@@ -16,6 +16,6 @@ return [
     'profile'          => [
         'edit'    => 'Edit profile',
         'save'    => 'Save profile',
-        'updated' => 'Profile updated'
-    ]
+        'updated' => 'Profile updated',
+    ],
 ];

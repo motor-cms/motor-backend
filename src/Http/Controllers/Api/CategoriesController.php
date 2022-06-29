@@ -13,8 +13,6 @@ use Motor\Core\Filter\Renderers\WhereRenderer;
 
 /**
  * Class CategoriesController
- *
- * @package Motor\Backend\Http\Controllers\Api
  */
 class CategoriesController extends ApiController
 {
@@ -80,7 +78,7 @@ class CategoriesController extends ApiController
      *
      * Display a listing of the resource.
      *
-     * @param \Motor\Backend\Models\Category $categoryTree
+     * @param  \Motor\Backend\Models\Category  $categoryTree
      * @return \Illuminate\Http\JsonResponse|\Motor\Backend\Http\Resources\CategoryCollection
      */
     public function index(Category $categoryTree, Request $request)
@@ -163,7 +161,7 @@ class CategoriesController extends ApiController
      *
      * Store a newly created resource in storage.
      *
-     * @param \Motor\Backend\Http\Requests\Backend\CategoryRequest $request
+     * @param  \Motor\Backend\Http\Requests\Backend\CategoryRequest  $request
      * @return \Illuminate\Http\JsonResponse|object
      */
     public function store(CategoryRequest $request)
@@ -233,7 +231,7 @@ class CategoriesController extends ApiController
      *
      * Display the specified resource.
      *
-     * @param \Motor\Backend\Models\Category $record
+     * @param  \Motor\Backend\Models\Category  $record
      * @return \Motor\Backend\Http\Resources\CategoryResource
      */
     public function show(Category $record)
@@ -304,8 +302,8 @@ class CategoriesController extends ApiController
      *
      * Update the specified resource in storage.
      *
-     * @param \Motor\Backend\Http\Requests\Backend\CategoryRequest $request
-     * @param \Motor\Backend\Models\Category $record
+     * @param  \Motor\Backend\Http\Requests\Backend\CategoryRequest  $request
+     * @param  \Motor\Backend\Models\Category  $record
      * @return \Motor\Backend\Http\Resources\CategoryResource
      */
     public function update(CategoryRequest $request, Category $record)
@@ -379,7 +377,7 @@ class CategoriesController extends ApiController
      *
      * Remove the specified resource from storage.
      *
-     * @param \Motor\Backend\Models\Category $record
+     * @param  \Motor\Backend\Models\Category  $record
      * @return \Illuminate\Http\JsonResponse
      */
     public function destroy(Category $record)

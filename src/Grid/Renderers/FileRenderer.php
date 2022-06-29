@@ -7,8 +7,6 @@ use Illuminate\Support\Arr;
 
 /**
  * Class FileRenderer
- *
- * @package Motor\Backend\Grid\Renderers
  */
 class FileRenderer
 {
@@ -21,9 +19,9 @@ class FileRenderer
     /**
      * FileRenderer constructor.
      *
-     * @param            $value
-     * @param array $options
-     * @param Model|null $record
+     * @param    $value
+     * @param  array  $options
+     * @param  Model|null  $record
      */
     public function __construct($value, array $options = [], Model $record = null)
     {
@@ -34,6 +32,7 @@ class FileRenderer
 
     /**
      * @return array|string
+     *
      * @throws \Throwable
      */
     public function render()
@@ -41,8 +40,8 @@ class FileRenderer
         $media = $this->record->getFirstMedia(Arr::get($this->options, 'file'));
 
         return view('motor-backend::grid.actions.file', ['media'   => $media,
-                                                         'record'  => $this->record,
-                                                         'options' => $this->options,
-            ])->render();
+            'record'  => $this->record,
+            'options' => $this->options,
+        ])->render();
     }
 }

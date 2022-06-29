@@ -15,8 +15,6 @@ use Motor\Backend\Models\ConfigVariable;
 
 /**
  * Class MotorServiceProvider
- *
- * @package Motor\Backend\Providers
  */
 class MotorServiceProvider extends ServiceProvider
 {

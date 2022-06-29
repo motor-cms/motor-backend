@@ -8,8 +8,6 @@ use NumberFormatter;
 
 /**
  * Class CurrencyRenderer
- *
- * @package Motor\Backend\Grid\Renderers
  */
 class CurrencyRenderer
 {
@@ -24,9 +22,9 @@ class CurrencyRenderer
     /**
      * CurrencyRenderer constructor.
      *
-     * @param            $value
-     * @param array $options
-     * @param Model|null $record
+     * @param    $value
+     * @param  array  $options
+     * @param  Model|null  $record
      */
     public function __construct($value, array $options = [], Model $record = null)
     {

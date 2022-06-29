@@ -14,8 +14,6 @@ use Motor\Core\Filter\Renderers\WhereRenderer;
 
 /**
  * Class CategoriesController
- *
- * @package Motor\Backend\Http\Controllers\Backend
  */
 class CategoriesController extends Controller
 {
@@ -24,8 +22,9 @@ class CategoriesController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @param Category $record
+     * @param  Category  $record
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     *
      * @throws \ReflectionException
      */
     public function index(Category $record)
@@ -52,7 +51,7 @@ class CategoriesController extends Controller
     /**
      * Show the form for creating a new resource.
      *
-     * @param Category $root
+     * @param  Category  $root
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function create(Category $root)
@@ -76,7 +75,7 @@ class CategoriesController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param CategoryRequest $request
+     * @param  CategoryRequest  $request
      * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
      */
     public function store(CategoryRequest $request)
@@ -116,7 +115,7 @@ class CategoriesController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param Category $record
+     * @param  Category  $record
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function edit(Category $record)
@@ -146,8 +145,8 @@ class CategoriesController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param CategoryRequest $request
-     * @param Category $record
+     * @param  CategoryRequest  $request
+     * @param  Category  $record
      * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
      */
     public function update(CategoryRequest $request, Category $record)
@@ -177,7 +176,7 @@ class CategoriesController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param Category $record
+     * @param  Category  $record
      * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
      */
     public function destroy(Category $record)

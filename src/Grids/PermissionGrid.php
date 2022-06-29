@@ -7,8 +7,6 @@ use Motor\Core\Filter\Renderers\SearchRenderer;
 
 /**
  * Class PermissionGrid
- *
- * @package Motor\Backend\Grids
  */
 class PermissionGrid extends Grid
 {

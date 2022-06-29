@@ -1,7 +1,5 @@
 <?php
 
-use Illuminate\Foundation\Testing\WithoutMiddleware;
-use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 use Motor\Backend\Models\User;
 
@@ -25,9 +23,8 @@ class MotorBackendBackendProfileTest extends TestCase
         'model_has_permissions',
         'model_has_roles',
         'roles',
-        'media'
+        'media',
     ];
-
 
     public function setUp()
     {
@@ -36,7 +33,6 @@ class MotorBackendBackendProfileTest extends TestCase
         create_test_permission_with_name('profile.read');
         create_test_permission_with_name('profile.write');
     }
-
 
     /** @test */
     public function user_can_log_in_and_see_dashboard_as_superadmin()
@@ -48,7 +44,6 @@ class MotorBackendBackendProfileTest extends TestCase
             'password'
         )->press(trans('motor-backend::backend/login.sign_in'))->see('Dashboard');
     }
-
 
     /** @test */
     public function user_can_change_password()
@@ -74,7 +69,6 @@ class MotorBackendBackendProfileTest extends TestCase
         $this->assertEquals('NewName', $this->user->fresh()->name);
     }
 
-
     /** @test */
     public function user_can_change_password_and_log_in_with_the_new_password()
     {
@@ -89,7 +83,6 @@ class MotorBackendBackendProfileTest extends TestCase
                 )->press(trans('motor-backend::backend/login.sign_in'))->see('Dashboard');
     }
 
-
     /** @test */
     public function user_can_add_profile_picture()
     {
@@ -98,7 +91,7 @@ class MotorBackendBackendProfileTest extends TestCase
         $this->actingAs($this->user);
 
         $this->visit('/backend/profile/edit')->attach(
-            __DIR__ . '/../../../../public/images/motor-logo-large.png',
+            __DIR__.'/../../../../public/images/motor-logo-large.png',
             'avatar'
         )->press(trans('motor-backend::backend/users.profile.save'));
 
@@ -106,7 +99,6 @@ class MotorBackendBackendProfileTest extends TestCase
 
         $this->assertEquals('motor-logo-large.png', $media->file_name);
     }
-
 
     /** @test */
     public function user_can_add_profile_picture_and_delete_it_again()
@@ -128,7 +120,6 @@ class MotorBackendBackendProfileTest extends TestCase
         $this->assertEquals(null, $media);
     }
 
-
     /** @test */
     public function user_can_change_profile_picture()
     {
@@ -140,7 +131,7 @@ class MotorBackendBackendProfileTest extends TestCase
         $this->actingAs($this->user);
 
         $this->visit('/backend/profile/edit')->attach(
-            __DIR__ . '/../../../../public/images/motor-logo-small.png',
+            __DIR__.'/../../../../public/images/motor-logo-small.png',
             'avatar'
         )->press(trans('motor-backend::backend/users.profile.save'));
 

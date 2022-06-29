@@ -7,8 +7,6 @@ use View;
 
 /**
  * Class Action
- *
- * @package Motor\Backend\Grid
  */
 class Action extends Base
 {
@@ -37,9 +35,9 @@ class Action extends Base
     /**
      * Action constructor.
      *
-     * @param       $label
-     * @param       $link
-     * @param array $parameters
+     * @param    $label
+     * @param    $link
+     * @param  array  $parameters
      */
     public function __construct(string $label, string $link, array $parameters = [])
     {
@@ -64,8 +62,8 @@ class Action extends Base
     }
 
     /**
-     * @param bool $confirmation
-     * @param string $message
+     * @param  bool  $confirmation
+     * @param  string  $message
      * @return $this
      */
     public function askForConfirmation(bool $confirmation = true, string $message = '')
@@ -81,9 +79,9 @@ class Action extends Base
     }
 
     /**
-     * @param        $column
-     * @param        $value
-     * @param string $operator
+     * @param    $column
+     * @param    $value
+     * @param  string  $operator
      * @return $this
      */
     public function onCondition(string $column, $value, string $operator = '=')
@@ -104,8 +102,9 @@ class Action extends Base
     }
 
     /**
-     * @param Model $record
+     * @param  Model  $record
      * @return array|bool|string
+     *
      * @throws \Throwable
      */
     public function render(Model $record)

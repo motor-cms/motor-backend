@@ -6,8 +6,6 @@ use Illuminate\Support\Arr;
 
 /**
  * Class TextRenderer
- *
- * @package Motor\Backend\Grid\Renderers
  */
 class TextRenderer
 {

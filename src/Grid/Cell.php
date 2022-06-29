@@ -6,8 +6,6 @@ use Exception;
 
 /**
  * Class Cell
- *
- * @package Motor\Backend\Grid
  */
 class Cell extends Base
 {
@@ -26,9 +24,9 @@ class Cell extends Base
     /**
      * Cell constructor.
      *
-     * @param string $name
-     * @param        $renderer
-     * @param array $renderOptions
+     * @param  string  $name
+     * @param    $renderer
+     * @param  array  $renderOptions
      */
     public function __construct(string $name, $renderer, array $renderOptions = [])
     {
@@ -88,7 +86,6 @@ class Cell extends Base
      * Parse filters assigned by column
      *
      * @param $filters
-     *
      * @return bool
      */
     public function parseFilters(array $filters)
@@ -101,7 +98,7 @@ class Cell extends Base
             }
 
             if (function_exists($filter)) {
-                if ($filter == "date") {
+                if ($filter == 'date') {
                     array_push($params, $this->value);
                 } else {
                     array_unshift($params, $this->value);

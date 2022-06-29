@@ -12,8 +12,6 @@ use Motor\Backend\Services\UserService;
 
 /**
  * Class UsersController
- *
- * @package Motor\Backend\Http\Controllers\Backend
  */
 class UsersController extends Controller
 {
@@ -23,6 +21,7 @@ class UsersController extends Controller
      * Display a listing of the resource.
      *
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     *
      * @throws \ReflectionException
      */
     public function index()
@@ -55,7 +54,7 @@ class UsersController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param UserRequest $request
+     * @param  UserRequest  $request
      * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
      */
     public function store(UserRequest $request)
@@ -80,7 +79,7 @@ class UsersController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param User $record
+     * @param  User  $record
      */
     public function show(User $record)
     {
@@ -89,7 +88,7 @@ class UsersController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param User $user
+     * @param  User  $user
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function edit(User $user)
@@ -107,8 +106,8 @@ class UsersController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param UserRequest $request
-     * @param User $record
+     * @param  UserRequest  $request
+     * @param  User  $record
      * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
      */
     public function update(UserRequest $request, User $record)
@@ -133,7 +132,7 @@ class UsersController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param User $record
+     * @param  User  $record
      * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
      */
     public function destroy(User $record)

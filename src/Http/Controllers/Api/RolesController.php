@@ -11,8 +11,6 @@ use Motor\Backend\Services\RoleService;
 
 /**
  * Class RolesController
- *
- * @package Motor\Backend\Http\Controllers\Api
  */
 class RolesController extends ApiController
 {
@@ -122,7 +120,7 @@ class RolesController extends ApiController
      *
      * Store a newly created resource in storage.
      *
-     * @param \Motor\Backend\Http\Requests\Backend\RoleRequest $request
+     * @param  \Motor\Backend\Http\Requests\Backend\RoleRequest  $request
      * @return \Illuminate\Http\JsonResponse|object
      */
     public function store(RoleRequest $request)
@@ -185,7 +183,7 @@ class RolesController extends ApiController
      *
      * Display the specified resource.
      *
-     * @param \Motor\Backend\Models\Role $record
+     * @param  \Motor\Backend\Models\Role  $record
      * @return \Motor\Backend\Http\Resources\RoleResource
      */
     public function show(Role $record)
@@ -249,8 +247,8 @@ class RolesController extends ApiController
      *
      * Update the specified resource in storage.
      *
-     * @param \Motor\Backend\Http\Requests\Backend\RoleRequest $request
-     * @param \Motor\Backend\Models\Role $record
+     * @param  \Motor\Backend\Http\Requests\Backend\RoleRequest  $request
+     * @param  \Motor\Backend\Models\Role  $record
      * @return \Motor\Backend\Http\Resources\RoleResource
      */
     public function update(RoleRequest $request, Role $record)
@@ -317,7 +315,7 @@ class RolesController extends ApiController
      *
      * Remove the specified resource from storage.
      *
-     * @param \Motor\Backend\Models\Role $record
+     * @param  \Motor\Backend\Models\Role  $record
      * @return \Illuminate\Http\JsonResponse
      */
     public function destroy(Role $record)

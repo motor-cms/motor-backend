@@ -12,8 +12,6 @@ use Motor\Backend\Services\PermissionService;
 
 /**
  * Class PermissionsController
- *
- * @package Motor\Backend\Http\Controllers\Backend
  */
 class PermissionsController extends Controller
 {
@@ -23,6 +21,7 @@ class PermissionsController extends Controller
      * Display a listing of the resource.
      *
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     *
      * @throws \ReflectionException
      */
     public function index()
@@ -55,7 +54,7 @@ class PermissionsController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param PermissionRequest $request
+     * @param  PermissionRequest  $request
      * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
      */
     public function store(PermissionRequest $request)
@@ -90,7 +89,7 @@ class PermissionsController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param Permission $record
+     * @param  Permission  $record
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function edit(Permission $record)
@@ -108,8 +107,8 @@ class PermissionsController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param PermissionRequest $request
-     * @param Permission $record
+     * @param  PermissionRequest  $request
+     * @param  Permission  $record
      * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
      */
     public function update(PermissionRequest $request, Permission $record)
@@ -134,7 +133,7 @@ class PermissionsController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param Permission $record
+     * @param  Permission  $record
      * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
      */
     public function destroy(Permission $record)

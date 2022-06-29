@@ -7,8 +7,6 @@ use Motor\Core\Filter\Renderers\SearchRenderer;
 
 /**
  * Class LanguageGrid
- *
- * @package Motor\Backend\Grids
  */
 class LanguageGrid extends Grid
 {

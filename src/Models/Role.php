@@ -17,6 +17,7 @@ use Motor\Core\Traits\Searchable;
  * @property \Illuminate\Support\Carbon|null $updated_at
  * @property-read \Illuminate\Database\Eloquent\Collection|\Spatie\Permission\Models\Permission[] $permissions
  * @property-read \Illuminate\Database\Eloquent\Collection|\Motor\Backend\Models\User[] $users
+ *
  * @method static Builder|Role filteredBy(Filter $filter, $column)
  * @method static Builder|Role filteredByMultiple(Filter $filter)
  * @method static Builder|Role newModelQuery()

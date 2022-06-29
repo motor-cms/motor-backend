@@ -6,8 +6,6 @@ use Motor\Backend\Http\Requests\Request;
 
 /**
  * Class UserRequest
- *
- * @package Motor\Backend\Http\Requests\Backend
  */
 class UserRequest extends Request
 {

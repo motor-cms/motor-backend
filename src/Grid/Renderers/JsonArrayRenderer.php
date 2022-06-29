@@ -6,8 +6,6 @@ use Illuminate\Database\Eloquent\Model;
 
 /**
  * Class JsonArrayRenderer
- *
- * @package Motor\Backend\Grid\Renderers
  */
 class JsonArrayRenderer
 {
@@ -22,9 +20,9 @@ class JsonArrayRenderer
     /**
      * JsonArrayRenderer constructor.
      *
-     * @param            $value
-     * @param array $options
-     * @param Model|null $record
+     * @param    $value
+     * @param  array  $options
+     * @param  Model|null  $record
      */
     public function __construct($value, array $options = [], Model $record = null)
     {

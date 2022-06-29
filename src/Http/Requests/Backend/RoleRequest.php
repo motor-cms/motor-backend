@@ -6,8 +6,6 @@ use Motor\Backend\Http\Requests\Request;
 
 /**
  * Class RoleRequest
- *
- * @package Motor\Backend\Http\Requests\Backend
  */
 class RoleRequest extends Request
 {

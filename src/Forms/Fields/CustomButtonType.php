@@ -6,8 +6,6 @@ use Kris\LaravelFormBuilder\Fields\FormField;
 
 /**
  * Class CustomButtonType
- *
- * @package Motor\Backend\Forms\Fields
  */
 class CustomButtonType extends FormField
 {
@@ -23,10 +21,10 @@ class CustomButtonType extends FormField
     }
 
     /**
-     * @param array $options
-     * @param bool $showLabel
-     * @param bool $showField
-     * @param bool $showError
+     * @param  array  $options
+     * @param  bool  $showLabel
+     * @param  bool  $showField
+     * @param  bool  $showError
      * @return string
      */
     public function render(array $options = [], $showLabel = true, $showField = true, $showError = true)

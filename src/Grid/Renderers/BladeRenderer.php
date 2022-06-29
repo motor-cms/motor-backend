@@ -7,8 +7,6 @@ use Illuminate\Support\Arr;
 
 /**
  * Class BladeRenderer
- *
- * @package Motor\Backend\Grid\Renderers
  */
 class BladeRenderer
 {
@@ -23,9 +21,9 @@ class BladeRenderer
      *
      * BladeRenderer constructor.
      *
-     * @param            $value
-     * @param            $options
-     * @param Model|null $record
+     * @param    $value
+     * @param    $options
+     * @param  Model|null  $record
      */
     public function __construct($value, $options, Model $record = null)
     {
@@ -36,6 +34,7 @@ class BladeRenderer
 
     /**
      * @return array|string
+     *
      * @throws \Throwable
      */
     public function render()

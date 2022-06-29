@@ -1,6 +1,7 @@
 <?php
+
 Route::group([
-    'middleware' => [ 'auth:api', 'bindings', 'permission' ],
+    'middleware' => ['auth:api', 'bindings', 'permission'],
     'namespace'  => 'Motor\Backend\Http\Controllers\Api',
     'prefix'     => 'api',
     'as'         => 'api.',
@@ -14,8 +15,8 @@ Route::group([
     Route::apiResource('email_templates', 'EmailTemplatesController');
     Route::apiResource('category_trees', 'CategoryTreesController', [
         'parameters' => [
-            'category_trees' => 'category'
-        ]
+            'category_trees' => 'category',
+        ],
     ]);
     Route::apiResource('category_trees/{category_tree}/categories', 'CategoriesController');
 
@@ -25,7 +26,7 @@ Route::group([
 });
 
 Route::group([
-    'middleware' => [ 'api', 'bindings' ],
+    'middleware' => ['api', 'bindings'],
     'namespace'  => 'Motor\Backend\Http\Controllers\Api\Auth',
     'prefix'     => 'api/auth',
     'as'         => 'api.auth',
@@ -38,7 +39,7 @@ Route::group([
 });
 
 Route::group([
-    'middleware' => [ 'web', 'web_auth', 'bindings', 'permission' ],
+    'middleware' => ['web', 'web_auth', 'bindings', 'permission'],
     'namespace'  => 'Motor\Backend\Http\Controllers\Api',
     'prefix'     => 'ajax',
     'as'         => 'ajax.',

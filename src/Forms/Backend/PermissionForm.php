@@ -7,8 +7,6 @@ use Motor\Backend\Models\PermissionGroup;
 
 /**
  * Class PermissionForm
- *
- * @package Motor\Backend\Forms\Backend
  */
 class PermissionForm extends Form
 {

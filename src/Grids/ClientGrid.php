@@ -6,8 +6,6 @@ use Motor\Backend\Grid\Grid;
 
 /**
  * Class ClientGrid
- *
- * @package Motor\Backend\Grids
  */
 class ClientGrid extends Grid
 {

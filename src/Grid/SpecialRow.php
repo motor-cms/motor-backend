@@ -6,8 +6,6 @@ use Illuminate\Contracts\Pagination\Paginator;
 
 /**
  * Class SpecialRow
- *
- * @package Motor\Backend\Grid
  */
 class SpecialRow extends Base
 {
@@ -30,9 +28,8 @@ class SpecialRow extends Base
     /**
      * Set column type
      *
-     * @param       $renderer
-     * @param array $options
-     *
+     * @param    $renderer
+     * @param  array  $options
      * @return $this
      */
     public function renderer($renderer, array $options = [])
@@ -44,7 +41,7 @@ class SpecialRow extends Base
     }
 
     /**
-     * @param Paginator $paginator
+     * @param  Paginator  $paginator
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function render(Paginator $paginator)

@@ -16,5 +16,5 @@ return [
     'contact'         => 'Contact',
     'address_info'    => 'Address information',
     'contact_info'    => 'Contact information',
-    'additional_info' => 'Additional information'
+    'additional_info' => 'Additional information',
 ];

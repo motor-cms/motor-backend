@@ -7,8 +7,6 @@ use Motor\Backend\Models\Language;
 
 /**
  * Class EmailTemplateForm
- *
- * @package Motor\Backend\Forms\Backend
  */
 class EmailTemplateForm extends Form
 {
@@ -34,9 +32,9 @@ class EmailTemplateForm extends Form
                                       ->toArray(),
              ])
              ->add('subject', 'text', [
-                     'label' => trans('motor-backend::backend/email_templates.subject'),
-                     'rules' => 'required',
-                 ])
+                 'label' => trans('motor-backend::backend/email_templates.subject'),
+                 'rules' => 'required',
+             ])
              ->add('default_sender_name', 'text', ['label' => trans('motor-backend::backend/email_templates.default_sender_name')])
              ->add('default_sender_email', 'text', ['label' => trans('motor-backend::backend/email_templates.default_sender_email')])
              ->add('default_recipient_name', 'text', ['label' => trans('motor-backend::backend/email_templates.default_recipient_name')])

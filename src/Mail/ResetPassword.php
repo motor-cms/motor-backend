@@ -8,8 +8,6 @@ use Illuminate\Queue\SerializesModels;
 
 /**
  * Class ResetPassword
- *
- * @package Motor\Backend\Mail
  */
 class ResetPassword extends Mailable
 {

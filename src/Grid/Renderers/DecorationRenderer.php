@@ -6,8 +6,6 @@ use Illuminate\Support\Facades\App;
 
 /**
  * Class DecorationRenderer
- *
- * @package Motor\Backend\Grid\Renderers
  */
 class DecorationRenderer
 {
@@ -18,8 +16,8 @@ class DecorationRenderer
     /**
      * DecorationRenderer constructor.
      *
-     * @param       $value
-     * @param array $options
+     * @param    $value
+     * @param  array  $options
      */
     public function __construct($value, array $options = [])
     {

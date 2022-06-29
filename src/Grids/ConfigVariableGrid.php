@@ -6,8 +6,6 @@ use Motor\Backend\Grid\Grid;
 
 /**
  * Class ConfigVariableGrid
- *
- * @package Motor\Backend\Grids
  */
 class ConfigVariableGrid extends Grid
 {

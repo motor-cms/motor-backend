@@ -7,8 +7,6 @@ use Motor\Backend\VueInternationalizationGenerator\Generator;
 
 /**
  * Class MotorGenerateIncludeCommand
- *
- * @package Motor\Backend\Console\Commands
  */
 class MotorGenerateIncludeCommand extends Command
 {
@@ -24,7 +22,7 @@ class MotorGenerateIncludeCommand extends Command
      *
      * @var string
      */
-    protected $description = "Generates a vue-i18n|vuex-i18n compatible js array out of project translations";
+    protected $description = 'Generates a vue-i18n|vuex-i18n compatible js array out of project translations';
 
     /**
      * Execute the console command.
@@ -45,7 +43,7 @@ class MotorGenerateIncludeCommand extends Command
             $files = (new Generator($config))->generateMultiple($root, $umd);
 
             if ($config['showOutputMessages']) {
-                echo "Written to :".PHP_EOL.$files.PHP_EOL;
+                echo 'Written to :'.PHP_EOL.$files.PHP_EOL;
             }
 
             exit;
@@ -57,7 +55,7 @@ class MotorGenerateIncludeCommand extends Command
         file_put_contents($jsFile, $data);
 
         if ($config['showOutputMessages']) {
-            echo "Written to ".$jsFile.PHP_EOL;
+            echo 'Written to '.$jsFile.PHP_EOL;
         }
     }
 }

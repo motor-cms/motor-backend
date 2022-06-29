@@ -6,8 +6,6 @@ use Kris\LaravelFormBuilder\Fields\FormField;
 
 /**
  * Class HtmlEditorType
- *
- * @package Motor\Backend\Forms\Fields
  */
 class HtmlEditorType extends FormField
 {
@@ -23,10 +21,10 @@ class HtmlEditorType extends FormField
     }
 
     /**
-     * @param array $options
-     * @param bool $showLabel
-     * @param bool $showField
-     * @param bool $showError
+     * @param  array  $options
+     * @param  bool  $showLabel
+     * @param  bool  $showField
+     * @param  bool  $showError
      * @return string
      */
     public function render(array $options = [], $showLabel = true, $showField = true, $showError = true)

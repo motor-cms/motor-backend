@@ -16,6 +16,7 @@ use Motor\Core\Traits\Searchable;
  * @property int|null $sort_position
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
+ *
  * @method static Builder|PermissionGroup filteredBy(Filter $filter, $column)
  * @method static Builder|PermissionGroup filteredByMultiple(Filter $filter)
  * @method static Builder|PermissionGroup newModelQuery()

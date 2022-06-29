@@ -7,8 +7,6 @@ use Illuminate\Http\Request;
 
 /**
  * Class DashboardController
- *
- * @package App\Http\Controllers
  */
 class DashboardController extends Controller
 {
@@ -25,7 +23,7 @@ class DashboardController extends Controller
     /**
      * Show the application dashboard.
      *
-     * @param Request $request
+     * @param  Request  $request
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function show(Request $request)

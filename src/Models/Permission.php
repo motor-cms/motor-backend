@@ -20,6 +20,7 @@ use Motor\Core\Traits\Searchable;
  * @property-read \Illuminate\Database\Eloquent\Collection|\Spatie\Permission\Models\Permission[] $permissions
  * @property-read \Illuminate\Database\Eloquent\Collection|\Spatie\Permission\Models\Role[] $roles
  * @property-read \Illuminate\Database\Eloquent\Collection|\Motor\Backend\Models\User[] $users
+ *
  * @method static Builder|Permission filteredBy(Filter $filter, $column)
  * @method static Builder|Permission filteredByMultiple(Filter $filter)
  * @method static Builder|Permission newModelQuery()

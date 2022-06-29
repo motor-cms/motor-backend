@@ -6,8 +6,6 @@ use Closure;
 
 /**
  * Class Column
- *
- * @package Motor\Backend\Grid
  */
 class Column extends Base
 {
@@ -36,10 +34,10 @@ class Column extends Base
     /**
      * Column constructor.
      *
-     * @param        $name
-     * @param        $label
-     * @param bool $sortable
-     * @param string $sortableField
+     * @param    $name
+     * @param    $label
+     * @param  bool  $sortable
+     * @param  string  $sortableField
      */
     public function __construct($name, $label, $sortable = false, $sortableField = null)
     {
@@ -60,9 +58,9 @@ class Column extends Base
     }
 
     /**
-     * @param        $column
-     * @param        $value
-     * @param string $operator
+     * @param    $column
+     * @param    $value
+     * @param  string  $operator
      * @return $this
      */
     public function onCondition($column, $value, $operator = '=')
@@ -127,8 +125,8 @@ class Column extends Base
     /**
      * Set column type
      *
-     * @param       $renderer
-     * @param array $options
+     * @param    $renderer
+     * @param  array  $options
      * @return $this
      */
     public function renderer($renderer, $options = [])
@@ -152,7 +150,7 @@ class Column extends Base
     /**
      * Set options for renderer
      *
-     * @param array $options
+     * @param  array  $options
      * @return $this
      */
     public function setRenderOptions(array $options)
@@ -186,7 +184,6 @@ class Column extends Base
      * Set sortable status and field
      *
      * @param $sortable
-     *
      * @return $this
      */
     protected function setSortable($sortable)
@@ -233,7 +230,6 @@ class Column extends Base
      * Set filters if available
      *
      * @param $filters
-     *
      * @return $this
      */
     protected function setFilters($filters)
@@ -285,8 +281,7 @@ class Column extends Base
     /**
      * Set cell closure
      *
-     * @param \Closure $closure
-     *
+     * @param  \Closure  $closure
      * @return $this
      */
     public function cell(Closure $closure)

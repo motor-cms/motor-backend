@@ -10,8 +10,6 @@ use Motor\Backend\Services\ProfileEditService;
 
 /**
  * Class ProfileEditController
- *
- * @package Motor\Backend\Http\Controllers\Api
  */
 class ProfileEditController extends ApiController
 {
@@ -65,7 +63,7 @@ class ProfileEditController extends ApiController
      *
      * Update the specified resource in storage.
      *
-     * @param \Motor\Backend\Http\Requests\Backend\ProfileEditRequest $request
+     * @param  \Motor\Backend\Http\Requests\Backend\ProfileEditRequest  $request
      * @return \Motor\Backend\Http\Resources\UserResource
      */
     public function update(ProfileEditRequest $request)

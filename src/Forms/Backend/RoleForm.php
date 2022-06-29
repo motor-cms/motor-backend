@@ -8,8 +8,6 @@ use Motor\Backend\Models\Permission;
 
 /**
  * Class RoleForm
- *
- * @package Motor\Backend\Forms\Backend
  */
 class RoleForm extends Form
 {

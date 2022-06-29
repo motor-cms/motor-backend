@@ -12,8 +12,6 @@ use Motor\Backend\Services\EmailTemplateService;
 
 /**
  * Class EmailTemplatesController
- *
- * @package Motor\Backend\Http\Controllers\Backend
  */
 class EmailTemplatesController extends Controller
 {
@@ -23,6 +21,7 @@ class EmailTemplatesController extends Controller
      * Display a listing of the resource.
      *
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     *
      * @throws \ReflectionException
      */
     public function index()
@@ -37,7 +36,7 @@ class EmailTemplatesController extends Controller
     }
 
     /**
-     * @param EmailTemplate $record
+     * @param  EmailTemplate  $record
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function duplicate(EmailTemplate $record)
@@ -50,7 +49,7 @@ class EmailTemplatesController extends Controller
     /**
      * Show the form for creating a new resource.
      *
-     * @param EmailTemplate $record
+     * @param  EmailTemplate  $record
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function create(EmailTemplate $record)
@@ -67,7 +66,7 @@ class EmailTemplatesController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param EmailTemplateRequest $request
+     * @param  EmailTemplateRequest  $request
      * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
      */
     public function store(EmailTemplateRequest $request)
@@ -102,7 +101,7 @@ class EmailTemplatesController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param EmailTemplate $record
+     * @param  EmailTemplate  $record
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function edit(EmailTemplate $record)
@@ -119,8 +118,8 @@ class EmailTemplatesController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param EmailTemplateRequest $request
-     * @param EmailTemplate $record
+     * @param  EmailTemplateRequest  $request
+     * @param  EmailTemplate  $record
      * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
      */
     public function update(EmailTemplateRequest $request, EmailTemplate $record)
@@ -145,7 +144,7 @@ class EmailTemplatesController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param EmailTemplate $record
+     * @param  EmailTemplate  $record
      * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
      */
     public function destroy(EmailTemplate $record)

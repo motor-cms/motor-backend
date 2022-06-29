@@ -6,8 +6,6 @@ use Kris\LaravelFormBuilder\Fields\SelectType;
 
 /**
  * Class Select2Type
- *
- * @package Motor\Backend\Forms\Fields
  */
 class Select2Type extends SelectType
 {
@@ -23,10 +21,10 @@ class Select2Type extends SelectType
     }
 
     /**
-     * @param array $options
-     * @param bool $showLabel
-     * @param bool $showField
-     * @param bool $showError
+     * @param  array  $options
+     * @param  bool  $showLabel
+     * @param  bool  $showField
+     * @param  bool  $showError
      * @return string
      */
     public function render(array $options = [], $showLabel = true, $showField = true, $showError = true)

@@ -19,6 +19,7 @@ use Motor\Core\Traits\Searchable;
  * @property string $native_name
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
+ *
  * @method static Builder|Language filteredBy(Filter $filter, $column)
  * @method static Builder|Language filteredByMultiple(Filter $filter)
  * @method static Builder|Language newModelQuery()

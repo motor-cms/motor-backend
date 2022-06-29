@@ -1,16 +1,15 @@
 <?php
 
+use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
-use Illuminate\Database\Schema\Blueprint;
-use Illuminate\Database\Migrations\Migration;
 
 /**
  * Class UpdatePermissionTables
  */
 class UpdatePermissionTables extends Migration
 {
-
     /**
      * Run the migrations.
      *
@@ -18,7 +17,7 @@ class UpdatePermissionTables extends Migration
      */
     public function up()
     {
-        $tableNames  = config('permission.table_names');
+        $tableNames = config('permission.table_names');
         $foreignKeys = config('permission.foreign_keys');
 
         Schema::table('roles', function (Blueprint $table) {
@@ -30,23 +29,23 @@ class UpdatePermissionTables extends Migration
 
         Schema::create(
             $tableNames['model_has_permissions'],
-            function (Blueprint $table) use ($tableNames, $foreignKeys) {
+            function (Blueprint $table) use ($tableNames) {
                 $table->integer('permission_id')->unsigned();
                 $table->morphs('model');
 
                 $table->foreign('permission_id')->references('id')->on($tableNames['permissions'])->onDelete('cascade');
 
-                $table->primary([ 'permission_id', 'model_id', 'model_type' ]);
+                $table->primary(['permission_id', 'model_id', 'model_type']);
             }
         );
 
-        Schema::create($tableNames['model_has_roles'], function (Blueprint $table) use ($tableNames, $foreignKeys) {
+        Schema::create($tableNames['model_has_roles'], function (Blueprint $table) use ($tableNames) {
             $table->integer('role_id')->unsigned();
             $table->morphs('model');
 
             $table->foreign('role_id')->references('id')->on($tableNames['roles'])->onDelete('cascade');
 
-            $table->primary([ 'role_id', 'model_id', 'model_type' ]);
+            $table->primary(['role_id', 'model_id', 'model_type']);
         });
 
         // Add guard to permission and role tables
@@ -68,7 +67,6 @@ class UpdatePermissionTables extends Migration
         Schema::drop('user_has_roles');
         Schema::drop('user_has_permissions');
     }
-
 
     /**
      * Reverse the migrations.

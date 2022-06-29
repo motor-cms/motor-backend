@@ -9,8 +9,8 @@
 //});
 
 Route::group([
-    'middleware' => [ 'web' ],
-    'namespace'  => 'Motor\Backend\Http\Controllers'
+    'middleware' => ['web'],
+    'namespace'  => 'Motor\Backend\Http\Controllers',
 ], static function () {
     Auth::routes(config('motor-backend.routes.auth', []));
     Route::get('password/change', 'Auth\ChangePasswordController@showChangeForm')->name('auth.change-password.index');
@@ -24,14 +24,14 @@ Route::group([
     'middleware' => [
         'web',
         'web_auth',
-        'navigation'
-    ]
+        'navigation',
+    ],
 ], static function () {
-    Route::group([ 'middleware' => [ 'permission' ] ], static function () {
+    Route::group(['middleware' => ['permission']], static function () {
         if (config('motor-backend.routes.dashboard')) {
             Route::get('/', [
                 'as'   => 'dashboard.index',
-                'uses' => 'DashboardController@show'
+                'uses' => 'DashboardController@show',
             ]);
             Route::get('dashboard', 'DashboardController@show')->name('dashboard.index');
         }
@@ -70,8 +70,8 @@ Route::group([
         Route::resource('categories', 'CategoriesController', [
             'except' => [
                 'index',
-                'create'
-            ]
+                'create',
+            ],
         ]);
 
         Route::get('categories/{category}', 'CategoriesController@index')->name('categories.index');
@@ -79,8 +79,8 @@ Route::group([
 
         Route::resource('category_trees', 'CategoryTreesController', [
             'parameters' => [
-                'category_trees' => 'category'
-            ]
+                'category_trees' => 'category',
+            ],
         ]);
 
         Route::resource('config_variables', 'ConfigVariablesController');

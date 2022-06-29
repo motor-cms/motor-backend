@@ -10,8 +10,6 @@ use Motor\Backend\Models\User;
 
 /**
  * Class UserForm
- *
- * @package Motor\Backend\Forms\Backend
  */
 class UserForm extends Form
 {

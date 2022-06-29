@@ -11,8 +11,6 @@ use Motor\Backend\Services\UserService;
 
 /**
  * Class UsersController
- *
- * @package Motor\Backend\Http\Controllers\Api
  */
 class UsersController extends ApiController
 {
@@ -122,7 +120,7 @@ class UsersController extends ApiController
      *
      * Store a newly created resource in storage.
      *
-     * @param \Motor\Backend\Http\Requests\Backend\UserRequest $request
+     * @param  \Motor\Backend\Http\Requests\Backend\UserRequest  $request
      * @return \Illuminate\Http\JsonResponse|object
      */
     public function store(UserRequest $request)
@@ -185,7 +183,7 @@ class UsersController extends ApiController
      *
      * Display the specified resource.
      *
-     * @param \Motor\Backend\Models\User $record
+     * @param  \Motor\Backend\Models\User  $record
      * @return \Motor\Backend\Http\Resources\UserResource
      */
     public function show(User $record)
@@ -249,8 +247,8 @@ class UsersController extends ApiController
      *
      * Update the specified resource in storage.
      *
-     * @param \Motor\Backend\Http\Requests\Backend\UserRequest $request
-     * @param \Motor\Backend\Models\User $record
+     * @param  \Motor\Backend\Http\Requests\Backend\UserRequest  $request
+     * @param  \Motor\Backend\Models\User  $record
      * @return \Motor\Backend\Http\Resources\UserResource
      */
     public function update(UserRequest $request, User $record)
@@ -317,7 +315,7 @@ class UsersController extends ApiController
      *
      * Remove the specified resource from storage.
      *
-     * @param \Motor\Backend\Models\User $record
+     * @param  \Motor\Backend\Models\User  $record
      * @return \Illuminate\Http\JsonResponse
      */
     public function destroy(User $record)

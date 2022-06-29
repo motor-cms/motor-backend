@@ -22,14 +22,14 @@ class RoleResource extends BaseResource
     /**
      * Transform the resource into an array.
      *
-     * @param \Illuminate\Http\Request $request
+     * @param  \Illuminate\Http\Request  $request
      * @return array
      */
     public function toArray($request)
     {
         return [
-            "name"       => $this->name,
-            "guard_name" => $this->guard_name,
+            'name'       => $this->name,
+            'guard_name' => $this->guard_name,
         ];
     }
 }

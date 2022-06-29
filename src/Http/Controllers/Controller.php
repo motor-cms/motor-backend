@@ -16,8 +16,6 @@ use Motor\Backend\Models\User;
 
 /**
  * Class Controller
- *
- * @package Motor\Backend\Http\Controllers
  */
 class Controller extends BaseController
 {
@@ -39,9 +37,9 @@ class Controller extends BaseController
     }
 
     /**
-     * @param        $record
-     * @param        $transformer
-     * @param string $includes
+     * @param    $record
+     * @param    $transformer
+     * @param  string  $includes
      * @return Item
      */
     protected function transformItem($record, $transformer, $includes = '')
@@ -52,9 +50,9 @@ class Controller extends BaseController
     }
 
     /**
-     * @param        $collection
-     * @param        $transformer
-     * @param string $includes
+     * @param    $collection
+     * @param    $transformer
+     * @param  string  $includes
      * @return Collection
      */
     protected function transformCollection($collection, $transformer, $includes = '')
@@ -65,9 +63,9 @@ class Controller extends BaseController
     }
 
     /**
-     * @param        $paginator
-     * @param        $transformer
-     * @param string $includes
+     * @param    $paginator
+     * @param    $transformer
+     * @param  string  $includes
      * @return Collection
      */
     protected function transformPaginator($paginator, $transformer, $includes = '')

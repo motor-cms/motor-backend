@@ -4,8 +4,6 @@ namespace Motor\Backend\Grid\Renderers;
 
 /**
  * Class BooleanRenderer
- *
- * @package Motor\Backend\Grid\Renderers
  */
 class BooleanRenderer
 {

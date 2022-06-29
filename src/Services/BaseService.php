@@ -21,8 +21,6 @@ use Spatie\MediaLibrary\HasMedia;
 
 /**
  * Class BaseService
- *
- * @package Motor\Backend\Services
  */
 abstract class BaseService
 {
@@ -43,15 +41,14 @@ abstract class BaseService
     protected $sortableField = 'id';
 
     protected $sortableDirection = 'ASC';
-    
+
     protected $disk = 'media';
 
     /**
      * Basic create method.
      * Usually called by an API
      *
-     * @param Request $request
-     *
+     * @param  Request  $request
      * @return mixed
      */
     public static function create(Request $request)
@@ -64,9 +61,8 @@ abstract class BaseService
      * Create method with support from a Form class
      * Usually called from a backend controller
      *
-     * @param Request $request
-     * @param Form $form
-     *
+     * @param  Request  $request
+     * @param  Form  $form
      * @return mixed
      */
     public static function createWithForm(Request $request, Form $form)
@@ -80,9 +76,8 @@ abstract class BaseService
      * Basic update method.
      * Usually called by an API
      *
-     * @param Model $record
-     * @param Request $request
-     *
+     * @param  Model  $record
+     * @param  Request  $request
      * @return mixed
      */
     public static function update(Model $record, Request $request)
@@ -96,10 +91,9 @@ abstract class BaseService
      * Create method with support from a Form class
      * Usually called from a backend controller
      *
-     * @param Model $record
-     * @param Request $request
-     * @param Form $form
-     *
+     * @param  Model  $record
+     * @param  Request  $request
+     * @param  Form  $form
      * @return mixed
      */
     public static function updateWithForm(Model $record, Request $request, Form $form)
@@ -114,7 +108,6 @@ abstract class BaseService
      * Simple wrapper to return the given record
      *
      * @param $record
-     *
      * @return mixed
      */
     public static function show($record)
@@ -127,8 +120,8 @@ abstract class BaseService
      * Wrapper to return paginated results
      * Applies basic filters and adds filters through the individual services filters() method
      *
-     * @param string $alias
-     * @param null $sorting
+     * @param  string  $alias
+     * @param  null  $sorting
      * @return BaseService
      */
     public static function collection($alias = '', $sorting = null)
@@ -157,7 +150,6 @@ abstract class BaseService
      * Simple wrapper around the delete method of the record
      *
      * @param $record
-     *
      * @return mixed
      */
     public static function delete($record)
@@ -217,7 +209,7 @@ abstract class BaseService
     /**
      * Set sorting array
      *
-     * @param array $sorting
+     * @param  array  $sorting
      * @return $this
      */
     public function setSorting(array $sorting)
@@ -282,7 +274,6 @@ abstract class BaseService
      * Add custom scopes to query
      *
      * @param $query
-     *
      * @return mixed
      */
     public function applyScopes($query)
@@ -363,8 +354,7 @@ abstract class BaseService
     /**
      * Sets a Form object to use when creating/updating
      *
-     * @param Form $form
-     *
+     * @param  Form  $form
      * @return $this
      */
     public function setForm(Form $form)
@@ -378,8 +368,7 @@ abstract class BaseService
     /**
      * Sets a record
      *
-     * @param Model $record
-     *
+     * @param  Model  $record
      * @return $this
      */
     public function setRecord(Model $record)
@@ -392,8 +381,8 @@ abstract class BaseService
     /**
      * Sets a request object
      *
-     * @param Request $request
-     * @param null $form
+     * @param  Request  $request
+     * @param  null  $form
      * @return $this
      */
     public function setRequest(Request $request, $form = null)
@@ -420,9 +409,8 @@ abstract class BaseService
     /**
      * Loops through the fields of the Form object to handle some special cases (date/datetime and checkboxes)
      *
-     * @param Form $form
-     * @param array $data
-     *
+     * @param  Form  $form
+     * @param  array  $data
      * @return array
      */
     public function handleFormValues(Form $form, array $data)
@@ -468,27 +456,28 @@ abstract class BaseService
         return $data;
     }
 
-     /**
+    /**
      * Sets another disk
      *
-     * @param string $disk
-     *
+     * @param  string  $disk
      */
-    private function setDisk(string $disk) {
+    private function setDisk(string $disk)
+    {
         $this->disk = $disk;
+
         return $this;
     }
-    
-    
+
     /**
      * Handles file uploads either with a UploadedFile object or a base64 encoded file
      *
      * @param $file
-     * @param string $identifier
-     * @param null $collection
-     * @param null $record
-     * @param false $addToCollection
+     * @param  string  $identifier
+     * @param  null  $collection
+     * @param  null  $record
+     * @param  false  $addToCollection
      * @return $this
+     *
      * @throws \Spatie\MediaLibrary\MediaCollections\Exceptions\FileDoesNotExist
      * @throws \Spatie\MediaLibrary\MediaCollections\Exceptions\FileIsTooBig
      */
@@ -544,7 +533,7 @@ abstract class BaseService
 
                 $name = Arr::get($this->data, $identifier.'_name', $tempFilename);
 
-                $handle = fopen($tempFilename, "w");
+                $handle = fopen($tempFilename, 'w');
                 fwrite($handle, $image);
                 fclose($handle);
                 $record->addMedia($tempFilename)
@@ -561,7 +550,6 @@ abstract class BaseService
      * Helper method to check if a file upload field is base64 encoded
      *
      * @param $string
-     *
      * @return bool
      */
     protected function isValidBase64($string)

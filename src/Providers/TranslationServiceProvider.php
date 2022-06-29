@@ -6,8 +6,6 @@ use Motor\Backend\Translation\Loaders\FileLoader;
 
 /**
  * Class TranslationServiceProvider
- *
- * @package Motor\Backend\Providers
  */
 class TranslationServiceProvider extends \Illuminate\Translation\TranslationServiceProvider
 {

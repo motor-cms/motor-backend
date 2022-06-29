@@ -7,8 +7,6 @@ use Illuminate\Support\Facades\Log;
 
 /**
  * Class JsonRequest
- *
- * @package Motor\Backend\Http\Requests
  */
 abstract class JsonRequest extends FormRequest
 {
@@ -16,6 +14,7 @@ abstract class JsonRequest extends FormRequest
      * Get the validator instance for the request.
      *
      * @return \Illuminate\Contracts\Validation\Validator|\Illuminate\Validation\Validator|mixed
+     *
      * @throws \Illuminate\Contracts\Container\BindingResolutionException
      */
     protected function getValidatorInstance()

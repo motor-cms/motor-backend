@@ -13,8 +13,6 @@ use Motor\Core\Filter\Renderers\WhereRenderer;
 
 /**
  * Class CategoryTreesController
- *
- * @package Motor\Backend\Http\Controllers\Backend
  */
 class CategoryTreesController extends Controller
 {
@@ -61,7 +59,7 @@ class CategoryTreesController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param \Motor\Backend\Http\Requests\Backend\CategoryTreeRequest $request
+     * @param  \Motor\Backend\Http\Requests\Backend\CategoryTreeRequest  $request
      * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
      */
     public function store(CategoryTreeRequest $request)
@@ -96,7 +94,7 @@ class CategoryTreesController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param \Motor\Backend\Models\Category $record
+     * @param  \Motor\Backend\Models\Category  $record
      * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
      */
     public function edit(Category $record)
@@ -114,8 +112,8 @@ class CategoryTreesController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param \Motor\Backend\Http\Requests\Backend\CategoryTreeRequest $request
-     * @param \Motor\Backend\Models\Category $record
+     * @param  \Motor\Backend\Http\Requests\Backend\CategoryTreeRequest  $request
+     * @param  \Motor\Backend\Models\Category  $record
      * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
      */
     public function update(CategoryTreeRequest $request, Category $record)
@@ -140,7 +138,7 @@ class CategoryTreesController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param \Motor\Backend\Models\Category $record
+     * @param  \Motor\Backend\Models\Category  $record
      * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
      */
     public function destroy(Category $record)

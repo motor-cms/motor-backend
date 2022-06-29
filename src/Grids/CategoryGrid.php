@@ -7,8 +7,6 @@ use Motor\Backend\Grid\Renderers\TreeRenderer;
 
 /**
  * Class CategoryGrid
- *
- * @package Motor\Backend\Grids
  */
 class CategoryGrid extends Grid
 {

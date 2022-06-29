@@ -6,8 +6,6 @@ use Motor\Backend\Models\PermissionGroup;
 
 /**
  * Class PermissionService
- *
- * @package Motor\Backend\Services
  */
 class PermissionGroupService extends BaseService
 {

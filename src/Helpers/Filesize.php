@@ -4,13 +4,11 @@ namespace Motor\Backend\Helpers;
 
 /**
  * Class Filesize
- *
- * @package Motor\Backend\Helpers
  */
 class Filesize
 {
     /**
-     * @param int $bytes
+     * @param  int  $bytes
      * @return string
      */
     public static function bytesToHuman(int $bytes): string

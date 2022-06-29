@@ -1,7 +1,5 @@
 <?php
 
-use Illuminate\Foundation\Testing\WithoutMiddleware;
-use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 use Motor\Backend\Models\ConfigVariable;
 
@@ -30,9 +28,8 @@ class MotorBackendBackendConfigVariableTest extends TestCase
         'model_has_permissions',
         'model_has_roles',
         'role_has_permissions',
-        'media'
+        'media',
     ];
-
 
     public function setUp()
     {
@@ -43,18 +40,16 @@ class MotorBackendBackendConfigVariableTest extends TestCase
         $this->addDefaults();
     }
 
-
     protected function addDefaults()
     {
-        $this->user   = create_test_superadmin();
+        $this->user = create_test_superadmin();
 
-        $this->readPermission   = create_test_permission_with_name('config_variables.read');
-        $this->writePermission  = create_test_permission_with_name('config_variables.write');
+        $this->readPermission = create_test_permission_with_name('config_variables.read');
+        $this->writePermission = create_test_permission_with_name('config_variables.write');
         $this->deletePermission = create_test_permission_with_name('config_variables.delete');
 
         $this->actingAs($this->user);
     }
-
 
     /** @test */
     public function can_see_grid_without_config_variable()

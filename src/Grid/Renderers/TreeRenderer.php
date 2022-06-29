@@ -6,8 +6,6 @@ use Illuminate\Database\Eloquent\Model;
 
 /**
  * Class TreeRenderer
- *
- * @package Motor\Backend\Grid\Renderers
  */
 class TreeRenderer
 {
@@ -20,9 +18,9 @@ class TreeRenderer
     /**
      * TreeRenderer constructor.
      *
-     * @param            $value
-     * @param array $options
-     * @param Model|null $record
+     * @param    $value
+     * @param  array  $options
+     * @param  Model|null  $record
      */
     public function __construct($value, array $options = [], Model $record = null)
     {

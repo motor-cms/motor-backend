@@ -6,8 +6,6 @@ use Motor\Backend\Http\Requests\Request;
 
 /**
  * Class LanguageRequest
- *
- * @package Motor\Backend\Http\Requests\Backend
  */
 class LanguageRequest extends Request
 {

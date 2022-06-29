@@ -2,10 +2,9 @@
 
 namespace Tests\Motor\Backend\Browser;
 
+use Laravel\Dusk\Browser;
 use Motor\Backend\Models\User;
 use Tests\DuskTestCase;
-use Laravel\Dusk\Browser;
-use Illuminate\Foundation\Testing\DatabaseMigrations;
 
 class ExampleTest extends DuskTestCase
 {

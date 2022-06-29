@@ -9,8 +9,6 @@ use Motor\Backend\Models\PermissionGroup;
 
 /**
  * Class MotorCreatePermissionsCommand
- *
- * @package Motor\Backend\Console\Commands
  */
 class MotorCreatePermissionsCommand extends Command
 {

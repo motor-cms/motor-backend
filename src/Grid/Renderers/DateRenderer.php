@@ -6,8 +6,6 @@ use Carbon\Carbon;
 
 /**
  * Class DateRenderer
- *
- * @package Motor\Backend\Grid\Renderers
  */
 class DateRenderer
 {
@@ -20,8 +18,8 @@ class DateRenderer
     /**
      * DateRenderer constructor.
      *
-     * @param       $value
-     * @param array $options
+     * @param    $value
+     * @param  array  $options
      */
     public function __construct($value, array $options = [])
     {

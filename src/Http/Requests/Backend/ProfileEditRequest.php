@@ -6,8 +6,6 @@ use Motor\Backend\Http\Requests\Request;
 
 /**
  * Class ProfileEditRequest
- *
- * @package Motor\Backend\Http\Requests\Backend
  */
 class ProfileEditRequest extends Request
 {

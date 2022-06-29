@@ -6,8 +6,6 @@ use Kris\LaravelFormBuilder\Form;
 
 /**
  * Class CategoryForm
- *
- * @package Motor\Backend\Forms\Backend
  */
 class CategoryForm extends Form
 {

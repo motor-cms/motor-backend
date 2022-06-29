@@ -32,6 +32,7 @@ use Motor\Core\Traits\Filterable;
  * @property-read \Motor\Backend\Models\User|null $eraser
  * @property-read \Motor\Backend\Models\Category|null $parent
  * @property-read \Motor\Backend\Models\User $updater
+ *
  * @method static Builder|Category d()
  * @method static Builder|Category filteredBy(Filter $filter, $column)
  * @method static Builder|Category filteredByMultiple(Filter $filter)
@@ -92,7 +93,6 @@ class Category extends Model
     {
         return (property_exists($this, 'searchableColumns')) ? $this->searchableColumns : [];
     }
-
 
     /**
      * @return array

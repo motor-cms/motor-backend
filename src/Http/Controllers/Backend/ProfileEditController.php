@@ -11,8 +11,6 @@ use Motor\Backend\Services\ProfileEditService;
 
 /**
  * Class ProfileEditController
- *
- * @package Motor\Backend\Http\Controllers\Backend
  */
 class ProfileEditController extends Controller
 {
@@ -39,7 +37,7 @@ class ProfileEditController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param ProfileEditRequest $request
+     * @param  ProfileEditRequest  $request
      * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
      */
     public function update(ProfileEditRequest $request)

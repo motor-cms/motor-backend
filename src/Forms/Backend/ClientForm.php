@@ -7,8 +7,6 @@ use Symfony\Component\Intl\Countries;
 
 /**
  * Class ClientForm
- *
- * @package Motor\Backend\Forms\Backend
  */
 class ClientForm extends Form
 {

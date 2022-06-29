@@ -7,8 +7,6 @@ use Motor\Backend\Models\User;
 
 /**
  * Class ProfileEditForm
- *
- * @package Motor\Backend\Forms\Backend
  */
 class ProfileEditForm extends Form
 {
@@ -29,9 +27,9 @@ class ProfileEditForm extends Form
                  ],
              ])
              ->add('avatar', 'file_image', [
-                     'label' => trans('motor-backend::backend/global.image'),
-                     'model' => User::class,
-                 ])
+                 'label' => trans('motor-backend::backend/global.image'),
+                 'model' => User::class,
+             ])
              ->add('submit', 'submit', [
                  'attr'  => ['class' => 'btn btn-primary'],
                  'label' => trans('motor-backend::backend/users.profile.save'),

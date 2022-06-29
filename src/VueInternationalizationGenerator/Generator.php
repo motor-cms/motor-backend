@@ -1,4 +1,6 @@
-<?php namespace Motor\Backend\VueInternationalizationGenerator;
+<?php
+
+namespace Motor\Backend\VueInternationalizationGenerator;
 
 use App;
 use DirectoryIterator;
@@ -7,8 +9,6 @@ use SplFileInfo;
 
 /**
  * Class Generator
- *
- * @package Motor\Backend\VueInternationalizationGenerator
  */
 class Generator
 {
@@ -25,7 +25,7 @@ class Generator
     /**
      * The constructor
      *
-     * @param array $config
+     * @param  array  $config
      */
     public function __construct($config = [])
     {
@@ -36,11 +36,11 @@ class Generator
     }
 
     /**
-     * @param string $path
-     * @param bool $umd
-     * @param bool $withVendor
-     *
+     * @param  string  $path
+     * @param  bool  $umd
+     * @param  bool  $withVendor
      * @return string
+     *
      * @throws Exception
      */
     public function generateFromPath($path, $umd = null, $withVendor = false)
@@ -142,10 +142,10 @@ class Generator
     }
 
     /**
-     * @param string $path
-     * @param bool $umd
-     *
+     * @param  string  $path
+     * @param  bool  $umd
      * @return string
+     *
      * @throws Exception
      */
     public function generateMultiple($path, $umd = null)
@@ -208,6 +208,7 @@ class Generator
     /**
      * @param $path
      * @return array|null
+     *
      * @throws Exception
      */
     private function allocateLocaleJSON($path)
@@ -217,7 +218,7 @@ class Generator
             return null;
         }
         $tmp = (array) json_decode(file_get_contents($path), true);
-        if (gettype($tmp) !== "array") {
+        if (gettype($tmp) !== 'array') {
             throw new Exception('Unexpected data while processing '.$path);
         }
 
@@ -227,6 +228,7 @@ class Generator
     /**
      * @param $path
      * @return array
+     *
      * @throws Exception
      */
     private function allocateLocaleArray($path)
@@ -259,7 +261,7 @@ class Generator
 
                 $tmp = include $fileName;
 
-                if (gettype($tmp) !== "array") {
+                if (gettype($tmp) !== 'array') {
                     throw new Exception('Unexpected data while processing '.$fileName);
                     continue;
                 }
@@ -277,8 +279,7 @@ class Generator
     }
 
     /**
-     * @param array $arr
-     *
+     * @param  array  $arr
      * @return array
      */
     private function adjustArray(array $arr)
@@ -300,8 +301,7 @@ class Generator
     /**
      * Adjus vendor index placement.
      *
-     * @param array $locales
-     *
+     * @param  array  $locales
      * @return array
      */
     private function adjustVendor($locales)
@@ -347,8 +347,7 @@ class Generator
     /**
      * Returns filename, with extension stripped
      *
-     * @param string $filename
-     *
+     * @param  string  $filename
      * @return string
      */
     private function removeExtension($filename)
@@ -364,8 +363,7 @@ class Generator
     /**
      * Returns an UMD style module
      *
-     * @param string $body
-     *
+     * @param  string  $body
      * @return string
      */
     private function getUMDModule($body)
@@ -384,8 +382,7 @@ HEREDOC;
     /**
      * Returns an ES6 style module
      *
-     * @param string $body
-     *
+     * @param  string  $body
      * @return string
      */
     private function getES6Module($body)

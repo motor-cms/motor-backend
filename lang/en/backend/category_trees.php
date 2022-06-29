@@ -10,5 +10,5 @@ return [
     'updated'        => 'Category tree updated',
     'deleted'        => 'Category tree deleted',
     'scope'          => 'Scope',
-    'show_nodes'     => 'Show categories'
+    'show_nodes'     => 'Show categories',
 ];

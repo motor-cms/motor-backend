@@ -9,8 +9,6 @@ use Motor\Backend\Traits\ChangesPasswords;
 
 /**
  * Class ChangePasswordController
- *
- * @package Motor\Backend\Http\Controllers\Auth
  */
 class ChangePasswordController extends Controller
 {
@@ -39,7 +37,7 @@ class ChangePasswordController extends Controller
      *
      * If no token is present, display the link request form.
      *
-     * @param Request $request
+     * @param  Request  $request
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function showChangeForm(Request $request)
@@ -51,7 +49,7 @@ class ChangePasswordController extends Controller
     }
 
     /**
-     * @param Request $request
+     * @param  Request  $request
      */
     public function saveNewPassword(Request $request)
     {

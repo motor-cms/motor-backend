@@ -4,8 +4,6 @@ namespace Motor\Backend\Grid\Renderers;
 
 /**
  * Class TranslateRenderer
- *
- * @package Motor\Backend\Grid\Renderers
  */
 class TranslateRenderer
 {

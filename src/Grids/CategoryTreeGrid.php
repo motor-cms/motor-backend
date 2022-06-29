@@ -6,8 +6,6 @@ use Motor\Backend\Grid\Grid;
 
 /**
  * Class CategoryTreeGrid
- *
- * @package Motor\Backend\Grids
  */
 class CategoryTreeGrid extends Grid
 {

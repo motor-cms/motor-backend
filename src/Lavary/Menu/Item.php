@@ -6,8 +6,6 @@ use Request;
 
 /**
  * Class Item
- *
- * @package Motor\Backend\Lavary\Menu
  */
 class Item extends \Lavary\Menu\Item
 {

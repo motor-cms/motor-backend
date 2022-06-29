@@ -8,8 +8,6 @@ use Motor\Backend\Models\Role;
 
 /**
  * Class RoleService
- *
- * @package Motor\Backend\Services
  */
 class RoleService extends BaseService
 {

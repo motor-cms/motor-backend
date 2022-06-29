@@ -16,6 +16,6 @@ return [
     'profile'          => [
         'edit'    => 'Profil bearbeiten',
         'save'    => 'Profil speichern',
-        'updated' => 'Profil aktualisiert'
-    ]
+        'updated' => 'Profil aktualisiert',
+    ],
 ];

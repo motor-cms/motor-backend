@@ -23,9 +23,9 @@ if (! function_exists('has_permission')) {
      */
     function has_permission($permission)
     {
-        return (Auth::user()
+        return Auth::user()
                     ->hasRole('SuperAdmin') || Auth::user()
-                                                   ->hasPermissionTo($permission));
+                                                   ->hasPermissionTo($permission);
     }
 }
 
@@ -38,15 +38,15 @@ if (! function_exists('has_role')) {
     {
         $role = explode(',', $role);
 
-        return (Auth::user()
+        return Auth::user()
                     ->hasRole('SuperAdmin') || Auth::user()
-                                                   ->hasAnyRole($role));
+                                                   ->hasAnyRole($role);
     }
 }
 
 /**
- * @param      $var
- * @param null $default
+ * @param    $var
+ * @param  null  $default
  * @return mixed|null
  */
 function config_variable($var, $default = null)

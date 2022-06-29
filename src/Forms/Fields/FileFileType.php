@@ -7,8 +7,6 @@ use Kris\LaravelFormBuilder\Fields\InputType;
 
 /**
  * Class FileFileType
- *
- * @package Motor\Backend\Forms\Fields
  */
 class FileFileType extends InputType
 {
@@ -24,10 +22,10 @@ class FileFileType extends InputType
     }
 
     /**
-     * @param array $options
-     * @param bool $showLabel
-     * @param bool $showField
-     * @param bool $showError
+     * @param  array  $options
+     * @param  bool  $showLabel
+     * @param  bool  $showField
+     * @param  bool  $showError
      * @return string
      */
     public function render(array $options = [], $showLabel = true, $showField = true, $showError = true)

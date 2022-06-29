@@ -4,8 +4,6 @@ namespace Motor\Backend\Grid\Renderers;
 
 /**
  * Class MultipleRenderer
- *
- * @package Motor\Backend\Grid\Renderers
  */
 class MultipleRenderer
 {

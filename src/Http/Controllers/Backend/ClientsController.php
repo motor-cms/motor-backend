@@ -12,8 +12,6 @@ use Motor\Backend\Services\ClientService;
 
 /**
  * Class ClientsController
- *
- * @package Motor\Backend\Http\Controllers\Backend
  */
 class ClientsController extends Controller
 {
@@ -23,6 +21,7 @@ class ClientsController extends Controller
      * Display a listing of the resource.
      *
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     *
      * @throws \ReflectionException
      */
     public function index()
@@ -55,7 +54,7 @@ class ClientsController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param ClientRequest $request
+     * @param  ClientRequest  $request
      * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
      */
     public function store(ClientRequest $request)
@@ -90,7 +89,7 @@ class ClientsController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param Client $record
+     * @param  Client  $record
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function edit(Client $record)
@@ -108,8 +107,8 @@ class ClientsController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param ClientRequest $request
-     * @param Client $record
+     * @param  ClientRequest  $request
+     * @param  Client  $record
      * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
      */
     public function update(ClientRequest $request, Client $record)
@@ -134,7 +133,7 @@ class ClientsController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param Client $record
+     * @param  Client  $record
      * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
      */
     public function destroy(Client $record)

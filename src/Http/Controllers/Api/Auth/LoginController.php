@@ -8,8 +8,6 @@ use Illuminate\Support\Facades\Auth;
 
 /**
  * Class LoginController
- *
- * @package Motor\Backend\Http\Controllers\Api\Auth
  */
 class LoginController extends Controller
 {
@@ -27,8 +25,7 @@ class LoginController extends Controller
     /**
      * Get a JWT token via given credentials.
      *
-     * @param \Illuminate\Http\Request $request
-     *
+     * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\JsonResponse
      */
     public function login(Request $request)
@@ -86,8 +83,7 @@ class LoginController extends Controller
     /**
      * Get the token array structure.
      *
-     * @param string $token
-     *
+     * @param  string  $token
      * @return \Illuminate\Http\JsonResponse
      */
     protected function respondWithToken($token)

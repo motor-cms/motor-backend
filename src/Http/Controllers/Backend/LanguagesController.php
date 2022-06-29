@@ -12,8 +12,6 @@ use Motor\Backend\Services\LanguageService;
 
 /**
  * Class LanguagesController
- *
- * @package Motor\Backend\Http\Controllers\Backend
  */
 class LanguagesController extends Controller
 {
@@ -23,6 +21,7 @@ class LanguagesController extends Controller
      * Display a listing of the resource.
      *
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     *
      * @throws \ReflectionException
      */
     public function index()
@@ -54,7 +53,7 @@ class LanguagesController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param LanguageRequest $request
+     * @param  LanguageRequest  $request
      * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
      */
     public function store(LanguageRequest $request)
@@ -89,7 +88,7 @@ class LanguagesController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param Language $record
+     * @param  Language  $record
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function edit(Language $record)
@@ -106,8 +105,8 @@ class LanguagesController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param LanguageRequest $request
-     * @param Language $record
+     * @param  LanguageRequest  $request
+     * @param  Language  $record
      * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
      */
     public function update(LanguageRequest $request, Language $record)
@@ -132,7 +131,7 @@ class LanguagesController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param Language $record
+     * @param  Language  $record
      * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
      */
     public function destroy(Language $record)

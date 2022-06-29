@@ -6,8 +6,6 @@ use Illuminate\Support\Facades\App;
 
 /**
  * Class CollectionRenderer
- *
- * @package Motor\Backend\Grid\Renderers
  */
 class CollectionRenderer
 {
@@ -18,8 +16,8 @@ class CollectionRenderer
     /**
      * CollectionRenderer constructor.
      *
-     * @param      $value
-     * @param null $options
+     * @param    $value
+     * @param  null  $options
      */
     public function __construct($value, $options = null)
     {

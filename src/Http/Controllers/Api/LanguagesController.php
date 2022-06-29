@@ -11,8 +11,6 @@ use Motor\Backend\Services\LanguageService;
 
 /**
  * Class LanguagesController
- *
- * @package Motor\Backend\Http\Controllers\Api
  */
 class LanguagesController extends ApiController
 {
@@ -122,7 +120,7 @@ class LanguagesController extends ApiController
      *
      * Store a newly created resource in storage.
      *
-     * @param \Motor\Backend\Http\Requests\Backend\LanguageRequest $request
+     * @param  \Motor\Backend\Http\Requests\Backend\LanguageRequest  $request
      * @return \Illuminate\Http\JsonResponse|object
      */
     public function store(LanguageRequest $request)
@@ -185,7 +183,7 @@ class LanguagesController extends ApiController
      *
      * Display the specified resource.
      *
-     * @param \Motor\Backend\Models\Language $record
+     * @param  \Motor\Backend\Models\Language  $record
      * @return \Motor\Backend\Http\Resources\LanguageResource
      */
     public function show(Language $record)
@@ -249,8 +247,8 @@ class LanguagesController extends ApiController
      *
      * Update the specified resource in storage.
      *
-     * @param \Motor\Backend\Http\Requests\Backend\LanguageRequest $request
-     * @param \Motor\Backend\Models\Language $record
+     * @param  \Motor\Backend\Http\Requests\Backend\LanguageRequest  $request
+     * @param  \Motor\Backend\Models\Language  $record
      * @return \Motor\Backend\Http\Resources\LanguageResource
      */
     public function update(LanguageRequest $request, Language $record)
@@ -317,7 +315,7 @@ class LanguagesController extends ApiController
      *
      * Remove the specified resource from storage.
      *
-     * @param \Motor\Backend\Models\Language $record
+     * @param  \Motor\Backend\Models\Language  $record
      * @return \Illuminate\Http\JsonResponse
      */
     public function destroy(Language $record)

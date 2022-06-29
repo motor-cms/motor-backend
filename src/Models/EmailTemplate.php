@@ -38,6 +38,7 @@ use Motor\Core\Traits\Searchable;
  * @property-read \Motor\Backend\Models\User|null $eraser
  * @property-read \Motor\Backend\Models\Language|null $language
  * @property-read \Motor\Backend\Models\User $updater
+ *
  * @method static Builder|EmailTemplate filteredBy(Filter $filter, $column)
  * @method static Builder|EmailTemplate filteredByMultiple(Filter $filter)
  * @method static Builder|EmailTemplate newModelQuery()

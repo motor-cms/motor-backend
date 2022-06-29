@@ -11,8 +11,6 @@ use Illuminate\Support\Str;
 
 /**
  * Trait ChangesPasswords
- *
- * @package Motor\Backend\Traits
  */
 trait ChangesPasswords
 {
@@ -21,7 +19,7 @@ trait ChangesPasswords
     /**
      * Reset the given user's password.
      *
-     * @param Request $request
+     * @param  Request  $request
      * @return \Illuminate\Http\JsonResponse|\Illuminate\Http\RedirectResponse
      */
     public function change(Request $request)
@@ -61,8 +59,7 @@ trait ChangesPasswords
     /**
      * Get the password reset credentials from the request.
      *
-     * @param \Illuminate\Http\Request $request
-     *
+     * @param  \Illuminate\Http\Request  $request
      * @return array
      */
     protected function credentials(Request $request)
@@ -73,9 +70,8 @@ trait ChangesPasswords
     /**
      * Reset the given user's password.
      *
-     * @param \Illuminate\Contracts\Auth\CanResetPassword $user
-     * @param string $password
-     *
+     * @param  \Illuminate\Contracts\Auth\CanResetPassword  $user
+     * @param  string  $password
      * @return void
      */
     protected function resetPassword($user, $password)
@@ -96,8 +92,7 @@ trait ChangesPasswords
     /**
      * Get the response for a successful password reset.
      *
-     * @param string $response
-     *
+     * @param  string  $response
      * @return \Illuminate\Http\RedirectResponse|\Illuminate\Http\JsonResponse
      */
     protected function sendResetResponse($response)
@@ -108,9 +103,8 @@ trait ChangesPasswords
     /**
      * Get the response for a failed password reset.
      *
-     * @param \Illuminate\Http\Request $request
-     * @param string $response
-     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  string  $response
      * @return \Illuminate\Http\RedirectResponse|\Illuminate\Http\JsonResponse
      */
     protected function sendResetFailedResponse(Request $request, $response)

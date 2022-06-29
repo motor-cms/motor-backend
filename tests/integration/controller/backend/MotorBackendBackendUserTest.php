@@ -1,10 +1,8 @@
 <?php
 
-use Illuminate\Foundation\Testing\WithoutMiddleware;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 use Motor\Backend\Models\User;
-use Motor\Backend\Models\Role;
 
 /**
  * Class MotorBackendBackendUserTest
@@ -32,9 +30,8 @@ class MotorBackendBackendUserTest extends TestCase
         'roles',
         'model_has_permissions',
         'model_has_roles',
-        'role_has_permissions'
+        'role_has_permissions',
     ];
-
 
     public function setUp()
     {
@@ -43,18 +40,16 @@ class MotorBackendBackendUserTest extends TestCase
         $this->addDefaults();
     }
 
-
     protected function addDefaults()
     {
-        $this->user   = create_test_superadmin();
+        $this->user = create_test_superadmin();
 
-        $this->readPermission   = create_test_permission_with_name('users.read');
-        $this->writePermission  = create_test_permission_with_name('users.write');
+        $this->readPermission = create_test_permission_with_name('users.read');
+        $this->writePermission = create_test_permission_with_name('users.write');
         $this->deletePermission = create_test_permission_with_name('users.delete');
 
         $this->actingAs($this->user);
     }
-
 
     /** @test */
     public function can_see_grid_with_one_users()
@@ -174,7 +169,7 @@ class MotorBackendBackendUserTest extends TestCase
             ->type('Username', 'name')
             ->type('uniqueemailaddress@test.de', 'email')
             ->type('secret', 'password')
-            ->attach(__DIR__ . '/../../../../public/images/motor-logo-large.png', 'avatar')
+            ->attach(__DIR__.'/../../../../public/images/motor-logo-large.png', 'avatar')
             ->within('.box-footer', function () {
                 $this->press(trans('motor-backend::backend/users.save'));
             })
@@ -235,7 +230,7 @@ class MotorBackendBackendUserTest extends TestCase
         $user = create_test_user();
         $this->visit('/backend/users/'.$user->id.'/edit')
             ->see(trans('motor-backend::backend/users.edit'))
-            ->attach(__DIR__ . '/../../../../public/images/motor-logo-large.png', 'avatar')
+            ->attach(__DIR__.'/../../../../public/images/motor-logo-large.png', 'avatar')
             ->within('.box-footer', function () {
                 $this->press(trans('motor-backend::backend/users.save'));
             })
@@ -277,7 +272,7 @@ class MotorBackendBackendUserTest extends TestCase
 
         $this->visit('/backend/users/'.$user->id.'/edit')
             ->see(trans('motor-backend::backend/users.edit'))
-            ->attach(__DIR__ . '/../../../../public/images/motor-logo-small.png', 'avatar')
+            ->attach(__DIR__.'/../../../../public/images/motor-logo-small.png', 'avatar')
             ->within('.box-footer', function () {
                 $this->press(trans('motor-backend::backend/users.save'));
             })

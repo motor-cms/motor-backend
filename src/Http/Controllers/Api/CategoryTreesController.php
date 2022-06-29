@@ -12,8 +12,6 @@ use Motor\Core\Filter\Renderers\WhereRenderer;
 
 /**
  * Class CategoriesController
- *
- * @package Motor\Backend\Http\Controllers\Api
  */
 class CategoryTreesController extends ApiController
 {
@@ -129,7 +127,7 @@ class CategoryTreesController extends ApiController
      *
      * Store a newly created resource in storage.
      *
-     * @param \Motor\Backend\Http\Requests\Backend\CategoryTreeRequest $request
+     * @param  \Motor\Backend\Http\Requests\Backend\CategoryTreeRequest  $request
      * @return mixed
      */
     public function store(CategoryTreeRequest $request)
@@ -192,7 +190,7 @@ class CategoryTreesController extends ApiController
      *
      * Display the specified resource.
      *
-     * @param \Motor\Backend\Models\Category $record
+     * @param  \Motor\Backend\Models\Category  $record
      * @return \Motor\Backend\Http\Resources\CategoryTreeResource
      */
     public function show(Category $record)
@@ -256,8 +254,8 @@ class CategoryTreesController extends ApiController
      *
      * Update the specified resource in storage.
      *
-     * @param \Motor\Backend\Http\Requests\Backend\CategoryTreeRequest $request
-     * @param \Motor\Backend\Models\Category $record
+     * @param  \Motor\Backend\Http\Requests\Backend\CategoryTreeRequest  $request
+     * @param  \Motor\Backend\Models\Category  $record
      * @return \Motor\Backend\Resources\Http\Resources\CategoryTreeResource
      */
     public function update(CategoryTreeRequest $request, Category $record)
@@ -324,7 +322,7 @@ class CategoryTreesController extends ApiController
      *
      * Remove the specified resource from storage.
      *
-     * @param \Motor\Backend\Models\Category $record
+     * @param  \Motor\Backend\Models\Category  $record
      * @return \Illuminate\Http\JsonResponse
      */
     public function destroy(Category $record)

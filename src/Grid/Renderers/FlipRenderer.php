@@ -4,8 +4,6 @@ namespace Motor\Backend\Grid\Renderers;
 
 /**
  * Class FlipRenderer
- *
- * @package Motor\Backend\Grid\Renderers
  */
 class FlipRenderer
 {

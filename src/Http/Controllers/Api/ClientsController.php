@@ -11,8 +11,6 @@ use Motor\Backend\Services\ClientService;
 
 /**
  * Class ClientsController
- *
- * @package Motor\Backend\Http\Controllers\Api
  */
 class ClientsController extends ApiController
 {
@@ -122,7 +120,7 @@ class ClientsController extends ApiController
      *
      * Store a newly created resource in storage.
      *
-     * @param ClientRequest $request
+     * @param  ClientRequest  $request
      * @return \Illuminate\Http\JsonResponse
      */
     public function store(ClientRequest $request)
@@ -185,7 +183,7 @@ class ClientsController extends ApiController
      *
      * Display the specified resource.
      *
-     * @param Client $record
+     * @param  Client  $record
      * @return ClientResource
      */
     public function show(Client $record)
@@ -249,8 +247,8 @@ class ClientsController extends ApiController
      *
      * Update the specified resource in storage.
      *
-     * @param ClientRequest $request
-     * @param Client $record
+     * @param  ClientRequest  $request
+     * @param  Client  $record
      * @return ClientResource
      */
     public function update(ClientRequest $request, Client $record)
@@ -317,7 +315,7 @@ class ClientsController extends ApiController
      *
      * Remove the specified resource from storage.
      *
-     * @param Client $record
+     * @param  Client  $record
      * @return \Illuminate\Http\JsonResponse
      */
     public function destroy(Client $record)

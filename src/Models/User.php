@@ -49,6 +49,7 @@ use Spatie\Permission\Traits\HasRoles;
  *                    $permissions
  * @property-read \Illuminate\Database\Eloquent\Collection|\Spatie\Permission\Models\Role[]
  *                    $roles
+ *
  * @method static Builder|User filteredBy(Filter $filter, $column)
  * @method static Builder|User filteredByMultiple(Filter $filter)
  * @method static Builder|User newModelQuery()
@@ -88,19 +89,18 @@ class User extends Authenticatable implements HasMedia
     /**
      * Send a password reset email to the user
      *
-     * @param string $token
+     * @param  string  $token
      */
     public function sendPasswordResetNotification($token)
     {
         $this->notify(new ResetPassword($token, $this));
     }
 
-
     /**
-     * @param Media|null $media
+     * @param  Media|null  $media
      */
     /**
-     * @param Media|null $media
+     * @param  Media|null  $media
      */
     public function registerMediaConversions(Media $media = null): void
     {

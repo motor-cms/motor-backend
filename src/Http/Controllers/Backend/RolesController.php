@@ -12,8 +12,6 @@ use Motor\Backend\Services\RoleService;
 
 /**
  * Class RolesController
- *
- * @package Motor\Backend\Http\Controllers\Backend
  */
 class RolesController extends Controller
 {
@@ -23,6 +21,7 @@ class RolesController extends Controller
      * Display a listing of the resource.
      *
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     *
      * @throws \ReflectionException
      */
     public function index()
@@ -55,7 +54,7 @@ class RolesController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param RoleRequest $request
+     * @param  RoleRequest  $request
      * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
      */
     public function store(RoleRequest $request)
@@ -90,7 +89,7 @@ class RolesController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param Role $record
+     * @param  Role  $record
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function edit(Role $record)
@@ -108,8 +107,8 @@ class RolesController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param RoleRequest $request
-     * @param Role $record
+     * @param  RoleRequest  $request
+     * @param  Role  $record
      * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
      */
     public function update(RoleRequest $request, Role $record)
@@ -134,7 +133,7 @@ class RolesController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param Role $record
+     * @param  Role  $record
      * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
      */
     public function destroy(Role $record)

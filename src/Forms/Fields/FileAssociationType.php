@@ -9,8 +9,6 @@ use Motor\Media\Http\Resources\FileResource;
 
 /**
  * Class FileAssociationType
- *
- * @package Motor\Backend\Forms\Fields
  */
 class FileAssociationType extends InputType
 {
@@ -54,10 +52,10 @@ class FileAssociationType extends InputType
     }
 
     /**
-     * @param array $options
-     * @param bool $showLabel
-     * @param bool $showField
-     * @param bool $showError
+     * @param  array  $options
+     * @param  bool  $showLabel
+     * @param  bool  $showField
+     * @param  bool  $showError
      * @return string
      */
     public function render(array $options = [], $showLabel = true, $showField = true, $showError = true)

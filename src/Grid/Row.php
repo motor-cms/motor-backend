@@ -4,8 +4,6 @@ namespace Motor\Backend\Grid;
 
 /**
  * Class Row
- *
- * @package Motor\Backend\Grid
  */
 class Row extends Base
 {
@@ -14,8 +12,7 @@ class Row extends Base
     /**
      * Add cell to row
      *
-     * @param Cell $cell
-     *
+     * @param  Cell  $cell
      * @return $this
      */
     public function addCell(Cell $cell)
@@ -29,7 +26,6 @@ class Row extends Base
      * Get cell by column name
      *
      * @param $name
-     *
      * @return bool|mixed
      */
     public function getCell(string $name)
