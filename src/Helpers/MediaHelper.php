@@ -2,7 +2,7 @@
 
 namespace Motor\Backend\Helpers;
 
-use function GuzzleHttp\Psr7\mimetype_from_filename;
+use GuzzleHttp\Psr7\MimeType;
 use Spatie\MediaLibrary\HasMedia;
 
 /**
@@ -11,10 +11,10 @@ use Spatie\MediaLibrary\HasMedia;
 class MediaHelper
 {
     /**
-     * @param  HasMedia  $record
-     * @param    $identifier
-     * @param  bool  $base64
-     * @param  array  $conversions
+     * @param \Spatie\MediaLibrary\HasMedia $record
+     * @param string $identifier
+     * @param bool $base64
+     * @param array $conversions
      * @return array
      */
     public static function getFileInformation(
@@ -36,7 +36,7 @@ class MediaHelper
             $data['file_size'] = $items[0]->size;
             $data['name'] = $items[0]->name;
             $data['file_name'] = $items[0]->file_name;
-            $data['mime_type'] = mimetype_from_filename($items[0]->file_name);
+            $data['mime_type'] = MimeType::fromFilename($items[0]->file_name);
             $data['is_generating'] = $items[0]->hasCustomProperty('generating');
 
             if ($base64) {
