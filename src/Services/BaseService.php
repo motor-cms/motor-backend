@@ -192,9 +192,10 @@ abstract class BaseService
     /**
      * Returns the paginator for the model
      *
+     * @param string[] $columns
      * @return mixed
      */
-    public function getPaginator()
+    public function getPaginator($columns = ['*'])
     {
         $query = ($this->model)::filteredByMultiple($this->getFilter());
 //        $query->addSelect($query->getModel()->getTable() . '.*'); // removed because if duplicate id issue in L7
@@ -203,7 +204,7 @@ abstract class BaseService
 
         return $query->paginate($this->getFilter()
                                      ->get('per_page')
-                                     ->getValue());
+                                     ->getValue(), $columns);
     }
 
     /**
