@@ -3,6 +3,7 @@
 namespace Motor\Backend\Helpers;
 
 use Exception;
+use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Mail;
 use Motor\Backend\Models\EmailTemplate;
@@ -20,7 +21,7 @@ class EmailHelper
             return false;
         }
 
-        $body = view(['template' => nl2br($template->body_text)], $data)->render();
+        $body = Blade::render(nl2br($template->body_text), $data);
 
         try {
             Mail::html($body, function ($message) use ($headers, $template, $body, $data) {
@@ -41,7 +42,7 @@ class EmailHelper
                     $message->bcc($headers['bcc_email'], $headers['bcc_name']);
                 }
 
-                $message->subject(html_entity_decode(view(['template' => $template->subject], $data)->render()));
+                $message->subject(html_entity_decode(Blade::render($template->subject, $data)));
             });
         } catch (Exception $e) {
             Log::error($e->getMessage());
