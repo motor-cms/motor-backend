@@ -87,10 +87,10 @@ class Grid extends Base
     }
 
     /**
-     * @param  string  $name
-     * @param  string|null  $label
-     * @param  bool  $sortable
-     * @param  null  $sortableField
+     * @param string $name
+     * @param string|null $label
+     * @param bool $sortable
+     * @param null $sortableField
      * @return Column
      */
     public function addColumn(string $name, string $label = null, bool $sortable = false, $sortableField = null): Column
@@ -129,7 +129,7 @@ class Grid extends Base
      * @param    $label
      * @param    $link
      * @param    $action
-     * @param  array  $parameters
+     * @param array $parameters
      * @return Action
      */
     public function addFormAction(string $label, $link, $action, array $parameters = []): Action
@@ -140,7 +140,7 @@ class Grid extends Base
     /**
      * @param    $label
      * @param    $link
-     * @param  array  $parameters
+     * @param array $parameters
      * @return Action
      */
     public function addEditAction($label, $link, $parameters = []): Action
@@ -151,7 +151,7 @@ class Grid extends Base
     /**
      * @param    $label
      * @param    $link
-     * @param  array  $parameters
+     * @param array $parameters
      * @return Action
      */
     public function addDuplicateAction($label, $link, $parameters = []): Action
@@ -162,7 +162,7 @@ class Grid extends Base
     /**
      * @param    $label
      * @param    $link
-     * @param  array  $parameters
+     * @param array $parameters
      * @return Action
      */
     public function addDeleteAction($label, $link, $parameters = []): Action
@@ -173,7 +173,7 @@ class Grid extends Base
     /**
      * @param    $label
      * @param    $link
-     * @param  array  $parameters
+     * @param array $parameters
      * @return Action
      */
     public function addAction($label, $link, $parameters = []): Action
@@ -271,7 +271,7 @@ class Grid extends Base
     /**
      * Set row closure
      *
-     * @param  \Closure  $closure
+     * @param \Closure $closure
      * @return $this
      */
     public function row(Closure $closure)
@@ -285,10 +285,10 @@ class Grid extends Base
      * Cell renderer, should maybe be outsourced in a 'render' class as we'll have separate renderers later (probably
      * ;))
      *
-     * @param  Cell  $cell
-     * @param  Column  $column
+     * @param Cell $cell
+     * @param Column $column
      * @param    $record
-     * @param  bool  $sanitize
+     * @param bool $sanitize
      * @return mixed
      */
     protected function getCellValue(Cell $cell, Column $column, $record, $sanitize = true)
@@ -348,7 +348,7 @@ class Grid extends Base
      * Set default sorting, if nothing is in the URL or the session
      *
      * @param    $field
-     * @param  string  $direction
+     * @param string $direction
      * @return $this
      */
     public function setDefaultSorting($field, $direction = 'ASC')
@@ -461,7 +461,7 @@ class Grid extends Base
     }
 
     /**
-     * @param  int  $limit
+     * @param int $limit
      * @return AbstractPaginator
      *
      * @throws \ReflectionException
@@ -503,7 +503,7 @@ class Grid extends Base
     /**
      * Set an external paginator
      *
-     * @param  AbstractPaginator  $paginator
+     * @param AbstractPaginator $paginator
      * @return $this
      */
     public function setPaginator(AbstractPaginator $paginator)

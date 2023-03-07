@@ -197,7 +197,12 @@ abstract class BaseService
     public function getPaginator()
     {
         $query = ($this->model)::filteredByMultiple($this->getFilter());
-//        $query->addSelect($query->getModel()->getTable() . '.*'); // removed because if duplicate id issue in L7
+
+        if (count($this->selectFields) > 0) {
+            $query->select(...array_merge(['id'], $this->selectFields));
+        }
+
+        //        $query->addSelect($query->getModel()->getTable() . '.*'); // removed because if duplicate id issue in L7
         $query = $this->applyScopes($query);
         $query = $this->applySorting($query);
 
