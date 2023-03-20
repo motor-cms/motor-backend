@@ -3,6 +3,7 @@
 namespace Motor\Backend\Models;
 
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Model;
 use Motor\Core\Filter\Filter;
 use Motor\Core\Traits\Filterable;
@@ -34,6 +35,7 @@ class PermissionGroup extends Model
 {
     use Searchable;
     use Filterable;
+    use HasUuids;
 
     /**
      * Searchable columns for the searchable trait

@@ -3,6 +3,7 @@
 namespace Motor\Backend\Models;
 
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Motor\Core\Filter\Filter;
 use Motor\Core\Traits\Filterable;
 use Motor\Core\Traits\Searchable;
@@ -36,6 +37,7 @@ class Role extends \Spatie\Permission\Models\Role
 {
     use Searchable;
     use Filterable;
+    use HasUuids;
 
     /**
      * Searchable columns for the searchable trait

@@ -3,6 +3,7 @@
 namespace Motor\Backend\Models;
 
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Motor\Backend\Database\Factories\LanguageFactory;
@@ -39,6 +40,7 @@ class Language extends Model
     use Searchable;
     use Filterable;
     use HasFactory;
+    use HasUuids;
 
     /**
      * Searchable columns for the searchable trait

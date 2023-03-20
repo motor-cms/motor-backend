@@ -88,7 +88,7 @@ class MotorServiceProvider extends ServiceProvider
     public function register()
     {
         $this->mergeConfigFrom(__DIR__.'/../../config/ide-helper.php', 'ide-helper');
-        $this->mergeConfigFrom(__DIR__.'/../../config/culpa.php', 'culpa');
+        $this->mergeConfigFrom(__DIR__.'/../../config/blameable.php', 'blameable');
         $this->mergeConfigFrom(__DIR__.'/../../config/media-library.php', 'medialibrary');
         $this->mergeConfigFrom(__DIR__.'/../../config/motor-backend.php', 'motor-backend');
         $this->mergeConfigFrom(__DIR__.'/../../config/motor-backend-html.php', 'motor-backend-html');

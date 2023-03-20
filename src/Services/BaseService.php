@@ -44,6 +44,8 @@ abstract class BaseService
 
     protected $disk = 'media';
 
+    protected $selectFields = [];
+
     /**
      * Basic create method.
      * Usually called by an API

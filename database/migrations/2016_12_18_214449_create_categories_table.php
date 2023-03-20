@@ -1,8 +1,7 @@
 <?php
 
-use Culpa\Database\Schema\Blueprint;
-use Culpa\Facades\Schema;
 use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
 use Kalnoy\Nestedset\NestedSet;
 
 /**
@@ -24,9 +23,9 @@ class CreateCategoriesTable extends Migration
             $table->string('scope')->index();
             NestedSet::columns($table);
 
-            $table->createdBy();
-            $table->updatedBy();
-            $table->deletedBy(true);
+            $table->integer('created_by')->nullable();
+            $table->integer('updated_by')->nullable();
+            $table->integer('deleted_by')->nullable();
             $table->timestamps();
         });
     }

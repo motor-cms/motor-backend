@@ -2,16 +2,14 @@
 
 namespace Motor\Backend\Models;
 
-use Culpa\Traits\Blameable;
-use Culpa\Traits\CreatedBy;
-use Culpa\Traits\DeletedBy;
-use Culpa\Traits\UpdatedBy;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Model;
 use Kalnoy\Nestedset\NodeTrait;
 use Kalnoy\Nestedset\QueryBuilder;
 use Motor\Core\Filter\Filter;
 use Motor\Core\Traits\Filterable;
+use RichanFongdasen\EloquentBlameable\BlameableTrait;
 
 /**
  * Motor\Backend\Models\Category
@@ -55,15 +53,9 @@ use Motor\Core\Traits\Filterable;
 class Category extends Model
 {
     use Filterable;
-    use Blameable, CreatedBy, UpdatedBy, DeletedBy;
+    use BlameableTrait;
     use NodeTrait;
-
-    /**
-     * Columns for the Blameable trait
-     *
-     * @var array
-     */
-    protected $blameable = ['created', 'updated', 'deleted'];
+    use HasUuids;
 
     /**
      * Searchable columns for the searchable trait

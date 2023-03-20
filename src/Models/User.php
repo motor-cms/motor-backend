@@ -3,6 +3,7 @@
 namespace Motor\Backend\Models;
 
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -78,6 +79,7 @@ class User extends Authenticatable implements HasMedia
     use Notifiable;
     use InteractsWithMedia;
     use HasFactory;
+    use HasUuids;
 
     protected $guard_name = 'web';
 

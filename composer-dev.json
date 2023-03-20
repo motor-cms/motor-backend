@@ -23,7 +23,7 @@
     "intervention/imagecache": "^2.0",
     "league/glide-laravel": "^1.0",
     "lavary/laravel-menu": "^1.8",
-    "dfox288/culpa": "^10.0",
+    "richan-fongdasen/eloquent-blameable": "^1.9",
     "symfony/intl": "^6.0",
     "kris/laravel-form-builder": "^1.40",
     "spatie/laravel-medialibrary": "^10.0",
