@@ -31,8 +31,8 @@ class CreatePermissionTables extends Migration
         });
 
         Schema::create('user_has_permissions', function (Blueprint $table) use ($config) {
-            $table->integer('user_id')->unsigned();
-            $table->integer('permission_id')->unsigned();
+            $table->bigInteger('user_id')->unsigned();
+            $table->bigInteger('permission_id')->unsigned();
 
             $table->foreign('user_id')
                 ->references('id')
@@ -48,8 +48,8 @@ class CreatePermissionTables extends Migration
         });
 
         Schema::create('user_has_roles', function (Blueprint $table) use ($config) {
-            $table->integer('role_id')->unsigned();
-            $table->integer('user_id')->unsigned();
+            $table->bigInteger('role_id')->unsigned();
+            $table->bigInteger('user_id')->unsigned();
 
             $table->foreign('role_id')
                 ->references('id')
@@ -65,8 +65,8 @@ class CreatePermissionTables extends Migration
         });
 
         Schema::create($config['role_has_permissions'], function (Blueprint $table) use ($config) {
-            $table->integer('permission_id')->unsigned();
-            $table->integer('role_id')->unsigned();
+            $table->bigInteger('permission_id')->unsigned();
+            $table->bigInteger('role_id')->unsigned();
 
             $table->foreign('permission_id')
                 ->references('id')

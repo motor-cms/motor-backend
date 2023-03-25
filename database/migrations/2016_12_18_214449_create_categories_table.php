@@ -23,9 +23,9 @@ class CreateCategoriesTable extends Migration
             $table->string('scope')->index();
             NestedSet::columns($table);
 
-            $table->integer('created_by')->nullable();
-            $table->integer('updated_by')->nullable();
-            $table->integer('deleted_by')->nullable();
+            $table->bigInteger('created_by')->nullable();
+            $table->bigInteger('updated_by')->nullable();
+            $table->bigInteger('deleted_by')->nullable();
             $table->timestamps();
         });
     }

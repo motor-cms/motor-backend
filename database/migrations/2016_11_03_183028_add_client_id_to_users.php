@@ -17,7 +17,7 @@ class AddClientIdToUsers extends Migration
     public function up()
     {
         Schema::table('users', function (Blueprint $table) {
-            $table->integer('client_id')->after('id')->unsigned()->nullable();
+            $table->bigInteger('client_id')->after('id')->unsigned()->nullable();
         });
     }
 

@@ -5,7 +5,7 @@ namespace Motor\Backend\Models;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Kra8\Snowflake\HasSnowflakePrimary;
+use Kra8\Snowflake\HasShortFlakePrimary;
 use Motor\Backend\Database\Factories\LanguageFactory;
 use Motor\Core\Filter\Filter;
 use Motor\Core\Traits\Filterable;
@@ -40,7 +40,7 @@ class Language extends Model
     use Searchable;
     use Filterable;
     use HasFactory;
-    use HasSnowflakePrimary;
+    use HasShortFlakePrimary;
 
     /**
      * Searchable columns for the searchable trait

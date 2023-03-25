@@ -17,8 +17,8 @@ class CreateEmailTemplates extends Migration
     {
         Schema::create('email_templates', function (Blueprint $table) {
             $table->id();
-            $table->integer('client_id')->unsigned()->index();
-            $table->integer('language_id')->unsigned()->nullable()->index();
+            $table->bigInteger('client_id')->unsigned()->index();
+            $table->bigInteger('language_id')->unsigned()->nullable()->index();
             $table->string('name');
             $table->string('subject');
             $table->text('body_text');
@@ -29,9 +29,9 @@ class CreateEmailTemplates extends Migration
             $table->string('default_recipient_email');
             $table->string('default_cc_email');
             $table->string('default_bcc_email');
-            $table->integer('created_by')->nullable();
-            $table->integer('updated_by')->nullable();
-            $table->integer('deleted_by')->nullable();
+            $table->bigInteger('created_by')->nullable();
+            $table->bigInteger('updated_by')->nullable();
+            $table->bigInteger('deleted_by')->nullable();
             $table->timestamps();
 
             $table->foreign('client_id')->references('id')->on('clients')->onDelete('cascade');

@@ -24,7 +24,7 @@ class CreatePermissionGroupTable extends Migration
         });
 
         Schema::table('permissions', function (Blueprint $table) {
-            $table->integer('permission_group_id')->after('id')->unsigned()->index()->nullable();
+            $table->bigInteger('permission_group_id')->after('id')->unsigned()->index()->nullable();
             $table->foreign('permission_group_id')->references('id')->on('permission_groups')->onDelete('set null');
         });
     }
