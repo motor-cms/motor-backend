@@ -3,7 +3,7 @@
 namespace Motor\Backend\Models;
 
 use Illuminate\Database\Eloquent\Builder;
-use Kra8\Snowflake\HasShortFlakePrimary;
+use Kra8\Snowflake\HasShortflakePrimary;
 use Motor\Core\Filter\Filter;
 use Motor\Core\Traits\Filterable;
 use Motor\Core\Traits\Searchable;
@@ -42,7 +42,7 @@ class Permission extends \Spatie\Permission\Models\Permission
 {
     use Searchable;
     use Filterable;
-    use HasShortFlakePrimary;
+    use HasShortflakePrimary;
 
     /**
      * Searchable columns for the searchable trait

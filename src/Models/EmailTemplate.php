@@ -4,7 +4,7 @@ namespace Motor\Backend\Models;
 
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
-use Kra8\Snowflake\HasShortFlakePrimary;
+use Kra8\Snowflake\HasShortflakePrimary;
 use Motor\Core\Filter\Filter;
 use Motor\Core\Traits\Filterable;
 use Motor\Core\Traits\Searchable;
@@ -68,7 +68,7 @@ class EmailTemplate extends Model
     use Searchable;
     use BlameableTrait;
     use Filterable;
-    use HasShortFlakePrimary;
+    use HasShortflakePrimary;
 
     /**
      * The attributes that are mass assignable.
