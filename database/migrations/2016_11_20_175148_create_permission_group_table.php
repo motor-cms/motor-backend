@@ -17,7 +17,7 @@ class CreatePermissionGroupTable extends Migration
     public function up()
     {
         Schema::create('permission_groups', function (Blueprint $table) {
-            $table->increments('id');
+            $table->id();
             $table->string('name');
             $table->integer('sort_position')->unsigned()->nullable();
             $table->timestamps();

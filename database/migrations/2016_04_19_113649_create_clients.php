@@ -16,7 +16,7 @@ class CreateClients extends Migration
     public function up()
     {
         Schema::create('clients', function (Blueprint $table) {
-            $table->increments('id');
+            $table->id();
             $table->string('slug');
             $table->boolean('is_active')->default(false);
             $table->string('name');

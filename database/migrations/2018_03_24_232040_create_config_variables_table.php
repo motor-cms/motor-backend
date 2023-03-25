@@ -16,7 +16,7 @@ class CreateConfigVariablesTable extends Migration
     public function up()
     {
         Schema::create('config_variables', function (Blueprint $table) {
-            $table->increments('id');
+            $table->id();
             $table->string('package');
             $table->string('group');
             $table->string('name');

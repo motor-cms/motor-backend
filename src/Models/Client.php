@@ -3,9 +3,9 @@
 namespace Motor\Backend\Models;
 
 use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Kra8\Snowflake\HasSnowflakePrimary;
 use Motor\Backend\Database\Factories\ClientFactory;
 use Motor\Core\Filter\Filter;
 use Motor\Core\Traits\Filterable;
@@ -69,7 +69,7 @@ class Client extends Model
     use BlameableTrait;
     use Filterable;
     use HasFactory;
-    use HasUuids;
+    use HasSnowflakePrimary;
 
     /**
      * Searchable columns for the searchable trait

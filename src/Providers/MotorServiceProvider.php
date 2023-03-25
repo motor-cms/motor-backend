@@ -89,6 +89,7 @@ class MotorServiceProvider extends ServiceProvider
     {
         $this->mergeConfigFrom(__DIR__.'/../../config/ide-helper.php', 'ide-helper');
         $this->mergeConfigFrom(__DIR__.'/../../config/blameable.php', 'blameable');
+        $this->mergeConfigFrom(__DIR__.'/../../config/snowflake.php', 'snowflake');
         $this->mergeConfigFrom(__DIR__.'/../../config/media-library.php', 'medialibrary');
         $this->mergeConfigFrom(__DIR__.'/../../config/motor-backend.php', 'motor-backend');
         $this->mergeConfigFrom(__DIR__.'/../../config/motor-backend-html.php', 'motor-backend-html');

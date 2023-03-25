@@ -3,8 +3,8 @@
 namespace Motor\Backend\Models;
 
 use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Model;
+use Kra8\Snowflake\HasSnowflakePrimary;
 use Motor\Core\Filter\Filter;
 use Motor\Core\Traits\Filterable;
 use Motor\Core\Traits\Searchable;
@@ -35,7 +35,7 @@ class PermissionGroup extends Model
 {
     use Searchable;
     use Filterable;
-    use HasUuids;
+    use HasSnowflakePrimary;
 
     /**
      * Searchable columns for the searchable trait

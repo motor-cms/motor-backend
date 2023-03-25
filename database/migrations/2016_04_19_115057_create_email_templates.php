@@ -16,7 +16,7 @@ class CreateEmailTemplates extends Migration
     public function up()
     {
         Schema::create('email_templates', function (Blueprint $table) {
-            $table->increments('id');
+            $table->id();
             $table->integer('client_id')->unsigned()->index();
             $table->integer('language_id')->unsigned()->nullable()->index();
             $table->string('name');

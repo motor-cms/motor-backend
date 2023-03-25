@@ -3,10 +3,10 @@
 namespace Motor\Backend\Models;
 
 use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Kra8\Snowflake\HasSnowflakePrimary;
 use Motor\Backend\Database\Factories\UserFactory;
 use Motor\Backend\Notifications\ResetPassword;
 use Motor\Core\Filter\Filter;
@@ -79,7 +79,7 @@ class User extends Authenticatable implements HasMedia
     use Notifiable;
     use InteractsWithMedia;
     use HasFactory;
-    use HasUuids;
+    use HasSnowflakePrimary;
 
     protected $guard_name = 'web';
 
