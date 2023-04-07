@@ -98,7 +98,7 @@
                 $('input[name="' + this.name + '"]').val(JSON.stringify(this.files[0]));
             },
             isImage: function (file) {
-                if (file.file.mime_type === 'image/png' || file.file.mime_type === 'image/jpg' || file.file.mime_type === 'image/jpeg' || file.file.mime_type === 'video/x-m4v') {
+                if (file.file.mime_type === 'image/png' || file.file.mime_type === 'image/jpg' || file.file.mime_type === 'image/jpeg' || file.file.mime_type === 'video/x-m4v' || file.file.mime_type === 'video/mp4') {
                     return true;
                 }
                 return false;
