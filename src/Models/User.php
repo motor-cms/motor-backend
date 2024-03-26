@@ -99,10 +99,7 @@ class User extends Authenticatable implements HasMedia
     }
 
     /**
-     * @param  Media|null  $media
-     */
-    /**
-     * @param  Media|null  $media
+     * @throws \Spatie\Image\Exceptions\InvalidManipulation
      */
     public function registerMediaConversions(Media $media = null): void
     {
