@@ -16,8 +16,8 @@ class ClientGrid extends Grid
         $this->addColumn('contact_name', trans('motor-backend::backend/clients.contact'));
         $this->setDefaultSorting('id', 'ASC');
         $this->addEditAction(trans('motor-backend::backend/global.edit'), 'backend.clients.edit')
-             ->needsPermissionTo('clients.write');
+            ->needsPermissionTo('clients.write');
         $this->addDeleteAction(trans('motor-backend::backend/global.delete'), 'backend.clients.destroy')
-             ->needsPermissionTo('clients.delete');
+            ->needsPermissionTo('clients.delete');
     }
 }

@@ -23,7 +23,9 @@ class EmailTemplatesController extends ApiController
      *   tags={"EmailTemplatesController"},
      *   path="/api/email_templates",
      *   summary="Get email template collection",
+     *
      *   @OA\Parameter(
+     *
      *     @OA\Schema(type="string"),
      *     in="query",
      *     allowReserved=true,
@@ -31,15 +33,20 @@ class EmailTemplatesController extends ApiController
      *     parameter="api_token",
      *     description="Personal api_token of the user"
      *   ),
+     *
      *   @OA\Response(
      *     response=200,
      *     description="Success",
+     *
      *     @OA\JsonContent(
+     *
      *       @OA\Property(
      *         property="data",
      *         type="array",
+     *
      *         @OA\Items(ref="#/components/schemas/EmailTemplateResource")
      *       ),
+     *
      *       @OA\Property(
      *         property="meta",
      *         ref="#/components/schemas/PaginationMeta"
@@ -55,9 +62,11 @@ class EmailTemplatesController extends ApiController
      *       )
      *     )
      *   ),
+     *
      *   @OA\Response(
      *     response="403",
      *     description="Access denied",
+     *
      *     @OA\JsonContent(ref="#/components/schemas/AccessDenied"),
      *   )
      * )
@@ -69,7 +78,7 @@ class EmailTemplatesController extends ApiController
     public function index()
     {
         $paginator = EmailTemplateService::collection()
-                                         ->getPaginator();
+            ->getPaginator();
 
         return (new EmailTemplateCollection($paginator))->additional(['message' => 'Email template collection read']);
     }
@@ -79,10 +88,14 @@ class EmailTemplatesController extends ApiController
      *   tags={"EmailTemplatesController"},
      *   path="/api/email_templates",
      *   summary="Create new email template",
+     *
      *   @OA\RequestBody(
+     *
      *     @OA\JsonContent(ref="#/components/schemas/EmailTemplateRequest")
      *   ),
+     *
      *   @OA\Parameter(
+     *
      *     @OA\Schema(type="string"),
      *     in="query",
      *     allowReserved=true,
@@ -90,10 +103,13 @@ class EmailTemplatesController extends ApiController
      *     parameter="api_token",
      *     description="Personal api_token of the user"
      *   ),
+     *
      *   @OA\Response(
      *     response=200,
      *     description="Success",
+     *
      *     @OA\JsonContent(
+     *
      *       @OA\Property(
      *         property="data",
      *         type="object",
@@ -106,31 +122,34 @@ class EmailTemplatesController extends ApiController
      *       )
      *     )
      *   ),
+     *
      *   @OA\Response(
      *     response="403",
      *     description="Access denied",
+     *
      *     @OA\JsonContent(ref="#/components/schemas/AccessDenied"),
      *   ),
+     *
      *   @OA\Response(
      *     response="404",
      *     description="Not found",
+     *
      *     @OA\JsonContent(ref="#/components/schemas/NotFound"),
      *   )
      * )
      *
      * Store a newly created resource in storage.
      *
-     * @param  \Motor\Backend\Http\Requests\Backend\EmailTemplateRequest  $request
      * @return \Illuminate\Http\JsonResponse|object
      */
     public function store(EmailTemplateRequest $request)
     {
         $result = EmailTemplateService::create($request)
-                                      ->getResult();
+            ->getResult();
 
         return (new EmailTemplateResource($result))->additional(['message' => 'Email template created'])
-                                                   ->response()
-                                                   ->setStatusCode(201);
+            ->response()
+            ->setStatusCode(201);
     }
 
     /**
@@ -138,7 +157,9 @@ class EmailTemplatesController extends ApiController
      *   tags={"EmailTemplatesController"},
      *   path="/api/email_templates/{email_template}",
      *   summary="Get single email template",
+     *
      *   @OA\Parameter(
+     *
      *     @OA\Schema(type="string"),
      *     in="query",
      *     allowReserved=true,
@@ -146,17 +167,22 @@ class EmailTemplatesController extends ApiController
      *     parameter="api_token",
      *     description="Personal api_token of the user"
      *   ),
+     *
      *   @OA\Parameter(
+     *
      *     @OA\Schema(type="integer"),
      *     in="path",
      *     name="email_template",
      *     parameter="email_template",
      *     description="Email template id"
      *   ),
+     *
      *   @OA\Response(
      *     response=200,
      *     description="Success",
+     *
      *     @OA\JsonContent(
+     *
      *       @OA\Property(
      *         property="data",
      *         type="object",
@@ -169,27 +195,30 @@ class EmailTemplatesController extends ApiController
      *       )
      *     )
      *   ),
+     *
      *   @OA\Response(
      *     response="403",
      *     description="Access denied",
+     *
      *     @OA\JsonContent(ref="#/components/schemas/AccessDenied"),
      *   ),
+     *
      *   @OA\Response(
      *     response="404",
      *     description="Not found",
+     *
      *     @OA\JsonContent(ref="#/components/schemas/NotFound"),
      *   )
      * )
      *
      * Display the specified resource.
      *
-     * @param  \Motor\Backend\Models\EmailTemplate  $record
      * @return \Motor\Backend\Http\Resources\EmailTemplateResource
      */
     public function show(EmailTemplate $record)
     {
         $result = EmailTemplateService::show($record)
-                                      ->getResult();
+            ->getResult();
 
         return (new EmailTemplateResource($result))->additional(['message' => 'Email template read']);
     }
@@ -199,10 +228,14 @@ class EmailTemplatesController extends ApiController
      *   tags={"EmailTemplatesController"},
      *   path="/api/email_templates/{email_template}",
      *   summary="Update an existing email template",
+     *
      *   @OA\RequestBody(
+     *
      *     @OA\JsonContent(ref="#/components/schemas/EmailTemplateRequest")
      *   ),
+     *
      *   @OA\Parameter(
+     *
      *     @OA\Schema(type="string"),
      *     in="query",
      *     allowReserved=true,
@@ -210,17 +243,22 @@ class EmailTemplatesController extends ApiController
      *     parameter="api_token",
      *     description="Personal api_token of the user"
      *   ),
+     *
      *   @OA\Parameter(
+     *
      *     @OA\Schema(type="integer"),
      *     in="path",
      *     name="email_template",
      *     parameter="email_template",
      *     description="Email template id"
      *   ),
+     *
      *   @OA\Response(
      *     response=200,
      *     description="Success",
+     *
      *     @OA\JsonContent(
+     *
      *       @OA\Property(
      *         property="data",
      *         type="object",
@@ -233,28 +271,30 @@ class EmailTemplatesController extends ApiController
      *       )
      *     )
      *   ),
+     *
      *   @OA\Response(
      *     response="403",
      *     description="Access denied",
+     *
      *     @OA\JsonContent(ref="#/components/schemas/AccessDenied"),
      *   ),
+     *
      *   @OA\Response(
      *     response="404",
      *     description="Not found",
+     *
      *     @OA\JsonContent(ref="#/components/schemas/NotFound"),
      *   )
      * )
      *
      * Update the specified resource in storage.
      *
-     * @param  \Motor\Backend\Http\Requests\Backend\EmailTemplateRequest  $request
-     * @param  \Motor\Backend\Models\EmailTemplate  $record
      * @return \Motor\Backend\Http\Resources\EmailTemplateResource
      */
     public function update(EmailTemplateRequest $request, EmailTemplate $record)
     {
         $result = EmailTemplateService::update($record, $request)
-                                      ->getResult();
+            ->getResult();
 
         return (new EmailTemplateResource($result))->additional(['message' => 'Email template updated']);
     }
@@ -264,7 +304,9 @@ class EmailTemplatesController extends ApiController
      *   tags={"EmailTemplatesController"},
      *   path="/api/email_templates/{email_template}",
      *   summary="Delete an email template",
+     *
      *   @OA\Parameter(
+     *
      *     @OA\Schema(type="string"),
      *     in="query",
      *     allowReserved=true,
@@ -272,17 +314,22 @@ class EmailTemplatesController extends ApiController
      *     parameter="api_token",
      *     description="Personal api_token of the user"
      *   ),
+     *
      *   @OA\Parameter(
+     *
      *     @OA\Schema(type="integer"),
      *     in="path",
      *     name="email_template",
      *     parameter="email_template",
      *     description="Email template id"
      *   ),
+     *
      *   @OA\Response(
      *     response=200,
      *     description="Success",
+     *
      *     @OA\JsonContent(
+     *
      *       @OA\Property(
      *         property="message",
      *         type="string",
@@ -290,20 +337,27 @@ class EmailTemplatesController extends ApiController
      *       )
      *     )
      *   ),
+     *
      *   @OA\Response(
      *     response="403",
      *     description="Access denied",
+     *
      *     @OA\JsonContent(ref="#/components/schemas/AccessDenied"),
      *   ),
+     *
      *   @OA\Response(
      *     response="404",
      *     description="Not found",
+     *
      *     @OA\JsonContent(ref="#/components/schemas/NotFound"),
      *   ),
+     *
      *   @OA\Response(
      *     response="400",
      *     description="Bad request",
+     *
      *     @OA\JsonContent(
+     *
      *       @OA\Property(
      *         property="message",
      *         type="string",
@@ -315,13 +369,12 @@ class EmailTemplatesController extends ApiController
      *
      * Remove the specified resource from storage.
      *
-     * @param  \Motor\Backend\Models\EmailTemplate  $record
      * @return \Illuminate\Http\JsonResponse
      */
     public function destroy(EmailTemplate $record)
     {
         $result = EmailTemplateService::delete($record)
-                                      ->getResult();
+            ->getResult();
 
         if ($result) {
             return response()->json(['message' => 'Email template deleted']);

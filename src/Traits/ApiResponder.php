@@ -21,9 +21,9 @@ trait ApiResponder
     protected function success(array $data, ?string $message = null, int $code = 200)
     {
         return response()->json([
-            'status'  => 'Success',
+            'status' => 'Success',
             'message' => $message,
-            'data'    => $data,
+            'data' => $data,
         ], $code);
     }
 
@@ -35,9 +35,9 @@ trait ApiResponder
     protected function error(?string $message = null, int $code = 500, ?array $data = null)
     {
         return response()->json([
-            'status'  => 'Error',
+            'status' => 'Error',
             'message' => $message,
-            'data'    => $data,
+            'data' => $data,
         ], $code);
     }
 }

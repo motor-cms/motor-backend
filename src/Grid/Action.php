@@ -34,10 +34,6 @@ class Action extends Base
 
     /**
      * Action constructor.
-     *
-     * @param    $label
-     * @param    $link
-     * @param  array  $parameters
      */
     public function __construct(string $label, string $link, array $parameters = [])
     {
@@ -51,7 +47,6 @@ class Action extends Base
     }
 
     /**
-     * @param $permission
      * @return $this
      */
     public function needsPermissionTo(string $permission)
@@ -62,8 +57,6 @@ class Action extends Base
     }
 
     /**
-     * @param  bool  $confirmation
-     * @param  string  $message
      * @return $this
      */
     public function askForConfirmation(bool $confirmation = true, string $message = '')
@@ -79,9 +72,6 @@ class Action extends Base
     }
 
     /**
-     * @param    $column
-     * @param    $value
-     * @param  string  $operator
      * @return $this
      */
     public function onCondition(string $column, $value, string $operator = '=')
@@ -102,7 +92,6 @@ class Action extends Base
     }
 
     /**
-     * @param  Model  $record
      * @return array|bool|string
      *
      * @throws \Throwable
@@ -172,11 +161,11 @@ class Action extends Base
         }
 
         return View::make($view, [
-            'link'       => $this->link,
-            'record'     => $record,
-            'label'      => $this->label,
+            'link' => $this->link,
+            'record' => $record,
+            'label' => $this->label,
             'parameters' => $this->parameters,
         ])
-                    ->render();
+            ->render();
     }
 }

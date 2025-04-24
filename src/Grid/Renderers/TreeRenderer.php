@@ -17,12 +17,8 @@ class TreeRenderer
 
     /**
      * TreeRenderer constructor.
-     *
-     * @param    $value
-     * @param  array  $options
-     * @param  Model|null  $record
      */
-    public function __construct($value, array $options = [], Model $record = null)
+    public function __construct($value, array $options = [], ?Model $record = null)
     {
         $this->value = $value;
         $this->options = $options;
@@ -36,7 +32,7 @@ class TreeRenderer
     {
         $returnValue = '';
         $ancestors = (int) $this->record->ancestors()
-                                        ->count();
+            ->count();
         while ($ancestors > 1) {
             $returnValue .= '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;';
             $ancestors--;

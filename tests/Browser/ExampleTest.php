@@ -13,7 +13,7 @@ class ExampleTest extends DuskTestCase
      *
      * @throws \Throwable
      */
-    public function testBasicExample()
+    public function test_basic_example()
     {
         $this->browse(function (Browser $browser) {
             $browser->visit('/backend')
@@ -21,7 +21,7 @@ class ExampleTest extends DuskTestCase
         });
     }
 
-    public function testLogin()
+    public function test_login()
     {
         $this->browse(function (Browser $browser) {
             $browser->loginAs(User::find(2))

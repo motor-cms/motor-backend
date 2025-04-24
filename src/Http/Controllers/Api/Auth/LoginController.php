@@ -19,13 +19,12 @@ class LoginController extends Controller
     public function __construct()
     {
         $this->middleware('api', ['except' => ['login']]);
-        //$this->middleware('authenticate-and-renew', [ 'except' => [ 'login' ] ]);
+        // $this->middleware('authenticate-and-renew', [ 'except' => [ 'login' ] ]);
     }
 
     /**
      * Get a JWT token via given credentials.
      *
-     * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\JsonResponse
      */
     public function login(Request $request)
@@ -33,7 +32,7 @@ class LoginController extends Controller
         $credentials = $request->only('email', 'password');
 
         if ($token = $this->guard()
-                          ->attempt($credentials)) {
+            ->attempt($credentials)) {
             return $this->respondWithToken($token);
         }
 
@@ -48,12 +47,12 @@ class LoginController extends Controller
     public function me()
     {
         if ($this->guard()
-                 ->user() == null) {
+            ->user() == null) {
             return response()->json(['error' => 'Unauthorized'], 401);
         }
 
         return response()->json($this->guard()
-                                     ->user());
+            ->user());
     }
 
     /**
@@ -64,7 +63,7 @@ class LoginController extends Controller
     public function logout()
     {
         $this->guard()
-             ->logout();
+            ->logout();
 
         return response()->json(['message' => 'Successfully logged out']);
     }
@@ -77,7 +76,7 @@ class LoginController extends Controller
     public function refresh()
     {
         return $this->respondWithToken($this->guard()
-                                            ->refresh());
+            ->refresh());
     }
 
     /**
@@ -90,10 +89,10 @@ class LoginController extends Controller
     {
         return response()->json([
             'access_token' => $token,
-            'token_type'   => 'bearer',
-            'expires_in'   => $this->guard()
-                                   ->factory()
-                                   ->getTTL() * 60,
+            'token_type' => 'bearer',
+            'expires_in' => $this->guard()
+                ->factory()
+                ->getTTL() * 60,
         ]);
     }
 

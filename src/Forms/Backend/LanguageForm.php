@@ -20,17 +20,17 @@ class LanguageForm extends Form
             'label' => trans('motor-backend::backend/languages.iso_639_1'),
             'rules' => 'required',
         ])
-             ->add('native_name', 'text', [
-                 'label' => trans('motor-backend::backend/languages.native_name'),
-                 'rules' => 'required',
-             ])
-             ->add('english_name', 'text', [
-                 'label' => trans('motor-backend::backend/languages.english_name'),
-                 'rules' => 'required',
-             ])
-             ->add('submit', 'submit', [
-                 'attr' => ['class' => 'btn btn-primary'],
-                 'label' => trans('motor-backend::backend/languages.save'),
-             ]);
+            ->add('native_name', 'text', [
+                'label' => trans('motor-backend::backend/languages.native_name'),
+                'rules' => 'required',
+            ])
+            ->add('english_name', 'text', [
+                'label' => trans('motor-backend::backend/languages.english_name'),
+                'rules' => 'required',
+            ])
+            ->add('submit', 'submit', [
+                'attr' => ['class' => 'btn btn-primary'],
+                'label' => trans('motor-backend::backend/languages.save'),
+            ]);
     }
 }

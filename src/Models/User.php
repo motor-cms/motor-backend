@@ -70,18 +70,19 @@ use Spatie\Permission\Traits\HasRoles;
  * @method static Builder|User wherePasswordLastChangedAt($value)
  * @method static Builder|User whereRememberToken($value)
  * @method static Builder|User whereUpdatedAt($value)
+ *
  * @mixin \Eloquent
  */
 class User extends Authenticatable implements HasMedia
 {
-    use Searchable;
-    use HasRoles;
     use Filterable;
-    use Notifiable;
-    use InteractsWithMedia;
-    use HasFactory;
-    use HasShortflakePrimary;
     use HasApiTokens;
+    use HasFactory;
+    use HasRoles;
+    use HasShortflakePrimary;
+    use InteractsWithMedia;
+    use Notifiable;
+    use Searchable;
 
     protected $guard_name = 'web';
 
@@ -103,14 +104,14 @@ class User extends Authenticatable implements HasMedia
     /**
      * @throws \Spatie\Image\Exceptions\InvalidManipulation
      */
-    public function registerMediaConversions(Media $media = null): void
+    public function registerMediaConversions(?Media $media = null): void
     {
         $this->addMediaConversion('thumb')
-             ->width(400)
-             ->height(400);
+            ->width(400)
+            ->height(400);
         $this->addMediaConversion('preview')
-             ->width(400)
-             ->height(400);
+            ->width(400)
+            ->height(400);
     }
 
     /**

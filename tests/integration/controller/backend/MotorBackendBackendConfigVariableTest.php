@@ -31,7 +31,7 @@ class MotorBackendBackendConfigVariableTest extends TestCase
         'media',
     ];
 
-    public function setUp()
+    protected function setUp()
     {
         parent::setUp();
 

@@ -11,10 +11,11 @@ use Motor\Backend\Traits\ApiResponder;
 class AuthController extends Controller
 {
     use ApiResponder;
+
     public function login(Request $request): JsonResponse
     {
         $attr = $request->validate([
-            'email'    => 'required|string|email|',
+            'email' => 'required|string|email|',
             'password' => 'required|string',
         ]);
 
@@ -49,13 +50,11 @@ class AuthController extends Controller
     public function me(Request $request)
     {
         if ($this->guard()
-                 ->user() == null) {
+            ->user() == null) {
             return response()->json(['error' => 'Unauthorized'], 401);
         }
 
         return response()->json($this->guard()
-                                     ->user());
+            ->user());
     }
-
-
 }

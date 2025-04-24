@@ -12,6 +12,7 @@ class RoleRequest extends Request
     /**
      * @OA\Schema(
      *   schema="RoleRequest",
+     *
      *   @OA\Property(
      *     property="name",
      *     type="string",

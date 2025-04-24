@@ -48,14 +48,15 @@ use RichanFongdasen\EloquentBlameable\BlameableTrait;
  * @method static Builder|Category whereScope($value)
  * @method static Builder|Category whereUpdatedAt($value)
  * @method static Builder|Category whereUpdatedBy($value)
+ *
  * @mixin \Eloquent
  */
 class Category extends Model
 {
-    use Filterable;
     use BlameableTrait;
-    use NodeTrait;
+    use Filterable;
     use HasShortflakePrimary;
+    use NodeTrait;
 
     /**
      * Searchable columns for the searchable trait

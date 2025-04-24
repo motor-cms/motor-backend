@@ -27,7 +27,7 @@ class MotorBackendApiRoleTest extends TestCase
         'role_has_permissions',
     ];
 
-    public function setUp()
+    protected function setUp()
     {
         parent::setUp();
 
@@ -94,7 +94,7 @@ class MotorBackendApiRoleTest extends TestCase
         $this->user->givePermissionTo($this->writePermission);
         $permissions = create_test_permission(5);
         $this->json('POST', '/api/roles?api_token='.$this->user->api_token, [
-            'name'        => 'TestRole',
+            'name' => 'TestRole',
             'permissions' => [
                 $permissions[0]->name => 1,
                 $permissions[1]->name => 1,

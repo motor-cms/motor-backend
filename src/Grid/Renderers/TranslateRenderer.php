@@ -15,9 +15,6 @@ class TranslateRenderer
 
     /**
      * TranslateRenderer constructor.
-     *
-     * @param $value
-     * @param $options
      */
     public function __construct($value, array $options)
     {

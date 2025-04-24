@@ -26,7 +26,7 @@ class MotorBackendBackendProfileTest extends TestCase
         'media',
     ];
 
-    public function setUp()
+    protected function setUp()
     {
         parent::setUp();
 
@@ -54,17 +54,17 @@ class MotorBackendBackendProfileTest extends TestCase
             'secret',
             'password'
         )->press(trans('motor-backend::backend/login.sign_in'))->see('Dashboard')->within(
-                    '.user-footer',
-                    function () {
-                        $this->click(trans('motor-backend::backend/global.edit'));
-                    }
-                )->see(trans('motor-backend::backend/users.profile.edit'))->type(
-                    'NewName',
-                    'name'
-                )->type('newpassword', 'password')->type(
-                    'newpassword',
-                    'password_confirmation'
-                )->press(trans('motor-backend::backend/users.profile.save'));
+            '.user-footer',
+            function () {
+                $this->click(trans('motor-backend::backend/global.edit'));
+            }
+        )->see(trans('motor-backend::backend/users.profile.edit'))->type(
+            'NewName',
+            'name'
+        )->type('newpassword', 'password')->type(
+            'newpassword',
+            'password_confirmation'
+        )->press(trans('motor-backend::backend/users.profile.save'));
 
         $this->assertEquals('NewName', $this->user->fresh()->name);
     }
@@ -78,9 +78,9 @@ class MotorBackendBackendProfileTest extends TestCase
             $this->user->email,
             'email'
         )->type(
-                    'newpassword',
-                    'password'
-                )->press(trans('motor-backend::backend/login.sign_in'))->see('Dashboard');
+            'newpassword',
+            'password'
+        )->press(trans('motor-backend::backend/login.sign_in'))->see('Dashboard');
     }
 
     /** @test */

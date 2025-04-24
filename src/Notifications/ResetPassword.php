@@ -20,9 +20,6 @@ class ResetPassword extends Notification
      * Create a new notification instance.
      *
      * ResetPassword constructor.
-     *
-     * @param $token
-     * @param $user
      */
     public function __construct($token, $user)
     {
@@ -44,7 +41,6 @@ class ResetPassword extends Notification
     /**
      * Get the mail representation of the notification.
      *
-     * @param $notifiable
      * @return \Motor\Backend\Mail\ResetPassword
      */
     public function toMail($notifiable)

@@ -33,12 +33,10 @@ class Controller extends BaseController
             $this->authorizeResource($this->userModel, $this->modelResource);
         }
         \Locale::setDefault(config('app.locale'));
-        $this->fractal = new Manager();
+        $this->fractal = new Manager;
     }
 
     /**
-     * @param    $record
-     * @param    $transformer
      * @param  string  $includes
      * @return Item
      */
@@ -50,8 +48,6 @@ class Controller extends BaseController
     }
 
     /**
-     * @param    $collection
-     * @param    $transformer
      * @param  string  $includes
      * @return Collection
      */
@@ -63,8 +59,6 @@ class Controller extends BaseController
     }
 
     /**
-     * @param    $paginator
-     * @param    $transformer
      * @param  string  $includes
      * @return Collection
      */
@@ -78,9 +72,6 @@ class Controller extends BaseController
     }
 
     /**
-     * @param $message
-     * @param $data
-     * @param $filename
      * @return mixed
      */
     protected function respondWithJsonDownload($message, $data, $filename)
@@ -88,7 +79,7 @@ class Controller extends BaseController
         $meta = null;
         if ($data instanceof ResourceAbstract) {
             $data = $this->fractal->createData($data)
-                                  ->toArray();
+                ->toArray();
             $meta = Arr::get($data, 'meta', null);
             $data = Arr::get($data, 'data');
         }
@@ -104,8 +95,6 @@ class Controller extends BaseController
     }
 
     /**
-     * @param $message
-     * @param $data
      * @return \Illuminate\Http\JsonResponse
      */
     protected function respondWithJson($message, $data, $status = 200)
@@ -113,7 +102,7 @@ class Controller extends BaseController
         $meta = null;
         if ($data instanceof ResourceAbstract) {
             $data = $this->fractal->createData($data)
-                                  ->toArray();
+                ->toArray();
             $meta = Arr::get($data, 'meta', null);
             $data = Arr::get($data, 'data');
         }

@@ -12,6 +12,7 @@ class PermissionGroupRequest extends Request
     /**
      * @OA\Schema(
      *   schema="PermissionGroupRequest",
+     *
      *   @OA\Property(
      *     property="name",
      *     type="string",

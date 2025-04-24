@@ -22,7 +22,6 @@ class CategoriesController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @param  Category  $record
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      *
      * @throws \ReflectionException
@@ -36,11 +35,11 @@ class CategoriesController extends Controller
 
         $filter = $service->getFilter();
         $filter->add(new WhereRenderer('scope'))
-               ->setValue($record->scope);
+            ->setValue($record->scope);
         $filter->add(new WhereRenderer('parent_id'))
-               ->setOperator('!=')
-               ->setAllowNull(true)
-               ->setValue(null);
+            ->setOperator('!=')
+            ->setAllowNull(true)
+            ->setValue(null);
 
         $grid->setFilter($filter);
         $paginator = $service->getPaginator();
@@ -51,21 +50,20 @@ class CategoriesController extends Controller
     /**
      * Show the form for creating a new resource.
      *
-     * @param  Category  $root
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function create(Category $root)
     {
         $form = $this->form(CategoryForm::class, [
-            'method'  => 'POST',
-            'route'   => 'backend.categories.store',
+            'method' => 'POST',
+            'route' => 'backend.categories.store',
             'enctype' => 'multipart/form-data',
         ]);
 
         $trees = Category::where('scope', $root->scope)
-                         ->defaultOrder()
-                         ->get()
-                         ->toTree();
+            ->defaultOrder()
+            ->get()
+            ->toTree();
         $newItem = true;
         $selectedItem = null;
 
@@ -75,7 +73,6 @@ class CategoriesController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  CategoryRequest  $request
      * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
      */
     public function store(CategoryRequest $request)
@@ -91,11 +88,11 @@ class CategoriesController extends Controller
         }
 
         $record = CategoryService::createWithForm($request, $form)
-                                 ->getResult();
+            ->getResult();
 
         $root = $record->ancestors()
-                       ->get()
-                       ->first();
+            ->get()
+            ->first();
 
         flash()->success(trans('motor-backend::backend/categories.created'));
 
@@ -104,8 +101,6 @@ class CategoriesController extends Controller
 
     /**
      * Display the specified resource.
-     *
-     * @param $id
      */
     public function show($id)
     {
@@ -115,25 +110,24 @@ class CategoriesController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  Category  $record
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function edit(Category $record)
     {
         $root = $record->ancestors()
-                       ->get()
-                       ->first();
+            ->get()
+            ->first();
 
         $trees = Category::where('scope', $root->scope)
-                         ->defaultOrder()
-                         ->get()
-                         ->toTree();
+            ->defaultOrder()
+            ->get()
+            ->toTree();
 
         $form = $this->form(CategoryForm::class, [
-            'method'  => 'PATCH',
-            'url'     => route('backend.categories.update', [$record->id]),
+            'method' => 'PATCH',
+            'url' => route('backend.categories.update', [$record->id]),
             'enctype' => 'multipart/form-data',
-            'model'   => $record,
+            'model' => $record,
         ]);
 
         $newItem = false;
@@ -145,8 +139,6 @@ class CategoriesController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  CategoryRequest  $request
-     * @param  Category  $record
      * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
      */
     public function update(CategoryRequest $request, Category $record)
@@ -162,11 +154,11 @@ class CategoriesController extends Controller
         }
 
         $record = CategoryService::updateWithForm($record, $request, $form)
-                                 ->getResult();
+            ->getResult();
 
         $root = $record->ancestors()
-                       ->get()
-                       ->first();
+            ->get()
+            ->first();
 
         flash()->success(trans('motor-backend::backend/categories.updated'));
 
@@ -176,14 +168,13 @@ class CategoriesController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  Category  $record
      * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
      */
     public function destroy(Category $record)
     {
         $root = $record->ancestors()
-                       ->get()
-                       ->first();
+            ->get()
+            ->first();
 
         CategoryService::delete($record);
 

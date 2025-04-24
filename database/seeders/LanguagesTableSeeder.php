@@ -18,15 +18,15 @@ class LanguagesTableSeeder extends Seeder
     public function run()
     {
         DB::table('languages')->insert([
-            'iso_639_1'    => 'de',
+            'iso_639_1' => 'de',
             'english_name' => 'German',
-            'native_name'  => 'Deutsch',
+            'native_name' => 'Deutsch',
         ]);
 
         DB::table('languages')->insert([
-            'iso_639_1'    => 'en',
+            'iso_639_1' => 'en',
             'english_name' => 'English',
-            'native_name'  => 'English',
+            'native_name' => 'English',
         ]);
     }
 }

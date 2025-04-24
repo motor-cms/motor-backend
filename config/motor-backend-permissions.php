@@ -1,85 +1,85 @@
 <?php
 
 return [
-    'profile'          => [
-        'name'   => 'backend/global.profile',
+    'profile' => [
+        'name' => 'backend/global.profile',
         'values' => [
             'read',
             'write',
         ],
     ],
-    'dashboard'        => [
-        'name'   => 'backend/global.dashboard',
+    'dashboard' => [
+        'name' => 'backend/global.dashboard',
         'values' => [
             'read',
         ],
     ],
-    'clients'          => [
-        'name'   => 'backend/clients.clients',
-        'values' => [
-            'read',
-            'write',
-            'delete',
-        ],
-    ],
-    'users'            => [
-        'name'   => 'backend/users.users',
+    'clients' => [
+        'name' => 'backend/clients.clients',
         'values' => [
             'read',
             'write',
             'delete',
         ],
     ],
-    'languages'        => [
-        'name'   => 'backend/languages.languages',
+    'users' => [
+        'name' => 'backend/users.users',
         'values' => [
             'read',
             'write',
             'delete',
         ],
     ],
-    'email_templates'  => [
-        'name'   => 'backend/email_templates.email_templates',
+    'languages' => [
+        'name' => 'backend/languages.languages',
         'values' => [
             'read',
             'write',
             'delete',
         ],
     ],
-    'permissions'      => [
-        'name'   => 'backend/permissions.permissions',
+    'email_templates' => [
+        'name' => 'backend/email_templates.email_templates',
         'values' => [
             'read',
             'write',
             'delete',
         ],
     ],
-    'roles'            => [
-        'name'   => 'backend/roles.roles',
+    'permissions' => [
+        'name' => 'backend/permissions.permissions',
         'values' => [
             'read',
             'write',
             'delete',
         ],
     ],
-    'categories'       => [
-        'name'   => 'motor-backend::backend/categories.categories',
+    'roles' => [
+        'name' => 'backend/roles.roles',
         'values' => [
             'read',
             'write',
             'delete',
         ],
     ],
-    'ajax.categories'       => [
-        'name'   => 'motor-backend::backend/categories.ajax.categories',
+    'categories' => [
+        'name' => 'motor-backend::backend/categories.categories',
         'values' => [
             'read',
             'write',
             'delete',
         ],
     ],
-    'category_trees'   => [
-        'name'   => 'motor-backend::backend/category_trees.category_trees',
+    'ajax.categories' => [
+        'name' => 'motor-backend::backend/categories.ajax.categories',
+        'values' => [
+            'read',
+            'write',
+            'delete',
+        ],
+    ],
+    'category_trees' => [
+        'name' => 'motor-backend::backend/category_trees.category_trees',
         'values' => [
             'read',
             'write',
@@ -87,15 +87,15 @@ return [
         ],
     ],
     'config_variables' => [
-        'name'   => 'motor-backend::backend/config_variables.config_variables',
+        'name' => 'motor-backend::backend/config_variables.config_variables',
         'values' => [
             'read',
             'write',
             'delete',
         ],
     ],
-    'administration'   => [
-        'name'   => 'motor-backend::backend/global.administration',
+    'administration' => [
+        'name' => 'motor-backend::backend/global.administration',
         'values' => [
             'read',
         ],

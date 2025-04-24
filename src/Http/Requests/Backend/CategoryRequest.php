@@ -12,6 +12,7 @@ class CategoryRequest extends Request
     /**
      * @OA\Schema(
      *   schema="CategoryRequest",
+     *
      *   @OA\Property(
      *     property="name",
      *     type="string",
@@ -54,10 +55,10 @@ class CategoryRequest extends Request
     public function rules()
     {
         return [
-            'name'                => 'required',
-            'parent_id'           => 'required',
+            'name' => 'required',
+            'parent_id' => 'required',
             'previous_sibling_id' => 'nullable',
-            'next_sibling_id'     => 'nullable',
+            'next_sibling_id' => 'nullable',
         ];
     }
 }

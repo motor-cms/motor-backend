@@ -1,7 +1,6 @@
 <?php
 
 use Illuminate\Database\Migrations\Migration;
-use Illuminate\Support\Facades\Artisan;
 
 return new class extends Migration
 {
@@ -33,9 +32,6 @@ class Transformer
 
     private array $foreignKeysConstraintsInfo = [];
 
-    /**
-     * @param Connection $connection
-     */
     public function __construct(Connection $connection)
     {
         $this->connection = $connection;
@@ -49,9 +45,6 @@ class Transformer
 
     /**
      * Set console command instance for printing message to the console.
-     *
-     * @param  Command $command
-     * @return void
      */
     public function setConsoleCommand(Command $command): void
     {
@@ -62,8 +55,6 @@ class Transformer
      * 1) Drop all foreign key constraints on each table
      * 2) Change INT to BIGINT on primary and foreign key columns on each table
      * 3) Restore all foreign key constraints on each table
-     *
-     * @return void
      */
     public function transform(): void
     {
@@ -135,8 +126,6 @@ class Transformer
      * On each table :
      * 1) Extract information on unsigned integer columns that are primary or foreign key.
      * 2) Extract information on foreign keys constraints concerning unsigned integer columns.
-     *
-     * @return void
      */
     private function extractSchemaInfos(): void
     {
@@ -205,9 +194,6 @@ class Transformer
 
     /**
      * Says if there are data that do not respect a foreign key constraint.
-     *
-     * @param  array $constraint
-     * @return bool
      */
     private function hasConstraintAnomaly(array $constraint): bool
     {
@@ -224,10 +210,6 @@ class Transformer
 
     /**
      * Print message to the console if set, or do an echo.
-     *
-     * @param  string $message
-     * @param  string $style
-     * @return void
      */
     protected function message(string $message, string $style = 'info'): void
     {

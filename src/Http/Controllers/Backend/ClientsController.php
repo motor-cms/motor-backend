@@ -43,8 +43,8 @@ class ClientsController extends Controller
     public function create()
     {
         $form = $this->form(ClientForm::class, [
-            'method'  => 'POST',
-            'route'   => 'backend.clients.store',
+            'method' => 'POST',
+            'route' => 'backend.clients.store',
             'enctype' => 'multipart/form-data',
         ]);
 
@@ -54,7 +54,6 @@ class ClientsController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  ClientRequest  $request
      * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
      */
     public function store(ClientRequest $request)
@@ -78,8 +77,6 @@ class ClientsController extends Controller
 
     /**
      * Display the specified resource.
-     *
-     * @param $id
      */
     public function show($id)
     {
@@ -89,16 +86,15 @@ class ClientsController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  Client  $record
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function edit(Client $record)
     {
         $form = $this->form(ClientForm::class, [
-            'method'  => 'PATCH',
-            'url'     => route('backend.clients.update', [$record->id]),
+            'method' => 'PATCH',
+            'url' => route('backend.clients.update', [$record->id]),
             'enctype' => 'multipart/form-data',
-            'model'   => $record,
+            'model' => $record,
         ]);
 
         return view('motor-backend::backend.clients.edit', compact('form'));
@@ -107,8 +103,6 @@ class ClientsController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  ClientRequest  $request
-     * @param  Client  $record
      * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
      */
     public function update(ClientRequest $request, Client $record)
@@ -133,7 +127,6 @@ class ClientsController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  Client  $record
      * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
      */
     public function destroy(Client $record)

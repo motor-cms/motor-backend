@@ -7,7 +7,7 @@
  */
 
 // EXAMPLE
-//return [
+// return [
 //    'items' => [
 //        0   => [
 //            'slug'        => 'dashboard',
@@ -36,6 +36,6 @@
 //            ]
 //        ]
 //    ]
-//];
+// ];
 
 return [];

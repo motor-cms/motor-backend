@@ -12,6 +12,7 @@ class ProfileEditRequest extends Request
     /**
      * @OA\Schema(
      *   schema="ProfileEditRequest",
+     *
      *   @OA\Property(
      *     property="name",
      *     type="string",
@@ -55,10 +56,10 @@ class ProfileEditRequest extends Request
     public function rules()
     {
         return [
-            'name'     => 'required',
-            'email'    => 'email',
+            'name' => 'required',
+            'email' => 'email',
             'password' => 'confirmed',
-            'avatar'   => 'nullable|image',
+            'avatar' => 'nullable|image',
         ];
     }
 }

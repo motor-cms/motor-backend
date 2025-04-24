@@ -23,7 +23,9 @@ class ConfigVariablesController extends ApiController
      *   tags={"ConfigVariablesController"},
      *   path="/api/config_variables",
      *   summary="Get config variables collection",
+     *
      *   @OA\Parameter(
+     *
      *     @OA\Schema(type="string"),
      *     in="query",
      *     allowReserved=true,
@@ -31,15 +33,20 @@ class ConfigVariablesController extends ApiController
      *     parameter="api_token",
      *     description="Personal api_token of the user"
      *   ),
+     *
      *   @OA\Response(
      *     response=200,
      *     description="Success",
+     *
      *     @OA\JsonContent(
+     *
      *       @OA\Property(
      *         property="data",
      *         type="array",
+     *
      *         @OA\Items(ref="#/components/schemas/ConfigVariableResource")
      *       ),
+     *
      *       @OA\Property(
      *         property="meta",
      *         ref="#/components/schemas/PaginationMeta"
@@ -55,9 +62,11 @@ class ConfigVariablesController extends ApiController
      *       )
      *     )
      *   ),
+     *
      *   @OA\Response(
      *     response="403",
      *     description="Access denied",
+     *
      *     @OA\JsonContent(ref="#/components/schemas/AccessDenied"),
      *   )
      * )
@@ -69,7 +78,7 @@ class ConfigVariablesController extends ApiController
     public function index()
     {
         $paginator = ConfigVariableService::collection()
-                                          ->getPaginator();
+            ->getPaginator();
 
         return (new ConfigVariableCollection($paginator))->additional(['message' => 'Config variable collection read']);
     }
@@ -79,10 +88,14 @@ class ConfigVariablesController extends ApiController
      *   tags={"ConfigVariablesController"},
      *   path="/api/config_variables",
      *   summary="Create new config variable",
+     *
      *   @OA\RequestBody(
+     *
      *     @OA\JsonContent(ref="#/components/schemas/ConfigVariableRequest")
      *   ),
+     *
      *   @OA\Parameter(
+     *
      *     @OA\Schema(type="string"),
      *     in="query",
      *     allowReserved=true,
@@ -90,10 +103,13 @@ class ConfigVariablesController extends ApiController
      *     parameter="api_token",
      *     description="Personal api_token of the user"
      *   ),
+     *
      *   @OA\Response(
      *     response=200,
      *     description="Success",
+     *
      *     @OA\JsonContent(
+     *
      *       @OA\Property(
      *         property="data",
      *         type="object",
@@ -106,31 +122,34 @@ class ConfigVariablesController extends ApiController
      *       )
      *     )
      *   ),
+     *
      *   @OA\Response(
      *     response="403",
      *     description="Access denied",
+     *
      *     @OA\JsonContent(ref="#/components/schemas/AccessDenied"),
      *   ),
+     *
      *   @OA\Response(
      *     response="404",
      *     description="Not found",
+     *
      *     @OA\JsonContent(ref="#/components/schemas/NotFound"),
      *   )
      * )
      *
      * Store a newly created resource in storage.
      *
-     * @param  \Motor\Backend\Http\Requests\Backend\ConfigVariableRequest  $request
      * @return \Illuminate\Http\JsonResponse|object
      */
     public function store(ConfigVariableRequest $request)
     {
         $result = ConfigVariableService::create($request)
-                                       ->getResult();
+            ->getResult();
 
         return (new ConfigVariableResource($result))->additional(['message' => 'Config variable created'])
-                                                    ->response()
-                                                    ->setStatusCode(201);
+            ->response()
+            ->setStatusCode(201);
     }
 
     /**
@@ -138,7 +157,9 @@ class ConfigVariablesController extends ApiController
      *   tags={"ConfigVariablesController"},
      *   path="/api/config_variables/{config_variable}",
      *   summary="Get single config variable",
+     *
      *   @OA\Parameter(
+     *
      *     @OA\Schema(type="string"),
      *     in="query",
      *     allowReserved=true,
@@ -146,17 +167,22 @@ class ConfigVariablesController extends ApiController
      *     parameter="api_token",
      *     description="Personal api_token of the user"
      *   ),
+     *
      *   @OA\Parameter(
+     *
      *     @OA\Schema(type="integer"),
      *     in="path",
      *     name="config_variable",
      *     parameter="config_variable",
      *     description="Config variable id"
      *   ),
+     *
      *   @OA\Response(
      *     response=200,
      *     description="Success",
+     *
      *     @OA\JsonContent(
+     *
      *       @OA\Property(
      *         property="data",
      *         type="object",
@@ -169,27 +195,30 @@ class ConfigVariablesController extends ApiController
      *       )
      *     )
      *   ),
+     *
      *   @OA\Response(
      *     response="403",
      *     description="Access denied",
+     *
      *     @OA\JsonContent(ref="#/components/schemas/AccessDenied"),
      *   ),
+     *
      *   @OA\Response(
      *     response="404",
      *     description="Not found",
+     *
      *     @OA\JsonContent(ref="#/components/schemas/NotFound"),
      *   )
      * )
      *
      * Display the specified resource.
      *
-     * @param  \Motor\Backend\Models\ConfigVariable  $record
      * @return \Motor\Backend\Http\Resources\ConfigVariableResource
      */
     public function show(ConfigVariable $record)
     {
         $result = ConfigVariableService::show($record)
-                                       ->getResult();
+            ->getResult();
 
         return (new ConfigVariableResource($result))->additional(['message' => 'Config variable read']);
     }
@@ -199,10 +228,14 @@ class ConfigVariablesController extends ApiController
      *   tags={"ConfigVariablesController"},
      *   path="/api/config_variables/{config_variable}",
      *   summary="Update an existing config variable",
+     *
      *   @OA\RequestBody(
+     *
      *     @OA\JsonContent(ref="#/components/schemas/ConfigVariableRequest")
      *   ),
+     *
      *   @OA\Parameter(
+     *
      *     @OA\Schema(type="string"),
      *     in="query",
      *     allowReserved=true,
@@ -210,17 +243,22 @@ class ConfigVariablesController extends ApiController
      *     parameter="api_token",
      *     description="Personal api_token of the user"
      *   ),
+     *
      *   @OA\Parameter(
+     *
      *     @OA\Schema(type="integer"),
      *     in="path",
      *     name="config_variable",
      *     parameter="config_variable",
      *     description="Config variable id"
      *   ),
+     *
      *   @OA\Response(
      *     response=200,
      *     description="Success",
+     *
      *     @OA\JsonContent(
+     *
      *       @OA\Property(
      *         property="data",
      *         type="object",
@@ -233,28 +271,30 @@ class ConfigVariablesController extends ApiController
      *       )
      *     )
      *   ),
+     *
      *   @OA\Response(
      *     response="403",
      *     description="Access denied",
+     *
      *     @OA\JsonContent(ref="#/components/schemas/AccessDenied"),
      *   ),
+     *
      *   @OA\Response(
      *     response="404",
      *     description="Not found",
+     *
      *     @OA\JsonContent(ref="#/components/schemas/NotFound"),
      *   )
      * )
      *
      * Update the specified resource in storage.
      *
-     * @param  \Motor\Backend\Http\Requests\Backend\ConfigVariableRequest  $request
-     * @param  \Motor\Backend\Models\ConfigVariable  $record
      * @return \Motor\Backend\Http\Resources\ConfigVariableResource
      */
     public function update(ConfigVariableRequest $request, ConfigVariable $record)
     {
         $result = ConfigVariableService::update($record, $request)
-                                       ->getResult();
+            ->getResult();
 
         return (new ConfigVariableResource($result))->additional(['message' => 'Config variable updated']);
     }
@@ -264,7 +304,9 @@ class ConfigVariablesController extends ApiController
      *   tags={"ConfigVariablesController"},
      *   path="/api/config_variables/{config_variable}",
      *   summary="Delete a config variable",
+     *
      *   @OA\Parameter(
+     *
      *     @OA\Schema(type="string"),
      *     in="query",
      *     allowReserved=true,
@@ -272,17 +314,22 @@ class ConfigVariablesController extends ApiController
      *     parameter="api_token",
      *     description="Personal api_token of the user"
      *   ),
+     *
      *   @OA\Parameter(
+     *
      *     @OA\Schema(type="integer"),
      *     in="path",
      *     name="config_variable",
      *     parameter="config_variable",
      *     description="Config variable id"
      *   ),
+     *
      *   @OA\Response(
      *     response=200,
      *     description="Success",
+     *
      *     @OA\JsonContent(
+     *
      *       @OA\Property(
      *         property="message",
      *         type="string",
@@ -290,20 +337,27 @@ class ConfigVariablesController extends ApiController
      *       )
      *     )
      *   ),
+     *
      *   @OA\Response(
      *     response="403",
      *     description="Access denied",
+     *
      *     @OA\JsonContent(ref="#/components/schemas/AccessDenied"),
      *   ),
+     *
      *   @OA\Response(
      *     response="404",
      *     description="Not found",
+     *
      *     @OA\JsonContent(ref="#/components/schemas/NotFound"),
      *   ),
+     *
      *   @OA\Response(
      *     response="400",
      *     description="Bad request",
+     *
      *     @OA\JsonContent(
+     *
      *       @OA\Property(
      *         property="message",
      *         type="string",
@@ -315,13 +369,12 @@ class ConfigVariablesController extends ApiController
      *
      * Remove the specified resource from storage.
      *
-     * @param  \Motor\Backend\Models\ConfigVariable  $record
      * @return \Illuminate\Http\JsonResponse
      */
     public function destroy(ConfigVariable $record)
     {
         $result = ConfigVariableService::delete($record)
-                                       ->getResult();
+            ->getResult();
 
         if ($result) {
             return response()->json(['message' => 'Config variable deleted']);

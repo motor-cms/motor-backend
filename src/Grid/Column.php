@@ -34,8 +34,6 @@ class Column extends Base
     /**
      * Column constructor.
      *
-     * @param    $name
-     * @param    $label
      * @param  bool  $sortable
      * @param  string  $sortableField
      */
@@ -58,8 +56,6 @@ class Column extends Base
     }
 
     /**
-     * @param    $column
-     * @param    $value
      * @param  string  $operator
      * @return $this
      */
@@ -73,7 +69,6 @@ class Column extends Base
     }
 
     /**
-     * @param $record
      * @return bool
      */
     public function checkCondition($record)
@@ -125,7 +120,6 @@ class Column extends Base
     /**
      * Set column type
      *
-     * @param    $renderer
      * @param  array  $options
      * @return $this
      */
@@ -150,7 +144,6 @@ class Column extends Base
     /**
      * Set options for renderer
      *
-     * @param  array  $options
      * @return $this
      */
     public function setRenderOptions(array $options)
@@ -183,7 +176,6 @@ class Column extends Base
     /**
      * Set sortable status and field
      *
-     * @param $sortable
      * @return $this
      */
     protected function setSortable($sortable)
@@ -229,7 +221,6 @@ class Column extends Base
     /**
      * Set filters if available
      *
-     * @param $filters
      * @return $this
      */
     protected function setFilters($filters)
@@ -281,7 +272,6 @@ class Column extends Base
     /**
      * Set cell closure
      *
-     * @param  \Closure  $closure
      * @return $this
      */
     public function cell(Closure $closure)

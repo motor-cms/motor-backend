@@ -36,7 +36,6 @@ class ConfigVariablesController extends Controller
     }
 
     /**
-     * @param  ConfigVariable  $record
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function duplicate(ConfigVariable $record)
@@ -50,16 +49,15 @@ class ConfigVariablesController extends Controller
     /**
      * Show the form for creating a new resource.
      *
-     * @param  ConfigVariable  $record
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function create(ConfigVariable $record)
     {
         $form = $this->form(ConfigVariableForm::class, [
-            'method'  => 'POST',
-            'route'   => 'backend.config_variables.store',
+            'method' => 'POST',
+            'route' => 'backend.config_variables.store',
             'enctype' => 'multipart/form-data',
-            'model'   => $record,
+            'model' => $record,
         ]);
 
         return view('motor-backend::backend.config_variables.create', compact('form'));
@@ -68,7 +66,6 @@ class ConfigVariablesController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  ConfigVariableRequest  $request
      * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
      */
     public function store(ConfigVariableRequest $request)
@@ -92,8 +89,6 @@ class ConfigVariablesController extends Controller
 
     /**
      * Display the specified resource.
-     *
-     * @param $id
      */
     public function show($id)
     {
@@ -103,16 +98,15 @@ class ConfigVariablesController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  ConfigVariable  $record
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function edit(ConfigVariable $record)
     {
         $form = $this->form(ConfigVariableForm::class, [
-            'method'  => 'PATCH',
-            'url'     => route('backend.config_variables.update', [$record->id]),
+            'method' => 'PATCH',
+            'url' => route('backend.config_variables.update', [$record->id]),
             'enctype' => 'multipart/form-data',
-            'model'   => $record,
+            'model' => $record,
         ]);
 
         return view('motor-backend::backend.config_variables.edit', compact('form'));
@@ -121,8 +115,6 @@ class ConfigVariablesController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  ConfigVariableRequest  $request
-     * @param  ConfigVariable  $record
      * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
      */
     public function update(ConfigVariableRequest $request, ConfigVariable $record)
@@ -147,7 +139,6 @@ class ConfigVariablesController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  ConfigVariable  $record
      * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
      */
     public function destroy(ConfigVariable $record)

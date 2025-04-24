@@ -15,9 +15,6 @@ class TextRenderer
 
     /**
      * TextRenderer constructor.
-     *
-     * @param $value
-     * @param $options
      */
     public function __construct($value, array $options = [])
     {

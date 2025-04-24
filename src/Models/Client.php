@@ -61,15 +61,16 @@ use RichanFongdasen\EloquentBlameable\BlameableTrait;
  * @method static Builder|Client whereUpdatedBy($value)
  * @method static Builder|Client whereWebsite($value)
  * @method static Builder|Client whereZip($value)
+ *
  * @mixin \Eloquent
  */
 class Client extends Model
 {
-    use Searchable;
     use BlameableTrait;
     use Filterable;
     use HasFactory;
     use HasShortflakePrimary;
+    use Searchable;
 
     /**
      * Searchable columns for the searchable trait

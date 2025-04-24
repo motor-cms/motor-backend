@@ -25,7 +25,7 @@ class MotorBackendApiPermissionTest extends TestCase
         'roles',
     ];
 
-    public function setUp()
+    protected function setUp()
     {
         parent::setUp();
 
@@ -92,10 +92,10 @@ class MotorBackendApiPermissionTest extends TestCase
         $this->user->givePermissionTo($this->writePermission);
         $permission_group = create_test_permission_group();
         $this->json('POST', '/api/permissions?api_token='.$this->user->api_token, [
-            'name'                => 'TestPermission',
+            'name' => 'TestPermission',
             'permission_group_id' => $permission_group->id,
         ])->seeStatusCode(200)->seeJson([
-            'name'                => 'TestPermission',
+            'name' => 'TestPermission',
             'permission_group_id' => $permission_group->id,
         ]);
     }

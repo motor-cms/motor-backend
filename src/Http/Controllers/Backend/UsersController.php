@@ -43,8 +43,8 @@ class UsersController extends Controller
     public function create()
     {
         $form = $this->form(UserForm::class, [
-            'method'  => 'POST',
-            'route'   => 'backend.users.store',
+            'method' => 'POST',
+            'route' => 'backend.users.store',
             'enctype' => 'multipart/form-data',
         ]);
 
@@ -54,7 +54,6 @@ class UsersController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  UserRequest  $request
      * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
      */
     public function store(UserRequest $request)
@@ -78,26 +77,21 @@ class UsersController extends Controller
 
     /**
      * Display the specified resource.
-     *
-     * @param  User  $record
      */
-    public function show(User $record)
-    {
-    }
+    public function show(User $record) {}
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  User  $user
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function edit(User $user)
     {
         $form = $this->form(UserForm::class, [
-            'method'  => 'PATCH',
-            'url'     => route('backend.users.update', [$user->id]),
+            'method' => 'PATCH',
+            'url' => route('backend.users.update', [$user->id]),
             'enctype' => 'multipart/form-data',
-            'model'   => $user,
+            'model' => $user,
         ]);
 
         return view('motor-backend::backend.users.edit', compact('form'));
@@ -106,8 +100,6 @@ class UsersController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  UserRequest  $request
-     * @param  User  $record
      * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
      */
     public function update(UserRequest $request, User $record)
@@ -132,7 +124,6 @@ class UsersController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  User  $record
      * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
      */
     public function destroy(User $record)

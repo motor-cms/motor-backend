@@ -23,10 +23,6 @@ class Cell extends Base
 
     /**
      * Cell constructor.
-     *
-     * @param  string  $name
-     * @param    $renderer
-     * @param  array  $renderOptions
      */
     public function __construct(string $name, $renderer, array $renderOptions = [])
     {
@@ -35,33 +31,21 @@ class Cell extends Base
         $this->renderOptions = $renderOptions;
     }
 
-    /**
-     * @return string
-     */
     public function getName(): string
     {
         return $this->name;
     }
 
-    /**
-     * @param $value
-     */
     public function setValue($value)
     {
         $this->value = $value;
     }
 
-    /**
-     * @param $record
-     */
     public function setRecord($record)
     {
         $this->record = $record;
     }
 
-    /**
-     * @param $column
-     */
     public function setColumn($column)
     {
         $this->column = $column;
@@ -85,7 +69,6 @@ class Cell extends Base
     /**
      * Parse filters assigned by column
      *
-     * @param $filters
      * @return bool
      */
     public function parseFilters(array $filters)

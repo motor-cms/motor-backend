@@ -5,6 +5,7 @@ namespace Motor\Backend\Http\Resources;
 /**
  * @OA\Schema(
  *   schema="RoleResource",
+ *
  *   @OA\Property(
  *     property="name",
  *     type="string",
@@ -28,7 +29,7 @@ class RoleResource extends BaseResource
     public function toArray($request)
     {
         return [
-            'name'       => $this->name,
+            'name' => $this->name,
             'guard_name' => $this->guard_name,
         ];
     }

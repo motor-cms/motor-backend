@@ -12,6 +12,7 @@ class ConfigVariableRequest extends Request
     /**
      * @OA\Schema(
      *   schema="ConfigVariableRequest",
+     *
      *   @OA\Property(
      *     property="package",
      *     type="string",
@@ -55,9 +56,9 @@ class ConfigVariableRequest extends Request
     {
         return [
             'package' => 'required',
-            'group'   => 'required',
-            'name'    => 'required',
-            'value'   => 'required',
+            'group' => 'required',
+            'name' => 'required',
+            'value' => 'required',
         ];
     }
 }

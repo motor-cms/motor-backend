@@ -31,8 +31,8 @@ class CategoryTreesController extends Controller
 
         $filter = $service->getFilter();
         $filter->add(new WhereRenderer('parent_id'))
-               ->setDefaultValue(null)
-               ->setAllowNull(true);
+            ->setDefaultValue(null)
+            ->setAllowNull(true);
 
         $grid->setFilter($filter);
         $paginator = $service->getPaginator();
@@ -48,8 +48,8 @@ class CategoryTreesController extends Controller
     public function create()
     {
         $form = $this->form(CategoryTreeForm::class, [
-            'method'  => 'POST',
-            'route'   => 'backend.category_trees.store',
+            'method' => 'POST',
+            'route' => 'backend.category_trees.store',
             'enctype' => 'multipart/form-data',
         ]);
 
@@ -59,7 +59,6 @@ class CategoryTreesController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Motor\Backend\Http\Requests\Backend\CategoryTreeRequest  $request
      * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
      */
     public function store(CategoryTreeRequest $request)
@@ -83,8 +82,6 @@ class CategoryTreesController extends Controller
 
     /**
      * Display the specified resource.
-     *
-     * @param $id
      */
     public function show($id)
     {
@@ -94,16 +91,15 @@ class CategoryTreesController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \Motor\Backend\Models\Category  $record
      * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
      */
     public function edit(Category $record)
     {
         $form = $this->form(CategoryTreeForm::class, [
-            'method'  => 'PATCH',
-            'url'     => route('backend.category_trees.update', [$record->id]),
+            'method' => 'PATCH',
+            'url' => route('backend.category_trees.update', [$record->id]),
             'enctype' => 'multipart/form-data',
-            'model'   => $record,
+            'model' => $record,
         ]);
 
         return view('motor-backend::backend.category_trees.edit', compact('form'));
@@ -112,8 +108,6 @@ class CategoryTreesController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Motor\Backend\Http\Requests\Backend\CategoryTreeRequest  $request
-     * @param  \Motor\Backend\Models\Category  $record
      * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
      */
     public function update(CategoryTreeRequest $request, Category $record)
@@ -138,7 +132,6 @@ class CategoryTreesController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \Motor\Backend\Models\Category  $record
      * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
      */
     public function destroy(Category $record)

@@ -50,72 +50,63 @@ abstract class BaseService
      * Basic create method.
      * Usually called by an API
      *
-     * @param  Request  $request
      * @return mixed
      */
     public static function create(Request $request)
     {
-        return (new static())->setRequest($request)
-                             ->doCreate();
+        return (new static)->setRequest($request)
+            ->doCreate();
     }
 
     /**
      * Create method with support from a Form class
      * Usually called from a backend controller
      *
-     * @param  Request  $request
-     * @param  Form  $form
      * @return mixed
      */
     public static function createWithForm(Request $request, Form $form)
     {
-        return (new static())->setRequest($request, $form)
-                             ->setForm($form)
-                             ->doCreate();
+        return (new static)->setRequest($request, $form)
+            ->setForm($form)
+            ->doCreate();
     }
 
     /**
      * Basic update method.
      * Usually called by an API
      *
-     * @param  Model  $record
-     * @param  Request  $request
      * @return mixed
      */
     public static function update(Model $record, Request $request)
     {
-        return (new static())->setRequest($request)
-                             ->setRecord($record)
-                             ->doUpdate();
+        return (new static)->setRequest($request)
+            ->setRecord($record)
+            ->doUpdate();
     }
 
     /**
      * Create method with support from a Form class
      * Usually called from a backend controller
      *
-     * @param  Model  $record
-     * @param  Request  $request
-     * @param  Form  $form
      * @return mixed
      */
     public static function updateWithForm(Model $record, Request $request, Form $form)
     {
-        return (new static())->setRequest($request, $form)
-                             ->setForm($form)
-                             ->setRecord($record)
-                             ->doUpdate();
+        return (new static)->setRequest($request, $form)
+            ->setForm($form)
+            ->setRecord($record)
+            ->doUpdate();
     }
 
     /**
      * Simple wrapper to return the given record
      *
-     * @param $record
      * @return mixed
      */
     public static function show($record)
     {
-        return (new static())->setRecord($record)
-                             ->doShow();
+        return (new static)->setRecord($record)
+            ->doShow();
     }
 
     /**
@@ -128,7 +119,7 @@ abstract class BaseService
      */
     public static function collection($alias = '', $sorting = null)
     {
-        $instance = new static();
+        $instance = new static;
         $instance->filter = new Filter($alias);
         $instance->defaultFilters();
         $instance->filters();
@@ -151,13 +142,12 @@ abstract class BaseService
     /**
      * Simple wrapper around the delete method of the record
      *
-     * @param $record
      * @return mixed
      */
     public static function delete($record)
     {
-        return (new static())->setRecord($record)
-                             ->doDelete();
+        return (new static)->setRecord($record)
+            ->doDelete();
     }
 
     /**
@@ -167,7 +157,7 @@ abstract class BaseService
     {
         $this->filter->add(new SearchRenderer('search'));
         $this->filter->add(new PerPageRenderer('per_page'))
-                     ->setup();
+            ->setup();
     }
 
     /**
@@ -209,14 +199,13 @@ abstract class BaseService
         $query = $this->applySorting($query);
 
         return $query->paginate($this->getFilter()
-                                     ->get('per_page')
-                                     ->getValue());
+            ->get('per_page')
+            ->getValue());
     }
 
     /**
      * Set sorting array
      *
-     * @param  array  $sorting
      * @return $this
      */
     public function setSorting(array $sorting)
@@ -229,7 +218,6 @@ abstract class BaseService
     /**
      * Add custom sorting, if available
      *
-     * @param $query
      * @return mixed
      */
     public function applySorting($query)
@@ -271,7 +259,7 @@ abstract class BaseService
             }
 
             return $query->orderBy($query->getModel()
-                                         ->getTable().'.'.$this->sortableField, $this->sortableDirection);
+                ->getTable().'.'.$this->sortableField, $this->sortableDirection);
         }
 
         return $query;
@@ -280,7 +268,6 @@ abstract class BaseService
     /**
      * Add custom scopes to query
      *
-     * @param $query
      * @return mixed
      */
     public function applyScopes($query)
@@ -311,7 +298,7 @@ abstract class BaseService
      */
     public function doCreate()
     {
-        $this->record = new $this->model();
+        $this->record = new $this->model;
         $this->beforeCreate();
         $this->record->fill($this->data);
         $this->result = $this->record->save();
@@ -361,7 +348,6 @@ abstract class BaseService
     /**
      * Sets a Form object to use when creating/updating
      *
-     * @param  Form  $form
      * @return $this
      */
     public function setForm(Form $form)
@@ -375,7 +361,6 @@ abstract class BaseService
     /**
      * Sets a record
      *
-     * @param  Model  $record
      * @return $this
      */
     public function setRecord(Model $record)
@@ -388,7 +373,6 @@ abstract class BaseService
     /**
      * Sets a request object
      *
-     * @param  Request  $request
      * @param  null  $form
      * @return $this
      */
@@ -416,8 +400,6 @@ abstract class BaseService
     /**
      * Loops through the fields of the Form object to handle some special cases (date/datetime and checkboxes)
      *
-     * @param  Form  $form
-     * @param  array  $data
      * @return array
      */
     public function handleFormValues(Form $form, array $data)
@@ -465,8 +447,6 @@ abstract class BaseService
 
     /**
      * Sets another disk
-     *
-     * @param  string  $disk
      */
     private function setDisk(string $disk)
     {
@@ -478,7 +458,6 @@ abstract class BaseService
     /**
      * Handles file uploads either with a UploadedFile object or a base64 encoded file
      *
-     * @param $file
      * @param  string  $identifier
      * @param  null  $collection
      * @param  null  $record
@@ -513,11 +492,11 @@ abstract class BaseService
             if (preg_match('/delete_media_(.*)/', $key, $matches) == 1 && $value == 1) {
                 $media = $record->getMedia($collection);
                 $mediaItem = $media->where('id', $matches[1])
-                                   ->first();
+                    ->first();
 
                 if (! empty($mediaItem)) {
                     $mediaItem->delete();
-//                    $record->deleteMedia($matches[1]);
+                    //                    $record->deleteMedia($matches[1]);
                 }
             }
         }
@@ -531,7 +510,7 @@ abstract class BaseService
 
         if ($file instanceof UploadedFile && $file->isValid()) {
             $record->addMedia($file)
-                   ->toMediaCollection($collection, $this->disk);
+                ->toMediaCollection($collection, $this->disk);
         } else {
             if ($this->isValidBase64(Arr::get($this->data, $identifier))) {
                 $image = base64_decode($this->data[$identifier]);
@@ -544,9 +523,9 @@ abstract class BaseService
                 fwrite($handle, $image);
                 fclose($handle);
                 $record->addMedia($tempFilename)
-                       ->setName($name)
-                       ->setFileName($name)
-                       ->toMediaCollection($collection, $this->disk);
+                    ->setName($name)
+                    ->setFileName($name)
+                    ->toMediaCollection($collection, $this->disk);
             }
         }
 
@@ -556,7 +535,6 @@ abstract class BaseService
     /**
      * Helper method to check if a file upload field is base64 encoded
      *
-     * @param $string
      * @return bool
      */
     protected function isValidBase64($string)
@@ -583,63 +561,45 @@ abstract class BaseService
     /**
      * Stub for the filters method of the child class
      */
-    public function filters()
-    {
-    }
+    public function filters() {}
 
     /**
      * Stub for the beforeCreate method of the child class
      */
-    public function beforeCreate()
-    {
-    }
+    public function beforeCreate() {}
 
     /**
      * Stub for the afterCreate method of the child class
      */
-    public function afterCreate()
-    {
-    }
+    public function afterCreate() {}
 
     /**
      * Stub for the beforeUpdate method of the child class
      */
-    public function beforeUpdate()
-    {
-    }
+    public function beforeUpdate() {}
 
     /**
      * Stub for the afterUpdate method of the child class
      */
-    public function afterUpdate()
-    {
-    }
+    public function afterUpdate() {}
 
     /**
      * Stub for the beforeDelete method of the child class
      */
-    public function beforeDelete()
-    {
-    }
+    public function beforeDelete() {}
 
     /**
      * Stub for the afterDelete method of the child class
      */
-    public function afterDelete()
-    {
-    }
+    public function afterDelete() {}
 
     /**
      * Stub for the beforeShow method of the child class
      */
-    public function beforeShow()
-    {
-    }
+    public function beforeShow() {}
 
     /**
      * Stub for the afterShow method of the child class
      */
-    public function afterShow()
-    {
-    }
+    public function afterShow() {}
 }

@@ -24,10 +24,10 @@ class ClientFactory extends Factory
     public function definition()
     {
         return [
-            'name'               => $this->faker->sentence,
+            'name' => $this->faker->sentence,
             'country_iso_3166_1' => Str::random(2),
-            'created_by'         => User::factory()->make()->id,
-            'updated_by'         => User::factory()->make()->id,
+            'created_by' => User::factory()->make()->id,
+            'updated_by' => User::factory()->make()->id,
         ];
     }
 }

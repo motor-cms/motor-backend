@@ -61,14 +61,15 @@ use RichanFongdasen\EloquentBlameable\BlameableTrait;
  * @method static Builder|EmailTemplate whereSubject($value)
  * @method static Builder|EmailTemplate whereUpdatedAt($value)
  * @method static Builder|EmailTemplate whereUpdatedBy($value)
+ *
  * @mixin \Eloquent
  */
 class EmailTemplate extends Model
 {
-    use Searchable;
     use BlameableTrait;
     use Filterable;
     use HasShortflakePrimary;
+    use Searchable;
 
     /**
      * The attributes that are mass assignable.

@@ -36,7 +36,6 @@ class EmailTemplatesController extends Controller
     }
 
     /**
-     * @param  EmailTemplate  $record
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function duplicate(EmailTemplate $record)
@@ -49,15 +48,14 @@ class EmailTemplatesController extends Controller
     /**
      * Show the form for creating a new resource.
      *
-     * @param  EmailTemplate  $record
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function create(EmailTemplate $record)
     {
         $form = $this->form(EmailTemplateForm::class, [
             'method' => 'POST',
-            'route'  => 'backend.email_templates.store',
-            'model'  => $record,
+            'route' => 'backend.email_templates.store',
+            'model' => $record,
         ]);
 
         return view('motor-backend::backend.email_templates.create', compact('form'));
@@ -66,7 +64,6 @@ class EmailTemplatesController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  EmailTemplateRequest  $request
      * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
      */
     public function store(EmailTemplateRequest $request)
@@ -90,8 +87,6 @@ class EmailTemplatesController extends Controller
 
     /**
      * Display the specified resource.
-     *
-     * @param $id
      */
     public function show($id)
     {
@@ -101,15 +96,14 @@ class EmailTemplatesController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  EmailTemplate  $record
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function edit(EmailTemplate $record)
     {
         $form = $this->form(EmailTemplateForm::class, [
             'method' => 'PATCH',
-            'url'    => route('backend.email_templates.update', [$record->id]),
-            'model'  => $record,
+            'url' => route('backend.email_templates.update', [$record->id]),
+            'model' => $record,
         ]);
 
         return view('motor-backend::backend.email_templates.edit', compact('form'));
@@ -118,8 +112,6 @@ class EmailTemplatesController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  EmailTemplateRequest  $request
-     * @param  EmailTemplate  $record
      * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
      */
     public function update(EmailTemplateRequest $request, EmailTemplate $record)
@@ -144,7 +136,6 @@ class EmailTemplatesController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  EmailTemplate  $record
      * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
      */
     public function destroy(EmailTemplate $record)

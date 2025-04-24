@@ -26,26 +26,26 @@ class RoleForm extends Form
         }
 
         $this->add('name', 'text', ['label' => trans('motor-backend::backend/roles.name'), 'rules' => 'required'])
-             ->add('guard_name', 'text', [
-                 'label'         => trans('motor-backend::backend/roles.guard_name'),
-                 'default_value' => 'web',
-                 'rules'         => 'required',
-             ])
-             ->add('permissions', 'choice', [
-                 'label'          => trans('motor-backend::backend/permissions.permissions'),
-                 'choice_options' => [
-                     'wrapper'    => ['class' => 'choice-wrapper'],
-                     'label_attr' => ['class' => 'label-class'],
-                 ],
-                 'selected'       => $selected,
-                 'expanded'       => true,
-                 'multiple'       => true,
-                 'choices'        => Permission::pluck('name', 'id')
-                                               ->toArray(),
-             ])
-             ->add('submit', 'submit', [
-                 'attr'  => ['class' => 'btn btn-primary'],
-                 'label' => trans('motor-backend::backend/roles.save'),
-             ]);
+            ->add('guard_name', 'text', [
+                'label' => trans('motor-backend::backend/roles.guard_name'),
+                'default_value' => 'web',
+                'rules' => 'required',
+            ])
+            ->add('permissions', 'choice', [
+                'label' => trans('motor-backend::backend/permissions.permissions'),
+                'choice_options' => [
+                    'wrapper' => ['class' => 'choice-wrapper'],
+                    'label_attr' => ['class' => 'label-class'],
+                ],
+                'selected' => $selected,
+                'expanded' => true,
+                'multiple' => true,
+                'choices' => Permission::pluck('name', 'id')
+                    ->toArray(),
+            ])
+            ->add('submit', 'submit', [
+                'attr' => ['class' => 'btn btn-primary'],
+                'label' => trans('motor-backend::backend/roles.save'),
+            ]);
     }
 }

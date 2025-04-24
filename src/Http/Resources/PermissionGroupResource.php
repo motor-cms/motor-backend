@@ -5,6 +5,7 @@ namespace Motor\Backend\Http\Resources;
 /**
  * @OA\Schema(
  *   schema="PermissionGroupResource",
+ *
  *   @OA\Property(
  *     property="id",
  *     type="integer",
@@ -23,6 +24,7 @@ namespace Motor\Backend\Http\Resources;
  *   @OA\Property(
  *     property="permissions",
  *     type="array",
+ *
  *     @OA\Items(
  *       ref="#/components/schemas/PermissionResource"
  *     )
@@ -40,10 +42,10 @@ class PermissionGroupResource extends BaseResource
     public function toArray($request)
     {
         return [
-            'id'            => (int) $this->id,
-            'name'          => $this->name,
+            'id' => (int) $this->id,
+            'name' => $this->name,
             'sort_position' => (int) $this->sort_position,
-            'permissions'   => PermissionResource::collection($this->whenLoaded('permissions')),
+            'permissions' => PermissionResource::collection($this->whenLoaded('permissions')),
         ];
     }
 }

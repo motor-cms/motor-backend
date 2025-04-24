@@ -12,6 +12,7 @@ namespace App\Http\Controllers\Api;
  *       "altText": "Logo"
  *     }
  *   },
+ *
  *   @OA\Contact(
  *     email="me@dfox.info"
  *   )
@@ -19,8 +20,8 @@ namespace App\Http\Controllers\Api;
  *
  * @OA\Tag(name="UsersController", description="Endpoints for the users resource")
  *
- *
  * @OA\Parameter(
+ *
  *    @OA\Schema(type="string"),
  *    in="query",
  *    allowReserved=true,
@@ -51,6 +52,7 @@ namespace App\Http\Controllers\Api;
 /**
  * @OA\Schema(
  *   schema="PaginationLinks",
+ *
  *   @OA\Property(
  *     property="first",
  *     type="string",
@@ -77,6 +79,7 @@ namespace App\Http\Controllers\Api;
 /**
  * @OA\Schema(
  *   schema="PaginationMeta",
+ *
  *   @OA\Property(
  *     property="current_page",
  *     type="integer",
@@ -115,7 +118,9 @@ namespace App\Http\Controllers\Api;
  *   @OA\Property(
  *     property="links",
  *     type="array",
+ *
  *     @OA\Items(
+ *
  *       @OA\Property(
  *         property="url",
  *         type="'null',string",

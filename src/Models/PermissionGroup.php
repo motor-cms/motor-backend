@@ -29,13 +29,14 @@ use Motor\Core\Traits\Searchable;
  * @method static Builder|PermissionGroup whereName($value)
  * @method static Builder|PermissionGroup whereSortPosition($value)
  * @method static Builder|PermissionGroup whereUpdatedAt($value)
+ *
  * @mixin \Eloquent
  */
 class PermissionGroup extends Model
 {
-    use Searchable;
     use Filterable;
     use HasShortflakePrimary;
+    use Searchable;
 
     /**
      * Searchable columns for the searchable trait

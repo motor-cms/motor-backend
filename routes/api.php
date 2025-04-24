@@ -1,5 +1,6 @@
 <?php
 
+use Illuminate\Http\Request;
 use Illuminate\Validation\ValidationException;
 use Motor\Backend\Http\Controllers\Api\Auth\AuthController;
 use Motor\Backend\Http\Controllers\Api\Auth\LoginController;
@@ -15,13 +16,12 @@ use Motor\Backend\Http\Controllers\Api\ProfileEditController;
 use Motor\Backend\Http\Controllers\Api\RolesController;
 use Motor\Backend\Http\Controllers\Api\UsersController;
 use Motor\Backend\Models\User;
-use Illuminate\Http\Request;
 
 Route::group([
     'middleware' => ['auth:api', 'bindings', 'permission'],
-    'namespace'  => 'Motor\Backend\Http\Controllers\Api',
-    'prefix'     => 'api',
-    'as'         => 'api.',
+    'namespace' => 'Motor\Backend\Http\Controllers\Api',
+    'prefix' => 'api',
+    'as' => 'api.',
 ], static function () {
     Route::apiResource('users', UsersController::class);
     Route::apiResource('clients', ClientsController::class);
@@ -38,22 +38,22 @@ Route::group([
     Route::apiResource('category_trees/{category_tree}/categories', CategoriesController::class);
 
     Route::get('profile', [ProfileEditController::class, 'me'])
-         ->name('profile.read');
+        ->name('profile.read');
     Route::put('profile', [ProfileEditController::class, 'update'])
-         ->name('profile.update');
+        ->name('profile.update');
     Route::apiResource('config_variables', ConfigVariablesController::class);
 });
 
 Route::group([
-    'prefix'     => 'api/sanctum',
-    'as'         => 'api.sanctum.',
+    'prefix' => 'api/sanctum',
+    'as' => 'api.sanctum.',
 ], static function ($router) {
-    //Route::post('auth/login', [AuthController::class, 'login']);
+    // Route::post('auth/login', [AuthController::class, 'login']);
     Route::post('auth/login', function (Request $request) {
         $request->validate([
             'email' => 'required|email',
             'password' => 'required',
-            //'device_name' => 'required',
+            // 'device_name' => 'required',
         ]);
 
         $user = User::where('email', $request->email)->first();
@@ -74,30 +74,29 @@ Route::group([
     Route::post('auth/logout', [AuthController::class, 'logout']);
 });
 
-
 Route::group([
     'middleware' => ['api', 'bindings'],
-    'namespace'  => 'Motor\Backend\Http\Controllers\Api\Auth',
-    'prefix'     => 'api/auth',
-    'as'         => 'api.auth',
+    'namespace' => 'Motor\Backend\Http\Controllers\Api\Auth',
+    'prefix' => 'api/auth',
+    'as' => 'api.auth',
 
 ], static function ($router) {
     Route::post('login', [LoginController::class, 'login'])
-         ->name('login');
+        ->name('login');
     Route::post('logout', [LoginController::class, 'logout'])
-         ->name('logout');
+        ->name('logout');
     Route::post('refresh', [LoginController::class, 'refresh'])
-         ->name('refresh');
+        ->name('refresh');
     Route::post('me', [LoginController::class, 'me'])
-         ->name('me');
+        ->name('me');
 });
 
 Route::group([
     'middleware' => ['web', 'web_auth', 'bindings', 'permission'],
-    'namespace'  => 'Motor\Backend\Http\Controllers\Api',
-    'prefix'     => 'ajax',
-    'as'         => 'ajax.',
+    'namespace' => 'Motor\Backend\Http\Controllers\Api',
+    'prefix' => 'ajax',
+    'as' => 'ajax.',
 ], static function () {
     Route::get('categories', [CategoriesController::class, 'index'])
-         ->name('categories.index');
+        ->name('categories.index');
 });

@@ -15,9 +15,6 @@ class DecorationRenderer
 
     /**
      * DecorationRenderer constructor.
-     *
-     * @param    $value
-     * @param  array  $options
      */
     public function __construct($value, array $options = [])
     {
@@ -31,6 +28,6 @@ class DecorationRenderer
     public function render()
     {
         return App::make('html')
-                  ->tag('span', $this->value, $this->options);
+            ->tag('span', $this->value, $this->options);
     }
 }

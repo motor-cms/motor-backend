@@ -89,7 +89,7 @@ class Generator
         $translator = app('translator');
 
         foreach ($translator->getLoader()
-                            ->namespaces() as $namespace => $directory) {
+            ->namespaces() as $namespace => $directory) {
             $fileinfo = new SplFileInfo($directory);
 
             if (! $fileinfo->isDir()) {
@@ -206,7 +206,6 @@ class Generator
     }
 
     /**
-     * @param $path
      * @return array|null
      *
      * @throws Exception
@@ -226,7 +225,6 @@ class Generator
     }
 
     /**
-     * @param $path
      * @return array
      *
      * @throws Exception
@@ -263,6 +261,7 @@ class Generator
 
                 if (gettype($tmp) !== 'array') {
                     throw new Exception('Unexpected data while processing '.$fileName);
+
                     continue;
                 }
                 if ($lastLocale !== false) {
@@ -279,7 +278,6 @@ class Generator
     }
 
     /**
-     * @param  array  $arr
      * @return array
      */
     private function adjustArray(array $arr)
@@ -324,7 +322,6 @@ class Generator
     /**
      * Turn Laravel style ":link" into vue-i18n style "{link}" or vuex-i18n style ":::".
      *
-     * @param $string
      * @return string|string[]|null
      */
     private function adjustString($string)

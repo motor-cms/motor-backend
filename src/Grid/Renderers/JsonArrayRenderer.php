@@ -19,12 +19,8 @@ class JsonArrayRenderer
 
     /**
      * JsonArrayRenderer constructor.
-     *
-     * @param    $value
-     * @param  array  $options
-     * @param  Model|null  $record
      */
-    public function __construct($value, array $options = [], Model $record = null)
+    public function __construct($value, array $options = [], ?Model $record = null)
     {
         $this->value = $value;
         $this->options = $options;

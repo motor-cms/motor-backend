@@ -36,9 +36,6 @@ class UuidTransformer
 
     private array $excludedTables = ['migrations'];
 
-    /**
-     * @param Connection $connection
-     */
     public function __construct(Connection $connection)
     {
         $this->connection = $connection;
@@ -51,9 +48,6 @@ class UuidTransformer
 
     /**
      * Set console command instance for printing message to the console.
-     *
-     * @param  Command $command
-     * @return void
      */
     public function setConsoleCommand(Command $command): void
     {
@@ -64,8 +58,6 @@ class UuidTransformer
      * 1) Drop all foreign key constraints on each table
      * 2) Change INT to BIGINT on primary and foreign key columns on each table
      * 3) Restore all foreign key constraints on each table
-     *
-     * @return void
      */
     public function transform(): void
     {
@@ -88,7 +80,6 @@ class UuidTransformer
                 $hasConstraintAnomaly = true;
             }
         }
-
 
         if ($hasConstraintAnomaly) {
             return;
@@ -138,8 +129,6 @@ class UuidTransformer
      * On each table :
      * 1) Extract information on unsigned integer columns that are primary or foreign key.
      * 2) Extract information on foreign keys constraints concerning unsigned integer columns.
-     *
-     * @return void
      */
     private function extractSchemaInfos(): void
     {
@@ -176,13 +165,12 @@ class UuidTransformer
                     || ! $column->getUnsigned()
                     || ! in_array($column->getName(), $tableKeysColumnsNames)) {
 
-
                     if (! str_ends_with($column->getName(), '_id') && ! in_array($column->getName(), ['created_by', 'updated_by', 'deleted_by'])) {
                         continue;
-                        //var_dump("FOUND A BITCH - ".$column->getName());
+                        // var_dump("FOUND A BITCH - ".$column->getName());
                     }
 
-                    //var_dump("SKIPPED - ". $column->getName() . '('.(string)(!$column->getType() instanceof \Doctrine\DBAL\Types\BigIntType).','.(string)!$column->getUnsigned().','.(string)(!in_array($column->getName(), $tableKeysColumnsNames).')'));
+                    // var_dump("SKIPPED - ". $column->getName() . '('.(string)(!$column->getType() instanceof \Doctrine\DBAL\Types\BigIntType).','.(string)!$column->getUnsigned().','.(string)(!in_array($column->getName(), $tableKeysColumnsNames).')'));
 
                 }
 
@@ -220,9 +208,6 @@ class UuidTransformer
 
     /**
      * Says if there are data that do not respect a foreign key constraint.
-     *
-     * @param  array $constraint
-     * @return bool
      */
     private function hasConstraintAnomaly(array $constraint): bool
     {
@@ -239,10 +224,6 @@ class UuidTransformer
 
     /**
      * Print message to the console if set, or do an echo.
-     *
-     * @param  string $message
-     * @param  string $style
-     * @return void
      */
     protected function message(string $message, string $style = 'info'): void
     {

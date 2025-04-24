@@ -22,7 +22,6 @@ class FileFileType extends InputType
     }
 
     /**
-     * @param  array  $options
      * @param  bool  $showLabel
      * @param  bool  $showField
      * @param  bool  $showError
@@ -33,11 +32,11 @@ class FileFileType extends InputType
         $modelData = $this->parent->getModel();
 
         // Check if we're in a child form
-        //$childForm = ( ! is_null($this->parent->getName()) ? true : false );
+        // $childForm = ( ! is_null($this->parent->getName()) ? true : false );
 
         $options['files'] = [];
 
-        //if ($childForm) {
+        // if ($childForm) {
         //    if (isset($modelData[$this->parent->getName()]) && isset($modelData[$this->parent->getName()]['id'])) {
         //        $record = app($this->getOption('model'))::find($this->parent->getModel()[$this->parent->getName()]['id']);
         //        if ( ! is_null($record)) {
@@ -47,7 +46,7 @@ class FileFileType extends InputType
         //            }
         //        }
         //    }
-        //} elseif (is_object($modelData)) {
+        // } elseif (is_object($modelData)) {
         //    $items            = $modelData->getMedia($this->getRealName())->reverse();
         //    if (!isset($options['files'])) {
         //        $options['files'] = [];
@@ -59,15 +58,15 @@ class FileFileType extends InputType
         //            ];
         //        }
         //    }
-        //}
+        // }
 
         if (is_object($modelData)) {
             $items = $modelData->getMedia($this->getRealName())
-                               ->reverse();
+                ->reverse();
             foreach ($items as $item) {
                 $options['files'][] = [
-                    'id'         => $item->id,
-                    'name'       => $item->file_name,
+                    'id' => $item->id,
+                    'name' => $item->file_name,
                     'created_at' => $item->created_at,
                 ];
             }

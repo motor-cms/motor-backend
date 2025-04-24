@@ -17,9 +17,6 @@ class DateRenderer
 
     /**
      * DateRenderer constructor.
-     *
-     * @param    $value
-     * @param  array  $options
      */
     public function __construct($value, array $options = [])
     {

@@ -13,6 +13,7 @@ class CategoryTreeRequest extends Request
     /**
      * @OA\Schema(
      *   schema="CategoryTreeRequest",
+     *
      *   @OA\Property(
      *     property="name",
      *     type="string",
@@ -47,19 +48,19 @@ class CategoryTreeRequest extends Request
         $request = $this;
 
         return [
-            'name'  => 'required',
+            'name' => 'required',
             'scope' => [
                 'required',
                 Rule::unique('categories')
                     ->where(function ($query) use ($request) {
                         if ($request->method() == 'PATCH' || $request->method() == 'PUT') {
                             return $query->where('scope', $request->scope)
-                                         ->where('parent_id', null)
-                                         ->where('id', '!=', $request->route()
-                                                                     ->originalParameter('category'));
+                                ->where('parent_id', null)
+                                ->where('id', '!=', $request->route()
+                                    ->originalParameter('category'));
                         } else {
                             return $query->where('scope', $request->scope)
-                                         ->where('parent_id', null);
+                                ->where('parent_id', null);
                         }
                     }),
             ],

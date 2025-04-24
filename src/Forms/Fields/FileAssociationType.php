@@ -34,8 +34,8 @@ class FileAssociationType extends InputType
 
         if (is_object($modelData)) {
             $fileAssociation = $modelData->file_associations()
-                                         ->where('identifier', $this->getRealName())
-                                         ->first();
+                ->where('identifier', $this->getRealName())
+                ->first();
             if (! is_null($fileAssociation)) {
                 // FIXME: check if this still works!
                 $data = (new FileResource($fileAssociation->file))->toArrayRecursive();
@@ -52,7 +52,6 @@ class FileAssociationType extends InputType
     }
 
     /**
-     * @param  array  $options
      * @param  bool  $showLabel
      * @param  bool  $showField
      * @param  bool  $showError

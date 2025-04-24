@@ -31,7 +31,7 @@ class MotorBackendApiEmailTemplateTest extends TestCase
         'role_has_permissions',
     ];
 
-    public function setUp()
+    protected function setUp()
     {
         parent::setUp();
 
@@ -88,10 +88,10 @@ class MotorBackendApiEmailTemplateTest extends TestCase
         $this->user->givePermissionTo($this->writePermission);
         $language = create_test_language();
         $this->json('POST', '/api/email_templates?api_token='.$this->user->api_token, [
-            'client_id'   => $this->client->id,
+            'client_id' => $this->client->id,
             'language_id' => $language->id,
-            'name'        => 'Test',
-            'subject'     => 'Test',
+            'name' => 'Test',
+            'subject' => 'Test',
         ])->seeStatusCode(200)->seeJson([
             'name' => 'Test',
         ]);
@@ -211,10 +211,10 @@ class MotorBackendApiEmailTemplateTest extends TestCase
         $language = create_test_language();
         $email_template = create_test_email_template();
         $this->json('PATCH', '/api/email_templates/'.$email_template->id.'?api_token='.$this->user->api_token, [
-            'client_id'   => $this->client->id,
+            'client_id' => $this->client->id,
             'language_id' => $language->id,
-            'name'        => 'Updated-Test',
-            'subject'     => 'Test',
+            'name' => 'Updated-Test',
+            'subject' => 'Test',
         ])->seeStatusCode(200)->seeJson([
             'name' => 'Updated-Test',
         ]);

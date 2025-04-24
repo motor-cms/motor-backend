@@ -15,19 +15,19 @@ use Motor\Backend\Http\Controllers\Backend\UsersController;
 
 Route::group([
     'middleware' => ['web'],
-    'namespace'  => 'Motor\Backend\Http\Controllers',
+    'namespace' => 'Motor\Backend\Http\Controllers',
 ], static function () {
     Auth::routes(config('motor-backend.routes.auth', []));
     Route::get('password/change', [ChangePasswordController::class, 'showChangeForm'])
-         ->name('auth.change-password.index');
+        ->name('auth.change-password.index');
     Route::post('password/change', [ChangePasswordController::class, 'change'])
-         ->name('auth.change-password.store');
+        ->name('auth.change-password.store');
 });
 
 Route::group([
-    'as'         => 'backend.',
-    'prefix'     => 'backend',
-    'namespace'  => 'Motor\Backend\Http\Controllers\Backend',
+    'as' => 'backend.',
+    'prefix' => 'backend',
+    'namespace' => 'Motor\Backend\Http\Controllers\Backend',
     'middleware' => [
         'web',
         'web_auth',
@@ -37,11 +37,11 @@ Route::group([
     Route::group(['middleware' => ['permission']], static function () {
         if (config('motor-backend.routes.dashboard')) {
             Route::get('/', [
-                'as'   => 'dashboard.index',
+                'as' => 'dashboard.index',
                 'uses' => [DashboardController::class, 'show'],
             ]);
             Route::get('dashboard', [DashboardController::class, 'show'])
-                 ->name('dashboard.index');
+                ->name('dashboard.index');
         }
 
         if (config('motor-backend.routes.users')) {
@@ -67,14 +67,14 @@ Route::group([
         if (config('motor-backend.routes.email_templates')) {
             Route::resource('email_templates', EmailTemplatesController::class);
             Route::get('email_templates/{email_template}/duplicate', [EmailTemplatesController::class, 'duplicate'])
-                 ->name('email_templates.duplicate');
+                ->name('email_templates.duplicate');
         }
 
         if (config('motor-backend.routes.profile')) {
             Route::get('profile/edit', [ProfileEditController::class, 'edit'])
-                 ->name('profile.edit');
+                ->name('profile.edit');
             Route::patch('profile/edit', [ProfileEditController::class, 'update'])
-                 ->name('profile.update');
+                ->name('profile.update');
         }
 
         Route::resource('categories', CategoriesController::class, [
@@ -85,9 +85,9 @@ Route::group([
         ]);
 
         Route::get('categories/{category}', [CategoriesController::class, 'index'])
-             ->name('categories.index');
+            ->name('categories.index');
         Route::get('categories/{category}/create', [CategoriesController::class, 'create'])
-             ->name('categories.create');
+            ->name('categories.create');
 
         Route::resource('category_trees', CategoryTreesController::class, [
             'parameters' => [
@@ -97,6 +97,6 @@ Route::group([
 
         Route::resource('config_variables', ConfigVariablesController::class);
         Route::get('config_variables/{config_variable}/duplicate', [ConfigVariablesController::class, 'duplicate'])
-             ->name('config_variables.duplicate');
+            ->name('config_variables.duplicate');
     });
 });

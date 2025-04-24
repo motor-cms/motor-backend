@@ -21,10 +21,10 @@ class UsersTableSeeder extends Seeder
     public function run()
     {
         DB::table('users')->insert([
-            'name'       => 'Motor Admin',
-            'email'      => 'motor@esmaili.info',
-            'password'   => bcrypt('admin'),
-            'api_token'  => Str::random(60),
+            'name' => 'Motor Admin',
+            'email' => 'motor@esmaili.info',
+            'password' => bcrypt('admin'),
+            'api_token' => Str::random(60),
             'created_at' => date('Y-m-d H:i:s'),
             'updated_at' => date('Y-m-d H:i:s'),
         ]);

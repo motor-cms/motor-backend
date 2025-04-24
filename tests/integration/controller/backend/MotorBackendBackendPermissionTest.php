@@ -28,7 +28,7 @@ class MotorBackendBackendPermissionTest extends TestCase
         'role_has_permissions',
     ];
 
-    public function setUp()
+    protected function setUp()
     {
         parent::setUp();
 

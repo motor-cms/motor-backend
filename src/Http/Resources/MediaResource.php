@@ -5,6 +5,7 @@ namespace Motor\Backend\Http\Resources;
 /**
  * @OA\Schema(
  *   schema="MediaResource",
+ *
  *   @OA\Property(
  *     property="collection",
  *     type="string",
@@ -53,7 +54,9 @@ namespace Motor\Backend\Http\Resources;
  *   @OA\Property(
  *     property="conversions",
  *     type="object",
+ *
  *     @OA\Items(
+ *
  *       @OA\Property(
  *         property="thumb",
  *         type="string",
@@ -88,15 +91,15 @@ class MediaResource extends BaseResource
         }
 
         return [
-            'collection'  => $this->collection_name,
-            'name'        => $this->name,
-            'file_name'   => $this->file_name,
-            'size'        => (int) $this->size,
-            'mime_type'   => $this->mime_type,
-            'url'         => $this->getUrl(),
-            'path'        => $this->getPath(),
-            'uuid'        => $this->uuid,
-            'created_at'  => (string) $this->created_at,
+            'collection' => $this->collection_name,
+            'name' => $this->name,
+            'file_name' => $this->file_name,
+            'size' => (int) $this->size,
+            'mime_type' => $this->mime_type,
+            'url' => $this->getUrl(),
+            'path' => $this->getPath(),
+            'uuid' => $this->uuid,
+            'created_at' => (string) $this->created_at,
             'conversions' => $conversions,
         ];
     }

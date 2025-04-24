@@ -37,20 +37,16 @@ class ChangePasswordController extends Controller
      *
      * If no token is present, display the link request form.
      *
-     * @param  Request  $request
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function showChangeForm(Request $request)
     {
         return view('motor-backend::auth.passwords.change')->with([
             'email' => Auth::guard()
-                           ->user()->email,
+                ->user()->email,
         ]);
     }
 
-    /**
-     * @param  Request  $request
-     */
     public function saveNewPassword(Request $request)
     {
         // Fixme: do something here

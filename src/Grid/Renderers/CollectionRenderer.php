@@ -16,7 +16,6 @@ class CollectionRenderer
     /**
      * CollectionRenderer constructor.
      *
-     * @param    $value
      * @param  null  $options
      */
     public function __construct($value, $options = null)
@@ -42,6 +41,6 @@ class CollectionRenderer
         }
 
         return App::make('html')
-                  ->ul($list, ['class' => 'list-unstyled']);
+            ->ul($list, ['class' => 'list-unstyled']);
     }
 }

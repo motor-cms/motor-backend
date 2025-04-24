@@ -44,7 +44,6 @@ class Grid extends Base
     /**
      * Grid constructor.
      *
-     * @param $model
      *
      * @throws \ReflectionException
      */
@@ -66,9 +65,7 @@ class Grid extends Base
     /**
      * Stub method. Implemented in the child classes
      */
-    protected function setup()
-    {
-    }
+    protected function setup() {}
 
     /**
      * @return Filter
@@ -78,22 +75,15 @@ class Grid extends Base
         return $this->filter;
     }
 
-    /**
-     * @param $filter
-     */
     public function setFilter($filter)
     {
         $this->filter = $filter;
     }
 
     /**
-     * @param string $name
-     * @param string|null $label
-     * @param bool $sortable
-     * @param null $sortableField
-     * @return Column
+     * @param  null  $sortableField
      */
-    public function addColumn(string $name, string $label = null, bool $sortable = false, $sortableField = null): Column
+    public function addColumn(string $name, ?string $label = null, bool $sortable = false, $sortableField = null): Column
     {
         $column = new Column($name, $label, $sortable, $sortableField);
         $this->columns[$column->getName()] = $column;
@@ -105,10 +95,6 @@ class Grid extends Base
         return $column;
     }
 
-    /**
-     * @param $view
-     * @return SpecialRow
-     */
     public function addSpecialRow($view): SpecialRow
     {
         $specialRow = new SpecialRow($view);
@@ -125,23 +111,13 @@ class Grid extends Base
         return $this->specialRows;
     }
 
-    /**
-     * @param    $label
-     * @param    $link
-     * @param    $action
-     * @param array $parameters
-     * @return Action
-     */
     public function addFormAction(string $label, $link, $action, array $parameters = []): Action
     {
         return $this->addAction($label, $link, array_merge($parameters, ['type' => 'form', 'action' => $action]));
     }
 
     /**
-     * @param    $label
-     * @param    $link
-     * @param array $parameters
-     * @return Action
+     * @param  array  $parameters
      */
     public function addEditAction($label, $link, $parameters = []): Action
     {
@@ -149,10 +125,7 @@ class Grid extends Base
     }
 
     /**
-     * @param    $label
-     * @param    $link
-     * @param array $parameters
-     * @return Action
+     * @param  array  $parameters
      */
     public function addDuplicateAction($label, $link, $parameters = []): Action
     {
@@ -160,10 +133,7 @@ class Grid extends Base
     }
 
     /**
-     * @param    $label
-     * @param    $link
-     * @param array $parameters
-     * @return Action
+     * @param  array  $parameters
      */
     public function addDeleteAction($label, $link, $parameters = []): Action
     {
@@ -171,10 +141,7 @@ class Grid extends Base
     }
 
     /**
-     * @param    $label
-     * @param    $link
-     * @param array $parameters
-     * @return Action
+     * @param  array  $parameters
      */
     public function addAction($label, $link, $parameters = []): Action
     {
@@ -183,14 +150,11 @@ class Grid extends Base
 
         // Once the first action is added, we need to add the action column
         $this->addColumn('special:actions', trans('motor-backend::backend/global.actions'))
-             ->attributes(['style' => 'text-align: right; min-width: 130px;', 'class' => 'action-column']);
+            ->attributes(['style' => 'text-align: right; min-width: 130px;', 'class' => 'action-column']);
 
         return $action;
     }
 
-    /**
-     * @return array
-     */
     public function getActions(): array
     {
         return $this->actions;
@@ -198,8 +162,6 @@ class Grid extends Base
 
     /**
      * Get all columns
-     *
-     * @return array
      */
     public function getColumns(): array
     {
@@ -209,7 +171,6 @@ class Grid extends Base
     /**
      * Query database and parse all rows and cells
      *
-     * @return array
      *
      * @throws \ReflectionException
      */
@@ -246,8 +207,6 @@ class Grid extends Base
 
     /**
      * Check if row closures are set
-     *
-     * @return bool
      */
     public function hasRowClosures(): bool
     {
@@ -260,8 +219,6 @@ class Grid extends Base
 
     /**
      * Get row closures
-     *
-     * @return array
      */
     public function getRowClosures(): array
     {
@@ -271,7 +228,6 @@ class Grid extends Base
     /**
      * Set row closure
      *
-     * @param \Closure $closure
      * @return $this
      */
     public function row(Closure $closure)
@@ -285,10 +241,7 @@ class Grid extends Base
      * Cell renderer, should maybe be outsourced in a 'render' class as we'll have separate renderers later (probably
      * ;))
      *
-     * @param Cell $cell
-     * @param Column $column
-     * @param    $record
-     * @param bool $sanitize
+     * @param  bool  $sanitize
      * @return mixed
      */
     protected function getCellValue(Cell $cell, Column $column, $record, $sanitize = true)
@@ -306,8 +259,8 @@ class Grid extends Base
                         }
                     }
                     $temporaryRecord = $temporaryRecord->{$segment};
-                    //if (isset($temporaryRecord->{$segment})) {
-                    //}
+                    // if (isset($temporaryRecord->{$segment})) {
+                    // }
                 } catch (Exception $exception) {
                 }
             }
@@ -347,8 +300,7 @@ class Grid extends Base
     /**
      * Set default sorting, if nothing is in the URL or the session
      *
-     * @param    $field
-     * @param string $direction
+     * @param  string  $direction
      * @return $this
      */
     public function setDefaultSorting($field, $direction = 'ASC')
@@ -359,10 +311,6 @@ class Grid extends Base
     }
 
     /**
-     * @param $field
-     * @param $direction
-     * @return bool
-     *
      * @throws \ReflectionException
      */
     public function checkSortable($field, $direction): bool
@@ -389,8 +337,6 @@ class Grid extends Base
     }
 
     /**
-     * @return array
-     *
      * @throws \ReflectionException
      */
     public function getSorting(): array
@@ -415,9 +361,6 @@ class Grid extends Base
     }
 
     /**
-     * @param $field
-     * @param $direction
-     *
      * @throws \ReflectionException
      */
     public function setSorting($field, $direction)
@@ -450,20 +393,12 @@ class Grid extends Base
         return $sorting[1];
     }
 
-    /**
-     * @param $field
-     * @param $direction
-     * @return string
-     */
     public function getSortableLink(string $field, string $direction): string
     {
         return '?sortable_field='.$field.'&sortable_direction='.$direction;
     }
 
     /**
-     * @param int $limit
-     * @return AbstractPaginator
-     *
      * @throws \ReflectionException
      */
     public function getPaginator(int $limit = 20): AbstractPaginator
@@ -476,7 +411,7 @@ class Grid extends Base
 
         if (! $this->filter->get('per_page')) {
             $this->filter->add(new PerPageRenderer('per_page'))
-                         ->setup();
+                ->setup();
         }
 
         $perPage = $this->filter->get('per_page');
@@ -489,8 +424,8 @@ class Grid extends Base
         // FIXME: we can't assume that the sorting will always be on the base model!?
         if (! is_null($sortableField)) {
             $this->paginator = $query->orderBy($query->getModel()
-                                                     ->getTable().'.'.$sortableField, $sortableDirection)
-                                     ->paginate($limit);
+                ->getTable().'.'.$sortableField, $sortableDirection)
+                ->paginate($limit);
 
             return $this->paginator;
         }
@@ -503,7 +438,6 @@ class Grid extends Base
     /**
      * Set an external paginator
      *
-     * @param AbstractPaginator $paginator
      * @return $this
      */
     public function setPaginator(AbstractPaginator $paginator)

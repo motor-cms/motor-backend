@@ -10,13 +10,6 @@ use Spatie\MediaLibrary\HasMedia;
  */
 class MediaHelper
 {
-    /**
-     * @param \Spatie\MediaLibrary\HasMedia $record
-     * @param string $identifier
-     * @param bool $base64
-     * @param array $conversions
-     * @return array
-     */
     public static function getFileInformation(
         HasMedia $record,
         string $identifier,
@@ -28,7 +21,7 @@ class MediaHelper
 
         $host = config('app.url');
 
-        //$host = ( isset($_SERVER['HTTPS']) ? "https" : "http" ) . "://".$_SERVER['HTTP_HOST'];
+        // $host = ( isset($_SERVER['HTTPS']) ? "https" : "http" ) . "://".$_SERVER['HTTP_HOST'];
 
         if (isset($items[0])) {
             $data['file_original'] = asset($items[0]->getUrl());

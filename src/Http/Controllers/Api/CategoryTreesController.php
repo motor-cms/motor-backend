@@ -24,7 +24,9 @@ class CategoryTreesController extends ApiController
      *   tags={"CategoryTreesController"},
      *   path="/api/category_trees",
      *   summary="Get category tree collection",
+     *
      *   @OA\Parameter(
+     *
      *     @OA\Schema(type="string"),
      *     in="query",
      *     allowReserved=true,
@@ -32,15 +34,20 @@ class CategoryTreesController extends ApiController
      *     parameter="api_token",
      *     description="Personal api_token of the user"
      *   ),
+     *
      *   @OA\Response(
      *     response=200,
      *     description="Success",
+     *
      *     @OA\JsonContent(
+     *
      *       @OA\Property(
      *         property="data",
      *         type="array",
+     *
      *         @OA\Items(ref="#/components/schemas/CategoryTreeResource")
      *       ),
+     *
      *       @OA\Property(
      *         property="meta",
      *         ref="#/components/schemas/PaginationMeta"
@@ -56,9 +63,11 @@ class CategoryTreesController extends ApiController
      *       )
      *     )
      *   ),
+     *
      *   @OA\Response(
      *     response="403",
      *     description="Access denied",
+     *
      *     @OA\JsonContent(ref="#/components/schemas/AccessDenied"),
      *   )
      * )
@@ -73,8 +82,8 @@ class CategoryTreesController extends ApiController
 
         $filter = $service->getFilter();
         $filter->add(new WhereRenderer('parent_id'))
-               ->setDefaultValue(null)
-               ->setAllowNull(true);
+            ->setDefaultValue(null)
+            ->setAllowNull(true);
 
         $paginator = $service->getPaginator();
 
@@ -86,10 +95,14 @@ class CategoryTreesController extends ApiController
      *   tags={"CategoryTreesController"},
      *   path="/api/category_trees",
      *   summary="Create new category tree",
+     *
      *   @OA\RequestBody(
+     *
      *     @OA\JsonContent(ref="#/components/schemas/CategoryTreeRequest")
      *   ),
+     *
      *   @OA\Parameter(
+     *
      *     @OA\Schema(type="string"),
      *     in="query",
      *     allowReserved=true,
@@ -97,10 +110,13 @@ class CategoryTreesController extends ApiController
      *     parameter="api_token",
      *     description="Personal api_token of the user"
      *   ),
+     *
      *   @OA\Response(
      *     response=200,
      *     description="Success",
+     *
      *     @OA\JsonContent(
+     *
      *       @OA\Property(
      *         property="data",
      *         type="object",
@@ -113,31 +129,34 @@ class CategoryTreesController extends ApiController
      *       )
      *     )
      *   ),
+     *
      *   @OA\Response(
      *     response="403",
      *     description="Access denied",
+     *
      *     @OA\JsonContent(ref="#/components/schemas/AccessDenied"),
      *   ),
+     *
      *   @OA\Response(
      *     response="404",
      *     description="Not found",
+     *
      *     @OA\JsonContent(ref="#/components/schemas/NotFound"),
      *   )
      * )
      *
      * Store a newly created resource in storage.
      *
-     * @param  \Motor\Backend\Http\Requests\Backend\CategoryTreeRequest  $request
      * @return mixed
      */
     public function store(CategoryTreeRequest $request)
     {
         $result = CategoryService::create($request)
-                                 ->getResult();
+            ->getResult();
 
         return (new CategoryTreeResource($result))->additional(['message' => 'Category tree created'])
-                                                  ->response()
-                                                  ->setStatusCode(201);
+            ->response()
+            ->setStatusCode(201);
     }
 
     /**
@@ -145,7 +164,9 @@ class CategoryTreesController extends ApiController
      *   tags={"CategoryTreesController"},
      *   path="/api/category_trees/{category}",
      *   summary="Get single category tree",
+     *
      *   @OA\Parameter(
+     *
      *     @OA\Schema(type="string"),
      *     in="query",
      *     allowReserved=true,
@@ -153,17 +174,22 @@ class CategoryTreesController extends ApiController
      *     parameter="api_token",
      *     description="Personal api_token of the user"
      *   ),
+     *
      *   @OA\Parameter(
+     *
      *     @OA\Schema(type="integer"),
      *     in="path",
      *     name="category",
      *     parameter="category",
      *     description="Category tree id"
      *   ),
+     *
      *   @OA\Response(
      *     response=200,
      *     description="Success",
+     *
      *     @OA\JsonContent(
+     *
      *       @OA\Property(
      *         property="data",
      *         type="object",
@@ -176,27 +202,30 @@ class CategoryTreesController extends ApiController
      *       )
      *     )
      *   ),
+     *
      *   @OA\Response(
      *     response="403",
      *     description="Access denied",
+     *
      *     @OA\JsonContent(ref="#/components/schemas/AccessDenied"),
      *   ),
+     *
      *   @OA\Response(
      *     response="404",
      *     description="Not found",
+     *
      *     @OA\JsonContent(ref="#/components/schemas/NotFound"),
      *   )
      * )
      *
      * Display the specified resource.
      *
-     * @param  \Motor\Backend\Models\Category  $record
      * @return \Motor\Backend\Http\Resources\CategoryTreeResource
      */
     public function show(Category $record)
     {
         $result = CategoryService::show($record)
-                                 ->getResult();
+            ->getResult();
 
         return (new CategoryTreeResource($result->load('children')))->additional(['message' => 'Category tree read']);
     }
@@ -206,10 +235,14 @@ class CategoryTreesController extends ApiController
      *   tags={"CategoryTreesController"},
      *   path="/api/category_trees/{category}",
      *   summary="Update an existing category tree",
+     *
      *   @OA\RequestBody(
+     *
      *     @OA\JsonContent(ref="#/components/schemas/CategoryTreeRequest")
      *   ),
+     *
      *   @OA\Parameter(
+     *
      *     @OA\Schema(type="string"),
      *     in="query",
      *     allowReserved=true,
@@ -217,17 +250,22 @@ class CategoryTreesController extends ApiController
      *     parameter="api_token",
      *     description="Personal api_token of the user"
      *   ),
+     *
      *   @OA\Parameter(
+     *
      *     @OA\Schema(type="integer"),
      *     in="path",
      *     name="category",
      *     parameter="category",
      *     description="Category tree id"
      *   ),
+     *
      *   @OA\Response(
      *     response=200,
      *     description="Success",
+     *
      *     @OA\JsonContent(
+     *
      *       @OA\Property(
      *         property="data",
      *         type="object",
@@ -240,28 +278,30 @@ class CategoryTreesController extends ApiController
      *       )
      *     )
      *   ),
+     *
      *   @OA\Response(
      *     response="403",
      *     description="Access denied",
+     *
      *     @OA\JsonContent(ref="#/components/schemas/AccessDenied"),
      *   ),
+     *
      *   @OA\Response(
      *     response="404",
      *     description="Not found",
+     *
      *     @OA\JsonContent(ref="#/components/schemas/NotFound"),
      *   )
      * )
      *
      * Update the specified resource in storage.
      *
-     * @param  \Motor\Backend\Http\Requests\Backend\CategoryTreeRequest  $request
-     * @param  \Motor\Backend\Models\Category  $record
      * @return \Motor\Backend\Resources\Http\Resources\CategoryTreeResource
      */
     public function update(CategoryTreeRequest $request, Category $record)
     {
         $result = CategoryService::update($record, $request)
-                                 ->getResult();
+            ->getResult();
 
         return (new CategoryTreeResource($result))->additional(['message' => 'Category tree updated']);
     }
@@ -271,7 +311,9 @@ class CategoryTreesController extends ApiController
      *   tags={"CategoryTreesController"},
      *   path="/api/category_trees/{category}",
      *   summary="Delete a category tree",
+     *
      *   @OA\Parameter(
+     *
      *     @OA\Schema(type="string"),
      *     in="query",
      *     allowReserved=true,
@@ -279,17 +321,22 @@ class CategoryTreesController extends ApiController
      *     parameter="api_token",
      *     description="Personal api_token of the user"
      *   ),
+     *
      *   @OA\Parameter(
+     *
      *     @OA\Schema(type="integer"),
      *     in="path",
      *     name="category",
      *     parameter="category",
      *     description="Category tree id"
      *   ),
+     *
      *   @OA\Response(
      *     response=200,
      *     description="Success",
+     *
      *     @OA\JsonContent(
+     *
      *       @OA\Property(
      *         property="message",
      *         type="string",
@@ -297,20 +344,27 @@ class CategoryTreesController extends ApiController
      *       )
      *     )
      *   ),
+     *
      *   @OA\Response(
      *     response="403",
      *     description="Access denied",
+     *
      *     @OA\JsonContent(ref="#/components/schemas/AccessDenied"),
      *   ),
+     *
      *   @OA\Response(
      *     response="404",
      *     description="Not found",
+     *
      *     @OA\JsonContent(ref="#/components/schemas/NotFound"),
      *   ),
+     *
      *   @OA\Response(
      *     response="400",
      *     description="Bad request",
+     *
      *     @OA\JsonContent(
+     *
      *       @OA\Property(
      *         property="message",
      *         type="string",
@@ -322,13 +376,12 @@ class CategoryTreesController extends ApiController
      *
      * Remove the specified resource from storage.
      *
-     * @param  \Motor\Backend\Models\Category  $record
      * @return \Illuminate\Http\JsonResponse
      */
     public function destroy(Category $record)
     {
         $result = CategoryService::delete($record)
-                                 ->getResult();
+            ->getResult();
 
         if ($result) {
             return response()->json(['message' => 'Category tree deleted']);

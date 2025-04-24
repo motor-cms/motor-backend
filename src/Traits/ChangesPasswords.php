@@ -19,7 +19,6 @@ trait ChangesPasswords
     /**
      * Reset the given user's password.
      *
-     * @param  Request  $request
      * @return \Illuminate\Http\JsonResponse|\Illuminate\Http\RedirectResponse
      */
     public function change(Request $request)
@@ -27,7 +26,7 @@ trait ChangesPasswords
         $this->validate($request, $this->rules(), $this->validationErrorMessages());
 
         $this->resetPassword(Auth::guard()
-                                 ->user(), $request->get('password'));
+            ->user(), $request->get('password'));
 
         flash()->success(trans('motor-backend::backend/login.password_successfully_changed'));
 
@@ -59,7 +58,6 @@ trait ChangesPasswords
     /**
      * Get the password reset credentials from the request.
      *
-     * @param  \Illuminate\Http\Request  $request
      * @return array
      */
     protected function credentials(Request $request)
@@ -83,10 +81,10 @@ trait ChangesPasswords
 
         $user->save();
 
-        //event(new PasswordReset($user));
+        // event(new PasswordReset($user));
 
         $this->guard()
-             ->login($user);
+            ->login($user);
     }
 
     /**
@@ -103,7 +101,6 @@ trait ChangesPasswords
     /**
      * Get the response for a failed password reset.
      *
-     * @param  \Illuminate\Http\Request  $request
      * @param  string  $response
      * @return \Illuminate\Http\RedirectResponse|\Illuminate\Http\JsonResponse
      */

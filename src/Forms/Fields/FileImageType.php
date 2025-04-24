@@ -22,7 +22,6 @@ class FileImageType extends InputType
     }
 
     /**
-     * @param  array  $options
      * @param  bool  $showLabel
      * @param  bool  $showField
      * @param  bool  $showError
@@ -33,11 +32,11 @@ class FileImageType extends InputType
         $modelData = $this->parent->getModel();
 
         // Check if we're in a child form
-        //$childForm = ( ! is_null($this->parent->getName()) ? true : false );
+        // $childForm = ( ! is_null($this->parent->getName()) ? true : false );
 
         $options['files'] = [];
 
-        //if ($childForm) {
+        // if ($childForm) {
         //    dd($this->parent->getModel());
         //    if (isset($modelData[$this->parent->getName()]) && isset($modelData[$this->parent->getName()]['id'])) {
         //        $record = app($this->getOption('model'))::find($this->parent->getModel()[$this->parent->getName()]['id']);
@@ -54,21 +53,21 @@ class FileImageType extends InputType
         //            }
         //        }
         //    }
-        //} elseif (is_object($modelData)) {
+        // } elseif (is_object($modelData)) {
         if (is_object($modelData)) {
             $items = $modelData->getMedia($this->getRealName())
-                               ->reverse();
+                ->reverse();
             foreach ($items as $item) {
                 $options['files'][] = [
-                    'id'         => $item->id,
-                    'name'       => $item->file_name,
-                    'image'      => $item->getUrl('thumb'),
-                    'preview'    => $item->getUrl('preview'),
+                    'id' => $item->id,
+                    'name' => $item->file_name,
+                    'image' => $item->getUrl('thumb'),
+                    'preview' => $item->getUrl('preview'),
                     'created_at' => $item->created_at,
                 ];
             }
         }
-        //}
+        // }
 
         $options['name'] = $this->getName();
         $options['name_slug'] = Str::slug($this->getName());

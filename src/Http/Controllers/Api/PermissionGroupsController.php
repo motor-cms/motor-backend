@@ -24,7 +24,9 @@ class PermissionGroupsController extends ApiController
      *   tags={"PermissionGroupsController"},
      *   path="/api/permission_groups",
      *   summary="Get permission group collection",
+     *
      *   @OA\Parameter(
+     *
      *     @OA\Schema(type="string"),
      *     in="query",
      *     allowReserved=true,
@@ -32,15 +34,20 @@ class PermissionGroupsController extends ApiController
      *     parameter="api_token",
      *     description="Personal api_token of the user"
      *   ),
+     *
      *   @OA\Response(
      *     response=200,
      *     description="Success",
+     *
      *     @OA\JsonContent(
+     *
      *       @OA\Property(
      *         property="data",
      *         type="array",
+     *
      *         @OA\Items(ref="#/components/schemas/PermissionGroupResource")
      *       ),
+     *
      *       @OA\Property(
      *         property="meta",
      *         ref="#/components/schemas/PaginationMeta"
@@ -56,9 +63,11 @@ class PermissionGroupsController extends ApiController
      *       )
      *     )
      *   ),
+     *
      *   @OA\Response(
      *     response="403",
      *     description="Access denied",
+     *
      *     @OA\JsonContent(ref="#/components/schemas/AccessDenied"),
      *   )
      * )
@@ -70,7 +79,7 @@ class PermissionGroupsController extends ApiController
     public function index()
     {
         $paginator = PermissionGroupService::collection()
-                                           ->getPaginator();
+            ->getPaginator();
 
         return (new PermissionGroupCollection($paginator))->additional(['message' => 'Permission collection read']);
     }
@@ -80,10 +89,14 @@ class PermissionGroupsController extends ApiController
      *   tags={"PermissionGroupsController"},
      *   path="/api/permission_groups",
      *   summary="Create new permission group",
+     *
      *   @OA\RequestBody(
+     *
      *     @OA\JsonContent(ref="#/components/schemas/PermissionGroupRequest")
      *   ),
+     *
      *   @OA\Parameter(
+     *
      *     @OA\Schema(type="string"),
      *     in="query",
      *     allowReserved=true,
@@ -91,10 +104,13 @@ class PermissionGroupsController extends ApiController
      *     parameter="api_token",
      *     description="Personal api_token of the user"
      *   ),
+     *
      *   @OA\Response(
      *     response=200,
      *     description="Success",
+     *
      *     @OA\JsonContent(
+     *
      *       @OA\Property(
      *         property="data",
      *         type="object",
@@ -107,31 +123,34 @@ class PermissionGroupsController extends ApiController
      *       )
      *     )
      *   ),
+     *
      *   @OA\Response(
      *     response="403",
      *     description="Access denied",
+     *
      *     @OA\JsonContent(ref="#/components/schemas/AccessDenied"),
      *   ),
+     *
      *   @OA\Response(
      *     response="404",
      *     description="Not found",
+     *
      *     @OA\JsonContent(ref="#/components/schemas/NotFound"),
      *   )
      * )
      *
      * Store a newly created resource in storage.
      *
-     * @param  \Motor\Backend\Http\Requests\Backend\PermissionGroupRequest  $request
      * @return \Illuminate\Http\JsonResponse|object
      */
     public function store(PermissionGroupRequest $request)
     {
         $result = PermissionGroupService::create($request)
-                                        ->getResult();
+            ->getResult();
 
         return (new PermissionGroupResource($result))->additional(['message' => 'Permission group created'])
-                                                     ->response()
-                                                     ->setStatusCode(201);
+            ->response()
+            ->setStatusCode(201);
     }
 
     /**
@@ -139,7 +158,9 @@ class PermissionGroupsController extends ApiController
      *   tags={"PermissionGroupsController"},
      *   path="/api/permission_groups/{permission_group}",
      *   summary="Get single permission group",
+     *
      *   @OA\Parameter(
+     *
      *     @OA\Schema(type="string"),
      *     in="query",
      *     allowReserved=true,
@@ -147,17 +168,22 @@ class PermissionGroupsController extends ApiController
      *     parameter="api_token",
      *     description="Personal api_token of the user"
      *   ),
+     *
      *   @OA\Parameter(
+     *
      *     @OA\Schema(type="integer"),
      *     in="path",
      *     name="permission_group",
      *     parameter="permission_group",
      *     description="Permission group id"
      *   ),
+     *
      *   @OA\Response(
      *     response=200,
      *     description="Success",
+     *
      *     @OA\JsonContent(
+     *
      *       @OA\Property(
      *         property="data",
      *         type="object",
@@ -170,27 +196,30 @@ class PermissionGroupsController extends ApiController
      *       )
      *     )
      *   ),
+     *
      *   @OA\Response(
      *     response="403",
      *     description="Access denied",
+     *
      *     @OA\JsonContent(ref="#/components/schemas/AccessDenied"),
      *   ),
+     *
      *   @OA\Response(
      *     response="404",
      *     description="Not found",
+     *
      *     @OA\JsonContent(ref="#/components/schemas/NotFound"),
      *   )
      * )
      *
      * Display the specified resource.
      *
-     * @param  \Motor\Backend\Models\PermissionGroup  $record
      * @return \Motor\Backend\Http\Resources\PermissionGroupResource
      */
     public function show(PermissionGroup $record)
     {
         $result = PermissionGroupService::show($record)
-                                        ->getResult();
+            ->getResult();
 
         return (new PermissionGroupResource($result->load('permissions')))->additional(['message' => 'Permission group read']);
     }
@@ -200,10 +229,14 @@ class PermissionGroupsController extends ApiController
      *   tags={"PermissionGroupsController"},
      *   path="/api/permission_groups/{permission_group}",
      *   summary="Update an existing permission group",
+     *
      *   @OA\RequestBody(
+     *
      *     @OA\JsonContent(ref="#/components/schemas/PermissionGroupRequest")
      *   ),
+     *
      *   @OA\Parameter(
+     *
      *     @OA\Schema(type="string"),
      *     in="query",
      *     allowReserved=true,
@@ -211,17 +244,22 @@ class PermissionGroupsController extends ApiController
      *     parameter="api_token",
      *     description="Personal api_token of the user"
      *   ),
+     *
      *   @OA\Parameter(
+     *
      *     @OA\Schema(type="integer"),
      *     in="path",
      *     name="permission_group",
      *     parameter="permission_group",
      *     description="Permission group id"
      *   ),
+     *
      *   @OA\Response(
      *     response=200,
      *     description="Success",
+     *
      *     @OA\JsonContent(
+     *
      *       @OA\Property(
      *         property="data",
      *         type="object",
@@ -234,28 +272,30 @@ class PermissionGroupsController extends ApiController
      *       )
      *     )
      *   ),
+     *
      *   @OA\Response(
      *     response="403",
      *     description="Access denied",
+     *
      *     @OA\JsonContent(ref="#/components/schemas/AccessDenied"),
      *   ),
+     *
      *   @OA\Response(
      *     response="404",
      *     description="Not found",
+     *
      *     @OA\JsonContent(ref="#/components/schemas/NotFound"),
      *   )
      * )
      *
      * Update the specified resource in storage.
      *
-     * @param  \Motor\Backend\Http\Requests\Backend\PermissionGroupRequest  $request
-     * @param  \Motor\Backend\Models\Permission  $record
      * @return \Motor\Backend\Http\Resources\PermissionGroupResource
      */
     public function update(PermissionGroupRequest $request, Permission $record)
     {
         $result = PermissionGroupService::update($record, $request)
-                                        ->getResult();
+            ->getResult();
 
         return (new PermissionGroupResource($result))->additional(['message' => 'Permission group updated']);
     }
@@ -265,7 +305,9 @@ class PermissionGroupsController extends ApiController
      *   tags={"PermissionGroupsController"},
      *   path="/api/permission_groups/{permission_group}",
      *   summary="Delete a permission group",
+     *
      *   @OA\Parameter(
+     *
      *     @OA\Schema(type="string"),
      *     in="query",
      *     allowReserved=true,
@@ -273,17 +315,22 @@ class PermissionGroupsController extends ApiController
      *     parameter="api_token",
      *     description="Personal api_token of the user"
      *   ),
+     *
      *   @OA\Parameter(
+     *
      *     @OA\Schema(type="integer"),
      *     in="path",
      *     name="permission_group",
      *     parameter="permission_group",
      *     description="Permission group id"
      *   ),
+     *
      *   @OA\Response(
      *     response=200,
      *     description="Success",
+     *
      *     @OA\JsonContent(
+     *
      *       @OA\Property(
      *         property="message",
      *         type="string",
@@ -291,20 +338,27 @@ class PermissionGroupsController extends ApiController
      *       )
      *     )
      *   ),
+     *
      *   @OA\Response(
      *     response="403",
      *     description="Access denied",
+     *
      *     @OA\JsonContent(ref="#/components/schemas/AccessDenied"),
      *   ),
+     *
      *   @OA\Response(
      *     response="404",
      *     description="Not found",
+     *
      *     @OA\JsonContent(ref="#/components/schemas/NotFound"),
      *   ),
+     *
      *   @OA\Response(
      *     response="400",
      *     description="Bad request",
+     *
      *     @OA\JsonContent(
+     *
      *       @OA\Property(
      *         property="message",
      *         type="string",
@@ -316,13 +370,12 @@ class PermissionGroupsController extends ApiController
      *
      * Remove the specified resource from storage.
      *
-     * @param  \Motor\Backend\Models\PermissionGroup  $record
      * @return \Illuminate\Http\JsonResponse
      */
     public function destroy(PermissionGroup $record)
     {
         $result = PermissionGroupService::delete($record)
-                                        ->getResult();
+            ->getResult();
 
         if ($result) {
             return response()->json(['message' => 'Permission group deleted']);

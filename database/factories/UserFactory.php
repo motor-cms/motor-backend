@@ -23,10 +23,10 @@ class UserFactory extends Factory
     public function definition()
     {
         return [
-            'name'           => $this->faker->name,
-            'email'          => $this->faker->unique()->safeEmail,
-            'password'       => ! isset($password) ?: $password = bcrypt('secret'),
-            'api_token'      => Str::random(60),
+            'name' => $this->faker->name,
+            'email' => $this->faker->unique()->safeEmail,
+            'password' => ! isset($password) ?: $password = bcrypt('secret'),
+            'api_token' => Str::random(60),
             'remember_token' => Str::random(10),
         ];
     }

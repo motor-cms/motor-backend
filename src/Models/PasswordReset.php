@@ -3,12 +3,12 @@
 namespace Motor\Backend\Models;
 
 use Illuminate\Database\Eloquent\Model;
+
 /**
  * Motor\Backend\Models\PasswordReset
  */
 class PasswordReset extends Model
 {
-
     public $timestamps = false;
 
     /**
@@ -19,7 +19,6 @@ class PasswordReset extends Model
     protected $fillable = [
         'email',
         'token',
-        'created_at'
+        'created_at',
     ];
-
 }

@@ -12,15 +12,10 @@ use Illuminate\Support\Str;
  */
 class CheckPermission
 {
-    /**
-     * @var
-     */
     protected $auth;
 
     /**
      * Create a new filter instance.
-     *
-     * @param  Guard  $auth
      */
     public function __construct(Guard $auth)
     {
@@ -31,18 +26,17 @@ class CheckPermission
      * Handle an incoming request.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \Closure  $next
      * @return mixed
      */
     public function handle($request, Closure $next)
     {
         // FIXME: find a proper way to do ip whitelisting
-        //if (strpos($request->ip(), '10.1.') !== false) {
+        // if (strpos($request->ip(), '10.1.') !== false) {
         //	return redirect('home');
-        //}
+        // }
 
         $route = $request->route()
-                         ->getName();
+            ->getName();
         $routeCleaned = str_replace('backend.', '', $route);
         $routeCleaned = str_replace('api.', '', $routeCleaned);
 

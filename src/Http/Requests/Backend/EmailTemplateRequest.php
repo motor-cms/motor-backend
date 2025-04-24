@@ -12,6 +12,7 @@ class EmailTemplateRequest extends Request
     /**
      * @OA\Schema(
      *   schema="EmailTemplateRequest",
+     *
      *   @OA\Property(
      *     property="client_id",
      *     type="integer",
@@ -96,8 +97,8 @@ class EmailTemplateRequest extends Request
     public function rules()
     {
         return [
-            'name'        => 'required',
-            'client_id'   => 'required',
+            'name' => 'required',
+            'client_id' => 'required',
             'language_id' => 'required',
         ];
     }

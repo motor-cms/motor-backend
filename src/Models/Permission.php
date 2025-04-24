@@ -36,13 +36,14 @@ use Motor\Core\Traits\Searchable;
  * @method static Builder|Permission whereName($value)
  * @method static Builder|Permission wherePermissionGroupId($value)
  * @method static Builder|Permission whereUpdatedAt($value)
+ *
  * @mixin \Eloquent
  */
 class Permission extends \Spatie\Permission\Models\Permission
 {
-    use Searchable;
     use Filterable;
     use HasShortflakePrimary;
+    use Searchable;
 
     /**
      * Searchable columns for the searchable trait

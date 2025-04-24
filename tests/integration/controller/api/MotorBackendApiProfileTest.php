@@ -27,7 +27,7 @@ class MotorBackendApiProfileTest extends TestCase
         'media',
     ];
 
-    public function setUp()
+    protected function setUp()
     {
         parent::setUp();
 
@@ -81,10 +81,10 @@ class MotorBackendApiProfileTest extends TestCase
     {
         $this->user->givePermissionTo($this->writePermission);
         $this->json('PATCH', '/api/profile/edit?api_token='.$this->user->api_token, [
-            'name'  => 'TestRole',
+            'name' => 'TestRole',
             'email' => $this->user->email,
         ])->seeStatusCode(200)->seeJson([
-            'name'  => 'TestRole',
+            'name' => 'TestRole',
             'email' => $this->user->email,
         ]);
     }
@@ -94,21 +94,21 @@ class MotorBackendApiProfileTest extends TestCase
     {
         $this->user->givePermissionTo($this->writePermission);
         $this->json('PATCH', '/api/profile/edit?api_token='.$this->user->api_token, [
-            'name'   => 'TestRole',
-            'email'  => $this->user->email,
+            'name' => 'TestRole',
+            'email' => $this->user->email,
             'avatar' => base64_encode(file_get_contents(__DIR__.'/../../../../public/images/motor-logo-large.png')),
         ])->seeStatusCode(200)->seeJson([
-            'name'       => 'TestRole',
-            'email'      => $this->user->email,
+            'name' => 'TestRole',
+            'email' => $this->user->email,
             'collection' => 'avatar',
         ]);
     }
 
-    ///**
+    // /**
     // * @test
     // */
-    //public function can_modify_profile_and_upload_image_and_delete_it_again()
-    //{
+    // public function can_modify_profile_and_upload_image_and_delete_it_again()
+    // {
     //    $this->user->givePermissionTo($this->writePermission);
     //
     //    $this->json('PATCH', '/api/profile/edit?api_token=' . $this->user->api_token, [
@@ -130,22 +130,22 @@ class MotorBackendApiProfileTest extends TestCase
     //    ])->seeStatusCode(200)->dontSeeJson([
     //        'collection' => 'avatar',
     //    ]);
-    //}
+    // }
 
     /** @test */
     public function can_modify_profile_and_upload_image_and_set_custom_filename()
     {
         $this->user->givePermissionTo($this->writePermission);
         $this->json('PATCH', '/api/profile/edit?api_token='.$this->user->api_token, [
-            'name'        => 'Testname',
-            'email'       => $this->user->email,
-            'avatar'      => base64_encode(file_get_contents(__DIR__.'/../../../../public/images/motor-logo-large.png')),
+            'name' => 'Testname',
+            'email' => $this->user->email,
+            'avatar' => base64_encode(file_get_contents(__DIR__.'/../../../../public/images/motor-logo-large.png')),
             'avatar_name' => 'custom_filename.png',
         ])->seeStatusCode(200)->seeJson([
-            'name'       => 'Testname',
-            'email'      => $this->user->email,
+            'name' => 'Testname',
+            'email' => $this->user->email,
             'collection' => 'avatar',
-            'file_name'  => 'custom_filename.png',
+            'file_name' => 'custom_filename.png',
         ]);
     }
 }

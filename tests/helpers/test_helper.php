@@ -18,7 +18,6 @@ function create_test_superadmin()
 }
 
 /**
- * @param $roles
  * @return mixed
  */
 function create_test_user_with_roles($roles)
@@ -34,7 +33,6 @@ function create_test_user_with_roles($roles)
 }
 
 /**
- * @param $permissions
  * @return mixed
  */
 function create_test_user_with_permissions($permissions)
@@ -49,8 +47,6 @@ function create_test_user_with_permissions($permissions)
 }
 
 /**
- * @param $roles
- * @param $permissions
  * @return mixed
  */
 function create_test_user_with_roles_and_permissions($roles, $permissions)
@@ -64,26 +60,17 @@ function create_test_user_with_roles_and_permissions($roles, $permissions)
     return $user;
 }
 
-/**
- * @param $user
- * @param $role
- */
 function assign_test_role($user, $role)
 {
     $user->assignRole($role);
 }
 
-/**
- * @param $user
- * @param $permission
- */
 function assign_test_permission($user, $permission)
 {
     $user->givePermissionTo($permission);
 }
 
 /**
- * @param $permission
  * @return mixed
  */
 function create_test_permission_with_name($permission)
@@ -92,7 +79,6 @@ function create_test_permission_with_name($permission)
 }
 
 /**
- * @param $role
  * @return mixed
  */
 function create_test_role_with_name($role)

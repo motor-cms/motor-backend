@@ -7,10 +7,6 @@ namespace Motor\Backend\Helpers;
  */
 class Filesize
 {
-    /**
-     * @param  int  $bytes
-     * @return string
-     */
     public static function bytesToHuman(int $bytes): string
     {
         $units = ['B', 'KB', 'MB', 'GB', 'TB', 'PB'];

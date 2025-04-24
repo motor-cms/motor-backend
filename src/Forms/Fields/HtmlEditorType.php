@@ -21,7 +21,6 @@ class HtmlEditorType extends FormField
     }
 
     /**
-     * @param  array  $options
      * @param  bool  $showLabel
      * @param  bool  $showField
      * @param  bool  $showError

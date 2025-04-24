@@ -3,7 +3,6 @@
 namespace Motor\Backend\Providers;
 
 use Illuminate\Support\Facades\Blade;
-use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Response;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\ServiceProvider;
@@ -32,7 +31,7 @@ class MotorServiceProvider extends ServiceProvider
     {
         Response::macro('attachment', static function ($content, $filename, $format = 'application/json') {
             $headers = [
-                'Content-type'        => $format,
+                'Content-type' => $format,
                 'Content-Disposition' => 'attachment; filename="'.$filename.'"',
             ];
 
@@ -105,11 +104,11 @@ class MotorServiceProvider extends ServiceProvider
     public function publishResourceAssets()
     {
         $assets = [
-            __DIR__.'/../../resources/assets/sass'   => resource_path('assets/sass'),
-            __DIR__.'/../../resources/assets/js'     => resource_path('assets/js'),
+            __DIR__.'/../../resources/assets/sass' => resource_path('assets/sass'),
+            __DIR__.'/../../resources/assets/js' => resource_path('assets/js'),
             __DIR__.'/../../resources/assets/images' => resource_path('assets/images'),
-            __DIR__.'/../../resources/assets/npm'    => resource_path('assets/npm'),
-            __DIR__.'/../../database/seeds'          => base_path('database/seeds'),
+            __DIR__.'/../../resources/assets/npm' => resource_path('assets/npm'),
+            __DIR__.'/../../database/seeds' => base_path('database/seeds'),
         ];
 
         $this->publishes($assets, 'motor-backend-install-resources');
@@ -149,9 +148,9 @@ class MotorServiceProvider extends ServiceProvider
     public function config()
     {
         $this->publishes([
-            __DIR__.'/../../config/motor-backend-project.php'          => config_path('motor-backend-project.php'),
-            __DIR__.'/../../config/motor-backend.php'                  => config_path('motor-backend.php'),
-            __DIR__.'/../../config/motor-backend-navigation-stub.php'  => config_path('motor-backend-navigation.php'),
+            __DIR__.'/../../config/motor-backend-project.php' => config_path('motor-backend-project.php'),
+            __DIR__.'/../../config/motor-backend.php' => config_path('motor-backend.php'),
+            __DIR__.'/../../config/motor-backend-navigation-stub.php' => config_path('motor-backend-navigation.php'),
             __DIR__.'/../../config/motor-backend-permissions-stub.php' => config_path('motor-backend-permissions.php'),
         ], 'motor-backend-install-config');
     }
@@ -241,5 +240,4 @@ class MotorServiceProvider extends ServiceProvider
             ]);
         }
     }
-
 }

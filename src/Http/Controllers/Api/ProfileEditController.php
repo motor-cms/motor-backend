@@ -19,13 +19,18 @@ class ProfileEditController extends ApiController
      *   path="/api/profile",
      *   parameters={"Accept": "application/json"},
      *   summary="Update an existing user",
+     *
      *   @OA\MediaType(
      *     mediaType="application/json",
      *   ),
+     *
      *   @OA\RequestBody(
+     *
      *     @OA\JsonContent(ref="#/components/schemas/ProfileEditRequest"),
      *   ),
+     *
      *   @OA\Parameter(
+     *
      *     @OA\Schema(type="string"),
      *     in="query",
      *     allowReserved=true,
@@ -33,10 +38,13 @@ class ProfileEditController extends ApiController
      *     parameter="api_token",
      *     description="Personal api_token of the user"
      *   ),
+     *
      *   @OA\Response(
      *     response=200,
      *     description="Success",
+     *
      *     @OA\JsonContent(
+     *
      *       @OA\Property(
      *         property="data",
      *         type="object",
@@ -49,27 +57,30 @@ class ProfileEditController extends ApiController
      *       )
      *     )
      *   ),
+     *
      *   @OA\Response(
      *     response="403",
      *     description="Access denied",
+     *
      *     @OA\JsonContent(ref="#/components/schemas/AccessDenied"),
      *   ),
+     *
      *   @OA\Response(
      *     response="404",
      *     description="Not found",
+     *
      *     @OA\JsonContent(ref="#/components/schemas/NotFound"),
      *   )
      * )
      *
      * Update the specified resource in storage.
      *
-     * @param  \Motor\Backend\Http\Requests\Backend\ProfileEditRequest  $request
      * @return \Motor\Backend\Http\Resources\UserResource
      */
     public function update(ProfileEditRequest $request)
     {
         $result = ProfileEditService::update(Auth::user(), $request)
-                                    ->getResult();
+            ->getResult();
 
         return (new UserResource($result))->additional(['message' => 'Profile updated']);
     }
@@ -79,10 +90,13 @@ class ProfileEditController extends ApiController
      *   tags={"UserProfileController"},
      *   path="/api/profile",
      *   summary="Get user profile",
+     *
      *   @OA\MediaType(
      *     mediaType="application/json",
      *   ),
+     *
      *   @OA\Parameter(
+     *
      *     @OA\Schema(type="string"),
      *     in="query",
      *     allowReserved=true,
@@ -90,10 +104,13 @@ class ProfileEditController extends ApiController
      *     parameter="api_token",
      *     description="Personal api_token of the user"
      *   ),
+     *
      *   @OA\Response(
      *     response=200,
      *     description="Success",
+     *
      *     @OA\JsonContent(
+     *
      *       @OA\Property(
      *         property="data",
      *         type="object",
@@ -106,14 +123,18 @@ class ProfileEditController extends ApiController
      *       )
      *     )
      *   ),
+     *
      *   @OA\Response(
      *     response="403",
      *     description="Access denied",
+     *
      *     @OA\JsonContent(ref="#/components/schemas/AccessDenied"),
      *   ),
+     *
      *   @OA\Response(
      *     response="404",
      *     description="Not found",
+     *
      *     @OA\JsonContent(ref="#/components/schemas/NotFound"),
      *   )
      * )
@@ -125,7 +146,7 @@ class ProfileEditController extends ApiController
     public function me()
     {
         $result = ProfileEditService::show(Auth::user())
-                                    ->getResult();
+            ->getResult();
 
         return (new UserResource($result))->additional(['message' => 'Profile read']);
     }

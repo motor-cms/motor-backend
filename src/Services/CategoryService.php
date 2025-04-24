@@ -14,10 +14,10 @@ class CategoryService extends BaseService
     public function filters()
     {
         $searchFilter = $this->getFilter()
-                             ->get('search');
+            ->get('search');
         $model = $this->model;
         if (! is_object($this->model)) {
-            $model = new $this->model();
+            $model = new $this->model;
         }
         $searchFilter->setSearchableColumns($model->getSearchableColumns());
     }
@@ -70,8 +70,8 @@ class CategoryService extends BaseService
         if (is_null($node)) {
             $node = Category::find($this->request->get('parent_id'));
             $previousParent = $this->record->ancestors()
-                                           ->get()
-                                           ->last();
+                ->get()
+                ->last();
             if (! is_null($node) && ! is_null($previousParent) && $previousParent->id != $node->id) {
                 $this->record->scope = $node->scope;
                 $nextSibling = $this->record->getNextSibling();

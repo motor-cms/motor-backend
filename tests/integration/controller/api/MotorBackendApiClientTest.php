@@ -26,7 +26,7 @@ class MotorBackendApiClientTest extends TestCase
         'roles',
     ];
 
-    public function setUp()
+    protected function setUp()
     {
         parent::setUp();
 

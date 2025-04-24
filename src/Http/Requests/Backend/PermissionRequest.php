@@ -12,6 +12,7 @@ class PermissionRequest extends Request
     /**
      * @OA\Schema(
      *   schema="PermissionRequest",
+     *
      *   @OA\Property(
      *     property="name",
      *     type="string",

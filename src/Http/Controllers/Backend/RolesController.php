@@ -43,8 +43,8 @@ class RolesController extends Controller
     public function create()
     {
         $form = $this->form(RoleForm::class, [
-            'method'  => 'POST',
-            'route'   => 'backend.roles.store',
+            'method' => 'POST',
+            'route' => 'backend.roles.store',
             'enctype' => 'multipart/form-data',
         ]);
 
@@ -54,7 +54,6 @@ class RolesController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  RoleRequest  $request
      * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
      */
     public function store(RoleRequest $request)
@@ -78,8 +77,6 @@ class RolesController extends Controller
 
     /**
      * Display the specified resource.
-     *
-     * @param $id
      */
     public function show($id)
     {
@@ -89,16 +86,15 @@ class RolesController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  Role  $record
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function edit(Role $record)
     {
         $form = $this->form(RoleForm::class, [
-            'method'  => 'PATCH',
-            'url'     => route('backend.roles.update', [$record->id]),
+            'method' => 'PATCH',
+            'url' => route('backend.roles.update', [$record->id]),
             'enctype' => 'multipart/form-data',
-            'model'   => $record,
+            'model' => $record,
         ]);
 
         return view('motor-backend::backend.roles.edit', compact('form'));
@@ -107,8 +103,6 @@ class RolesController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  RoleRequest  $request
-     * @param  Role  $record
      * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
      */
     public function update(RoleRequest $request, Role $record)
@@ -133,7 +127,6 @@ class RolesController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  Role  $record
      * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
      */
     public function destroy(Role $record)

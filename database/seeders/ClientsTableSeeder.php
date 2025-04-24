@@ -18,7 +18,7 @@ class ClientsTableSeeder extends Seeder
     public function run()
     {
         DB::table('clients')->insert([
-            'name'       => 'Default',
+            'name' => 'Default',
             'created_at' => date('Y-m-d H:i:s'),
             'updated_at' => date('Y-m-d H:i:s'),
             'created_by' => 1,

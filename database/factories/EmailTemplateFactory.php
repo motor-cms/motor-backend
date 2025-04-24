@@ -25,18 +25,18 @@ class EmailTemplateFactory extends Factory
     public function definition()
     {
         return [
-            'client_id'               => Client::factory()->make()->id,
-            'language_id'             => Language::factory()->make()->id,
-            'name'                    => $this->faker->sentence,
-            'subject'                 => $this->faker->sentence,
-            'body_text'               => $this->faker->paragraph(1),
-            'body_html'               => $this->faker->paragraph(1),
-            'default_sender_email'    => $this->faker->email,
-            'default_sender_name'     => $this->faker->name,
+            'client_id' => Client::factory()->make()->id,
+            'language_id' => Language::factory()->make()->id,
+            'name' => $this->faker->sentence,
+            'subject' => $this->faker->sentence,
+            'body_text' => $this->faker->paragraph(1),
+            'body_html' => $this->faker->paragraph(1),
+            'default_sender_email' => $this->faker->email,
+            'default_sender_name' => $this->faker->name,
             'default_recipient_email' => $this->faker->email,
-            'default_recipient_name'  => $this->faker->name,
-            'created_by'              => User::factory()->make()->id,
-            'updated_by'              => User::factory()->make()->id,
+            'default_recipient_name' => $this->faker->name,
+            'created_by' => User::factory()->make()->id,
+            'updated_by' => User::factory()->make()->id,
         ];
     }
 }

@@ -20,12 +20,8 @@ class BladeRenderer
      * BladeRenderer constructor.
      *
      * BladeRenderer constructor.
-     *
-     * @param    $value
-     * @param    $options
-     * @param  Model|null  $record
      */
-    public function __construct($value, $options, Model $record = null)
+    public function __construct($value, $options, ?Model $record = null)
     {
         $this->value = $value;
         $this->options = $options;
@@ -50,10 +46,10 @@ class BladeRenderer
         }
 
         return view(Arr::get($this->options, 'template'), [
-            'record'  => $this->record,
-            'value'   => $this->value,
+            'record' => $this->record,
+            'value' => $this->value,
             'options' => $this->options,
-            'index'   => $index,
+            'index' => $index,
         ])->render();
     }
 }

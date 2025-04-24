@@ -43,8 +43,8 @@ class PermissionsController extends Controller
     public function create()
     {
         $form = $this->form(PermissionForm::class, [
-            'method'  => 'POST',
-            'route'   => 'backend.permissions.store',
+            'method' => 'POST',
+            'route' => 'backend.permissions.store',
             'enctype' => 'multipart/form-data',
         ]);
 
@@ -54,7 +54,6 @@ class PermissionsController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  PermissionRequest  $request
      * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
      */
     public function store(PermissionRequest $request)
@@ -78,8 +77,6 @@ class PermissionsController extends Controller
 
     /**
      * Display the specified resource.
-     *
-     * @param $id
      */
     public function show($id)
     {
@@ -89,16 +86,15 @@ class PermissionsController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  Permission  $record
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function edit(Permission $record)
     {
         $form = $this->form(PermissionForm::class, [
-            'method'  => 'PATCH',
-            'url'     => route('backend.permissions.update', [$record->id]),
+            'method' => 'PATCH',
+            'url' => route('backend.permissions.update', [$record->id]),
             'enctype' => 'multipart/form-data',
-            'model'   => $record,
+            'model' => $record,
         ]);
 
         return view('motor-backend::backend.permissions.edit', compact('form'));
@@ -107,8 +103,6 @@ class PermissionsController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  PermissionRequest  $request
-     * @param  Permission  $record
      * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
      */
     public function update(PermissionRequest $request, Permission $record)
@@ -133,7 +127,6 @@ class PermissionsController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  Permission  $record
      * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
      */
     public function destroy(Permission $record)

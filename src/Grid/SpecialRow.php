@@ -17,8 +17,6 @@ class SpecialRow extends Base
 
     /**
      * SpecialRow constructor.
-     *
-     * @param $view
      */
     public function __construct($view)
     {
@@ -28,8 +26,6 @@ class SpecialRow extends Base
     /**
      * Set column type
      *
-     * @param    $renderer
-     * @param  array  $options
      * @return $this
      */
     public function renderer($renderer, array $options = [])
@@ -41,7 +37,6 @@ class SpecialRow extends Base
     }
 
     /**
-     * @param  Paginator  $paginator
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function render(Paginator $paginator)

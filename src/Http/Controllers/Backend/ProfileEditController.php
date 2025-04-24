@@ -25,10 +25,10 @@ class ProfileEditController extends Controller
     {
         $user = Auth::user();
         $form = $this->form(ProfileEditForm::class, [
-            'method'  => 'PATCH',
-            'url'     => route('backend.profile.update', [$user->id]),
+            'method' => 'PATCH',
+            'url' => route('backend.profile.update', [$user->id]),
             'enctype' => 'multipart/form-data',
-            'model'   => $user,
+            'model' => $user,
         ]);
 
         return view('motor-backend::backend.profile.edit', compact('form'));
@@ -37,7 +37,6 @@ class ProfileEditController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  ProfileEditRequest  $request
      * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
      */
     public function update(ProfileEditRequest $request)

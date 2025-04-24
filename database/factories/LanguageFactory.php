@@ -23,9 +23,9 @@ class LanguageFactory extends Factory
     public function definition()
     {
         return [
-            'iso_639_1'    => Str::random(2),
+            'iso_639_1' => Str::random(2),
             'english_name' => $this->faker->word,
-            'native_name'  => $this->faker->word,
+            'native_name' => $this->faker->word,
         ];
     }
 }

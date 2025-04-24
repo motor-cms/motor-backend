@@ -12,7 +12,6 @@ class Base
     protected $attributes = [];
 
     /**
-     * @param $attributes
      * @return $this
      */
     public function attributes(array $attributes)
@@ -23,7 +22,6 @@ class Base
     }
 
     /**
-     * @param $style
      * @return $this
      */
     public function style($style)
@@ -67,7 +65,6 @@ class Base
     }
 
     /**
-     * @param $string
      * @return string|array
      */
     protected function sanitize($string)

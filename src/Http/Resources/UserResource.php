@@ -5,6 +5,7 @@ namespace Motor\Backend\Http\Resources;
 /**
  * @OA\Schema(
  *   schema="UserResource",
+ *
  *   @OA\Property(
  *     property="id",
  *     type="integer",
@@ -18,17 +19,21 @@ namespace Motor\Backend\Http\Resources;
  *   @OA\Property(
  *     property="roles",
  *     type="array",
+ *
  *     @OA\Items(
  *       ref="#/components/schemas/RoleResource"
  *     ),
  *   ),
+ *
  *   @OA\Property(
  *     property="permissions",
  *     type="array",
+ *
  *     @OA\Items(
  *       ref="#/components/schemas/PermissionResource"
  *     ),
  *   ),
+ *
  *   @OA\Property(
  *     property="name",
  *     type="string",
@@ -57,13 +62,13 @@ class UserResource extends BaseResource
     public function toArray($request)
     {
         return [
-            'id'          => (int) $this->id,
-            'client'      => new ClientResource($this->client),
-            'roles'       => RoleResource::collection($this->roles),
+            'id' => (int) $this->id,
+            'client' => new ClientResource($this->client),
+            'roles' => RoleResource::collection($this->roles),
             'permissions' => PermissionResource::collection($this->permissions),
-            'name'        => $this->name,
-            'email'       => $this->email,
-            'avatar'      => new MediaResource($this->getFirstMedia('avatar')),
+            'name' => $this->name,
+            'email' => $this->email,
+            'avatar' => new MediaResource($this->getFirstMedia('avatar')),
         ];
     }
 }

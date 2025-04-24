@@ -26,7 +26,7 @@ class MotorBackendApiLanguageTest extends TestCase
         'roles',
     ];
 
-    public function setUp()
+    protected function setUp()
     {
         parent::setUp();
 
@@ -81,9 +81,9 @@ class MotorBackendApiLanguageTest extends TestCase
     {
         $this->user->givePermissionTo($this->writePermission);
         $this->json('POST', '/api/languages?api_token='.$this->user->api_token, [
-            'iso_639_1'    => 'DE',
+            'iso_639_1' => 'DE',
             'english_name' => 'German',
-            'native_name'  => 'Deutsch',
+            'native_name' => 'Deutsch',
         ])->seeStatusCode(200)->seeJson([
             'english_name' => 'German',
         ]);
@@ -199,9 +199,9 @@ class MotorBackendApiLanguageTest extends TestCase
         $this->user->givePermissionTo($this->writePermission);
         $language = create_test_language();
         $this->json('PATCH', '/api/languages/'.$language->id.'?api_token='.$this->user->api_token, [
-            'iso_639_1'    => $language->iso_639_1,
+            'iso_639_1' => $language->iso_639_1,
             'english_name' => $language->english_name,
-            'native_name'  => 'Test',
+            'native_name' => 'Test',
         ])->seeStatusCode(200)->seeJson([
             'native_name' => 'Test',
         ]);

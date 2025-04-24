@@ -44,7 +44,7 @@ class LanguagesController extends Controller
     {
         $form = $this->form(LanguageForm::class, [
             'method' => 'POST',
-            'route'  => 'backend.languages.store',
+            'route' => 'backend.languages.store',
         ]);
 
         return view('motor-backend::backend.languages.create', compact('form'));
@@ -53,7 +53,6 @@ class LanguagesController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  LanguageRequest  $request
      * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
      */
     public function store(LanguageRequest $request)
@@ -77,8 +76,6 @@ class LanguagesController extends Controller
 
     /**
      * Display the specified resource.
-     *
-     * @param $id
      */
     public function show($id)
     {
@@ -88,15 +85,14 @@ class LanguagesController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  Language  $record
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function edit(Language $record)
     {
         $form = $this->form(LanguageForm::class, [
             'method' => 'PATCH',
-            'url'    => route('backend.languages.update', [$record->id]),
-            'model'  => $record,
+            'url' => route('backend.languages.update', [$record->id]),
+            'model' => $record,
         ]);
 
         return view('motor-backend::backend.languages.edit', compact('form'));
@@ -105,8 +101,6 @@ class LanguagesController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  LanguageRequest  $request
-     * @param  Language  $record
      * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
      */
     public function update(LanguageRequest $request, Language $record)
@@ -131,7 +125,6 @@ class LanguagesController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  Language  $record
      * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
      */
     public function destroy(Language $record)

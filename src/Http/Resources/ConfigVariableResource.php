@@ -5,6 +5,7 @@ namespace Motor\Backend\Http\Resources;
 /**
  * @OA\Schema(
  *   schema="ConfigVariableResource",
+ *
  *   @OA\Property(
  *     property="id",
  *     type="integer",
@@ -48,11 +49,11 @@ class ConfigVariableResource extends BaseResource
     public function toArray($request)
     {
         return [
-            'id'           => (int) $this->id,
-            'package'      => $this->package,
-            'group'        => $this->group,
-            'name'         => $this->name,
-            'value'        => $this->value,
+            'id' => (int) $this->id,
+            'package' => $this->package,
+            'group' => $this->group,
+            'name' => $this->name,
+            'value' => $this->value,
             'is_invisible' => (bool) $this->is_invisible,
         ];
     }

@@ -21,7 +21,6 @@ class Select2Type extends SelectType
     }
 
     /**
-     * @param  array  $options
      * @param  bool  $showLabel
      * @param  bool  $showField
      * @param  bool  $showError

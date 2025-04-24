@@ -12,7 +12,6 @@ class Row extends Base
     /**
      * Add cell to row
      *
-     * @param  Cell  $cell
      * @return $this
      */
     public function addCell(Cell $cell)
@@ -25,7 +24,6 @@ class Row extends Base
     /**
      * Get cell by column name
      *
-     * @param $name
      * @return bool|mixed
      */
     public function getCell(string $name)
@@ -39,8 +37,6 @@ class Row extends Base
 
     /**
      * Get all cells
-     *
-     * @return array
      */
     public function getCells(): array
     {

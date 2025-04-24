@@ -13,9 +13,6 @@ class FlipRenderer
 
     /**
      * FlipRenderer constructor.
-     *
-     * @param $value
-     * @param $options
      */
     public function __construct($value, $options)
     {

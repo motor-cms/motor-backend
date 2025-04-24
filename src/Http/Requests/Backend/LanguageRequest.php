@@ -12,6 +12,7 @@ class LanguageRequest extends Request
     /**
      * @OA\Schema(
      *   schema="LanguageRequest",
+     *
      *   @OA\Property(
      *     property="iso_639_1",
      *     type="string",
@@ -49,9 +50,9 @@ class LanguageRequest extends Request
     public function rules()
     {
         return [
-            'iso_639_1'    => 'required',
+            'iso_639_1' => 'required',
             'english_name' => 'required',
-            'native_name'  => 'required',
+            'native_name' => 'required',
         ];
     }
 }

@@ -12,6 +12,7 @@ class ClientRequest extends Request
     /**
      * @OA\Schema(
      *   schema="ClientRequest",
+     *
      *   @OA\Property(
      *     property="name",
      *     type="string",
@@ -94,10 +95,10 @@ class ClientRequest extends Request
     public function rules()
     {
         return [
-            'name'          => 'required',
-            'website'       => 'nullable|url',
+            'name' => 'required',
+            'website' => 'nullable|url',
             'contact_email' => 'nullable|email',
-            'is_active'     => 'nullable|boolean',
+            'is_active' => 'nullable|boolean',
         ];
     }
 }

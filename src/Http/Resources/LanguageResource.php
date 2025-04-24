@@ -5,6 +5,7 @@ namespace Motor\Backend\Http\Resources;
 /**
  * @OA\Schema(
  *   schema="LanguageResource",
+ *
  *   @OA\Property(
  *     property="id",
  *     type="integer",
@@ -38,10 +39,10 @@ class LanguageResource extends BaseResource
     public function toArray($request)
     {
         return [
-            'id'           => (int) $this->id,
-            'iso_639_1'    => $this->iso_639_1,
+            'id' => (int) $this->id,
+            'iso_639_1' => $this->iso_639_1,
             'english_name' => $this->english_name,
-            'native_name'  => $this->native_name,
+            'native_name' => $this->native_name,
         ];
     }
 }

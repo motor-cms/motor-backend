@@ -5,6 +5,7 @@ namespace Motor\Backend\Http\Resources;
 /**
  * @OA\Schema(
  *   schema="CategoryResource",
+ *
  *   @OA\Property(
  *     property="id",
  *     type="integer",
@@ -52,13 +53,13 @@ class CategoryResource extends BaseResource
         }
 
         return [
-            'id'        => (int) $this->id,
-            'name'      => $this->name,
-            'scope'     => $this->scope,
+            'id' => (int) $this->id,
+            'name' => $this->name,
+            'scope' => $this->scope,
             'parent_id' => (int) $this->parent_id,
-            '_lft'      => (int) $this->_lft,
-            '_rgt'      => (int) $this->_rgt,
-            'children'  => CategoryResource::collection($this->whenLoaded('children')),
+            '_lft' => (int) $this->_lft,
+            '_rgt' => (int) $this->_rgt,
+            'children' => CategoryResource::collection($this->whenLoaded('children')),
         ];
     }
 }

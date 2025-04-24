@@ -33,14 +33,15 @@ use Motor\Core\Traits\Searchable;
  * @method static Builder|Language whereIso6391($value)
  * @method static Builder|Language whereNativeName($value)
  * @method static Builder|Language whereUpdatedAt($value)
+ *
  * @mixin \Eloquent
  */
 class Language extends Model
 {
-    use Searchable;
     use Filterable;
     use HasFactory;
     use HasShortflakePrimary;
+    use Searchable;
 
     /**
      * Searchable columns for the searchable trait
