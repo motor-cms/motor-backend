@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Kra8\Snowflake\HasShortflakePrimary;
+use Laravel\Sanctum\HasApiTokens;
 use Motor\Backend\Database\Factories\UserFactory;
 use Motor\Backend\Notifications\ResetPassword;
 use Motor\Core\Filter\Filter;
@@ -80,6 +81,7 @@ class User extends Authenticatable implements HasMedia
     use InteractsWithMedia;
     use HasFactory;
     use HasShortflakePrimary;
+    use HasApiTokens;
 
     protected $guard_name = 'web';
 
