@@ -1,8 +1,7 @@
 <?php
 
-use Culpa\Database\Schema\Blueprint;
-use Culpa\Facades\Schema;
 use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
 
 /**
  * Class CreateEmailTemplates
@@ -17,9 +16,9 @@ class CreateEmailTemplates extends Migration
     public function up()
     {
         Schema::create('email_templates', function (Blueprint $table) {
-            $table->increments('id');
-            $table->integer('client_id')->unsigned()->index();
-            $table->integer('language_id')->unsigned()->nullable()->index();
+            $table->id();
+            $table->bigInteger('client_id')->unsigned()->index();
+            $table->bigInteger('language_id')->unsigned()->nullable()->index();
             $table->string('name');
             $table->string('subject');
             $table->text('body_text');
@@ -30,9 +29,9 @@ class CreateEmailTemplates extends Migration
             $table->string('default_recipient_email');
             $table->string('default_cc_email');
             $table->string('default_bcc_email');
-            $table->createdBy();
-            $table->updatedBy();
-            $table->deletedBy(true);
+            $table->bigInteger('created_by')->nullable();
+            $table->bigInteger('updated_by')->nullable();
+            $table->bigInteger('deleted_by')->nullable();
             $table->timestamps();
 
             $table->foreign('client_id')->references('id')->on('clients')->onDelete('cascade');

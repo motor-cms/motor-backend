@@ -4,6 +4,7 @@ namespace Motor\Backend\Models;
 
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
+use Kra8\Snowflake\HasShortflakePrimary;
 use Motor\Core\Filter\Filter;
 use Motor\Core\Traits\Filterable;
 use Motor\Core\Traits\Searchable;
@@ -34,6 +35,7 @@ class PermissionGroup extends Model
 {
     use Searchable;
     use Filterable;
+    use HasShortflakePrimary;
 
     /**
      * Searchable columns for the searchable trait

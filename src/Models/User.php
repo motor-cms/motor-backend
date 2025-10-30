@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Kra8\Snowflake\HasShortflakePrimary;
 use Motor\Backend\Database\Factories\UserFactory;
 use Motor\Backend\Notifications\ResetPassword;
 use Motor\Core\Filter\Filter;
@@ -78,6 +79,7 @@ class User extends Authenticatable implements HasMedia
     use Notifiable;
     use InteractsWithMedia;
     use HasFactory;
+    use HasShortflakePrimary;
 
     protected $guard_name = 'web';
 
@@ -97,10 +99,7 @@ class User extends Authenticatable implements HasMedia
     }
 
     /**
-     * @param  Media|null  $media
-     */
-    /**
-     * @param  Media|null  $media
+     * @throws \Spatie\Image\Exceptions\InvalidManipulation
      */
     public function registerMediaConversions(Media $media = null): void
     {

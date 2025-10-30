@@ -70,6 +70,14 @@ return [
             'delete',
         ],
     ],
+    'ajax.categories'       => [
+        'name'   => 'motor-backend::backend/categories.ajax.categories',
+        'values' => [
+            'read',
+            'write',
+            'delete',
+        ],
+    ],
     'category_trees'   => [
         'name'   => 'motor-backend::backend/category_trees.category_trees',
         'values' => [

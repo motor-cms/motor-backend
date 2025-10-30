@@ -30,7 +30,7 @@ class UpdatePermissionTables extends Migration
         Schema::create(
             $tableNames['model_has_permissions'],
             function (Blueprint $table) use ($tableNames) {
-                $table->integer('permission_id')->unsigned();
+                $table->bigInteger('permission_id')->unsigned();
                 $table->morphs('model');
 
                 $table->foreign('permission_id')->references('id')->on($tableNames['permissions'])->onDelete('cascade');
@@ -40,7 +40,7 @@ class UpdatePermissionTables extends Migration
         );
 
         Schema::create($tableNames['model_has_roles'], function (Blueprint $table) use ($tableNames) {
-            $table->integer('role_id')->unsigned();
+            $table->bigInteger('role_id')->unsigned();
             $table->morphs('model');
 
             $table->foreign('role_id')->references('id')->on($tableNames['roles'])->onDelete('cascade');
@@ -76,8 +76,8 @@ class UpdatePermissionTables extends Migration
     public function down()
     {
         Schema::create('user_has_permissions', function (Blueprint $table) {
-            $table->integer('user_id')->unsigned();
-            $table->integer('permission_id')->unsigned();
+            $table->bigInteger('user_id')->unsigned();
+            $table->bigInteger('permission_id')->unsigned();
 
             $table->foreign('user_id')
                 ->references('id')
@@ -93,8 +93,8 @@ class UpdatePermissionTables extends Migration
         });
 
         Schema::create('user_has_roles', function (Blueprint $table) {
-            $table->integer('role_id')->unsigned();
-            $table->integer('user_id')->unsigned();
+            $table->bigInteger('role_id')->unsigned();
+            $table->bigInteger('user_id')->unsigned();
 
             $table->foreign('role_id')
                 ->references('id')

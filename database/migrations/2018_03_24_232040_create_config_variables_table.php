@@ -1,8 +1,7 @@
 <?php
 
-use Culpa\Database\Schema\Blueprint;
-use Culpa\Facades\Schema;
 use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
 
 /**
  * Class CreateConfigVariablesTable
@@ -17,16 +16,16 @@ class CreateConfigVariablesTable extends Migration
     public function up()
     {
         Schema::create('config_variables', function (Blueprint $table) {
-            $table->increments('id');
+            $table->id();
             $table->string('package');
             $table->string('group');
             $table->string('name');
             $table->string('value');
             $table->timestamps();
 
-            $table->createdBy();
-            $table->updatedBy();
-            $table->deletedBy(true);
+            $table->bigInteger('created_by')->nullable();
+            $table->bigInteger('updated_by')->nullable();
+            $table->bigInteger('deleted_by')->nullable();
         });
     }
 

@@ -5,24 +5,6 @@
                 {{$t('motor-media.backend.files.drop_file_here')}}
             </div>
             <template v-for="(file, index) in files">
-                <!--                <img v-if="isImage(file)" class="card-img-top" :src="file.file.preview">-->
-                <cropper
-                        ref="cropper"
-                        v-if="isImage(file)"
-                        class="card-img-top"
-                        :src="file.file.conversions.preview"
-                        classname="cropper"
-                        :stencilProps="stencilProps"
-                        :minWidth="minWidth"
-                        :minHeight="minHeight"
-                        @change="changeImage"
-                ></cropper>
-                <div class="btn-group">
-                    <a class="btn btn-light" @click="changeAspect(16/9)">16:9</a>
-                    <a class="btn btn-light" @click="changeAspect(4/3)">4:3</a>
-                    <a class="btn btn-light" @click="changeAspect(1)">1:1</a>
-                    <a class="btn btn-light" @click="changeAspect(0)">Free</a>
-                </div>
                 <div class="card-body" data-toggle="tooltip" data-placement="top" :title="file.description">
                     <button class="btn btn-danger float-right" type="button" @click="deleteFile(file)"><i
                             class="fa fa-trash-alt"></i>
@@ -116,7 +98,7 @@
                 $('input[name="' + this.name + '"]').val(JSON.stringify(this.files[0]));
             },
             isImage: function (file) {
-                if (file.file.mime_type === 'image/png' || file.file.mime_type === 'image/jpg' || file.file.mime_type === 'image/jpeg' || file.file.mime_type === 'video/mp4') {
+                if (file.file.mime_type === 'image/png' || file.file.mime_type === 'image/jpg' || file.file.mime_type === 'image/jpeg' || file.file.mime_type === 'video/x-m4v' || file.file.mime_type === 'video/mp4') {
                     return true;
                 }
                 return false;
