@@ -21,7 +21,7 @@
     "laracasts/flash": "^3.0",
     "spatie/laravel-fractal": "^6.0",
     "lavary/laravel-menu": "^1.8",
-    "richan-fongdasen/eloquent-blameable": "^1.9",
+    "richan-fongdasen/eloquent-blameable": "^1.11",
     "symfony/intl": "^7.0",
     "kris/laravel-form-builder": "^1.40",
     "spatie/laravel-medialibrary": "^11.0",
