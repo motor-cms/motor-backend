@@ -1,2 +1,2 @@
 <!-- Compiled app javascript -->
-<script src="{{ mix('/js/motor-backend.js') }}" type="text/javascript"></script>
+@vite(['resources/assets/js/app.js'])
