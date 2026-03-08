@@ -22,7 +22,7 @@
 <?php endif; ?>
 <?php endif; ?>
 @section('view_scripts')
-    <script type="text/javascript">
+    <script type="module">
         $(document).ready(function() {
             $('#{{$name}}').select2({
                 width: '100%'

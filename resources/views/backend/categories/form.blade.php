@@ -34,7 +34,7 @@
 @section('view_scripts')
 {{--    <link href="{{asset('plugins/jstree/themes/default/style.css')}}" rel="stylesheet" type="text/css"/>--}}
 {{--    <script src="{{asset('plugins/jstree/jstree.min.js')}}"></script>--}}
-    <script>
+    <script type="module">
         $.jstree.defaults.dnd.is_draggable = function (node) {
             let id = $(node).attr('id');
             if (id != 'category-item') {

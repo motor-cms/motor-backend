@@ -30,7 +30,7 @@
             </div>
         @elseif(config('motor-backend.flash') == 'toastr')
 @section('view_scripts')
-    <script type="text/javascript">
+    <script type="module">
         let notificationLevel = '{{ $message['level'] }}';
         toastr.options = {progressBar: true};
 

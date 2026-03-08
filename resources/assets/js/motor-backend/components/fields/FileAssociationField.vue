@@ -32,29 +32,37 @@
     </div>
 </template>
 
-<style lang="scss">
-</style>
+<script setup>
+import { onMounted, onUnmounted } from 'vue';
 
-<script>
-    export default {
-        name: 'field-file-association',
-        props: ['options', 'value'],
-        data: function () {
-            return {
-            }
-        },
-        methods: {
-        },
-        mounted: function () {
-            this.$eventHub.$on('motor-backend:file-association-value-change-'+this.options.real_name, (newValue) => {
-                this.$emit('input', newValue);
-            });
-            this.$eventHub.$on('motor-backend:file-association-crop-area-change-'+this.options.real_name, (newValue) => {
-                this.options.crop = newValue;
-            });
-            this.$eventHub.$emit('motor-backend:file-association-crop-area-set-'+this.options.real_name, this.options.crop);
-        },
-    }
+const props = defineProps(['options', 'value']);
+const emit = defineEmits(['update:modelValue', 'input']);
+
+const eventBus = window.eventBus;
+
+function onValueChange(newValue) {
+    emit('update:modelValue', newValue);
+    emit('input', newValue);
+}
+
+function onCropAreaChange(newValue) {
+    props.options.crop = newValue;
+}
+
+const valueChangeEvent = 'motor-backend:file-association-value-change-' + props.options.real_name;
+const cropAreaChangeEvent = 'motor-backend:file-association-crop-area-change-' + props.options.real_name;
+const cropAreaSetEvent = 'motor-backend:file-association-crop-area-set-' + props.options.real_name;
+
+onMounted(() => {
+    eventBus.on(valueChangeEvent, onValueChange);
+    eventBus.on(cropAreaChangeEvent, onCropAreaChange);
+    eventBus.emit(cropAreaSetEvent, props.options.crop);
+});
+
+onUnmounted(() => {
+    eventBus.off(valueChangeEvent, onValueChange);
+    eventBus.off(cropAreaChangeEvent, onCropAreaChange);
+});
 </script>
 
 <style lang="scss">

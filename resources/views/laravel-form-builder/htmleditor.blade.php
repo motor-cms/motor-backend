@@ -29,7 +29,7 @@
         }
     </style>
     <script src="//cdn.ckeditor.com/4.8.0/standard/ckeditor.js"></script>
-    <script>
+    <script type="module">
         CKEDITOR.replace( '{{$name}}', {
             toolbar: [
                 { name: 'basicstyles', items: [ 'Bold', 'Italic', 'RemoveFormat' ] },

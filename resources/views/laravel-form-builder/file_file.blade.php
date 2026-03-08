@@ -35,7 +35,7 @@
 <?php endif; ?>
 
 @section('view_scripts')
-    <script type="text/javascript">
+    <script type="module">
         $('.media-{{$options['name_slug']}}-delete').click(function (e) {
             e.preventDefault();
             if (!confirm('{!! trans('motor-backend::backend/global.delete_question') !!}')) {

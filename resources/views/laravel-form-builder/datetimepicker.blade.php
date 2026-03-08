@@ -23,7 +23,7 @@
 <?php endif; ?>
 
 @section('view_scripts')
-    <script type="text/javascript">
+    <script type="module">
         $(function () {
             $('input[name="{{$name}}_picker"]').datetimepicker({
                 locale: 'de',

@@ -36,12 +36,9 @@ Route::group([
 ], static function () {
     Route::group(['middleware' => ['permission']], static function () {
         if (config('motor-backend.routes.dashboard')) {
-            Route::get('/', [
-                'as'   => 'dashboard.index',
-                'uses' => [DashboardController::class, 'show'],
-            ]);
-            Route::get('dashboard', [DashboardController::class, 'show'])
+            Route::get('/', [DashboardController::class, 'show'])
                  ->name('dashboard.index');
+            Route::get('dashboard', [DashboardController::class, 'show']);
         }
 
         if (config('motor-backend.routes.users')) {

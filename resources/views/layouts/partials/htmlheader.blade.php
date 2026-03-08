@@ -12,5 +12,5 @@
     @yield('view_styles')
 
 <!-- Main styles for this application -->
-    <link href="{{ mix('/css/motor-backend.css') }}" rel="stylesheet" type="text/css" />
+    @vite(['resources/assets/sass/project.package-development.scss'])
 </head>

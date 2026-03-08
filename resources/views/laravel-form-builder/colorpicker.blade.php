@@ -23,7 +23,7 @@
 <?php endif; ?>
 
 @section('view_scripts')
-    <script type="text/javascript">
+    <script type="module">
         $('input[name="{{$name}}"]').minicolors({
             format: 'rgb',
             opacity: true,

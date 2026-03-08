@@ -58,7 +58,7 @@
 
     @include('motor-backend::layouts.partials.scripts_auth')
 
-    <script>
+    <script type="module">
         $(function () {
             $('input').iCheck({
                 checkboxClass: 'icheckbox_square-blue',

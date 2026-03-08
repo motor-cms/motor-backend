@@ -24,7 +24,7 @@
 <?php endif; ?>
 
 @section('view_scripts')
-    <script type="text/javascript">
+    <script type="module">
         $('input[name="{{$name}}_picker"]').datetimepicker({
             locale: 'de',
             format: 'DD.MM.YYYY',

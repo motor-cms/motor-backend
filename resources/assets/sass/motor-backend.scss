@@ -16,16 +16,16 @@ $primary-25:    #f9fdfe !default;
 
 
 // Bootstrap
-@import "~@coreui/coreui/scss/coreui";
+@import "@coreui/coreui/scss/coreui";
 // Plugins
-@import "~simple-line-icons/scss/simple-line-icons";
-@import "~toastr/toastr";
-@import "~@fancyapps/fancybox/dist/jquery.fancybox";
-@import "~select2/dist/css/select2";
-@import "~mediaelement/build/mediaelementplayer";
-@import "~@claviska/jquery-minicolors/jquery.minicolors";
-@import "~tempusdominus-bootstrap-4/build/css/tempusdominus-bootstrap-4.min";
-@import "~jstree/dist/themes/default/style";
+@import "simple-line-icons/scss/simple-line-icons";
+@import "toastr/toastr";
+@import "@fancyapps/fancybox/dist/jquery.fancybox";
+@import "select2/dist/css/select2";
+@import "mediaelement/build/mediaelementplayer";
+@import "@claviska/jquery-minicolors/jquery.minicolors";
+@import "tempusdominus-bootstrap-4/build/css/tempusdominus-bootstrap-4.min";
+@import "jstree/dist/themes/default/style";
 
 // Motor
 .form-control-sortable {

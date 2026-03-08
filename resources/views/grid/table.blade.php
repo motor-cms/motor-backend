@@ -45,7 +45,7 @@
     </table>
 </div>
 @section('view_scripts')
-    <script type="text/javascript">
+    <script type="module">
         $(document).ready(function() {
             $('.ask-for-confirmation').on('click', function(e) {
                 let message = $(this).data('message');
