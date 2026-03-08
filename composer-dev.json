@@ -18,7 +18,6 @@
     "guzzlehttp/guzzle": "^7.0",
     "laracasts/flash": "^3.0",
     "doctrine/dbal": "^3.6",
-    "laravelcollective/html": "^6.0",
     "spatie/laravel-fractal": "^6.0",
     "lavary/laravel-menu": "^1.8",
     "richan-fongdasen/eloquent-blameable": "^1.9",
