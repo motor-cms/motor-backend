@@ -1,5 +1,7 @@
 <?php
 
+namespace Tests\Motor\Backend\Integration;
+
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 use Motor\Backend\Models\Role;
 

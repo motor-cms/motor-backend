@@ -1,5 +1,7 @@
 <?php
 
+namespace Tests\Motor\Backend\Integration\Controller\Backend;
+
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 use Motor\Backend\Models\ConfigVariable;
 
