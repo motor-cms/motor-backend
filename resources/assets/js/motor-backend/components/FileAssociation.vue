@@ -55,7 +55,9 @@ function changeAspect(ratio) {
     minHeight.value = 20;
     minWidth.value = 20;
     nextTick(() => {
-        cropper.value[0].resetCoordinates();
+        if (cropper.value && cropper.value[0]) {
+            cropper.value[0].resetCoordinates();
+        }
     });
 }
 
@@ -67,6 +69,9 @@ function normalizeNumber(n1, n2, decimals) {
 }
 
 function changeImage(event) {
+    if (!cropper.value || !cropper.value[0]) {
+        return;
+    }
     const imageSize = cropper.value[0]._data.imageSize;
     const coordinates = {
         x1: normalizeNumber(event.coordinates.left, imageSize.width, 10),
@@ -125,12 +130,19 @@ function onClearData() {
 }
 
 function onCropAreaSet(normalizedCoordinates) {
-    console.log("received coordinates");
-    console.log(normalizedCoordinates);
+    if (!cropper.value || !cropper.value[0]) {
+        return;
+    }
     // FIXME: two timeouts seem excessive. find a better way to wait for the async operation to yield results
     setTimeout(() => {
+        if (!cropper.value || !cropper.value[0]) {
+            return;
+        }
         const imageSize = cropper.value[0]._data.imageSize;
         setTimeout(() => {
+            if (!cropper.value || !cropper.value[0]) {
+                return;
+            }
             const coordinates = {
                 left: normalizedCoordinates.x1 * imageSize.width,
                 top: normalizedCoordinates.y1 * imageSize.height,
