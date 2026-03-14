@@ -1,7 +1,7 @@
 <div class="box-tools">
     {!! $paginator->appends(['search' => $grid->getSearchTerm(), 'sortable_field' => $grid->getSortableColumn(), 'sortable_direction' => $grid->getSortableDirection() ])->links('pagination::bootstrap-4') !!}
 </div>
-<form class="form-inline">
+<form class="form-inline" action="{{ url()->current() }}" method="GET">
     @foreach ($grid->getFilter()->filters() as $filter)
         {!! $filter->render() !!}
     @endforeach
