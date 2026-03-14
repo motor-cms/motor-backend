@@ -3,7 +3,6 @@
 namespace Motor\Backend\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
-use Illuminate\Support\Facades\Log;
 
 /**
  * Class JsonRequest
@@ -19,9 +18,6 @@ abstract class JsonRequest extends FormRequest
      */
     protected function getValidatorInstance()
     {
-        Log::info('Request headers: '.json_encode(getallheaders()));
-        Log::info('Request body: '.$this->getContent());
-
         $factory = $this->container->make('Illuminate\Validation\Factory');
 
         if (method_exists($this, 'validator')) {
