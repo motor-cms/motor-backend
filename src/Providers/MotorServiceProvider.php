@@ -12,6 +12,7 @@ use Motor\Backend\Console\Commands\MotorGenerateIncludeCommand;
 use Motor\Backend\Console\Commands\ZiggyGenerateCommand;
 use Motor\Backend\Models\Category;
 use Motor\Backend\Models\ConfigVariable;
+use Motor\Backend\Observers\ConfigVariableObserver;
 
 /**
  * Class MotorServiceProvider
@@ -30,6 +31,8 @@ class MotorServiceProvider extends ServiceProvider
      */
     public function boot()
     {
+        ConfigVariable::observe(ConfigVariableObserver::class);
+
         Response::macro('attachment', static function ($content, $filename, $format = 'application/json') {
             $headers = [
                 'Content-type'        => $format,
