@@ -6,8 +6,15 @@ use Motor\Backend\Models\ConfigVariable;
 function merge_local_config_with_db_configuration_variables($package)
 {
     try {
-        foreach (ConfigVariable::where('package', $package)
-                               ->get() as $configVariable) {
+        // Cache all config variables in a single query, shared across all packages
+        static $allVariables = null;
+        if ($allVariables === null) {
+            $allVariables = \Illuminate\Support\Facades\Cache::remember('config_variables_all', 3600, function () {
+                return ConfigVariable::all()->groupBy('package');
+            });
+        }
+
+        foreach ($allVariables->get($package, []) as $configVariable) {
             $config = app('config')->get($configVariable->group, []);
             app('config')->set($configVariable->group, array_replace_recursive($config, [$configVariable->name => $configVariable->value]));
         }
@@ -53,13 +60,14 @@ function config_variable($var, $default = null)
 {
     [$package, $group, $name] = explode('.', $var);
 
-    $variable = \Motor\Backend\Models\ConfigVariable::where('package', $package)
-                                                    ->where('group', $group)
-                                                    ->where('name', $name)
-                                                    ->first();
-    if (! is_null($variable)) {
-        return $variable->value;
-    }
+    // Reuse the cached collection from merge_local_config_with_db_configuration_variables
+    $allVariables = \Illuminate\Support\Facades\Cache::remember('config_variables_all', 3600, function () {
+        return \Motor\Backend\Models\ConfigVariable::all()->groupBy('package');
+    });
 
-    return $default;
+    $variable = $allVariables->get($package, collect())->first(function ($v) use ($group, $name) {
+        return $v->group === $group && $v->name === $name;
+    });
+
+    return $variable ? $variable->value : $default;
 }
