@@ -48,6 +48,7 @@ Route::group([
 
 ], static function ($router) {
     Route::post('login', [LoginController::class, 'login'])
+         ->middleware('throttle:5,1')
          ->name('login');
     Route::post('logout', [LoginController::class, 'logout'])
          ->name('logout');
