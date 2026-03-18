@@ -54,13 +54,18 @@ class Grid extends Base
         $this->searchTerm = request('search');
         $this->clientFilter = request('client_id');
 
-        if (request('sortable_field') && request('sortable_direction')) {
-            $this->setSorting(request('sortable_field'), request('sortable_direction'));
-        }
-
         $this->filter = new Filter($this);
 
         $this->setup();
+
+        // Validate sorting after setup() so sortableFields is populated
+        if (request('sortable_field') && request('sortable_direction')) {
+            $field = request('sortable_field');
+            $direction = request('sortable_direction');
+            if (empty($this->sortableFields) || in_array($field, $this->sortableFields, true)) {
+                $this->setSorting($field, $direction);
+            }
+        }
     }
 
     /**
@@ -403,6 +408,20 @@ class Grid extends Base
         if (is_null($sortableField)) {
             $sortableField = Session::get($this->getClass().'_sortable_field');
             $sortableDirection = Session::get($this->getClass().'_sortable_direction');
+        }
+
+        // Validate against registered sortable columns to prevent SQL injection
+        if (! is_null($sortableField) && ! empty($this->sortableFields) && ! in_array($sortableField, $this->sortableFields, true)) {
+            // Clear invalid value from session
+            Session::forget($this->getClass().'_sortable_field');
+            Session::forget($this->getClass().'_sortable_direction');
+            $sortableField = null;
+            $sortableDirection = null;
+        }
+
+        // Validate direction
+        if (! is_null($sortableDirection) && ! in_array(strtoupper($sortableDirection), ['ASC', 'DESC'], true)) {
+            $sortableDirection = 'ASC';
         }
 
         // Check default

@@ -133,11 +133,14 @@ abstract class BaseService
         $instance->defaultFilters();
         $instance->filters();
 
-        if (Arr::get($_GET, 'sortable_field') && Arr::get($_GET, 'sortable_direction')) {
-            $instance->setSorting([
-                Arr::get($_GET, 'sortable_field'),
-                Arr::get($_GET, 'sortable_direction'),
-            ]);
+        $sortField = Arr::get($_GET, 'sortable_field');
+        $sortDirection = Arr::get($_GET, 'sortable_direction');
+        if ($sortField && $sortDirection) {
+            // Validate field contains only safe identifier characters (letters, digits, underscores, dots)
+            // and direction is ASC or DESC to prevent SQL injection via orderBy()
+            if (preg_match('/^[a-zA-Z0-9_.]+$/', $sortField) && in_array(strtoupper($sortDirection), ['ASC', 'DESC'], true)) {
+                $instance->setSorting([$sortField, $sortDirection]);
+            }
         }
 
         //		if (!is_null($sorting))
