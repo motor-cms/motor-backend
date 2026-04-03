@@ -24,29 +24,47 @@
 
 @section('view_scripts')
     <script type="module">
-        $(function () {
-            $('input[name="{{$name}}_picker"]').datetimepicker({
-                locale: 'de',
-                defaultDate: false,
-                icons: {
-                    time: 'far fa-clock',
-                    date: 'far fa-calendar-alt',
-                    up: 'fas fa-arrow-up',
-                    down: 'fas fa-arrow-down',
-                    previous: 'fas fa-chevron-left',
-                    next: 'fas fa-chevron-right',
-                    today: 'far fa-calendar-check-o',
-                    clear: 'far fa-trash',
-                    close: 'far fa-times'
-                }
-            });
-            $('input[name="{{$name}}_picker"]').on('dp.change', function (e) {
-                $('input[name="{{$name}}"]').val(e.date.format('YYYY-MM-DD HH:mm:ss'));
-            });
-            $('input[name="{{$name}}_picker"]').on('change.datetimepicker', function (e) {
-                $('input[name="{{$name}}"]').val(e.date.format('YYYY-MM-DD HH:mm:ss'));
-            });
-        });
+        console.log('[datetimepicker] script loaded for "{{$name}}"');
+        console.log('[datetimepicker] typeof $:', typeof $);
+        console.log('[datetimepicker] typeof window.$:', typeof window.$);
+        console.log('[datetimepicker] typeof jQuery:', typeof jQuery);
+        console.log('[datetimepicker] typeof window.jQuery:', typeof window.jQuery);
+        const jq = window.$ || window.jQuery;
+        if (!jq) {
+            console.error('[datetimepicker] jQuery not available!');
+        } else {
+            console.log('[datetimepicker] $.fn.datetimepicker:', typeof jq.fn.datetimepicker);
+            const $el = jq('input[name="{{$name}}_picker"]');
+            console.log('[datetimepicker] found elements:', $el.length);
+            if (typeof jq.fn.datetimepicker === 'function') {
+                jq(function () {
+                    jq('input[name="{{$name}}_picker"]').datetimepicker({
+                        locale: 'de',
+                        defaultDate: false,
+                        icons: {
+                            time: 'far fa-clock',
+                            date: 'far fa-calendar-alt',
+                            up: 'fas fa-arrow-up',
+                            down: 'fas fa-arrow-down',
+                            previous: 'fas fa-chevron-left',
+                            next: 'fas fa-chevron-right',
+                            today: 'far fa-calendar-check-o',
+                            clear: 'far fa-trash',
+                            close: 'far fa-times'
+                        }
+                    });
+                    console.log('[datetimepicker] initialized OK');
+                    jq('input[name="{{$name}}_picker"]').on('dp.change', function (e) {
+                        jq('input[name="{{$name}}"]').val(e.date.format('YYYY-MM-DD HH:mm:ss'));
+                    });
+                    jq('input[name="{{$name}}_picker"]').on('change.datetimepicker', function (e) {
+                        jq('input[name="{{$name}}"]').val(e.date.format('YYYY-MM-DD HH:mm:ss'));
+                    });
+                });
+            } else {
+                console.error('[datetimepicker] $.fn.datetimepicker is not a function — plugin not loaded');
+            }
+        }
     </script>
 @append
 
