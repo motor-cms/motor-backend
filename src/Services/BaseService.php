@@ -448,12 +448,25 @@ abstract class BaseService
 
             // Handle empty date values
             if ($field instanceof DatepickerType || $field instanceof DatetimepickerType) {
-                if (! isset($data[$field->getRealName().'_picker']) || (isset($data[$field->getRealName().'_picker']) && $data[$field->getRealName().'_picker'] == '')) {
-                    $data[$field->getRealName()] = '';
+                $pickerKey = $field->getRealName().'_picker';
+                $hiddenKey = $field->getRealName();
+
+                // If JS failed to sync the picker value to the hidden field,
+                // parse the picker's display value as a server-side fallback
+                if (! empty($data[$pickerKey]) && empty($data[$hiddenKey])) {
+                    $parsed = \DateTime::createFromFormat('d.m.Y H:i:s', $data[$pickerKey])
+                           ?: \DateTime::createFromFormat('d.m.Y', $data[$pickerKey]);
+                    if ($parsed) {
+                        $data[$hiddenKey] = $parsed->format('Y-m-d H:i:s');
+                    }
                 }
 
-                if (! isset($data[$field->getRealName()]) || (isset($data[$field->getRealName()]) && $data[$field->getRealName()] == '' || $data[$field->getRealName()] == '0000-00-00 00:00:00' || $data[$field->getRealName()] == '0000-00-00')) {
-                    $data[$field->getRealName()] = null;
+                if (! isset($data[$pickerKey]) || (isset($data[$pickerKey]) && $data[$pickerKey] == '')) {
+                    $data[$hiddenKey] = '';
+                }
+
+                if (! isset($data[$hiddenKey]) || (isset($data[$hiddenKey]) && $data[$hiddenKey] == '' || $data[$hiddenKey] == '0000-00-00 00:00:00' || $data[$hiddenKey] == '0000-00-00')) {
+                    $data[$hiddenKey] = null;
                 }
             }
 
