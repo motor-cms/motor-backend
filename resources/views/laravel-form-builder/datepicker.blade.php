@@ -10,7 +10,7 @@
 
     <?php if ($showField): ?>
     <?= Form::input('hidden', $name, $options['value']) ?>
-    <?= Form::input('text', $name.'_picker', ($options['value'] ? date('d.m.Y', strtotime($options['value'])) : ''), $options['attr']) ?>
+    <?= Form::input('text', $name.'_picker', ($options['value'] ? date('d.m.Y', strtotime($options['value'])) : ''), array_merge(['data-toggle' => 'datetimepicker'], $options['attr'])) ?>
 
     @include ('laravel-form-builder::help_block')
     <?php endif; ?>
