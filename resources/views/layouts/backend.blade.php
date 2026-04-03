@@ -73,6 +73,26 @@
     $('div.flash-message .alert').not('.alert-important').delay(3000).fadeOut(350);
     $('.sidebar-nav li.active').addClass('open');
     $('.sidebar-nav li.active > a').addClass('active');
+
+    // Dark mode toggle (class already applied by head script via MutationObserver)
+    (function() {
+        var isDark = document.body.classList.contains('c-dark-theme');
+        var icon = document.getElementById('dark-mode-icon');
+        var toggle = document.getElementById('dark-mode-toggle');
+
+        // Sync icon state
+        if (icon) { icon.className = isDark ? 'fas fa-sun' : 'fas fa-moon'; }
+        document.documentElement.style.background = '';
+
+        if (toggle) {
+            toggle.addEventListener('click', function() {
+                isDark = !isDark;
+                localStorage.setItem('pm-dark-mode', isDark ? 'true' : 'false');
+                document.body.classList.toggle('c-dark-theme', isDark);
+                if (icon) { icon.className = isDark ? 'fas fa-sun' : 'fas fa-moon'; }
+            });
+        }
+    })();
 </script>
 </body>
 </html>

@@ -6,6 +6,11 @@
 
 @section('content')
     <body class="app flex-row align-items-center">
+    <div style="position: fixed; top: 1rem; right: 1rem; z-index: 1000;">
+        <button type="button" id="dark-mode-toggle" class="btn btn-link text-white p-0" title="Toggle dark mode" style="font-size: 1.25rem; line-height: 1; border: none; opacity: 0.7;">
+            <i class="fas fa-moon" id="dark-mode-icon"></i>
+        </button>
+    </div>
     <div id="app" class="container">
         <div class="row justify-content-center">
             <div class="col-md-8">
@@ -61,5 +66,24 @@
         </div>
     </div>
     @include('motor-backend::layouts.partials.scripts_auth')
+    <script>
+        (function() {
+            var isDark = document.body.classList.contains('c-dark-theme');
+            var icon = document.getElementById('dark-mode-icon');
+            var toggle = document.getElementById('dark-mode-toggle');
+
+            if (icon) { icon.className = isDark ? 'fas fa-sun' : 'fas fa-moon'; }
+            document.documentElement.style.background = '';
+
+            if (toggle) {
+                toggle.addEventListener('click', function() {
+                    isDark = !isDark;
+                    localStorage.setItem('pm-dark-mode', isDark ? 'true' : 'false');
+                    document.body.classList.toggle('c-dark-theme', isDark);
+                    if (icon) { icon.className = isDark ? 'fas fa-sun' : 'fas fa-moon'; }
+                });
+            }
+        })();
+    </script>
 
 @endsection

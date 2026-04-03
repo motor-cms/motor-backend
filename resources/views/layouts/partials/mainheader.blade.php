@@ -1,5 +1,11 @@
 <ul class="c-header-nav ml-auto mr-4">
 
+    <li class="c-header-nav-item mr-3">
+        <button type="button" id="dark-mode-toggle" class="c-header-nav-link btn btn-link p-0" title="Toggle dark mode" style="font-size: 1.1rem; line-height: 1; border: none;">
+            <i class="fas fa-moon" id="dark-mode-icon"></i>
+        </button>
+    </li>
+
     <li class="c-header-nav-item dropdown"><a class="c-header-nav-link" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
             <div class="c-avatar" style="width: auto;">
                 @if (Auth::user() != null && ($avatar = Auth::user()->getMedia('avatar')->first()))

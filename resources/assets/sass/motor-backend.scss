@@ -18,6 +18,7 @@ $primary-25:    #f9fdfe !default;
 // Bootstrap
 @import "@coreui/coreui/scss/coreui";
 // Plugins
+$simple-line-font-path: "simple-line-icons/fonts/";
 @import "simple-line-icons/scss/simple-line-icons";
 @import "toastr/toastr";
 @import "@fancyapps/fancybox/dist/jquery.fancybox";
@@ -138,4 +139,637 @@ section.content-header h4 {
 }
 .bg-secondary.c-sidebar, #sidebar-right > div.c-sidebar-brand > h5 {
   color: #3c4b64 !important;
+}
+
+// ── Dark mode experiment ──
+// Color tokens
+$dm-bg:          #181a1e;
+$dm-surface:     #22262b;
+$dm-surface-alt: #2a2f35;
+$dm-elevated:    #323840;
+$dm-input:       #2a2f35;
+$dm-border:      #3a414a;
+$dm-border-strong: #4a5260;
+$dm-text:        #d0d4da;
+$dm-text-muted:  #8b95a3;
+$dm-heading:     #eef0f2;
+$dm-accent:      #20a8d8;
+
+.c-dark-theme {
+  // Body & app shell
+  &.c-app,
+  &.app,
+  &.login-page,
+  &.register-page {
+    background-color: $dm-bg;
+    color: $dm-text;
+  }
+
+  .c-main,
+  .c-body {
+    background-color: $dm-bg;
+  }
+
+  // Header
+  .c-header {
+    background-color: $dm-surface;
+    border-color: $dm-border;
+    color: $dm-text;
+  }
+
+  // Header toggler (burger menu) & nav links
+  .c-header-toggler {
+    color: $dm-text;
+
+    &:hover {
+      color: $dm-heading;
+    }
+  }
+
+  .c-header-nav-link,
+  .c-header-nav-item .c-header-nav-link {
+    color: $dm-text !important;
+
+    &:hover {
+      color: $dm-heading !important;
+    }
+  }
+
+  .c-avatar {
+    color: $dm-text;
+  }
+
+  .c-subheader {
+    background-color: $dm-surface;
+    border-color: $dm-border;
+  }
+
+  // Left sidebar – match the dark mode palette instead of CoreUI default blue-gray
+  .c-sidebar.c-sidebar-dark {
+    background-color: $dm-surface;
+
+    .c-sidebar-brand {
+      background-color: rgba(0, 0, 0, 0.2);
+    }
+
+    .c-sidebar-nav-link,
+    .c-sidebar-nav-dropdown-toggle {
+      color: $dm-text;
+
+      &:hover {
+        background-color: $dm-surface-alt;
+        color: $dm-heading;
+      }
+
+      .c-sidebar-nav-icon {
+        color: $dm-text-muted;
+      }
+    }
+
+    .c-sidebar-nav-link.c-active,
+    .c-active.c-sidebar-nav-dropdown-toggle {
+      background-color: rgba($dm-accent, 0.15);
+      color: $dm-heading;
+
+      .c-sidebar-nav-icon {
+        color: $dm-accent;
+      }
+    }
+
+    .c-sidebar-nav-dropdown.c-show {
+      background-color: rgba(0, 0, 0, 0.15);
+    }
+
+    .c-sidebar-nav-dropdown-items .c-sidebar-nav-link {
+      color: $dm-text-muted;
+
+      &:hover {
+        color: $dm-heading;
+      }
+    }
+
+    .c-sidebar-minimizer {
+      background-color: rgba(0, 0, 0, 0.2);
+      border-top: 1px solid $dm-border;
+
+      &:hover {
+        background-color: rgba(0, 0, 0, 0.3);
+      }
+    }
+
+    .c-sidebar-nav-title {
+      color: $dm-text-muted;
+    }
+  }
+
+  // Breadcrumbs
+  .breadcrumb {
+    background-color: transparent;
+  }
+  .breadcrumb-item,
+  .breadcrumb-item a,
+  .breadcrumb-item.active {
+    color: $dm-text-muted;
+  }
+
+  // Cards – main visible elements, need clear separation from background
+  .card {
+    background-color: $dm-surface;
+    border: 1px solid $dm-border;
+    color: $dm-text;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+  }
+
+  .card-header,
+  .card-footer {
+    background-color: $dm-surface-alt;
+    border-color: $dm-border;
+    color: $dm-heading;
+    font-weight: 600;
+  }
+
+  .card-body {
+    color: $dm-text;
+  }
+
+  // Headings inside cards
+  h3.box-title,
+  .card-header h3,
+  .card-header h4,
+  .card-header h5 {
+    color: $dm-heading;
+  }
+
+  // Labels
+  label,
+  .control-label,
+  .form-group > label {
+    color: $dm-text;
+  }
+
+  // Tables
+  .table {
+    color: $dm-text;
+
+    th {
+      color: $dm-heading;
+      border-color: $dm-border !important;
+    }
+
+    td {
+      border-color: $dm-border;
+    }
+  }
+
+  .table-striped tbody tr:nth-of-type(odd) {
+    background-color: rgba(255, 255, 255, 0.02);
+  }
+
+  .table-hover tbody tr:hover {
+    background-color: rgba(255, 255, 255, 0.05);
+    color: $dm-text;
+  }
+
+  // Forms
+  .form-control {
+    background-color: $dm-input;
+    border: 1px solid $dm-border;
+    color: $dm-text;
+
+    &:focus {
+      background-color: $dm-elevated;
+      border-color: $dm-accent;
+      color: $dm-heading;
+      box-shadow: 0 0 0 0.2rem rgba($dm-accent, 0.25);
+    }
+
+    &::placeholder {
+      color: #6c757d;
+    }
+
+    &:disabled,
+    &[readonly] {
+      background-color: $dm-bg;
+      color: $dm-text-muted;
+    }
+  }
+
+  // Native selects (single & multiple)
+  select.form-control,
+  select.form-control[multiple] {
+    background-color: $dm-input;
+    color: $dm-text;
+    border-color: $dm-border;
+
+    option {
+      background-color: $dm-surface;
+      color: $dm-text;
+
+      &:checked {
+        background-color: $dm-accent;
+        color: #fff;
+      }
+    }
+  }
+
+  .custom-select {
+    background-color: $dm-input;
+    border-color: $dm-border;
+    color: $dm-text;
+  }
+
+  .custom-control-label::before {
+    background-color: $dm-input;
+    border-color: $dm-border-strong;
+  }
+
+  .custom-file-label {
+    background-color: $dm-input;
+    border-color: $dm-border;
+    color: $dm-text;
+
+    &::after {
+      background-color: $dm-surface-alt;
+      color: $dm-text;
+    }
+  }
+
+  .input-group-text {
+    background-color: $dm-surface-alt;
+    border-color: $dm-border;
+    color: $dm-text;
+  }
+
+  // Buttons
+  .btn-warning {
+    background-color: #b8860b;
+    border-color: #a07608;
+    color: #fff;
+
+    &:hover {
+      background-color: #a07608;
+      border-color: #8a6507;
+      color: #fff;
+    }
+  }
+
+  .btn-danger {
+    background-color: #a83232;
+    border-color: #932b2b;
+    color: #fff;
+
+    &:hover {
+      background-color: #932b2b;
+      border-color: #7e2424;
+      color: #fff;
+    }
+  }
+
+  .btn-info {
+    background-color: #1a6d8a;
+    border-color: #155d77;
+    color: #fff;
+
+    &:hover {
+      background-color: #155d77;
+      border-color: #104e64;
+      color: #fff;
+    }
+  }
+
+  .btn-success {
+    background-color: #1a7a3a;
+    border-color: #156830;
+    color: #fff;
+
+    &:hover {
+      background-color: #156830;
+      border-color: #115627;
+      color: #fff;
+    }
+  }
+
+  .btn-primary {
+    background-color: #1a7fa8;
+    border-color: #156d92;
+    color: #fff;
+
+    &:hover {
+      background-color: #156d92;
+      border-color: #115c7c;
+      color: #fff;
+    }
+  }
+
+  .btn-secondary {
+    background-color: $dm-elevated;
+    border-color: $dm-border;
+    color: $dm-text;
+
+    &:hover {
+      background-color: lighten($dm-elevated, 5%);
+      color: $dm-heading;
+    }
+  }
+
+  .btn-light {
+    background-color: $dm-surface-alt;
+    border-color: $dm-border;
+    color: $dm-text;
+  }
+
+  .btn-outline-secondary {
+    border-color: $dm-border;
+    color: $dm-text;
+
+    &:hover {
+      background-color: $dm-elevated;
+      color: $dm-heading;
+    }
+  }
+
+  // Dropdowns
+  .dropdown-menu {
+    background-color: $dm-surface;
+    border-color: $dm-border;
+    color: $dm-text;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+  }
+
+  .dropdown-item {
+    color: $dm-text;
+
+    &:hover,
+    &:focus {
+      background-color: $dm-elevated;
+      color: $dm-heading;
+    }
+  }
+
+  .dropdown-divider {
+    border-color: $dm-border;
+  }
+
+  // Modals
+  .modal-content {
+    background-color: $dm-surface;
+    border-color: $dm-border;
+    color: $dm-text;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
+  }
+
+  .modal-header {
+    border-color: $dm-border;
+    color: $dm-heading;
+  }
+
+  .modal-footer {
+    border-color: $dm-border;
+  }
+
+  // List groups
+  .list-group-item {
+    background-color: $dm-surface;
+    border-color: $dm-border;
+    color: $dm-text;
+  }
+
+  // Pagination
+  .page-link {
+    background-color: $dm-surface;
+    border-color: $dm-border;
+    color: $dm-text;
+
+    &:hover {
+      background-color: $dm-elevated;
+      border-color: $dm-border;
+      color: $dm-heading;
+    }
+  }
+
+  .page-item.disabled .page-link {
+    background-color: $dm-bg;
+    border-color: $dm-border;
+    color: #6c757d;
+  }
+
+  .page-item.active .page-link {
+    background-color: #1a7fa8;
+    border-color: #156d92;
+  }
+
+  // Footer
+  .c-footer {
+    background-color: $dm-surface;
+    border-color: $dm-border;
+    color: $dm-text-muted;
+  }
+
+  // Alerts
+  .alert {
+    border-color: rgba(255, 255, 255, 0.1);
+  }
+
+  // Nav tabs
+  .nav-tabs {
+    border-color: $dm-border;
+
+    .nav-link {
+      color: $dm-text-muted;
+
+      &:hover {
+        border-color: $dm-border $dm-border transparent;
+        color: $dm-text;
+      }
+
+      &.active {
+        background-color: $dm-surface;
+        border-color: $dm-border $dm-border $dm-surface;
+        color: $dm-heading;
+      }
+    }
+  }
+
+  // Select2
+  .select2-container--default {
+    .select2-selection--single,
+    .select2-selection--multiple {
+      background-color: $dm-input;
+      border-color: $dm-border;
+      color: $dm-text;
+    }
+
+    .select2-selection--single .select2-selection__rendered {
+      color: $dm-text;
+    }
+
+    .select2-selection--multiple .select2-selection__choice {
+      background-color: $dm-elevated;
+      border-color: $dm-border;
+      color: $dm-text;
+    }
+
+    .select2-results__option {
+      color: $dm-text;
+    }
+
+    .select2-results__option--highlighted[aria-selected] {
+      background-color: $dm-accent;
+    }
+
+    .select2-dropdown {
+      background-color: $dm-surface;
+      border-color: $dm-border;
+    }
+
+    .select2-search--dropdown .select2-search__field {
+      background-color: $dm-input;
+      border-color: $dm-border;
+      color: $dm-text;
+    }
+  }
+
+  // jstree
+  .jstree-default .jstree-wholerow-hovered {
+    background-color: rgba(255, 255, 255, 0.06);
+  }
+  .jstree-default .jstree-wholerow-clicked {
+    background-color: rgba($dm-accent, 0.2);
+  }
+
+  // Toastr
+  .toast {
+    background-color: $dm-elevated;
+    color: $dm-text;
+  }
+
+  // Badges
+  .badge-secondary {
+    background-color: $dm-elevated;
+    color: $dm-text;
+  }
+
+  .badge-pill {
+    border: 1px solid $dm-border;
+  }
+
+  // Colored background cards (dashboard stats, login panel, etc.)
+  .bg-primary {
+    background-color: #1a7fa8 !important;
+  }
+
+  .card.bg-warning {
+    background-color: #b8860b !important;
+    border-color: #a07608 !important;
+  }
+
+  .card.bg-danger {
+    background-color: #a83232 !important;
+    border-color: #932b2b !important;
+  }
+
+  .card.bg-info {
+    background-color: #1a6d8a !important;
+    border-color: #155d77 !important;
+  }
+
+  .card.bg-success {
+    background-color: #1a7a3a !important;
+    border-color: #156830 !important;
+  }
+
+  // Generic helpers
+  .bg-light {
+    background-color: $dm-surface !important;
+  }
+
+  .bg-white {
+    background-color: $dm-surface !important;
+  }
+
+  .text-muted {
+    color: $dm-text-muted !important;
+  }
+
+  .text-dark {
+    color: $dm-text !important;
+  }
+
+  hr {
+    border-color: $dm-border;
+  }
+
+  // Content header
+  .content-header h4,
+  section.content-header h4 {
+    color: $dm-heading;
+  }
+
+  // Right sidebar
+  .c-sidebar.c-sidebar-right {
+    background-color: $dm-surface !important;
+    border-left: 1px solid $dm-border;
+    color: $dm-text !important;
+
+    .c-sidebar-brand {
+      background-color: $dm-surface-alt;
+      color: $dm-heading !important;
+
+      h5 {
+        color: $dm-heading !important;
+      }
+    }
+
+    .card {
+      background-color: $dm-surface-alt;
+      border-color: $dm-border;
+    }
+
+    .card-body {
+      color: $dm-text;
+
+      b {
+        color: #e74c3c;
+      }
+    }
+
+    select.form-control {
+      background-color: $dm-input;
+      border-color: $dm-border;
+      color: $dm-text;
+    }
+  }
+
+  // Sidebar brand area
+  &.c-app .bg-secondary.c-sidebar {
+    background-color: $dm-surface !important;
+    color: $dm-text !important;
+  }
+
+  #sidebar-right > div.c-sidebar-brand > h5 {
+    color: $dm-heading !important;
+  }
+
+  // Scrollbar styling for dark mode
+  * {
+    scrollbar-color: $dm-elevated $dm-bg;
+  }
+
+  ::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: $dm-bg;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: $dm-elevated;
+    border-radius: 4px;
+
+    &:hover {
+      background: $dm-border-strong;
+    }
+  }
 }

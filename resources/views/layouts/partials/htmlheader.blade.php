@@ -13,4 +13,23 @@
 
 <!-- Main styles for this application -->
     @vite(['resources/assets/sass/project.package-development.scss'])
+
+    {{-- Apply dark mode before paint to avoid flash --}}
+    <script>
+        (function() {
+            var dark = localStorage.getItem('pm-dark-mode');
+            if (dark === null) dark = 'true';
+            window.__pmDark = dark === 'true';
+            if (window.__pmDark) {
+                document.documentElement.style.background = '#181a1e';
+                // Apply c-dark-theme to body as soon as it exists
+                new MutationObserver(function(mutations, obs) {
+                    if (document.body) {
+                        document.body.classList.add('c-dark-theme');
+                        obs.disconnect();
+                    }
+                }).observe(document.documentElement, { childList: true });
+            }
+        })();
+    </script>
 </head>
