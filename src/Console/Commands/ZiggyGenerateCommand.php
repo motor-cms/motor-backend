@@ -2,23 +2,29 @@
 
 namespace Motor\Backend\Console\Commands;
 
-use Tightenco\Ziggy\CommandRouteGenerator;
+use Illuminate\Console\Command;
+use Illuminate\Filesystem\Filesystem;
+use Tighten\Ziggy\Output\File;
+use Tighten\Ziggy\Ziggy;
 
-class ZiggyGenerateCommand extends CommandRouteGenerator
+class ZiggyGenerateCommand extends Command
 {
     protected $signature = 'motor:ziggy:generate {path=./resources/assets/js/ziggy.js} {--url=/}';
 
-    public function handle()
+    protected $description = 'Generate Ziggy routes JS file with app.url stripped from output.';
+
+    public function handle(Filesystem $filesystem): void
     {
+        $ziggy = new Ziggy(null, $this->option('url') ? url($this->option('url')) : null);
+
         $path = $this->argument('path');
 
-        $generatedRoutes = $this->generate();
+        $filesystem->ensureDirectoryExists(dirname(base_path($path)), recursive: true);
 
-        $generatedRoutes = str_replace(config('app.url'), '', $generatedRoutes);
+        $generatedRoutes = (string) new File($ziggy);
+        $generatedRoutes = str_replace((string) config('app.url'), '', $generatedRoutes);
 
-        $this->makeDirectory($path);
-
-        $this->files->put($path, $generatedRoutes);
+        $filesystem->put(base_path($path), $generatedRoutes);
 
         $this->info('File generated!');
     }
