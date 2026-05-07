@@ -10,7 +10,7 @@ use Motor\Backend\Database\Factories\ClientFactory;
 use Motor\Core\Filter\Filter;
 use Motor\Core\Traits\Filterable;
 use Motor\Core\Traits\Searchable;
-use RichanFongdasen\EloquentBlameable\BlameableTrait;
+use Mattiverse\Userstamps\Traits\Userstamps;
 
 /**
  * Motor\Backend\Models\Client
@@ -66,7 +66,7 @@ use RichanFongdasen\EloquentBlameable\BlameableTrait;
 class Client extends Model
 {
     use Searchable;
-    use BlameableTrait;
+    use Userstamps;
     use Filterable;
     use HasFactory;
     use HasShortflakePrimary;

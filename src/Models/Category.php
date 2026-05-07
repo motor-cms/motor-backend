@@ -9,7 +9,7 @@ use Kalnoy\Nestedset\QueryBuilder;
 use Kra8\Snowflake\HasShortflakePrimary;
 use Motor\Core\Filter\Filter;
 use Motor\Core\Traits\Filterable;
-use RichanFongdasen\EloquentBlameable\BlameableTrait;
+use Mattiverse\Userstamps\Traits\Userstamps;
 
 /**
  * Motor\Backend\Models\Category
@@ -53,7 +53,7 @@ use RichanFongdasen\EloquentBlameable\BlameableTrait;
 class Category extends Model
 {
     use Filterable;
-    use BlameableTrait;
+    use Userstamps;
     use NodeTrait;
     use HasShortflakePrimary;
 

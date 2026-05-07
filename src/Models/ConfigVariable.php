@@ -8,7 +8,7 @@ use Kra8\Snowflake\HasShortflakePrimary;
 use Motor\Core\Filter\Filter;
 use Motor\Core\Traits\Filterable;
 use Motor\Core\Traits\Searchable;
-use RichanFongdasen\EloquentBlameable\BlameableTrait;
+use Mattiverse\Userstamps\Traits\Userstamps;
 
 /**
  * Motor\Backend\Models\ConfigVariable
@@ -49,7 +49,7 @@ class ConfigVariable extends Model
 {
     use Searchable;
     use Filterable;
-    use BlameableTrait;
+    use Userstamps;
     use HasShortflakePrimary;
 
     /**
