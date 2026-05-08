@@ -24,7 +24,7 @@
     "spatie/laravel-fractal": "^6.0",
     "league/glide-laravel": "^1.0",
     "lavary/laravel-menu": "^1.8",
-    "dfox288/culpa": "^10.0",
+    "wildside/userstamps": "^4.0",
     "symfony/intl": "^6.0",
     "kris/laravel-form-builder": "^1.40",
     "spatie/laravel-medialibrary": "^10.0",
