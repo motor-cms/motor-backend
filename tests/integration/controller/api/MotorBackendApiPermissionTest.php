@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Foundation\Testing\DatabaseTransactions;
+use PHPUnit\Framework\Attributes\Test;
 
 /**
  * Class MotorBackendApiPermissionTest
@@ -41,15 +42,13 @@ class MotorBackendApiPermissionTest extends TestCase
         $this->deletePermission = create_test_permission_with_name('permissions.delete');
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function returns_403_if_not_authenticated()
     {
         $this->json('GET', '/api/permissions/1')->seeStatusCode(401)->seeJson(['error' => 'Unauthenticated.']);
     }
 
-    /** @test */
+    #[Test]
     public function returns_404_for_non_existing_record()
     {
         $this->user->givePermissionTo($this->readPermission);
@@ -58,7 +57,7 @@ class MotorBackendApiPermissionTest extends TestCase
         ]);
     }
 
-    /** @test */
+    #[Test]
     public function fails_if_trying_to_create_without_payload()
     {
         $this->user->givePermissionTo($this->writePermission);
@@ -67,7 +66,7 @@ class MotorBackendApiPermissionTest extends TestCase
         ]);
     }
 
-    /** @test */
+    #[Test]
     public function fails_if_trying_to_create_without_permission()
     {
         $this->json('POST', '/api/permissions?api_token='.$this->user->api_token)->seeStatusCode(403)->seeJson([
@@ -75,7 +74,7 @@ class MotorBackendApiPermissionTest extends TestCase
         ]);
     }
 
-    /** @test */
+    #[Test]
     public function can_create_a_new_permission()
     {
         $this->user->givePermissionTo($this->writePermission);
@@ -86,7 +85,7 @@ class MotorBackendApiPermissionTest extends TestCase
         ]);
     }
 
-    /** @test */
+    #[Test]
     public function can_create_a_new_permission_with_permission_group()
     {
         $this->user->givePermissionTo($this->writePermission);
@@ -100,7 +99,7 @@ class MotorBackendApiPermissionTest extends TestCase
         ]);
     }
 
-    /** @test */
+    #[Test]
     public function can_show_a_single_permission()
     {
         $this->user->givePermissionTo($this->readPermission);
@@ -113,7 +112,7 @@ class MotorBackendApiPermissionTest extends TestCase
         ]);
     }
 
-    /** @test */
+    #[Test]
     public function fails_to_show_a_single_permission_without_permission()
     {
         $permission = create_test_permission();
@@ -125,7 +124,7 @@ class MotorBackendApiPermissionTest extends TestCase
         ]);
     }
 
-    /** @test */
+    #[Test]
     public function can_show_multiple_permissions()
     {
         $this->user->givePermissionTo($this->readPermission);
@@ -135,7 +134,7 @@ class MotorBackendApiPermissionTest extends TestCase
         ]);
     }
 
-    /** @test */
+    #[Test]
     public function can_search_for_a_permission()
     {
         $this->user->givePermissionTo($this->readPermission);
@@ -148,7 +147,7 @@ class MotorBackendApiPermissionTest extends TestCase
         ]);
     }
 
-    /** @test */
+    #[Test]
     public function can_show_a_second_results_page()
     {
         $this->user->givePermissionTo($this->readPermission);
@@ -161,7 +160,7 @@ class MotorBackendApiPermissionTest extends TestCase
         ]);
     }
 
-    /** @test */
+    #[Test]
     public function fails_if_trying_to_update_nonexisting_permission()
     {
         $this->user->givePermissionTo($this->writePermission);
@@ -170,7 +169,7 @@ class MotorBackendApiPermissionTest extends TestCase
         ]);
     }
 
-    /** @test */
+    #[Test]
     public function fails_if_trying_to_modify_a_permission_without_payload()
     {
         $this->user->givePermissionTo($this->writePermission);
@@ -183,7 +182,7 @@ class MotorBackendApiPermissionTest extends TestCase
         ]);
     }
 
-    /** @test */
+    #[Test]
     public function fails_if_trying_to_modify_a_permission_without_permission()
     {
         $permission = create_test_permission();
@@ -195,7 +194,7 @@ class MotorBackendApiPermissionTest extends TestCase
         ]);
     }
 
-    /** @test */
+    #[Test]
     public function can_modify_a_permission()
     {
         $this->user->givePermissionTo($this->writePermission);
@@ -207,7 +206,7 @@ class MotorBackendApiPermissionTest extends TestCase
         ]);
     }
 
-    /** @test */
+    #[Test]
     public function fails_if_trying_to_delete_a_non_existing_permission()
     {
         $this->user->givePermissionTo($this->deletePermission);
@@ -216,7 +215,7 @@ class MotorBackendApiPermissionTest extends TestCase
         ]);
     }
 
-    /** @test */
+    #[Test]
     public function fails_to_delete_a_permission_without_permission()
     {
         $permission = create_test_permission();
@@ -228,7 +227,7 @@ class MotorBackendApiPermissionTest extends TestCase
         ]);
     }
 
-    /** @test */
+    #[Test]
     public function can_delete_a_permission()
     {
         $this->user->givePermissionTo($this->deletePermission);

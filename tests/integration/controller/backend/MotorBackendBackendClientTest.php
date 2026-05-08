@@ -2,6 +2,7 @@
 
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 use Motor\Backend\Models\Client;
+use PHPUnit\Framework\Attributes\Test;
 
 /**
  * Class MotorBackendBackendClientTest
@@ -47,7 +48,7 @@ class MotorBackendBackendClientTest extends TestCase
         $this->actingAs($this->user);
     }
 
-    /** @test */
+    #[Test]
     public function can_see_grid_without_clients()
     {
         $this->visit('/backend/clients')
@@ -55,7 +56,7 @@ class MotorBackendBackendClientTest extends TestCase
             ->see(trans('motor-backend::backend/global.no_records'));
     }
 
-    /** @test */
+    #[Test]
     public function can_see_grid_with_one_client()
     {
         $client = create_test_client();
@@ -64,7 +65,7 @@ class MotorBackendBackendClientTest extends TestCase
             ->see($client->name);
     }
 
-    /** @test */
+    #[Test]
     public function can_visit_the_edit_form_of_a_client_and_use_the_back_button()
     {
         $client = create_test_client();
@@ -77,7 +78,7 @@ class MotorBackendBackendClientTest extends TestCase
             ->seePageIs('/backend/clients');
     }
 
-    /** @test */
+    #[Test]
     public function can_visit_the_edit_form_of_a_client_and_change_values()
     {
         $client = create_test_client();
@@ -97,7 +98,7 @@ class MotorBackendBackendClientTest extends TestCase
         $this->assertEquals('AU', $client->country_iso_3166_1);
     }
 
-    /** @test */
+    #[Test]
     public function can_click_the_create_button()
     {
         $this->visit('/backend/clients')
@@ -105,7 +106,7 @@ class MotorBackendBackendClientTest extends TestCase
             ->seePageIs('/backend/clients/create');
     }
 
-    /** @test */
+    #[Test]
     public function can_create_a_new_client()
     {
         $this->visit('/backend/clients/create')
@@ -120,7 +121,7 @@ class MotorBackendBackendClientTest extends TestCase
             ->seePageIs('/backend/clients');
     }
 
-    /** @test */
+    #[Test]
     public function cannot_create_a_new_client_with_empty_fields()
     {
         $this->visit('/backend/clients/create')
@@ -132,7 +133,7 @@ class MotorBackendBackendClientTest extends TestCase
             ->seePageIs('/backend/clients/create');
     }
 
-    /** @test */
+    #[Test]
     public function can_modify_a_client()
     {
         $client = create_test_client();
@@ -147,7 +148,7 @@ class MotorBackendBackendClientTest extends TestCase
             ->seePageIs('/backend/clients');
     }
 
-    /** @test */
+    #[Test]
     public function can_delete_a_client()
     {
         create_test_client();
@@ -163,7 +164,7 @@ class MotorBackendBackendClientTest extends TestCase
         $this->assertCount(0, Client::all());
     }
 
-    /** @test */
+    #[Test]
     public function can_paginate_results()
     {
         $clients = create_test_client(100);
@@ -174,7 +175,7 @@ class MotorBackendBackendClientTest extends TestCase
             ->seePageIs('/backend/clients?page=3');
     }
 
-    /** @test */
+    #[Test]
     public function can_search_results()
     {
         $clients = create_test_client(100);

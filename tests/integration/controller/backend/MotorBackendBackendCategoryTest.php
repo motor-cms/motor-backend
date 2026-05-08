@@ -2,6 +2,7 @@
 
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 use Motor\Backend\Models\Category;
+use PHPUnit\Framework\Attributes\Test;
 
 /**
  * Class MotorBackendBackendCategoryTest
@@ -51,7 +52,7 @@ class MotorBackendBackendCategoryTest extends TestCase
         $this->actingAs($this->user);
     }
 
-    /** @test */
+    #[Test]
     public function can_see_grid_without_category()
     {
         $this->visit('/backend/categories')
@@ -59,7 +60,7 @@ class MotorBackendBackendCategoryTest extends TestCase
             ->see(trans('motor-backend::backend/global.no_records'));
     }
 
-    /** @test */
+    #[Test]
     public function can_see_grid_with_one_category()
     {
         $record = create_test_category();
@@ -68,7 +69,7 @@ class MotorBackendBackendCategoryTest extends TestCase
             ->see($record->name);
     }
 
-    /** @test */
+    #[Test]
     public function can_visit_the_edit_form_of_a_category_and_use_the_back_button()
     {
         $record = create_test_category();
@@ -81,7 +82,7 @@ class MotorBackendBackendCategoryTest extends TestCase
             ->seePageIs('/backend/categories');
     }
 
-    /** @test */
+    #[Test]
     public function can_visit_the_edit_form_of_a_category_and_change_values()
     {
         $record = create_test_category();
@@ -100,7 +101,7 @@ class MotorBackendBackendCategoryTest extends TestCase
         $this->assertEquals('Updated Category', $record->name);
     }
 
-    /** @test */
+    #[Test]
     public function can_click_the_category_create_button()
     {
         $this->visit('/backend/categories')
@@ -108,7 +109,7 @@ class MotorBackendBackendCategoryTest extends TestCase
             ->seePageIs('/backend/categories/create');
     }
 
-    /** @test */
+    #[Test]
     public function can_create_a_new_category()
     {
         $this->visit('/backend/categories/create')
@@ -122,7 +123,7 @@ class MotorBackendBackendCategoryTest extends TestCase
             ->seePageIs('/backend/categories');
     }
 
-    /** @test */
+    #[Test]
     public function cannot_create_a_new_category_with_empty_fields()
     {
         $this->visit('/backend/categories/create')
@@ -134,7 +135,7 @@ class MotorBackendBackendCategoryTest extends TestCase
             ->seePageIs('/backend/categories/create');
     }
 
-    /** @test */
+    #[Test]
     public function can_modify_a_category()
     {
         $record = create_test_category();
@@ -149,7 +150,7 @@ class MotorBackendBackendCategoryTest extends TestCase
             ->seePageIs('/backend/categories');
     }
 
-    /** @test */
+    #[Test]
     public function can_delete_a_category()
     {
         create_test_category();
@@ -166,7 +167,7 @@ class MotorBackendBackendCategoryTest extends TestCase
         $this->assertCount(0, Category::all());
     }
 
-    /** @test */
+    #[Test]
     public function can_paginate_category_results()
     {
         $records = create_test_category(100);
@@ -177,7 +178,7 @@ class MotorBackendBackendCategoryTest extends TestCase
             ->seePageIs('/backend/categories?page=3');
     }
 
-    /** @test */
+    #[Test]
     public function can_search_category_results()
     {
         $records = create_test_category(10);

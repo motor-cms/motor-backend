@@ -2,6 +2,7 @@
 
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 use Motor\Backend\Models\Role;
+use PHPUnit\Framework\Attributes\Test;
 
 /**
  * Class MotorBackendBackendRoleTest
@@ -47,7 +48,7 @@ class MotorBackendBackendRoleTest extends TestCase
         $this->actingAs($this->user);
     }
 
-    /** @test */
+    #[Test]
     public function can_see_grid_with_one_role()
     {
         $this->visit('/backend/roles')
@@ -55,7 +56,7 @@ class MotorBackendBackendRoleTest extends TestCase
             ->see('SuperAdmin');
     }
 
-    /** @test */
+    #[Test]
     public function can_visit_the_edit_form_of_a_role_and_use_the_back_button()
     {
         $this->visit('/backend/roles')
@@ -67,7 +68,7 @@ class MotorBackendBackendRoleTest extends TestCase
             ->seePageIs('/backend/roles');
     }
 
-    /** @test */
+    #[Test]
     public function can_visit_the_edit_form_of_a_role_and_change_the_name()
     {
         $role = create_test_role();
@@ -83,7 +84,7 @@ class MotorBackendBackendRoleTest extends TestCase
             ->seePageIs('/backend/roles');
     }
 
-    /** @test */
+    #[Test]
     public function can_click_the_create_button()
     {
         $this->visit('/backend/roles')
@@ -91,7 +92,7 @@ class MotorBackendBackendRoleTest extends TestCase
             ->seePageIs('/backend/roles/create');
     }
 
-    /** @test */
+    #[Test]
     public function can_create_a_new_role()
     {
         $this->visit('/backend/roles/create')
@@ -105,7 +106,7 @@ class MotorBackendBackendRoleTest extends TestCase
             ->seePageIs('/backend/roles');
     }
 
-    /** @test */
+    #[Test]
     public function cannot_create_a_new_role_with_empty_fields()
     {
         $this->visit('/backend/roles/create')
@@ -117,7 +118,7 @@ class MotorBackendBackendRoleTest extends TestCase
             ->seePageIs('/backend/roles/create');
     }
 
-    /** @test */
+    #[Test]
     public function can_create_a_new_role_and_assign_one_permission()
     {
         create_test_permission_with_name('test.permission');
@@ -140,7 +141,7 @@ class MotorBackendBackendRoleTest extends TestCase
         $this->assertEquals(false, $role->hasPermissionto('another.permission'));
     }
 
-    /** @test */
+    #[Test]
     public function can_modify_a_role_and_assign_a_new_permission()
     {
         create_test_permission_with_name('test.permission');
@@ -165,7 +166,7 @@ class MotorBackendBackendRoleTest extends TestCase
         $this->assertEquals(true, $role->hasPermissionto('another.permission'));
     }
 
-    /** @test */
+    #[Test]
     public function can_modify_a_role_and_remove_a_permission()
     {
         create_test_permission_with_name('test.permission');
@@ -192,7 +193,7 @@ class MotorBackendBackendRoleTest extends TestCase
         $this->assertEquals(true, $role->hasPermissionto('another.permission'));
     }
 
-    /** @test */
+    #[Test]
     public function can_delete_a_role()
     {
         create_test_role();
@@ -205,7 +206,7 @@ class MotorBackendBackendRoleTest extends TestCase
         $this->assertCount(1, Role::all());
     }
 
-    /** @test */
+    #[Test]
     public function can_paginate_results()
     {
         $roles = create_test_role(100);
@@ -216,7 +217,7 @@ class MotorBackendBackendRoleTest extends TestCase
             ->seePageIs('/backend/roles?page=3');
     }
 
-    /** @test */
+    #[Test]
     public function can_search_results()
     {
         $roles = create_test_role(100);

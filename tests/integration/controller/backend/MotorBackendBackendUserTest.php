@@ -3,6 +3,7 @@
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 use Motor\Backend\Models\User;
+use PHPUnit\Framework\Attributes\Test;
 
 /**
  * Class MotorBackendBackendUserTest
@@ -51,7 +52,7 @@ class MotorBackendBackendUserTest extends TestCase
         $this->actingAs($this->user);
     }
 
-    /** @test */
+    #[Test]
     public function can_see_grid_with_one_users()
     {
         $this->visit('/backend/users')
@@ -59,7 +60,7 @@ class MotorBackendBackendUserTest extends TestCase
             ->see($this->user->name);
     }
 
-    /** @test */
+    #[Test]
     public function can_see_grid_with_one_user()
     {
         $user = create_test_user();
@@ -68,7 +69,7 @@ class MotorBackendBackendUserTest extends TestCase
             ->see($user->name);
     }
 
-    /** @test */
+    #[Test]
     public function can_visit_the_edit_form_of_a_user_and_use_the_back_button()
     {
         $this->visit('/backend/users')
@@ -80,7 +81,7 @@ class MotorBackendBackendUserTest extends TestCase
             ->seePageIs('/backend/users');
     }
 
-    /** @test */
+    #[Test]
     public function can_visit_the_edit_form_of_a_user_and_change_values()
     {
         $user = create_test_user();
@@ -96,7 +97,7 @@ class MotorBackendBackendUserTest extends TestCase
             ->seePageIs('/backend/users');
     }
 
-    /** @test */
+    #[Test]
     public function can_click_the_create_button()
     {
         $this->visit('/backend/users')
@@ -104,7 +105,7 @@ class MotorBackendBackendUserTest extends TestCase
             ->seePageIs('/backend/users/create');
     }
 
-    /** @test */
+    #[Test]
     public function can_create_a_new_user()
     {
         $this->visit('/backend/users/create')
@@ -120,7 +121,7 @@ class MotorBackendBackendUserTest extends TestCase
             ->seePageIs('/backend/users');
     }
 
-    /** @test */
+    #[Test]
     public function can_create_a_new_user_and_assign_a_role()
     {
         $role = create_test_role();
@@ -141,7 +142,7 @@ class MotorBackendBackendUserTest extends TestCase
         $this->assertEquals(true, $user->hasRole($role->name));
     }
 
-    /** @test */
+    #[Test]
     public function can_edit_a_user_and_remove_a_role()
     {
         $role = create_test_role();
@@ -161,7 +162,7 @@ class MotorBackendBackendUserTest extends TestCase
         $this->assertEquals(false, $updatedUser->hasRole($role->name));
     }
 
-    /** @test */
+    #[Test]
     public function can_create_a_new_user_and_upload_an_avatar()
     {
         $this->visit('/backend/users/create')
@@ -183,7 +184,7 @@ class MotorBackendBackendUserTest extends TestCase
         $this->assertEquals('motor-logo-large.png', $media->file_name);
     }
 
-    /** @test */
+    #[Test]
     public function cannot_create_a_new_user_with_empty_fields()
     {
         $this->visit('/backend/users/create')
@@ -195,7 +196,7 @@ class MotorBackendBackendUserTest extends TestCase
             ->seePageIs('/backend/users/create');
     }
 
-    /** @test */
+    #[Test]
     public function can_modify_a_user()
     {
         $user = create_test_user();
@@ -210,7 +211,7 @@ class MotorBackendBackendUserTest extends TestCase
             ->seePageIs('/backend/users');
     }
 
-    /** @test */
+    #[Test]
     public function can_modify_a_user_and_change_the_password()
     {
         $user = create_test_user();
@@ -224,7 +225,7 @@ class MotorBackendBackendUserTest extends TestCase
             ->seePageIs('/backend/users');
     }
 
-    /** @test */
+    #[Test]
     public function can_modify_a_user_and_upload_an_avatar()
     {
         $user = create_test_user();
@@ -245,7 +246,7 @@ class MotorBackendBackendUserTest extends TestCase
         return $updatedUser;
     }
 
-    /** @test */
+    #[Test]
     public function can_modify_a_user_and_upload_an_avatar_and_delete_it_again()
     {
         $user = $this->can_modify_a_user_and_upload_an_avatar();
@@ -265,7 +266,7 @@ class MotorBackendBackendUserTest extends TestCase
         $this->assertEquals(null, $media);
     }
 
-    /** @test */
+    #[Test]
     public function can_modify_a_user_and_change_an_avatar()
     {
         $user = $this->can_modify_a_user_and_upload_an_avatar();
@@ -285,7 +286,7 @@ class MotorBackendBackendUserTest extends TestCase
         $this->assertEquals('motor-logo-small.png', $media->file_name);
     }
 
-    /** @test */
+    #[Test]
     public function can_delete_a_user()
     {
         create_test_user();
@@ -301,7 +302,7 @@ class MotorBackendBackendUserTest extends TestCase
         $this->assertCount(1, User::all());
     }
 
-    /** @test */
+    #[Test]
     public function can_paginate_results()
     {
         create_test_user(100);
@@ -312,7 +313,7 @@ class MotorBackendBackendUserTest extends TestCase
             ->seePageIs('/backend/users?page=3');
     }
 
-    /** @test */
+    #[Test]
     public function can_search_results()
     {
         $users = create_test_user(100);
