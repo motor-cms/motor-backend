@@ -2,6 +2,7 @@
 
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 use Motor\Backend\Models\User;
+use PHPUnit\Framework\Attributes\Test;
 
 /**
  * Class MotorBackendBackendProfileTest
@@ -34,7 +35,7 @@ class MotorBackendBackendProfileTest extends TestCase
         create_test_permission_with_name('profile.write');
     }
 
-    /** @test */
+    #[Test]
     public function user_can_log_in_and_see_dashboard_as_superadmin()
     {
         $this->user = create_test_superadmin();
@@ -45,7 +46,7 @@ class MotorBackendBackendProfileTest extends TestCase
         )->press(trans('motor-backend::backend/login.sign_in'))->see('Dashboard');
     }
 
-    /** @test */
+    #[Test]
     public function user_can_change_password()
     {
         $this->user = create_test_superadmin();
@@ -69,7 +70,7 @@ class MotorBackendBackendProfileTest extends TestCase
         $this->assertEquals('NewName', $this->user->fresh()->name);
     }
 
-    /** @test */
+    #[Test]
     public function user_can_change_password_and_log_in_with_the_new_password()
     {
         $this->user_can_change_password();
@@ -83,7 +84,7 @@ class MotorBackendBackendProfileTest extends TestCase
                 )->press(trans('motor-backend::backend/login.sign_in'))->see('Dashboard');
     }
 
-    /** @test */
+    #[Test]
     public function user_can_add_profile_picture()
     {
         $this->user = create_test_superadmin();
@@ -100,7 +101,7 @@ class MotorBackendBackendProfileTest extends TestCase
         $this->assertEquals('motor-logo-large.png', $media->file_name);
     }
 
-    /** @test */
+    #[Test]
     public function user_can_add_profile_picture_and_delete_it_again()
     {
         $this->user_can_add_profile_picture();
@@ -120,7 +121,7 @@ class MotorBackendBackendProfileTest extends TestCase
         $this->assertEquals(null, $media);
     }
 
-    /** @test */
+    #[Test]
     public function user_can_change_profile_picture()
     {
         $this->user_can_add_profile_picture();

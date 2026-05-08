@@ -2,6 +2,7 @@
 
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 use Motor\Backend\Models\CategoryTree;
+use PHPUnit\Framework\Attributes\Test;
 
 /**
  * Class MotorBackendBackendCategoryTreeTest
@@ -51,7 +52,7 @@ class MotorBackendBackendCategoryTreeTest extends TestCase
         $this->actingAs($this->user);
     }
 
-    /** @test */
+    #[Test]
     public function can_see_grid_without_category_tree()
     {
         $this->visit('/backend/category_trees')
@@ -59,7 +60,7 @@ class MotorBackendBackendCategoryTreeTest extends TestCase
             ->see(trans('motor-backend::backend/global.no_records'));
     }
 
-    /** @test */
+    #[Test]
     public function can_see_grid_with_one_category_tree()
     {
         $record = create_test_category_tree();
@@ -68,7 +69,7 @@ class MotorBackendBackendCategoryTreeTest extends TestCase
             ->see($record->name);
     }
 
-    /** @test */
+    #[Test]
     public function can_visit_the_edit_form_of_a_category_tree_and_use_the_back_button()
     {
         $record = create_test_category_tree();
@@ -81,7 +82,7 @@ class MotorBackendBackendCategoryTreeTest extends TestCase
             ->seePageIs('/backend/category_trees');
     }
 
-    /** @test */
+    #[Test]
     public function can_visit_the_edit_form_of_a_category_tree_and_change_values()
     {
         $record = create_test_category_tree();
@@ -100,7 +101,7 @@ class MotorBackendBackendCategoryTreeTest extends TestCase
         $this->assertEquals('Updated Category tree', $record->name);
     }
 
-    /** @test */
+    #[Test]
     public function can_click_the_category_tree_create_button()
     {
         $this->visit('/backend/category_trees')
@@ -108,7 +109,7 @@ class MotorBackendBackendCategoryTreeTest extends TestCase
             ->seePageIs('/backend/category_trees/create');
     }
 
-    /** @test */
+    #[Test]
     public function can_create_a_new_category_tree()
     {
         $this->visit('/backend/category_trees/create')
@@ -122,7 +123,7 @@ class MotorBackendBackendCategoryTreeTest extends TestCase
             ->seePageIs('/backend/category_trees');
     }
 
-    /** @test */
+    #[Test]
     public function cannot_create_a_new_category_tree_with_empty_fields()
     {
         $this->visit('/backend/category_trees/create')
@@ -134,7 +135,7 @@ class MotorBackendBackendCategoryTreeTest extends TestCase
             ->seePageIs('/backend/category_trees/create');
     }
 
-    /** @test */
+    #[Test]
     public function can_modify_a_category_tree()
     {
         $record = create_test_category_tree();
@@ -149,7 +150,7 @@ class MotorBackendBackendCategoryTreeTest extends TestCase
             ->seePageIs('/backend/category_trees');
     }
 
-    /** @test */
+    #[Test]
     public function can_delete_a_category_tree()
     {
         create_test_category_tree();
@@ -166,7 +167,7 @@ class MotorBackendBackendCategoryTreeTest extends TestCase
         $this->assertCount(0, CategoryTree::all());
     }
 
-    /** @test */
+    #[Test]
     public function can_paginate_category_tree_results()
     {
         $records = create_test_category_tree(100);
@@ -177,7 +178,7 @@ class MotorBackendBackendCategoryTreeTest extends TestCase
             ->seePageIs('/backend/category_trees?page=3');
     }
 
-    /** @test */
+    #[Test]
     public function can_search_category_tree_results()
     {
         $records = create_test_category_tree(10);

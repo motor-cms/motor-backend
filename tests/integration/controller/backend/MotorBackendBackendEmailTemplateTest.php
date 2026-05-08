@@ -2,6 +2,7 @@
 
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 use Motor\Backend\Models\EmailTemplate;
+use PHPUnit\Framework\Attributes\Test;
 
 /**
  * Class MotorBackendBackendEmailTemplateTest
@@ -48,7 +49,7 @@ class MotorBackendBackendEmailTemplateTest extends TestCase
         $this->actingAs($this->user);
     }
 
-    /** @test */
+    #[Test]
     public function can_see_grid_without_email_templates()
     {
         $this->visit('/backend/email_templates')
@@ -56,7 +57,7 @@ class MotorBackendBackendEmailTemplateTest extends TestCase
             ->see(trans('motor-backend::backend/global.no_records'));
     }
 
-    /** @test */
+    #[Test]
     public function can_see_grid_with_one_email_template()
     {
         $email_template = create_test_email_template();
@@ -65,7 +66,7 @@ class MotorBackendBackendEmailTemplateTest extends TestCase
             ->see($email_template->name);
     }
 
-    /** @test */
+    #[Test]
     public function can_visit_the_edit_form_of_a_email_template_and_use_the_back_button()
     {
         $email_template = create_test_email_template();
@@ -78,7 +79,7 @@ class MotorBackendBackendEmailTemplateTest extends TestCase
             ->seePageIs('/backend/email_templates');
     }
 
-    /** @test */
+    #[Test]
     public function can_visit_the_edit_form_of_a_email_template_and_change_values()
     {
         $email_template = create_test_email_template();
@@ -94,7 +95,7 @@ class MotorBackendBackendEmailTemplateTest extends TestCase
             ->seePageIs('/backend/email_templates');
     }
 
-    /** @test */
+    #[Test]
     public function can_click_the_create_button()
     {
         $this->visit('/backend/email_templates')
@@ -102,7 +103,7 @@ class MotorBackendBackendEmailTemplateTest extends TestCase
             ->seePageIs('/backend/email_templates/create');
     }
 
-    /** @test */
+    #[Test]
     public function can_create_a_new_email_template()
     {
         $client = create_test_client();
@@ -121,7 +122,7 @@ class MotorBackendBackendEmailTemplateTest extends TestCase
             ->seePageIs('/backend/email_templates');
     }
 
-    /** @test */
+    #[Test]
     public function cannot_create_a_new_email_template_with_empty_fields()
     {
         $this->visit('/backend/email_templates/create')
@@ -133,7 +134,7 @@ class MotorBackendBackendEmailTemplateTest extends TestCase
             ->seePageIs('/backend/email_templates/create');
     }
 
-    /** @test */
+    #[Test]
     public function can_modify_a_email_template()
     {
         $email_template = create_test_email_template();
@@ -148,7 +149,7 @@ class MotorBackendBackendEmailTemplateTest extends TestCase
             ->seePageIs('/backend/email_templates');
     }
 
-    /** @test */
+    #[Test]
     public function can_modify_a_email_template_and_change_client_and_language()
     {
         $email_template = create_test_email_template();
@@ -167,7 +168,7 @@ class MotorBackendBackendEmailTemplateTest extends TestCase
             ->seePageIs('/backend/email_templates');
     }
 
-    /** @test */
+    #[Test]
     public function can_delete_a_email_template()
     {
         create_test_email_template();
@@ -183,7 +184,7 @@ class MotorBackendBackendEmailTemplateTest extends TestCase
         $this->assertCount(0, EmailTemplate::all());
     }
 
-    /** @test */
+    #[Test]
     public function can_paginate_results()
     {
         create_test_email_template(100);
@@ -194,7 +195,7 @@ class MotorBackendBackendEmailTemplateTest extends TestCase
             ->seePageIs('/backend/email_templates?page=3');
     }
 
-    /** @test */
+    #[Test]
     public function can_search_results()
     {
         $email_templates = create_test_email_template(100);

@@ -2,6 +2,7 @@
 
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 use Motor\Backend\Models\Language;
+use PHPUnit\Framework\Attributes\Test;
 
 /**
  * Class MotorBackendBackendLanguageTest
@@ -46,7 +47,7 @@ class MotorBackendBackendLanguageTest extends TestCase
         $this->actingAs($this->user);
     }
 
-    /** @test */
+    #[Test]
     public function can_see_grid_without_languages()
     {
         $this->visit('/backend/languages')
@@ -54,7 +55,7 @@ class MotorBackendBackendLanguageTest extends TestCase
             ->see(trans('motor-backend::backend/global.no_records'));
     }
 
-    /** @test */
+    #[Test]
     public function can_see_grid_with_one_language()
     {
         $language = create_test_language();
@@ -63,7 +64,7 @@ class MotorBackendBackendLanguageTest extends TestCase
             ->see($language->english_name);
     }
 
-    /** @test */
+    #[Test]
     public function can_visit_the_edit_form_of_a_language_and_use_the_back_button()
     {
         $language = create_test_language();
@@ -76,7 +77,7 @@ class MotorBackendBackendLanguageTest extends TestCase
             ->seePageIs('/backend/languages');
     }
 
-    /** @test */
+    #[Test]
     public function can_visit_the_edit_form_of_a_language_and_change_values()
     {
         $language = create_test_language();
@@ -92,7 +93,7 @@ class MotorBackendBackendLanguageTest extends TestCase
             ->seePageIs('/backend/languages');
     }
 
-    /** @test */
+    #[Test]
     public function can_click_the_create_button()
     {
         $this->visit('/backend/languages')
@@ -100,7 +101,7 @@ class MotorBackendBackendLanguageTest extends TestCase
             ->seePageIs('/backend/languages/create');
     }
 
-    /** @test */
+    #[Test]
     public function can_create_a_new_language()
     {
         $this->visit('/backend/languages/create')
@@ -116,7 +117,7 @@ class MotorBackendBackendLanguageTest extends TestCase
             ->seePageIs('/backend/languages');
     }
 
-    /** @test */
+    #[Test]
     public function cannot_create_a_new_language_with_empty_fields()
     {
         $this->visit('/backend/languages/create')
@@ -128,7 +129,7 @@ class MotorBackendBackendLanguageTest extends TestCase
             ->seePageIs('/backend/languages/create');
     }
 
-    /** @test */
+    #[Test]
     public function can_modify_a_language()
     {
         $language = create_test_language();
@@ -143,7 +144,7 @@ class MotorBackendBackendLanguageTest extends TestCase
             ->seePageIs('/backend/languages');
     }
 
-    /** @test */
+    #[Test]
     public function can_delete_a_language()
     {
         create_test_language();
@@ -159,7 +160,7 @@ class MotorBackendBackendLanguageTest extends TestCase
         $this->assertCount(0, Language::all());
     }
 
-    /** @test */
+    #[Test]
     public function can_paginate_results()
     {
         create_test_language(100);
@@ -170,7 +171,7 @@ class MotorBackendBackendLanguageTest extends TestCase
             ->seePageIs('/backend/languages?page=3');
     }
 
-    /** @test */
+    #[Test]
     public function can_search_results()
     {
         $languages = create_test_language(100);

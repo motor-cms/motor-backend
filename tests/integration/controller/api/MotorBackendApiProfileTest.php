@@ -2,6 +2,7 @@
 
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 use Motor\Backend\Models\User;
+use PHPUnit\Framework\Attributes\Test;
 
 /**
  * Class MotorBackendApiProfileTest
@@ -42,15 +43,13 @@ class MotorBackendApiProfileTest extends TestCase
         $this->writePermission = create_test_permission_with_name('profile.write');
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function returns_403_if_not_authenticated()
     {
         $this->json('GET', '/api/profile/me')->seeStatusCode(401)->seeJson(['error' => 'Unauthenticated.']);
     }
 
-    /** @test */
+    #[Test]
     public function can_show_own_profile()
     {
         $this->user->givePermissionTo($this->readPermission);
@@ -59,15 +58,13 @@ class MotorBackendApiProfileTest extends TestCase
         ]);
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function returns_403_if_trying_to_update_while_not_authenticated()
     {
         $this->json('PATCH', '/api/profile/edit')->seeStatusCode(401)->seeJson(['error' => 'Unauthenticated.']);
     }
 
-    /** @test */
+    #[Test]
     public function fails_if_trying_to_modify_profile_without_payload()
     {
         $this->user->givePermissionTo($this->writePermission);
@@ -76,7 +73,7 @@ class MotorBackendApiProfileTest extends TestCase
         ]);
     }
 
-    /** @test */
+    #[Test]
     public function can_modify_profile()
     {
         $this->user->givePermissionTo($this->writePermission);
@@ -89,7 +86,7 @@ class MotorBackendApiProfileTest extends TestCase
         ]);
     }
 
-    /** @test */
+    #[Test]
     public function can_modify_profile_and_upload_image()
     {
         $this->user->givePermissionTo($this->writePermission);
@@ -132,7 +129,7 @@ class MotorBackendApiProfileTest extends TestCase
     //    ]);
     //}
 
-    /** @test */
+    #[Test]
     public function can_modify_profile_and_upload_image_and_set_custom_filename()
     {
         $this->user->givePermissionTo($this->writePermission);

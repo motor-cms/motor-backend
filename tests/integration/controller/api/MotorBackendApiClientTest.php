@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Foundation\Testing\DatabaseTransactions;
+use PHPUnit\Framework\Attributes\Test;
 
 /**
  * Class MotorBackendApiClientTest
@@ -41,15 +42,13 @@ class MotorBackendApiClientTest extends TestCase
         $this->deletePermission = create_test_permission_with_name('clients.delete');
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function returns_403_if_not_authenticated()
     {
         $this->json('GET', '/api/clients/1')->seeStatusCode(401)->seeJson(['error' => 'Unauthenticated.']);
     }
 
-    /** @test */
+    #[Test]
     public function returns_404_for_non_existing_client_record()
     {
         $this->user->givePermissionTo($this->readPermission);
@@ -58,7 +57,7 @@ class MotorBackendApiClientTest extends TestCase
         ]);
     }
 
-    /** @test */
+    #[Test]
     public function fails_if_trying_to_create_without_payload()
     {
         $this->user->givePermissionTo($this->writePermission);
@@ -67,7 +66,7 @@ class MotorBackendApiClientTest extends TestCase
         ]);
     }
 
-    /** @test */
+    #[Test]
     public function fails_if_trying_to_create_without_permission()
     {
         $this->json('POST', '/api/clients?api_token='.$this->user->api_token)->seeStatusCode(403)->seeJson([
@@ -75,7 +74,7 @@ class MotorBackendApiClientTest extends TestCase
         ]);
     }
 
-    /** @test */
+    #[Test]
     public function can_create_a_new_client()
     {
         $this->user->givePermissionTo($this->writePermission);
@@ -86,7 +85,7 @@ class MotorBackendApiClientTest extends TestCase
         ]);
     }
 
-    /** @test */
+    #[Test]
     public function can_show_a_single_client()
     {
         $this->user->givePermissionTo($this->readPermission);
@@ -99,7 +98,7 @@ class MotorBackendApiClientTest extends TestCase
         ]);
     }
 
-    /** @test */
+    #[Test]
     public function fails_to_show_a_single_client_without_permission()
     {
         $client = factory(Motor\Backend\Models\Client::class)->create();
@@ -111,7 +110,7 @@ class MotorBackendApiClientTest extends TestCase
         ]);
     }
 
-    /** @test */
+    #[Test]
     public function can_get_empty_result_when_trying_to_show_multiple_clients()
     {
         $this->user->givePermissionTo($this->readPermission);
@@ -120,7 +119,7 @@ class MotorBackendApiClientTest extends TestCase
         ]);
     }
 
-    /** @test */
+    #[Test]
     public function can_show_multiple_clients()
     {
         $this->user->givePermissionTo($this->readPermission);
@@ -130,7 +129,7 @@ class MotorBackendApiClientTest extends TestCase
         ]);
     }
 
-    /** @test */
+    #[Test]
     public function can_search_for_a_client()
     {
         $this->user->givePermissionTo($this->readPermission);
@@ -143,7 +142,7 @@ class MotorBackendApiClientTest extends TestCase
         ]);
     }
 
-    /** @test */
+    #[Test]
     public function can_show_a_second_results_page()
     {
         $this->user->givePermissionTo($this->readPermission);
@@ -156,7 +155,7 @@ class MotorBackendApiClientTest extends TestCase
         ]);
     }
 
-    /** @test */
+    #[Test]
     public function fails_if_trying_to_update_nonexisting_client()
     {
         $this->user->givePermissionTo($this->writePermission);
@@ -165,7 +164,7 @@ class MotorBackendApiClientTest extends TestCase
         ]);
     }
 
-    /** @test */
+    #[Test]
     public function fails_if_trying_to_modify_a_client_without_payload()
     {
         $this->user->givePermissionTo($this->writePermission);
@@ -178,7 +177,7 @@ class MotorBackendApiClientTest extends TestCase
         ]);
     }
 
-    /** @test */
+    #[Test]
     public function fails_if_trying_to_modify_a_client_without_permission()
     {
         $client = create_test_client();
@@ -190,7 +189,7 @@ class MotorBackendApiClientTest extends TestCase
         ]);
     }
 
-    /** @test */
+    #[Test]
     public function can_modify_a_client()
     {
         $this->user->givePermissionTo($this->writePermission);
@@ -203,7 +202,7 @@ class MotorBackendApiClientTest extends TestCase
         ]);
     }
 
-    /** @test */
+    #[Test]
     public function fails_if_trying_to_delete_a_non_existing_client()
     {
         $this->user->givePermissionTo($this->deletePermission);
@@ -212,7 +211,7 @@ class MotorBackendApiClientTest extends TestCase
         ]);
     }
 
-    /** @test */
+    #[Test]
     public function fails_to_delete_a_client_without_permission()
     {
         $client = factory(Motor\Backend\Models\Client::class)->create();
@@ -224,7 +223,7 @@ class MotorBackendApiClientTest extends TestCase
         ]);
     }
 
-    /** @test */
+    #[Test]
     public function can_delete_a_client()
     {
         $this->user->givePermissionTo($this->deletePermission);

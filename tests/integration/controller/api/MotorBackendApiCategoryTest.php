@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Foundation\Testing\DatabaseTransactions;
+use PHPUnit\Framework\Attributes\Test;
 
 /**
  * Class MotorBackendApiCategoryTest
@@ -47,15 +48,13 @@ class MotorBackendApiCategoryTest extends TestCase
         $this->deletePermission = create_test_permission_with_name('categories.delete');
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function returns_403_for_category_if_not_authenticated()
     {
         $this->json('GET', '/api/categories/1')->seeStatusCode(401)->seeJson(['error' => 'Unauthenticated.']);
     }
 
-    /** @test */
+    #[Test]
     public function returns_404_for_non_existing_category_record()
     {
         $this->user->givePermissionTo($this->readPermission);
@@ -64,7 +63,7 @@ class MotorBackendApiCategoryTest extends TestCase
         ]);
     }
 
-    /** @test */
+    #[Test]
     public function fails_if_trying_to_create_category_without_payload()
     {
         $this->user->givePermissionTo($this->writePermission);
@@ -73,7 +72,7 @@ class MotorBackendApiCategoryTest extends TestCase
         ]);
     }
 
-    /** @test */
+    #[Test]
     public function fails_if_trying_to_create_category_without_permission()
     {
         $this->json('POST', '/api/categories?api_token='.$this->user->api_token)->seeStatusCode(403)->seeJson([
@@ -81,7 +80,7 @@ class MotorBackendApiCategoryTest extends TestCase
         ]);
     }
 
-    /** @test */
+    #[Test]
     public function can_create_a_new_category()
     {
         $this->user->givePermissionTo($this->writePermission);
@@ -92,7 +91,7 @@ class MotorBackendApiCategoryTest extends TestCase
         ]);
     }
 
-    /** @test */
+    #[Test]
     public function can_show_a_single_category()
     {
         $this->user->givePermissionTo($this->readPermission);
@@ -105,7 +104,7 @@ class MotorBackendApiCategoryTest extends TestCase
         ]);
     }
 
-    /** @test */
+    #[Test]
     public function fails_to_show_a_single_category_without_permission()
     {
         $record = create_test_category();
@@ -117,7 +116,7 @@ class MotorBackendApiCategoryTest extends TestCase
         ]);
     }
 
-    /** @test */
+    #[Test]
     public function can_get_empty_result_when_trying_to_show_multiple_category()
     {
         $this->user->givePermissionTo($this->readPermission);
@@ -126,7 +125,7 @@ class MotorBackendApiCategoryTest extends TestCase
         ]);
     }
 
-    /** @test */
+    #[Test]
     public function can_show_multiple_category()
     {
         $this->user->givePermissionTo($this->readPermission);
@@ -136,7 +135,7 @@ class MotorBackendApiCategoryTest extends TestCase
         ]);
     }
 
-    /** @test */
+    #[Test]
     public function can_search_for_a_category()
     {
         $this->user->givePermissionTo($this->readPermission);
@@ -149,7 +148,7 @@ class MotorBackendApiCategoryTest extends TestCase
         ]);
     }
 
-    /** @test */
+    #[Test]
     public function can_show_a_second_category_results_page()
     {
         $this->user->givePermissionTo($this->readPermission);
@@ -162,7 +161,7 @@ class MotorBackendApiCategoryTest extends TestCase
         ]);
     }
 
-    /** @test */
+    #[Test]
     public function fails_if_trying_to_update_nonexisting_category()
     {
         $this->user->givePermissionTo($this->writePermission);
@@ -171,7 +170,7 @@ class MotorBackendApiCategoryTest extends TestCase
         ]);
     }
 
-    /** @test */
+    #[Test]
     public function fails_if_trying_to_modify_a_category_without_payload()
     {
         $this->user->givePermissionTo($this->writePermission);
@@ -184,7 +183,7 @@ class MotorBackendApiCategoryTest extends TestCase
         ]);
     }
 
-    /** @test */
+    #[Test]
     public function fails_if_trying_to_modify_a_category_without_permission()
     {
         $record = create_test_category();
@@ -196,7 +195,7 @@ class MotorBackendApiCategoryTest extends TestCase
         ]);
     }
 
-    /** @test */
+    #[Test]
     public function can_modify_a_category()
     {
         $this->user->givePermissionTo($this->writePermission);
@@ -208,7 +207,7 @@ class MotorBackendApiCategoryTest extends TestCase
         ]);
     }
 
-    /** @test */
+    #[Test]
     public function fails_if_trying_to_delete_a_non_existing_category()
     {
         $this->user->givePermissionTo($this->deletePermission);
@@ -217,7 +216,7 @@ class MotorBackendApiCategoryTest extends TestCase
         ]);
     }
 
-    /** @test */
+    #[Test]
     public function fails_to_delete_a_category_without_permission()
     {
         $record = create_test_category();
@@ -229,7 +228,7 @@ class MotorBackendApiCategoryTest extends TestCase
         ]);
     }
 
-    /** @test */
+    #[Test]
     public function can_delete_a_category()
     {
         $this->user->givePermissionTo($this->deletePermission);

@@ -2,6 +2,7 @@
 
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 use Motor\Backend\Models\Permission;
+use PHPUnit\Framework\Attributes\Test;
 
 /**
  * Class MotorBackendBackendPermissionTest
@@ -46,7 +47,7 @@ class MotorBackendBackendPermissionTest extends TestCase
         $this->actingAs($this->user);
     }
 
-    /** @test */
+    #[Test]
     public function can_see_grid_with_three_permission()
     {
         $this->visit('/backend/permissions')
@@ -56,7 +57,7 @@ class MotorBackendBackendPermissionTest extends TestCase
             ->see('permissions.delete');
     }
 
-    /** @test */
+    #[Test]
     public function can_visit_the_edit_form_of_a_permission_and_use_the_back_button()
     {
         $this->visit('/backend/permissions')
@@ -68,7 +69,7 @@ class MotorBackendBackendPermissionTest extends TestCase
             ->seePageIs('/backend/permissions');
     }
 
-    /** @test */
+    #[Test]
     public function can_visit_the_edit_form_of_a_permission_and_change_the_name()
     {
         $permission = create_test_permission();
@@ -85,7 +86,7 @@ class MotorBackendBackendPermissionTest extends TestCase
             ->seePageIs('/backend/permissions');
     }
 
-    /** @test */
+    #[Test]
     public function can_click_the_create_button()
     {
         $this->visit('/backend/permissions')
@@ -93,7 +94,7 @@ class MotorBackendBackendPermissionTest extends TestCase
             ->seePageIs('/backend/permissions/create');
     }
 
-    /** @test */
+    #[Test]
     public function can_create_a_new_permission()
     {
         $group = create_test_permission_group();
@@ -108,7 +109,7 @@ class MotorBackendBackendPermissionTest extends TestCase
             ->seePageIs('/backend/permissions');
     }
 
-    /** @test */
+    #[Test]
     public function cannot_create_a_new_permission_with_empty_fields()
     {
         $this->visit('/backend/permissions/create')
@@ -120,7 +121,7 @@ class MotorBackendBackendPermissionTest extends TestCase
             ->seePageIs('/backend/permissions/create');
     }
 
-    /** @test */
+    #[Test]
     public function can_modify_a_permission_and_change_the_permission_group()
     {
         $groups = create_test_permission_group(5);
@@ -147,7 +148,7 @@ class MotorBackendBackendPermissionTest extends TestCase
         $this->assertEquals($groups[3]->id, $updatedPermission->permission_group_id);
     }
 
-    /** @test */
+    #[Test]
     public function can_delete_a_permission()
     {
         create_test_permission();
@@ -163,7 +164,7 @@ class MotorBackendBackendPermissionTest extends TestCase
         $this->assertCount(3, Permission::all());
     }
 
-    /** @test */
+    #[Test]
     public function can_paginate_results()
     {
         create_test_permission(100);
@@ -174,7 +175,7 @@ class MotorBackendBackendPermissionTest extends TestCase
             ->seePageIs('/backend/permissions?page=3');
     }
 
-    /** @test */
+    #[Test]
     public function can_search_results()
     {
         $permissions = create_test_permission(100);
